@@ -1,5 +1,7 @@
 # ![Instructions](http://i.imgur.com/927crlD.png)
 
+![CocoaPods Shield](https://img.shields.io/cocoapods/v/Instructions.svg)
+
 Add customizable coach marks into you iOS project. Instructions will makes your coach-mark-maker life easier, I promise. Available for both iPhone and iPad.
 
 ## Overview

@@ -1,6 +1,6 @@
 # ![Instructions](http://i.imgur.com/927crlD.png)
 
-![CocoaPods Shield](https://img.shields.io/cocoapods/v/Instructions.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Travis build status](https://img.shields.io/travis/ephread/Instructions.svg)](https://travis-ci.org/ephread/Instructions) [![CocoaPods Shield](https://img.shields.io/cocoapods/v/Instructions.svg)](https://cocoapods.org/pods/Instructions) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Add customizable coach marks into you iOS project. Instructions will makes your coach-mark-maker life easier, I promise. Available for both iPhone and iPad.
 

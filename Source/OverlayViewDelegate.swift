@@ -1,4 +1,4 @@
-// Instructions.h
+// OverlayViewDelegate.swift
 //
 // Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
 //
@@ -20,14 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+import Foundation
 
-//! Project version number for Instructions.
-FOUNDATION_EXPORT double InstructionsVersionNumber;
+/// This protocol expected to be implemented by CoachMarkManager, so
+/// it can be notified when a tap occured on the overlay.
+internal protocol OverlayViewDelegate: class {
 
-//! Project version string for Instructions.
-FOUNDATION_EXPORT const unsigned char InstructionsVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <Instructions/PublicHeader.h>
-
-
+    /// Called when the overlay received a tap event.
+    func didReceivedSingleTap()
+}

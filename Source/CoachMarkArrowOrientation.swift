@@ -1,4 +1,4 @@
-// Instructions.h
+// CoachMarkArrowOrientation.swift
 //
 // Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
 //
@@ -20,14 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+import Foundation
 
-//! Project version number for Instructions.
-FOUNDATION_EXPORT double InstructionsVersionNumber;
-
-//! Project version string for Instructions.
-FOUNDATION_EXPORT const unsigned char InstructionsVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <Instructions/PublicHeader.h>
-
-
+/// Available orientations for the arrow.
+/// An arrow can either sit at the top and point upward (.Top) or
+/// sit at the bottom and point downward. (.Bottom)
+public enum CoachMarkArrowOrientation {
+    case Top
+    case Bottom
+}

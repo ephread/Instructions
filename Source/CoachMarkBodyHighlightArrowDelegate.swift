@@ -1,4 +1,4 @@
-// Instructions.h
+// CoachMarkBodyHighlightArrowDelegate.swift
 //
 // Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
 //
@@ -20,14 +20,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+import Foundation
 
-//! Project version number for Instructions.
-FOUNDATION_EXPORT double InstructionsVersionNumber;
+/// Delegate the hilight mecanism of the arrow. This protocol is
+/// useful in case the whole body itself is the active control and
+/// we want the arrow to looks like it is part of this control.
+public protocol CoachMarkBodyHighlightArrowDelegate : class {
 
-//! Project version string for Instructions.
-FOUNDATION_EXPORT const unsigned char InstructionsVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <Instructions/PublicHeader.h>
-
-
+    /// Set wethe ror not the arrow should get in its
+    /// highlighted state.
+    ///
+    /// - Parameters highlighted: `true` if the arrow should be highlighted, `false` otherwise.
+    func highlightArrow(highlighted: Bool);
+}

@@ -1,4 +1,4 @@
-// Instructions.h
+// CoachMarksControllerDelegate.swift
 //
 // Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
 //
@@ -20,14 +20,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+import Foundation
 
-//! Project version number for Instructions.
-FOUNDATION_EXPORT double InstructionsVersionNumber;
+/// Give a chance to react when coach marks are displayed
+public protocol CoachMarksControllerDelegate: class {
+    func coachMarksController(coachMarksController: CoachMarksController, inout coachMarkWillShow coachMark: CoachMark, forIndex index: Int)
+    
+    func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillDisappear coachMark: CoachMark, forIndex index: Int)
+    
+    func didFinishShowingFromCoachMarksController(coachMarksController: CoachMarksController)
+}
 
-//! Project version string for Instructions.
-FOUNDATION_EXPORT const unsigned char InstructionsVersionString[];
+public extension CoachMarksControllerDelegate {
+    func coachMarksController(coachMarksController: CoachMarksController, inout coachMarkWillShow coachMark: CoachMark, forIndex index: Int) {}
 
-// In this header, you should import all the public headers of your framework using statements like #import <Instructions/PublicHeader.h>
+    func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillDisappear coachMark: CoachMark, forIndex index: Int) {}
 
-
+    func didFinishShowingFromCoachMarksController(coachMarksController: CoachMarksController) {}
+}

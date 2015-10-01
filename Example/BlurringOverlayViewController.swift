@@ -1,4 +1,4 @@
-// Instructions.h
+// BlurringOverlayViewController.swift
 //
 // Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
 //
@@ -20,14 +20,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+import UIKit
+import Instructions
 
-//! Project version number for Instructions.
-FOUNDATION_EXPORT double InstructionsVersionNumber;
+/// Will display coach marks on top of a blurred background.
+internal class BlurringOverlayViewController: DefaultViewController {
+    //MARK: - View lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-//! Project version string for Instructions.
-FOUNDATION_EXPORT const unsigned char InstructionsVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <Instructions/PublicHeader.h>
-
-
+        self.coachMarksController?.overlayBlurEffectStyle = .Dark
+    }
+}

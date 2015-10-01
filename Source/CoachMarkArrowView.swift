@@ -1,4 +1,4 @@
-// Instructions.h
+// CoachMarkArrowView.swift
 //
 // Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
 //
@@ -20,14 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+import Foundation
 
-//! Project version number for Instructions.
-FOUNDATION_EXPORT double InstructionsVersionNumber;
-
-//! Project version string for Instructions.
-FOUNDATION_EXPORT const unsigned char InstructionsVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <Instructions/PublicHeader.h>
-
-
+/// A protocol to which all the "arrow views" of a coach mark must conform.
+public protocol CoachMarkArrowView : class {
+    /// A method to change the arrow highlighted state.
+    /// If you feel the arrow should mirror the state of the "body view",
+    /// You will most likely change the background color of the view here.
+    var highlighted: Bool { set get }
+}

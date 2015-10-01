@@ -1,4 +1,4 @@
-// Instructions.h
+// CoachMarkBodyView.swift
 //
 // Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
 //
@@ -20,14 +20,19 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+import Foundation
 
-//! Project version number for Instructions.
-FOUNDATION_EXPORT double InstructionsVersionNumber;
+/// A protocol to which all the "body views" of a coach mark must conform.
+public protocol CoachMarkBodyView : class {
+    /// The control that will trigger the change between the current coach mark
+    /// and the next one.
+    var nextControl: UIControl? { get }
 
-//! Project version string for Instructions.
-FOUNDATION_EXPORT const unsigned char InstructionsVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <Instructions/PublicHeader.h>
-
-
+    /// A delegate to call, when the arrow view to mirror the current highlight
+    /// state of the body view. This is useful in case the entier view is actually a `UIControl`.
+    ///
+    /// The `CoachMarkView`, of which the current view must be
+    /// part, will automatically set itself as the delegate and will take care
+    /// of fowarding the state to the arrow view.
+    weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate? { get set }
+}

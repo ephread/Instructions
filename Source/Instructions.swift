@@ -1,4 +1,4 @@
-// Instructions.h
+// Instructions.swift
 //
 // Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
 //
@@ -20,14 +20,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+import Foundation
 
-//! Project version number for Instructions.
-FOUNDATION_EXPORT double InstructionsVersionNumber;
+/// Execute some code after a given delay
+///
+/// From [Matt Neuburg](http://stackoverflow.com/users/341994/matt), on
+/// [Stack Overflow](http://stackoverflow.com/questions/24034544/dispatch-after-gcd-in-swift/24318861#24318861)
+///
+/// - Parameter delay: the time to wait before executing
+/// - Parameter closure: the closure to execute
+public func delay(delay:Double, closure:()->()) {
+    dispatch_after(
+        dispatch_time(
+            DISPATCH_TIME_NOW,
+            Int64(delay * Double(NSEC_PER_SEC))
+        ),
+        dispatch_get_main_queue(), closure)
+}
 
-//! Project version string for Instructions.
-FOUNDATION_EXPORT const unsigned char InstructionsVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <Instructions/PublicHeader.h>
-
-
+let kOverlayFadeAnimationDuration: NSTimeInterval = 0.3;
+let kCoachMarkFadeAnimationDuration: NSTimeInterval = 0.3;
+let kOverlayColor = UIColor(red: 226.0/255.0, green: 226.0/255.0, blue: 226.0/255.0, alpha: 0.65);

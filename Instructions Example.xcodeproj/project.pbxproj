@@ -7,22 +7,64 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C636FFAA1BBBD99200EB243B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C636FFA91BBBD99200EB243B /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
+		C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */; settings = {ASSET_TAGS = (); }; };
+		C636FFB21BBC329600EB243B /* TransparentCoachMarkBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFB01BBC329600EB243B /* TransparentCoachMarkBodyView.swift */; settings = {ASSET_TAGS = (); }; };
 		C64FB3351BB6CC180081E5B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB32D1BB6CC180081E5B6 /* AppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
-		C64FB3361BB6CC180081E5B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C64FB32E1BB6CC180081E5B6 /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		C64FB3371BB6CC180081E5B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64FB32F1BB6CC180081E5B6 /* LaunchScreen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		C64FB3381BB6CC180081E5B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64FB3311BB6CC180081E5B6 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
-		C64FB3391BB6CC180081E5B6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C64FB3331BB6CC180081E5B6 /* Info.plist */; settings = {ASSET_TAGS = (); }; };
-		C64FB33A1BB6CC180081E5B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3341BB6CC180081E5B6 /* ViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		C64FB33A1BB6CC180081E5B6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3341BB6CC180081E5B6 /* ProfileViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		C64FB3841BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3831BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift */; settings = {ASSET_TAGS = (); }; };
+		C64FB3861BB98EC20081E5B6 /* CustomCoachMarkArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3851BB98EC20081E5B6 /* CustomCoachMarkArrowView.swift */; settings = {ASSET_TAGS = (); }; };
+		C6CE542C1BBD435500154266 /* BlurringOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE54291BBD435500154266 /* BlurringOverlayViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		C6CE542D1BBD435500154266 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE542A1BBD435500154266 /* CustomViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		C6CE542E1BBD435500154266 /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE542B1BBD435500154266 /* DefaultViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		C6CE54311BBD43CB00154266 /* DelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE542F1BBD43CB00154266 /* DelegateViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		C6CE54321BBD43CB00154266 /* MixedCoachMarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE54301BBD43CB00154266 /* MixedCoachMarksViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		C64FB36E1BB75F4D0081E5B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C64FB3691BB75F4D0081E5B6 /* Instructions.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C64FB2E91BB6CA8A0081E5B6;
+			remoteInfo = Instructions;
+		};
+		C64FB3701BB75F4D0081E5B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C64FB3691BB75F4D0081E5B6 /* Instructions.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C64FB2F31BB6CA8A0081E5B6;
+			remoteInfo = InstructionsTests;
+		};
+		C64FB3761BB75F980081E5B6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C64FB3691BB75F4D0081E5B6 /* Instructions.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C64FB2E81BB6CA8A0081E5B6;
+			remoteInfo = Instructions;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		C636FFA91BBBD99200EB243B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Example/Assets.xcassets; sourceTree = "<group>"; };
+		C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentCoachMarkArrowView.swift; sourceTree = "<group>"; };
+		C636FFB01BBC329600EB243B /* TransparentCoachMarkBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentCoachMarkBodyView.swift; sourceTree = "<group>"; };
 		C64FB30C1BB6CB1C0081E5B6 /* Instructions Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Instructions Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C64FB32D1BB6CC180081E5B6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C64FB32E1BB6CC180081E5B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C64FB3301BB6CC180081E5B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C64FB3321BB6CC180081E5B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		C64FB3331BB6CC180081E5B6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C64FB3341BB6CC180081E5B6 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C64FB3331BB6CC180081E5B6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Example/Info.plist; sourceTree = "<group>"; };
+		C64FB3341BB6CC180081E5B6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		C64FB3691BB75F4D0081E5B6 /* Instructions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Instructions.xcodeproj; sourceTree = "<group>"; };
+		C64FB3831BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCoachMarkBodyView.swift; sourceTree = "<group>"; };
+		C64FB3851BB98EC20081E5B6 /* CustomCoachMarkArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCoachMarkArrowView.swift; sourceTree = "<group>"; };
+		C6CE54291BBD435500154266 /* BlurringOverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurringOverlayViewController.swift; sourceTree = "<group>"; };
+		C6CE542A1BBD435500154266 /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
+		C6CE542B1BBD435500154266 /* DefaultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewController.swift; sourceTree = "<group>"; };
+		C6CE542F1BBD43CB00154266 /* DelegateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegateViewController.swift; sourceTree = "<group>"; };
+		C6CE54301BBD43CB00154266 /* MixedCoachMarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MixedCoachMarksViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,11 +78,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C636FFAD1BBBF68300EB243B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C636FFA91BBBD99200EB243B /* Assets.xcassets */,
+				C64FB3331BB6CC180081E5B6 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C636FFAE1BBBF69B00EB243B /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				C64FB32F1BB6CC180081E5B6 /* LaunchScreen.storyboard */,
+				C64FB3311BB6CC180081E5B6 /* Main.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
 		C64FB3031BB6CB1C0081E5B6 = {
 			isa = PBXGroup;
 			children = (
 				C64FB32C1BB6CC180081E5B6 /* Source */,
+				C636FFAD1BBBF68300EB243B /* Supporting Files */,
 				C64FB30D1BB6CB1C0081E5B6 /* Products */,
+				C64FB3691BB75F4D0081E5B6 /* Instructions.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,14 +118,45 @@
 			isa = PBXGroup;
 			children = (
 				C64FB32D1BB6CC180081E5B6 /* AppDelegate.swift */,
-				C64FB32E1BB6CC180081E5B6 /* Assets.xcassets */,
-				C64FB32F1BB6CC180081E5B6 /* LaunchScreen.storyboard */,
-				C64FB3311BB6CC180081E5B6 /* Main.storyboard */,
-				C64FB3331BB6CC180081E5B6 /* Info.plist */,
-				C64FB3341BB6CC180081E5B6 /* ViewController.swift */,
+				C636FFAE1BBBF69B00EB243B /* Storyboards */,
+				C6CE54261BBD42D300154266 /* View Controllers */,
+				C6CE54281BBD42E500154266 /* Custom Views */,
 			);
 			name = Source;
 			path = Example;
+			sourceTree = "<group>";
+		};
+		C64FB36A1BB75F4D0081E5B6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C64FB36F1BB75F4D0081E5B6 /* Instructions.framework */,
+				C64FB3711BB75F4D0081E5B6 /* InstructionsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6CE54261BBD42D300154266 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C64FB3341BB6CC180081E5B6 /* ProfileViewController.swift */,
+				C6CE54291BBD435500154266 /* BlurringOverlayViewController.swift */,
+				C6CE542A1BBD435500154266 /* CustomViewController.swift */,
+				C6CE542B1BBD435500154266 /* DefaultViewController.swift */,
+				C6CE542F1BBD43CB00154266 /* DelegateViewController.swift */,
+				C6CE54301BBD43CB00154266 /* MixedCoachMarksViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		C6CE54281BBD42E500154266 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				C64FB3851BB98EC20081E5B6 /* CustomCoachMarkArrowView.swift */,
+				C64FB3831BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift */,
+				C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */,
+				C636FFB01BBC329600EB243B /* TransparentCoachMarkBodyView.swift */,
+			);
+			name = "Custom Views";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,6 +173,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				C64FB3771BB75F980081E5B6 /* PBXTargetDependency */,
 			);
 			name = "Instructions Example";
 			productName = "Instructions Example";
@@ -111,6 +205,12 @@
 			mainGroup = C64FB3031BB6CB1C0081E5B6;
 			productRefGroup = C64FB30D1BB6CB1C0081E5B6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C64FB36A1BB75F4D0081E5B6 /* Products */;
+					ProjectRef = C64FB3691BB75F4D0081E5B6 /* Instructions.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C64FB30B1BB6CB1C0081E5B6 /* Instructions Example */,
@@ -118,14 +218,30 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		C64FB36F1BB75F4D0081E5B6 /* Instructions.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Instructions.framework;
+			remoteRef = C64FB36E1BB75F4D0081E5B6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		C64FB3711BB75F4D0081E5B6 /* InstructionsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = InstructionsTests.xctest;
+			remoteRef = C64FB3701BB75F4D0081E5B6 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		C64FB30A1BB6CB1C0081E5B6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C64FB3391BB6CC180081E5B6 /* Info.plist in Resources */,
 				C64FB3381BB6CC180081E5B6 /* Main.storyboard in Resources */,
-				C64FB3361BB6CC180081E5B6 /* Assets.xcassets in Resources */,
+				C636FFAA1BBBD99200EB243B /* Assets.xcassets in Resources */,
 				C64FB3371BB6CC180081E5B6 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,12 +253,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C64FB33A1BB6CC180081E5B6 /* ViewController.swift in Sources */,
+				C64FB3861BB98EC20081E5B6 /* CustomCoachMarkArrowView.swift in Sources */,
+				C64FB3841BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift in Sources */,
+				C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */,
+				C6CE542C1BBD435500154266 /* BlurringOverlayViewController.swift in Sources */,
+				C64FB33A1BB6CC180081E5B6 /* ProfileViewController.swift in Sources */,
+				C6CE54311BBD43CB00154266 /* DelegateViewController.swift in Sources */,
 				C64FB3351BB6CC180081E5B6 /* AppDelegate.swift in Sources */,
+				C6CE542E1BBD435500154266 /* DefaultViewController.swift in Sources */,
+				C636FFB21BBC329600EB243B /* TransparentCoachMarkBodyView.swift in Sources */,
+				C6CE54321BBD43CB00154266 /* MixedCoachMarksViewController.swift in Sources */,
+				C6CE542D1BBD435500154266 /* CustomViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C64FB3771BB75F980081E5B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Instructions;
+			targetProxy = C64FB3761BB75F980081E5B6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C64FB32F1BB6CC180081E5B6 /* LaunchScreen.storyboard */ = {
@@ -251,7 +384,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "Instructions Example/Info.plist";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -262,7 +399,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = "Instructions Example/Info.plist";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
+				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";

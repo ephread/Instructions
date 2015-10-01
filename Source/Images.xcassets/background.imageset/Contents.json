@@ -1,0 +1,65 @@
+{
+  "images" : [
+    {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 9,
+          "top" : 8,
+          "right" : 8,
+          "left" : 8
+        }
+      },
+      "idiom" : "universal",
+      "filename" : "pill-medium-letter.png",
+      "scale" : "1x"
+    },
+    {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 2,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 18,
+          "top" : 17,
+          "right" : 16,
+          "left" : 16
+        }
+      },
+      "idiom" : "universal",
+      "filename" : "pill-medium-letter@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "resizing" : {
+        "mode" : "9-part",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1,
+          "height" : 1
+        },
+        "cap-insets" : {
+          "bottom" : 27,
+          "top" : 26,
+          "right" : 25,
+          "left" : 25
+        }
+      },
+      "idiom" : "universal",
+      "filename" : "pill-medium-letter@3x.png",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

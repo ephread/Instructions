@@ -1,4 +1,4 @@
-// Instructions.h
+// TransparentCoachMarkArrowView.swift
 //
 // Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
 //
@@ -20,14 +20,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-#import <UIKit/UIKit.h>
+import UIKit
+import Instructions
 
-//! Project version number for Instructions.
-FOUNDATION_EXPORT double InstructionsVersionNumber;
+// Transparent coach mark (text without background, cool arrow)
+internal class TransparentCoachMarkArrowView : UIImageView, CoachMarkArrowView {
+    //MARK: - Initialization
+    init(orientation: CoachMarkArrowOrientation) {
+        if orientation == .Top {
+            super.init(image: UIImage(named: "arrow-top"))
+        } else {
+            super.init(image: UIImage(named: "arrow-bottom"))
+        }
 
-//! Project version string for Instructions.
-FOUNDATION_EXPORT const unsigned char InstructionsVersionString[];
+        self.translatesAutoresizingMaskIntoConstraints = false
 
-// In this header, you should import all the public headers of your framework using statements like #import <Instructions/PublicHeader.h>
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal,
+            toItem: nil, attribute: .NotAnAttribute,
+            multiplier: 1, constant: self.image!.size.width))
 
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal,
+            toItem: nil, attribute: .NotAnAttribute,
+            multiplier: 1, constant: self.image!.size.height))
+    }
 
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("This class does not support NSCoding.")
+    }
+}

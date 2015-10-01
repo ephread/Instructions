@@ -51,9 +51,9 @@ public class CoachMarkBodyDefaultView : UIControl, CoachMarkBodyView {
     public var separator = UIView();
 
     //MARK: - Private properties
-    private let backgroundImage = UIImage(named: "background", inBundle: NSBundle(identifier: "com.ephread.Instructions"), compatibleWithTraitCollection: nil)
+    private let backgroundImage = UIImage(named: "background", inBundle: NSBundle(forClass: CoachMarkBodyDefaultView.self), compatibleWithTraitCollection: nil)
 
-    private let highlightedBackgroundImage = UIImage(named: "background-highlighted", inBundle: NSBundle(identifier: "com.ephread.Instructions"), compatibleWithTraitCollection: nil)
+    private let highlightedBackgroundImage = UIImage(named: "background-highlighted", inBundle: NSBundle(forClass: CoachMarkBodyDefaultView.self), compatibleWithTraitCollection: nil)
 
     private let backgroundImageView: UIImageView
 

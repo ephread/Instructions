@@ -1,6 +1,6 @@
 # ![Instructions](http://i.imgur.com/927crlD.png)
 
-![CocoaPods Shield](https://img.shields.io/cocoapods/v/Instructions.svg)
+![CocoaPods Shield](https://img.shields.io/cocoapods/v/Instructions.svg) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 Add customizable coach marks into you iOS project. Instructions will makes your coach-mark-maker life easier, I promise. Available for both iPhone and iPad.
 
@@ -15,10 +15,10 @@ Add customizable coach marks into you iOS project. Instructions will makes your 
 - [x] Customizable highlight system
 - [ ] Full right-to-left support • **will make Instructions production-ready!**
 - [ ] Size changes support (orientation and multi-tasking) • **will make Instructions production-ready!**
+- [ ] Tests
 - [ ] Full support of UIVisualEffectView blur in overlay
 - [ ] Objective-C bridging
 - [ ] Coach marks animation support
-- [ ] Tests
 
 ## Requirements
 - Xcode 7 / Swift 2
@@ -35,7 +35,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'Instructions', '~> 0.1.1'
+pod 'Instructions', '~> 0.1.2'
 ```
 
 Then, run the following command:
@@ -45,7 +45,18 @@ $ pod install
 ```
 
 ### Carthage
-TBA
+Add Instructions to your Cartfile:
+
+```
+github "ephread/Instructions" ~> 0.1.2
+```
+
+You can then update, build and drag the generated framework into your project:
+
+```bash
+$ carthage update
+$ carthage build
+```
 
 ### Manually
 If you rather stay away from both Cocoapods and Carthage, you can also install Instructions manually, with the cost of managing updates yourself.

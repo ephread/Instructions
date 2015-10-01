@@ -15,7 +15,7 @@ Add customizable coach marks into you iOS project. Instructions will makes your 
 - [ ] Size changes support (orientation and multi-tasking) • **will make Instructions production-ready!**
 - [ ] Full support of UIVisualEffectView blur in overlay
 - [ ] Objective-C bridging
-- [ ] Coach marks animations support
+- [ ] Coach marks animation support
 - [ ] Tests
 
 ## Requirements
@@ -26,7 +26,21 @@ Add customizable coach marks into you iOS project. Instructions will makes your 
 ## Installation
 
 ### Cocoapods
-TBA
+Add Instructions to your Podfile:
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'Instructions', '~> 0.1.1'
+```
+
+Then, run the following command:
+
+```bash
+$ pod install
+```
 
 ### Carthage
 TBA

@@ -15,7 +15,8 @@ Add customizable coach marks into you iOS project. Instructions will makes your 
 - [ ] Size changes support (orientation and multi-tasking) • **will make Instructions production-ready!**
 - [ ] Full support of UIVisualEffectView blur in overlay
 - [ ] Objective-C bridging
-- [ ] Animations on coach marks themselves support
+- [ ] Coach marks animations support
+- [ ] Tests
 
 ## Requirements
 - Xcode 7 / Swift 2
@@ -62,9 +63,9 @@ class DefaultViewController: UIViewController, CoachMarksControllerDataSource, C
 The first one asks for the number of coach marks to display. Let's pretend that you want to display only one coach mark. Note that the `CoachMarksController` requesting the information is supplied, allowing you to supply data for mutiple `CoachMarksController`, within a single datasource.
 
 ```swift
-override func numberOfCoachMarksForCoachMarksController(_: CoachMarksController)
+func numberOfCoachMarksForCoachMarksController(coachMarkController: CoachMarksController)
 -> Int {
-	return 1
+    return 1
 }
 ```
 
@@ -73,7 +74,7 @@ The second one asks for metadata. This allows you to customize how a coach mark 
 ```swift
 let pointOfInterest = UIView()
 
-override func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex: Int)
+func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex: Int)
 -> CoachMark {
     return coachMarksController.coachMarkForView(self.pointOfInterest)
 }
@@ -84,13 +85,13 @@ The third one supplies two views (much like `cellForRowAtIndexPath`) in the form
 But for now, lets just return the default views provided by Instructions.
 
 ```swift
-override func coachMarksController(_: CoachMarksController, coachMarkViewsForIndex: Int, coachMark: CoachMark)
+func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex: Int, coachMark: CoachMark)
 -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
     let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
-    
+
     coachViews.bodyView.hintLabel.text = "Hello! I'm a Coach Mark!"
-    coachViews.bodyView.nextLabel.text = "Got it!"
-    
+    coachViews.bodyView.nextLabel.text = "Ok!"
+
     return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
 }
 ```

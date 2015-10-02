@@ -106,6 +106,18 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     /// `false` otherwise.
     private var paused = false
 
+    /// Since changing size calls asynchronous completion blocks,
+    /// we might end up firing multiple times the methods adding coach
+    /// marks to the view. To prevent that from happening we use the guard
+    /// property.
+    ///
+    /// Everything is normally happening on the main thread, atomicity should
+    /// not be a problem. Plus, a size change is a very long process compared to
+    /// subview addition.
+    ///
+    /// `true` when the controller is performing a size change, `false` otherwise.
+    private var changingSize = false
+
     //MARK: - View lifecycle
 
     // Called after the view was loaded.
@@ -171,6 +183,24 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         self.showNextCoachMark();
     }
 
+    override public func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+
+        self.overlayView.updateCutoutPath(nil)
+        self.prepareForSizeTransition()
+
+        self.changingSize = true
+
+        coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext) -> Void in
+
+        }, completion: { (context: UIViewControllerTransitionCoordinatorContext) -> Void in
+            self.changingSize = false
+            self.retrieveCoachMarkFromDataSource(shouldCallDelegate: false)
+        })
+    }
+
+    //MARK: - Public methods
+
     /// Will be called when the user perform an action requiring the display of the next coach mark.
     ///
     /// - Parameter sender: the object sending the message
@@ -195,8 +225,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             UIView.animateWithDuration(self.currentCoachMark!.animationDuration, animations: { () -> Void in
                 self.currentCoachMarkView?.alpha = 0.0
             }, completion: {(finished: Bool) -> Void in
-                self.currentCoachMarkView?.removeFromSuperview()
-                self.currentCoachMarkView?.nextControl?.removeTarget(self, action: "performShowNextCoachMark:", forControlEvents: .TouchUpInside)
+                self.hideCurrentCoachView()
 
                 if self.currentIndex < self.numberOfCoachMarks {
                     self.retrieveCoachMarkFromDataSource()
@@ -402,15 +431,22 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     }
 
     /// Ask the datasource, create the coach mark and display it. Also
-    /// notifies the delegate.
-    private func retrieveCoachMarkFromDataSource() {
+    /// notifies the delegate. When this method is called during a size change,
+    /// the delegate is not notified.
+    ///
+    /// - Parameter shouldCallDelegate: `true` to call delegate methods, `false` otherwise.
+    private func retrieveCoachMarkFromDataSource(shouldCallDelegate shouldCallDelegate: Bool = true) {
+        if changingSize { return }
+
         // Retrieves the current coach mark structure from the datasource.
         // It can't be nil, that's why we'll force unwrap it everywhere.
         self.currentCoachMark = self.datasource!.coachMarksController(self, coachMarksForIndex: self.currentIndex)
 
         // The coach mark will soon show, we notify the delegate, so it
         // can peform some things and, if required, update the coach mark structure.
-        self.delegate?.coachMarksController(self, coachMarkWillShow: &self.currentCoachMark!, forIndex: self.currentIndex)
+        if shouldCallDelegate {
+            self.delegate?.coachMarksController(self, coachMarkWillShow: &self.currentCoachMark!, forIndex: self.currentIndex)
+        }
 
         if !self.paused {
             createAndShowCoachMark()
@@ -419,6 +455,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
     /// Create display the coach mark view.
     private func createAndShowCoachMark() {
+        if changingSize { return }
 
         // Once the coach mark structure is final, we'll compute the arrow
         // orientation, so the data source will know what king of views supply.
@@ -458,6 +495,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     /// Add the current coach mark to the view, making sure it is
     /// properly positioned.
     private func prepareCurrentCoachMarkForDisplay() {
+
         guard let coachMark = self.currentCoachMark, coachMarkView = self.currentCoachMarkView else {
             return
         }
@@ -521,5 +559,18 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         } else {
             self.overlayView.updateCutoutPath(nil)
         }
+    }
+
+    /// Will hide the current coach view and unbind events.
+    private func hideCurrentCoachView() {
+        self.currentCoachMarkView?.removeFromSuperview()
+        self.currentCoachMarkView?.nextControl?.removeTarget(self, action: "performShowNextCoachMark:", forControlEvents: .TouchUpInside)
+    }
+
+    /// Will remove currently displayed coach mark.
+    private func prepareForSizeTransition() {
+        self.currentCoachMarkView?.layer.removeAllAnimations()
+        self.hideCurrentCoachView()
+        self.currentCoachMarkView = nil
     }
 }

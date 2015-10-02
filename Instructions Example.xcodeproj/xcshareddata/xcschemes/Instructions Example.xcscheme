@@ -50,7 +50,8 @@
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
+      allowLocationSimulation = "YES"
+      language = "IDELaunchSchemeLanguageRightToLeftLayoutDirection">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference

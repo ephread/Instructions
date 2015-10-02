@@ -10,6 +10,8 @@
 		C636FFAA1BBBD99200EB243B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C636FFA91BBBD99200EB243B /* Assets.xcassets */; settings = {ASSET_TAGS = (); }; };
 		C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */; settings = {ASSET_TAGS = (); }; };
 		C636FFB21BBC329600EB243B /* TransparentCoachMarkBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFB01BBC329600EB243B /* TransparentCoachMarkBodyView.swift */; settings = {ASSET_TAGS = (); }; };
+		C6402BE01BBE6EBD0087E23F /* Instructions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64FB36F1BB75F4D0081E5B6 /* Instructions.framework */; };
+		C6402BE11BBE6EBD0087E23F /* Instructions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C64FB36F1BB75F4D0081E5B6 /* Instructions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C64FB3351BB6CC180081E5B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB32D1BB6CC180081E5B6 /* AppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
 		C64FB3371BB6CC180081E5B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64FB32F1BB6CC180081E5B6 /* LaunchScreen.storyboard */; settings = {ASSET_TAGS = (); }; };
 		C64FB3381BB6CC180081E5B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64FB3311BB6CC180081E5B6 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
@@ -24,6 +26,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		C6402BE21BBE6EBD0087E23F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C64FB3691BB75F4D0081E5B6 /* Instructions.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C64FB2E81BB6CA8A0081E5B6;
+			remoteInfo = Instructions;
+		};
 		C64FB36E1BB75F4D0081E5B6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C64FB3691BB75F4D0081E5B6 /* Instructions.xcodeproj */;
@@ -46,6 +55,20 @@
 			remoteInfo = Instructions;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C6402BE41BBE6EBD0087E23F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C6402BE11BBE6EBD0087E23F /* Instructions.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C636FFA91BBBD99200EB243B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Example/Assets.xcassets; sourceTree = "<group>"; };
@@ -72,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6402BE01BBE6EBD0087E23F /* Instructions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,11 +193,13 @@
 				C64FB3081BB6CB1C0081E5B6 /* Sources */,
 				C64FB3091BB6CB1C0081E5B6 /* Frameworks */,
 				C64FB30A1BB6CB1C0081E5B6 /* Resources */,
+				C6402BE41BBE6EBD0087E23F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				C64FB3771BB75F980081E5B6 /* PBXTargetDependency */,
+				C6402BE31BBE6EBD0087E23F /* PBXTargetDependency */,
 			);
 			name = "Instructions Example";
 			productName = "Instructions Example";
@@ -270,6 +296,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		C6402BE31BBE6EBD0087E23F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Instructions;
+			targetProxy = C6402BE21BBE6EBD0087E23F /* PBXContainerItemProxy */;
+		};
 		C64FB3771BB75F980081E5B6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Instructions;
@@ -384,6 +415,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
@@ -399,6 +431,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",

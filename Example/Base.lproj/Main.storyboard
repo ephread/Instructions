@@ -149,16 +149,16 @@
         <!--Profile-->
         <scene sceneID="WBD-GZ-Xaa">
             <objects>
-                <viewController title="Profile" extendedLayoutIncludesOpaqueBars="YES" id="YJG-tQ-EGf" customClass="DefaultViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Profile" id="YJG-tQ-EGf" customClass="DefaultViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="e7T-A9-Djo"/>
                         <viewControllerLayoutGuide type="bottom" id="Wuy-GE-HQc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="yyL-TN-CqH">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kRL-eq-99Q">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kRL-eq-99Q">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="93p-mV-MOh">
@@ -295,19 +295,19 @@
             </objects>
             <point key="canvasLocation" x="1674" y="821"/>
         </scene>
-        <!--Profile-->
+        <!--Custom-->
         <scene sceneID="z7i-Fs-Ody">
             <objects>
-                <viewController title="Profile" extendedLayoutIncludesOpaqueBars="YES" id="lon-7h-axN" customClass="CustomViewsViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Custom" id="lon-7h-axN" customClass="CustomViewsViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oRA-Cy-qsP"/>
                         <viewControllerLayoutGuide type="bottom" id="nCS-ZR-raB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="sSt-Dc-fyX">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tu8-tc-hZ3">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tu8-tc-hZ3">
                                 <rect key="frame" x="0.0" y="64" width="600" height="486"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5bc-wN-frs">
@@ -362,7 +362,7 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="rAB-SB-d64">
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="rAB-SB-d64">
                                 <rect key="frame" x="0.0" y="550" width="600" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="john@doe.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XUj-ro-ksa">
@@ -408,9 +408,6 @@
                             <constraint firstItem="Tu8-tc-hZ3" firstAttribute="top" secondItem="oRA-Cy-qsP" secondAttribute="bottom" id="uUb-Ro-LoK"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="PIC-gV-fTU">
-                        <barButtonItem key="backBarButtonItem" title="Back" id="JXk-Ep-YIk"/>
-                    </navigationItem>
                     <connections>
                         <outlet property="avatar" destination="ttT-vE-Fj2" id="59b-jK-pMV"/>
                         <outlet property="emailLabel" destination="XUj-ro-ksa" id="74F-ib-Wc1"/>

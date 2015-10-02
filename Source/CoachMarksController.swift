@@ -101,10 +101,26 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         return overlayView
     }()
 
+    /// This view will be added to the current `UIWindow` and covere everything.
+    /// The overlay and the coachmarks will all be subviews of this property.
+    private var topMostView = UIView()
+
     /// Sometimes, the chain of coach mark display can be paused
     /// to let animations be performed. `true` to pause the execution,
     /// `false` otherwise.
     private var paused = false
+
+    /// Since changing size calls asynchronous completion blocks,
+    /// we might end up firing multiple times the methods adding coach
+    /// marks to the view. To prevent that from happening we use the guard
+    /// property.
+    ///
+    /// Everything is normally happening on the main thread, atomicity should
+    /// not be a problem. Plus, a size change is a very long process compared to
+    /// subview addition.
+    ///
+    /// `true` when the controller is performing a size change, `false` otherwise.
+    private var changingSize = false
 
     //MARK: - View lifecycle
 
@@ -142,6 +158,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         self.view.userInteractionEnabled = true
 
         self.overlayView.prepareForFade()
+
         UIView.animateWithDuration(self.overlayFadeAnimationDuration, animations: { () -> Void in
             self.overlayView.alpha = 1.0
         }, completion: { (finished: Bool) -> Void in
@@ -171,6 +188,26 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         self.showNextCoachMark();
     }
 
+    override public func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+
+        self.overlayView.updateCutoutPath(nil)
+        self.prepareForSizeTransition()
+
+        self.changingSize = true
+
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+
+        coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext) -> Void in
+
+        }, completion: { (context: UIViewControllerTransitionCoordinatorContext) -> Void in
+            self.changingSize = false
+            self.overlayView.alpha = 1.0
+            self.retrieveCoachMarkFromDataSource(shouldCallDelegate: false)
+        })
+    }
+
+    //MARK: - Public methods
+
     /// Will be called when the user perform an action requiring the display of the next coach mark.
     ///
     /// - Parameter sender: the object sending the message
@@ -195,8 +232,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             UIView.animateWithDuration(self.currentCoachMark!.animationDuration, animations: { () -> Void in
                 self.currentCoachMarkView?.alpha = 0.0
             }, completion: {(finished: Bool) -> Void in
-                self.currentCoachMarkView?.removeFromSuperview()
-                self.currentCoachMarkView?.nextControl?.removeTarget(self, action: "performShowNextCoachMark:", forControlEvents: .TouchUpInside)
+                self.hideCurrentCoachView()
 
                 if self.currentIndex < self.numberOfCoachMarks {
                     self.retrieveCoachMarkFromDataSource()
@@ -210,12 +246,16 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     }
 
     /// Will attach the controller as a child of the given view controller. This will
-    /// allow the coach mark controller to part of UIKit chain.
+    /// allow the coach mark controller to respond to size changes, though
+    /// `topMostView` will be a subview of `UIWindow`.
     ///
     /// - Parameter parentViewController: the controller of which become a child
     public func attachToViewController(parentViewController: UIViewController) {
         parentViewController.addChildViewController(self)
         parentViewController.view.addSubview(self.view)
+
+        self.topMostView.translatesAutoresizingMaskIntoConstraints = false;
+        parentViewController.view?.window?.addSubview(self.topMostView)
 
         parentViewController.view.addConstraints(
             NSLayoutConstraint.constraintsWithVisualFormat("V:|[overlayView]|", options: NSLayoutFormatOptions(rawValue: 0),
@@ -225,6 +265,16 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             NSLayoutConstraint.constraintsWithVisualFormat("H:|[overlayView]|", options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil, views: ["overlayView": self.view]))
 
+        parentViewController.view?.window?.addConstraints(
+            NSLayoutConstraint.constraintsWithVisualFormat("V:|[topMostView]|", options: NSLayoutFormatOptions(rawValue: 0),
+                metrics: nil, views: ["topMostView": self.topMostView]))
+
+        parentViewController.view?.window?.addConstraints(
+            NSLayoutConstraint.constraintsWithVisualFormat("H:|[topMostView]|", options: NSLayoutFormatOptions(rawValue: 0),
+                metrics: nil, views: ["topMostView": self.topMostView]))
+
+        self.topMostView.backgroundColor = UIColor.clearColor()
+
         self.beginAppearanceTransition(true, animated: false)
         self.endAppearanceTransition()
 
@@ -233,6 +283,8 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
     /// Detach the controller from its parent view controller.
     public func detachFromViewController() {
+        self.topMostView.removeFromSuperview()
+
         self.beginAppearanceTransition(false, animated: false)
         self.endAppearanceTransition()
 
@@ -319,7 +371,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             return
         }
 
-        let convertedFrame = self.view.convertRect(view.frame, fromView:view.superview);
+        let convertedFrame = self.topMostView.convertRect(view.frame, fromView:view.superview);
 
         var bezierPath: UIBezierPath;
 
@@ -332,7 +384,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         coachMark.cutoutPath = bezierPath
 
         if let pointOfInterest = pointOfInterest {
-            let convertedPoint = self.view.convertPoint(pointOfInterest, fromView:view.superview);
+            let convertedPoint = self.topMostView.convertPoint(pointOfInterest, fromView:view.superview);
             coachMark.pointOfInterest = convertedPoint
         }
     }
@@ -381,12 +433,12 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     //MARK: - Private methods
     /// Add the overlay view which will blur/dim the background.
     private func addOverlayView() {
-        self.view.addSubview(self.overlayView)
+        self.topMostView.addSubview(self.overlayView)
 
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[overlayView]|", options: NSLayoutFormatOptions(rawValue: 0),
+        self.topMostView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[overlayView]|", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["overlayView": self.overlayView]))
 
-        self.view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[overlayView]|", options: NSLayoutFormatOptions(rawValue: 0),
+        self.topMostView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[overlayView]|", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["overlayView": self.overlayView]))
 
         self.overlayView.alpha = 0.0
@@ -402,15 +454,22 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     }
 
     /// Ask the datasource, create the coach mark and display it. Also
-    /// notifies the delegate.
-    private func retrieveCoachMarkFromDataSource() {
+    /// notifies the delegate. When this method is called during a size change,
+    /// the delegate is not notified.
+    ///
+    /// - Parameter shouldCallDelegate: `true` to call delegate methods, `false` otherwise.
+    private func retrieveCoachMarkFromDataSource(shouldCallDelegate shouldCallDelegate: Bool = true) {
+        if changingSize { return }
+
         // Retrieves the current coach mark structure from the datasource.
         // It can't be nil, that's why we'll force unwrap it everywhere.
         self.currentCoachMark = self.datasource!.coachMarksController(self, coachMarksForIndex: self.currentIndex)
 
         // The coach mark will soon show, we notify the delegate, so it
         // can peform some things and, if required, update the coach mark structure.
-        self.delegate?.coachMarksController(self, coachMarkWillShow: &self.currentCoachMark!, forIndex: self.currentIndex)
+        if shouldCallDelegate {
+            self.delegate?.coachMarksController(self, coachMarkWillShow: &self.currentCoachMark!, forIndex: self.currentIndex)
+        }
 
         if !self.paused {
             createAndShowCoachMark()
@@ -419,6 +478,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
     /// Create display the coach mark view.
     private func createAndShowCoachMark() {
+        if changingSize { return }
 
         // Once the coach mark structure is final, we'll compute the arrow
         // orientation, so the data source will know what king of views supply.
@@ -458,16 +518,17 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     /// Add the current coach mark to the view, making sure it is
     /// properly positioned.
     private func prepareCurrentCoachMarkForDisplay() {
+
         guard let coachMark = self.currentCoachMark, coachMarkView = self.currentCoachMarkView else {
             return
         }
 
         // Add the view and compute its associated constraints.
-        self.view.addSubview(coachMarkView)
+        self.topMostView.addSubview(coachMarkView)
 
-        self.view.addConstraints(
+        self.topMostView.addConstraints(
             NSLayoutConstraint.constraintsWithVisualFormat("H:[currentCoachMarkView(<=\(coachMark.maxWidth))]", options: NSLayoutFormatOptions(rawValue: 0),
-                metrics: nil, views: ["currentCoachMarkView": self.currentCoachMarkView!])
+                metrics: nil, views: ["currentCoachMarkView": coachMarkView])
         )
 
         // No cutoutPath, no arrow.
@@ -477,11 +538,11 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             // Depending where the cutoutPath sits, the coach mark will either
             // stand above or below it.
             if coachMark.arrowOrientation! == .Bottom {
-                let coachMarkViewConstraint = NSLayoutConstraint(item: coachMarkView, attribute: .Bottom, relatedBy: .Equal, toItem: self.view, attribute: .Bottom, multiplier: 1, constant: -(self.view.frame.size.height - cutoutPath.bounds.origin.y + offset))
-                self.view.addConstraint(coachMarkViewConstraint)
+                let coachMarkViewConstraint = NSLayoutConstraint(item: coachMarkView, attribute: .Bottom, relatedBy: .Equal, toItem: self.topMostView, attribute: .Bottom, multiplier: 1, constant: -(self.topMostView.frame.size.height - cutoutPath.bounds.origin.y + offset))
+                self.topMostView.addConstraint(coachMarkViewConstraint)
             } else {
-                let coachMarkViewConstraint = NSLayoutConstraint(item: coachMarkView, attribute: .Top, relatedBy: .Equal, toItem: self.view, attribute: .Top, multiplier: 1, constant: (cutoutPath.bounds.origin.y + cutoutPath.bounds.size.height) + offset)
-                self.view.addConstraint(coachMarkViewConstraint)
+                let coachMarkViewConstraint = NSLayoutConstraint(item: coachMarkView, attribute: .Top, relatedBy: .Equal, toItem: self.topMostView, attribute: .Top, multiplier: 1, constant: (cutoutPath.bounds.origin.y + cutoutPath.bounds.size.height) + offset)
+                self.topMostView.addConstraint(coachMarkViewConstraint)
             }
 
             let horizontalMargin = coachMark.horizontalMargin
@@ -491,7 +552,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             let segmentNumber = 3 * pointOfInterest.x / self.view.bounds.size.width
 
             if segmentNumber < 1 {
-                self.view.addConstraints(
+                self.topMostView.addConstraints(
                     NSLayoutConstraint.constraintsWithVisualFormat("H:|-(==\(horizontalMargin))-[currentCoachMarkView(<=\(maxWidth))]-(>=\(horizontalMargin))-|", options: NSLayoutFormatOptions(rawValue: 0),
                         metrics: nil, views: ["currentCoachMarkView": coachMarkView])
                 )
@@ -499,9 +560,9 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
                 coachMarkView.changeArrowPositionTo(CoachMarkView.ArrowPosition.Leading, offset: pointOfInterest.x - coachMark.horizontalMargin)
 
             } else if segmentNumber < 2 {
-                self.view.addConstraint(NSLayoutConstraint(item: coachMarkView, attribute: .CenterX, relatedBy: .Equal, toItem: self.view, attribute: .CenterX, multiplier: 1, constant: 0))
+                self.topMostView.addConstraint(NSLayoutConstraint(item: coachMarkView, attribute: .CenterX, relatedBy: .Equal, toItem: self.topMostView, attribute: .CenterX, multiplier: 1, constant: 0))
 
-                self.view.addConstraints(
+                self.topMostView.addConstraints(
                     NSLayoutConstraint.constraintsWithVisualFormat("H:|-(>=\(horizontalMargin))-[currentCoachMarkView(<=\(maxWidth)@1000)]-(>=\(horizontalMargin))-|", options: NSLayoutFormatOptions(rawValue: 0),
                         metrics: nil, views: ["currentCoachMarkView": coachMarkView])
                 )
@@ -509,7 +570,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
                 coachMarkView.changeArrowPositionTo(CoachMarkView.ArrowPosition.Center, offset: self.view.center.x - pointOfInterest.x)
 
             } else if segmentNumber < 3 {
-                self.view.addConstraints(
+                self.topMostView.addConstraints(
                     NSLayoutConstraint.constraintsWithVisualFormat("H:|-(>=\(horizontalMargin))-[currentCoachMarkView(<=\(maxWidth))]-(==\(horizontalMargin))-|", options: NSLayoutFormatOptions(rawValue: 0),
                         metrics: nil, views: ["currentCoachMarkView": coachMarkView])
                 )
@@ -521,5 +582,18 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         } else {
             self.overlayView.updateCutoutPath(nil)
         }
+    }
+
+    /// Will hide the current coach view and unbind events.
+    private func hideCurrentCoachView() {
+        self.currentCoachMarkView?.removeFromSuperview()
+        self.currentCoachMarkView?.nextControl?.removeTarget(self, action: "performShowNextCoachMark:", forControlEvents: .TouchUpInside)
+    }
+
+    /// Will remove currently displayed coach mark.
+    private func prepareForSizeTransition() {
+        self.currentCoachMarkView?.layer.removeAllAnimations()
+        self.hideCurrentCoachView()
+        self.currentCoachMarkView = nil
     }
 }

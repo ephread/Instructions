@@ -56,6 +56,6 @@ internal class ProfileViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.coachMarksController?.startOn(self.navigationController!)
+        self.coachMarksController?.startOn(self)
     }
 }

@@ -545,38 +545,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
                 self.topMostView.addConstraint(coachMarkViewConstraint)
             }
 
-            let horizontalMargin = coachMark.horizontalMargin
-            let maxWidth = coachMark.maxWidth
-
-            let pointOfInterest = coachMark.pointOfInterest!
-            let segmentNumber = 3 * pointOfInterest.x / self.view.bounds.size.width
-
-            if segmentNumber < 1 {
-                self.topMostView.addConstraints(
-                    NSLayoutConstraint.constraintsWithVisualFormat("H:|-(==\(horizontalMargin))-[currentCoachMarkView(<=\(maxWidth))]-(>=\(horizontalMargin))-|", options: NSLayoutFormatOptions(rawValue: 0),
-                        metrics: nil, views: ["currentCoachMarkView": coachMarkView])
-                )
-
-                coachMarkView.changeArrowPositionTo(CoachMarkView.ArrowPosition.Leading, offset: pointOfInterest.x - coachMark.horizontalMargin)
-
-            } else if segmentNumber < 2 {
-                self.topMostView.addConstraint(NSLayoutConstraint(item: coachMarkView, attribute: .CenterX, relatedBy: .Equal, toItem: self.topMostView, attribute: .CenterX, multiplier: 1, constant: 0))
-
-                self.topMostView.addConstraints(
-                    NSLayoutConstraint.constraintsWithVisualFormat("H:|-(>=\(horizontalMargin))-[currentCoachMarkView(<=\(maxWidth)@1000)]-(>=\(horizontalMargin))-|", options: NSLayoutFormatOptions(rawValue: 0),
-                        metrics: nil, views: ["currentCoachMarkView": coachMarkView])
-                )
-
-                coachMarkView.changeArrowPositionTo(CoachMarkView.ArrowPosition.Center, offset: self.view.center.x - pointOfInterest.x)
-
-            } else if segmentNumber < 3 {
-                self.topMostView.addConstraints(
-                    NSLayoutConstraint.constraintsWithVisualFormat("H:|-(>=\(horizontalMargin))-[currentCoachMarkView(<=\(maxWidth))]-(==\(horizontalMargin))-|", options: NSLayoutFormatOptions(rawValue: 0),
-                        metrics: nil, views: ["currentCoachMarkView": coachMarkView])
-                )
-
-                coachMarkView.changeArrowPositionTo(CoachMarkView.ArrowPosition.Trailing, offset: self.view.bounds.size.width - pointOfInterest.x - coachMark.horizontalMargin)
-            }
+            self.positionCoachMarkView()
 
             self.overlayView.updateCutoutPath(cutoutPath)
         } else {
@@ -595,5 +564,120 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         self.currentCoachMarkView?.layer.removeAllAnimations()
         self.hideCurrentCoachView()
         self.currentCoachMarkView = nil
+    }
+
+    /// Compute the segment index (for now the screen is separated
+    /// in three horizontal areas and depending in which one the coach
+    /// mark stand, it will be layed out in a different way.
+    ///
+    /// - Parameter layoutDirection: the layout direction (RTL or LTR)
+    ///
+    /// - Returns: the segment index (either 1, 2 or 3)
+    private func computeSegmentIndexForLayoutDirection(layoutDirection: UIUserInterfaceLayoutDirection) -> Int {
+        guard let coachMark = self.currentCoachMark else {
+            return 2
+        }
+
+        let pointOfInterest = coachMark.pointOfInterest!
+        var segmentIndex = 3 * pointOfInterest.x / self.view.bounds.size.width
+
+        if layoutDirection == .RightToLeft {
+            segmentIndex = 3 - segmentIndex
+        }
+
+        return Int(ceil(segmentIndex))
+    }
+
+    /// Position the coach mark view.
+    /// TODO: Improve the layout system. Make it smarter.
+    private func positionCoachMarkView() {
+        guard let coachMark = self.currentCoachMark, coachMarkView = self.currentCoachMarkView else {
+            return
+        }
+
+        let layoutDirection = UIView.userInterfaceLayoutDirectionForSemanticContentAttribute(self.topMostView.semanticContentAttribute)
+
+        let segmentIndex = self.computeSegmentIndexForLayoutDirection(layoutDirection)
+
+        let horizontalMargin = coachMark.horizontalMargin
+        let maxWidth = coachMark.maxWidth
+
+        switch(segmentIndex) {
+        case 1:
+            self.topMostView.addConstraints(
+                NSLayoutConstraint.constraintsWithVisualFormat("H:|-(==\(horizontalMargin))-[currentCoachMarkView(<=\(maxWidth))]-(>=\(horizontalMargin))-|", options: NSLayoutFormatOptions(rawValue: 0),
+                    metrics: nil, views: ["currentCoachMarkView": coachMarkView])
+            )
+
+            let offset = arrowOffsetForLayoutDirection(layoutDirection, segmentIndex: segmentIndex)
+
+            coachMarkView.changeArrowPositionTo(.Leading, offset: offset)
+        case 2:
+            self.topMostView.addConstraint(NSLayoutConstraint(item: coachMarkView, attribute: .CenterX, relatedBy: .Equal, toItem: self.topMostView, attribute: .CenterX, multiplier: 1, constant: 0))
+
+            self.topMostView.addConstraints(
+                NSLayoutConstraint.constraintsWithVisualFormat("H:|-(>=\(horizontalMargin))-[currentCoachMarkView(<=\(maxWidth)@1000)]-(>=\(horizontalMargin))-|", options: NSLayoutFormatOptions(rawValue: 0),
+                    metrics: nil, views: ["currentCoachMarkView": coachMarkView])
+            )
+
+            let offset = arrowOffsetForLayoutDirection(layoutDirection, segmentIndex: segmentIndex)
+
+            coachMarkView.changeArrowPositionTo(.Center, offset: offset)
+
+        case 3:
+            self.topMostView.addConstraints(
+                NSLayoutConstraint.constraintsWithVisualFormat("H:|-(>=\(horizontalMargin))-[currentCoachMarkView(<=\(maxWidth))]-(==\(horizontalMargin))-|", options: NSLayoutFormatOptions(rawValue: 0),
+                    metrics: nil, views: ["currentCoachMarkView": coachMarkView])
+            )
+
+            let offset = arrowOffsetForLayoutDirection(layoutDirection, segmentIndex: segmentIndex)
+
+            coachMarkView.changeArrowPositionTo(.Trailing, offset: offset)
+        default:
+            break
+        }
+    }
+
+    /// Returns the arrow offset, based on the layout and the
+    /// segment in which the coach mark will be.
+    ///
+    /// - Parameter layoutDirection: the layout direction (RTL or LTR)
+    /// - Parameter: segmentIndex the segment index (either 1, 2 or 3)
+    private func arrowOffsetForLayoutDirection(layoutDirection: UIUserInterfaceLayoutDirection, segmentIndex: Int) -> CGFloat {
+
+        guard let coachMark = self.currentCoachMark else {
+            return 0
+        }
+
+        let pointOfInterest = coachMark.pointOfInterest!
+
+        var arrowOffset: CGFloat;
+
+        switch(segmentIndex) {
+        case 1:
+            if layoutDirection == .LeftToRight {
+                arrowOffset = pointOfInterest.x - coachMark.horizontalMargin
+            } else {
+                arrowOffset = self.topMostView.bounds.size.width - pointOfInterest.x - coachMark.horizontalMargin
+            }
+        case 2:
+            if layoutDirection == .LeftToRight {
+                arrowOffset = self.view.center.x - pointOfInterest.x
+            } else {
+                arrowOffset = pointOfInterest.x - self.view.center.x
+            }
+        case 3:
+            if layoutDirection == .LeftToRight {
+                arrowOffset = self.topMostView.bounds.size.width - pointOfInterest.x - coachMark.horizontalMargin
+            } else {
+                arrowOffset = pointOfInterest.x - coachMark.horizontalMargin
+            }
+
+        default:
+            arrowOffset = 0
+            break
+        }
+
+        return arrowOffset
     }
 }

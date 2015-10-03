@@ -595,7 +595,13 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             return
         }
 
-        let layoutDirection = UIView.userInterfaceLayoutDirectionForSemanticContentAttribute(self.topMostView.semanticContentAttribute)
+        let layoutDirection: UIUserInterfaceLayoutDirection
+
+        if #available(iOS 9, *) {
+            layoutDirection = UIView.userInterfaceLayoutDirectionForSemanticContentAttribute(self.topMostView.semanticContentAttribute)
+        } else {
+            layoutDirection = .LeftToRight
+        }
 
         let segmentIndex = self.computeSegmentIndexForLayoutDirection(layoutDirection)
 

@@ -2,20 +2,20 @@
 
 [![Travis build status](https://img.shields.io/travis/ephread/Instructions.svg)](https://travis-ci.org/ephread/Instructions) [![CocoaPods Shield](https://img.shields.io/cocoapods/v/Instructions.svg)](https://cocoapods.org/pods/Instructions) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-Add customizable coach marks into you iOS project. Instructions will makes your coach-mark-maker life easier, I promise. Available for both iPhone and iPad.
+Add customizable coach marks into you iOS project. Instructions will makes your life easier, I promise. Available for both iPhone and iPad.
 
 ## Overview
 ![Instructions Demo](http://i.imgur.com/JUlQH9F.gif)
 
-⚠️ **This project is not yet production ready, but it will be soon. Until Instructions reaches 1.0.0, the API is subject to change. Please see the Features section for more informations about the roadmap.**
+⚠️ **Until Instructions reaches 1.0.0, the API is subject to change. Please see the Features section for more information about the roadmap.**
 
 ## Features
 - [x] Customizable views
 - [x] Customizable positions
 - [x] Customizable highlight system
-- [ ] Full right-to-left support • **will make Instructions production-ready!**
-- [ ] Size changes support (orientation and multi-tasking) • **will make Instructions production-ready!**
-- [ ] Tests
+- [x] Full right-to-left support
+- [x] Size transition support (orientation and multi-tasking)
+- [ ] Good test coverage • **Once done, it should bump version to 1.0.0**
 - [ ] Full support of UIVisualEffectView blur in overlay
 - [ ] Objective-C bridging
 - [ ] Coach marks animation support
@@ -35,7 +35,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'Instructions', '~> 0.1.2'
+pod 'Instructions', '~> 0.2'
 ```
 
 Then, run the following command:
@@ -48,7 +48,7 @@ $ pod install
 Add Instructions to your Cartfile:
 
 ```
-github "ephread/Instructions" ~> 0.1.2
+github "ephread/Instructions" ~> 0.2
 ```
 
 You can then update, build and drag the generated framework into your project:
@@ -124,13 +124,13 @@ func coachMarksController(coachMarksController: CoachMarksController, coachMarkV
 ```
 
 #### Starting the coach marks flow
-Once the `datasource` is set up, you can start displaying the coach marks. You can supply `self` to `startOn`, but if you want the background overlay to cover the navigation/tab bar, you will most likely need to supply the parent `UINavigationController` or `UITabBarViewController`.
+Once the `datasource` is set up, you can start displaying the coach marks. You will most likely supply `self` to `startOn`. While the overlay adds itself as a child of the current window (to be on top of everything), the `CoachMarksController` will add itself as a child of the view controller you provide. That way, the `CoachMarksController` will receive size change events and react accordingly.
 
 ```swift
 override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
-    self.coachMarksController.startOn(self.navigationController!)
+    self.coachMarksController.startOn(self)
 }
 ```
 

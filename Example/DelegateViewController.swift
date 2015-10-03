@@ -34,7 +34,7 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //self.coachMarksController?.delegate = self
+        self.coachMarksController?.delegate = self
         self.coachMarksController?.datasource = self
 
         self.emailLabel?.layer.cornerRadius = 4.0

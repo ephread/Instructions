@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Instructions"
-  s.version          = "0.2.0"
+  s.version          = "0.2.1"
   s.summary          = "Easily add customizable coach marks into you iOS project."
   s.homepage         = "https://github.com/ephread/Instructions"
   s.license          = 'MIT'

@@ -2,8 +2,14 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
-## [0.2.0](https://github.com/ephread/Instructions/releases/tag/0.2.0)
+## [0.2.1](https://github.com/ephread/Instructions/releases/tag/0.2.1)
 Released on 2015-10-03.
+
+### Fixed
+- Wrapped unavailable method into `if #available` block.
+
+## [0.2.0](https://github.com/ephread/Instructions/releases/tag/0.2.0)
+Released on 2015-10-03. ⚠️ Defective version
 
 ### Added
 - Add full size transition support

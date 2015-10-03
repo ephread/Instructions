@@ -495,7 +495,7 @@
                                         <rect key="frame" x="20" y="466" width="560" height="50"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="jane@doe.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OiP-eq-syu">
-                                                <rect key="frame" x="0.0" y="0.0" width="173" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="125" height="50"/>
                                                 <animations/>
                                                 <color key="backgroundColor" red="0.95686274510000002" green="0.35513783469999999" blue="0.2749905856" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -503,15 +503,23 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="34 posts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jAg-rb-psY">
-                                                <rect key="frame" x="193" y="0.0" width="174" height="50"/>
+                                                <rect key="frame" x="145" y="0.0" width="125" height="50"/>
                                                 <animations/>
                                                 <color key="backgroundColor" red="0.46912790910000002" green="0.67032050639999996" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 answers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.30000001192092896" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yBK-FN-OvU">
+                                                <rect key="frame" x="290" y="0.0" width="125" height="50"/>
+                                                <animations/>
+                                                <color key="backgroundColor" red="0.95686274510000002" green="0.55512031648755489" blue="0.18176199934228049" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="29 reputation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.29999999999999999" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z95-tc-feG">
-                                                <rect key="frame" x="387" y="0.0" width="173" height="50"/>
+                                                <rect key="frame" x="435" y="0.0" width="125" height="50"/>
                                                 <animations/>
                                                 <color key="backgroundColor" red="0.4010104102" green="0.78979245580000002" blue="0.4541125902" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -548,6 +556,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="answersLabel" destination="yBK-FN-OvU" id="Nvz-A2-ZMX"/>
                         <outlet property="emailLabel" destination="OiP-eq-syu" id="pgr-Hh-IU9"/>
                         <outlet property="handleLabel" destination="GTv-j4-wTp" id="qeK-0G-8iw"/>
                         <outlet property="postsLabel" destination="jAg-rb-psY" id="SFd-bA-Fz9"/>

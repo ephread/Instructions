@@ -95,28 +95,28 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
     //MARK: - Protocol Conformance | CoachMarksControllerDelegate
     func coachMarksController(coachMarksController: CoachMarksController, inout coachMarkWillShow coachMark: CoachMark, forIndex index: Int) {
         if index == 0 {
-//            // We'll need to play an animation before showing up the coach mark.
-//            // To be able to play the animation and then show the coach mark and not stall
-//            // the UI (i. e. keep the asynchronicity), we'll pause the controller.
-//            //coachMarksController.pause()
-//
-//            // Then we run the animation.
-//            self.avatarVerticalPositionConstraint?.constant = 30
-//            self.view.needsUpdateConstraints()
-//
-//            UIView.animateWithDuration(1, animations: { () -> Void in
-//                self.view.layoutIfNeeded()
-//                }, completion: { (finished: Bool) -> Void in
-//
-//                    // Once the animation is completed, we update the coach mark,
-//                    // and start the display again.
-//                    coachMarksController.updateCurrentCoachMarkForView(self.avatar, pointOfInterest: nil) {
-//                        (frame: CGRect) -> UIBezierPath in
-//                        return UIBezierPath(ovalInRect: CGRectInset(frame, -4, -4))
-//                    }
-//
-//                    //coachMarksController.play()
-//            })
+            // We'll need to play an animation before showing up the coach mark.
+            // To be able to play the animation and then show the coach mark and not stall
+            // the UI (i. e. keep the asynchronicity), we'll pause the controller.
+            coachMarksController.pause()
+
+            // Then we run the animation.
+            self.avatarVerticalPositionConstraint?.constant = 30
+            self.view.needsUpdateConstraints()
+
+            UIView.animateWithDuration(1, animations: { () -> Void in
+                self.view.layoutIfNeeded()
+                }, completion: { (finished: Bool) -> Void in
+
+                    // Once the animation is completed, we update the coach mark,
+                    // and start the display again.
+                    coachMarksController.updateCurrentCoachMarkForView(self.avatar, pointOfInterest: nil) {
+                        (frame: CGRect) -> UIBezierPath in
+                        return UIBezierPath(ovalInRect: CGRectInset(frame, -4, -4))
+                    }
+
+                    coachMarksController.play()
+            })
         }
     }
 

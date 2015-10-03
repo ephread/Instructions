@@ -25,9 +25,13 @@ import Instructions
 
 // This class mix different kind of coach marks together.
 internal class MixedCoachMarksViewsViewController: ProfileViewController, CoachMarksControllerDataSource {
+    //MARK: - IBOutlet
+    @IBOutlet var answersLabel: UILabel?
 
     //MARK: - Private properties
     private let swipeImage = UIImage(named: "swipe")
+
+    private let answersText = "That's the number of answers you gave."
 
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -40,7 +44,7 @@ internal class MixedCoachMarksViewsViewController: ProfileViewController, CoachM
 
     //MARK: - Protocol Conformance | CoachMarksControllerDataSource
     func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
-        return 4
+        return 5
     }
 
     func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
@@ -55,6 +59,8 @@ internal class MixedCoachMarksViewsViewController: ProfileViewController, CoachM
         case 2:
             coachMark = coachMarksController.coachMarkForView(self.postsLabel)
         case 3:
+            coachMark = coachMarksController.coachMarkForView(self.answersLabel)
+        case 4:
             coachMark = coachMarksController.coachMarkForView(self.reputationLabel)
         default:
             coachMark = coachMarksController.coachMarkForView()
@@ -109,6 +115,14 @@ internal class MixedCoachMarksViewsViewController: ProfileViewController, CoachM
             bodyView = coachViews.bodyView
             arrowView = coachViews.arrowView
         case 3:
+            let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+
+            coachViews.bodyView.hintLabel.text = self.answersText
+            coachViews.bodyView.nextLabel.text = self.nextButtonText
+
+            bodyView = coachViews.bodyView
+            arrowView = coachViews.arrowView
+        case 4:
             let coachMarkBodyView = TransparentCoachMarkBodyView()
             var coachMarkArrowView: TransparentCoachMarkArrowView? = nil
 

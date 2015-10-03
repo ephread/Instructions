@@ -29,16 +29,6 @@ import UIKit
 /// 2. It is not suppoed to be subclassed at the moment, as it only acts as
 ///    container for body and arrow views.
 final internal class CoachMarkView : UIView, CoachMarkBodyHighlightArrowDelegate {
-
-    //MARK: - Internal sub elements
-
-    /// Define the position of the arrow.
-    enum ArrowPosition {
-        case Leading
-        case Center
-        case Trailing
-    }
-
     //MARK: - Internal properties
 
     /// The body of the coach mark (likely to contain some text).
@@ -136,6 +126,7 @@ final internal class CoachMarkView : UIView, CoachMarkBodyHighlightArrowDelegate
     /// - Parameter position: arrow position
     /// - Parameter offset: arrow offset
     func changeArrowPositionTo(position: ArrowPosition, offset: CGFloat) {
+        
         if self.arrowView == nil {
             return
         }

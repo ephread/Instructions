@@ -220,24 +220,18 @@ The `CoachMarkManager` will notify the delegate on three occasions. All those me
 First, when a coach mark will show. You might want to change something about the view. For that reason, the `CoachMark` metadata structure is passed as an `inout` object, so you can update it with new parameters.
 
 ```swift
-func coachMarksController(_: CoachMarksController, inout coachMarkWillShow: CoachMark, forIndex: Int) {
-    
-}
+func coachMarksController(coachMarksController: CoachMarksController, inout coachMarkWillShow: CoachMark, forIndex: Int)
 ```
 
 Second, when a coach mark disappears.
 
 ```swift    
-func coachMarksController(_: CoachMarksController, coachMarkWillDisappear: CoachMark, forIndex: Int) {
-    
-}
+func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillDisappear: CoachMark, forIndex: Int)
 ```
 Third, when all coach marks have been displayed. 
 
 ```swift    
-func didFinishShowingFromCoachMarksController(_: CoachMarksController) {
-    
-}
+func didFinishShowingFromCoachMarksController(coachMarksController: CoachMarksController)
 ```
 
 ##### Performing animations before showing coach marks #####
@@ -249,7 +243,7 @@ You'll implement some logic into the `coachMarkWillShow` delegate method.
 To ensure you don't have to hack something up and turn asynchronous animation blocks into synchronous ones, you can pause the flow, perform the animation and then start the flow again. This will ensure your UI never get stalled.
 
 ```swift
-func coachMarksController(_: CoachMarksController, inout coachMarkWillShow: CoachMark, forIndex: Int) {
+func coachMarksController(coachMarksController: CoachMarksController, inout coachMarkWillShow: CoachMark, forIndex: Int) {
 	 // Pause to be able to play the animation and then show the coach mark.
     coachMarksController.pause()
 

@@ -3,6 +3,7 @@ language: objective-c
 branches:
   only:
   - master
+  - tests
 
 osx_image: xcode7
 

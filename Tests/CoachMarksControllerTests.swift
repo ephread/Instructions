@@ -9,17 +9,21 @@
 import XCTest
 @testable import Instructions
 
-class CoachMarksControllerTests: XCTestCase {
+class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
 
     let coachMarksController = CoachMarksController()
     let parentController = UIViewController()
     let mockedDataSource = CoachMarkControllerMockedDataSource()
     let mockedWindow = UIWindow()
 
+    var delegateEndExpectation: XCTestExpectation? = nil;
+
     override func setUp() {
         super.setUp()
         
         self.coachMarksController.datasource = self.mockedDataSource
+        self.coachMarksController.delegate = self
+
         self.mockedWindow.addSubview(self.parentController.view)
     }
     
@@ -34,26 +38,49 @@ class CoachMarksControllerTests: XCTestCase {
         XCTAssertTrue(self.parentController.childViewControllers.contains(self.coachMarksController))
     }
 
-    func testThatCoachMarkControllerDetachItselfFromParent() {
-        let detachmentExpectation = self.expectationWithDescription("CoachMarkControllerDetachItselfFromParent")
+    func testThatDidFinishShowingIsCalled() {
+        self.delegateEndExpectation = self.expectationWithDescription("DidFinishShowing")
 
         self.coachMarksController.startOn(self.parentController)
         self.coachMarksController.stop()
 
-        Instructions.delay(coachMarksController.overlayFadeAnimationDuration) {
-            self.parentController.childViewControllers
-            XCTAssertFalse(self.parentController.childViewControllers.contains(self.coachMarksController))
-
-            detachmentExpectation.fulfill()
-        }
-
-        self.waitForExpectationsWithTimeout(coachMarksController.overlayFadeAnimationDuration + 1) { error in
-
+        self.waitForExpectationsWithTimeout(10) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
         }
+    }
 
+    func testThatCoachMarkControllerDetachItselfFromParent() {
+        self.delegateEndExpectation = self.expectationWithDescription("Detachment")
+
+        self.coachMarksController.startOn(self.parentController)
+        self.coachMarksController.stop()
+
+        self.waitForExpectationsWithTimeout(10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    func didFinishShowingFromCoachMarksController(coachMarksController: CoachMarksController) {
+        guard let delegateEndExpectation = self.delegateEndExpectation else {
+            XCTFail()
+            return
+        }
+
+        if (delegateEndExpectation.description == "Detachment") {
+            self.parentController.childViewControllers
+            XCTAssertFalse(self.parentController.childViewControllers.contains(self.coachMarksController))
+
+            delegateEndExpectation.fulfill()
+        } else if (delegateEndExpectation.description == "DidFinishShowing") {
+            XCTAssertTrue(true)
+            delegateEndExpectation.fulfill()
+        } else {
+            XCTFail()
+        }
     }
 }
 

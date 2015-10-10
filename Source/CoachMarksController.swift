@@ -101,7 +101,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         return overlayView
     }()
 
-    /// This view will be added to the current `UIWindow` and covere everything.
+    /// This view will be added to the current `UIWindow` and cover everything.
     /// The overlay and the coachmarks will all be subviews of this property.
     private var topMostView = UIView()
 
@@ -430,7 +430,6 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         }
     }
 
-    //MARK: - Private methods
     /// Add the overlay view which will blur/dim the background.
     private func addOverlayView() {
         self.topMostView.addSubview(self.overlayView)

@@ -22,6 +22,7 @@
 
 import UIKit
 
+// TODO: Refactor the Mega Controller. MASSIVE!
 /// Handles a set of coach marks, and display them successively.
 public class CoachMarksController: UIViewController, OverlayViewDelegate {
     //MARK: - Public properties
@@ -77,6 +78,29 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         }
     }
 
+    /// The view holding the "Skip" control
+    public var skipView: CoachMarkSkipView? {
+        // Again, we test the protocol/UIView combination
+        // at runtime.
+        
+        get {
+            return self.skipViewAsView as! CoachMarkSkipView?
+        }
+
+        set {
+            guard let validSkipView = newValue else {
+                self.skipViewAsView = nil
+                return
+            }
+
+            if !(validSkipView is UIView) {
+                fatalError("skipView must conform to CoachMarkBodyView but also be a UIView.")
+            }
+
+            self.skipViewAsView = validSkipView as? UIView
+        }
+    }
+
     //MARK: - Private properties
 
     /// The total number of coach marks, supplied by the `datasource`.
@@ -122,6 +146,9 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     /// `true` when the controller is performing a size change, `false` otherwise.
     private var changingSize = false
 
+    /// The view holding the "Skip" control.
+    private var skipViewAsView: UIView?
+
     //MARK: - View lifecycle
 
     // Called after the view was loaded.
@@ -157,10 +184,33 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         // from reaching down.
         self.view.userInteractionEnabled = true
 
+        if let skipViewAsView = self.skipViewAsView {
+            self.topMostView.addSubview(skipViewAsView)
+
+            let layoutConstraints = self.datasource?.coachMarksController(self, constraintsForSkipView: skipViewAsView, inParentView: self.topMostView)
+
+            skipViewAsView.translatesAutoresizingMaskIntoConstraints = false
+            
+            if let validLayoutConstraints = layoutConstraints {
+                self.topMostView.addConstraints(validLayoutConstraints)
+            } else {
+                self.topMostView.addConstraint(NSLayoutConstraint(item: skipViewAsView, attribute: .Trailing, relatedBy: .Equal, toItem: self.topMostView, attribute: .Trailing, multiplier: 1, constant: 0))
+
+                self.topMostView.addConstraint(NSLayoutConstraint(item: skipViewAsView, attribute: .Top, relatedBy: .Equal, toItem: self.topMostView, attribute: .Top, multiplier: 1, constant: 24))
+
+                self.topMostView.addConstraint(NSLayoutConstraint(item: skipViewAsView, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 100))
+
+                self.topMostView.addConstraint(NSLayoutConstraint(item: skipViewAsView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 40))
+            }
+        }
+
+        self.skipView?.skipControl?.addTarget(self, action: "skipCoachMarksTour:", forControlEvents: .TouchUpInside)
+
         self.overlayView.prepareForFade()
 
         UIView.animateWithDuration(self.overlayFadeAnimationDuration, animations: { () -> Void in
             self.overlayView.alpha = 1.0
+            self.skipViewAsView?.alpha = 1.0
         }, completion: { (finished: Bool) -> Void in
             self.showNextCoachMark()
         })
@@ -170,7 +220,10 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     public func stop() {
         UIView.animateWithDuration(self.overlayFadeAnimationDuration, animations: { () -> Void in
             self.overlayView.alpha = 0.0
+            self.skipViewAsView?.alpha = 0.0
+            self.currentCoachMarkView?.alpha = 0.0
         }, completion: {(finished: Bool) -> Void in
+            self.skipView?.skipControl?.removeTarget(self, action: "skipCoachMarksTour:", forControlEvents: .TouchUpInside)
             self.reset()
             self.detachFromViewController()
 
@@ -178,6 +231,20 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             self.delegate?.didFinishShowingFromCoachMarksController(self)
 
         })
+    }
+
+    /// Will be called when the user perform an action requiring the display of the next coach mark.
+    ///
+    /// - Parameter sender: the object sending the message
+    public func performShowNextCoachMark(sender:AnyObject?) {
+        self.showNextCoachMark();
+    }
+
+    /// Will be called when the user choose to skip the coach mark tour.
+    ///
+    /// - Parameter sender: the object sending the message
+    public func skipCoachMarksTour(sender: AnyObject?) {
+        self.stop()
     }
 
     //MARK: - Protocol Conformance | OverlayViewDelegate
@@ -204,15 +271,6 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             self.overlayView.alpha = 1.0
             self.retrieveCoachMarkFromDataSource(shouldCallDelegate: false)
         })
-    }
-
-    //MARK: - Public methods
-
-    /// Will be called when the user perform an action requiring the display of the next coach mark.
-    ///
-    /// - Parameter sender: the object sending the message
-    public func performShowNextCoachMark(sender:AnyObject?) {
-        self.showNextCoachMark();
     }
 
     //MARK: - Private methods
@@ -275,18 +333,12 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
         self.topMostView.backgroundColor = UIColor.clearColor()
 
-        self.beginAppearanceTransition(true, animated: false)
-        self.endAppearanceTransition()
-
         self.didMoveToParentViewController(parentViewController)
     }
 
     /// Detach the controller from its parent view controller.
     public func detachFromViewController() {
         self.topMostView.removeFromSuperview()
-
-        self.beginAppearanceTransition(false, animated: false)
-        self.endAppearanceTransition()
 
         self.willMoveToParentViewController(nil)
         self.view.removeFromSuperview()

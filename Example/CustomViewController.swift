@@ -36,6 +36,11 @@ internal class CustomViewsViewController: ProfileViewController, CoachMarksContr
         self.coachMarksController?.datasource = self
 
         self.coachMarksController?.overlayBackgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
+
+        let skipView = CoachMarkSkipDefaultView()
+        skipView.setTitle("Skip", forState: .Normal)
+
+        self.coachMarksController?.skipView = skipView
     }
 
     //MARK: - Protocol Conformance | CoachMarksControllerDataSource

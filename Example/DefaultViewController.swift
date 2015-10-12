@@ -35,6 +35,11 @@ internal class DefaultViewController: ProfileViewController, CoachMarksControlle
         self.emailLabel?.layer.cornerRadius = 4.0
         self.postsLabel?.layer.cornerRadius = 4.0
         self.reputationLabel?.layer.cornerRadius = 4.0
+
+        let skipView = CoachMarkSkipDefaultView()
+        skipView.setTitle("Skip", forState: .Normal)
+
+        self.coachMarksController?.skipView = skipView
     }
 
     //MARK: - Protocol Conformance | CoachMarksControllerDataSource

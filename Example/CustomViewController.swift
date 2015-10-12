@@ -39,6 +39,8 @@ internal class CustomViewsViewController: ProfileViewController, CoachMarksContr
 
         let skipView = CoachMarkSkipDefaultView()
         skipView.setTitle("Skip", forState: .Normal)
+        skipView.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        skipView.backgroundColor = UIColor.darkGrayColor()
 
         self.coachMarksController?.skipView = skipView
     }
@@ -142,5 +144,20 @@ internal class CustomViewsViewController: ProfileViewController, CoachMarksContr
         }
         
         return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
+    }
+
+    func coachMarksController(coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]? {
+
+        var constraints: [NSLayoutConstraint] = []
+
+        constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("H:|[skipView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
+
+        if UIApplication.sharedApplication().statusBarHidden {
+            constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|[skipView]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
+        } else {
+            constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-24-[skipView(==40)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
+        }
+
+        return constraints
     }
 }

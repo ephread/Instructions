@@ -33,10 +33,6 @@ public class CoachMarkSkipDefaultView : UIButton, CoachMarkSkipView {
     }
 
     //MARK: - Private properties
-    private let backgroundImage = UIImage(named: "background", inBundle: NSBundle(forClass: CoachMarkSkipDefaultView.self), compatibleWithTraitCollection: nil)
-
-    private let highlightedBackgroundImage = UIImage(named: "background-highlighted", inBundle: NSBundle(forClass: CoachMarkSkipDefaultView.self), compatibleWithTraitCollection: nil)
-
     public override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -44,14 +40,9 @@ public class CoachMarkSkipDefaultView : UIButton, CoachMarkSkipView {
     public convenience init() {
         self.init(frame: CGRectZero)
 
-        self.setBackgroundImage(self.backgroundImage, forState: .Normal)
-        self.setBackgroundImage(self.highlightedBackgroundImage, forState: .Highlighted)
-
-        self.setTitleColor(UIColor.darkGrayColor(), forState: .Normal)
+        self.setTitleColor(UIColor.blackColor(), forState: .Normal)
         self.titleLabel?.font = UIFont.systemFontOfSize(17.0);
         self.titleLabel?.textAlignment = .Center;
-
-        self.contentEdgeInsets = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20);
     }
 
     required public init?(coder aDecoder: NSCoder) {

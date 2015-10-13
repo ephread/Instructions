@@ -16,10 +16,13 @@ Add customizable coach marks into you iOS project. Instructions will makes your 
 - [x] Skipable tour
 - [x] Full right-to-left support
 - [x] Size transition support (orientation and multi-tasking)
+- [x] Skipable tour
+- [ ] Programatic support for transition
+- [ ] Cross controllers walkthrough
 - [ ] Good test coverage • **Once done, it should bump version to 1.0.0**
 - [ ] Full support of UIVisualEffectView blur in overlay
 - [ ] Objective-C bridging
-- [ ] Coach marks animation support
+- [ ] Coach marks animation
 
 ## Requirements
 - Xcode 7 / Swift 2

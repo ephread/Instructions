@@ -13,6 +13,7 @@ Add customizable coach marks into you iOS project. Instructions will makes your 
 - [x] Customizable views
 - [x] Customizable positions
 - [x] Customizable highlight system
+- [x] Skipable tour
 - [x] Full right-to-left support
 - [x] Size transition support (orientation and multi-tasking)
 - [ ] Good test coverage • **Once done, it should bump version to 1.0.0**
@@ -85,7 +86,7 @@ class DefaultViewController: UIViewController, CoachMarksControllerDataSource, C
 ```
 
 #### Data Source
-`CoachMarksControllerDataSource` declares three methods, all mandatory.
+`CoachMarksControllerDataSource` declares three mandatory methods.
 
 The first one asks for the number of coach marks to display. Let's pretend that you want to display only one coach mark. Note that the `CoachMarksController` requesting the information is supplied, allowing you to supply data for mutiple `CoachMarksController`, within a single datasource.
 
@@ -205,7 +206,7 @@ You can customize the following properties:
 - `animationDuration: NSTimeInterval`: the time it will take for a coach mark to appear or disappear on the screen.
 
 - `gapBetweenBodyAndArrow: CGFloat`: the vertical gap between the _body_ and the _arrow_ in a given coach mark.
-
+/var/folders/qk/kymhqqv17mg09d2bwb8_smlc0000gn/T/com.bohemiancoding.sketch3/Shape.png
 - `pointOfInterest: CGPoint?`: the point toward which the arrow will face. At the moment, it's only used to shift the arrow horizontally and make it sits above or below the point of interest.
 
 - `gapBetweenCoachMarkAndCutoutPath: CGFloat`: the gap between the coach mark and the cutout path.
@@ -213,6 +214,34 @@ You can customize the following properties:
 - `maxWidth: CGFloat`: the maximum width a coach mark can take. You don't want your coach marks to be too wide, especially on iPads.
 
 - `horizontalMargin: CGFloat` is the margin (both leading and trailing) between the edges of the overlay view and the coach mark. Note that if the max width of your coach mark is less than the width of the overlay view, you view will either stack on the left or on the right, leaving space on the other side.
+
+#### Let users skip the tour
+##### Control
+You can provide the user with a mean to skip the coach marks. First, you will need to set 
+`skipView` with a `UIView` conforming to the `CoachMarkSkipView` protocol. This protocol defines a single property:
+
+```swift
+public protocol CoachMarkSkipView : class {
+    var skipControl: UIControl? { get }
+}
+```
+
+You must implement a getter method for this property in your view. This will let the `CoachMarkController` know which control should be tapped, to skip the tour. Note that, again, it doesn't have to be a subview, you can return the view itself.
+
+As usual, Instructions provides a default implementation of `CoachMarkSkipView` named `CoachMarkSkipDefaultView`.
+
+##### datasource
+To define how the view will position itself, you can use a method from the `CoachMarkControllerDataSource` protocol. This method is optional.
+
+```swift
+func coachMarksController(coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]?
+```
+
+This method will be called by the `CoachMarksController` before starting the tour and whenever there is a size change. It gives you the _skip button_ and the view in which it will be positioned and expects an array of `NSLayoutConstraints` in return. These constraints will define how the _skip button_ will be positioned in its parent. You should not add the constraints yourself, just return them.
+
+Returning `nil` will tell the `CoachMarksController` to use the defaults constraints, which will position the _skip button_ at the top of the screen. Returning an empty array is discouraged, as it will most probably lead to an akward positioning.
+
+For more informations about the skip mechanism, you can check the `Example/` directory.
 
 #### Using a delegate
 The `CoachMarkManager` will notify the delegate on three occasions. All those methods are optionals.

@@ -115,7 +115,7 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
                         return UIBezierPath(ovalInRect: CGRectInset(frame, -4, -4))
                     }
 
-                    coachMarksController.play()
+                    coachMarksController.resume()
             })
         }
     }

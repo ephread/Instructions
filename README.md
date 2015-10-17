@@ -288,7 +288,7 @@ func coachMarksController(coachMarksController: CoachMarksController, inout coac
         // captured by the closure, you can use the following method to update
         // the coachmark. It will only work if you paused the flow.
         coachMarksController.updateCurrentCoachMarkForView(myView)
-        coachMarksController.play()
+        coachMarksController.resume()
     })
 }
 ```

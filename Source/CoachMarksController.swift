@@ -149,10 +149,10 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     /// The view holding the "Skip" control.
     private var skipViewAsView: UIView?
 
+    /// Constraints defining the SKipView position.
     private var skipViewConstraints: [NSLayoutConstraint] = []
 
     //MARK: - View lifecycle
-
     // Called after the view was loaded.
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -174,12 +174,12 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
         coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext) -> Void in
 
-            }, completion: { (context: UIViewControllerTransitionCoordinatorContext) -> Void in
-                self.changingSize = false
-                self.overlayView.alpha = 1.0
-                self.updateSkipViewConstraints()
-                self.skipViewAsView?.alpha = 1.0
-                self.retrieveCoachMarkFromDataSource(shouldCallDelegate: false)
+        }, completion: { (context: UIViewControllerTransitionCoordinatorContext) -> Void in
+            self.changingSize = false
+            self.overlayView.alpha = 1.0
+            self.updateSkipViewConstraints()
+            self.skipViewAsView?.alpha = 1.0
+            self.retrieveCoachMarkFromDataSource(shouldCallDelegate: false)
         })
     }
 
@@ -398,6 +398,15 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     }
 
     //MARK: - Private methods
+    /// Return the controller into an idle state.
+    private func reset() {
+        self.numberOfCoachMarks = 0;
+        self.currentIndex = -1;
+
+        self.currentCoachMark = nil;
+        self.currentCoachMarkView = nil;
+    }
+
     /// Will attach the controller as a child of the given view controller. This will
     /// allow the coach mark controller to respond to size changes, though
     /// `topMostView` will be a subview of `UIWindow`.
@@ -479,15 +488,6 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             metrics: nil, views: ["overlayView": self.overlayView]))
 
         self.overlayView.alpha = 0.0
-    }
-
-    /// Return the controller into an idle state.
-    private func reset() {
-        self.numberOfCoachMarks = 0;
-        self.currentIndex = -1;
-
-        self.currentCoachMark = nil;
-        self.currentCoachMarkView = nil;
     }
 
     /// Ask the datasource, create the coach mark and display it. Also
@@ -596,11 +596,6 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         self.currentCoachMarkView?.nextControl?.removeTarget(self, action: "performShowNextCoachMark:", forControlEvents: .TouchUpInside)
     }
 
-    /// Will hide the current Skip View.
-    private func hideSkipView() {
-        self.skipViewAsView?.alpha = 0.0
-    }
-
     /// Will remove currently displayed coach mark.
     private func prepareForSizeTransition() {
         self.currentCoachMarkView?.layer.removeAllAnimations()
@@ -609,6 +604,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         self.currentCoachMarkView = nil
     }
 
+    //MARK: Private layout-related Methods
     /// Compute the segment index (for now the screen is separated
     /// in three horizontal areas and depending in which one the coach
     /// mark stand, it will be layed out in a different way.
@@ -721,13 +717,19 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             } else {
                 arrowOffset = pointOfInterest.x - coachMark.horizontalMargin
             }
-
+            
         default:
             arrowOffset = 0
             break
         }
-
+        
         return arrowOffset
+    }
+
+    //MARK: Private skipView-related methods
+    /// Will hide the current Skip View.
+    private func hideSkipView() {
+        self.skipViewAsView?.alpha = 0.0
     }
 
     /// Add a the "Skip view" to the main view container.

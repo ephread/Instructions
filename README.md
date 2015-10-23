@@ -244,7 +244,7 @@ This method will be called by the `CoachMarksController` before starting the tou
 
 Returning `nil` will tell the `CoachMarksController` to use the defaults constraints, which will position the _skip button_ at the top of the screen. Returning an empty array is discouraged, as it will most probably lead to an akward positioning.
 
-For more informations about the skip mechanism, you can check the `Example/` directory.
+For more information about the skip mechanism, you can check the `Example/` directory.
 
 #### Using a delegate
 The `CoachMarkManager` will notify the delegate on three occasions. All those methods are optionals.

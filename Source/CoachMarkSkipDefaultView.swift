@@ -41,8 +41,8 @@ public class CoachMarkSkipDefaultView : UIButton, CoachMarkSkipView {
         self.init(frame: CGRectZero)
 
         self.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        self.titleLabel?.font = UIFont.systemFontOfSize(17.0);
-        self.titleLabel?.textAlignment = .Center;
+        self.titleLabel?.font = UIFont.systemFontOfSize(17.0)
+        self.titleLabel?.textAlignment = .Center
     }
 
     required public init?(coder aDecoder: NSCoder) {

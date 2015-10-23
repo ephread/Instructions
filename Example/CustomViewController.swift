@@ -58,7 +58,7 @@ internal class CustomViewsViewController: ProfileViewController, CoachMarksContr
             return UIBezierPath(rect: frame)
         }
 
-        var coachMark : CoachMark;
+        var coachMark : CoachMark
 
         switch(index) {
         case 0:

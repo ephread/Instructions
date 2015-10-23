@@ -182,12 +182,12 @@ internal class OverlayView: UIView {
         self.cutoutMaskLayer.path = cutoutMaskLayerPath.CGPath
         self.fullMaskLayer.path = fullMaskLayerPath.CGPath
 
-        let maskLayer = CALayer();
-        maskLayer.frame = self.layer.bounds;
+        let maskLayer = CALayer()
+        maskLayer.frame = self.layer.bounds
         maskLayer.addSublayer(self.cutoutMaskLayer)
         maskLayer.addSublayer(self.fullMaskLayer)
 
-        self.overlayLayer = CALayer();
+        self.overlayLayer = CALayer()
         self.overlayLayer.frame = self.layer.bounds
 
         if self.blurEffectView == nil {

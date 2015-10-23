@@ -34,7 +34,7 @@ internal class TransparentCoachMarkBodyView : UIControl, CoachMarkBodyView {
 
     weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate? = nil
 
-    var hintLabel = UITextView();
+    var hintLabel = UITextView()
 
     // MARK: - Initialization
     override init (frame: CGRect) {
@@ -57,16 +57,16 @@ internal class TransparentCoachMarkBodyView : UIControl, CoachMarkBodyView {
 
         hintLabel.backgroundColor = UIColor.clearColor()
         hintLabel.textColor = UIColor.whiteColor()
-        hintLabel.font = UIFont.systemFontOfSize(15.0);
-        hintLabel.scrollEnabled = false;
-        hintLabel.textAlignment = .Justified;
-        hintLabel.layoutManager.hyphenationFactor = 2.0;
-        hintLabel.editable = false;
+        hintLabel.font = UIFont.systemFontOfSize(15.0)
+        hintLabel.scrollEnabled = false
+        hintLabel.textAlignment = .Justified
+        hintLabel.layoutManager.hyphenationFactor = 2.0
+        hintLabel.editable = false
 
-        hintLabel.translatesAutoresizingMaskIntoConstraints = false;
-        hintLabel.userInteractionEnabled = false;
+        hintLabel.translatesAutoresizingMaskIntoConstraints = false
+        hintLabel.userInteractionEnabled = false
 
-        self.addSubview(hintLabel);
+        self.addSubview(hintLabel)
 
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[hintLabel]|", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["hintLabel": hintLabel]))

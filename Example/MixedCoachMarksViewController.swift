@@ -49,7 +49,7 @@ internal class MixedCoachMarksViewsViewController: ProfileViewController, CoachM
 
     func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
 
-        var coachMark : CoachMark;
+        var coachMark : CoachMark
 
         switch(index) {
         case 0:

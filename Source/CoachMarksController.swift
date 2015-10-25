@@ -98,11 +98,17 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             }
 
             self.skipViewAsView = validSkipView as? UIView
+
+            self.skipViewDisplayManager = SkipViewDisplayManager(skipView: skipViewAsView!, instructionsTopView: self.instructionsTopView)
         }
     }
 
     //MARK: - Private properties
-    private let coachMarkDisplayManager = CoachMarkDisplayManager()
+    private lazy var coachMarkDisplayManager: CoachMarkDisplayManager! = {
+        return CoachMarkDisplayManager(overlayView: self.overlayView, instructionsTopView: self.instructionsTopView)
+    }()
+
+    private var skipViewDisplayManager: SkipViewDisplayManager?
 
     /// The total number of coach marks, supplied by the `datasource`.
     private var numberOfCoachMarks = 0
@@ -351,7 +357,10 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         // from reaching down.
         self.view.userInteractionEnabled = true
 
-        self.addSkipView()
+        if let skipViewDisplayManager = self.skipViewDisplayManager {
+            skipViewDisplayManager.addSkipView()
+            updateSkipViewConstraints()
+        }
 
         self.skipView?.skipControl?.addTarget(self, action: "skipCoachMarksTour:", forControlEvents: .TouchUpInside)
 
@@ -460,8 +469,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         if self.currentIndex > 0 {
             self.delegate?.coachMarksController(self, coachMarkWillDisappear: self.currentCoachMark!, forIndex: self.currentIndex - 1)
 
-            self.coachMarkDisplayManager.hideCoachMarkView(self.currentCoachMarkView,
-            overlayView: self.overlayView, animationDuration: self.currentCoachMark!.animationDuration) {
+            self.coachMarkDisplayManager.hideCoachMarkView(self.currentCoachMarkView, animationDuration: self.currentCoachMark!.animationDuration) {
                 self.removeCurrentCoachView()
 
                 if self.currentIndex < self.numberOfCoachMarks {
@@ -533,7 +541,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         // Hook up the next coach control.
         self.currentCoachMarkView!.nextControl?.addTarget(self, action: "performShowNextCoachMark:", forControlEvents: .TouchUpInside)
 
-        self.coachMarkDisplayManager.displayCoachMarkView(self.currentCoachMarkView!, coachMark: self.currentCoachMark!, overlayView: self.overlayView, instructionsTopView: self.instructionsTopView)
+        self.coachMarkDisplayManager.displayCoachMarkView(self.currentCoachMarkView!, coachMark: self.currentCoachMark!)
     }
 
     /// Will hide the current coach view and unbind events.
@@ -546,53 +554,18 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     private func prepareForSizeTransition() {
         self.currentCoachMarkView?.layer.removeAllAnimations()
         self.removeCurrentCoachView()
-        self.hideSkipView()
+        self.skipViewDisplayManager?.hideSkipView()
         self.currentCoachMarkView = nil
     }
 
-    //MARK: Private skipView-related methods
-    /// Will hide the current Skip View.
-    private func hideSkipView() {
-        self.skipViewAsView?.alpha = 0.0
-    }
-
-    /// Add a the "Skip view" to the main view container.
-    private func addSkipView() {
-        if let skipViewAsView = self.skipViewAsView {
-            self.instructionsTopView.addSubview(skipViewAsView)
-            updateSkipViewConstraints()
-        }
-    }
-
-    /// Update the constraints defining the "Skip view" position.
+    /// Update the constraints defining the position of the "Skip" view.
     private func updateSkipViewConstraints() {
-        // If the view is not present, there is obviously nothing to do.
-        guard let skipViewAsView = self.skipViewAsView else {
+        guard let skipView = self.skipViewAsView, let skipViewDisplayManager = self.skipViewDisplayManager else {
             return
         }
 
-        let layoutConstraints = self.datasource?.coachMarksController(self, constraintsForSkipView: skipViewAsView, inParentView: self.instructionsTopView)
+        let layoutConstraints = self.datasource?.coachMarksController(self, constraintsForSkipView: skipView, inParentView: self.instructionsTopView)
 
-        skipViewAsView.translatesAutoresizingMaskIntoConstraints = false
-
-        self.instructionsTopView.removeConstraints(self.skipViewConstraints)
-        self.skipViewConstraints = []
-
-        if let validLayoutConstraints = layoutConstraints {
-            self.skipViewConstraints = validLayoutConstraints
-            self.instructionsTopView.addConstraints(self.skipViewConstraints)
-        } else {
-            self.skipViewConstraints.append(NSLayoutConstraint(item: skipViewAsView, attribute: .Trailing, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Trailing, multiplier: 1, constant: -10))
-
-            var topConstant: CGFloat = 24
-
-            if UIApplication.sharedApplication().statusBarHidden {
-                topConstant = 0
-            }
-
-            self.skipViewConstraints.append(NSLayoutConstraint(item: skipViewAsView, attribute: .Top, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Top, multiplier: 1, constant: topConstant))
-
-            self.instructionsTopView.addConstraints(self.skipViewConstraints)
-        }
+        skipViewDisplayManager.updateSkipViewConstraintsWithConstraints(layoutConstraints)
     }
 }

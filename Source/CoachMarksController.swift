@@ -291,7 +291,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             return
         }
 
-        let convertedFrame = self.instructionsTopView.convertRect(view.frame, fromView:view.superview);
+        let convertedFrame = self.instructionsTopView.convertRect(view.frame, fromView:view.superview)
 
         var bezierPath: UIBezierPath
 
@@ -304,7 +304,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         coachMark.cutoutPath = bezierPath
 
         if let pointOfInterest = pointOfInterest {
-            let convertedPoint = self.instructionsTopView.convertPoint(pointOfInterest, fromView:view.superview);
+            let convertedPoint = self.instructionsTopView.convertPoint(pointOfInterest, fromView:view.superview)
             coachMark.pointOfInterest = convertedPoint
         }
     }
@@ -426,7 +426,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         parentViewController.addChildViewController(self)
         parentViewController.view.addSubview(self.view)
 
-        self.instructionsTopView.translatesAutoresizingMaskIntoConstraints = false;
+        self.instructionsTopView.translatesAutoresizingMaskIntoConstraints = false
         parentViewController.view?.window?.addSubview(self.instructionsTopView)
 
         parentViewController.view.addConstraints(

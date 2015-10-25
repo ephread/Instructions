@@ -202,7 +202,7 @@ internal class CoachMarkDisplayManager {
 
         let pointOfInterest = coachMark.pointOfInterest!
 
-        var arrowOffset: CGFloat;
+        var arrowOffset: CGFloat
 
         switch(segmentIndex) {
         case 1:

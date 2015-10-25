@@ -357,14 +357,14 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         // from reaching down.
         self.view.userInteractionEnabled = true
 
+        self.overlayView.prepareForFade()
+
         if let skipViewDisplayManager = self.skipViewDisplayManager {
+            self.skipView?.skipControl?.addTarget(self, action: "skipCoachMarksTour:", forControlEvents: .TouchUpInside)
+
             skipViewDisplayManager.addSkipView()
             updateSkipViewConstraints()
         }
-
-        self.skipView?.skipControl?.addTarget(self, action: "skipCoachMarksTour:", forControlEvents: .TouchUpInside)
-
-        self.overlayView.prepareForFade()
 
         UIView.animateWithDuration(self.overlayFadeAnimationDuration, animations: { () -> Void in
             self.overlayView.alpha = 1.0

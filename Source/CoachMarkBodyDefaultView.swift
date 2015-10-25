@@ -46,9 +46,9 @@ public class CoachMarkBodyDefaultView : UIControl, CoachMarkBodyView {
         }
     }
 
-    public var nextLabel = UILabel();
-    public var hintLabel = UITextView();
-    public var separator = UIView();
+    public var nextLabel = UILabel()
+    public var hintLabel = UITextView()
+    public var separator = UIView()
 
     //MARK: - Private properties
     private let backgroundImage = UIImage(named: "background", inBundle: NSBundle(forClass: CoachMarkBodyDefaultView.self), compatibleWithTraitCollection: nil)
@@ -91,29 +91,29 @@ public class CoachMarkBodyDefaultView : UIControl, CoachMarkBodyView {
 
         hintLabel.backgroundColor = UIColor.clearColor()
         hintLabel.textColor = UIColor.darkGrayColor()
-        hintLabel.font = UIFont.systemFontOfSize(15.0);
-        hintLabel.scrollEnabled = false;
-        hintLabel.textAlignment = .Justified;
-        hintLabel.layoutManager.hyphenationFactor = 2.0;
-        hintLabel.editable = false;
+        hintLabel.font = UIFont.systemFontOfSize(15.0)
+        hintLabel.scrollEnabled = false
+        hintLabel.textAlignment = .Justified
+        hintLabel.layoutManager.hyphenationFactor = 2.0
+        hintLabel.editable = false
 
         nextLabel.textColor = UIColor.darkGrayColor()
-        nextLabel.font = UIFont.systemFontOfSize(17.0);
-        nextLabel.textAlignment = .Center;
+        nextLabel.font = UIFont.systemFontOfSize(17.0)
+        nextLabel.textAlignment = .Center
 
-        separator.backgroundColor = UIColor.grayColor();
+        separator.backgroundColor = UIColor.grayColor()
 
-        nextLabel.translatesAutoresizingMaskIntoConstraints = false;
-        hintLabel.translatesAutoresizingMaskIntoConstraints = false;
-        separator.translatesAutoresizingMaskIntoConstraints = false;
+        nextLabel.translatesAutoresizingMaskIntoConstraints = false
+        hintLabel.translatesAutoresizingMaskIntoConstraints = false
+        separator.translatesAutoresizingMaskIntoConstraints = false
 
-        nextLabel.userInteractionEnabled = false;
-        hintLabel.userInteractionEnabled = false;
-        separator.userInteractionEnabled = false;
+        nextLabel.userInteractionEnabled = false
+        hintLabel.userInteractionEnabled = false
+        separator.userInteractionEnabled = false
 
-        self.addSubview(nextLabel);
-        self.addSubview(hintLabel);
-        self.addSubview(separator);
+        self.addSubview(nextLabel)
+        self.addSubview(hintLabel)
+        self.addSubview(separator)
 
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[nextLabel]|", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["nextLabel": nextLabel]))

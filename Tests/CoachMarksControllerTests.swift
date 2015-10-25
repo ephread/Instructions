@@ -16,7 +16,7 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     let mockedDataSource = CoachMarkControllerMockedDataSource()
     let mockedWindow = UIWindow()
 
-    var delegateEndExpectation: XCTestExpectation? = nil;
+    var delegateEndExpectation: XCTestExpectation? = nil
 
     override func setUp() {
         super.setUp()

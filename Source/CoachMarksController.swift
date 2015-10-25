@@ -105,10 +105,10 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     private let coachMarkDisplayManager = CoachMarkDisplayManager()
 
     /// The total number of coach marks, supplied by the `datasource`.
-    private var numberOfCoachMarks = 0;
+    private var numberOfCoachMarks = 0
 
     /// The index (in `coachMarks`) of the coach mark being currently displayed.
-    private var currentIndex = -1;
+    private var currentIndex = -1
 
     /// Reference to the currently displayed coach mark, supplied by the `datasource`.
     private var currentCoachMark: CoachMark?
@@ -158,7 +158,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.translatesAutoresizingMaskIntoConstraints = false;
+        self.view.translatesAutoresizingMaskIntoConstraints = false
 
         self.addOverlayView()
     }
@@ -188,7 +188,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     internal func didReceivedSingleTap() {
         if self.paused { return }
 
-        self.showNextCoachMark();
+        self.showNextCoachMark()
     }
 
     //MARK: - Public handlers
@@ -196,7 +196,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     ///
     /// - Parameter sender: the object sending the message
     public func performShowNextCoachMark(sender:AnyObject?) {
-        self.showNextCoachMark();
+        self.showNextCoachMark()
     }
 
     /// Will be called when the user choose to skip the coach mark tour.
@@ -287,7 +287,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
         let convertedFrame = self.instructionsTopView.convertRect(view.frame, fromView:view.superview);
 
-        var bezierPath: UIBezierPath;
+        var bezierPath: UIBezierPath
 
         if let bezierPathBlock = bezierPathBlock {
             bezierPath = bezierPathBlock(frame: convertedFrame)
@@ -343,7 +343,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
         // We make sure we are in a idle state and get the number of coach marks to display
         // from the datasource.
-        self.currentIndex = -1;
+        self.currentIndex = -1
         self.numberOfCoachMarks = datasource.numberOfCoachMarksForCoachMarksController(self)
 
         // The view was previously hidden, to prevent it from catching the user input.
@@ -401,11 +401,11 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     //MARK: - Private methods
     /// Return the controller into an idle state.
     private func reset() {
-        self.numberOfCoachMarks = 0;
-        self.currentIndex = -1;
+        self.numberOfCoachMarks = 0
+        self.currentIndex = -1
 
-        self.currentCoachMark = nil;
-        self.currentCoachMarkView = nil;
+        self.currentCoachMark = nil
+        self.currentCoachMarkView = nil
     }
 
     /// Will attach the controller as a child of the given view controller. This will

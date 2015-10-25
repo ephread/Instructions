@@ -2,6 +2,12 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
+## 0.X.X
+Released on 2015-XX-XX.
+
+### Added
+- Add ability to skip a tour.
+
 ## [0.2.1](https://github.com/ephread/Instructions/releases/tag/0.2.1)
 Released on 2015-10-03.
 

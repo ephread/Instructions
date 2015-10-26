@@ -22,22 +22,6 @@
 
 import Foundation
 
-/// Execute some code after a given delay
-///
-/// From [Matt Neuburg](http://stackoverflow.com/users/341994/matt), on
-/// [Stack Overflow](http://stackoverflow.com/questions/24034544/dispatch-after-gcd-in-swift/24318861#24318861)
-///
-/// - Parameter delay: the time to wait before executing
-/// - Parameter closure: the closure to execute
-public func delay(delay:Double, closure:()->()) {
-    dispatch_after(
-        dispatch_time(
-            DISPATCH_TIME_NOW,
-            Int64(delay * Double(NSEC_PER_SEC))
-        ),
-        dispatch_get_main_queue(), closure)
-}
-
-let kOverlayFadeAnimationDuration: NSTimeInterval = 0.3;
-let kCoachMarkFadeAnimationDuration: NSTimeInterval = 0.3;
-let kOverlayColor = UIColor(red: 226.0/255.0, green: 226.0/255.0, blue: 226.0/255.0, alpha: 0.65);
+let kOverlayFadeAnimationDuration: NSTimeInterval = 0.3
+let kCoachMarkFadeAnimationDuration: NSTimeInterval = 0.3
+let kOverlayColor = UIColor(red: 226.0/255.0, green: 226.0/255.0, blue: 226.0/255.0, alpha: 0.65)

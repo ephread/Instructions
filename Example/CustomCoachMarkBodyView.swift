@@ -35,7 +35,7 @@ internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
     var highlighted: Bool = false
 
     var nextButton = UIButton()
-    var hintLabel = UITextView();
+    var hintLabel = UITextView()
 
     weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate? = nil
 
@@ -65,16 +65,16 @@ internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
         self.hintLabel.backgroundColor = UIColor.clearColor()
         self.hintLabel.textColor = UIColor.darkGrayColor()
         self.hintLabel.font = UIFont.systemFontOfSize(15.0)
-        self.hintLabel.scrollEnabled = false;
-        self.hintLabel.textAlignment = .Justified;
-        self.hintLabel.layoutManager.hyphenationFactor = 2.0;
-        self.hintLabel.editable = false;
+        self.hintLabel.scrollEnabled = false
+        self.hintLabel.textAlignment = .Justified
+        self.hintLabel.layoutManager.hyphenationFactor = 2.0
+        self.hintLabel.editable = false
 
-        self.nextButton.translatesAutoresizingMaskIntoConstraints = false;
-        self.hintLabel.translatesAutoresizingMaskIntoConstraints = false;
+        self.nextButton.translatesAutoresizingMaskIntoConstraints = false
+        self.hintLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        self.nextButton.userInteractionEnabled = true;
-        self.hintLabel.userInteractionEnabled = false;
+        self.nextButton.userInteractionEnabled = true
+        self.hintLabel.userInteractionEnabled = false
 
         self.nextButton.setBackgroundImage(UIImage(named: "button-background"), forState: .Normal)
         self.nextButton.setBackgroundImage(UIImage(named: "button-background-highlighted"), forState: .Highlighted)
@@ -82,8 +82,8 @@ internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
         self.nextButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         self.nextButton.titleLabel?.font = UIFont.systemFontOfSize(15.0)
 
-        self.addSubview(nextButton);
-        self.addSubview(hintLabel);
+        self.addSubview(nextButton)
+        self.addSubview(hintLabel)
 
         self.addConstraint(NSLayoutConstraint(item: nextButton, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 0))
 

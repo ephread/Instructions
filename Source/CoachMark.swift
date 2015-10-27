@@ -60,6 +60,15 @@ public struct CoachMark {
     }
 
     //MARK: - Internal Methods
+    /// This method perform both `computeOrientationInFrame` and
+    /// `computePointOfInterestInFrame`.
+    ///
+    /// - Parameter frame: the frame in which compute the orientation (likely to match the overlay's frame)
+    internal mutating func computeMetadataForFrame(frame: CGRect) {
+        self.computeOrientationInFrame(frame)
+        self.computePointOfInterestInFrame()
+    }
+
     /// Compute the orientation of the arrow, given the frame in which the coach mark will be displayed.
     ///
     /// - Parameter frame: the frame in which compute the orientation (likely to match the overlay's frame)

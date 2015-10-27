@@ -24,6 +24,11 @@ import Foundation
 
 /// This class deals with the layout of coach marks.
 internal class CoachMarkDisplayManager {
+    //MARK: - Public properties
+    weak var datasource: CoachMarksControllerDataSource!
+
+    unowned let coachMarksController: CoachMarksController
+
     //MARK: - Private properties
     /// The coach mark metadata
     private var coachMark: CoachMark!
@@ -42,12 +47,22 @@ internal class CoachMarkDisplayManager {
     ///
     /// - Parameter overlayView: the overlayView (covering everything and showing cutouts)
     /// - Parameter instructionsTopView: the view holding the coach marks
-    init(overlayView: OverlayView, instructionsTopView: UIView) {
+    init(coachMarksController: CoachMarksController, overlayView: OverlayView, instructionsTopView: UIView) {
+        self.coachMarksController = coachMarksController
         self.overlayView = overlayView
         self.instructionsTopView = instructionsTopView
     }
 
-    //MARK: - Internal Method
+    func createCoachMarkViewFromCoachMark(coachMark: CoachMark, withIndex index: Int) -> CoachMarkView {
+        // Asks the data source for the appropriate tuple of views.
+        let coachMarkComponentViews = self.datasource!.coachMarksController(coachMarksController, coachMarkViewsForIndex: index, coachMark: coachMark)
+
+        // Creates the CoachMarkView, from the supplied component views.
+        // CoachMarkView() is not a failable initializer. We'll force unwrap
+        // currentCoachMarkView everywhere.
+        return CoachMarkView(bodyView: coachMarkComponentViews.bodyView, arrowView: coachMarkComponentViews.arrowView, arrowOrientation: coachMark.arrowOrientation, arrowOffset: coachMark.gapBetweenBodyAndArrow)
+    }
+
     /// Hides the given CoachMark View
     ///
     /// - Parameter coachMarkView: the coach mark to hide
@@ -59,6 +74,7 @@ internal class CoachMarkDisplayManager {
         UIView.animateWithDuration(animationDuration, animations: { () -> Void in
             coachMarkView?.alpha = 0.0
         }, completion: {(finished: Bool) -> Void in
+            coachMarkView?.removeFromSuperview()
             completion?()
         })
     }

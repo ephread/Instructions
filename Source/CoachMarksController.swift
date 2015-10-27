@@ -33,7 +33,11 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     }
 
     /// An object implementing the data source protocol and supplying the coach marks to display.
-    public weak var datasource: CoachMarksControllerDataSource?
+    public weak var datasource: CoachMarksControllerDataSource? {
+        didSet {
+            self.coachMarkDisplayManager.datasource = self.datasource
+        }
+    }
 
     /// An object implementing the delegate data source protocol, which methods will be called at various points.
     public weak var delegate: CoachMarksControllerDelegate?
@@ -105,7 +109,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
     //MARK: - Private properties
     private lazy var coachMarkDisplayManager: CoachMarkDisplayManager! = {
-        return CoachMarkDisplayManager(overlayView: self.overlayView, instructionsTopView: self.instructionsTopView)
+        return CoachMarkDisplayManager(coachMarksController: self, overlayView: self.overlayView, instructionsTopView: self.instructionsTopView)
     }()
 
     private var skipViewDisplayManager: SkipViewDisplayManager?
@@ -186,7 +190,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             self.overlayView.alpha = 1.0
             self.updateSkipViewConstraints()
             self.skipViewAsView?.alpha = 1.0
-            self.retrieveCoachMarkFromDataSource(shouldCallDelegate: false)
+            self.createAndShowCoachMark(shouldCallDelegate: false)
         })
     }
 
@@ -403,7 +407,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     public func resume() {
         if self.started && self.paused {
             self.paused = false
-            self.createAndShowCoachMark()
+            self.createAndShowCoachMark(shouldCallDelegate: false)
         }
     }
 
@@ -470,16 +474,16 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             self.delegate?.coachMarksController(self, coachMarkWillDisappear: self.currentCoachMark!, forIndex: self.currentIndex - 1)
 
             self.coachMarkDisplayManager.hideCoachMarkView(self.currentCoachMarkView, animationDuration: self.currentCoachMark!.animationDuration) {
-                self.removeCurrentCoachView()
+                self.removeTargetFromCurrentCoachView()
 
                 if self.currentIndex < self.numberOfCoachMarks {
-                    self.retrieveCoachMarkFromDataSource()
+                    self.createAndShowCoachMark()
                 } else {
                     self.stop()
                 }
             }
         } else {
-            self.retrieveCoachMarkFromDataSource()
+            self.createAndShowCoachMark()
         }
     }
 
@@ -501,7 +505,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     /// the delegate is not notified.
     ///
     /// - Parameter shouldCallDelegate: `true` to call delegate methods, `false` otherwise.
-    private func retrieveCoachMarkFromDataSource(shouldCallDelegate shouldCallDelegate: Bool = true) {
+    private func createAndShowCoachMark(shouldCallDelegate shouldCallDelegate: Bool = true) {
         if changingSize { return }
 
         // Retrieves the current coach mark structure from the datasource.
@@ -509,51 +513,39 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         self.currentCoachMark = self.datasource!.coachMarksController(self, coachMarksForIndex: self.currentIndex)
 
         // The coach mark will soon show, we notify the delegate, so it
-        // can peform some things and, if required, update the coach mark structure.
+        // can perform some things and, if required, update the coach mark structure.
         if shouldCallDelegate {
             self.delegate?.coachMarksController(self, coachMarkWillShow: &self.currentCoachMark!, forIndex: self.currentIndex)
         }
 
+        // The delegate might have paused the flow, he check whether or not it's
+        // the case.
         if !self.paused {
-            createAndShowCoachMark()
+            self.currentCoachMark!.computeMetadataForFrame(self.instructionsTopView.frame)
+
+            self.currentCoachMarkView = self.coachMarkDisplayManager.createCoachMarkViewFromCoachMark(self.currentCoachMark!, withIndex: self.currentIndex)
+
+            self.addTargetToCurrentCoachView()
+
+            self.coachMarkDisplayManager.displayCoachMarkView(self.currentCoachMarkView!, coachMark: self.currentCoachMark!)
         }
     }
 
-    /// Create display the coach mark view.
-    private func createAndShowCoachMark() {
-        if changingSize { return }
-
-        // Once the coach mark structure is final, we'll compute the arrow
-        // orientation, so the data source will know what king of views supply.
-        self.currentCoachMark!.computeOrientationInFrame(self.view.frame)
-
-        // Compute the point of interest, based on the cutOut path.
-        self.currentCoachMark!.computePointOfInterestInFrame()
-
-        // Asksthe data source for the appropriate tuple of views.
-        let coachMarkComponentViews = self.datasource!.coachMarksController(self, coachMarkViewsForIndex: self.currentIndex, coachMark: self.currentCoachMark!)
-
-        // Creates the CoachMarkView, from the supplied component views.
-        // CoachMarkView() is not a failable initializer. We'll force unwrap
-        // currentCoachMarkView everywhere.
-        self.currentCoachMarkView = CoachMarkView(bodyView: coachMarkComponentViews.bodyView, arrowView: coachMarkComponentViews.arrowView, arrowOrientation: self.currentCoachMark!.arrowOrientation, arrowOffset: self.currentCoachMark!.gapBetweenBodyAndArrow)
-
-        // Hook up the next coach control.
-        self.currentCoachMarkView!.nextControl?.addTarget(self, action: "performShowNextCoachMark:", forControlEvents: .TouchUpInside)
-
-        self.coachMarkDisplayManager.displayCoachMarkView(self.currentCoachMarkView!, coachMark: self.currentCoachMark!)
+    /// Add touch up target to the current coach mark view.
+    private func addTargetToCurrentCoachView() {
+        self.currentCoachMarkView?.nextControl?.addTarget(self, action: "performShowNextCoachMark:", forControlEvents: .TouchUpInside)
     }
 
-    /// Will hide the current coach view and unbind events.
-    private func removeCurrentCoachView() {
-        self.currentCoachMarkView?.removeFromSuperview()
+    /// Remove touch up target from the current coach mark view.
+    private func removeTargetFromCurrentCoachView() {
         self.currentCoachMarkView?.nextControl?.removeTarget(self, action: "performShowNextCoachMark:", forControlEvents: .TouchUpInside)
     }
 
     /// Will remove currently displayed coach mark.
     private func prepareForSizeTransition() {
         self.currentCoachMarkView?.layer.removeAllAnimations()
-        self.removeCurrentCoachView()
+        self.coachMarkDisplayManager.hideCoachMarkView(self.currentCoachMarkView, animationDuration: 0)
+        self.removeTargetFromCurrentCoachView()
         self.skipViewDisplayManager?.hideSkipView()
         self.currentCoachMarkView = nil
     }

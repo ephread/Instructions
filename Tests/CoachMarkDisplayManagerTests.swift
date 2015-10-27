@@ -13,6 +13,7 @@ class CoachMarkDisplayManagerTests: XCTestCase {
 
     let overlayView = OverlayView()
     let instructionsTopView = UIView()
+    let coachMarksController = CoachMarksController()
     var coachMarkDisplayManager: CoachMarkDisplayManager!
 
     var viewIsVisibleExpectation: XCTestExpectation? = nil
@@ -24,7 +25,7 @@ class CoachMarkDisplayManagerTests: XCTestCase {
         self.instructionsTopView.frame = CGRect(x: 0, y: 0, width: 365, height: 667)
 
         self.coachMarkDisplayManager =
-            CoachMarkDisplayManager(overlayView: self.overlayView, instructionsTopView: self.instructionsTopView)
+            CoachMarkDisplayManager(coachMarksController: coachMarksController, overlayView: self.overlayView, instructionsTopView: self.instructionsTopView)
     }
 
     override func tearDown() {

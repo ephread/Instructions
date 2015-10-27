@@ -48,12 +48,19 @@ internal class SkipViewDisplayManager {
 
     //MARK: - Internal methods
     /// Will hide the current Skip View.
-    func hideSkipView() {
-        self.skipView.alpha = 0.0
+    func hideSkipView(duration: NSTimeInterval = 0) {
+        if duration == 0 {
+            self.skipView.alpha = 0.0
+        } else {
+            UIView.animateWithDuration(duration) { () -> Void in
+                self.skipView.alpha = 0.0
+            }
+        }
     }
 
     /// Add a the "Skip view" to the main view container.
     func addSkipView() {
+        self.skipView.alpha = 0.0
         self.instructionsTopView.addSubview(skipView)
     }
 

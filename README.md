@@ -293,6 +293,14 @@ func coachMarksController(coachMarksController: CoachMarksController, inout coac
 }
 ```
 
+## Contributing
+
+Found a bug? Fixed it? The pull request will glady be accepted!
+
+If you want to develop a specific feature and merge it back, it's better to notify me beforehand. You can either open a issue, poke me on gitter or send me an email, I'll respond as fast as possible!
+
+And don't forget to credit yourself! :clap:
+
 ## License
 
 Instructions is released under the MIT license. See LICENSE for details.

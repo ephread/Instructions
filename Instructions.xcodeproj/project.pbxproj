@@ -42,6 +42,13 @@
 			remoteGlobalIDString = C64FB2E81BB6CA8A0081E5B6;
 			remoteInfo = Instructions;
 		};
+		C6FD971F1BDFBDA000DE5889 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6FD971B1BDFBDA000DE5889 /* Instructions Example Objective-C.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C6FD97011BDFBD2200DE5889;
+			remoteInfo = "Instructions Example Objective-C";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +80,7 @@
 		C67100FF1BBFE3C50005DAFC /* CoachMarkPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkPosition.swift; sourceTree = "<group>"; };
 		C6FAE2B01BDCFE4D0080DF69 /* SkipViewDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkipViewDisplayManager.swift; sourceTree = "<group>"; };
 		C6FD96F61BDF887B00DE5889 /* CoachMarkDisplayManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkDisplayManagerTests.swift; sourceTree = "<group>"; };
+		C6FD971B1BDFBDA000DE5889 /* Instructions Example Objective-C.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "Instructions Example Objective-C.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +155,7 @@
 		C64FB2DF1BB6CA8A0081E5B6 = {
 			isa = PBXGroup;
 			children = (
+				C6FD971B1BDFBDA000DE5889 /* Instructions Example Objective-C.xcodeproj */,
 				C64FB3211BB6CB5C0081E5B6 /* Source */,
 				C64FB3261BB6CB680081E5B6 /* Tests */,
 				C64FB2EA1BB6CA8A0081E5B6 /* Products */,
@@ -206,6 +215,14 @@
 				C636FFB51BBC8E9800EB243B /* Internal */,
 			);
 			name = Protocols;
+			sourceTree = "<group>";
+		};
+		C6FD971C1BDFBDA000DE5889 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C6FD97201BDFBDA000DE5889 /* Instructions Example Objective-C.app */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,6 +302,12 @@
 			mainGroup = C64FB2DF1BB6CA8A0081E5B6;
 			productRefGroup = C64FB2EA1BB6CA8A0081E5B6 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = C6FD971C1BDFBDA000DE5889 /* Products */;
+					ProjectRef = C6FD971B1BDFBDA000DE5889 /* Instructions Example Objective-C.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				C64FB2E81BB6CA8A0081E5B6 /* Instructions */,
@@ -292,6 +315,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		C6FD97201BDFBDA000DE5889 /* Instructions Example Objective-C.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "Instructions Example Objective-C.app";
+			remoteRef = C6FD971F1BDFBDA000DE5889 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		C64FB2E71BB6CA8A0081E5B6 /* Resources */ = {

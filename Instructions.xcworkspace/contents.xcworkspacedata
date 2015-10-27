@@ -7,4 +7,7 @@
    <FileRef
       location = "group:Instructions Example.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Instructions Example Objective-C.xcodeproj">
+   </FileRef>
 </Workspace>

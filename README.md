@@ -16,12 +16,11 @@ Add customizable coach marks into you iOS project. Instructions will makes your 
 - [x] Skipable tour
 - [x] Full right-to-left support
 - [x] Size transition support (orientation and multi-tasking)
-- [x] Skipable tour
+- [x] Objective-C support through `-Swift.h` header
 - [ ] Programatic support for transition
 - [ ] Cross controllers walkthrough
 - [ ] Good test coverage • **Once done, it should bump version to 1.0.0**
 - [ ] Full support of UIVisualEffectView blur in overlay
-- [ ] Objective-C bridging
 - [ ] Coach marks animation
 
 ## Requirements
@@ -292,6 +291,13 @@ func coachMarksController(coachMarksController: CoachMarksController, inout coac
     })
 }
 ```
+
+## Using Instructions in Objective-C code
+
+Since Instructions uses Tuples and Struct, it can't be fully bridged to Objective-C.
+However, you can easily create a swift class conforming to `CoachMarkControllerDataSource` and `CoachMarksControllerDelegate` in swift, bridge it to Objective-C and then use this class in your Objective-C code.
+
+Check out the `Example Objective-C/` directory for a possible solution.
 
 ## Contributing
 

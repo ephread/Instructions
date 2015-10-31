@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = "Instructions"
-  s.version          = "0.2.1"
-  s.summary          = "Easily add customizable coach marks into you iOS project."
+  s.version          = "0.3.0"
+  s.summary          = "Create walkthroughs and coach mark tours in a simple way, using Swift."
   s.homepage         = "https://github.com/ephread/Instructions"
   s.license          = 'MIT'
   s.author           = { "Frédéric Maquin" => "fred@ephread.com" }

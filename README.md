@@ -29,6 +29,24 @@ Add customizable coach marks into you iOS project. Instructions will makes your 
 - iOS 8.0+ for the library itself
 - iOS 9.0+ for the example application (couldn't resist using `UIStackView`)
 
+## Asking Questions / Contributing
+
+### Asking questions
+
+If you need help with something in particular, ask a question on [Stack Overflow](https://stackoverflow.com) with the tag `instructions-swift` (make sure the question hasn't already been asked and answered).
+
+If you have other questions, use the [Gitter room](https://gitter.im/ephread/Instructions).
+
+### Contributing
+
+If you found a bug, open issue **or** fix it yourself and submit a pull request!
+
+If you have an idea for a missing feature, open an issue.
+
+If you want to develop a specific feature and merge it back, it's better to notify me beforehand. You can either open a issue, poke me on gitter or send me an email, I'll respond as fast as possible!
+
+And don't forget to credit yourself! :clap:
+
 ## Installation
 
 ### Cocoapods
@@ -292,14 +310,6 @@ func coachMarksController(coachMarksController: CoachMarksController, inout coac
     })
 }
 ```
-
-## Contributing
-
-Found a bug? Fixed it? The pull request will glady be accepted!
-
-If you want to develop a specific feature and merge it back, it's better to notify me beforehand. You can either open a issue, poke me on gitter or send me an email, I'll respond as fast as possible!
-
-And don't forget to credit yourself! :clap:
 
 ## License
 

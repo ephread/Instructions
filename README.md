@@ -49,7 +49,7 @@ And don't forget to credit yourself! :clap:
 
 ## Installation
 
-### Cocoapods
+### CocoaPods
 Add Instructions to your Podfile:
 
 ```ruby
@@ -81,7 +81,7 @@ $ carthage build
 ```
 
 ### Manually
-If you rather stay away from both Cocoapods and Carthage, you can also install Instructions manually, with the cost of managing updates yourself.
+If you rather stay away from both CocoaPods and Carthage, you can also install Instructions manually, with the cost of managing updates yourself.
 
 #### Embedded Framework
 1. Drag the Instructions.xcodeproj into the project navigator of your application's Xcode project.

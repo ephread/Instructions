@@ -337,6 +337,33 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         
         return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
     }
+    
+    /// Provides default coach views, can have a next label or just the message.
+    ///
+    /// - Parameter withArrow: `true` to return an instance of `CoachMarkArrowDefaultView` as well, `false` otherwise.
+    /// - Parameter arrowOrientation: orientation of the arrow (either .Top or .Bottom)
+    /// - Parameter hintText: message to show in the CoachMark
+    /// - Parameter nextText: text for the next label, if nil the CoachMark view will only show the hint text
+    ///
+    /// - Returns: new instances of the default coach views.
+    public func defaultCoachViewsWithArrow(withArrow: Bool = true, arrowOrientation: CoachMarkArrowOrientation? = .Top, hintText: String, nextText: String?) -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
+        
+        let coachMarkBodyView = CoachMarkBodyDefaultView(hintText: hintText, nextText: nextText)
+        
+        var coachMarkArrowView: CoachMarkArrowDefaultView? = nil
+        
+        if withArrow {
+            var arrowOrientation = arrowOrientation
+            
+            if arrowOrientation == nil {
+                arrowOrientation = .Top
+            }
+            
+            coachMarkArrowView = CoachMarkArrowDefaultView(orientation: arrowOrientation!)
+        }
+        
+        return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
+    }
 
     //MARK: - Public methods
     /// Start displaying the coach marks.

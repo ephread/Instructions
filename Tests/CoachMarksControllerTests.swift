@@ -96,5 +96,7 @@ internal class CoachMarkControllerMockedDataSource : CoachMarksControllerDataSou
 
     func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
         return (CoachMarkBodyDefaultView(), nil)
+        //return (CoachMarkBodyDefaultView(hintText: "hint", nextText: nil), nil) //passed
+        //return (CoachMarkBodyDefaultView(hintText: "hint", nextText: "next"), nil) //passed
     }
 }

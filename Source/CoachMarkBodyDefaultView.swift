@@ -73,8 +73,29 @@ public class CoachMarkBodyDefaultView : UIControl, CoachMarkBodyView {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("This class does not support NSCoding.")
     }
+    
+    public init (frame: CGRect, hintText: String, nextText: String?) {
+        self.backgroundImageView = UIImageView(image: self.backgroundImage)
+        
+        super.init(frame: frame)
+        
+        if let next = nextText {
+            self.hintLabel.text = hintText
+            self.nextLabel.text = next
+            self.setupInnerViewHierarchy()
+        } else {
+            self.hintLabel.text = hintText
+            self.setupSimpleInnerViewHierarchy()
+        }
+    }
+    
+    convenience public init (hintText: String, nextText: String?) {
+        
+        self.init(frame: CGRectZero, hintText: hintText, nextText: nextText)
+    }
 
     //MARK: - Private properties
+    //Configure the CoachMark view with a hint message and a next message
     private func setupInnerViewHierarchy() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -126,5 +147,40 @@ public class CoachMarkBodyDefaultView : UIControl, CoachMarkBodyView {
 
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(10)-[hintLabel]-(10)-[separator(==1)][nextLabel(==55)]|", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["hintLabel": hintLabel, "separator": separator, "nextLabel": nextLabel]))
+    }
+    
+    //Configure the CoachMark view with a hint message only
+    private func setupSimpleInnerViewHierarchy() {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.backgroundImageView.userInteractionEnabled = false
+        
+        self.addSubview(self.backgroundImageView)
+        
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[backgroundImageView]|", options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil, views: ["backgroundImageView": self.backgroundImageView]))
+        
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[backgroundImageView]|", options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil, views: ["backgroundImageView": self.backgroundImageView]))
+        
+        hintLabel.backgroundColor = UIColor.clearColor()
+        hintLabel.textColor = UIColor.darkGrayColor()
+        hintLabel.font = UIFont.systemFontOfSize(15.0)
+        hintLabel.scrollEnabled = false
+        hintLabel.textAlignment = .Justified
+        hintLabel.layoutManager.hyphenationFactor = 2.0
+        hintLabel.editable = false
+        
+        hintLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        hintLabel.userInteractionEnabled = false
+        
+        self.addSubview(hintLabel)
+        
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(5)-[hintLabel]-(5)-|", options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil, views: ["hintLabel": hintLabel]))
+        
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(10)-[hintLabel]-(10)-|", options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil, views: ["hintLabel": hintLabel]))
     }
 }

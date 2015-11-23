@@ -356,6 +356,11 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         self.currentIndex = -1
         self.numberOfCoachMarks = datasource.numberOfCoachMarksForCoachMarksController(self)
 
+        if self.numberOfCoachMarks == 0 {
+            self.detachFromViewController()
+            return
+        }
+
         // The view was previously hidden, to prevent it from catching the user input.
         // Now, we want exactly the opposite. We want the overlay view to prevent events
         // from reaching down.

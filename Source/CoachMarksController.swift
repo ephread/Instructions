@@ -436,7 +436,12 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         parentViewController.view.addSubview(self.view)
 
         self.instructionsTopView.translatesAutoresizingMaskIntoConstraints = false
-        parentViewController.view?.window?.addSubview(self.instructionsTopView)
+
+        if parentViewController.view?.window == nil {
+            print("Instructions could not be properly attached to the window, did you call `startOn` inside `viewDidLoad` instead of `ViewDidAppear`?")
+        } else {
+            parentViewController.view?.window?.addSubview(self.instructionsTopView)
+        }
 
         parentViewController.view.addConstraints(
             NSLayoutConstraint.constraintsWithVisualFormat("V:|[overlayView]|", options: NSLayoutFormatOptions(rawValue: 0),

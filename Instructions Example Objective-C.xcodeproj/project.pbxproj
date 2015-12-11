@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		C678920F1BDFE8C000360192 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C678920D1BDFE8C000360192 /* LaunchScreen.storyboard */; };
 		C67892101BDFE8C000360192 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C678920E1BDFE8C000360192 /* Main.storyboard */; };
+		C694B6881C1B6D7F005891EA /* Instructions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6FD97701BDFE57100DE5889 /* Instructions.framework */; };
+		C694B6891C1B6D7F005891EA /* Instructions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C6FD97701BDFE57100DE5889 /* Instructions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C6FD97571BDFE51000DE5889 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FD97561BDFE51000DE5889 /* AppDelegate.m */; };
 		C6FD975C1BDFE52A00DE5889 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C6FD97591BDFE52A00DE5889 /* Assets.xcassets */; };
 		C6FD975D1BDFE52A00DE5889 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C6FD975A1BDFE52A00DE5889 /* main.m */; };
@@ -17,6 +19,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		C694B68A1C1B6D7F005891EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6FD976A1BDFE57100DE5889 /* Instructions.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C64FB2E81BB6CA8A0081E5B6;
+			remoteInfo = Instructions;
+		};
 		C6FD976F1BDFE57100DE5889 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C6FD976A1BDFE57100DE5889 /* Instructions.xcodeproj */;
@@ -32,6 +41,20 @@
 			remoteInfo = InstructionsTests;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C694B68C1C1B6D7F005891EA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				C694B6891C1B6D7F005891EA /* Instructions.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C678920D1BDFE8C000360192 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = "Example Objective-C/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
@@ -54,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C694B6881C1B6D7F005891EA /* Instructions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,10 +171,12 @@
 				C6FD96FD1BDFBD2200DE5889 /* Sources */,
 				C6FD96FE1BDFBD2200DE5889 /* Frameworks */,
 				C6FD96FF1BDFBD2200DE5889 /* Resources */,
+				C694B68C1C1B6D7F005891EA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C694B68B1C1B6D7F005891EA /* PBXTargetDependency */,
 			);
 			name = "Instructions Example Objective-C";
 			productName = "Instructions Example Objective-C";
@@ -238,6 +264,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C694B68B1C1B6D7F005891EA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Instructions;
+			targetProxy = C694B68A1C1B6D7F005891EA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C6FD97161BDFBD2300DE5889 /* Debug */ = {
@@ -327,6 +361,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Example Objective-C/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-Example-Objective-C";
@@ -342,6 +377,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Example Objective-C/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-Example-Objective-C";

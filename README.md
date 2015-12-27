@@ -1,4 +1,4 @@
-# ![Instructions](http://i.imgur.com/ZDlw59f.png)
+# ![Instructions](http://i.imgur.com/2Wy44G6.png)
 
 [![Travis build status](https://img.shields.io/travis/ephread/Instructions.svg)](https://travis-ci.org/ephread/Instructions) [![CocoaPods Shield](https://img.shields.io/cocoapods/v/Instructions.svg)](https://cocoapods.org/pods/Instructions) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Join the chat at https://gitter.im/ephread/Instructions](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ephread/Instructions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -92,7 +92,7 @@ If you rather stay away from both CocoaPods and Carthage, you can also install I
 ## Usage
 
 ### Getting started
-Open up the controller for which you wish to display coach marks and instanciate a new `CoachMarksViewController`. You should also provide a `datasource`, which is an object conforming to the `CoachMarksControllerDataSource` protocol.
+Open up the controller for which you wish to display coach marks and instanciate a new `CoachMarksViewController`. You should also provide a `dataSource`, which is an object conforming to the `CoachMarksControllerDataSource` protocol.
 
 ```swift
 class DefaultViewController: UIViewController, CoachMarksControllerDataSource, CoachMarksControllerDelegate {
@@ -101,7 +101,7 @@ class DefaultViewController: UIViewController, CoachMarksControllerDataSource, C
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.coachMarksController.datasource = self
+        self.coachMarksController.dataSource = self
     }
 }
 ```
@@ -109,7 +109,7 @@ class DefaultViewController: UIViewController, CoachMarksControllerDataSource, C
 #### Data Source
 `CoachMarksControllerDataSource` declares three mandatory methods.
 
-The first one asks for the number of coach marks to display. Let's pretend that you want to display only one coach mark. Note that the `CoachMarksController` requesting the information is supplied, allowing you to supply data for mutiple `CoachMarksController`, within a single datasource.
+The first one asks for the number of coach marks to display. Let's pretend that you want to display only one coach mark. Note that the `CoachMarksController` requesting the information is supplied, allowing you to supply data for mutiple `CoachMarksController`, within a single dataSource.
 
 ```swift
 func numberOfCoachMarksForCoachMarksController(coachMarkController: CoachMarksController)
@@ -146,7 +146,7 @@ func coachMarksController(coachMarksController: CoachMarksController, coachMarkV
 ```
 
 #### Starting the coach marks flow
-Once the `datasource` is set up, you can start displaying the coach marks. You will most likely supply `self` to `startOn`. While the overlay adds itself as a child of the current window (to be on top of everything), the `CoachMarksController` will add itself as a child of the view controller you provide. That way, the `CoachMarksController` will receive size change events and react accordingly. Be careful, you can't call `startOn` in the `viewDidLoad` method, since the view hierarchy has to be set up and ready for Instructions to work properly.
+Once the `dataSource` is set up, you can start displaying the coach marks. You will most likely supply `self` to `startOn`. While the overlay adds itself as a child of the current window (to be on top of everything), the `CoachMarksController` will add itself as a child of the view controller you provide. That way, the `CoachMarksController` will receive size change events and react accordingly. Be careful, you can't call `startOn` in the `viewDidLoad` method, since the view hierarchy has to be set up and ready for Instructions to work properly.
 
 ```swift
 override func viewDidAppear(animated: Bool) {
@@ -209,7 +209,7 @@ override var highlighted: Bool {
 ```
 
 ##### Taking orientation into account #####
-Remember the following method, from the datasource?
+Remember the following method, from the dataSource?
 
 ```swift
 func coachMarksController(coachMarkController: CoachMarksController, coachMarkViewsForIndex: Int, coachMark: CoachMark) {
@@ -251,7 +251,7 @@ You must implement a getter method for this property in your view. This will let
 
 As usual, Instructions provides a default implementation of `CoachMarkSkipView` named `CoachMarkSkipDefaultView`.
 
-##### datasource
+##### dataSource
 To define how the view will position itself, you can use a method from the `CoachMarkControllerDataSource` protocol. This method is optional.
 
 ```swift

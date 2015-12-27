@@ -33,9 +33,22 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     }
 
     /// An object implementing the data source protocol and supplying the coach marks to display.
-    public weak var datasource: CoachMarksControllerDataSource? {
+    public weak var dataSource: CoachMarksControllerDataSource? {
         didSet {
-            self.coachMarkDisplayManager.datasource = self.datasource
+            self.coachMarkDisplayManager.dataSource = self.dataSource
+        }
+    }
+
+    @available(*, deprecated=0.4)
+    public weak var datasource: CoachMarksControllerDataSource? {
+        set(datasource) {
+            print("The `datasource` accessor is deprecated and will be removed in further versions. Please use `dataSource` instead.")
+            self.dataSource = datasource
+        }
+
+        get {
+            print("The `datasource` accessor is deprecated and will be removed in further versions. Please use `dataSource` instead.")
+            return self.dataSource
         }
     }
 
@@ -341,7 +354,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     //MARK: - Public methods
     /// Start displaying the coach marks.
     public func startOn(parentViewController: UIViewController) {
-        guard let datasource = self.datasource else {
+        guard let datasource = self.dataSource else {
             print("Snap! You didn't setup any datasource, the coach mark manager won't do anything.")
             return
         }
@@ -520,7 +533,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
         // Retrieves the current coach mark structure from the datasource.
         // It can't be nil, that's why we'll force unwrap it everywhere.
-        self.currentCoachMark = self.datasource!.coachMarksController(self, coachMarksForIndex: self.currentIndex)
+        self.currentCoachMark = self.dataSource!.coachMarksController(self, coachMarksForIndex: self.currentIndex)
 
         // The coach mark will soon show, we notify the delegate, so it
         // can perform some things and, if required, update the coach mark structure.
@@ -566,7 +579,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             return
         }
 
-        let layoutConstraints = self.datasource?.coachMarksController(self, constraintsForSkipView: skipView, inParentView: self.instructionsTopView)
+        let layoutConstraints = self.dataSource?.coachMarksController(self, constraintsForSkipView: skipView, inParentView: self.instructionsTopView)
 
         skipViewDisplayManager.updateSkipViewConstraintsWithConstraints(layoutConstraints)
     }

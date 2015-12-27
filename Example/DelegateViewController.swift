@@ -35,7 +35,7 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
         super.viewDidLoad()
 
         self.coachMarksController?.delegate = self
-        self.coachMarksController?.datasource = self
+        self.coachMarksController?.dataSource = self
 
         self.emailLabel?.layer.cornerRadius = 4.0
         self.postsLabel?.layer.cornerRadius = 4.0

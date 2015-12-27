@@ -30,7 +30,7 @@ internal class DefaultViewController: ProfileViewController, CoachMarksControlle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.coachMarksController?.datasource = self
+        self.coachMarksController?.dataSource = self
 
         self.emailLabel?.layer.cornerRadius = 4.0
         self.postsLabel?.layer.cornerRadius = 4.0

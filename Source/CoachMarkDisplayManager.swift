@@ -25,7 +25,7 @@ import Foundation
 /// This class deals with the layout of coach marks.
 internal class CoachMarkDisplayManager {
     //MARK: - Public properties
-    weak var datasource: CoachMarksControllerDataSource!
+    weak var dataSource: CoachMarksControllerDataSource!
 
     unowned let coachMarksController: CoachMarksController
 
@@ -55,7 +55,7 @@ internal class CoachMarkDisplayManager {
 
     func createCoachMarkViewFromCoachMark(coachMark: CoachMark, withIndex index: Int) -> CoachMarkView {
         // Asks the data source for the appropriate tuple of views.
-        let coachMarkComponentViews = self.datasource!.coachMarksController(coachMarksController, coachMarkViewsForIndex: index, coachMark: coachMark)
+        let coachMarkComponentViews = self.dataSource!.coachMarksController(coachMarksController, coachMarkViewsForIndex: index, coachMark: coachMark)
 
         // Creates the CoachMarkView, from the supplied component views.
         // CoachMarkView() is not a failable initializer. We'll force unwrap

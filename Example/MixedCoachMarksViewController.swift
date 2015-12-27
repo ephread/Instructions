@@ -37,7 +37,7 @@ internal class MixedCoachMarksViewsViewController: ProfileViewController, CoachM
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.coachMarksController?.datasource = self
+        self.coachMarksController?.dataSource = self
 
         self.coachMarksController?.overlayBackgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
     }

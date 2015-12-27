@@ -79,10 +79,11 @@ internal class SkipViewDisplayManager {
         } else {
             self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .Trailing, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Trailing, multiplier: 1, constant: -10))
 
-            var topConstant: CGFloat = 24
+            var topConstant: CGFloat = 0
 
-            if UIApplication.sharedApplication().statusBarHidden {
-                topConstant = 0
+            if UIApplication.respondsToSelector("sharedApplication") &&
+               !UIApplication.sharedApplication().statusBarHidden {
+                topConstant = 24
             }
 
             self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .Top, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Top, multiplier: 1, constant: topConstant))

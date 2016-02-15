@@ -40,6 +40,9 @@ internal class CustomViewsViewController: ProfileViewController, CoachMarksContr
         let skipView = CoachMarkSkipDefaultView()
         skipView.setTitle("Skip", forState: .Normal)
         skipView.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        skipView.setBackgroundImage(nil, forState: .Normal)
+        skipView.setBackgroundImage(nil, forState: .Highlighted)
+        skipView.layer.cornerRadius = 0
         skipView.backgroundColor = UIColor.darkGrayColor()
 
         self.coachMarksController?.skipView = skipView

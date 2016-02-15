@@ -43,6 +43,13 @@ public class CoachMarkSkipDefaultView : UIButton, CoachMarkSkipView {
         self.setTitleColor(UIColor.blackColor(), forState: .Normal)
         self.titleLabel?.font = UIFont.systemFontOfSize(17.0)
         self.titleLabel?.textAlignment = .Center
+
+        self.setBackgroundImage(UIImage(named: "background", inBundle: NSBundle(forClass: CoachMarkSkipDefaultView.self), compatibleWithTraitCollection: nil), forState: .Normal)
+        self.setBackgroundImage(UIImage(named: "background-highlighted", inBundle: NSBundle(forClass: CoachMarkSkipDefaultView.self), compatibleWithTraitCollection: nil), forState: .Highlighted)
+
+        self.layer.cornerRadius = 4
+        self.contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 15.0, bottom: 10.0, right: 15.0)
+        self.sizeToFit()
     }
 
     required public init?(coder aDecoder: NSCoder) {

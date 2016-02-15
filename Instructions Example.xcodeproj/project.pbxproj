@@ -426,6 +426,7 @@
 				);
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -442,6 +443,7 @@
 				);
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

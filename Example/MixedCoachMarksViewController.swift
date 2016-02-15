@@ -107,18 +107,12 @@ internal class MixedCoachMarksViewsViewController: ProfileViewController, CoachM
             bodyView = coachViews.bodyView
             arrowView = coachViews.arrowView
         case 2:
-            let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
-
-            coachViews.bodyView.hintLabel.text = self.postsText
-            coachViews.bodyView.nextLabel.text = self.nextButtonText
+            let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation, hintText: self.postsText, nextText: self.nextButtonText)
 
             bodyView = coachViews.bodyView
             arrowView = coachViews.arrowView
         case 3:
-            let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
-
-            coachViews.bodyView.hintLabel.text = self.answersText
-            coachViews.bodyView.nextLabel.text = self.nextButtonText
+            let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation, hintText: self.answersText, nextText: nil)
 
             bodyView = coachViews.bodyView
             arrowView = coachViews.arrowView

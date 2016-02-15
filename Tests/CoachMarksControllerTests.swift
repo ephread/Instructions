@@ -21,7 +21,7 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     override func setUp() {
         super.setUp()
         
-        self.coachMarksController.datasource = self.mockedDataSource
+        self.coachMarksController.dataSource = self.mockedDataSource
         self.coachMarksController.delegate = self
 
         self.mockedWindow.addSubview(self.parentController.view)
@@ -96,7 +96,17 @@ internal class CoachMarkControllerMockedDataSource : CoachMarksControllerDataSou
 
     func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
         return (CoachMarkBodyDefaultView(), nil)
-        //return (CoachMarkBodyDefaultView(hintText: "hint", nextText: nil), nil) //passed
-        //return (CoachMarkBodyDefaultView(hintText: "hint", nextText: "next"), nil) //passed
+    }
+}
+
+internal class CoachMarkControllerMockedDataSourceUsingConstructorWithoutButton : CoachMarkControllerMockedDataSource {
+    override func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        return (CoachMarkBodyDefaultView(hintText: "hint", nextText: nil), nil)
+    }
+}
+
+internal class CoachMarkControllerMockedDataSourceUsingConstructorWithButton : CoachMarkControllerMockedDataSource {
+    override func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        return (CoachMarkBodyDefaultView(hintText: "hint", nextText: "next"), nil)
     }
 }

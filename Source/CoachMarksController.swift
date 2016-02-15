@@ -381,7 +381,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     //MARK: - Public methods
     /// Start displaying the coach marks.
     public func startOn(parentViewController: UIViewController) {
-        guard let datasource = self.dataSource else {
+        guard let dataSource = self.dataSource else {
             print("Snap! You didn't setup any datasource, the coach mark manager won't do anything.")
             return
         }
@@ -394,7 +394,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         // We make sure we are in a idle state and get the number of coach marks to display
         // from the datasource.
         self.currentIndex = -1
-        self.numberOfCoachMarks = datasource.numberOfCoachMarksForCoachMarksController(self)
+        self.numberOfCoachMarks = dataSource.numberOfCoachMarksForCoachMarksController(self)
 
         if self.numberOfCoachMarks == 0 {
             self.detachFromViewController()

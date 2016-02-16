@@ -27,7 +27,7 @@ import Instructions
 internal class CustomViewsViewController: ProfileViewController, CoachMarksControllerDataSource {
 
     //MARK: - IBOutlet
-    @IBOutlet var infoStackView: UIStackView?
+    @IBOutlet var allView: UIView?
 
     //MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -72,11 +72,11 @@ internal class CustomViewsViewController: ProfileViewController, CoachMarksContr
         case 1:
             coachMark = coachMarksController.coachMarkForView(self.handleLabel)
         case 2:
-            coachMark = coachMarksController.coachMarkForView(self.infoStackView, pointOfInterest: self.emailLabel?.center, bezierPathBlock: flatBezierPathBlock)
+            coachMark = coachMarksController.coachMarkForView(self.allView, pointOfInterest: self.emailLabel?.center, bezierPathBlock: flatBezierPathBlock)
         case 3:
-            coachMark = coachMarksController.coachMarkForView(self.infoStackView, pointOfInterest: self.postsLabel?.center, bezierPathBlock: flatBezierPathBlock)
+            coachMark = coachMarksController.coachMarkForView(self.allView, pointOfInterest: self.postsLabel?.center, bezierPathBlock: flatBezierPathBlock)
         case 4:
-            coachMark = coachMarksController.coachMarkForView(self.infoStackView, pointOfInterest: self.reputationLabel?.center, bezierPathBlock: flatBezierPathBlock)
+            coachMark = coachMarksController.coachMarkForView(self.allView, pointOfInterest: self.reputationLabel?.center, bezierPathBlock: flatBezierPathBlock)
         default:
             coachMark = coachMarksController.coachMarkForView()
         }

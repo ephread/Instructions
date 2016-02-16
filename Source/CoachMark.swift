@@ -53,6 +53,13 @@ public struct CoachMark {
     /// Trailing and leading margin of the coach mark.
     public var horizontalMargin: CGFloat = 20
 
+    /// Set this property to `true` to disable a tap on the overlay.
+    /// (only if the tap capture was enabled)
+    ///
+    /// If you need to disable the tap for all the coachmarks,
+    /// prefer setting CoachMarkController.allowOverlayTap
+    public var disableOverlayTap: Bool = false
+
     //MARK: - Initialization
     /// Allocate and initiliaze a Coach mark with default values
     public init () {

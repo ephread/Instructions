@@ -60,10 +60,16 @@ internal class OverlayView: UIView {
         }
     }
 
+    /// Used to temporarily disable the tap, for a given coachmark.
+    var disableOverlayTap: Bool = false
+
     /// Delegate to which tell that the overlay view received a tap event.
     weak var delegate: OverlayViewDelegate?
 
     //MARK: - Private properties
+
+    /// The original cutout path
+    private var cutoutPath : UIBezierPath?
 
     /// The cutout mask
     private var cutoutMaskLayer = CAShapeLayer()
@@ -151,6 +157,8 @@ internal class OverlayView: UIView {
         self.fullMaskLayer.removeFromSuperlayer()
         self.overlayLayer.removeFromSuperlayer()
 
+        self.cutoutPath = cutoutPath
+
         if cutoutPath == nil {
             if self.blurEffectView == nil {
                 self.backgroundColor = self.overlayColor
@@ -203,6 +211,24 @@ internal class OverlayView: UIView {
         }
     }
 
+    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+        let hitView = super.hitTest(point, withEvent: event)
+
+        if hitView == self {
+            guard let cutoutPath = self.cutoutPath else {
+                return hitView
+            }
+
+            if cutoutPath.containsPoint(point) {
+                return nil
+            } else {
+                return hitView
+            }
+        }
+
+        return hitView
+    }
+
     //MARK: - Private Methods
 
     /// Creates the visual effect view holding
@@ -214,6 +240,7 @@ internal class OverlayView: UIView {
 
         self.blurEffectView = UIVisualEffectView(effect:blurEffect)
         self.blurEffectView!.translatesAutoresizingMaskIntoConstraints = false
+        self.blurEffectView!.userInteractionEnabled = false
         self.addSubview(self.blurEffectView!)
 
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[visualEffectView]|", options: NSLayoutFormatOptions(rawValue: 0),
@@ -234,6 +261,8 @@ internal class OverlayView: UIView {
     ///
     /// - Parameter sender: the object which sent the event
     @objc private func handleSingleTap(sender: AnyObject?) {
-        self.delegate?.didReceivedSingleTap()
+        if (!disableOverlayTap) {
+            self.delegate?.didReceivedSingleTap()
+        }
     }
 }

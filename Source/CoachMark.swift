@@ -37,7 +37,7 @@ public struct CoachMark {
     public var gapBetweenBodyAndArrow: CGFloat = 2.0
 
     /// The orientation of the arrow, around the body of the coach mark (top or bottom)
-    public private(set) var arrowOrientation: CoachMarkArrowOrientation?
+    public var arrowOrientation: CoachMarkArrowOrientation?
 
     /// The "point of interest" toward which the arrow will point.
     /// At the moment, it's only used to shift the arrow horizontally
@@ -76,6 +76,10 @@ public struct CoachMark {
         /// No cutout path means no arrow. That way, no orientation computation is needed.
         guard let cutoutPath = self.cutoutPath else {
             self.arrowOrientation = nil
+            return
+        }
+
+        if (self.arrowOrientation != nil) {
             return
         }
 

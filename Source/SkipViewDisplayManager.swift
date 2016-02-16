@@ -1,7 +1,7 @@
 //
 // SkipViewDisplayManager.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -77,16 +77,9 @@ internal class SkipViewDisplayManager {
             self.skipViewConstraints = validLayoutConstraints
             self.instructionsTopView.addConstraints(self.skipViewConstraints)
         } else {
-            self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .Trailing, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Trailing, multiplier: 1, constant: -10))
+            self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .Trailing, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Trailing, multiplier: 1, constant: -2))
 
-            var topConstant: CGFloat = 0
-
-            if UIApplication.respondsToSelector("sharedApplication") &&
-               !UIApplication.sharedApplication().statusBarHidden {
-                topConstant = 24
-            }
-
-            self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .Top, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Top, multiplier: 1, constant: topConstant))
+            self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .Top, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Top, multiplier: 1, constant: 22))
 
             self.instructionsTopView.addConstraints(self.skipViewConstraints)
         }

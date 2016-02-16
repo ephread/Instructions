@@ -1,6 +1,7 @@
 // CoachMarkBodyDefaultView.swift
 //
 // Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+//                    Esteban Soto <esteban.soto.dev@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal

@@ -28,11 +28,11 @@ import Instructions
 internal class TransitionFromCodeViewController: ProfileViewController, CoachMarksControllerDataSource, CoachMarksControllerDelegate {
 
     let text1 = "(1) That's the first coach mark."
-    let text2 = "(2) Second coeahmark no one will see."
-    let text3 = "(3) We skipped the second one. Now, please tap on this button to continue!"
-    let text4 = "(4) So we skipped the next two and are finally hitting the fourth one!"
-    let text5 = "(5) And now we jumped to the last (fifth) one…"
-    let text6 = "(6) The ability to overwrite the natural flow should be used scarcely, prefer ordering the coach mark in your dataSource."
+    let text2 = "(2) Second coach mark no one will see."
+    let text3 = "(3) We skipped the second one (look at how we did it in the code). Now, please tap on this button to continue!"
+    let text4 = "(4) We are finally hitting the fourth one!"
+    let text5 = "(5) And now the fifth one!"
+    let text6 = "(6) This instruction is the last one."
 
     @IBOutlet var tapMeButton : UIButton!
 
@@ -75,6 +75,9 @@ internal class TransitionFromCodeViewController: ProfileViewController, CoachMar
             return coachMarksController.coachMarkForView(self.handleLabel)
         case 2:
             var coachMark = coachMarksController.coachMarkForView(self.tapMeButton)
+            // Since we've allowed the user to tap on the overlay to show the
+            // next coach mark, we'll disable this ability for the current
+            // coach mark to force the user to perform the appropriate action.
             coachMark.disableOverlayTap = true
             return coachMark
         case 3:
@@ -92,6 +95,9 @@ internal class TransitionFromCodeViewController: ProfileViewController, CoachMar
 
         var coachViews: (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?)
 
+        // For the coach mark at index 2, we disable the ability to tap on the
+        // coach mark to get to the next one, forcing the user to perform
+        // the appropriate action.
         switch(index) {
         case 2:
             coachViews = coachMarksController.defaultCoachViewsWithArrow(true, withNextText: false, arrowOrientation: coachMark.arrowOrientation)
@@ -127,6 +133,7 @@ internal class TransitionFromCodeViewController: ProfileViewController, CoachMar
     func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillLoadForIndex index: Int) -> Bool {
         switch(index) {
         case 1:
+            // Skipping the second coach mark.
             return false
         default:
             return true
@@ -134,15 +141,7 @@ internal class TransitionFromCodeViewController: ProfileViewController, CoachMar
     }
 
     @IBAction func performButtonTap(sender: AnyObject) {
+        // The user tapped on the button, so let's carry on!
         self.coachMarksController?.showNext()
     }
-}
-
-func delay(delay: Double, block: ()->()) {
-    dispatch_after(
-        dispatch_time(
-            DISPATCH_TIME_NOW,
-            Int64(delay * Double(NSEC_PER_SEC))
-        ),
-        dispatch_get_main_queue(), block)
 }

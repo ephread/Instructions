@@ -71,6 +71,7 @@ internal class CustomViewsViewController: ProfileViewController, CoachMarksContr
             }
         case 1:
             coachMark = coachMarksController.coachMarkForView(self.handleLabel)
+            coachMark.arrowOrientation = .Top
         case 2:
             coachMark = coachMarksController.coachMarkForView(self.allView, pointOfInterest: self.emailLabel?.center, bezierPathBlock: flatBezierPathBlock)
         case 3:

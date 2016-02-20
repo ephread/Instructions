@@ -8,6 +8,9 @@ Released on 2016-XX-XX.
 ### Changed
 - Changed `datasource` to `dataSource`.
 
+### Added
+- Add ability to manually specify where the coach should sit.
+
 ## [0.3.0](https://github.com/ephread/Instructions/releases/tag/0.3.0)
 Released on 2015-10-31.
 

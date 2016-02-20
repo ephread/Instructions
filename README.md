@@ -227,7 +227,7 @@ You can customize the following properties:
 - `animationDuration: NSTimeInterval`: the time it will take for a coach mark to appear or disappear on the screen.
 
 - `gapBetweenBodyAndArrow: CGFloat`: the vertical gap between the _body_ and the _arrow_ in a given coach mark.
-/var/folders/qk/kymhqqv17mg09d2bwb8_smlc0000gn/T/com.bohemiancoding.sketch3/Shape.png
+
 - `pointOfInterest: CGPoint?`: the point toward which the arrow will face. At the moment, it's only used to shift the arrow horizontally and make it sits above or below the point of interest.
 
 - `gapBetweenCoachMarkAndCutoutPath: CGFloat`: the gap between the coach mark and the cutout path.
@@ -235,6 +235,8 @@ You can customize the following properties:
 - `maxWidth: CGFloat`: the maximum width a coach mark can take. You don't want your coach marks to be too wide, especially on iPads.
 
 - `horizontalMargin: CGFloat` is the margin (both leading and trailing) between the edges of the overlay view and the coach mark. Note that if the max width of your coach mark is less than the width of the overlay view, you view will either stack on the left or on the right, leaving space on the other side.
+
+- `arrowOrientation: CoachMarkArrowOrientation?` is the orientation of the arrow (not the coachmark, meaning setting this property to `.Top` will display the coach mark below the point of interest). Although it's usually pre-computed by the library, so can override it in `coachMarksForIndex:` or in `coachMarkWillShow:`.
 
 #### Let users skip the tour
 ##### Control

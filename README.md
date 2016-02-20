@@ -17,7 +17,7 @@ Add customizable coach marks into you iOS project. Instructions will makes your 
 - [x] Full right-to-left support
 - [x] Size transition support (orientation and multi-tasking)
 - [x] Skipable tour
-- [ ] Programatic support for transition
+- [x] Pilotable from code
 - [ ] Cross controllers walkthrough
 - [ ] Good test coverage • **Once done, it should bump version to 1.0.0**
 - [ ] Full support of UIVisualEffectView blur in overlay
@@ -26,8 +26,7 @@ Add customizable coach marks into you iOS project. Instructions will makes your 
 
 ## Requirements
 - Xcode 7 / Swift 2
-- iOS 8.0+ for the library itself
-- iOS 9.0+ for the example application (couldn't resist using `UIStackView`)
+- iOS 8.0+
 
 ## Asking Questions / Contributing
 
@@ -236,7 +235,9 @@ You can customize the following properties:
 
 - `horizontalMargin: CGFloat` is the margin (both leading and trailing) between the edges of the overlay view and the coach mark. Note that if the max width of your coach mark is less than the width of the overlay view, you view will either stack on the left or on the right, leaving space on the other side.
 
-- `arrowOrientation: CoachMarkArrowOrientation?` is the orientation of the arrow (not the coachmark, meaning setting this property to `.Top` will display the coach mark below the point of interest). Although it's usually pre-computed by the library, so can override it in `coachMarksForIndex:` or in `coachMarkWillShow:`.
+- `arrowOrientation: CoachMarkArrowOrientation?` is the orientation of the arrow (not the coach mark, meaning setting this property to `.Top` will display the coach mark below the point of interest). Although it's usually pre-computed by the library, you can override it in `coachMarksForIndex:` or in `coachMarkWillShow:`.
+
+- `disableOverlayTap: Bool` is property used to disable the ability to tap on the overlay to show the next coach mark, on a case-by-case basis.
 
 #### Let users skip the tour
 ##### Control
@@ -266,8 +267,19 @@ Returning `nil` will tell the `CoachMarksController` to use the defaults constra
 
 For more information about the skip mechanism, you can check the `Example/` directory.
 
+#### Piloting the flow from the code
+Should you ever need to programmatically show the coach mark, `CoachMarkController` also provides the following method:
+
+```swift
+func showNext(numberOfCoachMarksToSkip numberToSkip: Int = 0)
+```
+
+You can specify a number of coach marks to skip (effectively jumping to a further index).
+
+Take a look at `TransitionFromCodeViewController`, in the `Example/` directory, to get an idea of how you can leverage this method, in order to ask the user to perform certain actions.
+
 #### Using a delegate
-The `CoachMarkManager` will notify the delegate on three occasions. All those methods are optionals.
+The `CoachMarkController` will notify the delegate on three occasions. All those methods are optionals.
 
 First, when a coach mark will show. You might want to change something about the view. For that reason, the `CoachMark` metadata structure is passed as an `inout` object, so you can update it with new parameters.
 
@@ -312,6 +324,16 @@ func coachMarksController(coachMarksController: CoachMarksController, inout coac
     })
 }
 ```
+
+##### Skipping a coach mark
+
+You can skip a given coach mark by implementing the following method defined in `CoachMarksControllerDelegate`:
+
+```swift
+func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillLoadForIndex index: Int) -> Bool
+```
+
+`coachMarkWillLoadForIndex:` is called right before a given coach mark will show. To prevent a CoachMark from showing, you can return `false` from this method.
 
 ## License
 

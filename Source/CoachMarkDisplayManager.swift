@@ -83,12 +83,13 @@ internal class CoachMarkDisplayManager {
     ///
     /// - Parameter coachMarkView: the coach mark view to show
     /// - Parameter coachMark: the coach mark metadata
-    func displayCoachMarkView(coachMarkView: CoachMarkView, coachMark: CoachMark, completion: (() -> Void)? = nil) {
+    func displayCoachMarkView(coachMarkView: CoachMarkView, coachMark: CoachMark, noAnimation: Bool = false, completion: (() -> Void)? = nil) {
 
         self.storeCoachMark(coachMark, coachMarkView: coachMarkView, overlayView: overlayView,
                             instructionsTopView: instructionsTopView)
 
         self.prepareCoachMarkForDisplay()
+        self.overlayView.disableOverlayTap = coachMark.disableOverlayTap
 
         self.clearStoredData()
 
@@ -98,11 +99,16 @@ internal class CoachMarkDisplayManager {
         // Animate the view entry
         overlayView.showCutoutPathViewWithAnimationDuration(coachMark.animationDuration)
 
-        UIView.animateWithDuration(coachMark.animationDuration, animations: { () -> Void in
+        if noAnimation {
             coachMarkView.alpha = 1.0
-        }, completion: {(finished: Bool) -> Void in
             completion?()
-        })
+        } else {
+            UIView.animateWithDuration(coachMark.animationDuration, animations: { () -> Void in
+                coachMarkView.alpha = 1.0
+            }, completion: {(finished: Bool) -> Void in
+                completion?()
+            })
+        }
     }
 
     //MARK: - Private methods

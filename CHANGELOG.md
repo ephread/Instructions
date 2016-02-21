@@ -2,8 +2,8 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
-## 0.4.0
-Released on 2016-XX-XX.
+## [0.4.0](https://github.com/ephread/Instructions/releases/tag/0.3.0)
+Released on 2016-02-21.
 
 ### Changed
 - Change `datasource` to `dataSource`.

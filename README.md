@@ -100,7 +100,7 @@ class DefaultViewController: UIViewController, CoachMarksControllerDataSource, C
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.coachMarksController.dataSource = self
+        self.coachMarksController.datasource = self
     }
 }
 ```

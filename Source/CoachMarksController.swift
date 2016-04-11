@@ -515,7 +515,9 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         if parentViewController.view?.window == nil {
             print("attachToViewController: Instructions could not be properly attached to the window, did you call `startOn` inside `viewDidLoad` instead of `ViewDidAppear`?")
         } else {
+            fakeStatusBar = snapshotStatusBar()
             parentViewController.view?.window?.windowLevel = UIWindowLevelStatusBar+1
+            parentViewController.view?.window?.addSubview(fakeStatusBar!)
             parentViewController.view?.window?.addSubview(self.instructionsTopView)
         }
 
@@ -534,6 +536,9 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
     /// Detach the controller from its parent view controller.
     private func detachFromViewController() {
+        if let fakeStatusBar = fakeStatusBar {
+            fakeStatusBar.removeFromSuperview()
+        }
         self.instructionsTopView.window?.windowLevel = UIWindowLevelNormal
         self.instructionsTopView.removeFromSuperview()
 
@@ -656,4 +661,17 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
         skipViewDisplayManager.updateSkipViewConstraintsWithConstraints(layoutConstraints)
     }
+    
+    /// Return the status bar as an image using screen snapshot
+    var fakeStatusBar: UIView?
+    
+    /// Take a snapshot of the current status bar
+    func snapshotStatusBar() -> UIView {
+        let snapshotStatusBar = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.width , height: 20))
+        snapshotStatusBar.clipsToBounds = true
+        let statusBarImageView = UIScreen.mainScreen().snapshotViewAfterScreenUpdates(true)
+        snapshotStatusBar.addSubview(statusBarImageView)
+        return snapshotStatusBar
+    }
+    
 }

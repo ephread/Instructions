@@ -515,6 +515,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         if parentViewController.view?.window == nil {
             print("attachToViewController: Instructions could not be properly attached to the window, did you call `startOn` inside `viewDidLoad` instead of `ViewDidAppear`?")
         } else {
+            parentViewController.view?.window?.windowLevel = UIWindowLevelStatusBar+1
             parentViewController.view?.window?.addSubview(self.instructionsTopView)
         }
 
@@ -533,6 +534,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
     /// Detach the controller from its parent view controller.
     private func detachFromViewController() {
+        self.instructionsTopView.window?.windowLevel = UIWindowLevelNormal
         self.instructionsTopView.removeFromSuperview()
 
         self.willMoveToParentViewController(nil)

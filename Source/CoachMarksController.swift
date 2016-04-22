@@ -427,7 +427,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         self.overlayView.prepareForFade()
 
         if let skipViewDisplayManager = self.skipViewDisplayManager {
-            self.skipView?.skipControl?.addTarget(self, action: "skipCoachMarksTour:", forControlEvents: .TouchUpInside)
+            self.skipView?.skipControl?.addTarget(self, action: #selector(CoachMarksController.skipCoachMarksTour(_:)), forControlEvents: .TouchUpInside)
 
             skipViewDisplayManager.addSkipView()
             updateSkipViewConstraints()
@@ -448,7 +448,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             self.skipViewAsView?.alpha = 0.0
             self.currentCoachMarkView?.alpha = 0.0
         }, completion: {(finished: Bool) -> Void in
-            self.skipView?.skipControl?.removeTarget(self, action: "skipCoachMarksTour:", forControlEvents: .TouchUpInside)
+            self.skipView?.skipControl?.removeTarget(self, action: #selector(CoachMarksController.skipCoachMarksTour(_:)), forControlEvents: .TouchUpInside)
             self.reset()
             self.detachFromViewController()
 
@@ -542,7 +542,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
     /// Show the next coach mark and hide the current one.
     private func showNextCoachMark(hidePrevious hidePrevious: Bool = true) {
-        self.currentIndex++
+        self.currentIndex += 1
 
         // if `currentIndex` is above 0, that means a previous coach mark
         // is displayed. We call the delegate to notify that the current coach
@@ -627,12 +627,12 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
     /// Add touch up target to the current coach mark view.
     private func addTargetToCurrentCoachView() {
-        self.currentCoachMarkView?.nextControl?.addTarget(self, action: "performShowNextCoachMark:", forControlEvents: .TouchUpInside)
+        self.currentCoachMarkView?.nextControl?.addTarget(self, action: #selector(CoachMarksController.performShowNextCoachMark(_:)), forControlEvents: .TouchUpInside)
     }
 
     /// Remove touch up target from the current coach mark view.
     private func removeTargetFromCurrentCoachView() {
-        self.currentCoachMarkView?.nextControl?.removeTarget(self, action: "performShowNextCoachMark:", forControlEvents: .TouchUpInside)
+        self.currentCoachMarkView?.nextControl?.removeTarget(self, action: #selector(CoachMarksController.performShowNextCoachMark(_:)), forControlEvents: .TouchUpInside)
     }
 
     /// Will remove currently displayed coach mark.

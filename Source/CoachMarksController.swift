@@ -592,6 +592,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     /// - Parameter shouldCallDelegate: `true` to call delegate methods, `false` otherwise.
     private func createAndShowCoachMark(shouldCallDelegate shouldCallDelegate: Bool = true, noAnimation: Bool = false) {
         if changingSize { return }
+        guard let dataSource = dataSource else { return }
 
         if let delegate = self.delegate {
             let shouldLoad = delegate.coachMarksController(self, coachMarkWillLoadForIndex: self.currentIndex)
@@ -604,20 +605,22 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
         // Retrieves the current coach mark structure from the datasource.
         // It can't be nil, that's why we'll force unwrap it everywhere.
-        self.currentCoachMark = self.dataSource!.coachMarksController(self, coachMarksForIndex: self.currentIndex)
+        self.currentCoachMark = dataSource.coachMarksController(self, coachMarksForIndex: self.currentIndex)
 
         // The coach mark will soon show, we notify the delegate, so it
         // can perform some things and, if required, update the coach mark structure.
-        if shouldCallDelegate {
-            self.delegate?.coachMarksController(self, coachMarkWillShow: &self.currentCoachMark!, forIndex: self.currentIndex)
+        if let delegate = delegate where shouldCallDelegate {
+            if var currentCoachMark = currentCoachMark {
+                delegate.coachMarksController(self, coachMarkWillShow: &currentCoachMark, forIndex: currentIndex)
+            }
         }
 
         // The delegate might have paused the flow, he check whether or not it's
         // the case.
         if !self.paused {
-            self.currentCoachMark!.computeMetadataForFrame(self.instructionsTopView.frame)
+            currentCoachMark!.computeMetadataForFrame(self.instructionsTopView.frame)
 
-            self.currentCoachMarkView = self.coachMarkDisplayManager.createCoachMarkViewFromCoachMark(self.currentCoachMark!, withIndex: self.currentIndex)
+            self.currentCoachMarkView = self.coachMarkDisplayManager.createCoachMarkViewFromCoachMark(currentCoachMark!, withIndex: self.currentIndex)
 
             self.addTargetToCurrentCoachView()
 

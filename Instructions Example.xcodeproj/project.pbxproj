@@ -11,6 +11,7 @@
 		C636FFAA1BBBD99200EB243B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C636FFA91BBBD99200EB243B /* Assets.xcassets */; };
 		C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */; };
 		C636FFB21BBC329600EB243B /* TransparentCoachMarkBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFB01BBC329600EB243B /* TransparentCoachMarkBodyView.swift */; };
+		C63BB9161C73CDD600C81A4D /* TransitionFromCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63BB9151C73CDD600C81A4D /* TransitionFromCodeViewController.swift */; };
 		C6402BE01BBE6EBD0087E23F /* Instructions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64FB36F1BB75F4D0081E5B6 /* Instructions.framework */; };
 		C6402BE11BBE6EBD0087E23F /* Instructions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C64FB36F1BB75F4D0081E5B6 /* Instructions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C64FB3351BB6CC180081E5B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB32D1BB6CC180081E5B6 /* AppDelegate.swift */; };
@@ -76,6 +77,7 @@
 		C636FFA91BBBD99200EB243B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Example/Assets.xcassets; sourceTree = "<group>"; };
 		C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentCoachMarkArrowView.swift; sourceTree = "<group>"; };
 		C636FFB01BBC329600EB243B /* TransparentCoachMarkBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentCoachMarkBodyView.swift; sourceTree = "<group>"; };
+		C63BB9151C73CDD600C81A4D /* TransitionFromCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionFromCodeViewController.swift; sourceTree = "<group>"; };
 		C64FB30C1BB6CB1C0081E5B6 /* Instructions Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Instructions Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C64FB32D1BB6CC180081E5B6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C64FB3301BB6CC180081E5B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -165,12 +167,13 @@
 			isa = PBXGroup;
 			children = (
 				C64FB3341BB6CC180081E5B6 /* ProfileViewController.swift */,
-				C6CE54291BBD435500154266 /* BlurringOverlayViewController.swift */,
-				C6CE542A1BBD435500154266 /* CustomViewController.swift */,
 				C6CE542B1BBD435500154266 /* DefaultViewController.swift */,
+				5B84A3AD1BF48BE200C795F8 /* OnlyHintsViewController.swift */,
+				C6CE542A1BBD435500154266 /* CustomViewController.swift */,
+				C6CE54291BBD435500154266 /* BlurringOverlayViewController.swift */,
 				C6CE542F1BBD43CB00154266 /* DelegateViewController.swift */,
 				C6CE54301BBD43CB00154266 /* MixedCoachMarksViewController.swift */,
-				5B84A3AD1BF48BE200C795F8 /* OnlyHintsViewController.swift */,
+				C63BB9151C73CDD600C81A4D /* TransitionFromCodeViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */,
 				5B84A3AE1BF48BE200C795F8 /* OnlyHintsViewController.swift in Sources */,
 				C6CE542C1BBD435500154266 /* BlurringOverlayViewController.swift in Sources */,
+				C63BB9161C73CDD600C81A4D /* TransitionFromCodeViewController.swift in Sources */,
 				C64FB33A1BB6CC180081E5B6 /* ProfileViewController.swift in Sources */,
 				C6CE54311BBD43CB00154266 /* DelegateViewController.swift in Sources */,
 				C64FB3351BB6CC180081E5B6 /* AppDelegate.swift in Sources */,

@@ -85,7 +85,7 @@ internal class OverlayView: UIView {
 
     /// TapGestureRecognizer that will catch tap event performed on the overlay
     private lazy var singleTapGestureRecognizer: UITapGestureRecognizer = {
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: "handleSingleTap:")
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(OverlayView.handleSingleTap(_:)))
 
         return gestureRecognizer
     }()

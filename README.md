@@ -237,7 +237,9 @@ You can customize the following properties:
 
 - `arrowOrientation: CoachMarkArrowOrientation?` is the orientation of the arrow (not the coach mark, meaning setting this property to `.Top` will display the coach mark below the point of interest). Although it's usually pre-computed by the library, you can override it in `coachMarksForIndex:` or in `coachMarkWillShow:`.
 
-- `disableOverlayTap: Bool` is property used to disable the ability to tap on the overlay to show the next coach mark, on a case-by-case basis.
+- `disableOverlayTap: Bool` is used to disable the ability to tap on the overlay to show the next coach mark, on a case-by-case basis.
+
+- `allowTouchInsideCutoutPath: Bool` is used to allow touch forwarding inside the cutout path. Take a look at `TransitionFromCodeViewController`, in the `Example/` directory, for more information.
 
 #### Let users skip the tour
 ##### Control

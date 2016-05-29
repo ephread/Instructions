@@ -79,6 +79,10 @@ internal class TransitionFromCodeViewController: ProfileViewController, CoachMar
             // next coach mark, we'll disable this ability for the current
             // coach mark to force the user to perform the appropriate action.
             coachMark.disableOverlayTap = true
+
+            // We'll also enable the ability to touch what's inside
+            // the cutoutPath.
+            coachMark.allowTouchInsideCutoutPath = true
             return coachMark
         case 3:
             return coachMarksController.coachMarkForView(self.emailLabel)

@@ -90,6 +90,7 @@ internal class CoachMarkDisplayManager {
 
         self.prepareCoachMarkForDisplay()
         self.overlayView.disableOverlayTap = coachMark.disableOverlayTap
+        self.overlayView.allowTouchInsideCutoutPath = coachMark.allowTouchInsideCutoutPath
 
         self.clearStoredData()
 

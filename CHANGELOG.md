@@ -2,7 +2,13 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
-## [0.4.0](https://github.com/ephread/Instructions/releases/tag/0.3.0)
+## [0.4.1](https://github.com/ephread/Instructions/releases/tag/0.4.1)
+Released on 2016-XX-XX.
+
+### Fixed
+- Fix a bug caused by always-enabled touch inside the cutout path.
+
+## [0.4.0](https://github.com/ephread/Instructions/releases/tag/0.4.0)
 Released on 2016-02-21.
 
 ### Changed

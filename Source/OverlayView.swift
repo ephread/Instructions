@@ -63,6 +63,9 @@ internal class OverlayView: UIView {
     /// Used to temporarily disable the tap, for a given coachmark.
     var disableOverlayTap: Bool = false
 
+    /// Used to temporarily enable touch forwarding isnide the cutoutPath.
+    var allowTouchInsideCutoutPath: Bool = false
+
     /// Delegate to which tell that the overlay view received a tap event.
     weak var delegate: OverlayViewDelegate?
 
@@ -216,6 +219,10 @@ internal class OverlayView: UIView {
 
         if hitView == self {
             guard let cutoutPath = self.cutoutPath else {
+                return hitView
+            }
+
+            if !self.allowTouchInsideCutoutPath {
                 return hitView
             }
 

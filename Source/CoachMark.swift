@@ -60,6 +60,10 @@ public struct CoachMark {
     /// prefer setting CoachMarkController.allowOverlayTap
     public var disableOverlayTap: Bool = false
 
+    /// Set this property to `true` to allow touch forwarding
+    /// inside the cutoutPath.
+    public var allowTouchInsideCutoutPath: Bool = false
+
     //MARK: - Initialization
     /// Allocate and initiliaze a Coach mark with default values
     public init () {

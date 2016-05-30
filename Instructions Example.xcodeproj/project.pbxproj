@@ -25,6 +25,7 @@
 		C6CE542E1BBD435500154266 /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE542B1BBD435500154266 /* DefaultViewController.swift */; };
 		C6CE54311BBD43CB00154266 /* DelegateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE542F1BBD43CB00154266 /* DelegateViewController.swift */; };
 		C6CE54321BBD43CB00154266 /* MixedCoachMarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE54301BBD43CB00154266 /* MixedCoachMarksViewController.swift */; };
+		CCD08F9B1C96BECF00B93D4B /* EasyInstructionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD08F9A1C96BECF00B93D4B /* EasyInstructionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 		C6CE542B1BBD435500154266 /* DefaultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewController.swift; sourceTree = "<group>"; };
 		C6CE542F1BBD43CB00154266 /* DelegateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegateViewController.swift; sourceTree = "<group>"; };
 		C6CE54301BBD43CB00154266 /* MixedCoachMarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MixedCoachMarksViewController.swift; sourceTree = "<group>"; };
+		CCD08F9A1C96BECF00B93D4B /* EasyInstructionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyInstructionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 				C6CE542F1BBD43CB00154266 /* DelegateViewController.swift */,
 				C6CE54301BBD43CB00154266 /* MixedCoachMarksViewController.swift */,
 				C63BB9151C73CDD600C81A4D /* TransitionFromCodeViewController.swift */,
+				CCD08F9A1C96BECF00B93D4B /* EasyInstructionViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				C64FB33A1BB6CC180081E5B6 /* ProfileViewController.swift in Sources */,
 				C6CE54311BBD43CB00154266 /* DelegateViewController.swift in Sources */,
 				C64FB3351BB6CC180081E5B6 /* AppDelegate.swift in Sources */,
+				CCD08F9B1C96BECF00B93D4B /* EasyInstructionViewController.swift in Sources */,
 				C6CE542E1BBD435500154266 /* DefaultViewController.swift in Sources */,
 				C636FFB21BBC329600EB243B /* TransparentCoachMarkBodyView.swift in Sources */,
 				C6CE54321BBD43CB00154266 /* MixedCoachMarksViewController.swift in Sources */,

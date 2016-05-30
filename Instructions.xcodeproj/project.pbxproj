@@ -34,6 +34,8 @@
 		C67101001BBFE3C50005DAFC /* CoachMarkPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67100FF1BBFE3C50005DAFC /* CoachMarkPosition.swift */; };
 		C6FAE2B11BDCFE4D0080DF69 /* SkipViewDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FAE2B01BDCFE4D0080DF69 /* SkipViewDisplayManager.swift */; };
 		C6FD96F71BDF887B00DE5889 /* CoachMarkDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FD96F61BDF887B00DE5889 /* CoachMarkDisplayManagerTests.swift */; };
+		CCD08F971C96B4F900B93D4B /* EasyInstruction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD08F961C96B4F900B93D4B /* EasyInstruction.swift */; };
+		CCD08F991C96B54D00B93D4B /* InstructionPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCD08F981C96B54D00B93D4B /* InstructionPair.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		C67100FF1BBFE3C50005DAFC /* CoachMarkPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkPosition.swift; sourceTree = "<group>"; };
 		C6FAE2B01BDCFE4D0080DF69 /* SkipViewDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkipViewDisplayManager.swift; sourceTree = "<group>"; };
 		C6FD96F61BDF887B00DE5889 /* CoachMarkDisplayManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkDisplayManagerTests.swift; sourceTree = "<group>"; };
+		CCD08F961C96B4F900B93D4B /* EasyInstruction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyInstruction.swift; sourceTree = "<group>"; };
+		CCD08F981C96B54D00B93D4B /* InstructionPair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionPair.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				C636FFB31BBC8E0000EB243B /* OverlayViewDelegate.swift */,
+				CCD08F981C96B54D00B93D4B /* InstructionPair.swift */,
 			);
 			name = Internal;
 			sourceTree = "<group>";
@@ -141,6 +146,7 @@
 		C636FFB71BBC8EF800EB243B /* Default Views */ = {
 			isa = PBXGroup;
 			children = (
+				CCD08F961C96B4F900B93D4B /* EasyInstruction.swift */,
 				C636FFB81BBC8F3100EB243B /* CoachMarkBodyDefaultView.swift */,
 				C636FFBA1BBC8FC300EB243B /* CoachMarkArrowDefaultView.swift */,
 				C63FC23C1BC9BF3E00132132 /* CoachMarkSkipDefaultView.swift */,
@@ -322,6 +328,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCD08F971C96B4F900B93D4B /* EasyInstruction.swift in Sources */,
 				C636FFBB1BBC8FC300EB243B /* CoachMarkArrowDefaultView.swift in Sources */,
 				C64FB3431BB6D81C0081E5B6 /* CoachMarksController.swift in Sources */,
 				C61A76BD1BDC16D700F131BF /* CoachMarkDisplayManager.swift in Sources */,
@@ -337,6 +344,7 @@
 				C64FB3491BB6DC3B0081E5B6 /* OverlayView.swift in Sources */,
 				C64FB37E1BB828E50081E5B6 /* CoachMarkBodyHighlightArrowDelegate.swift in Sources */,
 				C64FB3451BB6D81C0081E5B6 /* CoachMarksControllerDelegate.swift in Sources */,
+				CCD08F991C96B54D00B93D4B /* InstructionPair.swift in Sources */,
 				C64FB3541BB747590081E5B6 /* Instructions.swift in Sources */,
 				C636FFB41BBC8E0000EB243B /* OverlayViewDelegate.swift in Sources */,
 				C64FB34D1BB6DEDC0081E5B6 /* CoachMarkArrowView.swift in Sources */,

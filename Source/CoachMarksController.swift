@@ -547,7 +547,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         // if `currentIndex` is above 0, that means a previous coach mark
         // is displayed. We call the delegate to notify that the current coach
         // mark will disappear, and only then, we hide the coach mark.
-        if self.currentIndex > 0 {
+        if self.currentIndex > 1 {
             self.delegate?.coachMarksController(self, coachMarkWillDisappear: self.currentCoachMark!, forIndex: self.currentIndex - 1)
 
             if hidePrevious {

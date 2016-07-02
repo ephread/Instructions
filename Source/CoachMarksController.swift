@@ -34,6 +34,11 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         return currentIndex != -1
     }
 
+    /// Sometimes, the chain of coach mark display can be paused
+    /// to let animations be performed. `true` to pause the execution,
+    /// `false` otherwise.
+    private(set) public var paused = false
+
     /// An object implementing the data source protocol and supplying the coach marks to display.
     public weak var dataSource: CoachMarksControllerDataSource? {
         didSet {
@@ -157,11 +162,6 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     /// This view will be added to the current `UIWindow` and cover everything.
     /// The overlay and the coachmarks will all be subviews of this property.
     private var instructionsTopView = InstructionsTopView()
-
-    /// Sometimes, the chain of coach mark display can be paused
-    /// to let animations be performed. `true` to pause the execution,
-    /// `false` otherwise.
-    private var paused = false
 
     /// Since changing size calls asynchronous completion blocks,
     /// we might end up firing multiple times the methods adding coach
@@ -525,6 +525,14 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         parentViewController.view?.window?.addConstraints(
             NSLayoutConstraint.constraintsWithVisualFormat("H:|[instructionsTopView]|", options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil, views: ["instructionsTopView": self.instructionsTopView]))
+
+        // If we're in the background we'll manually lay out the view.
+        //
+        // `instructionsTopView` is not laid out automatically in the
+        // background, likely because it's added to the window.
+        if UIApplication.sharedApplication().applicationState == .Background {
+            parentViewController.view?.window?.layoutIfNeeded()
+        }
 
         self.instructionsTopView.backgroundColor = UIColor.clearColor()
 

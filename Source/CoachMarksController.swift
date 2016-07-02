@@ -601,7 +601,8 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     private func createAndShowCoachMark(shouldCallDelegate shouldCallDelegate: Bool = true, noAnimation: Bool = false) {
         if changingSize { return }
 
-        if CGRectIsEmpty(instructionsTopView.bounds){
+        if CGRectIsEmpty(instructionsTopView.bounds) {
+            print("The overlay view added to the window has empty bounds, Instructions will stop.")
             self.stop()
             return
         }

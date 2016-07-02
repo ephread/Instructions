@@ -593,6 +593,11 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     private func createAndShowCoachMark(shouldCallDelegate shouldCallDelegate: Bool = true, noAnimation: Bool = false) {
         if changingSize { return }
 
+        if CGRectIsEmpty(instructionsTopView.bounds){
+            self.stop()
+            return
+        }
+        
         if let delegate = self.delegate {
             let shouldLoad = delegate.coachMarksController(self, coachMarkWillLoadForIndex: self.currentIndex)
 

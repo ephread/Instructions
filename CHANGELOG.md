@@ -7,6 +7,7 @@ Released on 2016-XX-XX.
 
 ### Fixed
 - Fix a bug caused by always-enabled touch inside the cutout path.
+- Fix a crash occuring during background fetches
 
 ## [0.4.0](https://github.com/ephread/Instructions/releases/tag/0.4.0)
 Released on 2016-02-21.

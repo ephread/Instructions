@@ -60,7 +60,7 @@ internal class TransparentCoachMarkBodyView : UIControl, CoachMarkBodyView {
         hintLabel.font = UIFont.systemFontOfSize(15.0)
         hintLabel.scrollEnabled = false
         hintLabel.textAlignment = .Justified
-        hintLabel.layoutManager.hyphenationFactor = 2.0
+        hintLabel.layoutManager.hyphenationFactor = 1.0
         hintLabel.editable = false
 
         hintLabel.translatesAutoresizingMaskIntoConstraints = false

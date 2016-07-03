@@ -18,6 +18,29 @@
 		C63FC2391BC91D1A00132132 /* CoachMarksControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63FC2381BC91D1A00132132 /* CoachMarksControllerTests.swift */; };
 		C63FC23B1BC9BB8100132132 /* CoachMarkSkipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63FC23A1BC9BB8100132132 /* CoachMarkSkipView.swift */; };
 		C63FC23D1BC9BF3E00132132 /* CoachMarkSkipDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63FC23C1BC9BF3E00132132 /* CoachMarkSkipDefaultView.swift */; };
+		C6417E161D291A8A004D13EA /* CoachMarkArrowDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFBA1BBC8FC300EB243B /* CoachMarkArrowDefaultView.swift */; };
+		C6417E171D291A8A004D13EA /* CoachMarksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3411BB6D1020081E5B6 /* CoachMarksController.swift */; };
+		C6417E181D291A8A004D13EA /* CoachMarkDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61A76BC1BDC16D700F131BF /* CoachMarkDisplayManager.swift */; };
+		C6417E191D291A8A004D13EA /* CoachMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3511BB6FA250081E5B6 /* CoachMarkView.swift */; };
+		C6417E1A1D291A8A004D13EA /* CoachMarksControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB33D1BB6CE2C0081E5B6 /* CoachMarksControllerDataSource.swift */; };
+		C6417E1B1D291A8A004D13EA /* DummyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63BB9171C73CDE200C81A4D /* DummyView.swift */; };
+		C6417E1C1D291A8A004D13EA /* InstructionsTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63BB9181C73CDE200C81A4D /* InstructionsTopView.swift */; };
+		C6417E1D1D291A8A004D13EA /* SkipViewDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FAE2B01BDCFE4D0080DF69 /* SkipViewDisplayManager.swift */; };
+		C6417E1E1D291A8A004D13EA /* CoachMarkArrowOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61458B21BBB01DE006EB4F2 /* CoachMarkArrowOrientation.swift */; };
+		C6417E1F1D291A8A004D13EA /* CoachMarkBodyDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFB81BBC8F3100EB243B /* CoachMarkBodyDefaultView.swift */; };
+		C6417E201D291A8A004D13EA /* CoachMarkSkipDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63FC23C1BC9BF3E00132132 /* CoachMarkSkipDefaultView.swift */; };
+		C6417E211D291A8A004D13EA /* CoachMarkPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67100FF1BBFE3C50005DAFC /* CoachMarkPosition.swift */; };
+		C6417E221D291A8A004D13EA /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3481BB6DC3B0081E5B6 /* OverlayView.swift */; };
+		C6417E231D291A8A004D13EA /* CoachMarkBodyHighlightArrowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB37D1BB828E50081E5B6 /* CoachMarkBodyHighlightArrowDelegate.swift */; };
+		C6417E241D291A8A004D13EA /* CoachMarksControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB33F1BB6D0160081E5B6 /* CoachMarksControllerDelegate.swift */; };
+		C6417E251D291A8A004D13EA /* Instructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3531BB747590081E5B6 /* Instructions.swift */; };
+		C6417E261D291A8A004D13EA /* OverlayViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFB31BBC8E0000EB243B /* OverlayViewDelegate.swift */; };
+		C6417E271D291A8A004D13EA /* CoachMarkArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB34C1BB6DEDC0081E5B6 /* CoachMarkArrowView.swift */; };
+		C6417E281D291A8A004D13EA /* CoachMarkSkipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63FC23A1BC9BB8100132132 /* CoachMarkSkipView.swift */; };
+		C6417E291D291A8A004D13EA /* CoachMarkBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB34A1BB6DD1B0081E5B6 /* CoachMarkBodyView.swift */; };
+		C6417E2A1D291A8A004D13EA /* CoachMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3461BB6D91E0081E5B6 /* CoachMark.swift */; };
+		C6417E2D1D291A8A004D13EA /* Instructions.h in Headers */ = {isa = PBXBuildFile; fileRef = C64FB3231BB6CB5C0081E5B6 /* Instructions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C6417E2F1D291A8A004D13EA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C64FB3791BB7DE930081E5B6 /* Images.xcassets */; };
 		C64FB2F41BB6CA8A0081E5B6 /* Instructions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64FB2E91BB6CA8A0081E5B6 /* Instructions.framework */; };
 		C64FB3251BB6CB5C0081E5B6 /* Instructions.h in Headers */ = {isa = PBXBuildFile; fileRef = C64FB3231BB6CB5C0081E5B6 /* Instructions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C64FB3431BB6D81C0081E5B6 /* CoachMarksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3411BB6D1020081E5B6 /* CoachMarksController.swift */; };
@@ -58,6 +81,8 @@
 		C63FC2381BC91D1A00132132 /* CoachMarksControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarksControllerTests.swift; sourceTree = "<group>"; };
 		C63FC23A1BC9BB8100132132 /* CoachMarkSkipView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkSkipView.swift; sourceTree = "<group>"; };
 		C63FC23C1BC9BF3E00132132 /* CoachMarkSkipDefaultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkSkipDefaultView.swift; sourceTree = "<group>"; };
+		C6417E331D291A8A004D13EA /* InstructionsAppExtensions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = InstructionsAppExtensions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6417E351D291EFA004D13EA /* InfoAppExtensions.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InfoAppExtensions.plist; sourceTree = "<group>"; };
 		C64FB2E91BB6CA8A0081E5B6 /* Instructions.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Instructions.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C64FB2F31BB6CA8A0081E5B6 /* InstructionsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstructionsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C64FB3221BB6CB5C0081E5B6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,6 +105,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		C6417E2B1D291A8A004D13EA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C64FB2E51BB6CA8A0081E5B6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -162,6 +194,7 @@
 			children = (
 				C64FB2E91BB6CA8A0081E5B6 /* Instructions.framework */,
 				C64FB2F31BB6CA8A0081E5B6 /* InstructionsTests.xctest */,
+				C6417E331D291A8A004D13EA /* InstructionsAppExtensions.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -199,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				C64FB3221BB6CB5C0081E5B6 /* Info.plist */,
+				C6417E351D291EFA004D13EA /* InfoAppExtensions.plist */,
 				C64FB3231BB6CB5C0081E5B6 /* Instructions.h */,
 				C64FB3791BB7DE930081E5B6 /* Images.xcassets */,
 			);
@@ -217,6 +251,14 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		C6417E2C1D291A8A004D13EA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6417E2D1D291A8A004D13EA /* Instructions.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C64FB2E61BB6CA8A0081E5B6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -228,6 +270,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		C6417E141D291A8A004D13EA /* InstructionsAppExtensions */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C6417E301D291A8A004D13EA /* Build configuration list for PBXNativeTarget "InstructionsAppExtensions" */;
+			buildPhases = (
+				C6417E151D291A8A004D13EA /* Sources */,
+				C6417E2B1D291A8A004D13EA /* Frameworks */,
+				C6417E2C1D291A8A004D13EA /* Headers */,
+				C6417E2E1D291A8A004D13EA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = InstructionsAppExtensions;
+			productName = Instructions;
+			productReference = C6417E331D291A8A004D13EA /* InstructionsAppExtensions.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		C64FB2E81BB6CA8A0081E5B6 /* Instructions */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C64FB2FD1BB6CA8A0081E5B6 /* Build configuration list for PBXNativeTarget "Instructions" */;
@@ -294,12 +354,21 @@
 			projectRoot = "";
 			targets = (
 				C64FB2E81BB6CA8A0081E5B6 /* Instructions */,
+				C6417E141D291A8A004D13EA /* InstructionsAppExtensions */,
 				C64FB2F21BB6CA8A0081E5B6 /* InstructionsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		C6417E2E1D291A8A004D13EA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6417E2F1D291A8A004D13EA /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C64FB2E71BB6CA8A0081E5B6 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -318,6 +387,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		C6417E151D291A8A004D13EA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C6417E161D291A8A004D13EA /* CoachMarkArrowDefaultView.swift in Sources */,
+				C6417E171D291A8A004D13EA /* CoachMarksController.swift in Sources */,
+				C6417E181D291A8A004D13EA /* CoachMarkDisplayManager.swift in Sources */,
+				C6417E191D291A8A004D13EA /* CoachMarkView.swift in Sources */,
+				C6417E1A1D291A8A004D13EA /* CoachMarksControllerDataSource.swift in Sources */,
+				C6417E1B1D291A8A004D13EA /* DummyView.swift in Sources */,
+				C6417E1C1D291A8A004D13EA /* InstructionsTopView.swift in Sources */,
+				C6417E1D1D291A8A004D13EA /* SkipViewDisplayManager.swift in Sources */,
+				C6417E1E1D291A8A004D13EA /* CoachMarkArrowOrientation.swift in Sources */,
+				C6417E1F1D291A8A004D13EA /* CoachMarkBodyDefaultView.swift in Sources */,
+				C6417E201D291A8A004D13EA /* CoachMarkSkipDefaultView.swift in Sources */,
+				C6417E211D291A8A004D13EA /* CoachMarkPosition.swift in Sources */,
+				C6417E221D291A8A004D13EA /* OverlayView.swift in Sources */,
+				C6417E231D291A8A004D13EA /* CoachMarkBodyHighlightArrowDelegate.swift in Sources */,
+				C6417E241D291A8A004D13EA /* CoachMarksControllerDelegate.swift in Sources */,
+				C6417E251D291A8A004D13EA /* Instructions.swift in Sources */,
+				C6417E261D291A8A004D13EA /* OverlayViewDelegate.swift in Sources */,
+				C6417E271D291A8A004D13EA /* CoachMarkArrowView.swift in Sources */,
+				C6417E281D291A8A004D13EA /* CoachMarkSkipView.swift in Sources */,
+				C6417E291D291A8A004D13EA /* CoachMarkBodyView.swift in Sources */,
+				C6417E2A1D291A8A004D13EA /* CoachMark.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		C64FB2E41BB6CA8A0081E5B6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -367,6 +464,50 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		C6417E311D291A8A004D13EA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"INSTRUCTIONS_APP_EXTENSIONS=1",
+				);
+				INFOPLIST_FILE = Source/InfoAppExtensions.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS_APP_EXTENSIONS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C6417E321D291A8A004D13EA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"INSTRUCTIONS_APP_EXTENSIONS=1",
+				);
+				INFOPLIST_FILE = Source/InfoAppExtensions.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS_APP_EXTENSIONS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		C64FB2FB1BB6CA8A0081E5B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -461,10 +602,12 @@
 		C64FB2FE1BB6CA8A0081E5B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = Source/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -478,6 +621,7 @@
 		C64FB2FF1BB6CA8A0081E5B6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -515,6 +659,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		C6417E301D291A8A004D13EA /* Build configuration list for PBXNativeTarget "InstructionsAppExtensions" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C6417E311D291A8A004D13EA /* Debug */,
+				C6417E321D291A8A004D13EA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C64FB2E31BB6CA8A0081E5B6 /* Build configuration list for PBXProject "Instructions" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

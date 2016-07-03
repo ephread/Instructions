@@ -153,13 +153,19 @@ internal class CustomViewsViewController: ProfileViewController, CoachMarksContr
     func coachMarksController(coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]? {
 
         var constraints: [NSLayoutConstraint] = []
+        var topMargin: CGFloat = 0.0
+
+        if !UIApplication.sharedApplication().statusBarHidden {
+            topMargin = UIApplication.sharedApplication().statusBarFrame.size.height
+        }
 
         constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("H:|[skipView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
 
         if UIApplication.sharedApplication().statusBarHidden {
             constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|[skipView]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
         } else {
-            constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-24-[skipView(==40)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
+            constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-topMargin-[skipView(==44)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["topMargin": topMargin],
+                                                             views: ["skipView": skipView]))
         }
 
         return constraints

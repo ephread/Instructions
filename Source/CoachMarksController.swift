@@ -183,7 +183,6 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     private var skipViewConstraints: [NSLayoutConstraint] = []
 
     //MARK: - View lifecycle
-
     public override func loadView() {
         let view = DummyView(frame: UIScreen.mainScreen().bounds)
 
@@ -197,6 +196,12 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         self.view.translatesAutoresizingMaskIntoConstraints = false
 
         self.addOverlayView()
+
+        self.registerForStatusBarFrameChanges()
+    }
+
+    deinit {
+        self.unregisterFromStatusBarFrameChanges()
     }
 
     //MARK: - Overrides
@@ -205,18 +210,12 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         self.overlayView.updateCutoutPath(nil)
         self.prepareForSizeTransition()
 
-        self.changingSize = true
-
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
 
             coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext) -> Void in
 
         }, completion: { (context: UIViewControllerTransitionCoordinatorContext) -> Void in
-            self.changingSize = false
-            self.overlayView.alpha = 1.0
-            self.updateSkipViewConstraints()
-            self.skipViewAsView?.alpha = 1.0
-            self.createAndShowCoachMark(shouldCallDelegate: false, noAnimation: true)
+            self.restoreAfterSizeTransitionDidComplete()
         })
     }
 
@@ -508,22 +507,24 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     ///
     /// - Parameter parentViewController: the controller of which become a child
     private func attachToViewController(parentViewController: UIViewController) {
+        guard let window = parentViewController.view?.window else {
+            print("attachToViewController: Instructions could not be properly attached to the window, did you call `startOn` inside `viewDidLoad` instead of `ViewDidAppear`?")
+
+            return
+        }
+
         parentViewController.addChildViewController(self)
         parentViewController.view.addSubview(self.view)
 
         self.instructionsTopView.translatesAutoresizingMaskIntoConstraints = false
 
-        if parentViewController.view?.window == nil {
-            print("attachToViewController: Instructions could not be properly attached to the window, did you call `startOn` inside `viewDidLoad` instead of `ViewDidAppear`?")
-        } else {
-            parentViewController.view?.window?.addSubview(self.instructionsTopView)
-        }
+        window.addSubview(self.instructionsTopView)
 
-        parentViewController.view?.window?.addConstraints(
+        window.addConstraints(
             NSLayoutConstraint.constraintsWithVisualFormat("V:|[instructionsTopView]|", options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil, views: ["instructionsTopView": self.instructionsTopView]))
 
-        parentViewController.view?.window?.addConstraints(
+        window.addConstraints(
             NSLayoutConstraint.constraintsWithVisualFormat("H:|[instructionsTopView]|", options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil, views: ["instructionsTopView": self.instructionsTopView]))
 
@@ -531,9 +532,11 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         //
         // `instructionsTopView` is not laid out automatically in the
         // background, likely because it's added to the window.
-        if UIApplication.sharedApplication().applicationState == .Background {
-            parentViewController.view?.window?.layoutIfNeeded()
-        }
+        #if !INSTRUCTIONS_APP_EXTENSIONS
+            if UIApplication.sharedApplication().applicationState == .Background {
+                window.layoutIfNeeded()
+            }
+        #endif
 
         self.instructionsTopView.backgroundColor = UIColor.clearColor()
 
@@ -651,12 +654,21 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     }
 
     /// Will remove currently displayed coach mark.
-    private func prepareForSizeTransition() {
+    @objc internal func prepareForSizeTransition() {
+        self.changingSize = true
         self.currentCoachMarkView?.layer.removeAllAnimations()
         self.coachMarkDisplayManager.hideCoachMarkView(self.currentCoachMarkView, animationDuration: 0)
         self.removeTargetFromCurrentCoachView()
         self.skipViewDisplayManager?.hideSkipView()
         self.currentCoachMarkView = nil
+    }
+
+    @objc internal func restoreAfterSizeTransitionDidComplete() {
+        self.changingSize = false
+        self.overlayView.alpha = 1.0
+        self.updateSkipViewConstraints()
+        self.skipViewAsView?.alpha = 1.0
+        self.createAndShowCoachMark(shouldCallDelegate: false, noAnimation: true)
     }
 
     /// Update the constraints defining the position of the "Skip" view.
@@ -668,5 +680,21 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         let layoutConstraints = self.dataSource?.coachMarksController(self, constraintsForSkipView: skipView, inParentView: self.instructionsTopView)
 
         skipViewDisplayManager.updateSkipViewConstraintsWithConstraints(layoutConstraints)
+    }
+
+    private func registerForStatusBarFrameChanges() {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+
+        notificationCenter.addObserver(self, selector: #selector(prepareForSizeTransition),
+                                       name: UIApplicationWillChangeStatusBarFrameNotification,
+                                       object: nil)
+
+        notificationCenter.addObserver(self, selector: #selector(restoreAfterSizeTransitionDidComplete),
+                                       name: UIApplicationDidChangeStatusBarFrameNotification,
+                                       object: nil)
+    }
+
+    private func unregisterFromStatusBarFrameChanges() {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }

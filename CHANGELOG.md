@@ -5,9 +5,13 @@ Instructions follows [Semantic Versioning](http://semver.org/).
 ## [0.4.1](https://github.com/ephread/Instructions/releases/tag/0.4.1)
 Released on 2016-XX-XX.
 
+### Removed
+- Removed partial support for App Extensions (will be added back in full for 0.5.0).
+
 ### Fixed
 - Fix a bug caused by always-enabled touch inside the cutout path.
-- Fix a crash occuring during background fetches
+- Fix a crash occuring during background fetches.
+- Fix the shift of cutout paths occuring when toggling the in-call status bar.
 
 ## [0.4.0](https://github.com/ephread/Instructions/releases/tag/0.4.0)
 Released on 2016-02-21.

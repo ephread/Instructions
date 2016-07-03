@@ -4,6 +4,23 @@
 
 Add customizable coach marks into you iOS project. Instructions will makes your life easier, I promise. Available for both iPhone and iPad.
 
+# Table of contents
+
+  * [Overview](#overview)
+  * [Features](#features)
+  * [Requirements](#requirements)
+  * [Asking Questions / Contributing](#asking-questions--contributing)
+      * [Asking Questions](#asking-questions)
+      * [Contributing](#contributing) 
+  * [Installation](#installation)
+      * [CocoaPods](#cocoapods)
+      * [Carthage](#carthage)
+      * [Manually](#manually) 
+  * [Usage](#usage)
+      * [Getting Started](#getting-started)
+      * [Advanced Usage](#advanced-usage)
+  * [License](#license)
+
 ## Overview
 ![Instructions Demo](http://i.imgur.com/JUlQH9F.gif)
 
@@ -21,20 +38,18 @@ Add customizable coach marks into you iOS project. Instructions will makes your 
 - [ ] Cross controllers walkthrough
 - [ ] Good test coverage • **Once done, it should bump version to 1.0.0**
 - [ ] Full support of UIVisualEffectView blur in overlay
-- [ ] Objective-C bridging
+- [ ] Support for multiple coach marks
 - [ ] Coach marks animation
 
 ## Requirements
-- Xcode 7 / Swift 2
+- Xcode 7 / Swift 2.2
 - iOS 8.0+
 
 ## Asking Questions / Contributing
 
 ### Asking questions
 
-If you need help with something in particular, ask a question on [Stack Overflow](https://stackoverflow.com) with the tag `instructions-swift` (make sure the question hasn't already been asked and answered).
-
-If you have other questions, use the [Gitter room](https://gitter.im/ephread/Instructions).
+If you need help with something in particular, ask a question in the [Gitter room](https://gitter.im/ephread/Instructions).
 
 ### Contributing
 

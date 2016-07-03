@@ -132,8 +132,21 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
     }
 
     func didFinishShowingFromCoachMarksController(coachMarksController: CoachMarksController) {
+        // If implemented, will fall back to the extension method,
+        // thus warning that this method should not be used anymore.
+    }
+
+    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndSkipped skipped: Bool) {
+        let newColor: UIColor
+
+        if skipped {
+            newColor = UIColor(red: 144.0/255.0, green: 26.0/255.0, blue: 146.0/255.0, alpha: 1.0)
+        } else {
+            newColor = UIColor(red: 244.0/255.0, green: 126.0/255.0, blue: 46.0/255.0, alpha: 1.0)
+        }
+
         UIView.animateWithDuration(1, animations: { () -> Void in
-            self.profileBackgroundView?.backgroundColor = UIColor(red: 244.0/255.0, green: 126.0/255.0, blue: 46.0/255.0, alpha: 1.0)
+            self.profileBackgroundView?.backgroundColor = newColor
         })
     }
 }

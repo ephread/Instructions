@@ -13,6 +13,9 @@ Released on 2016-XX-XX.
 - Fix a crash occuring during background fetches.
 - Fix the shift of cutout paths occuring when toggling the in-call status bar.
 
+### Changed
+- Change completion method signature in delegate; it now provides a boolean notifying whether the flow was skipped by the user.
+
 ## [0.4.0](https://github.com/ephread/Instructions/releases/tag/0.4.0)
 Released on 2016-02-21.
 

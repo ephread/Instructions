@@ -238,6 +238,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     ///
     /// - Parameter sender: the object sending the message
     public func skipCoachMarksTour(sender: AnyObject?) {
+        //self.delegate?
         self.stop()
     }
 
@@ -442,7 +443,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     }
 
     /// Stop displaying the coach marks and perform some cleanup.
-    public func stop() {
+    public func stop(wasSkipped: Bool = false) {
         UIView.animateWithDuration(self.overlayFadeAnimationDuration, animations: { () -> Void in
             self.overlayView.alpha = 0.0
             self.skipViewAsView?.alpha = 0.0
@@ -454,6 +455,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
             // Calling the delegate, maybe the user wants to do something?
             self.delegate?.didFinishShowingFromCoachMarksController(self)
+            self.delegate?.coachMarksController(self, didFinishShowingAndSkipped: wasSkipped)
 
         })
     }

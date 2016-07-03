@@ -28,7 +28,7 @@ import UIKit
 /// 1. It doesn't implement properly all the UIView initializers
 /// 2. It is not suppoed to be subclassed at the moment, as it only acts as
 ///    container for body and arrow views.
-final internal class CoachMarkView : UIView, CoachMarkBodyHighlightArrowDelegate {
+final internal class CoachMarkView : UIView {
     //MARK: - Internal properties
 
     /// The body of the coach mark (likely to contain some text).
@@ -106,12 +106,6 @@ final internal class CoachMarkView : UIView, CoachMarkBodyHighlightArrowDelegate
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("This class does not support NSCoding.")
-    }
-
-    //MARK: - Protocol conformance | CoachMarkBodyHighlightArrowDelegate
-
-    func highlightArrow(highlighted: Bool) {
-        self.arrowView?.highlighted = highlighted
     }
 
     //MARK: - Internal Method
@@ -215,5 +209,12 @@ final internal class CoachMarkView : UIView, CoachMarkBodyHighlightArrowDelegate
             self.addConstraint(bodyStickToTop)
             self.addConstraint(bodyStickToBottom)
         }
+    }
+}
+
+//MARK: - Protocol conformance | CoachMarkBodyHighlightArrowDelegate
+extension CoachMarkView: CoachMarkBodyHighlightArrowDelegate {
+    func highlightArrow(highlighted: Bool) {
+        self.arrowView?.highlighted = highlighted
     }
 }

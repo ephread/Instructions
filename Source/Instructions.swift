@@ -22,6 +22,8 @@
 
 import UIKit
 
-let kOverlayFadeAnimationDuration: NSTimeInterval = 0.3
-let kCoachMarkFadeAnimationDuration: NSTimeInterval = 0.3
-let kOverlayColor = UIColor(red: 226.0/255.0, green: 226.0/255.0, blue: 226.0/255.0, alpha: 0.65)
+struct Constants {
+    static let overlayFadeAnimationDuration: NSTimeInterval = 0.3
+    static let coachMarkFadeAnimationDuration: NSTimeInterval = 0.3
+    static let overlayColor = UIColor(red: 226.0/255.0, green: 226.0/255.0, blue: 226.0/255.0, alpha: 0.65)
+}

@@ -27,7 +27,7 @@ import UIKit
 
 // TODO: Refactor the Mega Controller!
 /// Handles a set of coach marks, and display them successively.
-public class CoachMarksController: UIViewController, OverlayViewDelegate {
+public class CoachMarksController: UIViewController {
     //MARK: - Public properties
 
     /// `true` if coach marks are curently being displayed, `false` otherwise.
@@ -64,7 +64,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     public weak var delegate: CoachMarksControllerDelegate?
 
     /// Overlay fade animation duration
-    public var overlayFadeAnimationDuration = kOverlayFadeAnimationDuration
+    public var overlayFadeAnimationDuration = Constants.overlayFadeAnimationDuration
 
     /// Background color of the overlay.
     public var overlayBackgroundColor: UIColor {
@@ -219,13 +219,6 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         })
     }
 
-    //MARK: - Protocol Conformance | OverlayViewDelegate
-    internal func didReceivedSingleTap() {
-        if self.paused { return }
-
-        self.showNextCoachMark()
-    }
-
     //MARK: - Public handlers
     /// Will be called when the user perform an action requiring the display of the next coach mark.
     ///
@@ -238,6 +231,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     ///
     /// - Parameter sender: the object sending the message
     public func skipCoachMarksTour(sender: AnyObject?) {
+        //self.delegate?
         self.stop()
     }
 
@@ -442,7 +436,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     }
 
     /// Stop displaying the coach marks and perform some cleanup.
-    public func stop() {
+    public func stop(wasSkipped: Bool = false) {
         UIView.animateWithDuration(self.overlayFadeAnimationDuration, animations: { () -> Void in
             self.overlayView.alpha = 0.0
             self.skipViewAsView?.alpha = 0.0
@@ -454,6 +448,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
             // Calling the delegate, maybe the user wants to do something?
             self.delegate?.didFinishShowingFromCoachMarksController(self)
+            self.delegate?.coachMarksController(self, didFinishShowingAndSkipped: wasSkipped)
 
         })
     }
@@ -536,6 +531,8 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
             if UIApplication.sharedApplication().applicationState == .Background {
                 window.layoutIfNeeded()
             }
+        #else
+            window.layoutIfNeeded()
         #endif
 
         self.instructionsTopView.backgroundColor = UIColor.clearColor()
@@ -696,5 +693,14 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
     private func unregisterFromStatusBarFrameChanges() {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+}
+
+//MARK: - Protocol Conformance | OverlayViewDelegate
+extension CoachMarksController: OverlayViewDelegate {
+    func didReceivedSingleTap() {
+        if self.paused { return }
+
+        self.showNextCoachMark()
     }
 }

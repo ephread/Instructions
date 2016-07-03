@@ -1,6 +1,6 @@
 // DefaultViewController.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@ import Instructions
 
 // That's the default controller, using every defaults made available by Instructions.
 // It can't get any simpler.
-internal class DefaultViewController: ProfileViewController, CoachMarksControllerDataSource {
+internal class DefaultViewController: ProfileViewController {
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +41,10 @@ internal class DefaultViewController: ProfileViewController, CoachMarksControlle
 
         self.coachMarksController?.skipView = skipView
     }
+}
 
-    //MARK: - Protocol Conformance | CoachMarksControllerDataSource
+//MARK: - Protocol Conformance | CoachMarksControllerDataSource
+extension DefaultViewController: CoachMarksControllerDataSource {
     func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
         return 5
     }

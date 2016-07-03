@@ -28,7 +28,7 @@ public struct CoachMark {
     //MARK: - Public properties
 
     /// Change this value to change the duration of the fade.
-    public var animationDuration = kCoachMarkFadeAnimationDuration
+    public var animationDuration = Constants.coachMarkFadeAnimationDuration
 
     /// The path to cut in the overlay, so the point of interest will be visible.
     public var cutoutPath: UIBezierPath?

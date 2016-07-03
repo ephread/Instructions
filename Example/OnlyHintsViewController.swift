@@ -1,6 +1,7 @@
 // OnlyHintViewController.swift
 //
-// Copyright (c) 2015 Esteban Soto <esteban.soto.dev@gmail.com>
+// Copyright (c) 2015, 2016 Esteban Soto <esteban.soto.dev@gmail.com>
+//                          Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -41,12 +42,14 @@ internal class OnlyHintViewController: ProfileViewController, CoachMarksControll
         
         self.coachMarksController?.skipView = skipView
     }
-    
-    //MARK: - Protocol Conformance | CoachMarksControllerDataSource
+}
+
+//MARK: - Protocol Conformance | CoachMarksControllerDataSource
+extension OnlyHintViewController: CoachMarksControllerDataSource {
     func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
         return 5
     }
-    
+
     func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
         switch(index) {
         case 0:
@@ -67,11 +70,11 @@ internal class OnlyHintViewController: ProfileViewController, CoachMarksControll
             return coachMarksController.coachMarkForView()
         }
     }
-    
+
     func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
-        
+
         var hintText = ""
-        
+
         switch(index) {
         case 0:
             hintText = self.profileSectionText
@@ -85,10 +88,9 @@ internal class OnlyHintViewController: ProfileViewController, CoachMarksControll
             hintText = self.reputationText
         default: break
         }
-        
+
         let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation, hintText: hintText, nextText: nil)
-        
+
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
 }
-

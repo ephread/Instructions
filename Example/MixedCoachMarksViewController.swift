@@ -1,7 +1,7 @@
 // MixedCoachMarksViewsViewController.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
-//                    Esteban Soto <esteban.soto.dev@gmail.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
+//                          Esteban Soto <esteban.soto.dev@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@ import UIKit
 import Instructions
 
 // This class mix different kind of coach marks together.
-internal class MixedCoachMarksViewsViewController: ProfileViewController, CoachMarksControllerDataSource {
+internal class MixedCoachMarksViewsViewController: ProfileViewController {
     //MARK: - IBOutlet
     @IBOutlet var answersLabel: UILabel?
 
@@ -42,8 +42,10 @@ internal class MixedCoachMarksViewsViewController: ProfileViewController, CoachM
 
         self.coachMarksController?.overlayBackgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
     }
+}
 
-    //MARK: - Protocol Conformance | CoachMarksControllerDataSource
+//MARK: - Protocol Conformance | CoachMarksControllerDataSource
+extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
     func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
         return 5
     }

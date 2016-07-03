@@ -839,7 +839,7 @@
         <!--Delegation-->
         <scene sceneID="2uk-Kf-Bqw">
             <objects>
-                <viewController title="Delegation" id="JVX-fG-PE3" customClass="DelegatetViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Delegation" id="JVX-fG-PE3" customClass="DelegateViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gbm-ly-liX"/>
                         <viewControllerLayoutGuide type="bottom" id="f3V-bP-hTl"/>

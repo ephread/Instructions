@@ -28,7 +28,7 @@ internal class OverlayView: UIView {
     //MARK: - Internal properties
 
     /// The background color of the overlay
-    var overlayColor: UIColor = kOverlayColor
+    var overlayColor: UIColor = Constants.overlayColor
 
     /// The blur effect style to apply to the overlay.
     /// Setting this property to anything but `nil` will

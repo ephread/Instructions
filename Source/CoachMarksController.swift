@@ -27,7 +27,7 @@ import UIKit
 
 // TODO: Refactor the Mega Controller!
 /// Handles a set of coach marks, and display them successively.
-public class CoachMarksController: UIViewController, OverlayViewDelegate {
+public class CoachMarksController: UIViewController {
     //MARK: - Public properties
 
     /// `true` if coach marks are curently being displayed, `false` otherwise.
@@ -64,7 +64,7 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
     public weak var delegate: CoachMarksControllerDelegate?
 
     /// Overlay fade animation duration
-    public var overlayFadeAnimationDuration = kOverlayFadeAnimationDuration
+    public var overlayFadeAnimationDuration = Constants.overlayFadeAnimationDuration
 
     /// Background color of the overlay.
     public var overlayBackgroundColor: UIColor {
@@ -217,13 +217,6 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
         }, completion: { (context: UIViewControllerTransitionCoordinatorContext) -> Void in
             self.restoreAfterSizeTransitionDidComplete()
         })
-    }
-
-    //MARK: - Protocol Conformance | OverlayViewDelegate
-    internal func didReceivedSingleTap() {
-        if self.paused { return }
-
-        self.showNextCoachMark()
     }
 
     //MARK: - Public handlers
@@ -700,5 +693,14 @@ public class CoachMarksController: UIViewController, OverlayViewDelegate {
 
     private func unregisterFromStatusBarFrameChanges() {
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+}
+
+//MARK: - Protocol Conformance | OverlayViewDelegate
+extension CoachMarksController: OverlayViewDelegate {
+    func didReceivedSingleTap() {
+        if self.paused { return }
+
+        self.showNextCoachMark()
     }
 }

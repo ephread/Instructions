@@ -1,6 +1,6 @@
 // DelegatetViewController.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ import UIKit
 import Instructions
 
 // This class show off the oportunities provided by the delegate mechanism.
-internal class DelegatetViewController: ProfileViewController, CoachMarksControllerDataSource, CoachMarksControllerDelegate {
+internal class DelegateViewController: ProfileViewController {
 
     //MARK: - IBOutlet
     @IBOutlet var profileBackgroundView: UIView?
@@ -41,8 +41,10 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
         self.postsLabel?.layer.cornerRadius = 4.0
         self.reputationLabel?.layer.cornerRadius = 4.0
     }
+}
 
-    //MARK: - Protocol Conformance | CoachMarksControllerDataSource
+//MARK: - Protocol Conformance | CoachMarksControllerDataSource
+extension DelegateViewController: CoachMarksControllerDataSource {
     func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
         return 5
     }
@@ -91,8 +93,10 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
 
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
+}
 
-    //MARK: - Protocol Conformance | CoachMarksControllerDelegate
+//MARK: - Protocol Conformance | CoachMarksControllerDelegate
+extension DelegateViewController: CoachMarksControllerDelegate {
     func coachMarksController(coachMarksController: CoachMarksController, inout coachMarkWillShow coachMark: CoachMark, forIndex index: Int) {
         if index == 0 {
             // We'll need to play an animation before showing up the coach mark.

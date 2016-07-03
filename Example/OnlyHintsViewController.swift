@@ -26,7 +26,7 @@ import Instructions
 
 // That's the default controller, using every defaults made available by Instructions.
 // It can't get any simpler.
-internal class OnlyHintViewController: ProfileViewController, CoachMarksControllerDataSource {
+internal class OnlyHintViewController: ProfileViewController {
     //MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -393,6 +393,12 @@ public class CoachMarksController: UIViewController {
     //MARK: - Public methods
     /// Start displaying the coach marks.
     public func startOn(parentViewController: UIViewController) {
+        #if INSTRUCTIONS_APP_EXTENSIONS
+            print("Instructions was built for App Extensions")
+        #else
+            print("Instructions was built for regular Apps")
+        #endif
+        
         guard let dataSource = self.dataSource else {
             print("startOn: Snap! You didn't setup any datasource, the coach mark manager won't do anything.")
             return

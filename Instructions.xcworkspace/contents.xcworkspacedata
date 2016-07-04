@@ -7,4 +7,7 @@
    <FileRef
       location = "group:Instructions Example.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:Instructions App Extensions Example.xcodeproj">
+   </FileRef>
 </Workspace>

@@ -140,7 +140,7 @@ extension DelegateViewController: CoachMarksControllerDelegate {
         // thus warning that this method should not be used anymore.
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndSkipped skipped: Bool) {
+    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool) {
         let newColor: UIColor
 
         if skipped {

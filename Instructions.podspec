@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "Instructions"
-  s.version          = "0.4.0"
+  s.version          = "0.4.1"
   s.summary          = "Create walkthroughs and guided tours (with coach marks) in a simple way, using Swift."
   s.homepage         = "https://github.com/ephread/Instructions"
   s.license          = 'MIT'

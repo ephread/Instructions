@@ -30,7 +30,7 @@ public protocol CoachMarksControllerDelegate: class {
 
     func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillDisappear coachMark: CoachMark, forIndex index: Int)
 
-    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndSkipped skipped: Bool)
+    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool)
 }
 
 public extension CoachMarksControllerDelegate {
@@ -42,10 +42,10 @@ public extension CoachMarksControllerDelegate {
 
     func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillDisappear coachMark: CoachMark, forIndex index: Int) { }
 
-    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndSkipped skipped: Bool) { }
+    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool) { }
 
-    @available(*, deprecated, message="use coachMarksController(_:didFinishShowingAndSkipped:) instead")
+
     final func didFinishShowingFromCoachMarksController(coachMarksController: CoachMarksController) {
-        print("didFinishShowingFromCoachMarksController(_:) has been deprecated and won't work anymore, if you implemented this method in your delegate, please use coachMarksController(_:didFinishShowingAndSkipped:) instead. Otherwise, ignore this message, which will be removed with 0.5.0")
+        print("didFinishShowingFromCoachMarksController(_:) has been deprecated and won't work anymore, if you implemented this method in your delegate, please use coachMarksController(_:didFinishShowingAndWasSkipped:) instead. Otherwise, ignore this message, which will be removed with 0.5.0")
     }
 }

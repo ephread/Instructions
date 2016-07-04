@@ -448,7 +448,7 @@ public class CoachMarksController: UIViewController {
 
             // Calling the delegate, maybe the user wants to do something?
             self.delegate?.didFinishShowingFromCoachMarksController(self)
-            self.delegate?.coachMarksController(self, didFinishShowingAndSkipped: wasSkipped)
+            self.delegate?.coachMarksController(self, didFinishShowingAndWasSkipped: wasSkipped)
 
         })
     }

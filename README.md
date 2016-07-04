@@ -309,10 +309,10 @@ Second, when a coach mark disappears.
 ```swift    
 func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillDisappear: CoachMark, forIndex: Int)
 ```
-Third, when all coach marks have been displayed. `didFinishShowingAndSkipped` specify whether the flow stopped because the user requested it to end.
+Third, when all coach marks have been displayed. `didFinishShowingAndWasSkipped` specify whether the flow completed because the user requested it to end.
 
 ```swift    
-func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndSkipped skipped: Bool)
+func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool)
 ```
 
 ##### Performing animations before showing coach marks #####

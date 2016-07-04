@@ -79,7 +79,7 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
         }
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndSkipped skipped: Bool) {
+    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool) {
         guard let delegateEndExpectation = self.delegateEndExpectation else {
             XCTFail()
             return

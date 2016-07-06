@@ -28,8 +28,7 @@ import UIKit
 // TODO: Refactor the Mega Controller!
 /// Handles a set of coach marks, and display them successively.
 public class CoachMarksController: UIViewController {
-    //MARK: - Public properties
-
+    //MARK: - Public properties -
     /// `true` if coach marks are curently being displayed, `false` otherwise.
     public var started: Bool {
         return currentIndex != -1
@@ -131,7 +130,7 @@ public class CoachMarksController: UIViewController {
         }
     }
 
-    //MARK: - Private properties
+    //MARK: - Private properties -
     private lazy var coachMarkDisplayManager: CoachMarkDisplayManager! = {
         return CoachMarkDisplayManager(coachMarksController: self, overlayView: self.overlayView, instructionsTopView: self.instructionsTopView)
     }()
@@ -164,6 +163,13 @@ public class CoachMarksController: UIViewController {
     /// The overlay and the coachmarks will all be subviews of this property.
     private var instructionsTopView = InstructionsTopView()
 
+    /// The view holding the "Skip" control.
+    private var skipViewAsView: UIView?
+
+    /// Constraints defining the SKipView position.
+    private var skipViewConstraints: [NSLayoutConstraint] = []
+
+    //MARK: Flow control
     /// Since changing size calls asynchronous completion blocks,
     /// we might end up firing multiple times the methods adding coach
     /// marks to the view. To prevent that from happening we use the guard
@@ -173,16 +179,21 @@ public class CoachMarksController: UIViewController {
     /// not be a problem. Plus, a size change is a very long process compared to
     /// subview addition.
     ///
+    /// This property will be checked multiple time during the process of
+    /// showing coach marks and can abort the normal flow. This, it's also
+    /// used to prevent the normal flow when calling `stop(imediately:)`.
+    ///
     /// `true` when the controller is performing a size change, `false` otherwise.
-    private var changingSize = false
+    private var disableFlow = false
 
-    /// The view holding the "Skip" control.
-    private var skipViewAsView: UIView?
+    /// This property is much like `disableFlow`, except it's used only to
+    /// prevent a coach mark from being shown multiple times (in case the user
+    /// is tapping too fast.
+    ///
+    /// `true` if a new coach mark can be shown, `false` otherwise.
+    private var canShowCoachMark = true
 
-    /// Constraints defining the SKipView position.
-    private var skipViewConstraints: [NSLayoutConstraint] = []
-
-    //MARK: - View lifecycle
+    //MARK: - View lifecycle -
     public override func loadView() {
         let view = DummyView(frame: UIScreen.mainScreen().bounds)
 
@@ -204,7 +215,7 @@ public class CoachMarksController: UIViewController {
         self.unregisterFromStatusBarFrameChanges()
     }
 
-    //MARK: - Overrides
+    //MARK: - Overrides -
     override public func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
 
         self.overlayView.updateCutoutPath(nil)
@@ -219,7 +230,7 @@ public class CoachMarksController: UIViewController {
         })
     }
 
-    //MARK: - Public handlers
+    //MARK: - Public handlers -
     /// Will be called when the user perform an action requiring the display of the next coach mark.
     ///
     /// - Parameter sender: the object sending the message
@@ -231,11 +242,10 @@ public class CoachMarksController: UIViewController {
     ///
     /// - Parameter sender: the object sending the message
     public func skipCoachMarksTour(sender: AnyObject?) {
-        //self.delegate?
-        self.stop()
+        self.stopFlow(userDidSkip: true)
     }
 
-    //MARK: - Public Helpers
+    //MARK: - Public Helpers -
     /// Returns a new coach mark with a cutout path set to be
     /// around the provided UIView. The cutout path will be slightly
     /// larger than the view and have rounded corners, however you can
@@ -390,7 +400,7 @@ public class CoachMarksController: UIViewController {
         return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
     }
 
-    //MARK: - Public methods
+    //MARK: - Public methods -
     /// Start displaying the coach marks.
     public func startOn(parentViewController: UIViewController) {
         guard let dataSource = self.dataSource else {
@@ -413,11 +423,6 @@ public class CoachMarksController: UIViewController {
             return
         }
 
-        // The view was previously hidden, to prevent it from catching the user input.
-        // Now, we want exactly the opposite. We want the overlay view to prevent events
-        // from reaching down.
-        self.view.userInteractionEnabled = true
-
         self.overlayView.prepareForFade()
 
         if let skipViewDisplayManager = self.skipViewDisplayManager {
@@ -431,13 +436,47 @@ public class CoachMarksController: UIViewController {
             self.overlayView.alpha = 1.0
             self.skipViewAsView?.alpha = 1.0
         }, completion: { (finished: Bool) -> Void in
+            // The view was previously hidden, to prevent it from catching the user input.
+            // Now, we want exactly the opposite. We want the overlay view to prevent events
+            // from reaching down.
+            self.view.userInteractionEnabled = true
+
             self.showNextCoachMark()
         })
     }
 
+    public func stop(immediately immediately: Bool = false) {
+        if immediately {
+            self.overlayView.layer.removeAllAnimations()
+            self.skipViewAsView?.layer.removeAllAnimations()
+            self.currentCoachMarkView?.layer.removeAllAnimations()
+
+            self.overlayView.removeFromSuperview()
+            self.skipViewAsView?.removeFromSuperview()
+            self.currentCoachMarkView?.removeFromSuperview()
+
+            self.skipViewAsView = nil
+            self.currentCoachMarkView = nil
+
+            self.disableFlow = true
+
+            self.stopFlow(withAnimation: false, userDidSkip: false, shouldCallDelegate: false)
+        } else {
+            self.stopFlow()
+        }
+    }
+
     /// Stop displaying the coach marks and perform some cleanup.
-    public func stop(wasSkipped: Bool = false) {
-        UIView.animateWithDuration(self.overlayFadeAnimationDuration, animations: { () -> Void in
+    internal func stopFlow(withAnimation animate: Bool = true, userDidSkip skipped: Bool = false, shouldCallDelegate: Bool = true) {
+        let animationDuration: NSTimeInterval
+
+        if animate {
+            animationDuration = self.overlayFadeAnimationDuration
+        } else {
+            animationDuration = 0.0
+        }
+
+        UIView.animateWithDuration(animationDuration, animations: { () -> Void in
             self.overlayView.alpha = 0.0
             self.skipViewAsView?.alpha = 0.0
             self.currentCoachMarkView?.alpha = 0.0
@@ -446,9 +485,11 @@ public class CoachMarksController: UIViewController {
             self.reset()
             self.detachFromViewController()
 
-            // Calling the delegate, maybe the user wants to do something?
-            self.delegate?.didFinishShowingFromCoachMarksController(self)
-            self.delegate?.coachMarksController(self, didFinishShowingAndWasSkipped: wasSkipped)
+            if shouldCallDelegate {
+                // Calling the delegate, maybe the user wants to do something?
+                self.delegate?.didFinishShowingFromCoachMarksController(self)
+                self.delegate?.coachMarksController(self, didFinishShowingAndWasSkipped: skipped)
+            }
 
         })
     }
@@ -469,7 +510,7 @@ public class CoachMarksController: UIViewController {
         }
     }
 
-    //MARK: - Private methods
+    //MARK: - Private methods -
     /// Return the controller into an idle state.
     private func reset() {
         self.numberOfCoachMarks = 0
@@ -483,7 +524,8 @@ public class CoachMarksController: UIViewController {
     ///
     /// - index if set, the index of the coach mark to show
     public func showNext(numberOfCoachMarksToSkip numberToSkip: Int = 0) {
-        if (!self.started) { return }
+        if (!self.started || !canShowCoachMark) { return }
+
         if (numberToSkip < 0) {
             print("showNext: The specified number of coach marks to skip was negative, nothing to do.")
             return
@@ -551,6 +593,10 @@ public class CoachMarksController: UIViewController {
 
     /// Show the next coach mark and hide the current one.
     private func showNextCoachMark(hidePrevious hidePrevious: Bool = true) {
+        if disableFlow || paused || !canShowCoachMark { return }
+        self.instructionsTopView.userInteractionEnabled = false
+        self.canShowCoachMark = false
+
         self.currentIndex += 1
 
         // if `currentIndex` is above 0, that means a previous coach mark
@@ -566,14 +612,14 @@ public class CoachMarksController: UIViewController {
                     if self.currentIndex < self.numberOfCoachMarks {
                         self.createAndShowCoachMark()
                     } else {
-                        self.stop()
+                        self.stopFlow()
                     }
                 }
             } else {
                 if self.currentIndex < self.numberOfCoachMarks {
                     self.createAndShowCoachMark()
                 } else {
-                    self.stop()
+                    self.stopFlow()
                 }
             }
         } else {
@@ -600,11 +646,11 @@ public class CoachMarksController: UIViewController {
     ///
     /// - Parameter shouldCallDelegate: `true` to call delegate methods, `false` otherwise.
     private func createAndShowCoachMark(shouldCallDelegate shouldCallDelegate: Bool = true, noAnimation: Bool = false) {
-        if changingSize { return }
+        if disableFlow { return }
 
         if CGRectIsEmpty(instructionsTopView.bounds) {
             print("The overlay view added to the window has empty bounds, Instructions will stop.")
-            self.stop()
+            self.stopFlow()
             return
         }
         
@@ -612,6 +658,7 @@ public class CoachMarksController: UIViewController {
             let shouldLoad = delegate.coachMarksController(self, coachMarkWillLoadForIndex: self.currentIndex)
 
             if (!shouldLoad) {
+                self.canShowCoachMark = true
                 showNextCoachMark(hidePrevious: false)
                 return
             }
@@ -636,7 +683,10 @@ public class CoachMarksController: UIViewController {
 
             self.addTargetToCurrentCoachView()
 
-            self.coachMarkDisplayManager.displayCoachMarkView(self.currentCoachMarkView!, coachMark: self.currentCoachMark!, noAnimation: noAnimation)
+            self.coachMarkDisplayManager.displayCoachMarkView(self.currentCoachMarkView!, coachMark: self.currentCoachMark!, noAnimation: noAnimation) {
+                self.instructionsTopView.userInteractionEnabled = true
+                self.canShowCoachMark = true
+            }
         }
     }
 
@@ -652,7 +702,7 @@ public class CoachMarksController: UIViewController {
 
     /// Will remove currently displayed coach mark.
     @objc internal func prepareForSizeTransition() {
-        self.changingSize = true
+        self.disableFlow = true
         self.currentCoachMarkView?.layer.removeAllAnimations()
         self.coachMarkDisplayManager.hideCoachMarkView(self.currentCoachMarkView, animationDuration: 0)
         self.removeTargetFromCurrentCoachView()
@@ -661,7 +711,7 @@ public class CoachMarksController: UIViewController {
     }
 
     @objc internal func restoreAfterSizeTransitionDidComplete() {
-        self.changingSize = false
+        self.disableFlow = false
         self.overlayView.alpha = 1.0
         self.updateSkipViewConstraints()
         self.skipViewAsView?.alpha = 1.0
@@ -696,7 +746,7 @@ public class CoachMarksController: UIViewController {
     }
 }
 
-//MARK: - Protocol Conformance | OverlayViewDelegate
+//MARK: - Protocol Conformance | OverlayViewDelegate -
 extension CoachMarksController: OverlayViewDelegate {
     func didReceivedSingleTap() {
         if self.paused { return }

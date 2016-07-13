@@ -67,7 +67,7 @@ internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
         self.hintLabel.font = UIFont.systemFontOfSize(15.0)
         self.hintLabel.scrollEnabled = false
         self.hintLabel.textAlignment = .Justified
-        self.hintLabel.layoutManager.hyphenationFactor = 2.0
+        self.hintLabel.layoutManager.hyphenationFactor = 1.0
         self.hintLabel.editable = false
 
         self.nextButton.translatesAutoresizingMaskIntoConstraints = false

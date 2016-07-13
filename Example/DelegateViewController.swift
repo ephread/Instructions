@@ -1,6 +1,6 @@
 // DelegatetViewController.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ import UIKit
 import Instructions
 
 // This class show off the oportunities provided by the delegate mechanism.
-internal class DelegatetViewController: ProfileViewController, CoachMarksControllerDataSource, CoachMarksControllerDelegate {
+internal class DelegateViewController: ProfileViewController {
 
     //MARK: - IBOutlet
     @IBOutlet var profileBackgroundView: UIView?
@@ -40,9 +40,16 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
         self.emailLabel?.layer.cornerRadius = 4.0
         self.postsLabel?.layer.cornerRadius = 4.0
         self.reputationLabel?.layer.cornerRadius = 4.0
-    }
 
-    //MARK: - Protocol Conformance | CoachMarksControllerDataSource
+        let skipView = CoachMarkSkipDefaultView()
+        skipView.setTitle("Skip", forState: .Normal)
+
+        self.coachMarksController?.skipView = skipView
+    }
+}
+
+//MARK: - Protocol Conformance | CoachMarksControllerDataSource
+extension DelegateViewController: CoachMarksControllerDataSource {
     func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
         return 5
     }
@@ -91,8 +98,10 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
 
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
+}
 
-    //MARK: - Protocol Conformance | CoachMarksControllerDelegate
+//MARK: - Protocol Conformance | CoachMarksControllerDelegate
+extension DelegateViewController: CoachMarksControllerDelegate {
     func coachMarksController(coachMarksController: CoachMarksController, inout coachMarkWillShow coachMark: CoachMark, forIndex index: Int) {
         if index == 0 {
             // We'll need to play an animation before showing up the coach mark.
@@ -132,8 +141,21 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
     }
 
     func didFinishShowingFromCoachMarksController(coachMarksController: CoachMarksController) {
+        // If implemented, will fall back to the extension method,
+        // thus warning that this method should not be used anymore.
+    }
+
+    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool) {
+        let newColor: UIColor
+
+        if skipped {
+            newColor = UIColor(red: 144.0/255.0, green: 26.0/255.0, blue: 146.0/255.0, alpha: 1.0)
+        } else {
+            newColor = UIColor(red: 244.0/255.0, green: 126.0/255.0, blue: 46.0/255.0, alpha: 1.0)
+        }
+
         UIView.animateWithDuration(1, animations: { () -> Void in
-            self.profileBackgroundView?.backgroundColor = UIColor(red: 244.0/255.0, green: 126.0/255.0, blue: 46.0/255.0, alpha: 1.0)
+            self.profileBackgroundView?.backgroundColor = newColor
         })
     }
 }

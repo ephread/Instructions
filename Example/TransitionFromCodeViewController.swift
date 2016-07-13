@@ -25,7 +25,7 @@ import Instructions
 
 // That's the default controller, using every defaults made available by Instructions.
 // It can't get any simpler.
-internal class TransitionFromCodeViewController: ProfileViewController, CoachMarksControllerDataSource, CoachMarksControllerDelegate {
+internal class TransitionFromCodeViewController: ProfileViewController {
 
     let text1 = "(1) That's the first coach mark."
     let text2 = "(2) Second coach mark no one will see."
@@ -58,7 +58,14 @@ internal class TransitionFromCodeViewController: ProfileViewController, CoachMar
         super.viewDidAppear(animated)
     }
 
-    //MARK: - Protocol Conformance | CoachMarksControllerDataSource
+    @IBAction func performButtonTap(sender: AnyObject) {
+        // The user tapped on the button, so let's carry on!
+        self.coachMarksController?.showNext()
+    }
+}
+
+//MARK: - Protocol Conformance | CoachMarksControllerDataSource
+extension TransitionFromCodeViewController: CoachMarksControllerDataSource {
     func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
         return 6
     }
@@ -79,6 +86,10 @@ internal class TransitionFromCodeViewController: ProfileViewController, CoachMar
             // next coach mark, we'll disable this ability for the current
             // coach mark to force the user to perform the appropriate action.
             coachMark.disableOverlayTap = true
+
+            // We'll also enable the ability to touch what's inside
+            // the cutoutPath.
+            coachMark.allowTouchInsideCutoutPath = true
             return coachMark
         case 3:
             return coachMarksController.coachMarkForView(self.emailLabel)
@@ -129,7 +140,10 @@ internal class TransitionFromCodeViewController: ProfileViewController, CoachMar
 
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
+}
 
+//MARK: - Protocol Conformance | CoachMarksControllerDelegate
+extension TransitionFromCodeViewController: CoachMarksControllerDelegate {
     func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillLoadForIndex index: Int) -> Bool {
         switch(index) {
         case 1:
@@ -138,10 +152,5 @@ internal class TransitionFromCodeViewController: ProfileViewController, CoachMar
         default:
             return true
         }
-    }
-
-    @IBAction func performButtonTap(sender: AnyObject) {
-        // The user tapped on the button, so let's carry on!
-        self.coachMarksController?.showNext()
     }
 }

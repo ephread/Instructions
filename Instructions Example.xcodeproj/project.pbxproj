@@ -11,6 +11,7 @@
 		C636FFAA1BBBD99200EB243B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C636FFA91BBBD99200EB243B /* Assets.xcassets */; };
 		C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */; };
 		C636FFB21BBC329600EB243B /* TransparentCoachMarkBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFB01BBC329600EB243B /* TransparentCoachMarkBodyView.swift */; };
+		C63935DB1D2837EF002DCABF /* BackgroundNetworkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63935DA1D2837EF002DCABF /* BackgroundNetworkingViewController.swift */; };
 		C63BB9161C73CDD600C81A4D /* TransitionFromCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63BB9151C73CDD600C81A4D /* TransitionFromCodeViewController.swift */; };
 		C6402BE01BBE6EBD0087E23F /* Instructions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64FB36F1BB75F4D0081E5B6 /* Instructions.framework */; };
 		C6402BE11BBE6EBD0087E23F /* Instructions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C64FB36F1BB75F4D0081E5B6 /* Instructions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -34,6 +35,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = C64FB2E81BB6CA8A0081E5B6;
 			remoteInfo = Instructions;
+		};
+		C6417E5B1D296341004D13EA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C64FB3691BB75F4D0081E5B6 /* Instructions.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C6417E331D291A8A004D13EA;
+			remoteInfo = InstructionsAppExtensions;
 		};
 		C64FB36E1BB75F4D0081E5B6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -77,6 +85,7 @@
 		C636FFA91BBBD99200EB243B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Example/Assets.xcassets; sourceTree = "<group>"; };
 		C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentCoachMarkArrowView.swift; sourceTree = "<group>"; };
 		C636FFB01BBC329600EB243B /* TransparentCoachMarkBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentCoachMarkBodyView.swift; sourceTree = "<group>"; };
+		C63935DA1D2837EF002DCABF /* BackgroundNetworkingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundNetworkingViewController.swift; sourceTree = "<group>"; };
 		C63BB9151C73CDD600C81A4D /* TransitionFromCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionFromCodeViewController.swift; sourceTree = "<group>"; };
 		C64FB30C1BB6CB1C0081E5B6 /* Instructions Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Instructions Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C64FB32D1BB6CC180081E5B6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				C64FB36F1BB75F4D0081E5B6 /* Instructions.framework */,
+				C6417E5C1D296341004D13EA /* InstructionsAppExtensions.framework */,
 				C64FB3711BB75F4D0081E5B6 /* InstructionsTests.xctest */,
 			);
 			name = Products;
@@ -168,6 +178,7 @@
 			children = (
 				C64FB3341BB6CC180081E5B6 /* ProfileViewController.swift */,
 				C6CE542B1BBD435500154266 /* DefaultViewController.swift */,
+				C63935DA1D2837EF002DCABF /* BackgroundNetworkingViewController.swift */,
 				5B84A3AD1BF48BE200C795F8 /* OnlyHintsViewController.swift */,
 				C6CE542A1BBD435500154266 /* CustomViewController.swift */,
 				C6CE54291BBD435500154266 /* BlurringOverlayViewController.swift */,
@@ -223,6 +234,7 @@
 				TargetAttributes = {
 					C64FB30B1BB6CB1C0081E5B6 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = EV2G94D75V;
 					};
 				};
 			};
@@ -251,6 +263,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		C6417E5C1D296341004D13EA /* InstructionsAppExtensions.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = InstructionsAppExtensions.framework;
+			remoteRef = C6417E5B1D296341004D13EA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		C64FB36F1BB75F4D0081E5B6 /* Instructions.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -287,6 +306,7 @@
 			files = (
 				C64FB3861BB98EC20081E5B6 /* CustomCoachMarkArrowView.swift in Sources */,
 				C64FB3841BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift in Sources */,
+				C63935DB1D2837EF002DCABF /* BackgroundNetworkingViewController.swift in Sources */,
 				C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */,
 				5B84A3AE1BF48BE200C795F8 /* OnlyHintsViewController.swift in Sources */,
 				C6CE542C1BBD435500154266 /* BlurringOverlayViewController.swift in Sources */,
@@ -372,7 +392,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -411,7 +431,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -423,6 +443,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -440,6 +461,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

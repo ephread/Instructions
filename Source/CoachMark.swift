@@ -28,7 +28,7 @@ public struct CoachMark {
     //MARK: - Public properties
 
     /// Change this value to change the duration of the fade.
-    public var animationDuration = kCoachMarkFadeAnimationDuration
+    public var animationDuration = Constants.coachMarkFadeAnimationDuration
 
     /// The path to cut in the overlay, so the point of interest will be visible.
     public var cutoutPath: UIBezierPath?
@@ -59,6 +59,10 @@ public struct CoachMark {
     /// If you need to disable the tap for all the coachmarks,
     /// prefer setting CoachMarkController.allowOverlayTap
     public var disableOverlayTap: Bool = false
+
+    /// Set this property to `true` to allow touch forwarding
+    /// inside the cutoutPath.
+    public var allowTouchInsideCutoutPath: Bool = false
 
     //MARK: - Initialization
     /// Allocate and initiliaze a Coach mark with default values

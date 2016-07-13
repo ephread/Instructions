@@ -1,6 +1,6 @@
 // ProfileViewController.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -56,6 +56,18 @@ internal class ProfileViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
+        startInstructions()
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        self.coachMarksController?.stop(immediately: true)
+    }
+
+    func startInstructions() {
         self.coachMarksController?.startOn(self)
     }
+
+
 }

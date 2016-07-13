@@ -1,6 +1,6 @@
 // CustomViewsViewController.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ import UIKit
 import Instructions
 
 // Will display custom coach marks.
-internal class CustomViewsViewController: ProfileViewController, CoachMarksControllerDataSource {
+internal class CustomViewsViewController: ProfileViewController {
 
     //MARK: - IBOutlet
     @IBOutlet var allView: UIView?
@@ -47,7 +47,10 @@ internal class CustomViewsViewController: ProfileViewController, CoachMarksContr
 
         self.coachMarksController?.skipView = skipView
     }
+}
 
+//MARK: - Protocol Conformance | CoachMarksControllerDataSource
+extension CustomViewsViewController: CoachMarksControllerDataSource {
     //MARK: - Protocol Conformance | CoachMarksControllerDataSource
     func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
         return 5
@@ -146,22 +149,28 @@ internal class CustomViewsViewController: ProfileViewController, CoachMarksContr
 
             coachMarkArrowView!.plate.addConstraint(NSLayoutConstraint(item: coachMarkArrowView!.plate, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: adjustedWidth))
         }
-        
+
         return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
     }
 
     func coachMarksController(coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]? {
 
         var constraints: [NSLayoutConstraint] = []
+        var topMargin: CGFloat = 0.0
+
+        if !UIApplication.sharedApplication().statusBarHidden {
+            topMargin = UIApplication.sharedApplication().statusBarFrame.size.height
+        }
 
         constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("H:|[skipView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
 
         if UIApplication.sharedApplication().statusBarHidden {
             constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|[skipView]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
         } else {
-            constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-24-[skipView(==40)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
+            constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-topMargin-[skipView(==44)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["topMargin": topMargin],
+                views: ["skipView": skipView]))
         }
-
+        
         return constraints
     }
 }

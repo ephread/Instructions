@@ -21,7 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Foundation
+import UIKit
 
 /// This class deals with the layout of the "skip" view
 internal class SkipViewDisplayManager {
@@ -73,13 +73,27 @@ internal class SkipViewDisplayManager {
         self.instructionsTopView.removeConstraints(self.skipViewConstraints)
         self.skipViewConstraints = []
 
+        
+
         if let validLayoutConstraints = layoutConstraints {
             self.skipViewConstraints = validLayoutConstraints
             self.instructionsTopView.addConstraints(self.skipViewConstraints)
         } else {
-            self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .Trailing, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Trailing, multiplier: 1, constant: -2))
 
-            self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .Top, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Top, multiplier: 1, constant: 22))
+
+            self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .Trailing, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Trailing, multiplier: 1, constant: -10))
+
+            var topConstant: CGFloat = 0.0
+
+            #if !INSTRUCTIONS_APP_EXTENSIONS
+            if !UIApplication.sharedApplication().statusBarHidden {
+                topConstant = UIApplication.sharedApplication().statusBarFrame.size.height
+            }
+            #endif
+
+            topConstant += 2
+
+            self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .Top, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Top, multiplier: 1, constant: topConstant))
 
             self.instructionsTopView.addConstraints(self.skipViewConstraints)
         }

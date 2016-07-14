@@ -27,20 +27,20 @@ import UIKit
 public class CoachMarkArrowDefaultView : UIImageView, CoachMarkArrowView {
     //MARK: - Initialization
     public init(orientation: CoachMarkArrowOrientation) {
-        if orientation == .Top {
-            super.init(image: UIImage(named: "arrow-top", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil), highlightedImage: UIImage(named: "arrow-top-highlighted", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!)
+        if orientation == .top {
+            super.init(image: UIImage(named: "arrow-top", in: Bundle(for: self.dynamicType), compatibleWith: nil), highlightedImage: UIImage(named: "arrow-top-highlighted", in: Bundle(for: self.dynamicType), compatibleWith: nil)!)
         } else {
-            super.init(image: UIImage(named: "arrow-bottom", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil), highlightedImage: UIImage(named: "arrow-bottom-highlighted", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!)
+            super.init(image: UIImage(named: "arrow-bottom", in: Bundle(for: self.dynamicType), compatibleWith: nil), highlightedImage: UIImage(named: "arrow-bottom-highlighted", in: Bundle(for: self.dynamicType), compatibleWith: nil)!)
         }
 
         self.translatesAutoresizingMaskIntoConstraints = false
 
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal,
-            toItem: nil, attribute: .NotAnAttribute,
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal,
+            toItem: nil, attribute: .notAnAttribute,
             multiplier: 1, constant: self.image!.size.width))
 
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal,
-            toItem: nil, attribute: .NotAnAttribute,
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal,
+            toItem: nil, attribute: .notAnAttribute,
             multiplier: 1, constant: self.image!.size.height))
     }
 

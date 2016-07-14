@@ -44,7 +44,7 @@ internal class TransparentCoachMarkBodyView : UIControl, CoachMarkBodyView {
     }
 
     convenience init() {
-        self.init(frame: CGRectZero)
+        self.init(frame: CGRect.zero)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -55,23 +55,23 @@ internal class TransparentCoachMarkBodyView : UIControl, CoachMarkBodyView {
     private func setupInnerViewHierarchy() {
         self.translatesAutoresizingMaskIntoConstraints = false
 
-        hintLabel.backgroundColor = UIColor.clearColor()
-        hintLabel.textColor = UIColor.whiteColor()
-        hintLabel.font = UIFont.systemFontOfSize(15.0)
-        hintLabel.scrollEnabled = false
-        hintLabel.textAlignment = .Justified
+        hintLabel.backgroundColor = UIColor.clear()
+        hintLabel.textColor = UIColor.white()
+        hintLabel.font = UIFont.systemFont(ofSize: 15.0)
+        hintLabel.isScrollEnabled = false
+        hintLabel.textAlignment = .justified
         hintLabel.layoutManager.hyphenationFactor = 2.0
-        hintLabel.editable = false
+        hintLabel.isEditable = false
 
         hintLabel.translatesAutoresizingMaskIntoConstraints = false
-        hintLabel.userInteractionEnabled = false
+        hintLabel.isUserInteractionEnabled = false
 
         self.addSubview(hintLabel)
 
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[hintLabel]|", options: NSLayoutFormatOptions(rawValue: 0),
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[hintLabel]|", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["hintLabel": hintLabel]))
 
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[hintLabel]|", options: NSLayoutFormatOptions(rawValue: 0),
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[hintLabel]|", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["hintLabel": hintLabel]))
     }
 }

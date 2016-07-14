@@ -47,7 +47,7 @@ internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
     }
 
     convenience init() {
-        self.init(frame: CGRectZero)
+        self.init(frame: CGRect.zero)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -57,43 +57,43 @@ internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
     //MARK: - Private methods
     private func setupInnerViewHierarchy() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.white()
 
         self.clipsToBounds = true
         self.layer.cornerRadius = 4
 
-        self.hintLabel.backgroundColor = UIColor.clearColor()
-        self.hintLabel.textColor = UIColor.darkGrayColor()
-        self.hintLabel.font = UIFont.systemFontOfSize(15.0)
-        self.hintLabel.scrollEnabled = false
-        self.hintLabel.textAlignment = .Justified
+        self.hintLabel.backgroundColor = UIColor.clear()
+        self.hintLabel.textColor = UIColor.darkGray()
+        self.hintLabel.font = UIFont.systemFont(ofSize: 15.0)
+        self.hintLabel.isScrollEnabled = false
+        self.hintLabel.textAlignment = .justified
         self.hintLabel.layoutManager.hyphenationFactor = 2.0
-        self.hintLabel.editable = false
+        self.hintLabel.isEditable = false
 
         self.nextButton.translatesAutoresizingMaskIntoConstraints = false
         self.hintLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        self.nextButton.userInteractionEnabled = true
-        self.hintLabel.userInteractionEnabled = false
+        self.nextButton.isUserInteractionEnabled = true
+        self.hintLabel.isUserInteractionEnabled = false
 
-        self.nextButton.setBackgroundImage(UIImage(named: "button-background"), forState: .Normal)
-        self.nextButton.setBackgroundImage(UIImage(named: "button-background-highlighted"), forState: .Highlighted)
+        self.nextButton.setBackgroundImage(UIImage(named: "button-background"), for: [])
+        self.nextButton.setBackgroundImage(UIImage(named: "button-background-highlighted"), for: .highlighted)
 
-        self.nextButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        self.nextButton.titleLabel?.font = UIFont.systemFontOfSize(15.0)
+        self.nextButton.setTitleColor(UIColor.white(), for: [])
+        self.nextButton.titleLabel?.font = UIFont.systemFont(ofSize: 15.0)
 
         self.addSubview(nextButton)
         self.addSubview(hintLabel)
 
-        self.addConstraint(NSLayoutConstraint(item: nextButton, attribute: .CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: nextButton, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
 
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[nextButton(==30)]", options: NSLayoutFormatOptions(rawValue: 0),
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[nextButton(==30)]", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["nextButton": nextButton]))
 
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-(5)-[hintLabel]-(5)-|", options: NSLayoutFormatOptions(rawValue: 0),
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(5)-[hintLabel]-(5)-|", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["hintLabel": hintLabel]))
 
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-(10)-[hintLabel]-(10)-[nextButton(==40)]-(10)-|", options: NSLayoutFormatOptions(rawValue: 0),
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[hintLabel]-(10)-[nextButton(==40)]-(10)-|", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["hintLabel": hintLabel, "nextButton": nextButton]))
     }
 }

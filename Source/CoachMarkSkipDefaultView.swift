@@ -38,14 +38,14 @@ public class CoachMarkSkipDefaultView : UIButton, CoachMarkSkipView {
     }
 
     public convenience init() {
-        self.init(frame: CGRectZero)
+        self.init(frame: CGRect.zero)
 
-        self.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        self.titleLabel?.font = UIFont.systemFontOfSize(17.0)
-        self.titleLabel?.textAlignment = .Center
+        self.setTitleColor(UIColor.black(), for: UIControlState())
+        self.titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
+        self.titleLabel?.textAlignment = .center
 
-        self.setBackgroundImage(UIImage(named: "background", inBundle: NSBundle(forClass: CoachMarkSkipDefaultView.self), compatibleWithTraitCollection: nil), forState: .Normal)
-        self.setBackgroundImage(UIImage(named: "background-highlighted", inBundle: NSBundle(forClass: CoachMarkSkipDefaultView.self), compatibleWithTraitCollection: nil), forState: .Highlighted)
+        self.setBackgroundImage(UIImage(named: "background", in: Bundle(for: CoachMarkSkipDefaultView.self), compatibleWith: nil), for: UIControlState())
+        self.setBackgroundImage(UIImage(named: "background-highlighted", in: Bundle(for: CoachMarkSkipDefaultView.self), compatibleWith: nil), for: .highlighted)
 
         self.layer.cornerRadius = 4
         self.contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 15.0, bottom: 10.0, right: 15.0)

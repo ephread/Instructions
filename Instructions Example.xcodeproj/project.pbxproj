@@ -223,6 +223,7 @@
 				TargetAttributes = {
 					C64FB30B1BB6CB1C0081E5B6 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -433,6 +434,7 @@
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -450,6 +452,7 @@
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

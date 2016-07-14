@@ -30,7 +30,7 @@ public protocol CoachMarksControllerDataSource: class {
     /// - Parameter coachMarksController: the coach mark controller requesting the information
     ///
     /// - Returns: the number of coach marks to display
-    func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int
+    func numberOfCoachMarksForCoachMarksController(_ coachMarksController: CoachMarksController) -> Int
 
     /// Asks for the metadata of the coach mark that will be displayed in the given nth place.
     /// All `CoachMark` metadata are optional or filled with sensible defaults. You are not
@@ -41,7 +41,7 @@ public protocol CoachMarksControllerDataSource: class {
     /// - Parameter coachMarkViewsForIndex: the index referring to the nth place
     ///
     /// - Returns: the coach mark metadata
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark
 
     /// Asks for the views defining the coach mark that will be displayed in the given nth place.
     /// The arrow view is optional. However, if you provide one, you are responsible for 
@@ -53,7 +53,7 @@ public protocol CoachMarksControllerDataSource: class {
     /// - Parameter coachMark: the coach mark meta data
     ///
     /// - Returns: a tuple packaging the body component and the arrow component
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?)
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?)
 
     /// Asks for autolayout constraints needed to position `skipView` in
     /// `coachMarksController.view`
@@ -63,11 +63,11 @@ public protocol CoachMarksControllerDataSource: class {
     /// - Parameter inParentView: the parent view (used to set contraints properly).
     ///
     /// - Returns: an array of NSLayoutConstraint
-    func coachMarksController(coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]?
+    func coachMarksController(_ coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]?
 }
 
 public extension CoachMarksControllerDataSource {
-    func coachMarksController(coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]? {
+    func coachMarksController(_ coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]? {
         return nil
     }
 }

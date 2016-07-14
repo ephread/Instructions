@@ -24,9 +24,9 @@ import Foundation
 
 /// Define the horizontal position of the coach mark.
 enum CoachMarkPosition {
-    case Leading
-    case Center
-    case Trailing
+    case leading
+    case center
+    case trailing
 }
 
 /// Define the horizontal position of the arrow.

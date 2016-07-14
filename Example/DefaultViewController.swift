@@ -37,17 +37,17 @@ internal class DefaultViewController: ProfileViewController, CoachMarksControlle
         self.reputationLabel?.layer.cornerRadius = 4.0
 
         let skipView = CoachMarkSkipDefaultView()
-        skipView.setTitle("Skip", forState: .Normal)
+        skipView.setTitle("Skip", for: [])
 
         self.coachMarksController?.skipView = skipView
     }
 
     //MARK: - Protocol Conformance | CoachMarksControllerDataSource
-    func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarksForCoachMarksController(_ coachMarksController: CoachMarksController) -> Int {
         return 5
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
         switch(index) {
         case 0:
             return coachMarksController.coachMarkForView(self.navigationController?.navigationBar) { (frame: CGRect) -> UIBezierPath in
@@ -68,7 +68,7 @@ internal class DefaultViewController: ProfileViewController, CoachMarksControlle
         }
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
 
         let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
 

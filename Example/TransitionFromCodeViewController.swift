@@ -48,22 +48,22 @@ internal class TransitionFromCodeViewController: ProfileViewController, CoachMar
         self.reputationLabel?.layer.cornerRadius = 4.0
 
         let skipView = CoachMarkSkipDefaultView()
-        skipView.setTitle("Skip", forState: .Normal)
+        skipView.setTitle("Skip", for: [])
 
         self.coachMarksController?.skipView = skipView
         self.coachMarksController?.allowOverlayTap = true
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
 
     //MARK: - Protocol Conformance | CoachMarksControllerDataSource
-    func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarksForCoachMarksController(_ coachMarksController: CoachMarksController) -> Int {
         return 6
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
         switch(index) {
         case 0:
             return coachMarksController.coachMarkForView(self.navigationController?.navigationBar) { (frame: CGRect) -> UIBezierPath in
@@ -91,7 +91,7 @@ internal class TransitionFromCodeViewController: ProfileViewController, CoachMar
         }
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
 
         var coachViews: (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?)
 
@@ -101,7 +101,7 @@ internal class TransitionFromCodeViewController: ProfileViewController, CoachMar
         switch(index) {
         case 2:
             coachViews = coachMarksController.defaultCoachViewsWithArrow(true, withNextText: false, arrowOrientation: coachMark.arrowOrientation)
-            coachViews.bodyView.userInteractionEnabled = false
+            coachViews.bodyView.isUserInteractionEnabled = false
         default:
             coachViews = coachMarksController.defaultCoachViewsWithArrow(true, withNextText: true, arrowOrientation: coachMark.arrowOrientation)
         }
@@ -130,7 +130,7 @@ internal class TransitionFromCodeViewController: ProfileViewController, CoachMar
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillLoadForIndex index: Int) -> Bool {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillLoadForIndex index: Int) -> Bool {
         switch(index) {
         case 1:
             // Skipping the second coach mark.
@@ -140,7 +140,7 @@ internal class TransitionFromCodeViewController: ProfileViewController, CoachMar
         }
     }
 
-    @IBAction func performButtonTap(sender: AnyObject) {
+    @IBAction func performButtonTap(_ sender: AnyObject) {
         // The user tapped on the button, so let's carry on!
         self.coachMarksController?.showNext()
     }

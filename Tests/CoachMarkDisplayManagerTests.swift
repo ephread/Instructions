@@ -52,19 +52,19 @@ class CoachMarkDisplayManagerTests: XCTestCase {
         var coachMark = CoachMark()
         coachMark.cutoutPath = UIBezierPath(rect: CGRect(x: 30, y: 30, width: 60, height: 30))
 
-        self.viewIsVisibleExpectation = self.expectationWithDescription("viewIsVisible")
+        self.viewIsVisibleExpectation = self.expectation(withDescription: "viewIsVisible")
 
         coachMark.computeOrientationInFrame(self.instructionsTopView.frame)
         coachMark.computePointOfInterestInFrame()
 
         self.coachMarkDisplayManager.displayCoachMarkView(coachMarkView, coachMark: coachMark) {
             XCTAssertEqual(coachMarkView.alpha, 1.0)
-            XCTAssertEqual(coachMarkView.hidden, false)
+            XCTAssertEqual(coachMarkView.isHidden, false)
 
             self.viewIsVisibleExpectation?.fulfill()
         }
 
-        self.waitForExpectationsWithTimeout(5) { error in
+        self.waitForExpectations(withTimeout: 5) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }

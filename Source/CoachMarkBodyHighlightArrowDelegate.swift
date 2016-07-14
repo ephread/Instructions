@@ -31,5 +31,5 @@ public protocol CoachMarkBodyHighlightArrowDelegate : class {
     /// highlighted state.
     ///
     /// - Parameters highlighted: `true` if the arrow should be highlighted, `false` otherwise.
-    func highlightArrow(highlighted: Bool)
+    func highlightArrow(_ highlighted: Bool)
 }

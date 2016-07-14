@@ -53,7 +53,7 @@ internal class ProfileViewController: UIViewController {
         self.coachMarksController?.allowOverlayTap = true
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         self.coachMarksController?.startOn(self)

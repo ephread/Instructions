@@ -48,11 +48,11 @@ internal class SkipViewDisplayManager {
 
     //MARK: - Internal methods
     /// Will hide the current Skip View.
-    func hideSkipView(duration: NSTimeInterval = 0) {
+    func hideSkipView(_ duration: TimeInterval = 0) {
         if duration == 0 {
             self.skipView.alpha = 0.0
         } else {
-            UIView.animateWithDuration(duration) { () -> Void in
+            UIView.animate(withDuration: duration) { () -> Void in
                 self.skipView.alpha = 0.0
             }
         }
@@ -67,7 +67,7 @@ internal class SkipViewDisplayManager {
     /// Update the constraints defining the "Skip view" position.
     ///
     /// - Parameter layoutConstraints: the constraints to add.
-    func updateSkipViewConstraintsWithConstraints(layoutConstraints: [NSLayoutConstraint]?) {
+    func updateSkipViewConstraintsWithConstraints(_ layoutConstraints: [NSLayoutConstraint]?) {
         self.skipView.translatesAutoresizingMaskIntoConstraints = false
 
         self.instructionsTopView.removeConstraints(self.skipViewConstraints)
@@ -77,9 +77,9 @@ internal class SkipViewDisplayManager {
             self.skipViewConstraints = validLayoutConstraints
             self.instructionsTopView.addConstraints(self.skipViewConstraints)
         } else {
-            self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .Trailing, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Trailing, multiplier: 1, constant: -2))
+            self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .trailing, relatedBy: .equal, toItem: self.instructionsTopView, attribute: .trailing, multiplier: 1, constant: -2))
 
-            self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .Top, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Top, multiplier: 1, constant: 22))
+            self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .top, relatedBy: .equal, toItem: self.instructionsTopView, attribute: .top, multiplier: 1, constant: 22))
 
             self.instructionsTopView.addConstraints(self.skipViewConstraints)
         }

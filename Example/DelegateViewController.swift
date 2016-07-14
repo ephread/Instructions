@@ -43,15 +43,15 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
     }
 
     //MARK: - Protocol Conformance | CoachMarksControllerDataSource
-    func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarksForCoachMarksController(_ coachMarksController: CoachMarksController) -> Int {
         return 5
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
         switch(index) {
         case 0:
             return coachMarksController.coachMarkForView(self.avatar) { (frame: CGRect) -> UIBezierPath in
-                return UIBezierPath(ovalInRect: CGRectInset(frame, -4, -4))
+                return UIBezierPath(ovalIn: frame.insetBy(dx: -4, dy: -4))
             }
         case 1:
             return coachMarksController.coachMarkForView(self.handleLabel)
@@ -66,7 +66,7 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
         }
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
 
         let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
 
@@ -93,7 +93,8 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
     }
 
     //MARK: - Protocol Conformance | CoachMarksControllerDelegate
-    func coachMarksController(coachMarksController: CoachMarksController, inout coachMarkWillShow coachMark: CoachMark, forIndex index: Int) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillShow coachMark: CoachMark, forIndex index: Int) {
+        var coachMark = coachMark
         if index == 0 {
             // We'll need to play an animation before showing up the coach mark.
             // To be able to play the animation and then show the coach mark and not stall
@@ -104,7 +105,7 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
             self.avatarVerticalPositionConstraint?.constant = 30
             self.view.needsUpdateConstraints()
 
-            UIView.animateWithDuration(1, animations: { () -> Void in
+            UIView.animate(withDuration: 1, animations: { () -> Void in
                 self.view.layoutIfNeeded()
                 }, completion: { (finished: Bool) -> Void in
 
@@ -112,7 +113,7 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
                     // and start the display again.
                     coachMarksController.updateCurrentCoachMarkForView(self.avatar, pointOfInterest: nil) {
                         (frame: CGRect) -> UIBezierPath in
-                        return UIBezierPath(ovalInRect: CGRectInset(frame, -4, -4))
+                        return UIBezierPath(ovalIn: frame.insetBy(dx: -4, dy: -4))
                     }
 
                     coachMarksController.resume()
@@ -120,19 +121,19 @@ internal class DelegatetViewController: ProfileViewController, CoachMarksControl
         }
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillDisappear coachMark: CoachMark, forIndex index: Int) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillDisappear coachMark: CoachMark, forIndex index: Int) {
         if index == 1 {
             self.avatarVerticalPositionConstraint?.constant = 0
             self.view.needsUpdateConstraints()
 
-            UIView.animateWithDuration(1, animations: { () -> Void in
+            UIView.animate(withDuration: 1, animations: { () -> Void in
                 self.view.layoutIfNeeded()
             })
         }
     }
 
-    func didFinishShowingFromCoachMarksController(coachMarksController: CoachMarksController) {
-        UIView.animateWithDuration(1, animations: { () -> Void in
+    func didFinishShowingFromCoachMarksController(_ coachMarksController: CoachMarksController) {
+        UIView.animate(withDuration: 1, animations: { () -> Void in
             self.profileBackgroundView?.backgroundColor = UIColor(red: 244.0/255.0, green: 126.0/255.0, blue: 46.0/255.0, alpha: 1.0)
         })
     }

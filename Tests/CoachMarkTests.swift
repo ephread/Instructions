@@ -41,7 +41,7 @@ class CoachMarkTests: XCTestCase {
 
         coachMark.computeOrientationInFrame(overlayFrame)
 
-        XCTAssertEqual(coachMark.arrowOrientation, CoachMarkArrowOrientation.Top)
+        XCTAssertEqual(coachMark.arrowOrientation, CoachMarkArrowOrientation.top)
     }
 
     func testThatOrientationIsBottom() {
@@ -52,7 +52,7 @@ class CoachMarkTests: XCTestCase {
 
         coachMark.computeOrientationInFrame(overlayFrame)
 
-        XCTAssertEqual(coachMark.arrowOrientation, CoachMarkArrowOrientation.Bottom)
+        XCTAssertEqual(coachMark.arrowOrientation, CoachMarkArrowOrientation.bottom)
     }
 
     func testThatPointOfInterestIsAtCenterOfCutoutPath() {

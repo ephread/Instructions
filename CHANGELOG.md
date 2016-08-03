@@ -3,6 +3,15 @@ Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 However, until it reaches 1.0.0, some breaking changes are to be expected.
 
+## [0.4.3](https://github.com/ephread/Instructions/releases/tag/0.4.3)
+Released on 2016-08-XX.
+
+### Fixed
+- Fix [#57], [#60] – Duplicated coach marks on rotation.
+
+[#57]: https://github.com/ephread/Instructions/issues/57
+[#60]: https://github.com/ephread/Instructions/issues/60
+
 ## [0.4.2](https://github.com/ephread/Instructions/releases/tag/0.4.2)
 Released on 2016-07-07.
 

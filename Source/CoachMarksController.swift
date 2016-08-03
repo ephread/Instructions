@@ -193,6 +193,9 @@ public class CoachMarksController: UIViewController {
     /// `true` if a new coach mark can be shown, `false` otherwise.
     private var canShowCoachMark = true
 
+    /// `true` when a size change is ongoing, false otherwise.
+    private var onGoingSizeChange = false
+
     //MARK: - View lifecycle -
     public override func loadView() {
         let view = DummyView(frame: UIScreen.mainScreen().bounds)
@@ -217,6 +220,7 @@ public class CoachMarksController: UIViewController {
 
     //MARK: - Overrides -
     override public func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        onGoingSizeChange = true
 
         self.overlayView.updateCutoutPath(nil)
         self.prepareForSizeTransition()
@@ -226,6 +230,7 @@ public class CoachMarksController: UIViewController {
             coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext) -> Void in
 
         }, completion: { (context: UIViewControllerTransitionCoordinatorContext) -> Void in
+            self.onGoingSizeChange = false
             self.restoreAfterSizeTransitionDidComplete()
         })
     }
@@ -701,7 +706,7 @@ public class CoachMarksController: UIViewController {
     }
 
     /// Will remove currently displayed coach mark.
-    @objc internal func prepareForSizeTransition() {
+    private func prepareForSizeTransition() {
         self.disableFlow = true
         self.currentCoachMarkView?.layer.removeAllAnimations()
         self.coachMarkDisplayManager.hideCoachMarkView(self.currentCoachMarkView, animationDuration: 0)
@@ -710,12 +715,28 @@ public class CoachMarksController: UIViewController {
         self.currentCoachMarkView = nil
     }
 
-    @objc internal func restoreAfterSizeTransitionDidComplete() {
+    /// Will re-add the current coach mark
+    private func restoreAfterSizeTransitionDidComplete() {
         self.disableFlow = false
         self.overlayView.alpha = 1.0
         self.updateSkipViewConstraints()
         self.skipViewAsView?.alpha = 1.0
         self.createAndShowCoachMark(shouldCallDelegate: false, noAnimation: true)
+    }
+
+    /// Same as `prepareForSizeTransition`, but for status bar changes.
+    func prepareForStatusBarChange() {
+        if !onGoingSizeChange {
+            prepareForSizeTransition()
+        }
+    }
+
+    /// Same as `restoreAfterSizeTransitionDidComplete`, but for status bar changes.
+    func restoreAfterStatusBarChangeDidComplete() {
+        if !onGoingSizeChange {
+            prepareForSizeTransition()
+            restoreAfterSizeTransitionDidComplete()
+        }
     }
 
     /// Update the constraints defining the position of the "Skip" view.
@@ -732,11 +753,11 @@ public class CoachMarksController: UIViewController {
     private func registerForStatusBarFrameChanges() {
         let notificationCenter = NSNotificationCenter.defaultCenter()
 
-        notificationCenter.addObserver(self, selector: #selector(prepareForSizeTransition),
+        notificationCenter.addObserver(self, selector: #selector(prepareForStatusBarChange),
                                        name: UIApplicationWillChangeStatusBarFrameNotification,
                                        object: nil)
 
-        notificationCenter.addObserver(self, selector: #selector(restoreAfterSizeTransitionDidComplete),
+        notificationCenter.addObserver(self, selector: #selector(restoreAfterStatusBarChangeDidComplete),
                                        name: UIApplicationDidChangeStatusBarFrameNotification,
                                        object: nil)
     }

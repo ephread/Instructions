@@ -608,10 +608,16 @@ public class CoachMarksController: UIViewController {
         // is displayed. We call the delegate to notify that the current coach
         // mark will disappear, and only then, we hide the coach mark.
         if self.currentIndex > 0 {
-            self.delegate?.coachMarksController(self, coachMarkWillDisappear: self.currentCoachMark!, forIndex: self.currentIndex - 1)
+            if let currentCoachMark = self.currentCoachMark {
+                self.delegate?.coachMarksController(self, coachMarkWillDisappear: currentCoachMark, forIndex: self.currentIndex - 1)
+            }
 
             if hidePrevious {
-                self.coachMarkDisplayManager.hideCoachMarkView(self.currentCoachMarkView, animationDuration: self.currentCoachMark!.animationDuration) {
+                guard let currentCoachMark = self.currentCoachMark else {
+                    return
+                }
+
+                self.coachMarkDisplayManager.hideCoachMarkView(self.currentCoachMarkView, animationDuration: currentCoachMark.animationDuration) {
                     self.removeTargetFromCurrentCoachView()
 
                     if self.currentIndex < self.numberOfCoachMarks {

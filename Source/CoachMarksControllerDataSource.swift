@@ -27,47 +27,64 @@ import UIKit
 public protocol CoachMarksControllerDataSource: class {
     /// Asks for the number of coach marks to display.
     ///
-    /// - Parameter coachMarksController: the coach mark controller requesting the information
+    /// - Parameter coachMarksController: the coach mark controller requesting
+    ///                                   the information.
     ///
-    /// - Returns: the number of coach marks to display
-    func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int
+    /// - Returns: the number of coach marks to display.
+    func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController)
+         -> Int
 
-    /// Asks for the metadata of the coach mark that will be displayed in the given nth place.
-    /// All `CoachMark` metadata are optional or filled with sensible defaults. You are not
-    /// forced to provide the `cutoutPath`. If you don't the coach mark will be dispayed at the bottom
-    /// of the screen, without an arrow.
+    /// Asks for the metadata of the coach mark that will be displayed in the
+    /// given nth place. All `CoachMark` metadata are optional or filled with
+    /// sensible defaults. You are not forced to provide the `cutoutPath`.
+    /// If you don't the coach mark will be dispayed at the bottom of the screen,
+    /// without an arrow.
     ///
-    /// - Parameter coachMarksController: the coach mark controller requesting the information
-    /// - Parameter coachMarkViewsForIndex: the index referring to the nth place
+    /// - Parameter coachMarksController: the coach mark controller requesting
+    ///                                   the information.
+    /// - Parameter coachMarkViewsForIndex: the index referring to the nth place.
     ///
-    /// - Returns: the coach mark metadata
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark
+    /// - Returns: the coach mark metadata.
+    func coachMarksController(coachMarksController: CoachMarksController,
+                              coachMarksForIndex index: Int) -> CoachMark
 
-    /// Asks for the views defining the coach mark that will be displayed in the given nth place.
-    /// The arrow view is optional. However, if you provide one, you are responsible for 
-    /// supplying the proper arrow orientation. The expected orientation
-    /// is available through `coachMark.arrowOrientation` and was computed beforehand.
+    /// Asks for the views defining the coach mark that will be displayed in
+    /// the given nth place. The arrow view is optional. However, if you provide
+    /// one, you are responsible for supplying the proper arrow orientation.
+    /// The expected orientation is available through
+    /// `coachMark.arrowOrientation` and was computed beforehand.
     ///
-    /// - Parameter coachMarksController: the coach mark controller requesting the information
-    /// - Parameter coachMarkViewsForIndex: the index referring to the nth place
-    /// - Parameter coachMark: the coach mark meta data
+    /// - Parameter coachMarksController: the coach mark controller requesting
+    ///                                   the information.
+    /// - Parameter coachMarkViewsForIndex: the index referring to the nth place.
+    /// - Parameter coachMark: the coach mark meta data.
     ///
-    /// - Returns: a tuple packaging the body component and the arrow component
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?)
+    /// - Returns: a tuple packaging the body component and the arrow component.
+    func coachMarksController(coachMarksController: CoachMarksController,
+                              coachMarkViewsForIndex index: Int,
+                              coachMark: CoachMark)
+         -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?)
 
     /// Asks for autolayout constraints needed to position `skipView` in
-    /// `coachMarksController.view`
+    /// `coachMarksController.view`.
     ///
-    /// - Parameter coachMarksController: the coach mark controller requesting the information
+    /// - Parameter coachMarksController: the coach mark controller requesting
+    ///                                   the information.
     /// - Parameter skipView: the view holding the skip button.
     /// - Parameter inParentView: the parent view (used to set contraints properly).
     ///
-    /// - Returns: an array of NSLayoutConstraint
-    func coachMarksController(coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]?
+    /// - Returns: an array of NSLayoutConstraint.
+    func coachMarksController(coachMarksController: CoachMarksController,
+                              constraintsForSkipView skipView: UIView,
+                              inParentView parentView: UIView)
+         -> [NSLayoutConstraint]?
 }
 
 public extension CoachMarksControllerDataSource {
-    func coachMarksController(coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]? {
+    func coachMarksController(coachMarksController: CoachMarksController,
+                              constraintsForSkipView skipView: UIView,
+                              inParentView parentView: UIView)
+         -> [NSLayoutConstraint]? {
         return nil
     }
 }

@@ -23,7 +23,7 @@
 import UIKit
 
 /// Top view added to the window, forwarding touch events.
-internal class InstructionsTopView : UIView {
+internal class InstructionsTopView: UIView {
     override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
         let hitView = super.hitTest(point, withEvent: event)
 
@@ -31,6 +31,6 @@ internal class InstructionsTopView : UIView {
             return nil
         }
 
-        return hitView;
+        return hitView
     }
 }

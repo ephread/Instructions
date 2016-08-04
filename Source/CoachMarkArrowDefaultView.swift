@@ -24,14 +24,20 @@ import UIKit
 
 /// A concrete implementation of the coach mark arrow view and the
 /// default one provided by the library.
-public class CoachMarkArrowDefaultView : UIImageView, CoachMarkArrowView {
+public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
     //MARK: - Initialization
     public init(orientation: CoachMarkArrowOrientation) {
+        let image, highlightedImage: UIImage?
+
         if orientation == .Top {
-            super.init(image: UIImage(named: "arrow-top", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil), highlightedImage: UIImage(named: "arrow-top-highlighted", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!)
+            image = UIImage(namedInInstructions: "arrow-top")
+            highlightedImage = UIImage(namedInInstructions: "arrow-top-highlighted")
         } else {
-            super.init(image: UIImage(named: "arrow-bottom", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil), highlightedImage: UIImage(named: "arrow-bottom-highlighted", inBundle: NSBundle(forClass: self.dynamicType), compatibleWithTraitCollection: nil)!)
+            image = UIImage(namedInInstructions: "arrow-bottom")
+            highlightedImage = UIImage(namedInInstructions: "arrow-bottom-highlighted")
         }
+
+        super.init(image: image, highlightedImage: highlightedImage)
 
         self.translatesAutoresizingMaskIntoConstraints = false
 

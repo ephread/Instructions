@@ -1,6 +1,7 @@
-// CoachMarkBodyHighlightArrowDelegate.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
+// UIImage+Bundle.swift
+//
+// Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,14 +23,10 @@
 
 import UIKit
 
-/// Delegate the hilight mecanism of the arrow. This protocol is
-/// useful in case the whole body itself is the active control and
-/// we want the arrow to looks like it is part of this control.
-public protocol CoachMarkBodyHighlightArrowDelegate : class {
-
-    /// Set wethe ror not the arrow should get in its
-    /// highlighted state.
-    ///
-    /// - Parameters highlighted: `true` if the arrow should be highlighted, `false` otherwise.
-    func highlightArrow(highlighted: Bool)
+extension UIImage {
+    convenience init?(namedInInstructions: String) {
+        self.init(named: namedInInstructions,
+                  inBundle: NSBundle(forClass: CoachMarkView.self),
+                  compatibleWithTraitCollection: nil)
+    }
 }

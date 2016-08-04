@@ -25,6 +25,8 @@
 
 import UIKit
 
+// swiftlint:disable type_body_length
+
 // TODO: Refactor the Mega Controller!
 /// Handles a set of coach marks, and display them successively.
 public class CoachMarksController: UIViewController {
@@ -49,17 +51,20 @@ public class CoachMarksController: UIViewController {
     @available(*, deprecated=0.4, message="use dataSource instead")
     public weak var datasource: CoachMarksControllerDataSource? {
         set(datasource) {
-            print("The `datasource` accessor is deprecated and will be removed in further versions. Please use `dataSource` instead.")
+            print("The `datasource` accessor is deprecated and will be removed" +
+                  "in further versions. Please use `dataSource` instead.")
             self.dataSource = datasource
         }
 
         get {
-            print("The `datasource` accessor is deprecated and will be removed in further versions. Please use `dataSource` instead.")
+            print("The `datasource` accessor is deprecated and will be removed" +
+                  "in further versions. Please use `dataSource` instead.")
             return self.dataSource
         }
     }
 
-    /// An object implementing the delegate data source protocol, which methods will be called at various points.
+    /// An object implementing the delegate data source protocol,
+    /// which methods will be called at various points.
     public weak var delegate: CoachMarksControllerDelegate?
 
     /// Overlay fade animation duration
@@ -105,11 +110,12 @@ public class CoachMarksController: UIViewController {
         }
     }
 
+    // swiftlint:disable force_cast
     /// The view holding the "Skip" control
     public var skipView: CoachMarkSkipView? {
         // Again, we test the protocol/UIView combination
         // at runtime.
-        
+
         get {
             return self.skipViewAsView as! CoachMarkSkipView?
         }
@@ -126,13 +132,19 @@ public class CoachMarksController: UIViewController {
 
             self.skipViewAsView = validSkipView as? UIView
 
-            self.skipViewDisplayManager = SkipViewDisplayManager(skipView: skipViewAsView!, instructionsTopView: self.instructionsTopView)
+            self.skipViewDisplayManager = SkipViewDisplayManager(
+                skipView: skipViewAsView!,
+                instructionsTopView: self.instructionsTopView
+            )
         }
     }
+    // swiftlint:enable force_cast
 
     //MARK: - Private properties -
     private lazy var coachMarkDisplayManager: CoachMarkDisplayManager! = {
-        return CoachMarkDisplayManager(coachMarksController: self, overlayView: self.overlayView, instructionsTopView: self.instructionsTopView)
+        return CoachMarkDisplayManager(coachMarksController: self,
+                                       overlayView: self.overlayView,
+                                       instructionsTopView: self.instructionsTopView)
     }()
 
     private var skipViewDisplayManager: SkipViewDisplayManager?
@@ -219,7 +231,11 @@ public class CoachMarksController: UIViewController {
     }
 
     //MARK: - Overrides -
-    override public func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override public func viewWillTransitionToSize(
+        size: CGSize,
+        withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator
+    ) {
+        if onGoingSizeChange { return }
         onGoingSizeChange = true
 
         self.overlayView.updateCutoutPath(nil)
@@ -227,9 +243,8 @@ public class CoachMarksController: UIViewController {
 
         super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
 
-            coordinator.animateAlongsideTransition({ (context: UIViewControllerTransitionCoordinatorContext) -> Void in
-
-        }, completion: { (context: UIViewControllerTransitionCoordinatorContext) -> Void in
+        coordinator.animateAlongsideTransition(nil, completion: {
+            (context: UIViewControllerTransitionCoordinatorContext) -> Void in
             self.onGoingSizeChange = false
             self.restoreAfterSizeTransitionDidComplete()
         })
@@ -239,7 +254,7 @@ public class CoachMarksController: UIViewController {
     /// Will be called when the user perform an action requiring the display of the next coach mark.
     ///
     /// - Parameter sender: the object sending the message
-    public func performShowNextCoachMark(sender:AnyObject?) {
+    public func performShowNextCoachMark(sender: AnyObject?) {
         self.showNextCoachMark()
     }
 
@@ -259,9 +274,12 @@ public class CoachMarksController: UIViewController {
     /// The point of interest (defining where the arrow will sit, horizontally)
     /// will be set at the center of the cutout path.
     ///
-    /// - Parameters view: the view around which create the cutoutPath
-    /// - Parameters bezierPathBlock: a block customizing the cutoutPath
-    public func coachMarkForView(view: UIView? = nil, bezierPathBlock: ((frame: CGRect) -> UIBezierPath)? = nil) -> CoachMark {
+    /// - Parameter view: the view around which create the cutoutPath
+    /// - Parameter bezierPathBlock: a block customizing the cutoutPath
+    public func coachMarkForView(
+        view: UIView? = nil,
+        bezierPathBlock: ((frame: CGRect) -> UIBezierPath)? = nil
+    ) -> CoachMark {
         return self.coachMarkForView(view, pointOfInterest: nil, bezierPathBlock: bezierPathBlock)
     }
 
@@ -273,17 +291,23 @@ public class CoachMarksController: UIViewController {
     /// The point of interest (defining where the arrow will sit, horizontally)
     /// will be the one provided.
     ///
-    /// - Parameters view: the view around which create the cutoutPath
-    /// - Parameters pointOfInterest: the point of interest toward which the arrow should point
-    /// - Parameters bezierPathBlock: a block customizing the cutoutPath
-    public func coachMarkForView(view: UIView? = nil, pointOfInterest: CGPoint?, bezierPathBlock: ((frame: CGRect) -> UIBezierPath)? = nil) -> CoachMark {
+    /// - Parameter view: the view around which create the cutoutPath
+    /// - Parameter pointOfInterest: the point of interest toward which the arrow should point
+    /// - Parameter bezierPathBlock: a block customizing the cutoutPath
+    public func coachMarkForView(
+        view: UIView? = nil,
+        pointOfInterest: CGPoint?,
+        bezierPathBlock: ((frame: CGRect) -> UIBezierPath)? = nil
+    ) -> CoachMark {
         var coachMark = CoachMark()
 
         guard let view = view else {
             return coachMark
         }
 
-        self.updateCoachMark(&coachMark, forView: view, pointOfInterest: pointOfInterest, bezierPathBlock: bezierPathBlock)
+        self.updateCoachMark(&coachMark, forView: view,
+                             pointOfInterest: pointOfInterest,
+                             bezierPathBlock: bezierPathBlock)
 
         return coachMark
     }
@@ -299,16 +323,25 @@ public class CoachMarksController: UIViewController {
     /// This method is expected to be used in the delegate, after pausing the display.
     /// Otherwise, there might not be such a thing as a "current coach mark".
     ///
-    /// - Parameters view: the view around which create the cutoutPath
-    /// - Parameters pointOfInterest: the point of interest toward which the arrow should point
-    /// - Parameters bezierPathBlock: a block customizing the cutoutPath
-    public func updateCurrentCoachMarkForView(view: UIView? = nil, pointOfInterest: CGPoint? = nil, bezierPathBlock: ((frame: CGRect) -> UIBezierPath)? = nil) -> Void {
+    /// - Parameter view: the view around which create the cutoutPath
+    /// - Parameter pointOfInterest: the point of interest toward which the arrow
+    ///                              should point
+    /// - Parameter bezierPathBlock: a block customizing the cutoutPath
+    public func updateCurrentCoachMarkForView(
+        view: UIView? = nil,
+        pointOfInterest: CGPoint? = nil,
+        bezierPathBlock: ((frame: CGRect) -> UIBezierPath)? = nil
+    ) {
         if !self.paused || self.currentCoachMark == nil {
-            print("updateCurrentCoachMarkForView: Something is wrong, did you called updateCurrentCoachMarkForView without pausing the controller first?")
+            print("updateCurrentCoachMarkForView: Something is wrong, did you" +
+                  "called updateCurrentCoachMarkForView without pausing" +
+                  "the controller first?")
             return
         }
 
-        self.updateCoachMark(&self.currentCoachMark!, forView: view, pointOfInterest: pointOfInterest, bezierPathBlock: bezierPathBlock)
+        self.updateCoachMark(&self.currentCoachMark!, forView: view,
+                             pointOfInterest: pointOfInterest,
+                             bezierPathBlock: bezierPathBlock)
     }
 
     /// Updates the given coach mark with a cutout path set to be
@@ -319,41 +352,60 @@ public class CoachMarksController: UIViewController {
     /// The point of interest (defining where the arrow will sit, horizontally)
     /// will be the one provided.
     ///
-    /// - Parameters coachMark: the CoachMark to update
-    /// - Parameters view: the view around which create the cutoutPath
-    /// - Parameters pointOfInterest: the point of interest toward which the arrow should point
-    /// - Parameters bezierPathBlock: a block customizing the cutoutPath
-    public func updateCoachMark(inout coachMark: CoachMark, forView view: UIView? = nil, pointOfInterest: CGPoint?, bezierPathBlock: ((frame: CGRect) -> UIBezierPath)? = nil) -> Void {
+    /// - Parameter coachMark: the CoachMark to update
+    /// - Parameter forView: the view around which create the cutoutPath
+    /// - Parameter pointOfInterest: the point of interest toward which the arrow should point
+    /// - Parameter bezierPathBlock: a block customizing the cutoutPath
+    public func updateCoachMark(
+        inout coachMark: CoachMark,
+        forView view: UIView? = nil,
+        pointOfInterest: CGPoint?,
+        bezierPathBlock: ((frame: CGRect) -> UIBezierPath)? = nil
+    ) {
 
         guard let view = view else {
             return
         }
 
-        let convertedFrame = self.instructionsTopView.convertRect(view.frame, fromView:view.superview)
+        let convertedFrame =
+            self.instructionsTopView.convertRect(view.frame, fromView:view.superview)
 
         var bezierPath: UIBezierPath
 
         if let bezierPathBlock = bezierPathBlock {
             bezierPath = bezierPathBlock(frame: convertedFrame)
         } else {
-            bezierPath = UIBezierPath(roundedRect: CGRectInset(convertedFrame, -4, -4), byRoundingCorners: .AllCorners, cornerRadii: CGSize(width: 4, height: 4))
+            bezierPath = UIBezierPath(
+                roundedRect: convertedFrame.insetBy(dx: -4, dy: -4),
+                byRoundingCorners: .AllCorners,
+                cornerRadii: CGSize(width: 4, height: 4)
+            )
         }
 
         coachMark.cutoutPath = bezierPath
 
         if let pointOfInterest = pointOfInterest {
-            let convertedPoint = self.instructionsTopView.convertPoint(pointOfInterest, fromView:view.superview)
+            let convertedPoint =
+                self.instructionsTopView.convertPoint(pointOfInterest, fromView:view.superview)
+
             coachMark.pointOfInterest = convertedPoint
         }
     }
 
     /// Provides default coach views.
     ///
-    /// - Parameter withArrow: `true` to return an instance of `CoachMarkArrowDefaultView` as well, `false` otherwise.
+    /// - Parameter withArrow: `true` to return an instance of `CoachMarkArrowDefaultView`
+    ///                        as well, `false` otherwise.
+    /// - Parameter withNextText: `true` to show the ‘next’ pseudo-button,
+    ///                           `false` otherwise.
     /// - Parameter arrowOrientation: orientation of the arrow (either .Top or .Bottom)
     ///
     /// - Returns: new instances of the default coach views.
-    public func defaultCoachViewsWithArrow(withArrow: Bool = true, withNextText: Bool = true, arrowOrientation: CoachMarkArrowOrientation? = .Top) -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
+    public func defaultCoachViewsWithArrow(
+        withArrow: Bool = true,
+        withNextText: Bool = true,
+        arrowOrientation: CoachMarkArrowOrientation? = .Top
+    ) -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
 
         var coachMarkBodyView: CoachMarkBodyDefaultView
 
@@ -374,47 +426,57 @@ public class CoachMarksController: UIViewController {
 
             coachMarkArrowView = CoachMarkArrowDefaultView(orientation: arrowOrientation!)
         }
-        
+
         return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
     }
-    
+
     /// Provides default coach views, can have a next label or just the message.
     ///
-    /// - Parameter withArrow: `true` to return an instance of `CoachMarkArrowDefaultView` as well, `false` otherwise.
+    /// - Parameter withArrow: `true` to return an instance of
+    ///                        `CoachMarkArrowDefaultView` as well, `false` otherwise.
     /// - Parameter arrowOrientation: orientation of the arrow (either .Top or .Bottom)
     /// - Parameter hintText: message to show in the CoachMark
-    /// - Parameter nextText: text for the next label, if nil the CoachMark view will only show the hint text
+    /// - Parameter nextText: text for the next label, if nil the CoachMark
+    ///                       view will only show the hint text
     ///
     /// - Returns: new instances of the default coach views.
-    public func defaultCoachViewsWithArrow(withArrow: Bool = true, arrowOrientation: CoachMarkArrowOrientation? = .Top, hintText: String, nextText: String?) -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
-        
+    public func defaultCoachViewsWithArrow(
+        withArrow: Bool = true,
+        arrowOrientation: CoachMarkArrowOrientation? = .Top,
+        hintText: String,
+        nextText: String?
+    ) -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
+
         let coachMarkBodyView = CoachMarkBodyDefaultView(hintText: hintText, nextText: nextText)
-        
+
         var coachMarkArrowView: CoachMarkArrowDefaultView? = nil
-        
+
         if withArrow {
             var arrowOrientation = arrowOrientation
-            
+
             if arrowOrientation == nil {
                 arrowOrientation = .Top
             }
-            
+
             coachMarkArrowView = CoachMarkArrowDefaultView(orientation: arrowOrientation!)
         }
-        
+
         return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
     }
 
     //MARK: - Public methods -
     /// Start displaying the coach marks.
+    ///
+    /// - Parameter parentViewController: View Controller to which attach self.
     public func startOn(parentViewController: UIViewController) {
         guard let dataSource = self.dataSource else {
-            print("startOn: Snap! You didn't setup any datasource, the coach mark manager won't do anything.")
+            print("startOn: Snap! You didn't setup any datasource, the" +
+                  "coach mark manager won't do anything.")
             return
         }
 
         // If coach marks are currently being displayed, calling `start()` doesn't do anything.
-        if (self.started) { return }
+        if self.started { return }
 
         self.attachToViewController(parentViewController)
 
@@ -431,7 +493,10 @@ public class CoachMarksController: UIViewController {
         self.overlayView.prepareForFade()
 
         if let skipViewDisplayManager = self.skipViewDisplayManager {
-            self.skipView?.skipControl?.addTarget(self, action: #selector(CoachMarksController.skipCoachMarksTour(_:)), forControlEvents: .TouchUpInside)
+            self.skipView?.skipControl?.addTarget(self,
+                action: #selector(CoachMarksController.skipCoachMarksTour(_:)),
+                forControlEvents: .TouchUpInside
+            )
 
             skipViewDisplayManager.addSkipView()
             updateSkipViewConstraints()
@@ -472,7 +537,17 @@ public class CoachMarksController: UIViewController {
     }
 
     /// Stop displaying the coach marks and perform some cleanup.
-    internal func stopFlow(withAnimation animate: Bool = true, userDidSkip skipped: Bool = false, shouldCallDelegate: Bool = true) {
+    ///
+    /// - Parameter withAnimation: `true` to fade the coach marks / overlay visibility
+    ///                            `false` otherwise.
+    /// - Parameter userDidSkip: `true` when the user canceled the flow, `false` otherwise.
+    /// - Parameter shouldCallDelegate: `true` to notify the delegate that the flow
+    ///                                 was stop.
+    internal func stopFlow(
+        withAnimation animate: Bool = true,
+        userDidSkip skipped: Bool = false,
+        shouldCallDelegate: Bool = true
+    ) {
         let animationDuration: NSTimeInterval
 
         if animate {
@@ -486,7 +561,11 @@ public class CoachMarksController: UIViewController {
             self.skipViewAsView?.alpha = 0.0
             self.currentCoachMarkView?.alpha = 0.0
         }, completion: {(finished: Bool) -> Void in
-            self.skipView?.skipControl?.removeTarget(self, action: #selector(CoachMarksController.skipCoachMarksTour(_:)), forControlEvents: .TouchUpInside)
+            self.skipView?.skipControl?.removeTarget(self,
+                action: #selector(CoachMarksController.skipCoachMarksTour(_:)),
+                forControlEvents: .TouchUpInside
+            )
+
             self.reset()
             self.detachFromViewController()
 
@@ -527,16 +606,18 @@ public class CoachMarksController: UIViewController {
 
     /// Show the next specified Coach Mark.
     ///
-    /// - index if set, the index of the coach mark to show
+    /// - Parameter numberOfCoachMarksToSkip: the number of coach marks
+    ///                                       to skip.
     public func showNext(numberOfCoachMarksToSkip numberToSkip: Int = 0) {
-        if (!self.started || !canShowCoachMark) { return }
+        if !self.started || !canShowCoachMark { return }
 
-        if (numberToSkip < 0) {
-            print("showNext: The specified number of coach marks to skip was negative, nothing to do.")
+        if numberToSkip < 0 {
+            print("showNext: The specified number of coach marks to skip" +
+                  "was negative, nothing to do.")
             return
         }
 
-        if (numberToSkip != -1) {
+        if numberToSkip != -1 {
             self.currentIndex += numberToSkip
         }
 
@@ -550,7 +631,9 @@ public class CoachMarksController: UIViewController {
     /// - Parameter parentViewController: the controller of which become a child
     private func attachToViewController(parentViewController: UIViewController) {
         guard let window = parentViewController.view?.window else {
-            print("attachToViewController: Instructions could not be properly attached to the window, did you call `startOn` inside `viewDidLoad` instead of `ViewDidAppear`?")
+            print("attachToViewController: Instructions could not be properly" +
+                  "attached to the window, did you call `startOn` inside" +
+                  "`viewDidLoad` instead of `ViewDidAppear`?")
 
             return
         }
@@ -562,13 +645,19 @@ public class CoachMarksController: UIViewController {
 
         window.addSubview(self.instructionsTopView)
 
-        window.addConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat("V:|[instructionsTopView]|", options: NSLayoutFormatOptions(rawValue: 0),
-                metrics: nil, views: ["instructionsTopView": self.instructionsTopView]))
+        window.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:|[instructionsTopView]|",
+            options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil,
+            views: ["instructionsTopView": self.instructionsTopView]
+        ))
 
-        window.addConstraints(
-            NSLayoutConstraint.constraintsWithVisualFormat("H:|[instructionsTopView]|", options: NSLayoutFormatOptions(rawValue: 0),
-                metrics: nil, views: ["instructionsTopView": self.instructionsTopView]))
+        window.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+            "H:|[instructionsTopView]|",
+            options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil,
+            views: ["instructionsTopView": self.instructionsTopView]
+        ))
 
         // If we're in the background we'll manually lay out the view.
         //
@@ -597,6 +686,9 @@ public class CoachMarksController: UIViewController {
     }
 
     /// Show the next coach mark and hide the current one.
+    ///
+    /// - Parameter hidePrevious: `true` to hide the previously shown coach mark,
+    ///                           `false` otherwise.
     private func showNextCoachMark(hidePrevious hidePrevious: Bool = true) {
         if disableFlow || paused || !canShowCoachMark { return }
         self.instructionsTopView.userInteractionEnabled = false
@@ -609,7 +701,10 @@ public class CoachMarksController: UIViewController {
         // mark will disappear, and only then, we hide the coach mark.
         if self.currentIndex > 0 {
             if let currentCoachMark = self.currentCoachMark {
-                self.delegate?.coachMarksController(self, coachMarkWillDisappear: currentCoachMark, forIndex: self.currentIndex - 1)
+                self.delegate?.coachMarksController(self,
+                    coachMarkWillDisappear: currentCoachMark,
+                    forIndex: self.currentIndex - 1
+                )
             }
 
             if hidePrevious {
@@ -617,15 +712,19 @@ public class CoachMarksController: UIViewController {
                     return
                 }
 
-                self.coachMarkDisplayManager.hideCoachMarkView(self.currentCoachMarkView, animationDuration: currentCoachMark.animationDuration) {
-                    self.removeTargetFromCurrentCoachView()
+                self.coachMarkDisplayManager.hideCoachMarkView(
+                    currentCoachMarkView,
+                    animationDuration: currentCoachMark.animationDuration,
+                    completion: {
+                        self.removeTargetFromCurrentCoachView()
 
-                    if self.currentIndex < self.numberOfCoachMarks {
-                        self.createAndShowCoachMark()
-                    } else {
-                        self.stopFlow()
+                        if self.currentIndex < self.numberOfCoachMarks {
+                            self.createAndShowCoachMark()
+                        } else {
+                            self.stopFlow()
+                        }
                     }
-                }
+                )
             } else {
                 if self.currentIndex < self.numberOfCoachMarks {
                     self.createAndShowCoachMark()
@@ -642,11 +741,23 @@ public class CoachMarksController: UIViewController {
     private func addOverlayView() {
         self.instructionsTopView.addSubview(self.overlayView)
 
-        self.instructionsTopView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[overlayView]|", options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["overlayView": self.overlayView]))
+        self.instructionsTopView.addConstraints(
+            NSLayoutConstraint.constraintsWithVisualFormat(
+                "V:|[overlayView]|",
+                options: NSLayoutFormatOptions(rawValue: 0),
+                metrics: nil,
+                views: ["overlayView": self.overlayView]
+            )
+        )
 
-        self.instructionsTopView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[overlayView]|", options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["overlayView": self.overlayView]))
+        self.instructionsTopView.addConstraints(
+            NSLayoutConstraint.constraintsWithVisualFormat(
+                "H:|[overlayView]|",
+                options: NSLayoutFormatOptions(rawValue: 0),
+                metrics: nil,
+                views: ["overlayView": self.overlayView]
+            )
+        )
 
         self.overlayView.alpha = 0.0
     }
@@ -656,19 +767,25 @@ public class CoachMarksController: UIViewController {
     /// the delegate is not notified.
     ///
     /// - Parameter shouldCallDelegate: `true` to call delegate methods, `false` otherwise.
-    private func createAndShowCoachMark(shouldCallDelegate shouldCallDelegate: Bool = true, noAnimation: Bool = false) {
+    /// - Parameter noAnimation: `true` to show the coachmark without fade, `false` otherwise.
+    private func createAndShowCoachMark(
+        shouldCallDelegate shouldCallDelegate: Bool = true,
+        noAnimation: Bool = false
+    ) {
         if disableFlow { return }
 
-        if CGRectIsEmpty(instructionsTopView.bounds) {
+        if instructionsTopView.bounds.isEmpty {
             print("The overlay view added to the window has empty bounds, Instructions will stop.")
             self.stopFlow()
             return
         }
-        
-        if let delegate = self.delegate {
-            let shouldLoad = delegate.coachMarksController(self, coachMarkWillLoadForIndex: self.currentIndex)
 
-            if (!shouldLoad) {
+        if let delegate = self.delegate {
+            let shouldLoad = delegate.coachMarksController(
+                self, coachMarkWillLoadForIndex: self.currentIndex
+            )
+
+            if !shouldLoad {
                 self.canShowCoachMark = true
                 showNextCoachMark(hidePrevious: false)
                 return
@@ -677,47 +794,70 @@ public class CoachMarksController: UIViewController {
 
         // Retrieves the current coach mark structure from the datasource.
         // It can't be nil, that's why we'll force unwrap it everywhere.
-        self.currentCoachMark = self.dataSource!.coachMarksController(self, coachMarksForIndex: self.currentIndex)
+        self.currentCoachMark = self.dataSource!.coachMarksController(
+            self, coachMarksForIndex: self.currentIndex
+        )
 
         // The coach mark will soon show, we notify the delegate, so it
         // can perform some things and, if required, update the coach mark structure.
         if shouldCallDelegate {
-            self.delegate?.coachMarksController(self, coachMarkWillShow: &self.currentCoachMark!, forIndex: self.currentIndex)
+            self.delegate?.coachMarksController(self,
+                coachMarkWillShow: &self.currentCoachMark!,
+                forIndex: self.currentIndex
+            )
         }
 
         // The delegate might have paused the flow, he check whether or not it's
         // the case.
         if !self.paused {
-            self.currentCoachMark!.computeMetadataForFrame(self.instructionsTopView.frame)
+            currentCoachMark!.computeMetadataForFrame(self.instructionsTopView.frame)
 
-            self.currentCoachMarkView = self.coachMarkDisplayManager.createCoachMarkViewFromCoachMark(self.currentCoachMark!, withIndex: self.currentIndex)
+            currentCoachMarkView = coachMarkDisplayManager.createCoachMarkViewFromCoachMark(
+                currentCoachMark!, withIndex: self.currentIndex
+            )
 
-            self.addTargetToCurrentCoachView()
+            addTargetToCurrentCoachView()
 
-            self.coachMarkDisplayManager.displayCoachMarkView(self.currentCoachMarkView!, coachMark: self.currentCoachMark!, noAnimation: noAnimation) {
-                self.instructionsTopView.userInteractionEnabled = true
-                self.canShowCoachMark = true
-            }
+            coachMarkDisplayManager.displayCoachMarkView(
+                self.currentCoachMarkView!,
+                coachMark: self.currentCoachMark!,
+                noAnimation: noAnimation,
+                completion: {
+                    self.instructionsTopView.userInteractionEnabled = true
+                    self.canShowCoachMark = true
+                }
+            )
         }
     }
 
     /// Add touch up target to the current coach mark view.
     private func addTargetToCurrentCoachView() {
-        self.currentCoachMarkView?.nextControl?.addTarget(self, action: #selector(CoachMarksController.performShowNextCoachMark(_:)), forControlEvents: .TouchUpInside)
+        self.currentCoachMarkView?.nextControl?.addTarget(self,
+            action: #selector(CoachMarksController.performShowNextCoachMark(_:)),
+            forControlEvents: .TouchUpInside
+        )
     }
 
     /// Remove touch up target from the current coach mark view.
     private func removeTargetFromCurrentCoachView() {
-        self.currentCoachMarkView?.nextControl?.removeTarget(self, action: #selector(CoachMarksController.performShowNextCoachMark(_:)), forControlEvents: .TouchUpInside)
+        self.currentCoachMarkView?.nextControl?.removeTarget(self,
+            action: #selector(CoachMarksController.performShowNextCoachMark(_:)),
+            forControlEvents: .TouchUpInside
+        )
     }
 
     /// Will remove currently displayed coach mark.
     private func prepareForSizeTransition() {
         self.disableFlow = true
         self.currentCoachMarkView?.layer.removeAllAnimations()
-        self.coachMarkDisplayManager.hideCoachMarkView(self.currentCoachMarkView, animationDuration: 0)
         self.removeTargetFromCurrentCoachView()
         self.skipViewDisplayManager?.hideSkipView()
+
+        self.coachMarkDisplayManager.hideCoachMarkView(
+            self.currentCoachMarkView,
+            animationDuration: 0
+        )
+
         self.currentCoachMarkView = nil
     }
 
@@ -747,11 +887,15 @@ public class CoachMarksController: UIViewController {
 
     /// Update the constraints defining the position of the "Skip" view.
     private func updateSkipViewConstraints() {
-        guard let skipView = self.skipViewAsView, let skipViewDisplayManager = self.skipViewDisplayManager else {
+        guard let skipView = self.skipViewAsView,
+                  skipViewDisplayManager = self.skipViewDisplayManager else {
             return
         }
 
-        let layoutConstraints = self.dataSource?.coachMarksController(self, constraintsForSkipView: skipView, inParentView: self.instructionsTopView)
+        let layoutConstraints = self.dataSource?.coachMarksController(self,
+            constraintsForSkipView: skipView,
+            inParentView: self.instructionsTopView
+        )
 
         skipViewDisplayManager.updateSkipViewConstraintsWithConstraints(layoutConstraints)
     }
@@ -759,13 +903,17 @@ public class CoachMarksController: UIViewController {
     private func registerForStatusBarFrameChanges() {
         let notificationCenter = NSNotificationCenter.defaultCenter()
 
-        notificationCenter.addObserver(self, selector: #selector(prepareForStatusBarChange),
-                                       name: UIApplicationWillChangeStatusBarFrameNotification,
-                                       object: nil)
+        notificationCenter.addObserver(self,
+            selector: #selector(prepareForStatusBarChange),
+            name: UIApplicationWillChangeStatusBarFrameNotification,
+            object: nil
+        )
 
-        notificationCenter.addObserver(self, selector: #selector(restoreAfterStatusBarChangeDidComplete),
-                                       name: UIApplicationDidChangeStatusBarFrameNotification,
-                                       object: nil)
+        notificationCenter.addObserver(self,
+            selector: #selector(restoreAfterStatusBarChangeDidComplete),
+            name: UIApplicationDidChangeStatusBarFrameNotification,
+            object: nil
+        )
     }
 
     private func unregisterFromStatusBarFrameChanges() {

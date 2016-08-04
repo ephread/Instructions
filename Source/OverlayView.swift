@@ -74,14 +74,10 @@ internal class OverlayView: UIView {
     /// The original cutout path
     private var cutoutPath: UIBezierPath?
 
-    /// The cutout mask
-    private var cutoutMaskLayer = CAShapeLayer()
-
-    /// The full mask (together with `cutoutMaskLayer` they will form the cutout shape)
-    private var fullMaskLayer = CAShapeLayer()
-
     /// The overlay layer, which will handle the background color
     private var overlayLayer = CALayer()
+
+    private var layerManager: OverlayViewLayerManager
 
     /// The view holding the blur effect
     private var blurEffectView: UIVisualEffectView?
@@ -98,6 +94,7 @@ internal class OverlayView: UIView {
 
     //MARK: - Initialization
     init() {
+        layerManager = OverlayViewLayerManager(layer: overlayLayer)
         super.init(frame: CGRect.zero)
     }
 
@@ -116,40 +113,14 @@ internal class OverlayView: UIView {
     ///
     /// - Parameter duration: duration of the animation
     func showCutoutPathViewWithAnimationDuration(duration: NSTimeInterval) {
-        CATransaction.begin()
-
-        self.fullMaskLayer.opacity = 0.0
-
-        let animation = CABasicAnimation(keyPath: "opacity")
-        animation.fromValue = 1.0
-        animation.toValue = 0.0
-        animation.duration = duration
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        animation.removedOnCompletion = true
-
-        self.fullMaskLayer.addAnimation(animation, forKey: "opacityAnimationFadeIn")
-
-        CATransaction.commit()
+        layerManager.showCutoutPathViewWithAnimationDuration(duration)
     }
 
     /// Hide a cutout path with fade in animation
     ///
     /// - Parameter duration: duration of the animation
     func hideCutoutPathViewWithAnimationDuration(duration: NSTimeInterval) {
-        CATransaction.begin()
-
-        self.fullMaskLayer.opacity = 1.0
-
-        let animation = CABasicAnimation(keyPath: "opacity")
-        animation.fromValue = 0.0
-        animation.toValue = 1.0
-        animation.duration = duration
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        animation.removedOnCompletion = true
-
-        self.fullMaskLayer.addAnimation(animation, forKey: "opacityAnimationFadeOut")
-
-        CATransaction.commit()
+        layerManager.hideCutoutPathViewWithAnimationDuration(duration)
     }
 
     /// Update the cutout path. Please note that the update won't perform any
@@ -158,63 +129,26 @@ internal class OverlayView: UIView {
     ///
     /// - Parameter cutoutPath: the cutout path
     func updateCutoutPath(cutoutPath: UIBezierPath?) {
-
-        self.cutoutMaskLayer.removeFromSuperlayer()
-        self.fullMaskLayer.removeFromSuperlayer()
-        self.overlayLayer.removeFromSuperlayer()
-
         self.cutoutPath = cutoutPath
 
         if cutoutPath == nil {
-            if self.blurEffectView == nil {
-                self.backgroundColor = self.overlayColor
+            if blurEffectView == nil {
+                backgroundColor = overlayColor
+            }
+        } else {
+            if blurEffectView == nil {
+                overlayLayer.removeFromSuperlayer()
+
+                overlayLayer.frame = frame
+                overlayLayer.backgroundColor = self.overlayColor.CGColor
+
+                layer.addSublayer(overlayLayer)
             }
 
-            return
+            backgroundColor = UIColor.clearColor()
         }
 
-        self.backgroundColor = UIColor.clearColor()
-
-        self.cutoutMaskLayer = CAShapeLayer()
-        self.cutoutMaskLayer.name = "cutoutMaskLayer"
-        self.cutoutMaskLayer.fillRule = kCAFillRuleEvenOdd
-        self.cutoutMaskLayer.frame = self.frame
-
-        self.fullMaskLayer = CAShapeLayer()
-        self.fullMaskLayer.name = "fullMaskLayer"
-        self.fullMaskLayer.fillRule = kCAFillRuleEvenOdd
-        self.fullMaskLayer.frame = self.frame
-        self.fullMaskLayer.opacity = 1.0
-
-        let cutoutMaskLayerPath = UIBezierPath()
-        cutoutMaskLayerPath.appendPath(UIBezierPath(rect: self.bounds))
-        cutoutMaskLayerPath.appendPath(cutoutPath!)
-
-        let fullMaskLayerPath = UIBezierPath()
-        fullMaskLayerPath.appendPath(UIBezierPath(rect: self.bounds))
-
-        self.cutoutMaskLayer.path = cutoutMaskLayerPath.CGPath
-        self.fullMaskLayer.path = fullMaskLayerPath.CGPath
-
-        let maskLayer = CALayer()
-        maskLayer.frame = self.layer.bounds
-        maskLayer.addSublayer(self.cutoutMaskLayer)
-        maskLayer.addSublayer(self.fullMaskLayer)
-
-        self.overlayLayer = CALayer()
-        self.overlayLayer.frame = self.layer.bounds
-
-        if self.blurEffectView == nil {
-            self.overlayLayer.backgroundColor = self.overlayColor.CGColor
-        }
-
-        self.overlayLayer.mask = maskLayer
-
-        if let blurEffectView = self.blurEffectView {
-            blurEffectView.layer.mask = maskLayer
-        } else {
-            self.layer.addSublayer(self.overlayLayer)
-        }
+        layerManager.updateCutoutPath(cutoutPath)
     }
 
     override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
@@ -246,6 +180,8 @@ internal class OverlayView: UIView {
     private func createBlurView() {
         if self.blurEffectStyle == nil { return }
 
+        overlayLayer.removeFromSuperlayer()
+
         let blurEffect = UIBlurEffect(style: self.blurEffectStyle!)
 
         self.blurEffectView = UIVisualEffectView(effect:blurEffect)
@@ -266,12 +202,16 @@ internal class OverlayView: UIView {
             metrics: nil,
             views: ["visualEffectView": self.blurEffectView!]
         ))
+
+        layerManager.managedLayer = blurEffectView!.layer
     }
 
     /// Removes the view holding the blur effect.
     private func destroyBlurView() {
         self.blurEffectView?.removeFromSuperview()
         self.blurEffectView = nil
+
+        layerManager.managedLayer = overlayLayer
     }
 
     /// This method will be called each time the overlay receive

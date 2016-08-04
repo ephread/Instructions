@@ -1,7 +1,7 @@
 // CoachMarkBodyDefaultView.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
-//                    Esteban Soto <esteban.soto.dev@gmail.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
+//                          Esteban Soto <esteban.soto.dev@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -52,7 +52,7 @@ public class CoachMarkBodyDefaultView: UIControl, CoachMarkBodyView {
     public var hintLabel = UITextView()
     public var separator = UIView()
 
-    //MARK: - Private properties
+    //MARK: Private properties
     private let backgroundImage = UIImage(
         named: "background",
         inBundle: NSBundle(forClass: CoachMarkBodyDefaultView.self),
@@ -67,7 +67,7 @@ public class CoachMarkBodyDefaultView: UIControl, CoachMarkBodyView {
 
     private let backgroundImageView: UIImageView
 
-    //MARK: - Initialization
+    //MARK: Initialization
     override public init(frame: CGRect) {
         self.backgroundImageView = UIImageView(image: self.backgroundImage)
 
@@ -104,8 +104,8 @@ public class CoachMarkBodyDefaultView: UIControl, CoachMarkBodyView {
     }
 }
 
-//MARK: - Inner Hierarchy Setup
-extension CoachMarkBodyDefaultView {
+//MARK: - Private Inner Hierarchy Setup
+private extension CoachMarkBodyDefaultView {
     //Configure the CoachMark view with a hint message and a next message
     private func setupInnerViewHierarchy() {
         translatesAutoresizingMaskIntoConstraints = false

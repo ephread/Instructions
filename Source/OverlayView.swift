@@ -72,7 +72,7 @@ internal class OverlayView: UIView {
     //MARK: - Private properties
 
     /// The original cutout path
-    private var cutoutPath : UIBezierPath?
+    private var cutoutPath: UIBezierPath?
 
     /// The cutout mask
     private var cutoutMaskLayer = CAShapeLayer()
@@ -88,14 +88,17 @@ internal class OverlayView: UIView {
 
     /// TapGestureRecognizer that will catch tap event performed on the overlay
     private lazy var singleTapGestureRecognizer: UITapGestureRecognizer = {
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(OverlayView.handleSingleTap(_:)))
+        let gestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(OverlayView.handleSingleTap(_:))
+        )
 
         return gestureRecognizer
     }()
 
     //MARK: - Initialization
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -204,7 +207,7 @@ internal class OverlayView: UIView {
         if self.blurEffectView == nil {
             self.overlayLayer.backgroundColor = self.overlayColor.CGColor
         }
-        
+
         self.overlayLayer.mask = maskLayer
 
         if let blurEffectView = self.blurEffectView {
@@ -250,11 +253,19 @@ internal class OverlayView: UIView {
         self.blurEffectView!.userInteractionEnabled = false
         self.addSubview(self.blurEffectView!)
 
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[visualEffectView]|", options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["visualEffectView": self.blurEffectView!]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:|[visualEffectView]|",
+            options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil,
+            views: ["visualEffectView": self.blurEffectView!]
+        ))
 
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[visualEffectView]|", options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["visualEffectView": self.blurEffectView!]))
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+            "H:|[visualEffectView]|",
+            options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil,
+            views: ["visualEffectView": self.blurEffectView!]
+        ))
     }
 
     /// Removes the view holding the blur effect.
@@ -268,7 +279,7 @@ internal class OverlayView: UIView {
     ///
     /// - Parameter sender: the object which sent the event
     @objc private func handleSingleTap(sender: AnyObject?) {
-        if (!disableOverlayTap) {
+        if !disableOverlayTap {
             self.delegate?.didReceivedSingleTap()
         }
     }

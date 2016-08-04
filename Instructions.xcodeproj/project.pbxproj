@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C61458B31BBB01DE006EB4F2 /* CoachMarkArrowOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61458B21BBB01DE006EB4F2 /* CoachMarkArrowOrientation.swift */; };
 		C61A76BD1BDC16D700F131BF /* CoachMarkDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61A76BC1BDC16D700F131BF /* CoachMarkDisplayManager.swift */; };
+		C633C4B61D535A990025FAE9 /* UIImage+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633C4B51D535A990025FAE9 /* UIImage+Bundle.swift */; };
 		C63524311BC02AD10054EA0A /* CoachMarkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63524301BC02AD10054EA0A /* CoachMarkTests.swift */; };
 		C636FFB41BBC8E0000EB243B /* OverlayViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFB31BBC8E0000EB243B /* OverlayViewDelegate.swift */; };
 		C636FFB91BBC8F3100EB243B /* CoachMarkBodyDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFB81BBC8F3100EB243B /* CoachMarkBodyDefaultView.swift */; };
@@ -72,6 +73,7 @@
 /* Begin PBXFileReference section */
 		C61458B21BBB01DE006EB4F2 /* CoachMarkArrowOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkArrowOrientation.swift; sourceTree = "<group>"; };
 		C61A76BC1BDC16D700F131BF /* CoachMarkDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkDisplayManager.swift; sourceTree = "<group>"; };
+		C633C4B51D535A990025FAE9 /* UIImage+Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Bundle.swift"; sourceTree = "<group>"; };
 		C63524301BC02AD10054EA0A /* CoachMarkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkTests.swift; sourceTree = "<group>"; };
 		C636FFB31BBC8E0000EB243B /* OverlayViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayViewDelegate.swift; sourceTree = "<group>"; };
 		C636FFB81BBC8F3100EB243B /* CoachMarkBodyDefaultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkBodyDefaultView.swift; sourceTree = "<group>"; };
@@ -142,11 +144,20 @@
 		C61458B51BBB0201006EB4F2 /* Extra */ = {
 			isa = PBXGroup;
 			children = (
+				C633C4B41D535A880025FAE9 /* Extensions */,
 				C636FFB71BBC8EF800EB243B /* Default Views */,
 				C61458B41BBB01F2006EB4F2 /* Enums */,
 				C64FB33C1BB6CDBB0081E5B6 /* Protocols */,
 			);
 			name = Extra;
+			sourceTree = "<group>";
+		};
+		C633C4B41D535A880025FAE9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C633C4B51D535A990025FAE9 /* UIImage+Bundle.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		C636FFB51BBC8E9800EB243B /* Internal */ = {
@@ -292,6 +303,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C64FB2FD1BB6CA8A0081E5B6 /* Build configuration list for PBXNativeTarget "Instructions" */;
 			buildPhases = (
+				C6B30BA61D529E1000505F0C /* ShellScript */,
 				C64FB2E41BB6CA8A0081E5B6 /* Sources */,
 				C64FB2E51BB6CA8A0081E5B6 /* Frameworks */,
 				C64FB2E61BB6CA8A0081E5B6 /* Headers */,
@@ -386,6 +398,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		C6B30BA61D529E1000505F0C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "source ~/.profile\nif which swiftlint > /dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C6417E151D291A8A004D13EA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -428,6 +456,7 @@
 				C63BB91A1C73CDE200C81A4D /* InstructionsTopView.swift in Sources */,
 				C6FAE2B11BDCFE4D0080DF69 /* SkipViewDisplayManager.swift in Sources */,
 				C61458B31BBB01DE006EB4F2 /* CoachMarkArrowOrientation.swift in Sources */,
+				C633C4B61D535A990025FAE9 /* UIImage+Bundle.swift in Sources */,
 				C636FFB91BBC8F3100EB243B /* CoachMarkBodyDefaultView.swift in Sources */,
 				C63FC23D1BC9BF3E00132132 /* CoachMarkSkipDefaultView.swift in Sources */,
 				C67101001BBFE3C50005DAFC /* CoachMarkPosition.swift in Sources */,

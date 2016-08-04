@@ -39,7 +39,7 @@ internal class SkipViewDisplayManager {
     //MARK: - Initialization
     /// Allocate and initialize the manager.
     ///
-    /// - Parameter overlayView: the overlayView (covering everything and showing cutouts)
+    /// - Parameter skipView: the control to touch to skip the flow
     /// - Parameter instructionsTopView: the view holding the coach marks
     init(skipView: UIView, instructionsTopView: UIView) {
         self.skipView = skipView
@@ -47,7 +47,9 @@ internal class SkipViewDisplayManager {
     }
 
     //MARK: - Internal methods
-    /// Will hide the current Skip View.
+    /// Will hide the current Skip View with a fading effect.
+    ///
+    /// - Parameter duration: the duration of the fade.
     func hideSkipView(duration: NSTimeInterval = 0) {
         if duration == 0 {
             self.skipView.alpha = 0.0
@@ -73,15 +75,21 @@ internal class SkipViewDisplayManager {
         self.instructionsTopView.removeConstraints(self.skipViewConstraints)
         self.skipViewConstraints = []
 
-        
-
         if let validLayoutConstraints = layoutConstraints {
             self.skipViewConstraints = validLayoutConstraints
             self.instructionsTopView.addConstraints(self.skipViewConstraints)
         } else {
 
 
-            self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .Trailing, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Trailing, multiplier: 1, constant: -10))
+            self.skipViewConstraints.append(NSLayoutConstraint(
+                item: self.skipView,
+                attribute: .Trailing,
+                relatedBy: .Equal,
+                toItem: self.instructionsTopView,
+                attribute: .Trailing,
+                multiplier: 1,
+                constant: -10
+            ))
 
             var topConstant: CGFloat = 0.0
 
@@ -93,7 +101,15 @@ internal class SkipViewDisplayManager {
 
             topConstant += 2
 
-            self.skipViewConstraints.append(NSLayoutConstraint(item: self.skipView, attribute: .Top, relatedBy: .Equal, toItem: self.instructionsTopView, attribute: .Top, multiplier: 1, constant: topConstant))
+            self.skipViewConstraints.append(NSLayoutConstraint(
+                item: self.skipView,
+                attribute: .Top,
+                relatedBy: .Equal,
+                toItem: self.instructionsTopView,
+                attribute: .Top,
+                multiplier: 1,
+                constant: topConstant
+            ))
 
             self.instructionsTopView.addConstraints(self.skipViewConstraints)
         }

@@ -1,6 +1,6 @@
 // CoachMarkView.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,13 +22,15 @@
 
 import UIKit
 
+// swiftlint:disable force_cast
+
 /// The actual coach mark that will be displayed.
 ///
 /// Note: This class is final for two reasons:
 /// 1. It doesn't implement properly all the UIView initializers
 /// 2. It is not suppoed to be subclassed at the moment, as it only acts as
 ///    container for body and arrow views.
-final internal class CoachMarkView : UIView {
+final internal class CoachMarkView: UIView {
     //MARK: - Internal properties
 
     /// The body of the coach mark (likely to contain some text).
@@ -50,21 +52,29 @@ final internal class CoachMarkView : UIView {
             return bodyView.nextControl
         }
     }
-    
+
     //MARK: - Private properties
+
+    private var bodyUIView: UIView {
+        return bodyView as! UIView
+    }
+
+    private var arrowUIView: UIView? {
+        return arrowView as? UIView
+    }
 
     /// The horizontal position of the arrow, likely to be at the center of the
     /// cutout path.
-    var arrowXpositionConstraint: NSLayoutConstraint?
+    private var arrowXpositionConstraint: NSLayoutConstraint?
 
     /// The constraint making the arrow stick to its parent.
-    var arrowStickToParent: NSLayoutConstraint?
+    private var arrowStickToParent: NSLayoutConstraint?
 
     /// The constraint making the arrow stick to its body.
-    var arrowStickToBodyConstraint: NSLayoutConstraint?
+    private var arrowStickToBodyConstraint: NSLayoutConstraint?
 
     /// The constraint making the body stick to its parent.
-    var bodyStickToParent: NSLayoutConstraint?
+    private var bodyStickToParent: NSLayoutConstraint?
 
     //MARK: - Initialization
 
@@ -73,15 +83,18 @@ final internal class CoachMarkView : UIView {
     /// - Parameter bodyView: the mandatory body view
     /// - Parameter arrowView: the optional arrow view
     /// - Parameter arrowOrientation: the arrow orientation, either .Top or .Bottom
-    /// - Parameter arrowOffset: the arrow offset (in case the arrow is required to overlap the body) - a positive number will make the arrow overlap.
+    /// - Parameter arrowOffset: the arrow offset (in case the arrow is required
+    ///                          to overlap the body) - a positive number
+    ///                          will make the arrow overlap.
     init(bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView? = nil,
         arrowOrientation: CoachMarkArrowOrientation? = nil, arrowOffset: CGFloat? = 0.0) {
 
         // Due to the fact Swift 2 compiler doesn't let us enforce type check of
-        // an object being a class conforming to a given protocol, we are checking the
-        // type of body and arrow views at runtime. This isn't very nice, but I haven't found any
-        // better way to enforce that they both are subclasses of `UIView` and conform to the `CoachMarkBodyView`
-        // and `CoachMarkArrowView` protocols.
+        // an object being a class conforming to a given protocol, we are checking
+        // the type of body and arrow views at runtime. This isn't very nice, but
+        // I haven't found any better way to enforce that they both are subclasses
+        // of `UIView` and conform to the `CoachMarkBodyView` and
+        // `CoachMarkArrowView` protocols.
         if !(bodyView is UIView) {
             fatalError("Body view must conform to CoachMarkBodyView but also be a UIView.")
         }
@@ -98,12 +111,12 @@ final internal class CoachMarkView : UIView {
             self.arrowOffset = arrowOffset!
         }
 
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
 
         self.bodyView.highlightArrowDelegate = self
         self.layoutViewComposition()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("This class does not support NSCoding.")
     }
@@ -120,32 +133,31 @@ final internal class CoachMarkView : UIView {
     /// - Parameter position: arrow position
     /// - Parameter offset: arrow offset
     func changeArrowPositionTo(position: ArrowPosition, offset: CGFloat) {
-        
-        if self.arrowView == nil {
-            return
-        }
 
-        let arrowView = self.arrowView as! UIView
+        guard let arrowView = arrowUIView else { return }
 
         if self.arrowXpositionConstraint != nil {
             self.removeConstraint(self.arrowXpositionConstraint!)
         }
 
         if position == .Leading {
-            self.arrowXpositionConstraint =
-                NSLayoutConstraint(item: arrowView, attribute: .CenterX, relatedBy: .Equal,
-                                   toItem: self.bodyView, attribute: .Leading,
-                                   multiplier: 1, constant: offset)
+            self.arrowXpositionConstraint = NSLayoutConstraint(
+                item: arrowView, attribute: .CenterX, relatedBy: .Equal,
+                toItem: self.bodyView, attribute: .Leading,
+                multiplier: 1, constant: offset
+            )
         } else if position == .Center {
-            self.arrowXpositionConstraint =
-                NSLayoutConstraint(item: arrowView, attribute: .CenterX, relatedBy: .Equal,
-                                   toItem: self.bodyView, attribute: .CenterX,
-                                   multiplier: 1, constant: -offset)
+            self.arrowXpositionConstraint = NSLayoutConstraint(
+                item: arrowView, attribute: .CenterX, relatedBy: .Equal,
+                toItem: self.bodyView, attribute: .CenterX,
+                multiplier: 1, constant: -offset
+            )
         } else if position == .Trailing {
-            self.arrowXpositionConstraint =
-                NSLayoutConstraint(item: arrowView, attribute: .CenterX, relatedBy: .Equal,
-                                   toItem: self.bodyView, attribute: .Trailing,
-                                   multiplier: 1, constant: -offset)
+            self.arrowXpositionConstraint = NSLayoutConstraint(
+                item: arrowView, attribute: .CenterX, relatedBy: .Equal,
+                toItem: self.bodyView, attribute: .Trailing,
+                multiplier: 1, constant: -offset
+            )
         }
 
         self.addConstraint(self.arrowXpositionConstraint!)
@@ -157,48 +169,64 @@ final internal class CoachMarkView : UIView {
     private func layoutViewComposition() {
         self.translatesAutoresizingMaskIntoConstraints = false
 
-        self.addSubview(self.bodyView as! UIView)
-        
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[bodyView]|", options: NSLayoutFormatOptions(rawValue: 0),
-                                                                           metrics: nil, views: ["bodyView": self.bodyView]))
+        self.addSubview(bodyUIView)
 
-        let bodyStickToTop = NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal,
-                                                toItem: self.bodyView, attribute: .Top,
-                                                multiplier: 1, constant: 0)
+        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+            "H:|[bodyView]|",
+            options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil,
+            views: ["bodyView": self.bodyView]
+        ))
 
-        let bodyStickToBottom = NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal,
-                                                   toItem: self.bodyView, attribute: .Bottom,
-                                                   multiplier: 1, constant: 0)
+        let bodyStickToTop = NSLayoutConstraint(
+            item: self, attribute: .Top, relatedBy: .Equal,
+            toItem: self.bodyView, attribute: .Top,
+            multiplier: 1, constant: 0
+        )
 
-        if let arrowView = self.arrowView, arrowOrientation = self.arrowOrientation {
-            let arrowView = arrowView as! UIView
+        let bodyStickToBottom = NSLayoutConstraint(
+            item: self, attribute: .Bottom, relatedBy: .Equal,
+            toItem: self.bodyView, attribute: .Bottom,
+            multiplier: 1, constant: 0
+        )
 
+        if let arrowView = arrowUIView, arrowOrientation = self.arrowOrientation {
             self.addSubview(arrowView)
 
-            self.arrowXpositionConstraint = NSLayoutConstraint(item: arrowView, attribute: .CenterX, relatedBy: .Equal,
-                                                               toItem: self.bodyView, attribute: .CenterX,
-                                                               multiplier: 1, constant: 0)
+            self.arrowXpositionConstraint = NSLayoutConstraint(
+                item: arrowView, attribute: .CenterX, relatedBy: .Equal,
+                toItem: self.bodyView, attribute: .CenterX,
+                multiplier: 1, constant: 0
+            )
 
             self.addConstraint(self.arrowXpositionConstraint!)
 
             if arrowOrientation == .Top {
-                self.arrowStickToParent = NSLayoutConstraint(item: self, attribute: .Top, relatedBy: .Equal,
-                                                              toItem: arrowView, attribute: .Top,
-                                                              multiplier: 1, constant: 0)
-                
-                self.arrowStickToBodyConstraint = NSLayoutConstraint(item: arrowView, attribute: .Bottom, relatedBy: .Equal,
-                                                                     toItem: self.bodyView, attribute: .Top,
-                                                                     multiplier: 1, constant: self.arrowOffset)
+                self.arrowStickToParent = NSLayoutConstraint(
+                    item: self, attribute: .Top, relatedBy: .Equal,
+                    toItem: arrowView, attribute: .Top,
+                    multiplier: 1, constant: 0
+                )
+
+                self.arrowStickToBodyConstraint = NSLayoutConstraint(
+                    item: arrowView, attribute: .Bottom, relatedBy: .Equal,
+                    toItem: self.bodyView, attribute: .Top,
+                    multiplier: 1, constant: self.arrowOffset
+                )
 
                 self.addConstraint(bodyStickToBottom)
             } else if arrowOrientation == .Bottom {
-                self.arrowStickToParent = NSLayoutConstraint(item: self, attribute: .Bottom, relatedBy: .Equal,
-                                                             toItem: arrowView, attribute: .Bottom,
-                                                             multiplier: 1, constant: 0)
+                self.arrowStickToParent = NSLayoutConstraint(
+                    item: self, attribute: .Bottom, relatedBy: .Equal,
+                    toItem: arrowView, attribute: .Bottom,
+                    multiplier: 1, constant: 0
+                )
 
-                self.arrowStickToBodyConstraint = NSLayoutConstraint(item: arrowView, attribute: .Top, relatedBy: .Equal,
-                                                                     toItem: self.bodyView, attribute: .Bottom,
-                                                                     multiplier: 1, constant: -self.arrowOffset)
+                self.arrowStickToBodyConstraint = NSLayoutConstraint(
+                    item: arrowView, attribute: .Top, relatedBy: .Equal,
+                    toItem: self.bodyView, attribute: .Bottom,
+                    multiplier: 1, constant: -self.arrowOffset
+                )
 
                 self.addConstraint(bodyStickToTop)
             }

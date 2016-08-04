@@ -129,10 +129,6 @@ extension DelegateViewController: CoachMarksControllerDelegate {
         }
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillLoadForIndex index: Int) -> Bool {
-        return false
-    }
-
     func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillDisappear coachMark: CoachMark, forIndex index: Int) {
         if index == 1 {
             self.avatarVerticalPositionConstraint?.constant = 0

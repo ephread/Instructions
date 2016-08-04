@@ -23,7 +23,7 @@
 import UIKit
 
 /// Dummy view used by the CoachMarksController, forwarding touch events.
-internal class DummyView : UIView {
+internal class DummyView: UIView {
     override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
         return nil
     }

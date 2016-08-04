@@ -25,7 +25,7 @@ import UIKit
 /// This structure handle the parametrization of a given coach mark.
 /// It doesn't provide any clue about the way it will look, however.
 public struct CoachMark {
-    //MARK: - Public properties
+    //MARK: Public properties
 
     /// Change this value to change the duration of the fade.
     public var animationDuration = Constants.coachMarkFadeAnimationDuration
@@ -33,10 +33,12 @@ public struct CoachMark {
     /// The path to cut in the overlay, so the point of interest will be visible.
     public var cutoutPath: UIBezierPath?
 
-    /// The vertical offset for the arrow (in rare cases, the arrow might need to overlap with the coach mark body).
+    /// The vertical offset for the arrow (in rare cases, the arrow might need
+    /// to overlap with the coach mark body).
     public var gapBetweenBodyAndArrow: CGFloat = 2.0
 
-    /// The orientation of the arrow, around the body of the coach mark (top or bottom)
+    /// The orientation of the arrow, around the body of the coach mark
+    /// (top or bottom)
     public var arrowOrientation: CoachMarkArrowOrientation?
 
     /// The "point of interest" toward which the arrow will point.
@@ -64,33 +66,37 @@ public struct CoachMark {
     /// inside the cutoutPath.
     public var allowTouchInsideCutoutPath: Bool = false
 
-    //MARK: - Initialization
-    /// Allocate and initiliaze a Coach mark with default values
+    //MARK: Initialization
+    /// Allocate and initialize a Coach mark with default values.
     public init () {
-        
+
     }
 
-    //MARK: - Internal Methods
+    //MARK: Internal Methods
     /// This method perform both `computeOrientationInFrame` and
     /// `computePointOfInterestInFrame`.
     ///
-    /// - Parameter frame: the frame in which compute the orientation (likely to match the overlay's frame)
+    /// - Parameter frame: the frame in which compute the orientation
+    ///                    (likely to match the overlay's frame)
     internal mutating func computeMetadataForFrame(frame: CGRect) {
         self.computeOrientationInFrame(frame)
         self.computePointOfInterestInFrame()
     }
 
-    /// Compute the orientation of the arrow, given the frame in which the coach mark will be displayed.
+    /// Compute the orientation of the arrow, given the frame in which
+    /// the coach mark will be displayed.
     ///
-    /// - Parameter frame: the frame in which compute the orientation (likely to match the overlay's frame)
+    /// - Parameter frame: the frame in which compute the orientation
+    ///                    (likely to match the overlay's frame)
     internal mutating func computeOrientationInFrame(frame: CGRect) {
-        /// No cutout path means no arrow. That way, no orientation computation is needed.
+        // No cutout path means no arrow. That way, no orientation
+        // computation is needed.
         guard let cutoutPath = self.cutoutPath else {
             self.arrowOrientation = nil
             return
         }
 
-        if (self.arrowOrientation != nil) {
+        if self.arrowOrientation != nil {
             return
         }
 
@@ -101,12 +107,14 @@ public struct CoachMark {
         }
     }
 
-    /// Compute the orientation of the arrow, given the frame in which the coach mark will be displayed.
+    /// Compute the orientation of the arrow, given the frame in which
+    /// the coach mark will be displayed.
     internal mutating func computePointOfInterestInFrame() {
         /// If the value is already set, don't do anything.
         if self.pointOfInterest != nil { return }
 
-        /// No cutout path means no point of interest. That way, no orientation computation is needed.
+        /// No cutout path means no point of interest. That way, no
+        /// orientation computation is needed.
         guard let cutoutPath = self.cutoutPath else { return }
 
         let x = cutoutPath.bounds.origin.x + cutoutPath.bounds.width / 2

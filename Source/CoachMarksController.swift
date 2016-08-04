@@ -144,7 +144,8 @@ public class CoachMarksController: UIViewController {
     private lazy var coachMarkDisplayManager: CoachMarkDisplayManager! = {
         return CoachMarkDisplayManager(coachMarksController: self,
                                        overlayView: self.overlayView,
-                                       instructionsTopView: self.instructionsTopView)
+                                       instructionsTopView: self.instructionsTopView,
+                                       coachMarkLayoutHelper: CoachMarkLayoutHelper())
     }()
 
     private var skipViewDisplayManager: SkipViewDisplayManager?

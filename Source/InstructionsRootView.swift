@@ -1,4 +1,4 @@
-// InstructionsTopView.swift
+// InstructionsRootView.swift
 //
 // Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
 //
@@ -23,7 +23,18 @@
 import UIKit
 
 /// Top view added to the window, forwarding touch events.
-internal class InstructionsTopView: UIView {
+internal class InstructionsRootView: UIView {
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initialize()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initialize()
+    }
+
     override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
         let hitView = super.hitTest(point, withEvent: event)
 
@@ -32,5 +43,9 @@ internal class InstructionsTopView: UIView {
         }
 
         return hitView
+    }
+
+    private func initialize() {
+        translatesAutoresizingMaskIntoConstraints = false
     }
 }

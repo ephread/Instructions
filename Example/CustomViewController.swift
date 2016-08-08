@@ -144,7 +144,7 @@ extension CustomViewsViewController: CoachMarksControllerDataSource {
 
             // If the view is larger than 1/3 of the overlay width, we'll shrink a bit the width
             // of the arrow.
-            let oneThirdOfWidth = coachMarksController.view.bounds.size.width / 3
+            let oneThirdOfWidth = coachMarksController.overlayFrame.size.width / 3
             let adjustedWidth = width >= oneThirdOfWidth ? width - 2 * coachMark.horizontalMargin : width
 
             coachMarkArrowView!.plate.addConstraint(NSLayoutConstraint(item: coachMarkArrowView!.plate, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: adjustedWidth))

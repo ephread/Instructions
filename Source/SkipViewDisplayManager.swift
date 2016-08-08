@@ -27,65 +27,68 @@ import UIKit
 internal class SkipViewDisplayManager {
     //MARK: - Public properties
     /// Constraints defining the position of the "Skip" view
-    var skipViewConstraints: [NSLayoutConstraint] = []
+    private var skipViewConstraints: [NSLayoutConstraint] = []
 
-    //MARK: - Private properties
-    /// The view holding the "Skip" control
-    private let skipView: UIView
-
-    /// The view holding the coach marks
-    private let instructionsTopView: UIView
-
-    //MARK: - Initialization
-    /// Allocate and initialize the manager.
-    ///
-    /// - Parameter skipView: the control to touch to skip the flow
-    /// - Parameter instructionsTopView: the view holding the coach marks
-    init(skipView: UIView, instructionsTopView: UIView) {
-        self.skipView = skipView
-        self.instructionsTopView = instructionsTopView
-    }
+    weak var dataSource: CoachMarksControllerProxyDataSource!
 
     //MARK: - Internal methods
     /// Will hide the current Skip View with a fading effect.
     ///
     /// - Parameter duration: the duration of the fade.
-    func hideSkipView(duration: NSTimeInterval = 0) {
+    func hideSkipView(skipView: CoachMarkSkipView, duration: NSTimeInterval = 0) {
         if duration == 0 {
-            self.skipView.alpha = 0.0
+            skipView.asView?.alpha = 0.0
         } else {
             UIView.animateWithDuration(duration) { () -> Void in
-                self.skipView.alpha = 0.0
+                skipView.asView?.alpha = 0.0
             }
         }
     }
 
-    /// Add a the "Skip view" to the main view container.
-    func addSkipView() {
-        self.skipView.alpha = 0.0
-        self.instructionsTopView.addSubview(skipView)
+    func showSkipView(skipView: CoachMarkSkipView, duration: NSTimeInterval = 0) {
+        let constraints =
+            self.dataSource.constraintsForSkipView(skipView.asView!,
+                                                   inParentView: skipView.asView!.superview!)
+
+        updateSkipView(skipView, withConstraints: constraints)
+
+        skipView.asView?.superview?.bringSubviewToFront(skipView.asView!)
+
+        if duration == 0 {
+            skipView.asView?.alpha = 1.0
+        } else {
+            UIView.animateWithDuration(duration) { () -> Void in
+                skipView.asView?.alpha = 1.0
+            }
+        }
     }
 
     /// Update the constraints defining the "Skip view" position.
     ///
     /// - Parameter layoutConstraints: the constraints to add.
-    func updateSkipViewConstraintsWithConstraints(layoutConstraints: [NSLayoutConstraint]?) {
-        self.skipView.translatesAutoresizingMaskIntoConstraints = false
+    internal func updateSkipView(
+        skipView: CoachMarkSkipView,
+        withConstraints constraints: [NSLayoutConstraint]?
+    ) {
+        guard let parentView = skipView.asView?.superview else {
+            print("skipView has no parent.")
+            return
+        }
 
-        self.instructionsTopView.removeConstraints(self.skipViewConstraints)
+        skipView.asView?.translatesAutoresizingMaskIntoConstraints = false
+        parentView.removeConstraints(self.skipViewConstraints)
+
         self.skipViewConstraints = []
 
-        if let validLayoutConstraints = layoutConstraints {
-            self.skipViewConstraints = validLayoutConstraints
-            self.instructionsTopView.addConstraints(self.skipViewConstraints)
+        if let constraints = constraints {
+            self.skipViewConstraints = constraints
+            parentView.addConstraints(self.skipViewConstraints)
         } else {
-
-
             self.skipViewConstraints.append(NSLayoutConstraint(
-                item: self.skipView,
+                item: skipView,
                 attribute: .Trailing,
                 relatedBy: .Equal,
-                toItem: self.instructionsTopView,
+                toItem: parentView,
                 attribute: .Trailing,
                 multiplier: 1,
                 constant: -10
@@ -102,16 +105,16 @@ internal class SkipViewDisplayManager {
             topConstant += 2
 
             self.skipViewConstraints.append(NSLayoutConstraint(
-                item: self.skipView,
+                item: skipView,
                 attribute: .Top,
                 relatedBy: .Equal,
-                toItem: self.instructionsTopView,
+                toItem: parentView,
                 attribute: .Top,
                 multiplier: 1,
                 constant: topConstant
             ))
 
-            self.instructionsTopView.addConstraints(self.skipViewConstraints)
+            parentView.addConstraints(self.skipViewConstraints)
         }
     }
 }

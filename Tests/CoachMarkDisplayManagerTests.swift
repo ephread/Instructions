@@ -26,7 +26,7 @@ import XCTest
 class CoachMarkDisplayManagerTests: XCTestCase {
 
     let overlayView = OverlayView()
-    let instructionsTopView = UIView()
+    let instructionsRootView = UIView()
     let coachMarksController = CoachMarksController()
     var coachMarkDisplayManager: CoachMarkDisplayManager!
 
@@ -36,10 +36,10 @@ class CoachMarkDisplayManagerTests: XCTestCase {
         super.setUp()
 
         self.overlayView.frame = CGRect(x: 0, y: 0, width: 365, height: 667)
-        self.instructionsTopView.frame = CGRect(x: 0, y: 0, width: 365, height: 667)
+        self.instructionsRootView.frame = CGRect(x: 0, y: 0, width: 365, height: 667)
 
         self.coachMarkDisplayManager =
-            CoachMarkDisplayManager(coachMarksController: coachMarksController, overlayView: self.overlayView, instructionsTopView: self.instructionsTopView)
+            CoachMarkDisplayManager(coachMarksController: coachMarksController, overlayView: self.overlayView, instructionsRootView: self.instructionsRootView)
     }
 
     override func tearDown() {
@@ -54,7 +54,7 @@ class CoachMarkDisplayManagerTests: XCTestCase {
 
         self.viewIsVisibleExpectation = self.expectationWithDescription("viewIsVisible")
 
-        coachMark.computeOrientationInFrame(self.instructionsTopView.frame)
+        coachMark.computeOrientationInFrame(self.instructionsRootView.frame)
         coachMark.computePointOfInterestInFrame()
 
         self.coachMarkDisplayManager.displayCoachMarkView(coachMarkView, coachMark: coachMark) {

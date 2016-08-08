@@ -86,7 +86,7 @@ internal class OverlayView: UIView {
     private lazy var singleTapGestureRecognizer: UITapGestureRecognizer = {
         let gestureRecognizer = UITapGestureRecognizer(
             target: self,
-            action: #selector(OverlayView.handleSingleTap(_:))
+            action: #selector(handleSingleTap(_:))
         )
 
         return gestureRecognizer
@@ -96,6 +96,7 @@ internal class OverlayView: UIView {
     init() {
         layerManager = OverlayViewLayerManager(layer: overlayLayer)
         super.init(frame: CGRect.zero)
+        translatesAutoresizingMaskIntoConstraints = false
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -106,7 +107,7 @@ internal class OverlayView: UIView {
 
     /// Prepare for the fade, by removing the cutout shape.
     func prepareForFade() {
-        self.updateCutoutPath(nil)
+        updateCutoutPath(nil)
     }
 
     /// Show a cutout path with fade in animation
@@ -134,12 +135,14 @@ internal class OverlayView: UIView {
         if cutoutPath == nil {
             if blurEffectView == nil {
                 backgroundColor = overlayColor
+                overlayLayer.removeFromSuperlayer()
             }
         } else {
             if blurEffectView == nil {
                 overlayLayer.removeFromSuperlayer()
 
-                overlayLayer.frame = frame
+                overlayLayer.frame = bounds
+
                 overlayLayer.backgroundColor = self.overlayColor.CGColor
 
                 layer.addSublayer(overlayLayer)
@@ -221,6 +224,14 @@ internal class OverlayView: UIView {
     @objc private func handleSingleTap(sender: AnyObject?) {
         if !disableOverlayTap {
             self.delegate?.didReceivedSingleTap()
+        }
+    }
+
+    override func layoutSublayersOfLayer(layer: CALayer) {
+        super.layoutSublayersOfLayer(layer)
+
+        if layer == self.layer {
+            overlayLayer.frame = bounds
         }
     }
 }

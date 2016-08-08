@@ -1,6 +1,6 @@
-// Instructions.swift
+// OverlayViewLayerManager.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -73,7 +73,10 @@ class OverlayViewLayerManager {
         cutoutMaskLayer.removeFromSuperlayer()
         fullMaskLayer.removeFromSuperlayer()
 
-        guard let cutoutPath = cutoutPath else { return }
+        guard let cutoutPath = cutoutPath else {
+            managedLayer.mask = nil
+            return
+        }
 
         configureCutoutMask(cutoutPath)
         configureFullMask()

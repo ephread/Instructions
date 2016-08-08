@@ -26,4 +26,17 @@ import UIKit
 public protocol CoachMarkSkipView : class {
     /// The control that will trigger the stop, in the display flow.
     var skipControl: UIControl? { get }
+    var asView: UIView? { get }
+}
+
+extension CoachMarkSkipView {
+    public var skipControl: UIControl? {
+        return nil
+    }
+}
+
+extension CoachMarkSkipView where Self: UIView {
+    public var asView: UIView? {
+        return self
+    }
 }

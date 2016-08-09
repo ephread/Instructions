@@ -152,12 +152,9 @@ private extension CoachMarkBodyDefaultView {
         hintLabel.translatesAutoresizingMaskIntoConstraints = false
         hintLabel.userInteractionEnabled = false
         hintLabel.backgroundColor = UIColor.clearColor()
-        hintLabel.textColor = UIColor.darkGrayColor()
-        hintLabel.font = UIFont.systemFontOfSize(15.0)
         hintLabel.scrollEnabled = false
-        hintLabel.textAlignment = .Justified
-        hintLabel.layoutManager.hyphenationFactor = 1.0
-        hintLabel.editable = false
+
+        configureHintLabelTextProperties()
 
         addSubview(hintLabel)
 
@@ -170,12 +167,10 @@ private extension CoachMarkBodyDefaultView {
     }
 
     private func configureNextLabel() {
-        nextLabel.textColor = UIColor.darkGrayColor()
-        nextLabel.font = UIFont.systemFontOfSize(17.0)
-        nextLabel.textAlignment = .Center
-
         nextLabel.translatesAutoresizingMaskIntoConstraints = false
         nextLabel.userInteractionEnabled = false
+
+        configureNextLabelTextProperties()
 
         self.addSubview(nextLabel)
 
@@ -200,6 +195,20 @@ private extension CoachMarkBodyDefaultView {
             metrics: nil,
             views: ["separator": separator]
         ))
+    }
+
+    private func configureHintLabelTextProperties() {
+        hintLabel.textColor = UIColor.darkGrayColor()
+        hintLabel.font = UIFont.systemFontOfSize(15.0)
+        hintLabel.textAlignment = .Justified
+        hintLabel.layoutManager.hyphenationFactor = 1.0
+        hintLabel.editable = false
+    }
+
+    private func configureNextLabelTextProperties() {
+        nextLabel.textColor = UIColor.darkGrayColor()
+        nextLabel.font = UIFont.systemFontOfSize(17.0)
+        nextLabel.textAlignment = .Center
     }
 }
 

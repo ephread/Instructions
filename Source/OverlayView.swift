@@ -185,11 +185,29 @@ internal class OverlayView: UIView {
 
         overlayLayer.removeFromSuperlayer()
 
+        configureBlurView()
+        addBlurView()
+
+        layerManager.managedLayer = blurEffectView!.layer
+    }
+
+    /// Removes the view holding the blur effect.
+    private func destroyBlurView() {
+        self.blurEffectView?.removeFromSuperview()
+        self.blurEffectView = nil
+
+        layerManager.managedLayer = overlayLayer
+    }
+
+    private func configureBlurView() {
         let blurEffect = UIBlurEffect(style: self.blurEffectStyle!)
 
         self.blurEffectView = UIVisualEffectView(effect:blurEffect)
         self.blurEffectView!.translatesAutoresizingMaskIntoConstraints = false
         self.blurEffectView!.userInteractionEnabled = false
+    }
+
+    private func addBlurView() {
         self.addSubview(self.blurEffectView!)
 
         self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
@@ -205,16 +223,6 @@ internal class OverlayView: UIView {
             metrics: nil,
             views: ["visualEffectView": self.blurEffectView!]
         ))
-
-        layerManager.managedLayer = blurEffectView!.layer
-    }
-
-    /// Removes the view holding the blur effect.
-    private func destroyBlurView() {
-        self.blurEffectView?.removeFromSuperview()
-        self.blurEffectView = nil
-
-        layerManager.managedLayer = overlayLayer
     }
 
     /// This method will be called each time the overlay receive

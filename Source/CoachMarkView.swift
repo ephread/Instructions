@@ -55,26 +55,11 @@ final internal class CoachMarkView: UIView {
 
     //MARK: - Private properties
 
-    private var bodyUIView: UIView {
-        return bodyView as! UIView
-    }
+    private var bodyUIView: UIView { return bodyView as! UIView }
 
-    private var arrowUIView: UIView? {
-        return arrowView as? UIView
-    }
+    private var arrowUIView: UIView? { return arrowView as? UIView }
 
-    /// The horizontal position of the arrow, likely to be at the center of the
-    /// cutout path.
-    private var arrowXpositionConstraint: NSLayoutConstraint?
-
-    /// The constraint making the arrow stick to its parent.
-    private var arrowStickToParent: NSLayoutConstraint?
-
-    /// The constraint making the arrow stick to its body.
-    private var arrowStickToBodyConstraint: NSLayoutConstraint?
-
-    /// The constraint making the body stick to its parent.
-    private var bodyStickToParent: NSLayoutConstraint?
+    private var innerConstraints = CoachMarkViewConstraints()
 
     private let coachMarkLayoutHelper: CoachMarkInnerLayoutHelper
 
@@ -141,16 +126,15 @@ final internal class CoachMarkView: UIView {
 
         guard let arrowUIView = arrowUIView else { return }
 
-        if self.arrowXpositionConstraint != nil {
-            self.removeConstraint(self.arrowXpositionConstraint!)
+        if innerConstraints.arrowXposition != nil {
+            self.removeConstraint(innerConstraints.arrowXposition!)
         }
 
-        self.arrowXpositionConstraint = coachMarkLayoutHelper.horizontalArrowConstraints(
-            for: position, withHorizontalOffset: offset,
-            body: bodyUIView, arrow: arrowUIView
-        )
+        innerConstraints.arrowXposition = coachMarkLayoutHelper.horizontalArrowConstraints(
+            for: (bodyView: bodyUIView, arrowView: arrowUIView), withPosition: position,
+            horizontalOffset: offset)
 
-        self.addConstraint(self.arrowXpositionConstraint!)
+        self.addConstraint(innerConstraints.arrowXposition!)
     }
 
     //MARK: - Private Method
@@ -165,16 +149,13 @@ final internal class CoachMarkView: UIView {
         if let arrowUIView = arrowUIView, arrowOrientation = self.arrowOrientation {
             self.addSubview(arrowUIView)
 
-            self.arrowXpositionConstraint = coachMarkLayoutHelper.horizontalArrowConstraints(
-                for: .Center, withHorizontalOffset: 0,
-                body: bodyUIView, arrow: arrowUIView
-            )
+            innerConstraints.arrowXposition = coachMarkLayoutHelper.horizontalArrowConstraints(
+                for: (bodyView: bodyUIView, arrowView: arrowUIView), withPosition: .Center,
+                horizontalOffset: 0)
 
-            self.addConstraint(self.arrowXpositionConstraint!)
+            self.addConstraint(innerConstraints.arrowXposition!)
             self.addConstraints(coachMarkLayoutHelper.verticalConstraints(
-                forBody: bodyUIView,
-                andArrow: arrowUIView,
-                in: self,
+                for: (bodyView: bodyUIView, arrowView: arrowUIView), in: self,
                 withProperties: (orientation: arrowOrientation, verticalArrowOffset: arrowOffset)
             ))
         } else {
@@ -189,4 +170,15 @@ extension CoachMarkView: CoachMarkBodyHighlightArrowDelegate {
     func highlightArrow(highlighted: Bool) {
         self.arrowView?.highlighted = highlighted
     }
+}
+
+struct CoachMarkViewConstraints {
+    /// The horizontal position of the arrow, likely to be at the center of the
+    /// cutout path.
+    private var arrowXposition: NSLayoutConstraint?
+
+    /// The constraint making the body stick to its parent.
+    private var bodyStickToParent: NSLayoutConstraint?
+
+    init () { }
 }

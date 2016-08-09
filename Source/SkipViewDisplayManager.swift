@@ -93,31 +93,39 @@ internal class SkipViewDisplayManager {
 
         if let constraints = constraints {
             self.skipViewConstraints = constraints
-            parentView.addConstraints(self.skipViewConstraints)
         } else {
-            self.skipViewConstraints.append(NSLayoutConstraint(
-                item: skipView, attribute: .Trailing, relatedBy: .Equal,
-                toItem: parentView, attribute: .Trailing,
-                multiplier: 1, constant: -10
-            ))
+            self.skipViewConstraints = defaultConstraints(for: skipView, in: parentView)
+        }
 
-            var topConstant: CGFloat = 0.0
+        parentView.addConstraints(self.skipViewConstraints)
+    }
 
-            #if !INSTRUCTIONS_APP_EXTENSIONS
+    private func defaultConstraints(for skipView: CoachMarkSkipView, in parentView: UIView)
+    -> [NSLayoutConstraint] {
+        var constraints = [NSLayoutConstraint]()
+
+        constraints.append(NSLayoutConstraint(
+            item: skipView, attribute: .Trailing, relatedBy: .Equal,
+            toItem: parentView, attribute: .Trailing,
+            multiplier: 1, constant: -10
+        ))
+
+        var topConstant: CGFloat = 0.0
+
+        #if !INSTRUCTIONS_APP_EXTENSIONS
             if !UIApplication.sharedApplication().statusBarHidden {
                 topConstant = UIApplication.sharedApplication().statusBarFrame.size.height
             }
-            #endif
+        #endif
 
-            topConstant += 2
+        topConstant += 2
 
-            self.skipViewConstraints.append(NSLayoutConstraint(
-                item: skipView, attribute: .Top, relatedBy: .Equal,
-                toItem: parentView, attribute: .Top,
-                multiplier: 1, constant: topConstant
-            ))
+        constraints.append(NSLayoutConstraint(
+            item: skipView, attribute: .Top, relatedBy: .Equal,
+            toItem: parentView, attribute: .Top,
+            multiplier: 1, constant: topConstant
+        ))
 
-            parentView.addConstraints(self.skipViewConstraints)
-        }
+        return constraints
     }
 }

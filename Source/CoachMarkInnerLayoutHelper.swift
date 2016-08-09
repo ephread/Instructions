@@ -23,13 +23,12 @@
 import UIKit
 
 class CoachMarkInnerLayoutHelper {
-    func horizontalArrowConstraints(for position: ArrowPosition,
-                                    withHorizontalOffset horizontalOffset: CGFloat,
-                                    body bodyView: UIView, arrow arrowView: UIView
-    ) -> NSLayoutConstraint {
+    func horizontalArrowConstraints(for coachMarkViews: CoachMarkViews,
+                                    withPosition position: ArrowPosition,
+                                    horizontalOffset: CGFloat) -> NSLayoutConstraint {
         return NSLayoutConstraint(
-            item: arrowView, attribute: .CenterX, relatedBy: .Equal,
-            toItem: bodyView, attribute: position.layoutAttribute,
+            item: coachMarkViews.arrowView, attribute: .CenterX, relatedBy: .Equal,
+            toItem: coachMarkViews.bodyView, attribute: position.layoutAttribute,
             multiplier: 1, constant: adaptedOffset(for: position, offset: horizontalOffset)
         )
     }
@@ -43,43 +42,19 @@ class CoachMarkInnerLayoutHelper {
         )
     }
 
-    func verticalConstraints(forBody bodyView: UIView, andArrow arrowView: UIView,
-                             in parentView: UIView,
-                             withProperties properties: (orientation: CoachMarkArrowOrientation,
-                                                         verticalArrowOffset: CGFloat)
-    ) -> [NSLayoutConstraint] {
+    func verticalConstraints(for coachMarkViews: CoachMarkViews, in parentView: UIView,
+                             withProperties properties: CoachMarkViewProperties)
+    -> [NSLayoutConstraint] {
         var constraints = [NSLayoutConstraint]()
 
+        let verticalArrowOffset = properties.verticalArrowOffset
+
         if properties.orientation == .Top {
-            constraints.append(NSLayoutConstraint(
-                item: parentView, attribute: .Top, relatedBy: .Equal,
-                toItem: arrowView, attribute: .Top,
-                multiplier: 1, constant: 0
-            ))
-
-            constraints.append(NSLayoutConstraint(
-                item: arrowView, attribute: .Bottom, relatedBy: .Equal,
-                toItem: bodyView, attribute: .Top,
-                multiplier: 1, constant: adaptedOffset(for: properties.orientation,
-                                                       offset: properties.verticalArrowOffset)
-            ))
-
-            constraints.append(bottomConstraint(forBody: bodyView, in: parentView))
+            constraints = topOrientationConstraints(for: coachMarkViews, in: parentView,
+                                                    verticalArrowOffset: verticalArrowOffset)
         } else if properties.orientation == .Bottom {
-            constraints.append(NSLayoutConstraint(
-                item: parentView, attribute: .Bottom, relatedBy: .Equal,
-                toItem: arrowView, attribute: .Bottom,
-                multiplier: 1, constant: 0
-            ))
-
-            constraints.append(NSLayoutConstraint(
-                item: arrowView, attribute: .Top, relatedBy: .Equal,
-                toItem: bodyView, attribute: .Bottom,
-                multiplier: 1, constant: adaptedOffset(for: properties.orientation,
-                                                       offset: properties.verticalArrowOffset)
-            ))
-
-            constraints.append(topConstraint(forBody: bodyView, in: parentView))
+            constraints = bottomOrientationConstraints(for: coachMarkViews, in: parentView,
+                                                       verticalArrowOffset: verticalArrowOffset)
         }
 
         return constraints
@@ -101,6 +76,50 @@ class CoachMarkInnerLayoutHelper {
         )
     }
 
+    private func topOrientationConstraints(for coachMarkViews: CoachMarkViews,
+                                           in parentView: UIView, verticalArrowOffset: CGFloat)
+    -> [NSLayoutConstraint] {
+        var constraints = [NSLayoutConstraint]()
+
+        constraints.append(NSLayoutConstraint(
+            item: parentView, attribute: .Top, relatedBy: .Equal,
+            toItem: coachMarkViews.arrowView, attribute: .Top,
+            multiplier: 1, constant: 0
+        ))
+
+        constraints.append(NSLayoutConstraint(
+            item: coachMarkViews.arrowView, attribute: .Bottom, relatedBy: .Equal,
+            toItem: coachMarkViews.bodyView, attribute: .Top,
+            multiplier: 1, constant: adaptedOffset(for: .Top, offset: verticalArrowOffset)
+        ))
+
+        constraints.append(bottomConstraint(forBody: coachMarkViews.bodyView, in: parentView))
+
+        return constraints
+    }
+
+    private func bottomOrientationConstraints(for coachMarkViews: CoachMarkViews,
+                                              in parentView: UIView, verticalArrowOffset: CGFloat)
+        -> [NSLayoutConstraint] {
+            var constraints = [NSLayoutConstraint]()
+
+            constraints.append(NSLayoutConstraint(
+                item: parentView, attribute: .Bottom, relatedBy: .Equal,
+                toItem: coachMarkViews.arrowView, attribute: .Bottom,
+                multiplier: 1, constant: 0
+            ))
+
+            constraints.append(NSLayoutConstraint(
+                item: coachMarkViews.arrowView, attribute: .Top, relatedBy: .Equal,
+                toItem: coachMarkViews.bodyView, attribute: .Bottom,
+                multiplier: 1, constant: adaptedOffset(for: .Bottom, offset: verticalArrowOffset)
+            ))
+
+            constraints.append(topConstraint(forBody: coachMarkViews.bodyView, in: parentView))
+
+            return constraints
+    }
+
     private func adaptedOffset(for arrowPosition: ArrowPosition, offset: CGFloat) -> CGFloat {
         switch arrowPosition {
         case .Leading: return offset
@@ -117,3 +136,7 @@ class CoachMarkInnerLayoutHelper {
         }
     }
 }
+
+typealias CoachMarkViews = (bodyView: UIView, arrowView: UIView)
+typealias CoachMarkViewProperties = (orientation: CoachMarkArrowOrientation,
+                                     verticalArrowOffset: CGFloat)

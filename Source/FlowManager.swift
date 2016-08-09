@@ -41,11 +41,11 @@ class FlowManager {
     /// which methods will be called at various points.
     weak var delegate: CoachMarksControllerProxyDelegate?
 
-    /// The total number of coach marks, supplied by the `datasource`.
-    private var numberOfCoachMarks = 0
-
     /// Reference to the currently displayed coach mark, supplied by the `datasource`.
     var currentCoachMark: CoachMark?
+
+    /// The total number of coach marks, supplied by the `datasource`.
+    private var numberOfCoachMarks = 0
 
     /// Since changing size calls asynchronous completion blocks,
     /// we might end up firing multiple times the methods adding coach
@@ -135,34 +135,33 @@ class FlowManager {
         if disableFlow || paused || !canShowCoachMark { return }
 
         canShowCoachMark = false
-
         currentIndex += 1
 
-        if currentIndex > 0 {
-            if let currentCoachMark = currentCoachMark {
-                delegate?.coachMarkWillDisappear(currentCoachMark,
-                                                 forIndex: currentIndex - 1)
-            }
+        if currentIndex == 0 {
+            createAndShowCoachMark()
+            return
+        }
 
-            if hidePrevious {
-                guard let currentCoachMark = currentCoachMark else { return }
+        if let currentCoachMark = currentCoachMark {
+            delegate?.coachMarkWillDisappear(currentCoachMark, forIndex: currentIndex - 1)
+        }
 
-                coachMarksViewController.hideCurrentCoachMark(currentCoachMark) {
-                    if self.currentIndex < self.numberOfCoachMarks {
-                        self.createAndShowCoachMark()
-                    } else {
-                        self.stopFlow()
-                    }
-                }
-            } else {
-                if self.currentIndex < self.numberOfCoachMarks {
-                    self.createAndShowCoachMark()
-                } else {
-                    self.stopFlow()
-                }
+        if hidePrevious {
+            guard let currentCoachMark = currentCoachMark else { return }
+
+            coachMarksViewController.hideCurrentCoachMark(currentCoachMark) {
+                self.showOrStop()
             }
         } else {
-            createAndShowCoachMark()
+            showOrStop()
+        }
+    }
+
+    func showOrStop() {
+        if self.currentIndex < self.numberOfCoachMarks {
+            self.createAndShowCoachMark()
+        } else {
+            self.stopFlow()
         }
     }
 

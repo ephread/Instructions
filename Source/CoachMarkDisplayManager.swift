@@ -68,7 +68,7 @@ internal class CoachMarkDisplayManager {
     /// - Parameter completion: a block to execute after the coach mark was hidden
     func hideCoachMarkView(coachMarkView: UIView?, overlayView: OverlayView,
                            animationDuration: NSTimeInterval, completion: (() -> Void)? = nil) {
-        overlayView.hideCutoutPathViewWithAnimationDuration(animationDuration)
+        overlayView.showCutoutPathView(false, withAnimationDuration: animationDuration)
         coachMarkView?.layer.removeAllAnimations()
         //removeTargetFromCurrentCoachView()
 
@@ -104,7 +104,7 @@ internal class CoachMarkDisplayManager {
         coachMarkView.alpha = 0.0
 
         // Animate the view entry
-        overlayView.showCutoutPathViewWithAnimationDuration(coachMark.animationDuration)
+        overlayView.showCutoutPathView(true, withAnimationDuration: coachMark.animationDuration)
 
         if noAnimation {
             coachMarkView.alpha = 1.0

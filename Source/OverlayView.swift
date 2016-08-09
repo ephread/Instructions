@@ -121,15 +121,13 @@ public class OverlayView: UIView {
     /// Show a cutout path with fade in animation
     ///
     /// - Parameter duration: duration of the animation
-    func showCutoutPathViewWithAnimationDuration(duration: NSTimeInterval) {
-        layerManager.showCutoutPathViewWithAnimationDuration(duration)
-    }
-
-    /// Hide a cutout path with fade in animation
-    ///
     /// - Parameter duration: duration of the animation
-    func hideCutoutPathViewWithAnimationDuration(duration: NSTimeInterval) {
-        layerManager.hideCutoutPathViewWithAnimationDuration(duration)
+    func showCutoutPathView(show: Bool, withAnimationDuration duration: NSTimeInterval) {
+        if show {
+            layerManager.showCutoutPathViewWithAnimationDuration(duration)
+        } else {
+            layerManager.hideCutoutPathViewWithAnimationDuration(duration)
+        }
     }
 
     /// Update the cutout path. Please note that the update won't perform any
@@ -182,17 +180,27 @@ public class OverlayView: UIView {
         return hitView
     }
 
+    override public func layoutSublayersOfLayer(layer: CALayer) {
+        super.layoutSublayersOfLayer(layer)
+
+        if layer == self.layer {
+            overlayLayer.frame = bounds
+        }
+    }
+
     //MARK: - Private Methods
 
     /// Creates the visual effect view holding
     /// the blur effect and adds it to the overlay.
     private func createBlurView() {
-        if self.blurEffectStyle == nil { return }
+        guard let blurEffectStyle = blurEffectStyle else { return }
 
         overlayLayer.removeFromSuperlayer()
 
-        configureBlurView()
-        addBlurView()
+        let helper = BlurEffectViewHelper()
+
+        blurEffectView = helper.buildBlurEffectView(withStyle: blurEffectStyle)
+        helper.addBlurView(blurEffectView!, to: self)
 
         layerManager.managedLayer = blurEffectView!.layer
     }
@@ -205,32 +213,6 @@ public class OverlayView: UIView {
         layerManager.managedLayer = overlayLayer
     }
 
-    private func configureBlurView() {
-        let blurEffect = UIBlurEffect(style: self.blurEffectStyle!)
-
-        self.blurEffectView = UIVisualEffectView(effect:blurEffect)
-        self.blurEffectView!.translatesAutoresizingMaskIntoConstraints = false
-        self.blurEffectView!.userInteractionEnabled = false
-    }
-
-    private func addBlurView() {
-        self.addSubview(self.blurEffectView!)
-
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|[visualEffectView]|",
-            options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil,
-            views: ["visualEffectView": self.blurEffectView!]
-        ))
-
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|[visualEffectView]|",
-            options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil,
-            views: ["visualEffectView": self.blurEffectView!]
-        ))
-    }
-
     /// This method will be called each time the overlay receive
     /// a tap event.
     ///
@@ -238,14 +220,6 @@ public class OverlayView: UIView {
     @objc private func handleSingleTap(sender: AnyObject?) {
         if enableTap {
             self.delegate?.didReceivedSingleTap()
-        }
-    }
-
-    override public func layoutSublayersOfLayer(layer: CALayer) {
-        super.layoutSublayersOfLayer(layer)
-
-        if layer == self.layer {
-            overlayLayer.frame = bounds
         }
     }
 }

@@ -23,44 +23,29 @@
 import UIKit
 
 class CoachMarkLayoutHelper {
-    struct CoachMarkComputedProperties {
-        let layoutDirection: UIUserInterfaceLayoutDirection
-        let segmentIndex: Int
-    }
-
     /// Position the coach mark view.
     /// TODO: Improve the layout system. Make it smarter.
     func constraintsForCoachMarkView(coachMarkView: CoachMarkView, coachMark: CoachMark,
                                      parentView: UIView) -> [NSLayoutConstraint] {
         let computedProperties = computePropertiesForCoachMark(coachMark, inParentView: parentView)
-
         let offset = arrowOffsetForCoachMark(coachMark, withProperties: computedProperties,
                                              inParentView: parentView)
 
-        let constraints: [NSLayoutConstraint]
-
         switch computedProperties.segmentIndex {
         case 1:
-            constraints = leadingConstraintsForCoachMark(coachMarkView, withCoachMark: coachMark,
-                                                         inParentView: parentView)
-
             coachMarkView.changeArrowPositionTo(.Leading, offset: offset)
+            return leadingConstraintsForCoachMark(coachMarkView, withCoachMark: coachMark,
+                                                  inParentView: parentView)
         case 2:
-
-            constraints = middleConstraintsForCoachMark(coachMarkView, withCoachMark: coachMark,
-                                                        inParentView: parentView)
-
             coachMarkView.changeArrowPositionTo(.Center, offset: offset)
+            return middleConstraintsForCoachMark(coachMarkView, withCoachMark: coachMark,
+                                                 inParentView: parentView)
         case 3:
-            constraints = trailingConstraintsForCoachMark(coachMarkView, withCoachMark: coachMark,
-                                                          inParentView: parentView)
-
             coachMarkView.changeArrowPositionTo(.Trailing, offset: offset)
-        default:
-            constraints = [NSLayoutConstraint]()
+            return trailingConstraintsForCoachMark(coachMarkView, withCoachMark: coachMark,
+                                                          inParentView: parentView)
+        default: return [NSLayoutConstraint]()
         }
-
-        return constraints
     }
 
     private func leadingConstraintsForCoachMark(coachMarkView: CoachMarkView,
@@ -219,4 +204,9 @@ class CoachMarkLayoutHelper {
             segmentIndex: segmentIndex
         )
     }
+}
+
+struct CoachMarkComputedProperties {
+    let layoutDirection: UIUserInterfaceLayoutDirection
+    let segmentIndex: Int
 }

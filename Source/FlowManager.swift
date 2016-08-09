@@ -22,7 +22,7 @@
 
 import UIKit
 
-class FlowManager {
+public class FlowManager {
     //MARK: Internal Properties
     /// `true` if coach marks are curently being displayed, `false` otherwise.
     var started: Bool {
@@ -34,15 +34,15 @@ class FlowManager {
     /// `false` otherwise.
     var paused = false
 
-    unowned let coachMarksViewController: CoachMarksViewController
-    weak var dataSource: CoachMarksControllerProxyDataSource?
+    internal unowned let coachMarksViewController: CoachMarksViewController
+    internal weak var dataSource: CoachMarksControllerProxyDataSource?
 
     /// An object implementing the delegate data source protocol,
     /// which methods will be called at various points.
-    weak var delegate: CoachMarksControllerProxyDelegate?
+    internal weak var delegate: CoachMarksControllerProxyDelegate?
 
     /// Reference to the currently displayed coach mark, supplied by the `datasource`.
-    var currentCoachMark: CoachMark?
+    internal var currentCoachMark: CoachMark?
 
     /// The total number of coach marks, supplied by the `datasource`.
     private var numberOfCoachMarks = 0
@@ -78,7 +78,7 @@ class FlowManager {
     }
 
 
-    func startFlow(withNumberOfCoachMarks numberOfCoachMarks: Int) {
+    internal func startFlow(withNumberOfCoachMarks numberOfCoachMarks: Int) {
         self.numberOfCoachMarks = numberOfCoachMarks
 
         coachMarksViewController.prepareToShowCoachMarks {
@@ -113,7 +113,7 @@ class FlowManager {
             disableFlow = true
             animationDuration = 0.0
         } else {
-            animationDuration = coachMarksViewController.overlayFadeAnimationDuration
+            animationDuration = coachMarksViewController.overlayView.fadeAnimationDuration
         }
 
         UIView.animateWithDuration(animationDuration, animations: { () -> Void in
@@ -131,7 +131,7 @@ class FlowManager {
         })
     }
 
-    func showNextCoachMark(hidePrevious hidePrevious: Bool = true) {
+    internal func showNextCoachMark(hidePrevious hidePrevious: Bool = true) {
         if disableFlow || paused || !canShowCoachMark { return }
 
         canShowCoachMark = false
@@ -157,7 +157,7 @@ class FlowManager {
         }
     }
 
-    func showOrStop() {
+    internal  func showOrStop() {
         if self.currentIndex < self.numberOfCoachMarks {
             self.createAndShowCoachMark()
         } else {
@@ -171,7 +171,7 @@ class FlowManager {
     ///
     /// - Parameter shouldCallDelegate: `true` to call delegate methods, `false` otherwise.
     /// - Parameter noAnimation: `true` to show the coachmark without fade, `false` otherwise.
-    func createAndShowCoachMark(shouldCallDelegate: Bool = true) {
+    internal func createAndShowCoachMark(shouldCallDelegate: Bool = true) {
         if disableFlow { return }
 
         // Retrieves the current coach mark structure from the datasource.
@@ -210,7 +210,7 @@ class FlowManager {
     ///
     /// - Parameter numberOfCoachMarksToSkip: the number of coach marks
     ///                                       to skip.
-    func showNext(numberOfCoachMarksToSkip numberToSkip: Int = 0) {
+    internal func showNext(numberOfCoachMarksToSkip numberToSkip: Int = 0) {
         if !self.started || !canShowCoachMark { return }
 
         if numberToSkip < 0 {

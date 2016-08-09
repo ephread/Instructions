@@ -25,6 +25,76 @@ import UIKit
 // Disable the line lenght, due to the lack support for multi-line string literals.
 // swiftlint:disable line_length
 public extension CoachMarksController {
+    @available(*, deprecated=0.5, message="please use flow.started instead.")
+    var started: Bool {
+        return flow.started
+    }
+
+    @available(*, deprecated=0.5, message="please use flow.paused instead.")
+    var paused: Bool {
+        return flow.paused
+    }
+
+    /// Pause the display.
+    /// This method is expected to be used by the delegate to
+    /// top the display, perform animation and resume display with `play()`
+    @available(*, deprecated=0.5, message="please use flow.pause() instead.")
+    func pause() {
+        flow.pause()
+    }
+
+    /// Resume the display.
+    /// If the display wasn't paused earlier, this method won't do anything.
+    @available(*, deprecated=0.5, message="please use flow.resume() instead.")
+    func resume() {
+        flow.resume()
+    }
+
+    /// Show the next specified Coach Mark.
+    ///
+    /// - Parameter numberOfCoachMarksToSkip: the number of coach marks
+    ///                                       to skip.
+    @available(*, deprecated=0.5, message="please use flow.showNext() instead.")
+    public func showNext(numberOfCoachMarksToSkip numberToSkip: Int = 0) {
+        flow.showNext(numberOfCoachMarksToSkip: numberToSkip)
+    }
+
+    /// Overlay fade animation duration
+    @available(*, deprecated=0.5, message="please use overlay.fadeAnimationDuration instead.")
+    var overlayFadeAnimationDuration: NSTimeInterval {
+        get { return overlay.fadeAnimationDuration }
+        set { overlay.fadeAnimationDuration = newValue }
+    }
+
+    /// Background color of the overlay.
+    @available(*, deprecated=0.5, message="please use overlay.color instead.")
+    var overlayBackgroundColor: UIColor {
+        get { return overlay.color }
+        set { overlay.color = newValue }
+    }
+
+
+    /// Blur effect style for the overlay view. Keeping this property
+    /// `nil` will disable the effect. This property
+    /// is mutually exclusive with `overlayBackgroundColor`.
+    @available(*, deprecated=0.5, message="please use blurEffectStyle instead.")
+    var overlayBlurEffectStyle: UIBlurEffectStyle? {
+        get { return overlay.blurEffectStyle }
+        set { overlay.blurEffectStyle = newValue }
+    }
+
+    /// `true` to let the overlay catch tap event and forward them to the
+    /// CoachMarkController, `false` otherwise.
+    ///
+    /// After receiving a tap event, the controller will show the next coach mark.
+    ///
+    /// You can disable the tap on a case-by-case basis, see CoachMark.disableOverlayTap
+    @available(*, deprecated=0.5, message="please use overlay.allowTap instead.")
+    var allowOverlayTap: Bool {
+        get { return overlay.allowTap }
+        set { overlay.allowTap = newValue }
+    }
+
     /// Returns a new coach mark with a cutout path set to be
     /// around the provided UIView. The cutout path will be slightly
     /// larger than the view and have rounded corners, however you can
@@ -36,7 +106,7 @@ public extension CoachMarksController {
     /// - Parameter view: the view around which create the cutoutPath
     /// - Parameter pointOfInterest: the point of interest toward which the arrow should point
     /// - Parameter bezierPathBlock: a block customizing the cutoutPath
-    @available(*, deprecated=0.5, message="please use CoachMarkForView.helper.coachMarkForView instead.")
+    @available(*, deprecated=0.5, message="please use helper.coachMarkForView instead.")
     public func coachMarkForView(view: UIView? = nil, pointOfInterest: CGPoint? = nil,
                                  bezierPathBlock: BezierPathBlock? = nil) -> CoachMark {
         return helper.coachMarkForView(view,
@@ -53,7 +123,7 @@ public extension CoachMarksController {
     /// - Parameter arrowOrientation: orientation of the arrow (either .Top or .Bottom)
     ///
     /// - Returns: new instances of the default coach views.
-    @available(*, deprecated=0.5, message="please use CoachMarkForView.helper.defaultCoachViewsWithArrow instead.")
+    @available(*, deprecated=0.5, message="please use helper.defaultCoachViewsWithArrow instead.")
     public func defaultCoachViewsWithArrow(arrow: Bool = true, withNextText nextText: Bool = true,
                                            arrowOrientation: CoachMarkArrowOrientation? = .Top)
     -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
@@ -71,7 +141,7 @@ public extension CoachMarksController {
     ///                       view will only show the hint text
     ///
     /// - Returns: new instances of the default coach views.
-    @available(*, deprecated=0.5, message="please use CoachMarkForView.helper.defaultCoachViewsWithArrow instead.")
+    @available(*, deprecated=0.5, message="please use helper.defaultCoachViewsWithArrow instead.")
     public func defaultCoachViewsWithArrow(arrow: Bool = true,
                                            arrowOrientation: CoachMarkArrowOrientation? = .Top,
                                            hintText: String, nextText: String? = nil)
@@ -95,7 +165,7 @@ public extension CoachMarksController {
     /// - Parameter pointOfInterest: the point of interest toward which the arrow
     ///                              should point
     /// - Parameter bezierPathBlock: a block customizing the cutoutPath
-    @available(*, deprecated=0.5, message="please use CoachMarkForView.helper.updateCurrentCoachMarkForView instead.")
+    @available(*, deprecated=0.5, message="please use helper.updateCurrentCoachMarkForView instead.")
     public func updateCurrentCoachMarkForView(view: UIView? = nil, pointOfInterest: CGPoint? = nil ,
                                               bezierPathBlock: BezierPathBlock? = nil) {
         helper.updateCurrentCoachMarkForView(view, pointOfInterest: pointOfInterest,
@@ -114,7 +184,7 @@ public extension CoachMarksController {
     /// - Parameter forView: the view around which create the cutoutPath
     /// - Parameter pointOfInterest: the point of interest toward which the arrow should point
     /// - Parameter bezierPathBlock: a block customizing the cutoutPath
-    @available(*, deprecated=0.5, message="please use CoachMarkForView.helper.updateCoachMark instead.")
+    @available(*, deprecated=0.5, message="please use helper.updateCoachMark instead.")
     internal func updateCoachMark(inout coachMark: CoachMark, forView view: UIView? = nil,
                                   pointOfInterest: CGPoint? = nil,
                                   bezierPathBlock: BezierPathBlock? = nil) {

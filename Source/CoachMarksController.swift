@@ -37,34 +37,21 @@ public class CoachMarksController {
     /// be called at various points.
     public weak var delegate: CoachMarksControllerDelegate?
 
+    private(set) public lazy var overlay: OverlayView = {
+        let overlayView = OverlayView()
+        overlayView.delegate = self
+
+        return overlayView
+    }()
+
     /// Provides methods easing the process of creating cutout paths.
-    public lazy var helper: CoachMarkHelper! = {
-        return CoachMarkHelper(instructionsRootView: self.instructionsRootView,
-                               flowManager: self.flowManager)
+    private(set) public lazy var helper: CoachMarkHelper! = {
+        let instructionsTopView = self.coachMarksViewController.instructionsRootView
+        return CoachMarkHelper(instructionsRootView: instructionsTopView,
+                               flowManager: self.flow)
     }()
 
-    //MARK: Private properties
-    private lazy var coachMarksViewController: CoachMarksViewController = {
-        let coachMarkController = CoachMarksViewController()
-        coachMarkController.coachMarkDisplayManager = self.coachMarkDisplayManager
-        coachMarkController.skipViewDisplayManager = self.skipViewDisplayManager
-
-        coachMarkController.overlayView = OverlayView()
-        coachMarkController.overlayView.delegate = self
-        coachMarkController.instructionsRootView = self.instructionsRootView
-
-        return coachMarkController
-    }()
-
-    private lazy var coachMarkDisplayManager: CoachMarkDisplayManager = {
-        let coachMarkDisplayManager =
-            CoachMarkDisplayManager(coachMarkLayoutHelper: CoachMarkLayoutHelper())
-        coachMarkDisplayManager.dataSource = self
-
-        return coachMarkDisplayManager
-    }()
-
-    private lazy var flowManager: FlowManager = {
+    private(set) public lazy var flow: FlowManager = {
         let flowManager = FlowManager(coachMarksViewController: self.coachMarksViewController)
         flowManager.dataSource = self
         flowManager.delegate = self
@@ -74,14 +61,17 @@ public class CoachMarksController {
         return flowManager
     }()
 
-    private lazy var skipViewDisplayManager: SkipViewDisplayManager? = {
-        let skipViewDisplayManager = SkipViewDisplayManager()
-        skipViewDisplayManager.dataSource = self
+    //MARK: Private properties
+    private lazy var coachMarksViewController: CoachMarksViewController = {
+        let coachMarkController = CoachMarksViewController()
+        coachMarkController.coachMarkDisplayManager = self.buildCoachMarkDisplayManager()
+        coachMarkController.skipViewDisplayManager = self.buildSkipViewDisplayManager()
 
-        return skipViewDisplayManager
+        coachMarkController.overlayView = self.overlay
+        coachMarkController.instructionsRootView = InstructionsRootView()
+
+        return coachMarkController
     }()
-
-    private let instructionsRootView = InstructionsRootView()
 
     //MARK: Lifecycle
     public init() { }
@@ -89,26 +79,9 @@ public class CoachMarksController {
 
 //MARK: Forwarded Properties
 public extension CoachMarksController {
-    var started: Bool {
-        return flowManager.started
-    }
-
-    var paused: Bool {
-        return flowManager.paused
-    }
-
     var skipView: CoachMarkSkipView? {
-        get {
-            return coachMarksViewController.skipView
-        }
-
-        set {
-            coachMarksViewController.skipView = newValue
-        }
-    }
-
-    var overlayFrame: CGRect {
-        return coachMarksViewController.instructionsRootView.frame
+        get { return coachMarksViewController.skipView }
+        set { coachMarksViewController.skipView = newValue }
     }
 }
 
@@ -125,7 +98,7 @@ public extension CoachMarksController {
         }
 
         // If coach marks are currently being displayed, calling `start()` doesn't do anything.
-        if flowManager.started { return }
+        if flow.started { return }
 
         let numberOfCoachMarks = dataSource.numberOfCoachMarksForCoachMarksController(self)
         if numberOfCoachMarks <= 0 {
@@ -135,95 +108,37 @@ public extension CoachMarksController {
         }
 
         coachMarksViewController.attachToViewController(parentViewController)
-        flowManager.startFlow(withNumberOfCoachMarks: numberOfCoachMarks)
+        flow.startFlow(withNumberOfCoachMarks: numberOfCoachMarks)
     }
 
     public func stop(immediately immediately: Bool = false) {
         if immediately {
-            flowManager.stopFlow(immediately: true, userDidSkip: false, shouldCallDelegate: false)
+            flow.stopFlow(immediately: true, userDidSkip: false, shouldCallDelegate: false)
         } else {
-            flowManager.stopFlow()
-        }
-    }
-
-    /// Pause the display.
-    /// This method is expected to be used by the delegate to
-    /// top the display, perform animation and resume display with `play()`
-    public func pause() {
-        flowManager.pause()
-    }
-
-    /// Resume the display.
-    /// If the display wasn't paused earlier, this method won't do anything.
-    public func resume() {
-        flowManager.resume()
-    }
-
-    /// Show the next specified Coach Mark.
-    ///
-    /// - Parameter numberOfCoachMarksToSkip: the number of coach marks
-    ///                                       to skip.
-    public func showNext(numberOfCoachMarksToSkip numberToSkip: Int = 0) {
-        flowManager.showNext(numberOfCoachMarksToSkip: numberToSkip)
-    }
-}
-
-//MARK: - OverlayView related
-public extension CoachMarksController {
-    /// Overlay fade animation duration
-    var overlayFadeAnimationDuration: NSTimeInterval {
-        get {
-            return coachMarksViewController.overlayFadeAnimationDuration
-        }
-
-        set {
-            coachMarksViewController.overlayFadeAnimationDuration = newValue
-        }
-    }
-
-    /// Background color of the overlay.
-    var overlayBackgroundColor: UIColor {
-        get {
-            return coachMarksViewController.overlayView.overlayColor
-        }
-
-        set {
-            coachMarksViewController.overlayView.overlayColor = newValue
-        }
-    }
-
-    /// Blur effect style for the overlay view. Keeping this property
-    /// `nil` will disable the effect. This property
-    /// is mutually exclusive with `overlayBackgroundColor`.
-    var overlayBlurEffectStyle: UIBlurEffectStyle? {
-        get {
-            return coachMarksViewController.overlayView.blurEffectStyle
-        }
-
-        set {
-            coachMarksViewController.overlayView.blurEffectStyle = newValue
-        }
-    }
-
-    /// `true` to let the overlay catch tap event and forward them to the
-    /// CoachMarkController, `false` otherwise.
-    ///
-    /// After receiving a tap event, the controller will show the next coach mark.
-    ///
-    /// You can disable the tap on a case-by-case basis, see CoachMark.disableOverlayTap
-    var allowOverlayTap: Bool {
-        get {
-            return coachMarksViewController.overlayView.allowOverlayTap
-        }
-
-        set {
-            coachMarksViewController.overlayView.allowOverlayTap = newValue
+            flow.stopFlow()
         }
     }
 }
 
 extension CoachMarksController: OverlayViewDelegate {
     func didReceivedSingleTap() {
-        flowManager.showNextCoachMark()
+        flow.showNextCoachMark()
+    }
+}
+
+private extension CoachMarksController {
+    private func buildCoachMarkDisplayManager() -> CoachMarkDisplayManager {
+        let coachMarkDisplayManager =
+            CoachMarkDisplayManager(coachMarkLayoutHelper: CoachMarkLayoutHelper())
+        coachMarkDisplayManager.dataSource = self
+
+        return coachMarkDisplayManager
+    }
+
+    private func buildSkipViewDisplayManager() -> SkipViewDisplayManager {
+        let skipViewDisplayManager = SkipViewDisplayManager()
+        skipViewDisplayManager.dataSource = self
+
+        return skipViewDisplayManager
     }
 }

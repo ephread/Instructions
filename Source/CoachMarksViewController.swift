@@ -30,9 +30,6 @@ import UIKit
 class CoachMarksViewController: UIViewController {
 
     //MARK: Internal properties
-    /// Duration to use when hiding/showing the overlay.
-    var overlayFadeAnimationDuration = Constants.overlayFadeAnimationDuration
-
     /// Control or control wrapper used to skip the flow.
     var skipView: CoachMarkSkipView? {
         willSet {
@@ -139,10 +136,10 @@ extension CoachMarksViewController {
 
         if let skipView = skipView {
             self.skipViewDisplayManager.showSkipView(skipView,
-                                                     duration: overlayFadeAnimationDuration)
+                                                     duration: overlayView.fadeAnimationDuration)
         }
 
-        UIView.animateWithDuration(overlayFadeAnimationDuration, animations: {
+        UIView.animateWithDuration(overlayView.fadeAnimationDuration, animations: {
             () -> Void in
             self.overlayView.alpha = 1.0
         }, completion: { (finished: Bool) -> Void in

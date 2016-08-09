@@ -24,6 +24,11 @@ import UIKit
 
 class OverlayViewLayerManager {
     var managedLayer: CALayer
+    var cutoutPath: UIBezierPath? {
+        didSet {
+            updateCutoutPath()
+        }
+    }
 
     /// The cutout mask
     private var cutoutMaskLayer = CAShapeLayer()
@@ -68,8 +73,10 @@ class OverlayViewLayerManager {
 
         CATransaction.commit()
     }
+}
 
-    func updateCutoutPath(cutoutPath: UIBezierPath?) {
+private extension OverlayViewLayerManager {
+    func updateCutoutPath() {
         cutoutMaskLayer.removeFromSuperlayer()
         fullMaskLayer.removeFromSuperlayer()
 
@@ -88,9 +95,7 @@ class OverlayViewLayerManager {
 
         managedLayer.mask = maskLayer
     }
-}
 
-private extension OverlayViewLayerManager {
     func configureCutoutMask(cutoutPath: UIBezierPath) {
         cutoutMaskLayer = CAShapeLayer()
         cutoutMaskLayer.name = "cutoutMaskLayer"

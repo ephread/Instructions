@@ -97,7 +97,7 @@ internal class CoachMarkDisplayManager {
             overlayView: overlayView
         )
 
-        overlayView.disableOverlayTap = coachMark.disableOverlayTap
+        overlayView.enableTap = !coachMark.disableOverlayTap
         overlayView.allowTouchInsideCutoutPath = coachMark.allowTouchInsideCutoutPath
 
         // The view shall be invisible, 'cause we'll animate its entry.

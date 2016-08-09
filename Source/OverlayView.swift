@@ -24,11 +24,13 @@ import UIKit
 
 // Overlay a blocking view on top of the screen and handle the cutout path
 // around the point of interest.
-internal class OverlayView: UIView {
-    //MARK: - Internal properties
-
+public class OverlayView: UIView {
+    //MARK: - Public properties
     /// The background color of the overlay
-    var overlayColor: UIColor = Constants.overlayColor
+    var color: UIColor = Constants.overlayColor
+
+    /// Duration to use when hiding/showing the overlay.
+    var fadeAnimationDuration = Constants.overlayFadeAnimationDuration
 
     /// The blur effect style to apply to the overlay.
     /// Setting this property to anything but `nil` will
@@ -43,10 +45,21 @@ internal class OverlayView: UIView {
         }
     }
 
+    /// The original cutout path
+    var cutoutPath: UIBezierPath? {
+        set(cutoutPath) {
+            updateCutoutPath(cutoutPath)
+        }
+
+        get {
+            return layerManager.cutoutPath
+        }
+    }
+
     /// `true` to let the overlay catch tap event and forward them to the
     /// CoachMarkController, `false` otherwise.
     /// After receiving a tap event, the controller will show the next coach mark.
-    var allowOverlayTap: Bool {
+    var allowTap: Bool {
         get {
             return self.singleTapGestureRecognizer.view != nil
         }
@@ -60,20 +73,17 @@ internal class OverlayView: UIView {
         }
     }
 
-    /// Used to temporarily disable the tap, for a given coachmark.
-    var disableOverlayTap: Bool = false
-
     /// Used to temporarily enable touch forwarding isnide the cutoutPath.
     var allowTouchInsideCutoutPath: Bool = false
 
+    //MARK: Internal Properties
+    /// Used to temporarily disable the tap, for a given coachmark.
+    internal var enableTap: Bool = true
+
     /// Delegate to which tell that the overlay view received a tap event.
-    weak var delegate: OverlayViewDelegate?
+    internal weak var delegate: OverlayViewDelegate?
 
     //MARK: - Private properties
-
-    /// The original cutout path
-    private var cutoutPath: UIBezierPath?
-
     /// The overlay layer, which will handle the background color
     private var overlayLayer = CALayer()
 
@@ -84,10 +94,8 @@ internal class OverlayView: UIView {
 
     /// TapGestureRecognizer that will catch tap event performed on the overlay
     private lazy var singleTapGestureRecognizer: UITapGestureRecognizer = {
-        let gestureRecognizer = UITapGestureRecognizer(
-            target: self,
-            action: #selector(handleSingleTap(_:))
-        )
+        let gestureRecognizer = UITapGestureRecognizer(target: self,
+                                                       action: #selector(handleSingleTap(_:)))
 
         return gestureRecognizer
     }()
@@ -99,7 +107,7 @@ internal class OverlayView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("This class does not support NSCoding")
     }
 
@@ -130,11 +138,9 @@ internal class OverlayView: UIView {
     ///
     /// - Parameter cutoutPath: the cutout path
     func updateCutoutPath(cutoutPath: UIBezierPath?) {
-        self.cutoutPath = cutoutPath
-
         if cutoutPath == nil {
             if blurEffectView == nil {
-                backgroundColor = overlayColor
+                backgroundColor = color
                 overlayLayer.removeFromSuperlayer()
             }
         } else {
@@ -143,7 +149,7 @@ internal class OverlayView: UIView {
 
                 overlayLayer.frame = bounds
 
-                overlayLayer.backgroundColor = self.overlayColor.CGColor
+                overlayLayer.backgroundColor = color.CGColor
 
                 layer.addSublayer(overlayLayer)
             }
@@ -151,10 +157,10 @@ internal class OverlayView: UIView {
             backgroundColor = UIColor.clearColor()
         }
 
-        layerManager.updateCutoutPath(cutoutPath)
+        layerManager.cutoutPath = cutoutPath
     }
 
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+    override public func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
         let hitView = super.hitTest(point, withEvent: event)
 
         if hitView == self {
@@ -230,12 +236,12 @@ internal class OverlayView: UIView {
     ///
     /// - Parameter sender: the object which sent the event
     @objc private func handleSingleTap(sender: AnyObject?) {
-        if !disableOverlayTap {
+        if enableTap {
             self.delegate?.didReceivedSingleTap()
         }
     }
 
-    override func layoutSublayersOfLayer(layer: CALayer) {
+    override public func layoutSublayersOfLayer(layer: CALayer) {
         super.layoutSublayersOfLayer(layer)
 
         if layer == self.layer {

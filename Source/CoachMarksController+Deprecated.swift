@@ -22,6 +22,8 @@
 
 import UIKit
 
+// Disable the line lenght, due to the lack support for multi-line string literals.
+// swiftlint:disable line_length
 public extension CoachMarksController {
     /// Returns a new coach mark with a cutout path set to be
     /// around the provided UIView. The cutout path will be slightly
@@ -34,11 +36,9 @@ public extension CoachMarksController {
     /// - Parameter view: the view around which create the cutoutPath
     /// - Parameter pointOfInterest: the point of interest toward which the arrow should point
     /// - Parameter bezierPathBlock: a block customizing the cutoutPath
-    public func coachMarkForView(
-        view: UIView? = nil,
-        pointOfInterest: CGPoint? = nil,
-        bezierPathBlock: ((frame: CGRect) -> UIBezierPath)? = nil
-    ) -> CoachMark {
+    @available(*, deprecated=0.5, message="please use CoachMarkForView.helper.coachMarkForView instead.")
+    public func coachMarkForView(view: UIView? = nil, pointOfInterest: CGPoint? = nil,
+                                 bezierPathBlock: BezierPathBlock? = nil) -> CoachMark {
         return helper.coachMarkForView(view,
                                        pointOfInterest: pointOfInterest,
                                        bezierPathBlock: bezierPathBlock)
@@ -46,43 +46,38 @@ public extension CoachMarksController {
 
     /// Provides default coach views.
     ///
-    /// - Parameter withArrow: `true` to return an instance of `CoachMarkArrowDefaultView`
-    ///                        as well, `false` otherwise.
+    /// - Parameter arrow: `true` to return an instance of `CoachMarkArrowDefaultView`
+    ///                    as well, `false` otherwise.
     /// - Parameter withNextText: `true` to show the ‘next’ pseudo-button,
     ///                           `false` otherwise.
     /// - Parameter arrowOrientation: orientation of the arrow (either .Top or .Bottom)
     ///
     /// - Returns: new instances of the default coach views.
-    public func defaultCoachViewsWithArrow(
-        arrow: Bool = true,
-        withNextText nextText: Bool = true,
-        arrowOrientation: CoachMarkArrowOrientation? = .Top
-    ) -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
-        return helper.defaultCoachViewsWithArrow(arrow,
-                                                 withNextText: nextText,
+    @available(*, deprecated=0.5, message="please use CoachMarkForView.helper.defaultCoachViewsWithArrow instead.")
+    public func defaultCoachViewsWithArrow(arrow: Bool = true, withNextText nextText: Bool = true,
+                                           arrowOrientation: CoachMarkArrowOrientation? = .Top)
+    -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
+        return helper.defaultCoachViewsWithArrow(arrow, withNextText: nextText,
                                                  arrowOrientation: arrowOrientation)
     }
 
     /// Provides default coach views, can have a next label or just the message.
     ///
-    /// - Parameter withArrow: `true` to return an instance of
-    ///                        `CoachMarkArrowDefaultView` as well, `false` otherwise.
+    /// - Parameter arrow: `true` to return an instance of
+    ///                    `CoachMarkArrowDefaultView` as well, `false` otherwise.
     /// - Parameter arrowOrientation: orientation of the arrow (either .Top or .Bottom)
     /// - Parameter hintText: message to show in the CoachMark
     /// - Parameter nextText: text for the next label, if nil the CoachMark
     ///                       view will only show the hint text
     ///
     /// - Returns: new instances of the default coach views.
-    public func defaultCoachViewsWithArrow(
-        arrow: Bool = true,
-        arrowOrientation: CoachMarkArrowOrientation? = .Top,
-        hintText: String,
-        nextText: String? = nil
-    ) -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
-        return helper.defaultCoachViewsWithArrow(arrow,
-                                                 arrowOrientation: arrowOrientation,
-                                                 hintText: hintText,
-                                                 nextText: nextText)
+    @available(*, deprecated=0.5, message="please use CoachMarkForView.helper.defaultCoachViewsWithArrow instead.")
+    public func defaultCoachViewsWithArrow(arrow: Bool = true,
+                                           arrowOrientation: CoachMarkArrowOrientation? = .Top,
+                                           hintText: String, nextText: String? = nil)
+    -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
+        return helper.defaultCoachViewsWithArrow(arrow, arrowOrientation: arrowOrientation,
+                                                 hintText: hintText, nextText: nextText)
     }
 
     /// Updates the currently stored coach mark with a cutout path set to be
@@ -100,13 +95,10 @@ public extension CoachMarksController {
     /// - Parameter pointOfInterest: the point of interest toward which the arrow
     ///                              should point
     /// - Parameter bezierPathBlock: a block customizing the cutoutPath
-    public func updateCurrentCoachMarkForView(
-        view: UIView? = nil,
-        pointOfInterest: CGPoint? = nil ,
-        bezierPathBlock: ((frame: CGRect) -> UIBezierPath)? = nil
-    ) {
-        helper.updateCurrentCoachMarkForView(view,
-                                             pointOfInterest: pointOfInterest,
+    @available(*, deprecated=0.5, message="please use CoachMarkForView.helper.updateCurrentCoachMarkForView instead.")
+    public func updateCurrentCoachMarkForView(view: UIView? = nil, pointOfInterest: CGPoint? = nil ,
+                                              bezierPathBlock: BezierPathBlock? = nil) {
+        helper.updateCurrentCoachMarkForView(view, pointOfInterest: pointOfInterest,
                                              bezierPathBlock: bezierPathBlock)
     }
 
@@ -122,15 +114,11 @@ public extension CoachMarksController {
     /// - Parameter forView: the view around which create the cutoutPath
     /// - Parameter pointOfInterest: the point of interest toward which the arrow should point
     /// - Parameter bezierPathBlock: a block customizing the cutoutPath
-    internal func updateCoachMark(
-        inout coachMark: CoachMark,
-        forView view: UIView? = nil,
-        pointOfInterest: CGPoint? = nil,
-        bezierPathBlock: ((frame: CGRect) -> UIBezierPath)? = nil
-    ) {
-        helper.updateCoachMark(&coachMark,
-                               forView: view,
-                               pointOfInterest: pointOfInterest,
+    @available(*, deprecated=0.5, message="please use CoachMarkForView.helper.updateCoachMark instead.")
+    internal func updateCoachMark(inout coachMark: CoachMark, forView view: UIView? = nil,
+                                  pointOfInterest: CGPoint? = nil,
+                                  bezierPathBlock: BezierPathBlock? = nil) {
+        helper.updateCoachMark(&coachMark, forView: view, pointOfInterest: pointOfInterest,
                                bezierPathBlock: bezierPathBlock)
     }
 }

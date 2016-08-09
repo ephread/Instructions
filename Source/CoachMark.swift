@@ -1,6 +1,6 @@
 // CoachMark.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,17 +33,17 @@ public struct CoachMark {
     /// The path to cut in the overlay, so the point of interest will be visible.
     public var cutoutPath: UIBezierPath?
 
-    /// The vertical offset for the arrow (in rare cases, the arrow might need
-    /// to overlap with the coach mark body).
+    /// The vertical offset for the arrow (in rare cases, the arrow might need to overlap with
+    /// the coach mark body).
     public var gapBetweenBodyAndArrow: CGFloat = 2.0
 
-    /// The orientation of the arrow, around the body of the coach mark
-    /// (top or bottom)
+    /// The orientation of the arrow, around the body of the coach mark (top or bottom).
     public var arrowOrientation: CoachMarkArrowOrientation?
 
     /// The "point of interest" toward which the arrow will point.
-    /// At the moment, it's only used to shift the arrow horizontally
-    /// and make it sits above/below the point of interest.
+    ///
+    /// At the moment, it's only used to shift the arrow horizontally and make it sits above/below
+    /// the point of interest.
     public var pointOfInterest: CGPoint?
 
     /// Offset between the coach mark and the cutout path.
@@ -58,12 +58,11 @@ public struct CoachMark {
     /// Set this property to `true` to disable a tap on the overlay.
     /// (only if the tap capture was enabled)
     ///
-    /// If you need to disable the tap for all the coachmarks,
-    /// prefer setting CoachMarkController.allowOverlayTap
+    /// If you need to disable the tap for all the coachmarks, prefer setting
+    /// `CoachMarkController.allowOverlayTap`.
     public var disableOverlayTap: Bool = false
 
-    /// Set this property to `true` to allow touch forwarding
-    /// inside the cutoutPath.
+    /// Set this property to `true` to allow touch forwarding inside the cutoutPath.
     public var allowTouchInsideCutoutPath: Bool = false
 
     //MARK: Initialization
@@ -73,8 +72,7 @@ public struct CoachMark {
     }
 
     //MARK: Internal Methods
-    /// This method perform both `computeOrientationInFrame` and
-    /// `computePointOfInterestInFrame`.
+    /// This method perform both `computeOrientationInFrame` and `computePointOfInterestInFrame`.
     ///
     /// - Parameter frame: the frame in which compute the orientation
     ///                    (likely to match the overlay's frame)
@@ -83,8 +81,8 @@ public struct CoachMark {
         self.computePointOfInterestInFrame()
     }
 
-    /// Compute the orientation of the arrow, given the frame in which
-    /// the coach mark will be displayed.
+    /// Compute the orientation of the arrow, given the frame in which the coach mark
+    /// will be displayed.
     ///
     /// - Parameter frame: the frame in which compute the orientation
     ///                    (likely to match the overlay's frame)
@@ -107,14 +105,14 @@ public struct CoachMark {
         }
     }
 
-    /// Compute the orientation of the arrow, given the frame in which
-    /// the coach mark will be displayed.
+    /// Compute the orientation of the arrow, given the frame in which the coach mark
+    /// will be displayed.
     internal mutating func computePointOfInterestInFrame() {
         /// If the value is already set, don't do anything.
         if self.pointOfInterest != nil { return }
 
-        /// No cutout path means no point of interest. That way, no
-        /// orientation computation is needed.
+        /// No cutout path means no point of interest.
+        /// That way, no orientation computation is needed.
         guard let cutoutPath = self.cutoutPath else { return }
 
         let x = cutoutPath.bounds.origin.x + cutoutPath.bounds.width / 2

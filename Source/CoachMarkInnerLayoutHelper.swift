@@ -23,11 +23,9 @@
 import UIKit
 
 class CoachMarkInnerLayoutHelper {
-    func horizontalArrowConstraints(
-        for position: ArrowPosition,
-        withHorizontalOffset horizontalOffset: CGFloat,
-        body bodyView: UIView,
-        arrow arrowView: UIView
+    func horizontalArrowConstraints(for position: ArrowPosition,
+                                    withHorizontalOffset horizontalOffset: CGFloat,
+                                    body bodyView: UIView, arrow arrowView: UIView
     ) -> NSLayoutConstraint {
         return NSLayoutConstraint(
             item: arrowView, attribute: .CenterX, relatedBy: .Equal,
@@ -45,12 +43,10 @@ class CoachMarkInnerLayoutHelper {
         )
     }
 
-    func verticalConstraints(
-        forBody bodyView: UIView,
-        andArrow arrowView: UIView,
-        in parentView: UIView,
-        withProperties properties: (orientation: CoachMarkArrowOrientation,
-                                    verticalArrowOffset: CGFloat)
+    func verticalConstraints(forBody bodyView: UIView, andArrow arrowView: UIView,
+                             in parentView: UIView,
+                             withProperties properties: (orientation: CoachMarkArrowOrientation,
+                                                         verticalArrowOffset: CGFloat)
     ) -> [NSLayoutConstraint] {
         var constraints = [NSLayoutConstraint]()
 
@@ -105,10 +101,7 @@ class CoachMarkInnerLayoutHelper {
         )
     }
 
-    private func adaptedOffset(
-        for arrowPosition: ArrowPosition,
-        offset: CGFloat
-    ) -> CGFloat {
+    private func adaptedOffset(for arrowPosition: ArrowPosition, offset: CGFloat) -> CGFloat {
         switch arrowPosition {
         case .Leading: return offset
         case .Center: return -offset
@@ -116,10 +109,8 @@ class CoachMarkInnerLayoutHelper {
         }
     }
 
-    private func adaptedOffset(
-        for arrowOrientation: CoachMarkArrowOrientation,
-            offset: CGFloat
-        ) -> CGFloat {
+    private func adaptedOffset(for arrowOrientation: CoachMarkArrowOrientation,
+                               offset: CGFloat) -> CGFloat {
         switch arrowOrientation {
         case .Top: return offset
         case .Bottom: return -offset

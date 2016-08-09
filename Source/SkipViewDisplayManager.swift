@@ -23,17 +23,20 @@
 
 import UIKit
 
-/// This class deals with the layout of the "skip" view
+/// This class deals with the layout of the "skip" view.
 internal class SkipViewDisplayManager {
-    //MARK: - Public properties
+    //MARK: Internal properties
+    /// Datasource providing the constraints to use.
+    weak var dataSource: CoachMarksControllerProxyDataSource!
+
+    //MARK: Private properties
     /// Constraints defining the position of the "Skip" view
     private var skipViewConstraints: [NSLayoutConstraint] = []
 
-    weak var dataSource: CoachMarksControllerProxyDataSource!
-
-    //MARK: - Internal methods
-    /// Will hide the current Skip View with a fading effect.
+    //MARK: Internal methods
+    /// Hide the given Skip View with a fading effect.
     ///
+    /// - Parameter skipView: the skip view to hide.
     /// - Parameter duration: the duration of the fade.
     func hideSkipView(skipView: CoachMarkSkipView, duration: NSTimeInterval = 0) {
         if duration == 0 {
@@ -45,10 +48,19 @@ internal class SkipViewDisplayManager {
         }
     }
 
+    /// Show the given Skip View with a fading effect.
+    ///
+    /// - Parameter skipView: the skip view to show.
+    /// - Parameter duration: the duration of the fade.
     func showSkipView(skipView: CoachMarkSkipView, duration: NSTimeInterval = 0) {
+        guard let parentView = skipView.asView?.superview else {
+            print("The Skip View has no parent, aborting.")
+            return
+        }
+
         let constraints =
             self.dataSource.constraintsForSkipView(skipView.asView!,
-                                                   inParentView: skipView.asView!.superview!)
+                                                   inParentView: parentView)
 
         updateSkipView(skipView, withConstraints: constraints)
 
@@ -63,15 +75,14 @@ internal class SkipViewDisplayManager {
         }
     }
 
-    /// Update the constraints defining the "Skip view" position.
+    /// Update the constraints defining the location of given s view.
     ///
-    /// - Parameter layoutConstraints: the constraints to add.
-    internal func updateSkipView(
-        skipView: CoachMarkSkipView,
-        withConstraints constraints: [NSLayoutConstraint]?
-    ) {
+    /// - Parameter skipView: the skip view to position.
+    /// - Parameter constraints: the constraints to use.
+    internal func updateSkipView(skipView: CoachMarkSkipView,
+                                 withConstraints constraints: [NSLayoutConstraint]?) {
         guard let parentView = skipView.asView?.superview else {
-            print("skipView has no parent.")
+            print("The Skip View has no parent, aborting.")
             return
         }
 
@@ -85,13 +96,9 @@ internal class SkipViewDisplayManager {
             parentView.addConstraints(self.skipViewConstraints)
         } else {
             self.skipViewConstraints.append(NSLayoutConstraint(
-                item: skipView,
-                attribute: .Trailing,
-                relatedBy: .Equal,
-                toItem: parentView,
-                attribute: .Trailing,
-                multiplier: 1,
-                constant: -10
+                item: skipView, attribute: .Trailing, relatedBy: .Equal,
+                toItem: parentView, attribute: .Trailing,
+                multiplier: 1, constant: -10
             ))
 
             var topConstant: CGFloat = 0.0
@@ -105,13 +112,9 @@ internal class SkipViewDisplayManager {
             topConstant += 2
 
             self.skipViewConstraints.append(NSLayoutConstraint(
-                item: skipView,
-                attribute: .Top,
-                relatedBy: .Equal,
-                toItem: parentView,
-                attribute: .Top,
-                multiplier: 1,
-                constant: topConstant
+                item: skipView, attribute: .Top, relatedBy: .Equal,
+                toItem: parentView, attribute: .Top,
+                multiplier: 1, constant: topConstant
             ))
 
             parentView.addConstraints(self.skipViewConstraints)

@@ -232,13 +232,13 @@ extension CoachMarkBodyDefaultView {
             options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil,
             views: ["hintLabel": hintLabel]
-            ))
+        ))
 
         addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
             "H:|-(10)-[hintLabel]-(10)-|",
             options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil,
             views: ["hintLabel": hintLabel]
-            ))
+        ))
     }
 }

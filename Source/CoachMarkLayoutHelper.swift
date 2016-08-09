@@ -30,12 +30,8 @@ class CoachMarkLayoutHelper {
 
     /// Position the coach mark view.
     /// TODO: Improve the layout system. Make it smarter.
-    func constraintsForCoachMarkView(
-        coachMarkView: CoachMarkView,
-        coachMark: CoachMark,
-        parentView: UIView
-    ) -> [NSLayoutConstraint] {
-
+    func constraintsForCoachMarkView(coachMarkView: CoachMarkView, coachMark: CoachMark,
+                                     parentView: UIView) -> [NSLayoutConstraint] {
         let computedProperties = computePropertiesForCoachMark(coachMark,
             inParentView: parentView
         )
@@ -133,8 +129,7 @@ class CoachMarkLayoutHelper {
     /// - Parameter segmentIndex: the segment index (either 1, 2 or 3)
     private func arrowOffsetForCoachMark(coachMark: CoachMark,
                                          withProperties properties: CoachMarkComputedProperties,
-                                         inParentView parentView: UIView
-    ) -> CGFloat {
+                                         inParentView parentView: UIView) -> CGFloat {
         let pointOfInterest = coachMark.pointOfInterest!
 
         var arrowOffset: CGFloat

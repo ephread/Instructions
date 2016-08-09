@@ -1,4 +1,4 @@
-// OverlayViewDelegate.swift
+// CoachMarksController.swift
 //
 // Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
@@ -20,12 +20,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import UIKit
+/// Used by the CoachMarksViewController to notify user or system related events.
+protocol CoachMarksViewControllerDelegate: class {
+    /// The given `coachMarkView` was tapped.
+    ///
+    /// - Parameter coachMarkView: the view that was tapped.
+    func didTapCoachMark(coachMarkView: CoachMarkView?)
 
-/// This protocol expected to be implemented by CoachMarkManager, so
-/// it can be notified when a tap occured on the overlay.
-internal protocol OverlayViewDelegate: class {
+    /// The given `skipView` was tapped.
+    ///
+    /// - Parameter skipView: the view that was tapped.
+    func didTapSkipView(skipView: CoachMarkSkipView?)
 
-    /// Called when the overlay received a tap event.
-    func didReceivedSingleTap()
+    /// The delegate should prepare for the upcoming size transition.
+    func willTransition()
+
+    /// The delegate should perform action, after for the size transition was completed
+    func didTransition()
 }

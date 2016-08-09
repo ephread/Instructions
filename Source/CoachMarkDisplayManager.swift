@@ -66,10 +66,8 @@ internal class CoachMarkDisplayManager {
     /// - Parameter coachMarkView: the coach mark to hide
     /// - Parameter animationDuration: the duration of the fade
     /// - Parameter completion: a block to execute after the coach mark was hidden
-    func hideCoachMarkView(coachMarkView: UIView?,
-                           overlayView: OverlayView,
-                           animationDuration: NSTimeInterval,
-                           completion: (() -> Void)? = nil) {
+    func hideCoachMarkView(coachMarkView: UIView?, overlayView: OverlayView,
+                           animationDuration: NSTimeInterval, completion: (() -> Void)? = nil) {
         overlayView.hideCutoutPathViewWithAnimationDuration(animationDuration)
         coachMarkView?.layer.removeAllAnimations()
         //removeTargetFromCurrentCoachView()
@@ -90,12 +88,9 @@ internal class CoachMarkDisplayManager {
     ///                          visibility, `false` otherwise.
     /// - Parameter completion: a handler to call after the coach mark
     ///                         was successfully displayed.
-    func showCoachMarkView(coachMarkView: CoachMarkView,
-                           from coachMark: CoachMark,
-                           overlayView: OverlayView,
-                           noAnimation: Bool = false,
+    func showCoachMarkView(coachMarkView: CoachMarkView, from coachMark: CoachMark,
+                           overlayView: OverlayView, noAnimation: Bool = false,
                            completion: (() -> Void)? = nil) {
-
         prepareCoachMarkViewForDisplay(coachMarkView,
             in: overlayView.superview!,
             coachMark: coachMark,
@@ -132,10 +127,8 @@ internal class CoachMarkDisplayManager {
     /// - Parameter coachMarkView: the coach mark view (the one displayed)
     /// - Parameter overlayView: the overlayView (covering everything and showing cutouts)
     /// - Parameter instructionsRootView: the view holding the coach marks
-    private func storeCoachMark(coachMark: CoachMark,
-                                coachMarkView: CoachMarkView,
-                                overlayView: OverlayView,
-                                instructionsRootView: UIView) {
+    private func storeCoachMark(coachMark: CoachMark, coachMarkView: CoachMarkView,
+                                overlayView: OverlayView, instructionsRootView: UIView) {
         self.coachMark = coachMark
         self.coachMarkView = coachMarkView
     }
@@ -148,12 +141,10 @@ internal class CoachMarkDisplayManager {
 
     /// Add the current coach mark to the view, making sure it is
     /// properly positioned.
-    private func prepareCoachMarkViewForDisplay(
-        coachMarkView: CoachMarkView,
-        in parentView: UIView,
-        coachMark: CoachMark,
-        overlayView: OverlayView
-    ) {
+    private func prepareCoachMarkViewForDisplay(coachMarkView: CoachMarkView,
+                                                in parentView: UIView,
+                                                    coachMark: CoachMark,
+                                                  overlayView: OverlayView) {
         // Add the view and compute its associated constraints.
         parentView.addSubview(coachMarkView)
 

@@ -82,17 +82,15 @@ final internal class CoachMarkView: UIView {
 
     /// Allocate and initliaze the coach mark view, with the given subviews.
     ///
-    /// - Parameter bodyView: the mandatory body view
-    /// - Parameter arrowView: the optional arrow view
+    /// - Parameter bodyView:         the mandatory body view
+    /// - Parameter arrowView:        the optional arrow view
     /// - Parameter arrowOrientation: the arrow orientation, either .Top or .Bottom
-    /// - Parameter arrowOffset: the arrow offset (in case the arrow is required
-    ///                          to overlap the body) - a positive number
-    ///                          will make the arrow overlap.
+    /// - Parameter arrowOffset:      the arrow offset (in case the arrow is required
+    ///                               to overlap the body) - a positive number
+    ///                               will make the arrow overlap.
     /// - Parameter coachMarkInnerLayoutHelper: auto-layout constraints helper.
-    init(bodyView: CoachMarkBodyView,
-         arrowView: CoachMarkArrowView? = nil,
-         arrowOrientation: CoachMarkArrowOrientation? = nil,
-         arrowOffset: CGFloat? = 0.0,
+    init(bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView? = nil,
+         arrowOrientation: CoachMarkArrowOrientation? = nil, arrowOffset: CGFloat? = 0.0,
          coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper) {
 
         // Due to the fact Swift 2 compiler doesn't let us enforce type check of
@@ -133,9 +131,9 @@ final internal class CoachMarkView: UIView {
     //TODO: Better documentation
     /// Change the arrow horizontal position to the given position.
     /// `position` is relative to:
-    /// - `.Leading`: `offset` is relative to the leading edge of the overlay
-    /// - `.Center`: `offset` is relative to the center of the overlay
-    /// - `.Trailing`: `offset` is relative to the trailing edge of the overlay
+    /// - `.Leading`: `offset` is relative to the leading edge of the overlay;
+    /// - `.Center`: `offset` is relative to the center of the overlay;
+    /// - `.Trailing`: `offset` is relative to the trailing edge of the overlay.
     ///
     /// - Parameter position: arrow position
     /// - Parameter offset: arrow offset

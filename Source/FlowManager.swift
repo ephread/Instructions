@@ -104,11 +104,9 @@ class FlowManager {
     /// - Parameter userDidSkip: `true` when the user canceled the flow, `false` otherwise.
     /// - Parameter shouldCallDelegate: `true` to notify the delegate that the flow
     ///                                 was stop.
-    internal func stopFlow(
-        immediately immediately: Bool = false,
-        userDidSkip skipped: Bool = false,
-        shouldCallDelegate: Bool = true
-    ) {
+    internal func stopFlow(immediately immediately: Bool = false,
+                               userDidSkip skipped: Bool = false,
+                                shouldCallDelegate: Bool = true ) {
         let animationDuration: NSTimeInterval
 
         if immediately {
@@ -124,7 +122,7 @@ class FlowManager {
             self.coachMarksViewController.currentCoachMarkView?.alpha = 0.0
 
             }, completion: {(finished: Bool) -> Void in
-                //self.coachMarksViewController.cleanup()
+                self.coachMarksViewController.detachFromViewController()
 
                 if shouldCallDelegate {
                     // Calling the delegate, maybe the user wants to do something?
@@ -197,7 +195,8 @@ class FlowManager {
         // the case.
         if !self.paused {
             if coachMarksViewController.instructionsRootView.bounds.isEmpty {
-                print("The overlay view added to the window has empty bounds, Instructions will stop.")
+                print("The overlay view added to the window has empty bounds, " +
+                      "Instructions will stop.")
                 self.stopFlow()
                 return
             }

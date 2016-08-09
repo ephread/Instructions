@@ -235,3 +235,10 @@ internal class OverlayView: UIView {
         }
     }
 }
+
+/// This protocol expected to be implemented by CoachMarkManager, so
+/// it can be notified when a tap occured on the overlay.
+internal protocol OverlayViewDelegate: class {
+    /// Called when the overlay received a tap event.
+    func didReceivedSingleTap()
+}

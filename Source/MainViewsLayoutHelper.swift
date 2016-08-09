@@ -9,9 +9,7 @@
 import Foundation
 
 class MainViewsLayoutHelper {
-    func fullSizeConstraintsForView(
-        view: UIView
-    ) -> [NSLayoutConstraint] {
+    func fullSizeConstraintsForView(view: UIView) -> [NSLayoutConstraint] {
         var constraints = [NSLayoutConstraint]()
 
         constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat(

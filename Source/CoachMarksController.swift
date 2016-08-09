@@ -29,14 +29,15 @@ import UIKit
 /// Handles a set of coach marks, and display them successively.
 public class CoachMarksController {
     //MARK: Public properties
-    /// An object implementing the data source protocol and supplying
+    /// Implement the data source protocol and supply
     /// the coach marks to display.
     public weak var dataSource: CoachMarksControllerDataSource?
 
-    /// An object implementing the delegate data source protocol,
-    /// which methods will be called at various points.
+    /// Implement the delegate protocol, which methods will
+    /// be called at various points.
     public weak var delegate: CoachMarksControllerDelegate?
 
+    /// Provides methods easing the process of creating cutout paths.
     public lazy var helper: CoachMarkHelper! = {
         return CoachMarkHelper(instructionsRootView: self.instructionsRootView,
                                flowManager: self.flowManager)
@@ -82,9 +83,11 @@ public class CoachMarksController {
 
     private let instructionsRootView = InstructionsRootView()
 
+    //MARK: Lifecycle
     public init() { }
 }
 
+//MARK: Forwarded Properties
 public extension CoachMarksController {
     var started: Bool {
         return flowManager.started

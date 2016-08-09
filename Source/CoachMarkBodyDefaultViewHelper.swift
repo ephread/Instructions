@@ -38,6 +38,15 @@ public class CoachMarkBodyDefaultViewHelper {
         )
     }
 
+    func verticalConstraintsForHint(hint: UITextView) -> [NSLayoutConstraint] {
+        return NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:|-(5)-[hint]-(5)-|",
+            options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil,
+            views: ["hint": hint]
+        )
+    }
+
     func configureBackground(background: UIView, addTo parent: UIView) {
         background.translatesAutoresizingMaskIntoConstraints = false
         background.userInteractionEnabled = false
@@ -66,33 +75,12 @@ public class CoachMarkBodyDefaultViewHelper {
         hint.scrollEnabled = false
 
         configureHintTextProperties(hint)
-
         parent.addSubview(hint)
-
-        parent.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|-(5)-[hint]-(5)-|",
-            options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil,
-            views: ["hint": hint]
-        ))
+        parent.addConstraints(verticalConstraintsForHint(hint))
     }
 
     func configureSimpleHint(hint: UITextView, addTo parent: UIView) {
-        hint.translatesAutoresizingMaskIntoConstraints = false
-        hint.userInteractionEnabled = false
-        hint.backgroundColor = UIColor.clearColor()
-        hint.scrollEnabled = false
-
-        configureSimpleHintTextProperties(hint)
-
-        parent.addSubview(hint)
-
-        parent.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|-(5)-[hintLabel]-(5)-|",
-            options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil,
-            views: ["hintLabel": hint]
-            ))
+        configureHint(hint, addTo: parent)
 
         parent.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
             "H:|-(10)-[hintLabel]-(10)-|",
@@ -134,14 +122,6 @@ public class CoachMarkBodyDefaultViewHelper {
     }
 
     private func configureHintTextProperties(hint: UITextView) {
-        hint.textColor = UIColor.darkGrayColor()
-        hint.font = UIFont.systemFontOfSize(15.0)
-        hint.textAlignment = .Justified
-        hint.layoutManager.hyphenationFactor = 1.0
-        hint.editable = false
-    }
-
-    private func configureSimpleHintTextProperties(hint: UITextView) {
         hint.textColor = UIColor.darkGrayColor()
         hint.font = UIFont.systemFontOfSize(15.0)
         hint.textAlignment = .Justified

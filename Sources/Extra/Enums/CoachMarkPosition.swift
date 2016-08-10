@@ -1,6 +1,6 @@
-// BlurringOverlayViewController.swift
+// CoachMarkPosition.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,14 +21,21 @@
 // THE SOFTWARE.
 
 import UIKit
-import Instructions
 
-/// Will display coach marks on top of a blurred background.
-internal class BlurringOverlayViewController: DefaultViewController {
-    //MARK: - View lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.coachMarksController?.overlay.blurEffectStyle = .Dark
+/// Define the horizontal position of the coach mark.
+enum CoachMarkPosition {
+    var layoutAttribute: NSLayoutAttribute {
+        switch self {
+        case .Leading: return .Leading
+        case .Center: return .CenterX
+        case .Trailing: return .Trailing
+        }
     }
+
+    case Leading
+    case Center
+    case Trailing
 }
+
+/// Define the horizontal position of the arrow.
+typealias ArrowPosition = CoachMarkPosition

@@ -1,6 +1,6 @@
-// CoachMarkPosition.swift
+// BlurEffectViewHelper.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,12 +22,32 @@
 
 import UIKit
 
-/// Define the horizontal position of the coach mark.
-enum CoachMarkPosition {
-    case Leading
-    case Center
-    case Trailing
-}
+class BlurEffectViewHelper {
+    func buildBlurEffectView(withStyle style: UIBlurEffectStyle) -> UIVisualEffectView {
+        let blurEffect = UIBlurEffect(style: style)
 
-/// Define the horizontal position of the arrow.
-typealias ArrowPosition = CoachMarkPosition
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        blurEffectView.userInteractionEnabled = false
+
+        return blurEffectView
+    }
+
+    func addBlurView(view: UIVisualEffectView, to parent: UIView) {
+        parent.addSubview(view)
+
+        parent.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:|[view]|",
+            options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil,
+            views: ["view": view]
+        ))
+
+        parent.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+            "H:|[view]|",
+            options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil,
+            views: ["view": view]
+        ))
+    }
+}

@@ -1,6 +1,6 @@
-// CoachMarkSkipView.swift
+// CoachMarksViewControllerDelegate.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,10 +20,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import UIKit
+/// Used by the CoachMarksViewController to notify user or system related events.
+protocol CoachMarksViewControllerDelegate: class {
+    /// The given `coachMarkView` was tapped.
+    ///
+    /// - Parameter coachMarkView: the view that was tapped.
+    func didTapCoachMark(coachMarkView: CoachMarkView?)
 
-/// A protocol to which all the "skip views" must conform.
-public protocol CoachMarkSkipView : class {
-    /// The control that will trigger the stop, in the display flow.
-    var skipControl: UIControl? { get }
+    /// The given `skipView` was tapped.
+    ///
+    /// - Parameter skipView: the view that was tapped.
+    func didTapSkipView(skipView: CoachMarkSkipView?)
+
+    /// The delegate should prepare for the upcoming size transition.
+    func willTransition()
+
+    /// The delegate should perform action, after for the size transition was completed
+    func didTransition()
 }

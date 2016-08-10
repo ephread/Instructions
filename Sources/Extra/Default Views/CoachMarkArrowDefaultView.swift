@@ -1,6 +1,6 @@
 // CoachMarkArrowDefaultView.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,10 +22,11 @@
 
 import UIKit
 
+//MARK: - Default Class
 /// A concrete implementation of the coach mark arrow view and the
 /// default one provided by the library.
 public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
-    //MARK: - Initialization
+    //MARK: Initialization
     public init(orientation: CoachMarkArrowOrientation) {
         let image, highlightedImage: UIImage?
 
@@ -39,18 +40,29 @@ public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
 
         super.init(image: image, highlightedImage: highlightedImage)
 
-        self.translatesAutoresizingMaskIntoConstraints = false
-
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal,
-            toItem: nil, attribute: .NotAnAttribute,
-            multiplier: 1, constant: self.image!.size.width))
-
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal,
-            toItem: nil, attribute: .NotAnAttribute,
-            multiplier: 1, constant: self.image!.size.height))
+        initializeConstraints()
     }
 
     required public init?(coder aDecoder: NSCoder) {
         fatalError("This class does not support NSCoding.")
+    }
+}
+
+//MARK: - Private Inner Setup
+private extension CoachMarkArrowDefaultView {
+    func initializeConstraints() {
+        self.translatesAutoresizingMaskIntoConstraints = false
+
+        self.addConstraint(NSLayoutConstraint(
+            item: self, attribute: .Width, relatedBy: .Equal,
+            toItem: nil, attribute: .NotAnAttribute,
+            multiplier: 1, constant: self.image!.size.width
+        ))
+
+        self.addConstraint(NSLayoutConstraint(
+            item: self, attribute: .Height, relatedBy: .Equal,
+            toItem: nil, attribute: .NotAnAttribute,
+            multiplier: 1, constant: self.image!.size.height
+        ))
     }
 }

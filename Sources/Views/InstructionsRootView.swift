@@ -1,6 +1,6 @@
-// Instructions.swift
+// InstructionsRootView.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,11 +22,32 @@
 
 import UIKit
 
-struct Constants {
-    static let overlayFadeAnimationDuration: NSTimeInterval = 0.3
-    static let coachMarkFadeAnimationDuration: NSTimeInterval = 0.3
-    static let overlayColor = UIColor(red: 226.0/255.0,
-                                      green: 226.0/255.0,
-                                      blue: 226.0/255.0,
-                                      alpha: 0.65)
+/// Top view added to the window, forwarding touch events.
+internal class InstructionsRootView: UIView {
+
+    var passthrough: Bool = false
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        initialize()
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        initialize()
+    }
+
+    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+        let hitView = super.hitTest(point, withEvent: event)
+
+        if hitView == self && passthrough {
+            return nil
+        }
+
+        return hitView
+    }
+
+    private func initialize() {
+        translatesAutoresizingMaskIntoConstraints = false
+    }
 }

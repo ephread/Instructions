@@ -50,7 +50,7 @@ internal class ProfileViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
 
         self.coachMarksController = CoachMarksController()
-        self.coachMarksController?.allowOverlayTap = true
+        self.coachMarksController?.overlay.allowTap = true
     }
 
     override func viewDidAppear(animated: Bool) {

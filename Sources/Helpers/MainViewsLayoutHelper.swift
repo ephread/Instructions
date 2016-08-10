@@ -1,6 +1,6 @@
-// BlurringOverlayViewController.swift
+// MainViewsLayoutHelper.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -21,14 +21,25 @@
 // THE SOFTWARE.
 
 import UIKit
-import Instructions
 
-/// Will display coach marks on top of a blurred background.
-internal class BlurringOverlayViewController: DefaultViewController {
-    //MARK: - View lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
+class MainViewsLayoutHelper {
+    func fullSizeConstraintsForView(view: UIView) -> [NSLayoutConstraint] {
+        var constraints = [NSLayoutConstraint]()
 
-        self.coachMarksController?.overlay.blurEffectStyle = .Dark
+        constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:|[view]|",
+            options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil,
+            views: ["view": view]
+        ))
+
+        constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat(
+            "H:|[view]|",
+            options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil,
+            views: ["view": view]
+        ))
+
+        return constraints
     }
 }

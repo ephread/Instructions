@@ -1,4 +1,3 @@
-//
 // UIImage+Bundle.swift
 //
 // Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
@@ -25,8 +24,7 @@ import UIKit
 
 extension UIImage {
     convenience init?(namedInInstructions: String) {
-        self.init(named: namedInInstructions,
-                  inBundle: NSBundle(forClass: CoachMarkView.self),
+        self.init(named: namedInInstructions, inBundle: NSBundle(forClass: CoachMarkView.self),
                   compatibleWithTraitCollection: nil)
     }
 }

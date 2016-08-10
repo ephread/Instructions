@@ -1,4 +1,4 @@
-// OverlayViewDelegate.swift
+// CoachMarkSkipView.swift
 //
 // Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
@@ -22,10 +22,21 @@
 
 import UIKit
 
-/// This protocol expected to be implemented by CoachMarkManager, so
-/// it can be notified when a tap occured on the overlay.
-internal protocol OverlayViewDelegate: class {
+/// A protocol to which all the "skip views" must conform.
+public protocol CoachMarkSkipView : class {
+    /// The control that will trigger the stop, in the display flow.
+    var skipControl: UIControl? { get }
+    var asView: UIView? { get }
+}
 
-    /// Called when the overlay received a tap event.
-    func didReceivedSingleTap()
+extension CoachMarkSkipView {
+    public var skipControl: UIControl? {
+        return nil
+    }
+}
+
+extension CoachMarkSkipView where Self: UIView {
+    public var asView: UIView? {
+        return self
+    }
 }

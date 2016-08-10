@@ -64,3 +64,13 @@ public extension CoachMarksControllerDelegate {
               "instead. Otherwise, ignore this message, which will be removed with 0.5.0")
     }
 }
+
+protocol CoachMarksControllerProxyDelegate: class {
+    func coachMarkWillLoadForIndex(index: Int) -> Bool
+
+    func coachMarkWillShow(inout coachMark: CoachMark, forIndex index: Int)
+
+    func coachMarkWillDisappear(coachMark: CoachMark, forIndex index: Int)
+
+    func didFinishShowingAndWasSkipped(skipped: Bool)
+}

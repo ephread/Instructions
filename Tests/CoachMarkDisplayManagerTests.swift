@@ -38,8 +38,10 @@ class CoachMarkDisplayManagerTests: XCTestCase {
         self.overlayView.frame = CGRect(x: 0, y: 0, width: 365, height: 667)
         self.instructionsRootView.frame = CGRect(x: 0, y: 0, width: 365, height: 667)
 
+        instructionsRootView.addSubview(overlayView)
+
         self.coachMarkDisplayManager =
-            CoachMarkDisplayManager(coachMarksController: coachMarksController, overlayView: self.overlayView, instructionsRootView: self.instructionsRootView)
+            CoachMarkDisplayManager(coachMarkLayoutHelper: CoachMarkLayoutHelper())
     }
 
     override func tearDown() {
@@ -48,7 +50,8 @@ class CoachMarkDisplayManagerTests: XCTestCase {
     }
 
     func testThatCoachMarkViewIsShown() {
-        let coachMarkView = CoachMarkView(bodyView: CoachMarkBodyDefaultView())
+        let coachMarkView = CoachMarkView(bodyView: CoachMarkBodyDefaultView(),
+                                          coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper())
         var coachMark = CoachMark()
         coachMark.cutoutPath = UIBezierPath(rect: CGRect(x: 30, y: 30, width: 60, height: 30))
 
@@ -57,7 +60,9 @@ class CoachMarkDisplayManagerTests: XCTestCase {
         coachMark.computeOrientationInFrame(self.instructionsRootView.frame)
         coachMark.computePointOfInterestInFrame()
 
-        self.coachMarkDisplayManager.displayCoachMarkView(coachMarkView, coachMark: coachMark) {
+        self.coachMarkDisplayManager.showCoachMarkView(coachMarkView,
+                                                       from: coachMark,
+                                                       overlayView: self.overlayView) {
             XCTAssertEqual(coachMarkView.alpha, 1.0)
             XCTAssertEqual(coachMarkView.hidden, false)
 

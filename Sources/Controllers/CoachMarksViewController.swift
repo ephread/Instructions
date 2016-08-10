@@ -1,4 +1,4 @@
-// CoachMarksController.swift
+// CoachMarksViewController.swift
 //
 // Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>,
 //                          Daniel Basedow <daniel.basedow@gmail.com>,

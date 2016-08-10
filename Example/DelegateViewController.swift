@@ -1,4 +1,4 @@
-// DelegatetViewController.swift
+// DelegateViewController.swift
 //
 // Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //

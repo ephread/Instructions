@@ -2,4 +2,4 @@ disabled_rules:
   - todo
 
 included:
-  - Source
+  - Sources

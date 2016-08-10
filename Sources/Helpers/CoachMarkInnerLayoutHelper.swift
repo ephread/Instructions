@@ -1,4 +1,4 @@
-// CoachMarkDisplayManager.swift
+// CoachMarkInnerLayoutHelper.swift
 //
 // Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
 //

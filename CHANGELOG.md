@@ -4,10 +4,11 @@ Instructions follows [Semantic Versioning](http://semver.org/).
 However, until it reaches 1.0.0, some breaking changes are to be expected.
 
 ## [0.4.3](https://github.com/ephread/Instructions/releases/tag/0.4.3)
-Released on 2016-08-XX.
+Released on 2016-08-10.
 
 ### Fixed
 - Fix [#57], [#60] – Duplicated coach marks on rotation.
+- Fix crash occurring on index 0 when `coachMarkWillLoadForIndex` returns false.
 
 [#57]: https://github.com/ephread/Instructions/issues/57
 [#60]: https://github.com/ephread/Instructions/issues/60

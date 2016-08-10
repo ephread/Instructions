@@ -2,7 +2,7 @@
 
 [![Travis build status](https://img.shields.io/travis/ephread/Instructions.svg)](https://travis-ci.org/ephread/Instructions) [![codebeat badge](https://codebeat.co/badges/7bbb17b5-2cde-4108-aac0-eefcd439cf9f)](https://codebeat.co/projects/github-com-ephread-instructions) [![CocoaPods Shield](https://img.shields.io/cocoapods/v/Instructions.svg)](https://cocoapods.org/pods/Instructions) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Join the chat at https://gitter.im/ephread/Instructions](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ephread/Instructions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Add customizable coach marks into you iOS project. Instructions will makes your life easier, I promise. Available for both iPhone and iPad.
+Add customizable coach marks into you iOS project. Available for both iPhone and iPad.
 
 # Table of contents
 
@@ -24,7 +24,11 @@ Add customizable coach marks into you iOS project. Instructions will makes your 
 ## Overview
 ![Instructions Demo](http://i.imgur.com/JUlQH9F.gif)
 
+⚠️ **This README pertains to the upcoming version (0.5), for version 0.4.3, please see [here].**
+
 ⚠️ **Until Instructions reaches 1.0.0, the API is subject to change. Please see the Features section for more information about the roadmap.**
+
+[here]: https://github.com/ephread/Instructions/tree/0.4.3
 
 ## Features
 - [x] Customizable views
@@ -71,7 +75,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'Instructions', '~> 0.4'
+pod 'Instructions', '~> 0.5'
 ```
 
 Then, run the following command:
@@ -84,7 +88,7 @@ $ pod install
 Add Instructions to your Cartfile:
 
 ```
-github "ephread/Instructions" ~> 0.4
+github "ephread/Instructions" ~> 0.5
 ```
 
 You can then update, build and drag the generated framework into your project:
@@ -106,7 +110,7 @@ If you rather stay away from both CocoaPods and Carthage, you can also install I
 ## Usage
 
 ### Getting started
-Open up the controller for which you wish to display coach marks and instanciate a new `CoachMarksViewController`. You should also provide a `dataSource`, which is an object conforming to the `CoachMarksControllerDataSource` protocol.
+Open up the controller for which you wish to display coach marks and instanciate a new `CoachMarksController`. You should also provide a `dataSource`, which is an object conforming to the `CoachMarksControllerDataSource` protocol.
 
 ```swift
 class DefaultViewController: UIViewController, CoachMarksControllerDataSource, CoachMarksControllerDelegate {
@@ -150,7 +154,7 @@ But for now, lets just return the default views provided by Instructions.
 ```swift
 func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex: Int, coachMark: CoachMark)
 -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
-    let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+    let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
 
     coachViews.bodyView.hintLabel.text = "Hello! I'm a Coach Mark!"
     coachViews.bodyView.nextLabel.text = "Ok!"
@@ -188,21 +192,21 @@ You're all set. For more examples you can check the `Examples/` directory provid
 #### Customizing general properties
 You can customized the background color of the overlay using this property:
 
-- `overlayBackgroundColor`
+- `overlay.color`
 
-You can also make the overlay blur the content sitting behind it. Setting this property to anything else than `nil` will disable the `overlayBackgroundColor`:
+You can also make the overlay blur the content sitting behind it. Setting this property to anything else than `nil` will disable the `overlay.color`:
 
-- `overlayBlurEffectStyle: UIBlurEffectStyle?`
+- `overlay.blurEffectStyle: UIBlurEffectStyle?`
 
 Last, you can make the overlay tappable. A tap on the overlay will hide the current coach mark and display the next one.
 
-- `allowOverlayTap: Bool`
+- `overlay.allowTap: Bool`
 
 #### Providing a custom cutout path
 If you dislike how the default cutout path looks like, you can customize it by providing a block to `coachMarkForView`. The cutout path will automatically be stored in the `cutoutPath` property of the returning `CoachMark` object:
 
 ```swift
-var coachMark = coachMarksController.coachMarkForView(customView) {
+var coachMark = coachMarksController.helper.coachMarkForView(customView) {
 (frame: CGRect) -> UIBezierPath in
     // This will create an oval cutout a bit larger than the view.
     return UIBezierPath(ovalInRect: CGRectInset(frame, -4, -4))
@@ -238,7 +242,7 @@ Remember the following method, from the dataSource?
 
 ```swift
 func coachMarksController(coachMarkController: CoachMarksController, coachMarkViewsForIndex: Int, coachMark: CoachMark) {
-	let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+	let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
 }
 ```
 

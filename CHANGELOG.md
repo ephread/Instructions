@@ -3,6 +3,14 @@ Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 However, until it reaches 1.0.0, some breaking changes are to be expected.
 
+## [0.5.0](https://github.com/ephread/Instructions/releases/tag/0.5.0)
+Released on 2016-XX-XX.
+
+### Changed
+- Deprecate calling helper methods directly from `CoachMarkController`, methods are now available through the `CoachMarkController.helper` object.
+- Deprecate calling flow state properties directly from `CoachMarkController`, properties are now available through the `CoachMarkController.flow` object.
+- Deprecate settings overlay parameters directly from `CoachMarkController`, properties are now available through the `CoachMarkController.overlay` object.
+
 ## [0.4.3](https://github.com/ephread/Instructions/releases/tag/0.4.3)
 Released on 2016-08-XX.
 
@@ -23,7 +31,7 @@ Released on 2016-07-07.
 Released on 2016-07-04.
 
 ### Removed
-- Removed partial support for App Extensions (will be added back in full for 0.5.0).
+- Remove partial support for App Extensions (will be added back in full for 0.5.0).
 
 ### Fixed
 - Fix a bug caused by always-enabled touch inside the cutout path.

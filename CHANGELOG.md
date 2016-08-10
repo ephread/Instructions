@@ -11,6 +11,9 @@ Released on 2016-XX-XX.
 - Deprecate calling flow state properties directly from `CoachMarkController`, properties are now available through the `CoachMarkController.flow` object.
 - Deprecate settings overlay parameters directly from `CoachMarkController`, properties are now available through the `CoachMarkController.overlay` object.
 
+### Added
+- Full support of App Extensions.
+
 ## [0.4.3](https://github.com/ephread/Instructions/releases/tag/0.4.3)
 Released on 2016-08-10.
 

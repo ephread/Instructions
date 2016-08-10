@@ -35,21 +35,6 @@ public extension CoachMarksController {
         return flow.paused
     }
 
-    /// Pause the display.
-    /// This method is expected to be used by the delegate to
-    /// top the display, perform animation and resume display with `play()`
-    @available(*, deprecated=0.5, message="please use flow.pause() instead.")
-    func pause() {
-        flow.pause()
-    }
-
-    /// Resume the display.
-    /// If the display wasn't paused earlier, this method won't do anything.
-    @available(*, deprecated=0.5, message="please use flow.resume() instead.")
-    func resume() {
-        flow.resume()
-    }
-
     /// Show the next specified Coach Mark.
     ///
     /// - Parameter numberOfCoachMarksToSkip: the number of coach marks

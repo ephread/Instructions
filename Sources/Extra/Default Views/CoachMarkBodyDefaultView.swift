@@ -49,7 +49,7 @@ public class CoachMarkBodyDefaultView: UIControl, CoachMarkBodyView {
 
     public weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate?
 
-    private var views = CoachMarkBodyDefaultViewStore()
+    private var views = CoachMarkBodyDefaultViewHolder()
 
     //MARK: Initialization
     override public init(frame: CGRect) {
@@ -115,7 +115,8 @@ private extension CoachMarkBodyDefaultView {
     }
 }
 
-struct CoachMarkBodyDefaultViewStore {
+//MARK: - View Holder
+struct CoachMarkBodyDefaultViewHolder {
     let nextLabel = UILabel()
     let hintLabel = UITextView()
     let separator = UIView()

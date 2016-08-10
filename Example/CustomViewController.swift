@@ -35,7 +35,7 @@ internal class CustomViewsViewController: ProfileViewController {
 
         self.coachMarksController?.dataSource = self
 
-        self.coachMarksController?.overlayBackgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
+        self.coachMarksController?.overlay.color = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
 
         let skipView = CoachMarkSkipDefaultView()
         skipView.setTitle("Skip", forState: .Normal)
@@ -68,21 +68,21 @@ extension CustomViewsViewController: CoachMarksControllerDataSource {
 
         switch(index) {
         case 0:
-            coachMark = coachMarksController.coachMarkForView(self.avatar) { (frame: CGRect) -> UIBezierPath in
+            coachMark = coachMarksController.helper.coachMarkForView(self.avatar) { (frame: CGRect) -> UIBezierPath in
                 // This will create a circular cutoutPath, perfect for the circular avatar!
                 return UIBezierPath(ovalInRect: CGRectInset(frame, -4, -4))
             }
         case 1:
-            coachMark = coachMarksController.coachMarkForView(self.handleLabel)
+            coachMark = coachMarksController.helper.coachMarkForView(self.handleLabel)
             coachMark.arrowOrientation = .Top
         case 2:
-            coachMark = coachMarksController.coachMarkForView(self.allView, pointOfInterest: self.emailLabel?.center, bezierPathBlock: flatBezierPathBlock)
+            coachMark = coachMarksController.helper.coachMarkForView(self.allView, pointOfInterest: self.emailLabel?.center, bezierPathBlock: flatBezierPathBlock)
         case 3:
-            coachMark = coachMarksController.coachMarkForView(self.allView, pointOfInterest: self.postsLabel?.center, bezierPathBlock: flatBezierPathBlock)
+            coachMark = coachMarksController.helper.coachMarkForView(self.allView, pointOfInterest: self.postsLabel?.center, bezierPathBlock: flatBezierPathBlock)
         case 4:
-            coachMark = coachMarksController.coachMarkForView(self.allView, pointOfInterest: self.reputationLabel?.center, bezierPathBlock: flatBezierPathBlock)
+            coachMark = coachMarksController.helper.coachMarkForView(self.allView, pointOfInterest: self.reputationLabel?.center, bezierPathBlock: flatBezierPathBlock)
         default:
-            coachMark = coachMarksController.coachMarkForView()
+            coachMark = coachMarksController.helper.coachMarkForView()
         }
 
         coachMark.gapBetweenCoachMarkAndCutoutPath = 6.0

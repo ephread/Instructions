@@ -25,14 +25,14 @@ import UIKit
 public class FlowManager {
     //MARK: Internal Properties
     /// `true` if coach marks are curently being displayed, `false` otherwise.
-    var started: Bool {
+    public var started: Bool {
         return currentIndex > -1
     }
 
     /// Sometimes, the chain of coach mark display can be paused
     /// to let animations be performed. `true` to pause the execution,
     /// `false` otherwise.
-    var paused = false
+    public var paused = false
 
     internal unowned let coachMarksViewController: CoachMarksViewController
     internal weak var dataSource: CoachMarksControllerProxyDataSource?
@@ -99,8 +99,8 @@ public class FlowManager {
 
     /// Stop displaying the coach marks and perform some cleanup.
     ///
-    /// - Parameter withAnimation: `true` to fade the coach marks / overlay visibility
-    ///                            `false` otherwise.
+    /// - Parameter immediately: `true` to hide immediately with no animation
+    ///                          `false` otherwise.
     /// - Parameter userDidSkip: `true` when the user canceled the flow, `false` otherwise.
     /// - Parameter shouldCallDelegate: `true` to notify the delegate that the flow
     ///                                 was stop.
@@ -170,7 +170,6 @@ public class FlowManager {
     /// the delegate is not notified.
     ///
     /// - Parameter shouldCallDelegate: `true` to call delegate methods, `false` otherwise.
-    /// - Parameter noAnimation: `true` to show the coachmark without fade, `false` otherwise.
     internal func createAndShowCoachMark(shouldCallDelegate: Bool = true) {
         if disableFlow { return }
 
@@ -210,7 +209,7 @@ public class FlowManager {
     ///
     /// - Parameter numberOfCoachMarksToSkip: the number of coach marks
     ///                                       to skip.
-    internal func showNext(numberOfCoachMarksToSkip numberToSkip: Int = 0) {
+    public func showNext(numberOfCoachMarksToSkip numberToSkip: Int = 0) {
         if !self.started || !canShowCoachMark { return }
 
         if numberToSkip < 0 {

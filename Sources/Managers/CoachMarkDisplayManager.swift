@@ -64,6 +64,7 @@ internal class CoachMarkDisplayManager {
     /// Hides the given CoachMark View
     ///
     /// - Parameter coachMarkView: the coach mark to hide
+    /// - Parameter overlayView: the overlay to which update the cutout path
     /// - Parameter animationDuration: the duration of the fade
     /// - Parameter completion: a block to execute after the coach mark was hidden
     func hideCoachMarkView(coachMarkView: UIView?, overlayView: OverlayView,
@@ -84,6 +85,7 @@ internal class CoachMarkDisplayManager {
     ///
     /// - Parameter coachMarkView: the coach mark view to show
     /// - Parameter coachMark: the coach mark metadata
+    /// - Parameter overlayView: the overlay to which update the cutout path
     /// - Parameter noAnimation: `true` to skip animating the coach mark
     ///                          visibility, `false` otherwise.
     /// - Parameter completion: a handler to call after the coach mark
@@ -141,6 +143,11 @@ internal class CoachMarkDisplayManager {
 
     /// Add the current coach mark to the view, making sure it is
     /// properly positioned.
+    ///
+    /// - Parameter coachMarkView: the coach mark to display
+    /// - Parameter parentView: the view in whci display coach marks
+    /// - Parameter coachMark: the coachmark data
+    /// - Parameter overlayView: the overlayView (covering everything and showing cutouts)
     private func prepareCoachMarkViewForDisplay(coachMarkView: CoachMarkView,
                                                 in parentView: UIView,
                                                     coachMark: CoachMark,

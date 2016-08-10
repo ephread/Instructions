@@ -26,7 +26,6 @@ import UIKit
 /// It doesn't provide any clue about the way it will look, however.
 public struct CoachMark {
     //MARK: Public properties
-
     /// Change this value to change the duration of the fade.
     public var animationDuration = Constants.coachMarkFadeAnimationDuration
 

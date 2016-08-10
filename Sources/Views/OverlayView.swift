@@ -27,16 +27,16 @@ import UIKit
 public class OverlayView: UIView {
     //MARK: - Public properties
     /// The background color of the overlay
-    var color: UIColor = Constants.overlayColor
+    public var color: UIColor = Constants.overlayColor
 
     /// Duration to use when hiding/showing the overlay.
-    var fadeAnimationDuration = Constants.overlayFadeAnimationDuration
+    public var fadeAnimationDuration = Constants.overlayFadeAnimationDuration
 
     /// The blur effect style to apply to the overlay.
     /// Setting this property to anything but `nil` will
     /// enable the effect. `overlayColor` will be ignored if this
     /// property is set.
-    var blurEffectStyle: UIBlurEffectStyle? {
+    public var blurEffectStyle: UIBlurEffectStyle? {
         didSet {
             if self.blurEffectStyle != oldValue {
                 self.destroyBlurView()
@@ -46,7 +46,7 @@ public class OverlayView: UIView {
     }
 
     /// The original cutout path
-    var cutoutPath: UIBezierPath? {
+    public var cutoutPath: UIBezierPath? {
         set(cutoutPath) {
             updateCutoutPath(cutoutPath)
         }
@@ -59,7 +59,7 @@ public class OverlayView: UIView {
     /// `true` to let the overlay catch tap event and forward them to the
     /// CoachMarkController, `false` otherwise.
     /// After receiving a tap event, the controller will show the next coach mark.
-    var allowTap: Bool {
+    public var allowTap: Bool {
         get {
             return self.singleTapGestureRecognizer.view != nil
         }
@@ -74,7 +74,7 @@ public class OverlayView: UIView {
     }
 
     /// Used to temporarily enable touch forwarding isnide the cutoutPath.
-    var allowTouchInsideCutoutPath: Bool = false
+    public var allowTouchInsideCutoutPath: Bool = false
 
     //MARK: Internal Properties
     /// Used to temporarily disable the tap, for a given coachmark.
@@ -118,9 +118,9 @@ public class OverlayView: UIView {
         updateCutoutPath(nil)
     }
 
-    /// Show a cutout path with fade in animation
+    /// Show/hide a cutout path with fade in animation
     ///
-    /// - Parameter duration: duration of the animation
+    /// - Parameter show: `true` to show the cutout path, `false` to hide.
     /// - Parameter duration: duration of the animation
     func showCutoutPathView(show: Bool, withAnimationDuration duration: NSTimeInterval) {
         if show {

@@ -77,8 +77,9 @@ public class FlowManager {
         self.coachMarksViewController = coachMarksViewController
     }
 
-
     internal func startFlow(withNumberOfCoachMarks numberOfCoachMarks: Int) {
+        disableFlow = false
+
         self.numberOfCoachMarks = numberOfCoachMarks
 
         coachMarksViewController.prepareToShowCoachMarks {
@@ -97,6 +98,12 @@ public class FlowManager {
         paused = true
     }
 
+    internal func reset() {
+        currentIndex = -1
+        paused = false
+        canShowCoachMark = true
+    }
+
     /// Stop displaying the coach marks and perform some cleanup.
     ///
     /// - Parameter immediately: `true` to hide immediately with no animation
@@ -107,28 +114,32 @@ public class FlowManager {
     internal func stopFlow(immediately immediately: Bool = false,
                                userDidSkip skipped: Bool = false,
                                 shouldCallDelegate: Bool = true ) {
-        let animationDuration: NSTimeInterval
-
-        if immediately {
-            disableFlow = true
-            animationDuration = 0.0
-        } else {
-            animationDuration = coachMarksViewController.overlayView.fadeAnimationDuration
-        }
-
-        UIView.animateWithDuration(animationDuration, animations: { () -> Void in
+        let animationBlock = { () -> Void in
             self.coachMarksViewController.overlayView.alpha = 0.0
             self.coachMarksViewController.skipView?.asView?.alpha = 0.0
             self.coachMarksViewController.currentCoachMarkView?.alpha = 0.0
+        }
 
-            }, completion: {(finished: Bool) -> Void in
-                self.coachMarksViewController.detachFromViewController()
+        let completionBlock = {(finished: Bool) -> Void in
+            self.coachMarksViewController.detachFromViewController()
 
-                if shouldCallDelegate {
-                    // Calling the delegate, maybe the user wants to do something?
-                    self.delegate?.didFinishShowingAndWasSkipped(skipped)
-                }
-        })
+            if shouldCallDelegate {
+                // Calling the delegate, maybe the user wants to do something?
+                self.delegate?.didFinishShowingAndWasSkipped(skipped)
+            }
+        }
+
+        reset()
+
+        if immediately {
+            disableFlow = true
+            animationBlock()
+            completionBlock(true)
+        } else {
+            UIView.animateWithDuration(coachMarksViewController.overlayView.fadeAnimationDuration,
+                                       animations: animationBlock,
+                                       completion: completionBlock)
+        }
     }
 
     internal func showNextCoachMark(hidePrevious hidePrevious: Bool = true) {
@@ -177,16 +188,10 @@ public class FlowManager {
         // It can't be nil, that's why we'll force unwrap it everywhere.
         currentCoachMark = self.dataSource!.coachMarksForIndex(currentIndex)
 
+        // The coach mark will soon show, we notify the delegate, so it
+        // can perform some things and, if required, update the coach mark structure.
         if shouldCallDelegate {
-            // Retrieves the current coach mark structure from the datasource.
-            // It can't be nil, that's why we'll force unwrap it everywhere.
-            currentCoachMark = self.dataSource!.coachMarksForIndex(currentIndex)
-
-            // The coach mark will soon show, we notify the delegate, so it
-            // can perform some things and, if required, update the coach mark structure.
-            if shouldCallDelegate {
-                self.delegate?.coachMarkWillShow(&currentCoachMark!, forIndex: currentIndex)
-            }
+            self.delegate?.coachMarkWillShow(&currentCoachMark!, forIndex: currentIndex)
         }
 
         // The delegate might have paused the flow, he check whether or not it's

@@ -38,15 +38,8 @@ class BlurEffectViewHelper {
 
         var constraints = [NSLayoutConstraint]()
 
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|[view]|", options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["view": view]
-        )
-
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|[view]|", options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["view": view]
-        )
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": view])
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": view])
 
         parent.addConstraints(constraints)
     }

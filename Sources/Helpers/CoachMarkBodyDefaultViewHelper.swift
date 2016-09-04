@@ -23,6 +23,7 @@
 
 import UIKit
 
+// swiftlint:disable line_length
 //MARK: - Main Class
 /// A concrete implementation of the coach mark body view and the
 /// default one provided by the library.
@@ -52,15 +53,9 @@ public class CoachMarkBodyDefaultViewHelper {
 
         var constraints = [NSLayoutConstraint]()
 
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|[background]|", options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["background": background]
-        )
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[background]|", options: NSLayoutFormatOptions(rawValue: 0),metrics: nil, views: ["background": background])
 
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|[background]|", options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["background": background]
-        )
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[background]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["background": background])
 
         parent.addConstraints(constraints)
     }

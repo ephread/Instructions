@@ -22,6 +22,7 @@
 
 import UIKit
 
+// swiftlint:disable line_length
 //MARK: - Default Class
 /// A concrete implementation of the coach mark arrow view and the
 /// default one provided by the library.
@@ -55,13 +56,8 @@ private extension CoachMarkArrowDefaultView {
 
         var constraints = [NSLayoutConstraint]()
 
-        constraints.append(NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal,
-                                              toItem: nil, attribute: .NotAnAttribute,
-                                              multiplier: 1, constant: self.image!.size.width))
-
-        constraints.append(NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal,
-                                              toItem: nil, attribute: .NotAnAttribute,
-                                              multiplier: 1, constant: self.image!.size.height))
+        constraints.append(NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: self.image!.size.width))
+        constraints.append(NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: self.image!.size.height))
 
         self.addConstraints(constraints)
     }

@@ -22,23 +22,13 @@
 
 import UIKit
 
+// swiftlint:disable line_length
 class MainViewsLayoutHelper {
     func fullSizeConstraintsForView(view: UIView) -> [NSLayoutConstraint] {
         var constraints = [NSLayoutConstraint]()
 
-        constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|[view]|",
-            options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil,
-            views: ["view": view]
-        ))
-
-        constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|[view]|",
-            options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil,
-            views: ["view": view]
-        ))
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": view])
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": view])
 
         return constraints
     }

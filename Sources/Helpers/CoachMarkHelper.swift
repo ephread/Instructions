@@ -176,7 +176,8 @@ public class CoachMarkHelper {
         }
     }
 
-    internal func defaultArrowViews(arrowOrientation: CoachMarkArrowOrientation?) -> CoachMarkArrowDefaultView {
+    internal func defaultArrowViews(arrowOrientation: CoachMarkArrowOrientation?)
+    -> CoachMarkArrowDefaultView {
         var arrowOrientation = arrowOrientation
 
         if arrowOrientation == nil {

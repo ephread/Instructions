@@ -53,16 +53,16 @@ private extension CoachMarkArrowDefaultView {
     func initializeConstraints() {
         self.translatesAutoresizingMaskIntoConstraints = false
 
-        self.addConstraint(NSLayoutConstraint(
-            item: self, attribute: .Width, relatedBy: .Equal,
-            toItem: nil, attribute: .NotAnAttribute,
-            multiplier: 1, constant: self.image!.size.width
-        ))
+        var constraints = [NSLayoutConstraint]()
 
-        self.addConstraint(NSLayoutConstraint(
-            item: self, attribute: .Height, relatedBy: .Equal,
-            toItem: nil, attribute: .NotAnAttribute,
-            multiplier: 1, constant: self.image!.size.height
-        ))
+        constraints.append(NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal,
+                                              toItem: nil, attribute: .NotAnAttribute,
+                                              multiplier: 1, constant: self.image!.size.width))
+
+        constraints.append(NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal,
+                                              toItem: nil, attribute: .NotAnAttribute,
+                                              multiplier: 1, constant: self.image!.size.height))
+
+        self.addConstraints(constraints)
     }
 }

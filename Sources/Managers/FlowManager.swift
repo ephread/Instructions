@@ -32,7 +32,7 @@ public class FlowManager {
     /// Sometimes, the chain of coach mark display can be paused
     /// to let animations be performed. `true` to pause the execution,
     /// `false` otherwise.
-    public var paused = false
+    private(set) public var paused = false
 
     internal unowned let coachMarksViewController: CoachMarksViewController
     internal weak var dataSource: CoachMarksControllerProxyDataSource?
@@ -102,6 +102,7 @@ public class FlowManager {
         currentIndex = -1
         paused = false
         canShowCoachMark = true
+        //disableFlow will be set by startFlow, to enable quick stop.
     }
 
     /// Stop displaying the coach marks and perform some cleanup.
@@ -111,9 +112,10 @@ public class FlowManager {
     /// - Parameter userDidSkip: `true` when the user canceled the flow, `false` otherwise.
     /// - Parameter shouldCallDelegate: `true` to notify the delegate that the flow
     ///                                 was stop.
-    internal func stopFlow(immediately immediately: Bool = false,
-                               userDidSkip skipped: Bool = false,
-                                shouldCallDelegate: Bool = true ) {
+    internal func stopFlow(immediately immediately: Bool = false, userDidSkip skipped: Bool = false,
+                           shouldCallDelegate: Bool = true ) {
+        reset()
+
         let animationBlock = { () -> Void in
             self.coachMarksViewController.overlayView.alpha = 0.0
             self.coachMarksViewController.skipView?.asView?.alpha = 0.0
@@ -122,14 +124,8 @@ public class FlowManager {
 
         let completionBlock = {(finished: Bool) -> Void in
             self.coachMarksViewController.detachFromViewController()
-
-            if shouldCallDelegate {
-                // Calling the delegate, maybe the user wants to do something?
-                self.delegate?.didFinishShowingAndWasSkipped(skipped)
-            }
+            if shouldCallDelegate { self.delegate?.didFinishShowingAndWasSkipped(skipped) }
         }
-
-        reset()
 
         if immediately {
             disableFlow = true
@@ -137,8 +133,7 @@ public class FlowManager {
             completionBlock(true)
         } else {
             UIView.animateWithDuration(coachMarksViewController.overlayView.fadeAnimationDuration,
-                                       animations: animationBlock,
-                                       completion: completionBlock)
+                                       animations: animationBlock, completion: completionBlock)
         }
     }
 
@@ -168,7 +163,7 @@ public class FlowManager {
         }
     }
 
-    internal  func showOrStop() {
+    internal func showOrStop() {
         if self.currentIndex < self.numberOfCoachMarks {
             self.createAndShowCoachMark()
         } else {

@@ -81,15 +81,7 @@ public class CoachMarkHelper {
 
         var coachMarkArrowView: CoachMarkArrowDefaultView? = nil
 
-        if arrow {
-            var arrowOrientation = arrowOrientation
-
-            if arrowOrientation == nil {
-                arrowOrientation = .Top
-            }
-
-            coachMarkArrowView = CoachMarkArrowDefaultView(orientation: arrowOrientation!)
-        }
+        if arrow { coachMarkArrowView = defaultArrowViews(arrowOrientation) }
 
         return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
     }
@@ -112,15 +104,7 @@ public class CoachMarkHelper {
 
         var coachMarkArrowView: CoachMarkArrowDefaultView? = nil
 
-        if arrow {
-            var arrowOrientation = arrowOrientation
-
-            if arrowOrientation == nil {
-                arrowOrientation = .Top
-            }
-
-            coachMarkArrowView = CoachMarkArrowDefaultView(orientation: arrowOrientation!)
-        }
+        if arrow { coachMarkArrowView = defaultArrowViews(arrowOrientation) }
 
         return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
     }
@@ -170,32 +154,36 @@ public class CoachMarkHelper {
     internal func updateCoachMark(inout coachMark: CoachMark, forView view: UIView? = nil,
                                   pointOfInterest: CGPoint?,
                                   bezierPathBlock: BezierPathBlock? = nil) {
-        guard let view = view else {
-            return
-        }
+        guard let view = view else { return }
 
-        let convertedFrame =
-            instructionsRootView.convertRect(view.frame, fromView: view.superview)
+        let convertedFrame = instructionsRootView.convertRect(view.frame, fromView: view.superview)
 
         let bezierPath: UIBezierPath
 
         if let bezierPathBlock = bezierPathBlock {
             bezierPath = bezierPathBlock(frame: convertedFrame)
         } else {
-            bezierPath = UIBezierPath(
-                roundedRect: convertedFrame.insetBy(dx: -4, dy: -4),
-                byRoundingCorners: .AllCorners,
-                cornerRadii: CGSize(width: 4, height: 4)
-            )
+            bezierPath = UIBezierPath(roundedRect: convertedFrame.insetBy(dx: -4, dy: -4),
+                                      byRoundingCorners: .AllCorners,
+                                      cornerRadii: CGSize(width: 4, height: 4))
         }
 
         coachMark.cutoutPath = bezierPath
 
         if let pointOfInterest = pointOfInterest {
-            coachMark.pointOfInterest =
-                instructionsRootView.convertPoint(pointOfInterest,
-                                                  fromView: view.superview)
+            coachMark.pointOfInterest = instructionsRootView.convertPoint(pointOfInterest,
+                                                                          fromView: view.superview)
         }
+    }
+
+    internal func defaultArrowViews(arrowOrientation: CoachMarkArrowOrientation?) -> CoachMarkArrowDefaultView {
+        var arrowOrientation = arrowOrientation
+
+        if arrowOrientation == nil {
+            arrowOrientation = .Top
+        }
+
+        return CoachMarkArrowDefaultView(orientation: arrowOrientation!)
     }
 }
 

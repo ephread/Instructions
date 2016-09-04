@@ -36,18 +36,18 @@ class BlurEffectViewHelper {
     func addBlurView(view: UIVisualEffectView, to parent: UIView) {
         parent.addSubview(view)
 
-        parent.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|[view]|",
-            options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil,
-            views: ["view": view]
-        ))
+        var constraints = [NSLayoutConstraint]()
 
-        parent.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|[view]|",
-            options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil,
-            views: ["view": view]
-        ))
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat(
+            "V:|[view]|", options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil, views: ["view": view]
+        )
+
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat(
+            "H:|[view]|", options: NSLayoutFormatOptions(rawValue: 0),
+            metrics: nil, views: ["view": view]
+        )
+
+        parent.addConstraints(constraints)
     }
 }

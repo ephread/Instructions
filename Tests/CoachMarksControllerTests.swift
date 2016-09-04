@@ -49,8 +49,10 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     func testThatCoachMarkControllerAttachItselfToParent() {
         self.coachMarksController.startOn(self.parentController)
 
-        self.parentController.childViewControllers
-        XCTAssertTrue(self.parentController.childViewControllers.contains(self.coachMarksController))
+        let contains =
+            isCoachMarkViewControllerAttached(self.parentController.childViewControllers)
+
+        XCTAssertTrue(contains)
     }
 
     func testThatDidFinishShowingIsCalled() {
@@ -79,15 +81,17 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
         }
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndSkipped skipped: Bool) {
+    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool) {
         guard let delegateEndExpectation = self.delegateEndExpectation else {
             XCTFail()
             return
         }
 
         if (delegateEndExpectation.description == "Detachment") {
-            self.parentController.childViewControllers
-            XCTAssertFalse(self.parentController.childViewControllers.contains(self.coachMarksController))
+            let contains =
+                isCoachMarkViewControllerAttached(self.parentController.childViewControllers)
+
+            XCTAssertFalse(contains)
 
             delegateEndExpectation.fulfill()
         } else if (delegateEndExpectation.description == "DidFinishShowing") {
@@ -96,6 +100,18 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
         } else {
             XCTFail()
         }
+    }
+
+    private func isCoachMarkViewControllerAttached(controller: [UIViewController])
+    -> Bool {
+        var contains = false
+
+        for controller in controller {
+            contains = controller is CoachMarksViewController
+            if contains { break }
+        }
+
+        return contains
     }
 }
 

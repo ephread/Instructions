@@ -1,4 +1,4 @@
-// DelegatetViewController.swift
+// DelegateViewController.swift
 //
 // Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
@@ -40,6 +40,11 @@ internal class DelegateViewController: ProfileViewController {
         self.emailLabel?.layer.cornerRadius = 4.0
         self.postsLabel?.layer.cornerRadius = 4.0
         self.reputationLabel?.layer.cornerRadius = 4.0
+
+        let skipView = CoachMarkSkipDefaultView()
+        skipView.setTitle("Skip", forState: .Normal)
+
+        self.coachMarksController?.skipView = skipView
     }
 }
 
@@ -52,25 +57,25 @@ extension DelegateViewController: CoachMarksControllerDataSource {
     func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
         switch(index) {
         case 0:
-            return coachMarksController.coachMarkForView(self.avatar) { (frame: CGRect) -> UIBezierPath in
+            return coachMarksController.helper.coachMarkForView(self.avatar) { (frame: CGRect) -> UIBezierPath in
                 return UIBezierPath(ovalInRect: CGRectInset(frame, -4, -4))
             }
         case 1:
-            return coachMarksController.coachMarkForView(self.handleLabel)
+            return coachMarksController.helper.coachMarkForView(self.handleLabel)
         case 2:
-            return coachMarksController.coachMarkForView(self.emailLabel)
+            return coachMarksController.helper.coachMarkForView(self.emailLabel)
         case 3:
-            return coachMarksController.coachMarkForView(self.postsLabel)
+            return coachMarksController.helper.coachMarkForView(self.postsLabel)
         case 4:
-            return coachMarksController.coachMarkForView(self.reputationLabel)
+            return coachMarksController.helper.coachMarkForView(self.reputationLabel)
         default:
-            return coachMarksController.coachMarkForView()
+            return coachMarksController.helper.coachMarkForView()
         }
     }
 
     func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
 
-        let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+        let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
 
         switch(index) {
         case 0:
@@ -114,7 +119,7 @@ extension DelegateViewController: CoachMarksControllerDelegate {
 
                     // Once the animation is completed, we update the coach mark,
                     // and start the display again.
-                    coachMarksController.updateCurrentCoachMarkForView(self.avatar, pointOfInterest: nil) {
+                    coachMarksController.helper.updateCurrentCoachMarkForView(self.avatar, pointOfInterest: nil) {
                         (frame: CGRect) -> UIBezierPath in
                         return UIBezierPath(ovalInRect: CGRectInset(frame, -4, -4))
                     }
@@ -140,7 +145,7 @@ extension DelegateViewController: CoachMarksControllerDelegate {
         // thus warning that this method should not be used anymore.
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndSkipped skipped: Bool) {
+    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool) {
         let newColor: UIColor
 
         if skipped {

@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5B84A3AE1BF48BE200C795F8 /* OnlyHintsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B84A3AD1BF48BE200C795F8 /* OnlyHintsViewController.swift */; };
-		C60FA09E1D2993E40055B60B /* Instructions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64FB36F1BB75F4D0081E5B6 /* Instructions.framework */; };
-		C60FA09F1D2993E40055B60B /* Instructions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C64FB36F1BB75F4D0081E5B6 /* Instructions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C615FBAF1D7A1BB500EAEEFB /* TestFlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C615FBAE1D7A1BB500EAEEFB /* TestFlowViewController.swift */; };
 		C636FFAA1BBBD99200EB243B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C636FFA91BBBD99200EB243B /* Assets.xcassets */; };
 		C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */; };
 		C636FFB21BBC329600EB243B /* TransparentCoachMarkBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFB01BBC329600EB243B /* TransparentCoachMarkBodyView.swift */; };
@@ -82,6 +81,7 @@
 
 /* Begin PBXFileReference section */
 		5B84A3AD1BF48BE200C795F8 /* OnlyHintsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlyHintsViewController.swift; sourceTree = "<group>"; };
+		C615FBAE1D7A1BB500EAEEFB /* TestFlowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFlowViewController.swift; sourceTree = "<group>"; };
 		C636FFA91BBBD99200EB243B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Example/Assets.xcassets; sourceTree = "<group>"; };
 		C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentCoachMarkArrowView.swift; sourceTree = "<group>"; };
 		C636FFB01BBC329600EB243B /* TransparentCoachMarkBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentCoachMarkBodyView.swift; sourceTree = "<group>"; };
@@ -185,6 +185,7 @@
 				C6CE542F1BBD43CB00154266 /* DelegateViewController.swift */,
 				C6CE54301BBD43CB00154266 /* MixedCoachMarksViewController.swift */,
 				C63BB9151C73CDD600C81A4D /* TransitionFromCodeViewController.swift */,
+				C615FBAE1D7A1BB500EAEEFB /* TestFlowViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -234,6 +235,7 @@
 				TargetAttributes = {
 					C64FB30B1BB6CB1C0081E5B6 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = EV2G94D75V;
 					};
 				};
 			};
@@ -317,6 +319,7 @@
 				C636FFB21BBC329600EB243B /* TransparentCoachMarkBodyView.swift in Sources */,
 				C6CE54321BBD43CB00154266 /* MixedCoachMarksViewController.swift in Sources */,
 				C6CE542D1BBD435500154266 /* CustomViewController.swift in Sources */,
+				C615FBAF1D7A1BB500EAEEFB /* TestFlowViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,11 +445,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS";
@@ -459,11 +460,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS";

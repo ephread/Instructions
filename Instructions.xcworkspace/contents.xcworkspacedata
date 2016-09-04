@@ -10,4 +10,10 @@
    <FileRef
       location = "group:Instructions App Extensions Example.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:.swiftlint.yml">
+   </FileRef>
+   <FileRef
+      location = "group:.travis.yml">
+   </FileRef>
 </Workspace>

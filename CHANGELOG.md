@@ -1,12 +1,41 @@
 # Change Log
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
+However, until it reaches 1.0.0, some breaking changes are to be expected.
 
-## [0.4.1](https://github.com/ephread/Instructions/releases/tag/0.4.1)
+## [0.5.0](https://github.com/ephread/Instructions/releases/tag/0.5.0)
 Released on 2016-XX-XX.
 
+### Changed
+- Deprecate calling helper methods directly from `CoachMarkController`, methods are now available through the `CoachMarkController.helper` object.
+- Deprecate calling flow state properties directly from `CoachMarkController`, properties are now available through the `CoachMarkController.flow` object.
+- Deprecate settings overlay parameters directly from `CoachMarkController`, properties are now available through the `CoachMarkController.overlay` object.
+
+### Added
+- Full support of App Extensions.
+
+## [0.4.3](https://github.com/ephread/Instructions/releases/tag/0.4.3)
+Released on 2016-08-10.
+
+### Fixed
+- Fix [#57], [#60] – Duplicated coach marks on rotation.
+- Fix crash occurring on index 0 when `coachMarkWillLoadForIndex` returns false.
+
+[#57]: https://github.com/ephread/Instructions/issues/57
+[#60]: https://github.com/ephread/Instructions/issues/60
+
+## [0.4.2](https://github.com/ephread/Instructions/releases/tag/0.4.2)
+Released on 2016-07-07.
+
+### Fixed
+- Fix an issue where the `skipped` parameter was not set properly on `didFinishShowingAndWasSkipped`.
+- Fix most timing issues, leading to multiple coach marks being displayed.
+
+## [0.4.1](https://github.com/ephread/Instructions/releases/tag/0.4.1)
+Released on 2016-07-04.
+
 ### Removed
-- Removed partial support for App Extensions (will be added back in full for 0.5.0).
+- Remove partial support for App Extensions (will be added back in full for 0.5.0).
 
 ### Fixed
 - Fix a bug caused by always-enabled touch inside the cutout path.

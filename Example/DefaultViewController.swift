@@ -52,27 +52,27 @@ extension DefaultViewController: CoachMarksControllerDataSource {
     func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
         switch(index) {
         case 0:
-            return coachMarksController.coachMarkForView(self.navigationController?.navigationBar) { (frame: CGRect) -> UIBezierPath in
+            return coachMarksController.helper.coachMarkForView(self.navigationController?.navigationBar) { (frame: CGRect) -> UIBezierPath in
                 // This will make a cutoutPath matching the shape of
                 // the component (no padding, no rounded corners).
                 return UIBezierPath(rect: frame)
             }
         case 1:
-            return coachMarksController.coachMarkForView(self.handleLabel)
+            return coachMarksController.helper.coachMarkForView(self.handleLabel)
         case 2:
-            return coachMarksController.coachMarkForView(self.emailLabel)
+            return coachMarksController.helper.coachMarkForView(self.emailLabel)
         case 3:
-            return coachMarksController.coachMarkForView(self.postsLabel)
+            return coachMarksController.helper.coachMarkForView(self.postsLabel)
         case 4:
-            return coachMarksController.coachMarkForView(self.reputationLabel)
+            return coachMarksController.helper.coachMarkForView(self.reputationLabel)
         default:
-            return coachMarksController.coachMarkForView()
+            return coachMarksController.helper.coachMarkForView()
         }
     }
 
     func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
 
-        let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+        let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
 
         switch(index) {
         case 0:

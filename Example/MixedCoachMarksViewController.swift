@@ -40,7 +40,7 @@ internal class MixedCoachMarksViewsViewController: ProfileViewController {
 
         self.coachMarksController?.dataSource = self
 
-        self.coachMarksController?.overlayBackgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
+        self.coachMarksController?.overlay.color = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
     }
 }
 
@@ -56,17 +56,17 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
 
         switch(index) {
         case 0:
-            coachMark = coachMarksController.coachMarkForView(self.handleLabel)
+            coachMark = coachMarksController.helper.coachMarkForView(self.handleLabel)
         case 1:
-            coachMark = coachMarksController.coachMarkForView(self.emailLabel)
+            coachMark = coachMarksController.helper.coachMarkForView(self.emailLabel)
         case 2:
-            coachMark = coachMarksController.coachMarkForView(self.postsLabel)
+            coachMark = coachMarksController.helper.coachMarkForView(self.postsLabel)
         case 3:
-            coachMark = coachMarksController.coachMarkForView(self.answersLabel)
+            coachMark = coachMarksController.helper.coachMarkForView(self.answersLabel)
         case 4:
-            coachMark = coachMarksController.coachMarkForView(self.reputationLabel)
+            coachMark = coachMarksController.helper.coachMarkForView(self.reputationLabel)
         default:
-            coachMark = coachMarksController.coachMarkForView()
+            coachMark = coachMarksController.helper.coachMarkForView()
         }
 
         coachMark.gapBetweenCoachMarkAndCutoutPath = 6.0
@@ -102,7 +102,7 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
             bodyView = coachMarkBodyView
             arrowView = coachMarkArrowView
         case 1:
-            let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+            let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
 
             coachViews.bodyView.hintLabel.text = self.emailText
             coachViews.bodyView.nextLabel.text = self.nextButtonText
@@ -110,12 +110,12 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
             bodyView = coachViews.bodyView
             arrowView = coachViews.arrowView
         case 2:
-            let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation, hintText: self.postsText, nextText: self.nextButtonText)
+            let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation, hintText: self.postsText, nextText: self.nextButtonText)
 
             bodyView = coachViews.bodyView
             arrowView = coachViews.arrowView
         case 3:
-            let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation, hintText: self.answersText, nextText: nil)
+            let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation, hintText: self.answersText, nextText: nil)
 
             bodyView = coachViews.bodyView
             arrowView = coachViews.arrowView
@@ -132,7 +132,7 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
             bodyView = coachMarkBodyView
             arrowView = coachMarkArrowView
         default:
-            let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+            let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
             
             bodyView = coachViews.bodyView
             arrowView = coachViews.arrowView

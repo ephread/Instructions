@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import InstructionsAppExtensions
+import InstructionsAppExtensions // <-- If you're using Carthage or managing frameworks manually.
+//import Instructions <-- If you're using CocoaPods.
 
 class KeyboardViewController: UIInputViewController, CoachMarksControllerDataSource {
 
@@ -37,12 +38,12 @@ class KeyboardViewController: UIInputViewController, CoachMarksControllerDataSou
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.coachMarksController?.startOn(self)
-
         let skipView = CoachMarkSkipDefaultView()
         skipView.setTitle("Skip", forState: .Normal)
 
         self.coachMarksController?.skipView = skipView
+
+        self.coachMarksController?.startOn(self)
     }
 
     override func didReceiveMemoryWarning() {

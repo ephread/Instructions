@@ -1,5 +1,5 @@
 import UIKit
-import InstructionsAppExtensions
+import Instructions
 
 class ViewController: UIViewController, CoachMarksControllerDataSource {
 

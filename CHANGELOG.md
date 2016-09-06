@@ -4,7 +4,16 @@ Instructions follows [Semantic Versioning](http://semver.org/).
 However, until it reaches 1.0.0, some breaking changes are to be expected.
 
 ## [0.5.0](https://github.com/ephread/Instructions/releases/tag/0.5.0)
-Released on 2016-XX-XX.
+Released on 2016-09-06.
+
+### Added
+
+### Fixed
+- Fix [#63] dataSource methods wrongly called during idle state.
+- Fix [#58] inability to restart the flow.
+
+[#63]: https://github.com/ephread/Instructions/issues/63
+[#58]: https://github.com/ephread/Instructions/issues/58
 
 ### Changed
 - Deprecate calling helper methods directly from `CoachMarkController`, methods are now available through the `CoachMarkController.helper` object.

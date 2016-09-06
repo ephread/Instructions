@@ -112,7 +112,6 @@ internal class SkipViewDisplayManager {
         var topConstant: CGFloat = 0.0
 
         #if !INSTRUCTIONS_APP_EXTENSIONS
-            print("Specific branch: Used Regular Instructions")
             if !UIApplication.sharedApplication().statusBarHidden {
                 topConstant = UIApplication.sharedApplication().statusBarFrame.size.height
             }

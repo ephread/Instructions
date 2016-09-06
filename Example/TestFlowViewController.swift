@@ -71,7 +71,7 @@ extension TestFlowViewController: CoachMarksControllerDataSource {
         return 3
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
+    func coachMarksController(coachMarksController: CoachMarksController, coachMarkForIndex index: Int) -> CoachMark {
         print("coachMarksForIndex: \(index)")
         switch(index) {
         case 0:

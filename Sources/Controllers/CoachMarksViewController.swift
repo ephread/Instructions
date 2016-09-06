@@ -90,7 +90,6 @@ class CoachMarksViewController: UIViewController {
     // Called after the view was loaded.
     override func viewDidLoad() {
         super.viewDidLoad()
-        registerForStatusBarFrameChanges()
     }
 
     deinit {
@@ -299,6 +298,8 @@ extension CoachMarksViewController {
             return
         }
 
+        registerForStatusBarFrameChanges()
+
         parentViewController.addChildViewController(self)
         parentViewController.view.addSubview(self.view)
 
@@ -310,16 +311,15 @@ extension CoachMarksViewController {
         // `instructionsRootView` is not laid out automatically in the
         // background, likely because it's added to the window.
         #if !INSTRUCTIONS_APP_EXTENSIONS
-            print("Specific branch: Used Regular Instructions")
             if UIApplication.sharedApplication().applicationState == .Background {
                 window.layoutIfNeeded()
             }
         #else
-            print("Specific branch: Used App Extensions Instructions")
             window.layoutIfNeeded()
         #endif
 
         self.didMoveToParentViewController(parentViewController)
+
     }
 
     /// Detach the controller from its parent view controller.
@@ -328,6 +328,7 @@ extension CoachMarksViewController {
         self.willMoveToParentViewController(nil)
         self.view.removeFromSuperview()
         self.removeFromParentViewController()
+        unregisterFromStatusBarFrameChanges()
     }
 }
 

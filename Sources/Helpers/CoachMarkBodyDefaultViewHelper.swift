@@ -53,7 +53,7 @@ public class CoachMarkBodyDefaultViewHelper {
 
         var constraints = [NSLayoutConstraint]()
 
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[background]|", options: NSLayoutFormatOptions(rawValue: 0),metrics: nil, views: ["background": background])
+        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[background]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["background": background])
 
         constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[background]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["background": background])
 

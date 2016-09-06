@@ -56,7 +56,7 @@ extension CustomViewsViewController: CoachMarksControllerDataSource {
         return 5
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
+    func coachMarksController(coachMarksController: CoachMarksController, coachMarkForIndex index: Int) -> CoachMark {
 
         // This will create cutout path matching perfectly the given view.
         // No padding!

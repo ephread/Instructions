@@ -181,7 +181,7 @@ public class FlowManager {
 
         // Retrieves the current coach mark structure from the datasource.
         // It can't be nil, that's why we'll force unwrap it everywhere.
-        currentCoachMark = self.dataSource!.coachMarksForIndex(currentIndex)
+        currentCoachMark = self.dataSource!.coachMarkForIndex(currentIndex)
 
         // The coach mark will soon show, we notify the delegate, so it
         // can perform some things and, if required, update the coach mark structure.

@@ -46,7 +46,7 @@ public protocol CoachMarksControllerDataSource: class {
     ///
     /// - Returns: the coach mark metadata.
     func coachMarksController(coachMarksController: CoachMarksController,
-                              coachMarksForIndex index: Int) -> CoachMark
+                              coachMarkForIndex index: Int) -> CoachMark
 
     /// Asks for the views defining the coach mark that will be displayed in
     /// the given nth place. The arrow view is optional. However, if you provide
@@ -104,7 +104,7 @@ internal protocol CoachMarksControllerProxyDataSource: class {
     /// - Parameter index: the index referring to the nth place.
     ///
     /// - Returns: the coach mark metadata.
-    func coachMarksForIndex(index: Int) -> CoachMark
+    func coachMarkForIndex(index: Int) -> CoachMark
 
     /// Asks for the views defining the coach mark that will be displayed in
     /// the given nth place. The arrow view is optional. However, if you provide

@@ -49,7 +49,7 @@ extension DefaultViewController: CoachMarksControllerDataSource {
         return 5
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
+    func coachMarksController(coachMarksController: CoachMarksController, coachMarkForIndex index: Int) -> CoachMark {
         switch(index) {
         case 0:
             return coachMarksController.helper.coachMarkForView(self.navigationController?.navigationBar) { (frame: CGRect) -> UIBezierPath in

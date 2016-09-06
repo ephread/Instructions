@@ -27,8 +27,8 @@ extension CoachMarksController: CoachMarksControllerProxyDataSource {
         return dataSource!.numberOfCoachMarksForCoachMarksController(self)
     }
 
-    func coachMarksForIndex(index: Int) -> CoachMark {
-        return dataSource!.coachMarksController(self, coachMarksForIndex: index)
+    func coachMarkForIndex(index: Int) -> CoachMark {
+        return dataSource!.coachMarksController(self, coachMarkForIndex: index)
     }
 
     func coachMarkViewsForIndex(index: Int, coachMark: CoachMark)

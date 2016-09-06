@@ -22,6 +22,7 @@
 
 import UIKit
 
+// swiftlint:disable line_length
 class BlurEffectViewHelper {
     func buildBlurEffectView(withStyle style: UIBlurEffectStyle) -> UIVisualEffectView {
         let blurEffect = UIBlurEffect(style: style)

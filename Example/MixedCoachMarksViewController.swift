@@ -50,7 +50,7 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
         return 5
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
+    func coachMarksController(coachMarksController: CoachMarksController, coachMarkForIndex index: Int) -> CoachMark {
 
         var coachMark : CoachMark
 

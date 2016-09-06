@@ -25,7 +25,7 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 ## Overview
 ![Instructions Demo](http://i.imgur.com/JUlQH9F.gif)
 
-⚠️ **This README pertains to the upcoming version (0.5), for version 0.4.3, please see [here].**
+⚠️ **With 0.5.0, `CoachMarksControllerDataSource.coachMarksController(_:coachMarksForIndex:)` has been renamed to `CoachMarksControllerDataSource.coachMarksController(_:coachMarkForIndex:)`, update your code accordingly.**
 
 ⚠️ **Until Instructions reaches 1.0.0, the API is subject to change. Please see the Features section for more information about the roadmap.**
 

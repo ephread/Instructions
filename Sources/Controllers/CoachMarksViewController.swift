@@ -310,10 +310,12 @@ extension CoachMarksViewController {
         // `instructionsRootView` is not laid out automatically in the
         // background, likely because it's added to the window.
         #if !INSTRUCTIONS_APP_EXTENSIONS
+            print("Specific branch: Used Regular Instructions")
             if UIApplication.sharedApplication().applicationState == .Background {
                 window.layoutIfNeeded()
             }
         #else
+            print("Specific branch: Used App Extensions Instructions")
             window.layoutIfNeeded()
         #endif
 

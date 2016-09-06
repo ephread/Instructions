@@ -14,8 +14,6 @@
 		C636FFB21BBC329600EB243B /* TransparentCoachMarkBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFB01BBC329600EB243B /* TransparentCoachMarkBodyView.swift */; };
 		C63935DB1D2837EF002DCABF /* BackgroundNetworkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63935DA1D2837EF002DCABF /* BackgroundNetworkingViewController.swift */; };
 		C63BB9161C73CDD600C81A4D /* TransitionFromCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63BB9151C73CDD600C81A4D /* TransitionFromCodeViewController.swift */; };
-		C6402BE01BBE6EBD0087E23F /* Instructions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C64FB36F1BB75F4D0081E5B6 /* Instructions.framework */; };
-		C6402BE11BBE6EBD0087E23F /* Instructions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C64FB36F1BB75F4D0081E5B6 /* Instructions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C64FB3351BB6CC180081E5B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB32D1BB6CC180081E5B6 /* AppDelegate.swift */; };
 		C64FB3371BB6CC180081E5B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64FB32F1BB6CC180081E5B6 /* LaunchScreen.storyboard */; };
 		C64FB3381BB6CC180081E5B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64FB3311BB6CC180081E5B6 /* Main.storyboard */; };
@@ -30,7 +28,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C6402BE21BBE6EBD0087E23F /* PBXContainerItemProxy */ = {
+		C60FA09B1D2993DD0055B60B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C64FB3691BB75F4D0081E5B6 /* Instructions.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C64FB2E81BB6CA8A0081E5B6;
+			remoteInfo = Instructions;
+		};
+		C60FA0A01D2993E40055B60B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C64FB3691BB75F4D0081E5B6 /* Instructions.xcodeproj */;
 			proxyType = 1;
@@ -58,23 +63,16 @@
 			remoteGlobalIDString = C64FB2F31BB6CA8A0081E5B6;
 			remoteInfo = InstructionsTests;
 		};
-		C64FB3761BB75F980081E5B6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C64FB3691BB75F4D0081E5B6 /* Instructions.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = C64FB2E81BB6CA8A0081E5B6;
-			remoteInfo = Instructions;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		C6402BE41BBE6EBD0087E23F /* Embed Frameworks */ = {
+		C60FA0A21D2993E40055B60B /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C6402BE11BBE6EBD0087E23F /* Instructions.framework in Embed Frameworks */,
+				C60FA09F1D2993E40055B60B /* Instructions.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,7 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6402BE01BBE6EBD0087E23F /* Instructions.framework in Frameworks */,
+				C60FA09E1D2993E40055B60B /* Instructions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,13 +211,13 @@
 				C64FB3081BB6CB1C0081E5B6 /* Sources */,
 				C64FB3091BB6CB1C0081E5B6 /* Frameworks */,
 				C64FB30A1BB6CB1C0081E5B6 /* Resources */,
-				C6402BE41BBE6EBD0087E23F /* Embed Frameworks */,
+				C60FA0A21D2993E40055B60B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C64FB3771BB75F980081E5B6 /* PBXTargetDependency */,
-				C6402BE31BBE6EBD0087E23F /* PBXTargetDependency */,
+				C60FA09C1D2993DD0055B60B /* PBXTargetDependency */,
+				C60FA0A11D2993E40055B60B /* PBXTargetDependency */,
 			);
 			name = "Instructions Example";
 			productName = "Instructions Example";
@@ -328,15 +326,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C6402BE31BBE6EBD0087E23F /* PBXTargetDependency */ = {
+		C60FA09C1D2993DD0055B60B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Instructions;
-			targetProxy = C6402BE21BBE6EBD0087E23F /* PBXContainerItemProxy */;
+			targetProxy = C60FA09B1D2993DD0055B60B /* PBXContainerItemProxy */;
 		};
-		C64FB3771BB75F980081E5B6 /* PBXTargetDependency */ = {
+		C60FA0A11D2993E40055B60B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Instructions;
-			targetProxy = C64FB3761BB75F980081E5B6 /* PBXContainerItemProxy */;
+			targetProxy = C60FA0A01D2993E40055B60B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

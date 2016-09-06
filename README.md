@@ -2,7 +2,7 @@
 
 [![Travis build status](https://img.shields.io/travis/ephread/Instructions.svg)](https://travis-ci.org/ephread/Instructions) [![codebeat badge](https://codebeat.co/badges/7bbb17b5-2cde-4108-aac0-eefcd439cf9f)](https://codebeat.co/projects/github-com-ephread-instructions) [![CocoaPods Shield](https://img.shields.io/cocoapods/v/Instructions.svg)](https://cocoapods.org/pods/Instructions) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Join the chat at https://gitter.im/ephread/Instructions](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ephread/Instructions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Add customizable coach marks into you iOS project. Available for both iPhone and iPad.
+Add customizable coach marks into your iOS project. Available for both iPhone and iPad.
 
 # Table of contents
 
@@ -11,14 +11,15 @@ Add customizable coach marks into you iOS project. Available for both iPhone and
   * [Requirements](#requirements)
   * [Asking Questions / Contributing](#asking-questions--contributing)
       * [Asking Questions](#asking-questions)
-      * [Contributing](#contributing) 
+      * [Contributing](#contributing)
   * [Installation](#installation)
       * [CocoaPods](#cocoapods)
       * [Carthage](#carthage)
-      * [Manually](#manually) 
+      * [Manually](#manually)
   * [Usage](#usage)
       * [Getting Started](#getting-started)
       * [Advanced Usage](#advanced-usage)
+  * [Usage within App Extensions](#instructions-within-app-extensions)
   * [License](#license)
 
 ## Overview
@@ -31,18 +32,18 @@ Add customizable coach marks into you iOS project. Available for both iPhone and
 [here]: https://github.com/ephread/Instructions/tree/0.4.3
 
 ## Features
-- [x] Customizable views
-- [x] Customizable positions
-- [x] Customizable highlight system
-- [x] Skipable tour
-- [x] Full right-to-left support
+- [x] [Customizable highlight system](#advanced-usage)
+- [x] [Customizable views](#providing-custom-views)
+- [x] [Customizable positions](#customizing-how-the-coach-mark-will-show)
+- [x] [Skipable tour](#let-users-skip-the-tour)
+- [x] [Pilotable from code](#piloting-the-flow-from-the-code)
+- [x] [App Extensions support](#usage-within-app-extensions)
+- [x] Right-to-left support
 - [x] Size transition support (orientation and multi-tasking)
-- [x] Skipable tour
-- [x] Pilotable from code
-- [ ] Cross controllers walkthrough
 - [ ] Good test coverage • **Once done, it should bump version to 1.0.0**
-- [ ] Full support of UIVisualEffectView blur in overlay
-- [ ] Support for multiple coach marks
+- [ ] Cross controllers walkthrough
+- [ ] Full UIVisualEffectView support
+- [ ] Multiple coach marks support
 - [ ] Coach marks animation
 
 ## Requirements
@@ -115,10 +116,10 @@ Open up the controller for which you wish to display coach marks and instanciate
 ```swift
 class DefaultViewController: UIViewController, CoachMarksControllerDataSource, CoachMarksControllerDelegate {
     let coachMarksController = CoachMarksController()
-	 
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.coachMarksController.dataSource = self
     }
 }
@@ -273,7 +274,7 @@ You can customize the following properties:
 
 #### Let users skip the tour
 ##### Control
-You can provide the user with a mean to skip the coach marks. First, you will need to set 
+You can provide the user with a mean to skip the coach marks. First, you will need to set
 `skipView` with a `UIView` conforming to the `CoachMarkSkipView` protocol. This protocol defines a single property:
 
 ```swift
@@ -366,6 +367,62 @@ func coachMarksController(coachMarksController: CoachMarksController, coachMarkW
 ```
 
 `coachMarkWillLoadForIndex:` is called right before a given coach mark will show. To prevent a CoachMark from showing, you can return `false` from this method.
+
+### Usage within App Extensions
+If you wish to add Instructions within App Extensions, there's additional work you need to perform. An example is available in the `App Extensions Example/` directory.
+
+#### Dependencies
+Instructions comes with two shared schemes, `Instructions` and `InstructionsAppExtensions`. The only differences between the two is that `InstructionsAppExtensions` does not depend upon the `UIApplication.sharedApplication()`, making it suitable for App Extensions.
+
+In the following examples, let's consider a project with two targets, one for a regular application (`Instructions App Extensions Example`) and another for an app extension (`Keyboard Extension`).
+
+#### CocoaPods
+
+If you're importing Instructions with CocoaPods, you'll need to edit your `Podfile` to make it look like this:
+
+```ruby
+target 'Instructions App Extensions Example' do
+  pod 'Instructions', '~> 0.5'
+end
+
+target 'Keyboard Extension' do
+  pod 'Instructions/AppExtensions', '~> 0.5'
+end
+```
+
+If Instructions only imported from within App Extension target, you don't need the first block.
+
+When compiling either targets, CocoaPods will make sure the appropriate flags are set, thus allowing/forbidding calls to `UIApplication.sharedApplication()`. You don't need to change your code.
+
+#### Frameworks (Carthage / Manual management)
+
+If you're importing Instructions through frameworks, you'll notice that the two shared schemes (`Instructions` and `InstructionsAppExtensions`) both result in different frameworks.
+
+You need to embed both frameworks and link them to the proper targets. Make sure they look like theses:
+
+**Instructions App Extensions Example**
+![Imgur](http://i.imgur.com/3M3BQaO.png)
+
+**Keyboard Extension**
+![Imgur](http://i.imgur.com/LAtV0oA.png)
+
+If you plan to add Instructions only to the App Extension target, you don't need to add `Instructions.frameworks`.
+
+##### Import statements
+
+When importing Instructions from files within `Instructions App Extensions Example`, you should use the regular import statement:
+
+```swift
+import Instructions
+```
+
+However, when importing Instructions from files within `Keyboard Extension`, you should use the specific statement:
+
+```swift
+import InstructionsAppExtensions
+```
+
+⚠️ **Please be extremely careful**, as you will be able to import regular _Instructions_ from within an app extension without breaking anything. It will work. However, you're at a high risk of rejection from the Apple Store. Uses of `UIApplication.sharedApplication()` are statically checked during compilation but nothing prevents you from performing the calls at runtime. Fortunately Xcode should warn you if you've mistakenly linked with a framework not suited for App Extensions.
 
 ## License
 

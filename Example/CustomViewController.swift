@@ -168,7 +168,7 @@ extension CustomViewsViewController: CoachMarksControllerDataSource {
             constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|[skipView]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
         } else {
             constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-topMargin-[skipView(==44)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["topMargin": topMargin],
-                views: ["skipView": skipView]))
+                                                             views: ["skipView": skipView]))
         }
         
         return constraints

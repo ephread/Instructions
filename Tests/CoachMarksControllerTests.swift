@@ -121,7 +121,7 @@ internal class CoachMarkControllerMockedDataSource : CoachMarksControllerDataSou
         return 1
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
+    func coachMarksController(coachMarksController: CoachMarksController, coachMarkForIndex index: Int) -> CoachMark {
         return CoachMark()
     }
 

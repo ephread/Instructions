@@ -62,12 +62,10 @@
 		C6D365101D57C5BB00D2C6A2 /* CoachMarksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3650F1D57C5BB00D2C6A2 /* CoachMarksController.swift */; };
 		C6D365121D57E97600D2C6A2 /* FlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D365111D57E97600D2C6A2 /* FlowManager.swift */; };
 		C6D365131D57E97700D2C6A2 /* FlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D365111D57E97600D2C6A2 /* FlowManager.swift */; };
-		C6D4D0E11D58E28800F14FC5 /* CoachMarksController+Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4D0E01D58E28800F14FC5 /* CoachMarksController+Deprecated.swift */; };
 		C6D4D0E31D58E74B00F14FC5 /* CoachMarksController+Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4D0E21D58E74B00F14FC5 /* CoachMarksController+Proxy.swift */; };
 		C6D4D0E71D59E4AF00F14FC5 /* CoachMarkViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4D0E61D59E4AF00F14FC5 /* CoachMarkViewControllerDelegate.swift */; };
 		C6D4D0EC1D5A774F00F14FC5 /* CoachMarkBodyDefaultViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4D0EB1D5A774F00F14FC5 /* CoachMarkBodyDefaultViewHelper.swift */; };
 		C6D4D0EE1D5A908100F14FC5 /* BlurEffectViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4D0ED1D5A908100F14FC5 /* BlurEffectViewHelper.swift */; };
-		C6D4D0F31D5B2DA300F14FC5 /* CoachMarksController+Deprecated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4D0E01D58E28800F14FC5 /* CoachMarksController+Deprecated.swift */; };
 		C6D4D0F41D5B2DA300F14FC5 /* CoachMarksController+Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4D0E21D58E74B00F14FC5 /* CoachMarksController+Proxy.swift */; };
 		C6D4D0F51D5B2DA300F14FC5 /* CoachMarksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3650F1D57C5BB00D2C6A2 /* CoachMarksController.swift */; };
 		C6D4D0F61D5B2DA300F14FC5 /* UIImage+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633C4B51D535A990025FAE9 /* UIImage+Bundle.swift */; };
@@ -131,7 +129,6 @@
 		C6D3650D1D57B07D00D2C6A2 /* MainViewsLayoutHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewsLayoutHelper.swift; sourceTree = "<group>"; };
 		C6D3650F1D57C5BB00D2C6A2 /* CoachMarksController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarksController.swift; sourceTree = "<group>"; };
 		C6D365111D57E97600D2C6A2 /* FlowManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowManager.swift; sourceTree = "<group>"; };
-		C6D4D0E01D58E28800F14FC5 /* CoachMarksController+Deprecated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoachMarksController+Deprecated.swift"; sourceTree = "<group>"; };
 		C6D4D0E21D58E74B00F14FC5 /* CoachMarksController+Proxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoachMarksController+Proxy.swift"; sourceTree = "<group>"; };
 		C6D4D0E61D59E4AF00F14FC5 /* CoachMarkViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkViewControllerDelegate.swift; sourceTree = "<group>"; };
 		C6D4D0EB1D5A774F00F14FC5 /* CoachMarkBodyDefaultViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkBodyDefaultViewHelper.swift; sourceTree = "<group>"; };
@@ -331,7 +328,6 @@
 			isa = PBXGroup;
 			children = (
 				C64FB3461BB6D91E0081E5B6 /* CoachMark.swift */,
-				C6D4D0E01D58E28800F14FC5 /* CoachMarksController+Deprecated.swift */,
 				C6D4D0E21D58E74B00F14FC5 /* CoachMarksController+Proxy.swift */,
 				C6D3650F1D57C5BB00D2C6A2 /* CoachMarksController.swift */,
 			);
@@ -421,14 +417,19 @@
 		C64FB2E01BB6CA8A0081E5B6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Ephread;
 				TargetAttributes = {
+					C6417E141D291A8A004D13EA = {
+						LastSwiftMigration = 0800;
+					};
 					C64FB2E81BB6CA8A0081E5B6 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 					C64FB2F21BB6CA8A0081E5B6 = {
 						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -498,7 +499,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6D4D0F31D5B2DA300F14FC5 /* CoachMarksController+Deprecated.swift in Sources */,
 				C6D4D0F41D5B2DA300F14FC5 /* CoachMarksController+Proxy.swift in Sources */,
 				C6D4D0F51D5B2DA300F14FC5 /* CoachMarksController.swift in Sources */,
 				C6D4D0F61D5B2DA300F14FC5 /* UIImage+Bundle.swift in Sources */,
@@ -552,7 +552,6 @@
 				C61458B31BBB01DE006EB4F2 /* CoachMarkArrowOrientation.swift in Sources */,
 				C633C4B61D535A990025FAE9 /* UIImage+Bundle.swift in Sources */,
 				C636FFB91BBC8F3100EB243B /* CoachMarkBodyDefaultView.swift in Sources */,
-				C6D4D0E11D58E28800F14FC5 /* CoachMarksController+Deprecated.swift in Sources */,
 				C63FC23D1BC9BF3E00132132 /* CoachMarkSkipDefaultView.swift in Sources */,
 				C6D365101D57C5BB00D2C6A2 /* CoachMarksController.swift in Sources */,
 				C6D3650E1D57B07D00D2C6A2 /* MainViewsLayoutHelper.swift in Sources */,
@@ -599,6 +598,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -611,6 +611,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.InstructionsAppExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -618,6 +619,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -630,6 +632,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.InstructionsAppExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -646,8 +649,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -695,8 +700,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -717,6 +724,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -728,6 +736,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -740,6 +749,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -747,6 +757,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -758,6 +769,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -768,6 +780,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.InstructionsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -778,6 +791,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.InstructionsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

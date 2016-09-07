@@ -26,6 +26,6 @@ import UIKit
 /// An arrow can either sit at the top and point upward (.Top) or
 /// sit at the bottom and point downward. (.Bottom)
 public enum CoachMarkArrowOrientation {
-    case Top
-    case Bottom
+    case top
+    case bottom
 }

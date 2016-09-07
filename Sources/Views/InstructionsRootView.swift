@@ -23,7 +23,7 @@
 import UIKit
 
 /// Top view added to the window, forwarding touch events.
-internal class InstructionsRootView: UIView {
+class InstructionsRootView: UIView {
 
     var passthrough: Bool = false
 
@@ -37,8 +37,8 @@ internal class InstructionsRootView: UIView {
         initialize()
     }
 
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-        let hitView = super.hitTest(point, withEvent: event)
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let hitView = super.hitTest(point, with: event)
 
         if hitView == self && passthrough {
             return nil

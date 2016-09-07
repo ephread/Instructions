@@ -45,17 +45,17 @@ class TestFlowViewController: ProfileViewController {
         self.reputationLabel?.layer.cornerRadius = 4.0
 
         let skipView = CoachMarkSkipDefaultView()
-        skipView.setTitle("Skip", forState: .Normal)
+        skipView.setTitle("Skip", for: .normal)
 
         self.coachMarksController?.skipView = skipView
         self.coachMarksController?.overlay.allowTap = true
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
 
-    @IBAction func performButtonTap(sender: AnyObject) {
+    @IBAction func performButtonTap(_ sender: AnyObject) {
         // The user tapped on the button, so let's carry on!
         //self.coachMarksController?.flow.showNext()
 
@@ -66,35 +66,35 @@ class TestFlowViewController: ProfileViewController {
 
 //MARK: - Protocol Conformance | CoachMarksControllerDataSource
 extension TestFlowViewController: CoachMarksControllerDataSource {
-    func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         print("numberOfCoachMarksForCoachMarksController: \(index)")
         return 3
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkForIndex index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
         print("coachMarksForIndex: \(index)")
         switch(index) {
         case 0:
-            return coachMarksController.helper.coachMarkForView(self.navigationController?.navigationBar) { (frame: CGRect) -> UIBezierPath in
+            return coachMarksController.helper.makeCoachMark(for: self.navigationController?.navigationBar) { (frame: CGRect) -> UIBezierPath in
                 return UIBezierPath(rect: frame)
             }
         case 1:
-            return coachMarksController.helper.coachMarkForView(self.handleLabel)
+            return coachMarksController.helper.makeCoachMark(for: self.handleLabel)
         case 2:
-            var coachMark = coachMarksController.helper.coachMarkForView(self.tapMeButton)
+            var coachMark = coachMarksController.helper.makeCoachMark(for: self.tapMeButton)
             coachMark.allowTouchInsideCutoutPath = true
 
             return coachMark
         default:
-            return coachMarksController.helper.coachMarkForView()
+            return coachMarksController.helper.makeCoachMark()
         }
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
         print("coachMarkViewsForIndex: \(index)")
         var coachViews: (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?)
 
-        coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, withNextText: false, arrowOrientation: coachMark.arrowOrientation)
+        coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, withNextText: false, arrowOrientation: coachMark.arrowOrientation)
 
         switch(index) {
         case 0:
@@ -115,25 +115,25 @@ extension TestFlowViewController: CoachMarksControllerDataSource {
 
 //MARK: - Protocol Conformance | CoachMarksControllerDelegate
 extension TestFlowViewController: CoachMarksControllerDelegate {
-    func coachMarksController(coachMarksController: CoachMarksController,
+    func coachMarksController(_ coachMarksController: CoachMarksController,
                               coachMarkWillLoadForIndex index: Int) -> Bool {
         print("coachMarkWillLoadForIndex: \(index)")
         return true
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController,
-                              inout coachMarkWillShow coachMark: CoachMark,
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              coachMarkWillShow coachMark: inout CoachMark,
                                                       forIndex index: Int) {
         print("coachMarkWillShow forIndex: \(index)")
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController,
+    func coachMarksController(_ coachMarksController: CoachMarksController,
                               coachMarkWillDisappear coachMark: CoachMark,
                                                      forIndex index: Int) {
         print("coachMarkWillDisappear forIndex: \(index)")
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController,
+    func coachMarksController(_ coachMarksController: CoachMarksController,
                               didFinishShowingAndWasSkipped skipped: Bool) {
         print("didFinishShowingAndWasSkipped: \(skipped)")
     }

@@ -1,6 +1,6 @@
 // CustomCoachMarkArrowView.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -33,13 +33,13 @@ internal class CustomCoachMarkArrowView : UIView, CoachMarkArrowView {
     var highlighted: Bool = false
 
     //MARK: - Private properties
-    private var column = UIView()
+    fileprivate var column = UIView()
 
     //MARK: - Initialization
     init?(orientation: CoachMarkArrowOrientation) {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
 
-        if orientation == .Top {
+        if orientation == .top {
             self.plate.image = topPlateImage
         } else {
             self.plate.image = bottomPlateImage
@@ -52,19 +52,19 @@ internal class CustomCoachMarkArrowView : UIView, CoachMarkArrowView {
         self.addSubview(plate)
         self.addSubview(column)
 
-        plate.backgroundColor = UIColor.clearColor()
-        column.backgroundColor = UIColor.whiteColor()
+        plate.backgroundColor = UIColor.clear
+        column.backgroundColor = UIColor.white
 
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[plate]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["plate" : plate]))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[plate]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["plate" : plate]))
 
-        self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[column(==3)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["column" : column]))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[column(==3)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["column" : column]))
 
-        self.addConstraint(NSLayoutConstraint(item: column, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: column, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
 
-        if orientation == .Top {
-            self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[plate(==5)][column(==10)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["plate" : plate, "column" : column]))
+        if orientation == .top {
+            self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[plate(==5)][column(==10)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["plate" : plate, "column" : column]))
         } else {
-            self.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[column(==10)][plate(==5)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["plate" : plate, "column" : column]))
+            self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[column(==10)][plate(==5)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["plate" : plate, "column" : column]))
         }
     }
 

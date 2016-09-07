@@ -35,12 +35,12 @@ class ViewController: UIViewController, CoachMarksControllerDataSource {
         self.coachMarksController.dataSource = self
 
         let skipView = CoachMarkSkipDefaultView()
-        skipView.setTitle("Skip", forState: .Normal)
+        skipView.setTitle("Skip", for: .normal)
 
         self.coachMarksController.skipView = skipView
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         self.coachMarksController.startOn(self)
@@ -51,19 +51,19 @@ class ViewController: UIViewController, CoachMarksControllerDataSource {
         // Dispose of any resources that can be recreated.
     }
 
-    func numberOfCoachMarksForCoachMarksController(coachMarkController: CoachMarksController)
+    func numberOfCoachMarks(for coachMarkController: CoachMarksController)
         -> Int {
             return 1
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkForIndex: Int)
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt: Int)
         -> CoachMark {
-            return coachMarksController.helper.coachMarkForView(rectangleView)
+            return coachMarksController.helper.makeCoachMark(for: rectangleView)
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex: Int, coachMark: CoachMark)
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt: Int, coachMark: CoachMark)
         -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
-            let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+            let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
 
             coachViews.bodyView.hintLabel.text = "Hello! I'm a Coach Mark!"
             coachViews.bodyView.nextLabel.text = "Ok!"

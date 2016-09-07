@@ -31,8 +31,7 @@ public protocol CoachMarksControllerDataSource: class {
     ///                                   the information.
     ///
     /// - Returns: the number of coach marks to display.
-    func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController)
-         -> Int
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int
 
     /// Asks for the metadata of the coach mark that will be displayed in the
     /// given nth place. All `CoachMark` metadata are optional or filled with
@@ -45,8 +44,8 @@ public protocol CoachMarksControllerDataSource: class {
     /// - Parameter coachMarkViewsForIndex: the index referring to the nth place.
     ///
     /// - Returns: the coach mark metadata.
-    func coachMarksController(coachMarksController: CoachMarksController,
-                              coachMarkForIndex index: Int) -> CoachMark
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              coachMarkAt index: Int) -> CoachMark
 
     /// Asks for the views defining the coach mark that will be displayed in
     /// the given nth place. The arrow view is optional. However, if you provide
@@ -60,10 +59,9 @@ public protocol CoachMarksControllerDataSource: class {
     /// - Parameter coachMark: the coach mark meta data.
     ///
     /// - Returns: a tuple packaging the body component and the arrow component.
-    func coachMarksController(coachMarksController: CoachMarksController,
-                              coachMarkViewsForIndex index: Int,
-                              coachMark: CoachMark)
-         -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?)
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              coachMarkViewsAt index: Int, coachMark: CoachMark)
+    -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?)
 
     /// Asks for autolayout constraints needed to position `skipView` in
     /// `coachMarksController.view`.
@@ -74,17 +72,15 @@ public protocol CoachMarksControllerDataSource: class {
     /// - Parameter inParentView: the parent view (used to set contraints properly).
     ///
     /// - Returns: an array of NSLayoutConstraint.
-    func coachMarksController(coachMarksController: CoachMarksController,
+    func coachMarksController(_ coachMarksController: CoachMarksController,
                               constraintsForSkipView skipView: UIView,
-                              inParentView parentView: UIView)
-         -> [NSLayoutConstraint]?
+                              inParentView parentView: UIView) -> [NSLayoutConstraint]?
 }
 
 public extension CoachMarksControllerDataSource {
-    func coachMarksController(coachMarksController: CoachMarksController,
+    func coachMarksController(_ coachMarksController: CoachMarksController,
                               constraintsForSkipView skipView: UIView,
-                              inParentView parentView: UIView)
-         -> [NSLayoutConstraint]? {
+                              inParentView parentView: UIView) -> [NSLayoutConstraint]? {
         return nil
     }
 }
@@ -104,7 +100,7 @@ internal protocol CoachMarksControllerProxyDataSource: class {
     /// - Parameter index: the index referring to the nth place.
     ///
     /// - Returns: the coach mark metadata.
-    func coachMarkForIndex(index: Int) -> CoachMark
+    func coachMark(at index: Int) -> CoachMark
 
     /// Asks for the views defining the coach mark that will be displayed in
     /// the given nth place. The arrow view is optional. However, if you provide
@@ -116,7 +112,7 @@ internal protocol CoachMarksControllerProxyDataSource: class {
     /// - Parameter coachMark: the coach mark meta data.
     ///
     /// - Returns: a tuple packaging the body component and the arrow component.
-    func coachMarkViewsForIndex(index: Int, coachMark: CoachMark)
+    func coachMarkViews(at index: Int, coachMark: CoachMark)
         -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?)
 
     /// Asks for autolayout constraints needed to position `skipView` in
@@ -126,7 +122,6 @@ internal protocol CoachMarksControllerProxyDataSource: class {
     /// - Parameter inParentView: the parent view (used to set contraints properly).
     ///
     /// - Returns: an array of NSLayoutConstraint.
-    func constraintsForSkipView(skipView: UIView,
-                                inParentView parentView: UIView)
-        -> [NSLayoutConstraint]?
+    func constraintsForSkipView(_ skipView: UIView,
+                                inParentView parentView: UIView) -> [NSLayoutConstraint]?
 }

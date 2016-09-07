@@ -24,21 +24,20 @@ import UIKit
 
 extension CoachMarksController: CoachMarksControllerProxyDataSource {
     func numberOfCoachMarks() -> Int {
-        return dataSource!.numberOfCoachMarksForCoachMarksController(self)
+        return dataSource!.numberOfCoachMarks(for: self)
     }
 
-    func coachMarkForIndex(index: Int) -> CoachMark {
-        return dataSource!.coachMarksController(self, coachMarkForIndex: index)
+    func coachMark(at index: Int) -> CoachMark {
+        return dataSource!.coachMarksController(self, coachMarkAt: index)
     }
 
-    func coachMarkViewsForIndex(index: Int, coachMark: CoachMark)
+    func coachMarkViews(at index: Int, coachMark: CoachMark)
         -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
-            return dataSource!.coachMarksController(self,
-                                                    coachMarkViewsForIndex: index,
+            return dataSource!.coachMarksController(self, coachMarkViewsAt: index,
                                                     coachMark: coachMark)
     }
 
-    func constraintsForSkipView(skipView: UIView,
+    func constraintsForSkipView(_ skipView: UIView,
                                 inParentView parentView: UIView)
         -> [NSLayoutConstraint]? {
             return dataSource?.coachMarksController(self,
@@ -48,25 +47,21 @@ extension CoachMarksController: CoachMarksControllerProxyDataSource {
 }
 
 extension CoachMarksController: CoachMarksControllerProxyDelegate {
-    func coachMarkWillLoadForIndex(index: Int) -> Bool {
+    func coachMarkWillLoad(at index: Int) -> Bool {
         guard let delegate = delegate else { return true }
 
-        return delegate.coachMarksController(self, coachMarkWillLoadForIndex: index)
+        return delegate.coachMarksController(self, coachMarkWillLoadAt: index)
     }
 
-    func coachMarkWillShow(inout coachMark: CoachMark, forIndex index: Int) {
-        delegate?.coachMarksController(self,
-                                       coachMarkWillShow: &coachMark,
-                                       forIndex: index)
+    func coachMarkWillShow(_ coachMark: inout CoachMark, at index: Int) {
+        delegate?.coachMarksController(self, coachMarkWillShow: &coachMark, at: index)
     }
 
-    func coachMarkWillDisappear(coachMark: CoachMark, forIndex index: Int) {
-        delegate?.coachMarksController(self,
-                                       coachMarkWillDisappear: coachMark,
-                                       forIndex: index)
+    func coachMarkWillDisappear(_ coachMark: CoachMark, at index: Int) {
+        delegate?.coachMarksController(self, coachMarkWillDisappear: coachMark, at: index)
     }
 
-    func didFinishShowingAndWasSkipped(skipped: Bool) {
+    func didFinishShowingAndWasSkipped(_ skipped: Bool) {
         delegate?.coachMarksController(self, didFinishShowingAndWasSkipped: skipped)
     }
 }

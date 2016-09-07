@@ -1,6 +1,6 @@
 // TransparentCoachMarkArrowView.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ import Instructions
 internal class TransparentCoachMarkArrowView : UIImageView, CoachMarkArrowView {
     //MARK: - Initialization
     init(orientation: CoachMarkArrowOrientation) {
-        if orientation == .Top {
+        if orientation == .top {
             super.init(image: UIImage(named: "arrow-top"))
         } else {
             super.init(image: UIImage(named: "arrow-bottom"))
@@ -35,12 +35,12 @@ internal class TransparentCoachMarkArrowView : UIImageView, CoachMarkArrowView {
 
         self.translatesAutoresizingMaskIntoConstraints = false
 
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal,
-            toItem: nil, attribute: .NotAnAttribute,
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal,
+            toItem: nil, attribute: .notAnAttribute,
             multiplier: 1, constant: self.image!.size.width))
 
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal,
-            toItem: nil, attribute: .NotAnAttribute,
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal,
+            toItem: nil, attribute: .notAnAttribute,
             multiplier: 1, constant: self.image!.size.height))
     }
 

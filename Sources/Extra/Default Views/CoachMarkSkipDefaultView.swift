@@ -1,6 +1,6 @@
 // CoachMarkSkipDefaultView.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -40,15 +40,14 @@ public class CoachMarkSkipDefaultView: UIButton, CoachMarkSkipView {
     public convenience init() {
         self.init(frame: CGRect.zero)
 
-        setTitleColor(UIColor.blackColor(), forState: .Normal)
-        titleLabel?.font = UIFont.systemFontOfSize(17.0)
-        titleLabel?.textAlignment = .Center
+        setTitleColor(UIColor.black, for: .normal)
+        titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
+        titleLabel?.textAlignment = .center
 
-        setBackgroundImage(UIImage(namedInInstructions: "background"),
-                           forState: .Normal)
+        setBackgroundImage(UIImage(namedInInstructions: "background"), for: .normal)
 
         setBackgroundImage(UIImage(namedInInstructions: "background-highlighted"),
-                           forState: .Highlighted)
+                           for: .highlighted)
 
         layer.cornerRadius = 4
         contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 15.0, bottom: 10.0, right: 15.0)

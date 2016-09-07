@@ -43,17 +43,17 @@ class KeyboardViewController: UIInputViewController, CoachMarksControllerDataSou
 
         loadInterface()
 
-        self.nextKeyboardButton.addTarget(self, action: #selector(UIInputViewController.advanceToNextInputMode), forControlEvents: .TouchUpInside)
+        self.nextKeyboardButton.addTarget(self, action: #selector(UIInputViewController.advanceToNextInputMode), for: .touchUpInside)
 
         self.coachMarksController = CoachMarksController()
         self.coachMarksController?.dataSource = self
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         let skipView = CoachMarkSkipDefaultView()
-        skipView.setTitle("Skip", forState: .Normal)
+        skipView.setTitle("Skip", for: .normal)
 
         self.coachMarksController?.skipView = skipView
 
@@ -65,33 +65,33 @@ class KeyboardViewController: UIInputViewController, CoachMarksControllerDataSou
         // Dispose of any resources that can be recreated
     }
 
-    override func textWillChange(textInput: UITextInput?) {
+    override func textWillChange(_ textInput: UITextInput?) {
         // The app is about to change the document's contents. Perform any preparation here.
     }
 
-    override func textDidChange(textInput: UITextInput?) {
+    override func textDidChange(_ textInput: UITextInput?) {
         // The app has just changed the document's contents, the document context has been updated.
     }
 
-    func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 2;
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkForIndex index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
         switch(index) {
         case 0:
-            return coachMarksController.helper.coachMarkForView(self.nextKeyboardButton)
+            return coachMarksController.helper.makeCoachMark(for: self.nextKeyboardButton)
         case 1:
-            return coachMarksController.helper.coachMarkForView(self.secondButton)
+            return coachMarksController.helper.makeCoachMark(for: self.secondButton)
         default:
             return CoachMark()
         }
     }
 
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
 
-        let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
 
         switch(index) {
         case 0:
@@ -110,15 +110,15 @@ class KeyboardViewController: UIInputViewController, CoachMarksControllerDataSou
         // load the nib file
         let nib = UINib(nibName: "Keyboard", bundle: nil)
         // instantiate the view
-        keyboardView = nib.instantiateWithOwner(self, options: nil)[0] as! UIView
+        keyboardView = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
 
         // add the interface to the main view
         view.addSubview(keyboardView)
 
         keyboardView.translatesAutoresizingMaskIntoConstraints = false
 
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[keyboardView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["keyboardView" : keyboardView]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[keyboardView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["keyboardView" : keyboardView]))
 
-        view.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[keyboardView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["keyboardView" : keyboardView]))
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[keyboardView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["keyboardView" : keyboardView]))
     }
 }

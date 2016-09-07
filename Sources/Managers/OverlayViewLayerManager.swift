@@ -31,16 +31,16 @@ class OverlayViewLayerManager {
     }
 
     /// The cutout mask
-    private var cutoutMaskLayer = CAShapeLayer()
+    fileprivate var cutoutMaskLayer = CAShapeLayer()
 
     /// The full mask (together with `cutoutMaskLayer` they will form the cutout shape)
-    private var fullMaskLayer = CAShapeLayer()
+    fileprivate var fullMaskLayer = CAShapeLayer()
 
     init(layer: CALayer) {
         managedLayer = layer
     }
 
-    func showCutoutPathViewWithAnimationDuration(duration: NSTimeInterval) {
+    func showCutoutPathView(withAnimationDuration duration: TimeInterval) {
         CATransaction.begin()
 
         fullMaskLayer.opacity = 0.0
@@ -50,14 +50,14 @@ class OverlayViewLayerManager {
         animation.toValue = 0.0
         animation.duration = duration
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        animation.removedOnCompletion = true
+        animation.isRemovedOnCompletion = true
 
-        fullMaskLayer.addAnimation(animation, forKey: "opacityAnimationFadeIn")
+        fullMaskLayer.add(animation, forKey: "opacityAnimationFadeIn")
 
         CATransaction.commit()
     }
 
-    func hideCutoutPathViewWithAnimationDuration(duration: NSTimeInterval) {
+    func hideCutoutPathView(withAnimationDuration duration: TimeInterval) {
         CATransaction.begin()
 
         self.fullMaskLayer.opacity = 1.0
@@ -67,9 +67,9 @@ class OverlayViewLayerManager {
         animation.toValue = 1.0
         animation.duration = duration
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        animation.removedOnCompletion = true
+        animation.isRemovedOnCompletion = true
 
-        self.fullMaskLayer.addAnimation(animation, forKey: "opacityAnimationFadeOut")
+        self.fullMaskLayer.add(animation, forKey: "opacityAnimationFadeOut")
 
         CATransaction.commit()
     }
@@ -85,7 +85,7 @@ private extension OverlayViewLayerManager {
             return
         }
 
-        configureCutoutMask(cutoutPath)
+        configureCutoutMask(usingCutoutPath: cutoutPath)
         configureFullMask()
 
         let maskLayer = CALayer()
@@ -96,17 +96,17 @@ private extension OverlayViewLayerManager {
         managedLayer.mask = maskLayer
     }
 
-    func configureCutoutMask(cutoutPath: UIBezierPath) {
+    func configureCutoutMask(usingCutoutPath cutoutPath: UIBezierPath) {
         cutoutMaskLayer = CAShapeLayer()
         cutoutMaskLayer.name = "cutoutMaskLayer"
         cutoutMaskLayer.fillRule = kCAFillRuleEvenOdd
         cutoutMaskLayer.frame = managedLayer.frame
 
         let cutoutMaskLayerPath = UIBezierPath()
-        cutoutMaskLayerPath.appendPath(UIBezierPath(rect: managedLayer.bounds))
-        cutoutMaskLayerPath.appendPath(cutoutPath)
+        cutoutMaskLayerPath.append(UIBezierPath(rect: managedLayer.bounds))
+        cutoutMaskLayerPath.append(cutoutPath)
 
-        cutoutMaskLayer.path = cutoutMaskLayerPath.CGPath
+        cutoutMaskLayer.path = cutoutMaskLayerPath.cgPath
     }
 
     func configureFullMask() {
@@ -117,8 +117,8 @@ private extension OverlayViewLayerManager {
         fullMaskLayer.opacity = 1.0
 
         let fullMaskLayerPath = UIBezierPath()
-        fullMaskLayerPath.appendPath(UIBezierPath(rect: managedLayer.bounds))
+        fullMaskLayerPath.append(UIBezierPath(rect: managedLayer.bounds))
 
-        fullMaskLayer.path = fullMaskLayerPath.CGPath
+        fullMaskLayer.path = fullMaskLayerPath.cgPath
     }
 }

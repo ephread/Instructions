@@ -1,6 +1,6 @@
 // CoachMarkTests.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -39,9 +39,9 @@ class CoachMarkTests: XCTestCase {
 
         coachMark.cutoutPath = UIBezierPath(rect: CGRect(x: 30, y: 50, width: 30, height: 60))
 
-        coachMark.computeOrientationInFrame(overlayFrame)
+        coachMark.computeOrientation(inFrame: overlayFrame)
 
-        XCTAssertEqual(coachMark.arrowOrientation, CoachMarkArrowOrientation.Top)
+        XCTAssertEqual(coachMark.arrowOrientation, CoachMarkArrowOrientation.top)
     }
 
     func testThatOrientationIsBottom() {
@@ -50,16 +50,16 @@ class CoachMarkTests: XCTestCase {
 
         coachMark.cutoutPath = UIBezierPath(rect: CGRect(x: 30, y: 320, width: 30, height: 60))
 
-        coachMark.computeOrientationInFrame(overlayFrame)
+        coachMark.computeOrientation(inFrame: overlayFrame)
 
-        XCTAssertEqual(coachMark.arrowOrientation, CoachMarkArrowOrientation.Bottom)
+        XCTAssertEqual(coachMark.arrowOrientation, CoachMarkArrowOrientation.bottom)
     }
 
     func testThatPointOfInterestIsAtCenterOfCutoutPath() {
         var coachMark = CoachMark()
         coachMark.cutoutPath = UIBezierPath(rect: CGRect(x: 30, y: 320, width: 30, height: 60))
 
-        coachMark.computePointOfInterestInFrame()
+        coachMark.computePointOfInterest()
 
         XCTAssertEqual(coachMark.pointOfInterest, CGPoint(x: 45, y: 350))
     }

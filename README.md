@@ -47,7 +47,7 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 - [ ] Coach marks animation
 
 ## Requirements
-- Xcode 7 / Swift 2.2
+- Xcode 7 / Swift 2.2 ~ Xcode 8 / Swift 3 (see [`swift3`](https://github.com/ephread/Instructions/tree/swift3))
 - iOS 8.0+
 
 ## Asking Questions / Contributing

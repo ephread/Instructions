@@ -214,7 +214,7 @@ extension CoachMarksViewController {
 
     private func enableInteraction() {
         instructionsRootView.userInteractionEnabled = true
-        overlayView.userInteractionEnabled = true
+        overlayView.userInteractionEnabled = false
         currentCoachMarkView?.userInteractionEnabled = true
         skipView?.asView?.userInteractionEnabled = true
     }

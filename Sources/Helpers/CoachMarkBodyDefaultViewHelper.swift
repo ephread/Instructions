@@ -40,7 +40,7 @@ public class CoachMarkBodyDefaultViewHelper {
 
     func verticalConstraintsForHint(hint: UITextView) -> [NSLayoutConstraint] {
         return NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|-(5)-[hint]-(5)-|", options: NSLayoutFormatOptions(rawValue: 0),
+            "V:|-(0)-[hint]-(0)-|", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["hint": hint]
         )
     }
@@ -75,7 +75,7 @@ public class CoachMarkBodyDefaultViewHelper {
         configureHint(hint, addTo: parent)
 
         parent.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|-(10)-[hintLabel]-(10)-|", options: NSLayoutFormatOptions(rawValue: 0),
+            "H:|-(5)-[hintLabel]-(5)-|", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["hintLabel": hint]
         ))
     }
@@ -108,15 +108,15 @@ public class CoachMarkBodyDefaultViewHelper {
     }
 
     private func configureHintTextProperties(hint: UITextView) {
-        hint.textColor = UIColor.darkGrayColor()
-        hint.font = UIFont.systemFontOfSize(15.0)
+        hint.textColor = UIColor.whiteColor()
+        hint.font = UIFont.systemFontOfSize(12.0)
         hint.textAlignment = .Justified
         hint.layoutManager.hyphenationFactor = 1.0
         hint.editable = false
     }
 
     private func configureNextTextProperties(next: UILabel) {
-        next.textColor = UIColor.darkGrayColor()
+        next.textColor = UIColor.whiteColor()
         next.font = UIFont.systemFontOfSize(17.0)
         next.textAlignment = .Center
     }

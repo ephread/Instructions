@@ -40,7 +40,7 @@ public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
         }
 
         super.init(image: image, highlightedImage: highlightedImage)
-
+        
         initializeConstraints()
     }
 
@@ -52,6 +52,7 @@ public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
 //MARK: - Private Inner Setup
 private extension CoachMarkArrowDefaultView {
     func initializeConstraints() {
+        
         self.translatesAutoresizingMaskIntoConstraints = false
 
         var constraints = [NSLayoutConstraint]()

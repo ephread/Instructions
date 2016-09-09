@@ -178,6 +178,21 @@ public class FlowManager {
     /// - Parameter shouldCallDelegate: `true` to call delegate methods, `false` otherwise.
     internal func createAndShowCoachMark(shouldCallDelegate: Bool = true) {
         if disableFlow { return }
+        
+        // Check if the next CoachMark should be loaded
+        // Else find the next one that should
+        if let delegate = self.delegate {
+            while !delegate.coachMarkWillLoadForIndex(currentIndex) && currentIndex < numberOfCoachMarks {
+                currentIndex += 1
+            }
+        }
+        
+        // Check if there is more CoachMark to show
+        // Else stop the flow
+        if currentIndex >= numberOfCoachMarks {
+            self.stopFlow()
+            return
+        }
 
         // Retrieves the current coach mark structure from the datasource.
         // It can't be nil, that's why we'll force unwrap it everywhere.

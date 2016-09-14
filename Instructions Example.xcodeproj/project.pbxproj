@@ -72,7 +72,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C60FA09F1D2993E40055B60B /* Instructions.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -108,7 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C60FA09E1D2993E40055B60B /* Instructions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +234,7 @@
 					C64FB30B1BB6CB1C0081E5B6 = {
 						CreatedOnToolsVersion = 7.0;
 						DevelopmentTeam = EV2G94D75V;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -453,6 +452,7 @@
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -468,6 +468,7 @@
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

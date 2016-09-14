@@ -267,9 +267,11 @@
 				TargetAttributes = {
 					C60FA0AB1D29A2770055B60B = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = EV2G94D75V;
 					};
 					C60FA0E61D29A4AF0055B60B = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = EV2G94D75V;
 					};
 				};
 			};
@@ -491,6 +493,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = EV2G94D75V;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/App Extensions Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
@@ -498,6 +501,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-App-Extensions-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -506,36 +510,42 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = EV2G94D75V;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/App Extensions Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-App-Extensions-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
 		C60FA0F01D29A4AF0055B60B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = EV2G94D75V;
 				INFOPLIST_FILE = "$(SRCROOT)/App Extensions Example/KeyboardExtension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-App-Extensions-Example.KeyboardExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
 		C60FA0F11D29A4AF0055B60B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEVELOPMENT_TEAM = EV2G94D75V;
 				INFOPLIST_FILE = "$(SRCROOT)/App Extensions Example/KeyboardExtension/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-App-Extensions-Example.KeyboardExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

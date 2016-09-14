@@ -25,10 +25,10 @@
 
 import UIKit
 
-//MARK: Main Class
+//mark: Main Class
 /// Handles a set of coach marks, and display them successively.
 public class CoachMarksController {
-    //MARK: Public properties
+    //mark: Public properties
     /// Implement the data source protocol and supply
     /// the coach marks to display.
     public weak var dataSource: CoachMarksControllerDataSource?
@@ -63,7 +63,7 @@ public class CoachMarksController {
         return flowManager
     }()
 
-    //MARK: Private properties
+    //mark: Private properties
     /// Handle the UI part
     private lazy var coachMarksViewController: CoachMarksViewController = {
         let coachMarkController = CoachMarksViewController()
@@ -76,11 +76,11 @@ public class CoachMarksController {
         return coachMarkController
     }()
 
-    //MARK: Lifecycle
+    //mark: Lifecycle
     public init() { }
 }
 
-//MARK: - Forwarded Properties
+//mark: - Forwarded Properties
 public extension CoachMarksController {
     /// Control or control wrapper used to skip the flow.
     var skipView: CoachMarkSkipView? {
@@ -89,7 +89,7 @@ public extension CoachMarksController {
     }
 }
 
-//MARK: - Flow management
+//mark: - Flow management
 public extension CoachMarksController {
     /// Start displaying the coach marks.
     ///
@@ -141,14 +141,14 @@ public extension CoachMarksController {
     }
 }
 
-//MARK: - Protocol Conformance | OverlayViewDelegate
+//mark: - Protocol Conformance | OverlayViewDelegate
 extension CoachMarksController: OverlayViewDelegate {
     func didReceivedSingleTap() {
         flow.showNextCoachMark()
     }
 }
 
-//MARK: - Private builders
+//mark: - Private builders
 private extension CoachMarksController {
     private func buildCoachMarkDisplayManager() -> CoachMarkDisplayManager {
         let coachMarkDisplayManager =

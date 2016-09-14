@@ -25,7 +25,7 @@ import Instructions
 
 // Custom coach mark body (with the secret-like arrow)
 internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
-    //MARK: - Internal properties
+    //mark: - Internal properties
     var nextControl: UIControl? {
         get {
             return self.nextButton
@@ -39,7 +39,7 @@ internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
 
     weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate? = nil
 
-    // MARK: - Initialization
+    // mark: - Initialization
     override init (frame: CGRect) {
         super.init(frame: frame)
 
@@ -54,7 +54,7 @@ internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
         fatalError("This class does not support NSCoding.")
     }
 
-    //MARK: - Private methods
+    //mark: - Private methods
     private func setupInnerViewHierarchy() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = UIColor.whiteColor()

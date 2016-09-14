@@ -25,7 +25,7 @@ import Instructions
 
 // Transparent coach mark (text without background, cool arrow)
 internal class TransparentCoachMarkBodyView : UIControl, CoachMarkBodyView {
-    // MARK: - Internal properties
+    // mark: - Internal properties
     var nextControl: UIControl? {
         get {
             return self
@@ -36,7 +36,7 @@ internal class TransparentCoachMarkBodyView : UIControl, CoachMarkBodyView {
 
     var hintLabel = UITextView()
 
-    // MARK: - Initialization
+    // mark: - Initialization
     override init (frame: CGRect) {
         super.init(frame: frame)
 
@@ -51,7 +51,7 @@ internal class TransparentCoachMarkBodyView : UIControl, CoachMarkBodyView {
         fatalError("This class does not support NSCoding.")
     }
 
-    // MARK: - Private methods
+    // mark: - Private methods
     private func setupInnerViewHierarchy() {
         self.translatesAutoresizingMaskIntoConstraints = false
 

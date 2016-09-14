@@ -25,17 +25,17 @@ import Instructions
 
 // Custom coach mark body (with the secret-like arrow)
 internal class CustomCoachMarkArrowView : UIView, CoachMarkArrowView {
-    //MARK: - Internal properties
+    //mark: - Internal properties
     var topPlateImage = UIImage(named: "coach-mark-top-plate")
     var bottomPlateImage = UIImage(named: "coach-mark-bottom-plate")
     var plate = UIImageView()
 
     var highlighted: Bool = false
 
-    //MARK: - Private properties
+    //mark: - Private properties
     private var column = UIView()
 
-    //MARK: - Initialization
+    //mark: - Initialization
     init?(orientation: CoachMarkArrowOrientation) {
         super.init(frame: CGRectZero)
 

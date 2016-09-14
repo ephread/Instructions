@@ -26,7 +26,7 @@ import Instructions
 // That's the default controller, using every defaults made available by Instructions.
 // It can't get any simpler.
 internal class DefaultViewController: ProfileViewController {
-    //MARK: - View Lifecycle
+    //mark: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,7 +43,7 @@ internal class DefaultViewController: ProfileViewController {
     }
 }
 
-//MARK: - Protocol Conformance | CoachMarksControllerDataSource
+//mark: - Protocol Conformance | CoachMarksControllerDataSource
 extension DefaultViewController: CoachMarksControllerDataSource {
     func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
         return 5

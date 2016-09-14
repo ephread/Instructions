@@ -27,7 +27,7 @@ import Instructions
 // Unleash the Network Link Conditioner!
 internal class BackgroundNetworkingViewController: DefaultViewController {
 
-    //MARK: - Private properties
+    //mark: - Private properties
     private lazy var urlSession: NSURLSession = {
         let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier("BackgroundNetworking")
         configuration.sessionSendsLaunchEvents = true
@@ -38,7 +38,7 @@ internal class BackgroundNetworkingViewController: DefaultViewController {
 
     private var downloadTask: NSURLSessionDownloadTask?
 
-    //MARK: - View Lifecycle
+    //mark: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         coachMarksController?.delegate = self
@@ -50,7 +50,7 @@ internal class BackgroundNetworkingViewController: DefaultViewController {
         startDownload()
     }
 
-    //MARK: - Internal Methods
+    //mark: - Internal Methods
     override func startInstructions() {
         // Do nothing and override super.
     }
@@ -65,7 +65,7 @@ internal class BackgroundNetworkingViewController: DefaultViewController {
     }
 }
 
-//MARK: - CoachMarksControllerDelegate
+//mark: - CoachMarksControllerDelegate
 extension BackgroundNetworkingViewController: CoachMarksControllerDelegate {
     func coachMarksController(coachMarksController: CoachMarksController, inout coachMarkWillShow coachMark: CoachMark, forIndex index: Int) {
         if index == 2 {
@@ -76,7 +76,7 @@ extension BackgroundNetworkingViewController: CoachMarksControllerDelegate {
 
 }
 
-//MARK: - NSURLSessionDownloadDelegate
+//mark: - NSURLSessionDownloadDelegate
 extension BackgroundNetworkingViewController: NSURLSessionDownloadDelegate {
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
         print("Finished.")

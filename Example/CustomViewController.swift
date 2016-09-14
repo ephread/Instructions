@@ -26,10 +26,10 @@ import Instructions
 // Will display custom coach marks.
 internal class CustomViewsViewController: ProfileViewController {
 
-    //MARK: - IBOutlet
+    //mark: - IBOutlet
     @IBOutlet var allView: UIView?
 
-    //MARK: - View Lifecycle
+    //mark: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,9 +49,9 @@ internal class CustomViewsViewController: ProfileViewController {
     }
 }
 
-//MARK: - Protocol Conformance | CoachMarksControllerDataSource
+//mark: - Protocol Conformance | CoachMarksControllerDataSource
 extension CustomViewsViewController: CoachMarksControllerDataSource {
-    //MARK: - Protocol Conformance | CoachMarksControllerDataSource
+    //mark: - Protocol Conformance | CoachMarksControllerDataSource
     func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
         return 5
     }

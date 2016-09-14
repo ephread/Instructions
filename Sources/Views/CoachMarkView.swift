@@ -31,7 +31,7 @@ import UIKit
 /// 2. It is not suppoed to be subclassed at the moment, as it only acts as
 ///    container for body and arrow views.
 final internal class CoachMarkView: UIView {
-    //MARK: - Internal properties
+    //mark: - Internal properties
 
     /// The body of the coach mark (likely to contain some text).
     let bodyView: CoachMarkBodyView
@@ -53,7 +53,7 @@ final internal class CoachMarkView: UIView {
         }
     }
 
-    //MARK: - Private properties
+    //mark: - Private properties
 
     private var bodyUIView: UIView { return bodyView as! UIView }
 
@@ -63,7 +63,7 @@ final internal class CoachMarkView: UIView {
 
     private let coachMarkLayoutHelper: CoachMarkInnerLayoutHelper
 
-    //MARK: - Initialization
+    //mark: - Initialization
 
     /// Allocate and initliaze the coach mark view, with the given subviews.
     ///
@@ -111,7 +111,7 @@ final internal class CoachMarkView: UIView {
         fatalError("This class does not support NSCoding.")
     }
 
-    //MARK: - Internal Method
+    //mark: - Internal Method
 
     //TODO: Better documentation
     /// Change the arrow horizontal position to the given position.
@@ -137,7 +137,7 @@ final internal class CoachMarkView: UIView {
         self.addConstraint(innerConstraints.arrowXposition!)
     }
 
-    //MARK: - Private Method
+    //mark: - Private Method
 
     /// Layout the body view and the arrow view together.
     private func layoutViewComposition() {
@@ -165,7 +165,7 @@ final internal class CoachMarkView: UIView {
     }
 }
 
-//MARK: - Protocol conformance | CoachMarkBodyHighlightArrowDelegate
+//mark: - Protocol conformance | CoachMarkBodyHighlightArrowDelegate
 extension CoachMarkView: CoachMarkBodyHighlightArrowDelegate {
     func highlightArrow(highlighted: Bool) {
         self.arrowView?.highlighted = highlighted

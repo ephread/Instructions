@@ -25,14 +25,14 @@ import Instructions
 
 /// This class serves as a base for all the other examples
 internal class ProfileViewController: UIViewController {
-    //MARK: - IBOutlet
+    //mark: - IBOutlet
     @IBOutlet var handleLabel: UILabel?
     @IBOutlet var emailLabel: UILabel?
     @IBOutlet var postsLabel: UILabel?
     @IBOutlet var reputationLabel: UILabel?
     @IBOutlet var avatar: UIImageView?
 
-    //MARK: - Public properties
+    //mark: - Public properties
     var coachMarksController: CoachMarksController?
 
     let avatarText = "That's your profile picture. You look gorgeous!"
@@ -44,7 +44,7 @@ internal class ProfileViewController: UIViewController {
 
     let nextButtonText = "Ok!"
 
-    //MARK: - View lifecycle
+    //mark: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

@@ -25,14 +25,14 @@ import UIKit
 /// A concrete implementation of the coach mark skip view and the
 /// default one provided by the library.
 public class CoachMarkSkipDefaultView: UIButton, CoachMarkSkipView {
-    //MARK: - Public properties
+    //mark: - Public properties
     public var skipControl: UIControl? {
         get {
             return self
         }
     }
 
-    //MARK: - Private properties
+    //mark: - Private properties
     public override init(frame: CGRect) {
         super.init(frame: frame)
     }

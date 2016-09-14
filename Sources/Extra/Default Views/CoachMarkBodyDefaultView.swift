@@ -23,11 +23,11 @@
 
 import UIKit
 
-//MARK: - Main Class
+//mark: - Main Class
 /// A concrete implementation of the coach mark body view and the
 /// default one provided by the library.
 public class CoachMarkBodyDefaultView: UIControl, CoachMarkBodyView {
-    //MARK: Public properties
+    //mark: Public properties
     override public var highlighted: Bool {
         didSet {
             if self.highlighted {
@@ -51,7 +51,7 @@ public class CoachMarkBodyDefaultView: UIControl, CoachMarkBodyView {
 
     private var views = CoachMarkBodyDefaultViewHolder()
 
-    //MARK: Initialization
+    //mark: Initialization
     override public init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -88,7 +88,7 @@ public class CoachMarkBodyDefaultView: UIControl, CoachMarkBodyView {
     }
 }
 
-//MARK: - Private Inner Hierarchy Setup
+//mark: - Private Inner Hierarchy Setup
 private extension CoachMarkBodyDefaultView {
     //Configure the CoachMark view with a hint message and a next message
     func setupInnerViewHierarchy(helper: CoachMarkBodyDefaultViewHelper) {
@@ -115,7 +115,7 @@ private extension CoachMarkBodyDefaultView {
     }
 }
 
-//MARK: - View Holder
+//mark: - View Holder
 struct CoachMarkBodyDefaultViewHolder {
     let nextLabel = UILabel()
     let hintLabel = UITextView()

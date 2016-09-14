@@ -24,15 +24,15 @@ import UIKit
 
 /// This class deals with the layout of the "skip" view.
 internal class SkipViewDisplayManager {
-    //MARK: Internal properties
+    //mark: Internal properties
     /// Datasource providing the constraints to use.
     weak var dataSource: CoachMarksControllerProxyDataSource!
 
-    //MARK: Private properties
+    //mark: Private properties
     /// Constraints defining the position of the "Skip" view
     private var skipViewConstraints: [NSLayoutConstraint] = []
 
-    //MARK: Internal methods
+    //mark: Internal methods
     /// Hide the given Skip View with a fading effect.
     ///
     /// - Parameter skipView: the skip view to hide.

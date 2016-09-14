@@ -24,10 +24,10 @@ import UIKit
 
 /// This class deals with the layout of coach marks.
 class CoachMarkDisplayManager {
-    //MARK: - Public properties
+    //mark: - Public properties
     weak var dataSource: CoachMarksControllerProxyDataSource!
 
-    //MARK: - Private properties
+    //mark: - Private properties
     /// The coach mark metadata
     private var coachMark: CoachMark!
 
@@ -36,7 +36,7 @@ class CoachMarkDisplayManager {
 
     private let coachMarkLayoutHelper: CoachMarkLayoutHelper
 
-    //MARK: - Initialization
+    //mark: - Initialization
     /// Allocate and initialize the manager.
     ///
     /// - Parameter coachMarkLayoutHelper: auto-layout constraint generator
@@ -115,7 +115,7 @@ class CoachMarkDisplayManager {
         }
     }
 
-    //MARK: - Private methods
+    //mark: - Private methods
 
     /// Store the necessary data (rather than passing them across all private
     /// methods.)

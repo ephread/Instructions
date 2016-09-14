@@ -25,7 +25,7 @@ import Instructions
 
 // Transparent coach mark (text without background, cool arrow)
 internal class TransparentCoachMarkArrowView : UIImageView, CoachMarkArrowView {
-    //MARK: - Initialization
+    //mark: - Initialization
     init(orientation: CoachMarkArrowOrientation) {
         if orientation == .top {
             super.init(image: UIImage(named: "arrow-top"))

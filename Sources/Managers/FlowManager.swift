@@ -23,7 +23,7 @@
 import UIKit
 
 public class FlowManager {
-    //MARK: Internal Properties
+    //mark: Internal Properties
     /// `true` if coach marks are curently being displayed, `false` otherwise.
     public var started: Bool {
         return currentIndex > -1

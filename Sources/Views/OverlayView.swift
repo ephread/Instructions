@@ -25,7 +25,7 @@ import UIKit
 // Overlay a blocking view on top of the screen and handle the cutout path
 // around the point of interest.
 public class OverlayView: UIView {
-    //MARK: - Public properties
+    //mark: - Public properties
     /// The background color of the overlay
     public var color: UIColor = Constants.overlayColor
 
@@ -76,14 +76,14 @@ public class OverlayView: UIView {
     /// Used to temporarily enable touch forwarding isnide the cutoutPath.
     public var allowTouchInsideCutoutPath: Bool = false
 
-    //MARK: Internal Properties
+    //mark: Internal Properties
     /// Used to temporarily disable the tap, for a given coachmark.
     internal var enableTap: Bool = true
 
     /// Delegate to which tell that the overlay view received a tap event.
     internal weak var delegate: OverlayViewDelegate?
 
-    //MARK: - Private properties
+    //mark: - Private properties
     /// The overlay layer, which will handle the background color
     private var overlayLayer = CALayer()
 
@@ -100,7 +100,7 @@ public class OverlayView: UIView {
         return gestureRecognizer
     }()
 
-    //MARK: - Initialization
+    //mark: - Initialization
     init() {
         layerManager = OverlayViewLayerManager(layer: overlayLayer)
         super.init(frame: CGRect.zero)
@@ -111,7 +111,7 @@ public class OverlayView: UIView {
         fatalError("This class does not support NSCoding")
     }
 
-    //MARK: - Internal methods
+    //mark: - Internal methods
 
     /// Prepare for the fade, by removing the cutout shape.
     func prepareForFade() {
@@ -188,7 +188,7 @@ public class OverlayView: UIView {
         }
     }
 
-    //MARK: - Private Methods
+    //mark: - Private Methods
 
     /// Creates the visual effect view holding
     /// the blur effect and adds it to the overlay.

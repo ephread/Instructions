@@ -5,10 +5,10 @@
       location = "group:Instructions.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Instructions Example.xcodeproj">
+      location = "group:Examples/Instructions Example.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Instructions App Extensions Example.xcodeproj">
+      location = "group:Examples/Instructions App Extensions Example.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:.swiftlint.yml">

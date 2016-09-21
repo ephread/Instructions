@@ -179,6 +179,12 @@ public class FlowManager {
     internal func createAndShowCoachMark(_ shouldCallDelegate: Bool = true) {
         if disableFlow { return }
 
+        guard delegate?.coachMarkWillLoadForIndex(currentIndex) ?? false else {
+            canShowCoachMark = true
+            showNextCoachMark(hidePrevious: false)
+            return
+        }
+
         // Retrieves the current coach mark structure from the datasource.
         // It can't be nil, that's why we'll force unwrap it everywhere.
         currentCoachMark = self.dataSource!.coachMark(at: currentIndex)

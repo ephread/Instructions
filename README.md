@@ -29,8 +29,6 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 
 ⚠️ **Until Instructions reaches 1.0.0, the API is subject to change. Please see the Features section for more information about the roadmap.**
 
-[here]: https://github.com/ephread/Instructions/tree/0.4.3
-
 ## Features
 - [x] [Customizable highlight system](#advanced-usage)
 - [x] [Customizable views](#providing-custom-views)
@@ -47,9 +45,8 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 - [ ] Coach marks animation
 
 ## Requirements
-- Xcode 7 / Swift 2.2
-- Xcode 8 / Swift 2.3 (use `master` instead of `0.5.0`)
-- Xcode 8 / Swift 3 (use [`swift3`](https://github.com/ephread/Instructions/tree/swift3))
+- Xcode 8 / Swift 3 (use `master`)
+- Xcode 8 / Swift 2.3 (use [`swift2`](https://github.com/ephread/Instructions/tree/swift2))
 - iOS 8.0+
 
 ## Asking Questions / Contributing
@@ -133,20 +130,19 @@ class DefaultViewController: UIViewController, CoachMarksControllerDataSource, C
 The first one asks for the number of coach marks to display. Let's pretend that you want to display only one coach mark. Note that the `CoachMarksController` requesting the information is supplied, allowing you to supply data for mutiple `CoachMarksController`, within a single dataSource.
 
 ```swift
-func numberOfCoachMarksForCoachMarksController(coachMarkController: CoachMarksController)
--> Int {
+func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int
     return 1
 }
 ```
 
-The second one asks for metadata. This allows you to customize how a coach mark will position and appear, but won't let you define its look (more on this later). Metadata are packaged in a struct named `CoachMark`. Note the parameter `coachMarksForIndex`, it gives you the coach mark logical position, much like and `IndexPath` would do. `coachMarksController` provides you with an easy way to create a default `CoachMark` object, from a given view.
+The second one asks for metadata. This allows you to customize how a coach mark will position and appear, but won't let you define its look (more on this later). Metadata are packaged in a struct named `CoachMark`. Note the parameter `coachMarkAt`, it gives you the coach mark logical position, much like and `IndexPath` would do. `coachMarksController` provides you with an easy way to create a default `CoachMark` object, from a given view.
 
 ```swift
 let pointOfInterest = UIView()
 
-func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex: Int)
--> CoachMark {
-    return coachMarksController.coachMarkForView(self.pointOfInterest)
+func coachMarksController(_ coachMarksController: CoachMarksController,
+                              coachMarkAt index: Int) -> CoachMark {
+    return coachMarksController.helper.makeCoachMark(for: self.reputationLabel)
 }
 ```
 
@@ -155,9 +151,8 @@ The third one supplies two views (much like `cellForRowAtIndexPath`) in the form
 But for now, lets just return the default views provided by Instructions.
 
 ```swift
-func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex: Int, coachMark: CoachMark)
--> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
-    let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
 
     coachViews.bodyView.hintLabel.text = "Hello! I'm a Coach Mark!"
     coachViews.bodyView.nextLabel.text = "Ok!"
@@ -206,13 +201,13 @@ Last, you can make the overlay tappable. A tap on the overlay will hide the curr
 - `overlay.allowTap: Bool`
 
 #### Providing a custom cutout path
-If you dislike how the default cutout path looks like, you can customize it by providing a block to `coachMarkForView`. The cutout path will automatically be stored in the `cutoutPath` property of the returning `CoachMark` object:
+If you dislike how the default cutout path looks like, you can customize it by providing a block to `makeCoachMark(for:)`. The cutout path will automatically be stored in the `cutoutPath` property of the returning `CoachMark` object:
 
 ```swift
-var coachMark = coachMarksController.helper.coachMarkForView(customView) {
+var coachMark = coachMarksController.helper.makeCoachMark(for: customView) {
 (frame: CGRect) -> UIBezierPath in
     // This will create an oval cutout a bit larger than the view.
-    return UIBezierPath(ovalInRect: CGRectInset(frame, -4, -4))
+    return UIBezierPath(ovalIn: frame.insetBy(dx: -4, dy: -4))
 }
 ```
 
@@ -244,8 +239,8 @@ override var highlighted: Bool {
 Remember the following method, from the dataSource?
 
 ```swift
-func coachMarksController(coachMarkController: CoachMarksController, coachMarkViewsForIndex: Int, coachMark: CoachMark) {
-	let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+	let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
 }
 ```
 
@@ -293,7 +288,7 @@ As usual, Instructions provides a default implementation of `CoachMarkSkipView` 
 To define how the view will position itself, you can use a method from the `CoachMarkControllerDataSource` protocol. This method is optional.
 
 ```swift
-func coachMarksController(coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]?
+func coachMarksController(_ coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]?
 ```
 
 This method will be called by the `CoachMarksController` before starting the tour and whenever there is a size change. It gives you the _skip button_ and the view in which it will be positioned and expects an array of `NSLayoutConstraints` in return. These constraints will define how the _skip button_ will be positioned in its parent. You should not add the constraints yourself, just return them.
@@ -303,7 +298,7 @@ Returning `nil` will tell the `CoachMarksController` to use the defaults constra
 For more information about the skip mechanism, you can check the `Example/` directory.
 
 #### Piloting the flow from the code
-Should you ever need to programmatically show the coach mark, `CoachMarkController` also provides the following method:
+Should you ever need to programmatically show the coach mark, `CoachMarkController.flow` also provides the following method:
 
 ```swift
 func showNext(numberOfCoachMarksToSkip numberToSkip: Int = 0)
@@ -319,18 +314,19 @@ The `CoachMarkController` will notify the delegate on three occasions. All those
 First, when a coach mark will show. You might want to change something about the view. For that reason, the `CoachMark` metadata structure is passed as an `inout` object, so you can update it with new parameters.
 
 ```swift
-func coachMarksController(coachMarksController: CoachMarksController, inout coachMarkWillShow: CoachMark, forIndex: Int)
+func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillShow coachMark: inout CoachMark, at index: Int)
 ```
 
 Second, when a coach mark disappears.
 
 ```swift    
-func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillDisappear: CoachMark, forIndex: Int)
+func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillDisappear coachMark: CoachMark, at index: Int)
 ```
+
 Third, when all coach marks have been displayed. `didFinishShowingAndWasSkipped` specify whether the flow completed because the user requested it to end.
 
 ```swift    
-func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool)
+func coachMarksController(_ coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool)
 ```
 
 ##### Performing animations before showing coach marks #####
@@ -342,9 +338,9 @@ You'll implement some logic into the `coachMarkWillShow` delegate method.
 To ensure you don't have to hack something up and turn asynchronous animation blocks into synchronous ones, you can pause the flow, perform the animation and then start the flow again. This will ensure your UI never get stalled.
 
 ```swift
-func coachMarksController(coachMarksController: CoachMarksController, inout coachMarkWillShow: CoachMark, forIndex: Int) {
+func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillShow coachMark: inout CoachMark, at index: Int) {
 	 // Pause to be able to play the animation and then show the coach mark.
-    coachMarksController.pause()
+    coachMarksController.flow.pause()
 
     // Run the animation
     UIView.animateWithDuration(1, animations: { () -> Void in
@@ -354,8 +350,8 @@ func coachMarksController(coachMarksController: CoachMarksController, inout coac
         // and start the display again. Since inout parameters cannot be
         // captured by the closure, you can use the following method to update
         // the coachmark. It will only work if you paused the flow.
-        coachMarksController.updateCurrentCoachMarkForView(myView)
-        coachMarksController.resume()
+        coachMarksController.helper.updateCurrentCoachMarkForView(myView)
+        coachMarksController.flow.resume()
     })
 }
 ```
@@ -365,10 +361,10 @@ func coachMarksController(coachMarksController: CoachMarksController, inout coac
 You can skip a given coach mark by implementing the following method defined in `CoachMarksControllerDelegate`:
 
 ```swift
-func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillLoadForIndex index: Int) -> Bool
+func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillLoadAt index: Int) -> Bool
 ```
 
-`coachMarkWillLoadForIndex:` is called right before a given coach mark will show. To prevent a CoachMark from showing, you can return `false` from this method.
+`coachMarkWillLoadAt:` is called right before a given coach mark will show. To prevent a CoachMark from showing, you can return `false` from this method.
 
 ### Usage within App Extensions
 If you wish to add Instructions within App Extensions, there's additional work you need to perform. An example is available in the `App Extensions Example/` directory.

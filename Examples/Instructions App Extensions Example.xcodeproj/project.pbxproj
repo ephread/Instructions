@@ -13,36 +13,15 @@
 		C60FA0D11D29A3DF0055B60B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C60FA0CE1D29A3DF0055B60B /* Main.storyboard */; };
 		C60FA0EA1D29A4AF0055B60B /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60FA0E91D29A4AF0055B60B /* KeyboardViewController.swift */; };
 		C60FA0EE1D29A4AF0055B60B /* KeyboardExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C60FA0E71D29A4AF0055B60B /* KeyboardExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		C60FA0F81D29A9E20055B60B /* InstructionsAppExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C60FA0DB1D29A4760055B60B /* InstructionsAppExtensions.framework */; };
 		C60FA0FB1D29AC640055B60B /* Keyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = C60FA0FA1D29AC640055B60B /* Keyboard.xib */; };
 		C60FA1041D29B7300055B60B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60FA1021D29B65D0055B60B /* ViewController.swift */; };
-		C60FA1061D29B7C40055B60B /* InstructionsAppExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C60FA0DB1D29A4760055B60B /* InstructionsAppExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C692E74E1D7D7B7E0052ECA0 /* Instructions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C60FA0D91D29A4760055B60B /* Instructions.framework */; };
-		C692E74F1D7D7B7E0052ECA0 /* Instructions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C60FA0D91D29A4760055B60B /* Instructions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C6EF656E1D92EA9400BE5B66 /* Instructions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6EF655D1D92EA5100BE5B66 /* Instructions.framework */; };
+		C6EF656F1D92EA9400BE5B66 /* Instructions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C6EF655D1D92EA5100BE5B66 /* Instructions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C6EF65731D92EA9800BE5B66 /* InstructionsAppExtensions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C6EF655F1D92EA5100BE5B66 /* InstructionsAppExtensions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		C6EF65761D92EAA100BE5B66 /* InstructionsAppExtensions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6EF655F1D92EA5100BE5B66 /* InstructionsAppExtensions.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C60FA0D81D29A4760055B60B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C60FA0D21D29A4760055B60B /* Instructions.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C64FB2E91BB6CA8A0081E5B6;
-			remoteInfo = Instructions;
-		};
-		C60FA0DA1D29A4760055B60B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C60FA0D21D29A4760055B60B /* Instructions.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C6417E331D291A8A004D13EA;
-			remoteInfo = InstructionsAppExtensions;
-		};
-		C60FA0DC1D29A4760055B60B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C60FA0D21D29A4760055B60B /* Instructions.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C64FB2F31BB6CA8A0081E5B6;
-			remoteInfo = InstructionsTests;
-		};
 		C60FA0EC1D29A4AF0055B60B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C60FA0A41D29A2770055B60B /* Project object */;
@@ -50,19 +29,40 @@
 			remoteGlobalIDString = C60FA0E61D29A4AF0055B60B;
 			remoteInfo = KeyboardExtension;
 		};
-		C60FA1071D29B7C40055B60B /* PBXContainerItemProxy */ = {
+		C6EF655C1D92EA5100BE5B66 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C60FA0D21D29A4760055B60B /* Instructions.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = C6417E141D291A8A004D13EA;
+			containerPortal = C6EF65561D92EA5100BE5B66 /* Instructions.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C64FB2E91BB6CA8A0081E5B6;
+			remoteInfo = Instructions;
+		};
+		C6EF655E1D92EA5100BE5B66 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6EF65561D92EA5100BE5B66 /* Instructions.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C6417E331D291A8A004D13EA;
 			remoteInfo = InstructionsAppExtensions;
 		};
-		C692E7501D7D7B7E0052ECA0 /* PBXContainerItemProxy */ = {
+		C6EF65601D92EA5100BE5B66 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = C60FA0D21D29A4760055B60B /* Instructions.xcodeproj */;
+			containerPortal = C6EF65561D92EA5100BE5B66 /* Instructions.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C64FB2F31BB6CA8A0081E5B6;
+			remoteInfo = InstructionsTests;
+		};
+		C6EF65701D92EA9400BE5B66 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6EF65561D92EA5100BE5B66 /* Instructions.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = C64FB2E81BB6CA8A0081E5B6;
 			remoteInfo = Instructions;
+		};
+		C6EF65741D92EA9800BE5B66 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C6EF65561D92EA5100BE5B66 /* Instructions.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = C6417E141D291A8A004D13EA;
+			remoteInfo = InstructionsAppExtensions;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -84,8 +84,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C60FA1061D29B7C40055B60B /* InstructionsAppExtensions.framework in Embed Frameworks */,
-				C692E74F1D7D7B7E0052ECA0 /* Instructions.framework in Embed Frameworks */,
+				C6EF656F1D92EA9400BE5B66 /* Instructions.framework in Embed Frameworks */,
+				C6EF65731D92EA9800BE5B66 /* InstructionsAppExtensions.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,12 +99,12 @@
 		C60FA0C81D29A3B10055B60B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "App Extensions Example/AppDelegate.swift"; sourceTree = SOURCE_ROOT; };
 		C60FA0CD1D29A3DF0055B60B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "App Extensions Example/Base.lproj/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
 		C60FA0CF1D29A3DF0055B60B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "App Extensions Example/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
-		C60FA0D21D29A4760055B60B /* Instructions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Instructions.xcodeproj; sourceTree = "<group>"; };
 		C60FA0E71D29A4AF0055B60B /* KeyboardExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = KeyboardExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		C60FA0E91D29A4AF0055B60B /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeyboardViewController.swift; path = "App Extensions Example/KeyboardExtension/KeyboardViewController.swift"; sourceTree = SOURCE_ROOT; };
 		C60FA0EB1D29A4AF0055B60B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "App Extensions Example/KeyboardExtension/Info.plist"; sourceTree = SOURCE_ROOT; };
 		C60FA0FA1D29AC640055B60B /* Keyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Keyboard.xib; path = "App Extensions Example/KeyboardExtension/Keyboard.xib"; sourceTree = SOURCE_ROOT; };
 		C60FA1021D29B65D0055B60B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = "App Extensions Example/ViewController.swift"; sourceTree = SOURCE_ROOT; };
+		C6EF65561D92EA5100BE5B66 /* Instructions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Instructions.xcodeproj; path = ../Instructions.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C692E74E1D7D7B7E0052ECA0 /* Instructions.framework in Frameworks */,
+				C6EF656E1D92EA9400BE5B66 /* Instructions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,7 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C60FA0F81D29A9E20055B60B /* InstructionsAppExtensions.framework in Frameworks */,
+				C6EF65761D92EAA100BE5B66 /* InstructionsAppExtensions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,7 +134,7 @@
 				C60FA0C11D29A2D60055B60B /* Supporting Files */,
 				C60FA0E81D29A4AF0055B60B /* KeyboardExtension */,
 				C60FA0AD1D29A2770055B60B /* Products */,
-				C60FA0D21D29A4760055B60B /* Instructions.xcodeproj */,
+				C6EF65561D92EA5100BE5B66 /* Instructions.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,16 +177,6 @@
 			name = Storyboards;
 			sourceTree = "<group>";
 		};
-		C60FA0D31D29A4760055B60B /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				C60FA0D91D29A4760055B60B /* Instructions.framework */,
-				C60FA0DB1D29A4760055B60B /* InstructionsAppExtensions.framework */,
-				C60FA0DD1D29A4760055B60B /* InstructionsTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		C60FA0E81D29A4AF0055B60B /* KeyboardExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -213,6 +203,16 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
+		C6EF65571D92EA5100BE5B66 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C6EF655D1D92EA5100BE5B66 /* Instructions.framework */,
+				C6EF655F1D92EA5100BE5B66 /* InstructionsAppExtensions.framework */,
+				C6EF65611D92EA5100BE5B66 /* InstructionsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -230,8 +230,8 @@
 			);
 			dependencies = (
 				C60FA0ED1D29A4AF0055B60B /* PBXTargetDependency */,
-				C60FA1081D29B7C40055B60B /* PBXTargetDependency */,
-				C692E7511D7D7B7E0052ECA0 /* PBXTargetDependency */,
+				C6EF65711D92EA9400BE5B66 /* PBXTargetDependency */,
+				C6EF65751D92EA9800BE5B66 /* PBXTargetDependency */,
 			);
 			name = "Instructions App Extensions Example";
 			productName = "Instructions App Extensions Example";
@@ -262,16 +262,18 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = ephread.com;
 				TargetAttributes = {
 					C60FA0AB1D29A2770055B60B = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = EV2G94D75V;
+						LastSwiftMigration = 0800;
 					};
 					C60FA0E61D29A4AF0055B60B = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = EV2G94D75V;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -288,8 +290,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = C60FA0D31D29A4760055B60B /* Products */;
-					ProjectRef = C60FA0D21D29A4760055B60B /* Instructions.xcodeproj */;
+					ProductGroup = C6EF65571D92EA5100BE5B66 /* Products */;
+					ProjectRef = C6EF65561D92EA5100BE5B66 /* Instructions.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -301,25 +303,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		C60FA0D91D29A4760055B60B /* Instructions.framework */ = {
+		C6EF655D1D92EA5100BE5B66 /* Instructions.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = Instructions.framework;
-			remoteRef = C60FA0D81D29A4760055B60B /* PBXContainerItemProxy */;
+			remoteRef = C6EF655C1D92EA5100BE5B66 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C60FA0DB1D29A4760055B60B /* InstructionsAppExtensions.framework */ = {
+		C6EF655F1D92EA5100BE5B66 /* InstructionsAppExtensions.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = InstructionsAppExtensions.framework;
-			remoteRef = C60FA0DA1D29A4760055B60B /* PBXContainerItemProxy */;
+			remoteRef = C6EF655E1D92EA5100BE5B66 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		C60FA0DD1D29A4760055B60B /* InstructionsTests.xctest */ = {
+		C6EF65611D92EA5100BE5B66 /* InstructionsTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = InstructionsTests.xctest;
-			remoteRef = C60FA0DC1D29A4760055B60B /* PBXContainerItemProxy */;
+			remoteRef = C6EF65601D92EA5100BE5B66 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -371,15 +373,15 @@
 			target = C60FA0E61D29A4AF0055B60B /* KeyboardExtension */;
 			targetProxy = C60FA0EC1D29A4AF0055B60B /* PBXContainerItemProxy */;
 		};
-		C60FA1081D29B7C40055B60B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = InstructionsAppExtensions;
-			targetProxy = C60FA1071D29B7C40055B60B /* PBXContainerItemProxy */;
-		};
-		C692E7511D7D7B7E0052ECA0 /* PBXTargetDependency */ = {
+		C6EF65711D92EA9400BE5B66 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Instructions;
-			targetProxy = C692E7501D7D7B7E0052ECA0 /* PBXContainerItemProxy */;
+			targetProxy = C6EF65701D92EA9400BE5B66 /* PBXContainerItemProxy */;
+		};
+		C6EF65751D92EA9800BE5B66 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = InstructionsAppExtensions;
+			targetProxy = C6EF65741D92EA9800BE5B66 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -417,8 +419,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -463,8 +467,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -483,6 +489,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -491,33 +498,33 @@
 		C60FA0BF1D29A2770055B60B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = EV2G94D75V;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/App Extensions Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-App-Extensions-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		C60FA0C01D29A2770055B60B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = EV2G94D75V;
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/App Extensions Example/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-App-Extensions-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -531,7 +538,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-App-Extensions-Example.KeyboardExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -545,7 +552,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-App-Extensions-Example.KeyboardExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

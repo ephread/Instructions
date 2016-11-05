@@ -43,17 +43,16 @@ public class CoachMarkHelper {
     /// - Parameter view: the view around which create the cutoutPath
     /// - Parameter pointOfInterest: the point of interest toward which the arrow should point
     /// - Parameter bezierPathBlock: a block customizing the cutoutPath
-    public func coachMarkForView(view: UIView? = nil, pointOfInterest: CGPoint? = nil,
-                                 bezierPathBlock: BezierPathBlock? = nil) -> CoachMark {
+    public func makeCoachMark(for view: UIView? = nil, pointOfInterest: CGPoint? = nil,
+                          cutoutPathMaker: CutoutPathMaker? = nil) -> CoachMark {
         var coachMark = CoachMark()
 
         guard let view = view else {
             return coachMark
         }
 
-        self.updateCoachMark(&coachMark, forView: view,
-                             pointOfInterest: pointOfInterest,
-                             bezierPathBlock: bezierPathBlock)
+        self.update(coachMark: &coachMark, usingView: view,
+                    pointOfInterest: pointOfInterest, cutoutPathMaker: cutoutPathMaker)
 
         return coachMark
     }
@@ -67,8 +66,9 @@ public class CoachMarkHelper {
     /// - Parameter arrowOrientation: orientation of the arrow (either .Top or .Bottom)
     ///
     /// - Returns: new instances of the default coach views.
-    public func defaultCoachViewsWithArrow(arrow: Bool = true, withNextText nextText: Bool = true,
-                                           arrowOrientation: CoachMarkArrowOrientation? = .Top)
+    public func makeDefaultCoachViews(withArrow arrow: Bool = true,
+                                      withNextText nextText: Bool = true,
+                                      arrowOrientation: CoachMarkArrowOrientation? = .top)
     -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
 
         var coachMarkBodyView: CoachMarkBodyDefaultView
@@ -81,7 +81,7 @@ public class CoachMarkHelper {
 
         var coachMarkArrowView: CoachMarkArrowDefaultView? = nil
 
-        if arrow { coachMarkArrowView = defaultArrowViews(arrowOrientation) }
+        if arrow { coachMarkArrowView = makeDefaultArrow(withOrientation: arrowOrientation) }
 
         return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
     }
@@ -96,15 +96,15 @@ public class CoachMarkHelper {
     ///                       view will only show the hint text
     ///
     /// - Returns: new instances of the default coach views.
-    public func defaultCoachViewsWithArrow(arrow: Bool = true,
-                                           arrowOrientation: CoachMarkArrowOrientation? = .Top,
-                                           hintText: String, nextText: String? = nil)
+    public func makeDefaultCoachViews(withArrow arrow: Bool = true,
+                                      arrowOrientation: CoachMarkArrowOrientation? = .top,
+                                      hintText: String, nextText: String? = nil)
     -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
         let coachMarkBodyView = CoachMarkBodyDefaultView(hintText: hintText, nextText: nextText)
 
         var coachMarkArrowView: CoachMarkArrowDefaultView? = nil
 
-        if arrow { coachMarkArrowView = defaultArrowViews(arrowOrientation) }
+        if arrow { coachMarkArrowView = makeDefaultArrow(withOrientation: arrowOrientation) }
 
         return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
     }
@@ -124,8 +124,9 @@ public class CoachMarkHelper {
     /// - Parameter pointOfInterest: the point of interest toward which the arrow
     ///                              should point
     /// - Parameter bezierPathBlock: a block customizing the cutoutPath
-    public func updateCurrentCoachMarkForView(view: UIView? = nil, pointOfInterest: CGPoint? = nil ,
-                                              bezierPathBlock: BezierPathBlock? = nil) {
+    public func updateCurrentCoachMark(usingView view: UIView? = nil,
+                                       pointOfInterest: CGPoint? = nil,
+                                       cutoutPathMaker: CutoutPathMaker? = nil) {
         if !flowManager.paused || flowManager.currentCoachMark == nil {
             print("updateCurrentCoachMarkForView: Something is wrong, did you" +
                   "call updateCurrentCoachMarkForView without pausing" +
@@ -133,10 +134,8 @@ public class CoachMarkHelper {
             return
         }
 
-        updateCoachMark(&flowManager.currentCoachMark!,
-                        forView: view,
-                        pointOfInterest: pointOfInterest,
-                        bezierPathBlock: bezierPathBlock)
+        update(coachMark: &flowManager.currentCoachMark!, usingView: view,
+               pointOfInterest: pointOfInterest, cutoutPathMaker: cutoutPathMaker)
     }
 
     /// Updates the given coach mark with a cutout path set to be
@@ -151,41 +150,41 @@ public class CoachMarkHelper {
     /// - Parameter forView: the view around which create the cutoutPath
     /// - Parameter pointOfInterest: the point of interest toward which the arrow should point
     /// - Parameter bezierPathBlock: a block customizing the cutoutPath
-    internal func updateCoachMark(inout coachMark: CoachMark, forView view: UIView? = nil,
-                                  pointOfInterest: CGPoint?,
-                                  bezierPathBlock: BezierPathBlock? = nil) {
+    internal func update(coachMark: inout CoachMark,
+                         usingView view: UIView? = nil, pointOfInterest: CGPoint?,
+                         cutoutPathMaker: CutoutPathMaker? = nil) {
         guard let view = view else { return }
 
-        let convertedFrame = instructionsRootView.convertRect(view.frame, fromView: view.superview)
+        let convertedFrame = instructionsRootView.convert(view.frame, from: view.superview)
 
         let bezierPath: UIBezierPath
 
-        if let bezierPathBlock = bezierPathBlock {
-            bezierPath = bezierPathBlock(frame: convertedFrame)
+        if let makeCutoutPathWithFrame = cutoutPathMaker {
+            bezierPath = makeCutoutPathWithFrame(convertedFrame)
         } else {
             bezierPath = UIBezierPath(roundedRect: convertedFrame.insetBy(dx: -4, dy: -4),
-                                      byRoundingCorners: .AllCorners,
+                                      byRoundingCorners: .allCorners,
                                       cornerRadii: CGSize(width: 4, height: 4))
         }
 
         coachMark.cutoutPath = bezierPath
 
         if let pointOfInterest = pointOfInterest {
-            coachMark.pointOfInterest = instructionsRootView.convertPoint(pointOfInterest,
-                                                                          fromView: view.superview)
+            coachMark.pointOfInterest = instructionsRootView.convert(pointOfInterest,
+                                                                          from: view.superview)
         }
     }
 
-    internal func defaultArrowViews(arrowOrientation: CoachMarkArrowOrientation?)
+    internal func makeDefaultArrow(withOrientation arrowOrientation: CoachMarkArrowOrientation?)
     -> CoachMarkArrowDefaultView {
         var arrowOrientation = arrowOrientation
 
         if arrowOrientation == nil {
-            arrowOrientation = .Top
+            arrowOrientation = .top
         }
 
         return CoachMarkArrowDefaultView(orientation: arrowOrientation!)
     }
 }
 
-public typealias BezierPathBlock = (frame: CGRect) -> UIBezierPath
+public typealias CutoutPathMaker = (_ frame: CGRect) -> UIBezierPath

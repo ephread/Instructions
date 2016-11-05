@@ -37,7 +37,7 @@ class CoachMarksViewController: UIViewController {
                 self.skipView?.asView?.removeFromSuperview()
                 self.skipView?.skipControl?.removeTarget(self,
                                                          action: #selector(skipCoachMarksTour(_:)),
-                                                         forControlEvents: .TouchUpInside)
+                                                         for: .touchUpInside)
             }
         }
 
@@ -70,8 +70,8 @@ class CoachMarksViewController: UIViewController {
     weak var delegate: CoachMarksViewControllerDelegate?
 
     //mark: Private properties
-    private var onGoingSizeChange = false
-    private let mainViewsLayoutHelper = MainViewsLayoutHelper()
+    fileprivate var onGoingSizeChange = false
+    fileprivate let mainViewsLayoutHelper = MainViewsLayoutHelper()
 
     //mark: Lifecycle
     convenience init(coachMarkDisplayManager: CoachMarkDisplayManager,
@@ -83,7 +83,7 @@ class CoachMarksViewController: UIViewController {
     }
 
     override func loadView() {
-        view = DummyView(frame: UIScreen.mainScreen().bounds)
+        view = DummyView(frame: UIScreen.main.bounds)
         view.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -97,30 +97,30 @@ class CoachMarksViewController: UIViewController {
     }
 
     //mark: Private Methods
-    private func addOverlayView() {
+    fileprivate func addOverlayView() {
         instructionsRootView.addSubview(overlayView)
-        let constraints = mainViewsLayoutHelper.fullSizeConstraintsForView(overlayView)
+        let constraints = mainViewsLayoutHelper.fullSizeConstraints(for: overlayView)
         instructionsRootView.addConstraints(constraints)
 
         overlayView.alpha = 0.0
     }
 
-    private func addRootView(to window: UIWindow) {
+    fileprivate func addRootView(to window: UIWindow) {
         window.addSubview(instructionsRootView)
-        let constraints = mainViewsLayoutHelper.fullSizeConstraintsForView(instructionsRootView)
+        let constraints = mainViewsLayoutHelper.fullSizeConstraints(for: instructionsRootView)
         window.addConstraints(constraints)
 
-        instructionsRootView.backgroundColor = UIColor.clearColor()
+        instructionsRootView.backgroundColor = UIColor.clear
     }
 
     /// Add a the "Skip view" to the main view container.
-    private func addSkipView() {
+    fileprivate func addSkipView() {
         guard let skipView = skipView else { return }
 
         skipView.asView?.alpha = 0.0
         skipView.skipControl?.addTarget(self,
                                         action: #selector(skipCoachMarksTour(_:)),
-                                        forControlEvents: .TouchUpInside)
+                                        for: .touchUpInside)
 
         instructionsRootView.addSubview(skipView.asView!)
     }
@@ -129,17 +129,16 @@ class CoachMarksViewController: UIViewController {
 //mark: - Coach Mark Display
 extension CoachMarksViewController {
     //mark: Internal Methods
-    func prepareToShowCoachMarks(completion: () -> Void) {
+    func prepareToShowCoachMarks(_ completion: @escaping () -> Void) {
         disableInteraction()
         overlayView.prepareForFade()
 
         if let skipView = skipView {
-            self.skipViewDisplayManager.showSkipView(skipView,
-                                                     duration: overlayView.fadeAnimationDuration)
+            self.skipViewDisplayManager.show(skipView: skipView,
+                                             duration: overlayView.fadeAnimationDuration)
         }
 
-        UIView.animateWithDuration(overlayView.fadeAnimationDuration, animations: {
-            () -> Void in
+        UIView.animate(withDuration: overlayView.fadeAnimationDuration, animations: { () -> Void in
             self.overlayView.alpha = 1.0
         }, completion: { (finished: Bool) -> Void in
             self.enableInteraction()
@@ -147,93 +146,82 @@ extension CoachMarksViewController {
         })
     }
 
-    func hideCurrentCoachMark(coachMark: CoachMark, withoutAnimation: Bool = false,
-                              completion: (() -> Void)? = nil) {
+    func hide(coachMark: CoachMark, animated: Bool = true,
+              completion: (() -> Void)? = nil) {
         guard let currentCoachMarkView = currentCoachMarkView else {
             completion?()
             return
         }
 
         disableInteraction()
-        let duration: NSTimeInterval
+        let duration: TimeInterval
 
-        if withoutAnimation {
-            duration = 0
-        } else {
+        if animated {
             duration = coachMark.animationDuration
+        } else {
+            duration = 0
         }
 
-        self.coachMarkDisplayManager.hideCoachMarkView(
-            currentCoachMarkView,
-            overlayView: overlayView,
-            animationDuration: duration,
-            completion: {
-                self.enableInteraction()
-                self.removeTargetFromCurrentCoachView()
-                completion?()
-            }
-        )
+        self.coachMarkDisplayManager.hide(coachMarkView: currentCoachMarkView,
+                                          overlayView: overlayView, animationDuration: duration) {
+            self.enableInteraction()
+            self.removeTargetFromCurrentCoachView()
+            completion?()
+        }
     }
 
-    func showCoachMark(inout coachMark: CoachMark, withIndex index: Int,
-                       animated: Bool = true, completion: (() -> Void)? = nil) {
-
+    func show(coachMark: inout CoachMark, at index: Int, animated: Bool = true,
+              completion: (() -> Void)? = nil) {
         disableInteraction()
-        coachMark.computeMetadataForFrame(instructionsRootView.frame)
+        coachMark.computeMetadata(inFrame: instructionsRootView.frame)
+        let passthrough = coachMark.allowTouchInsideCutoutPath
 
-        let coachMarkView = coachMarkDisplayManager.createCoachMarkViewFromCoachMark(
-            coachMark, withIndex: index
-        )
+        let coachMarkView = coachMarkDisplayManager.createCoachMarkView(from: coachMark,
+                                                                        at: index)
 
         currentCoachMarkView = coachMarkView
 
         addTargetToCurrentCoachView()
 
-        coachMarkDisplayManager.showCoachMarkView(
-            coachMarkView,
-            from: coachMark,
-            overlayView: overlayView!,
-            noAnimation: !animated,
-            completion: {
-                self.instructionsRootView.passthrough = coachMark.allowTouchInsideCutoutPath
-
-                self.enableInteraction()
-                completion?()
-            }
-        )
+        coachMarkDisplayManager.showNew(coachMarkView: coachMarkView, from: coachMark,
+                                        on: overlayView!, animated: animated) {
+            self.instructionsRootView.passthrough = passthrough
+            self.enableInteraction()
+            completion?()
+        }
     }
 
     //mark: Private Methods
     private func disableInteraction() {
         instructionsRootView.passthrough = false
-        instructionsRootView.userInteractionEnabled = true
-        overlayView.userInteractionEnabled = false
-        currentCoachMarkView?.userInteractionEnabled = false
-        skipView?.asView?.userInteractionEnabled = false
+        instructionsRootView.isUserInteractionEnabled = true
+        overlayView.isUserInteractionEnabled = false
+        currentCoachMarkView?.isUserInteractionEnabled = false
+        skipView?.asView?.isUserInteractionEnabled = false
     }
 
     private func enableInteraction() {
-        instructionsRootView.userInteractionEnabled = true
-        overlayView.userInteractionEnabled = true
-        currentCoachMarkView?.userInteractionEnabled = true
-        skipView?.asView?.userInteractionEnabled = true
+        instructionsRootView.isUserInteractionEnabled = true
+        overlayView.isUserInteractionEnabled = true
+        currentCoachMarkView?.isUserInteractionEnabled = true
+        skipView?.asView?.isUserInteractionEnabled = true
     }
 }
 
 //mark: - Change Events
 extension CoachMarksViewController {
     //mark: Overrides
-    override func viewWillTransitionToSize(size: CGSize,
-        withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize,
+                                     with coordinator: UIViewControllerTransitionCoordinator) {
         if onGoingSizeChange { return }
         onGoingSizeChange = true
 
-        overlayView.updateCutoutPath(nil)
+        overlayView.update(cutoutPath: nil)
         delegate?.willTransition()
 
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        super.viewWillTransition(to: size, with: coordinator)
 
-        coordinator.animateAlongsideTransition(nil, completion: {
+        coordinator.animate(alongsideTransition: nil, completion: {
             (context: UIViewControllerTransitionCoordinatorContext) -> Void in
             self.onGoingSizeChange = false
             self.delegate?.didTransition()
@@ -244,37 +232,37 @@ extension CoachMarksViewController {
     /// Will remove currently displayed coach mark.
     func prepareForSizeTransition() {
         guard let skipView = skipView else { return }
-        skipViewDisplayManager?.hideSkipView(skipView)
+        skipViewDisplayManager?.hide(skipView: skipView)
     }
 
     /// Will re-add the current coach mark
     func restoreAfterSizeTransitionDidComplete() {
         guard let skipView = skipView else { return }
-        skipViewDisplayManager?.showSkipView(skipView)
+        skipViewDisplayManager?.show(skipView: skipView)
     }
 
     //mark: Private methods
-    private func registerForStatusBarFrameChanges() {
-        let center = NSNotificationCenter.defaultCenter()
+    fileprivate func registerForStatusBarFrameChanges() {
+        let center = NotificationCenter.default
 
         center.addObserver(self, selector: #selector(prepareForStatusBarChange),
-                           name: UIApplicationWillChangeStatusBarFrameNotification, object: nil)
+                           name: .UIApplicationWillChangeStatusBarFrame, object: nil)
 
         center.addObserver(self, selector: #selector(restoreAfterStatusBarChangeDidComplete),
-                           name: UIApplicationDidChangeStatusBarFrameNotification, object: nil)
+                           name: .UIApplicationDidChangeStatusBarFrame, object: nil)
     }
 
-    private func unregisterFromStatusBarFrameChanges() {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+    fileprivate func unregisterFromStatusBarFrameChanges() {
+        NotificationCenter.default.removeObserver(self)
     }
 
     /// Same as `prepareForSizeTransition`, but for status bar changes.
-    @objc private func prepareForStatusBarChange() {
+    @objc fileprivate func prepareForStatusBarChange() {
         if !onGoingSizeChange { prepareForSizeTransition() }
     }
 
     /// Same as `restoreAfterSizeTransitionDidComplete`, but for status bar changes.
-    @objc private func restoreAfterStatusBarChangeDidComplete() {
+    @objc fileprivate func restoreAfterStatusBarChangeDidComplete() {
         if !onGoingSizeChange {
             prepareForSizeTransition()
             restoreAfterSizeTransitionDidComplete()
@@ -289,7 +277,7 @@ extension CoachMarksViewController {
     /// `instructionsRootView` will be a subview of `UIWindow`.
     ///
     /// - Parameter parentViewController: the controller of which become a child
-    func attachToViewController(parentViewController: UIViewController) {
+    func attachTo(_ parentViewController: UIViewController) {
         guard let window = parentViewController.view?.window else {
             print("attachToViewController: Instructions could not be properly" +
                   "attached to the window, did you call `startOn` inside" +
@@ -311,21 +299,21 @@ extension CoachMarksViewController {
         // `instructionsRootView` is not laid out automatically in the
         // background, likely because it's added to the window.
         #if !INSTRUCTIONS_APP_EXTENSIONS
-            if UIApplication.sharedApplication().applicationState == .Background {
+            if UIApplication.shared.applicationState == .background {
                 window.layoutIfNeeded()
             }
         #else
             window.layoutIfNeeded()
         #endif
 
-        self.didMoveToParentViewController(parentViewController)
+        self.didMove(toParentViewController: parentViewController)
 
     }
 
     /// Detach the controller from its parent view controller.
-    func detachFromViewController() {
+    func detachFromParentViewController() {
         self.instructionsRootView.removeFromSuperview()
-        self.willMoveToParentViewController(nil)
+        self.willMove(toParentViewController: nil)
         self.view.removeFromSuperview()
         self.removeFromParentViewController()
         unregisterFromStatusBarFrameChanges()
@@ -335,28 +323,28 @@ extension CoachMarksViewController {
 //mark: - Private Extension: User Events
 private extension CoachMarksViewController {
     /// Add touch up target to the current coach mark view.
-    private func addTargetToCurrentCoachView() {
+    func addTargetToCurrentCoachView() {
         currentCoachMarkView?.nextControl?.addTarget(self,
-            action: #selector(didTapCoachMark(_:)), forControlEvents: .TouchUpInside)
+            action: #selector(didTapCoachMark(_:)), for: .touchUpInside)
     }
 
     /// Remove touch up target from the current coach mark view.
-    private func removeTargetFromCurrentCoachView() {
+    func removeTargetFromCurrentCoachView() {
         currentCoachMarkView?.nextControl?.removeTarget(self,
-            action: #selector(didTapCoachMark(_:)), forControlEvents: .TouchUpInside)
+            action: #selector(didTapCoachMark(_:)), for: .touchUpInside)
     }
 
     /// Will be called when the user perform an action requiring the display of the next coach mark.
     ///
     /// - Parameter sender: the object sending the message
-    @objc private func didTapCoachMark(sender: AnyObject?) {
-        delegate?.didTapCoachMark(currentCoachMarkView)
+    @objc func didTapCoachMark(_ sender: AnyObject?) {
+        delegate?.didTap(coachMarkView: currentCoachMarkView)
     }
 
     /// Will be called when the user choose to skip the coach mark tour.
     ///
     /// - Parameter sender: the object sending the message
-    @objc private func skipCoachMarksTour(sender: AnyObject?) {
-        delegate?.didTapSkipView(skipView)
+    @objc func skipCoachMarksTour(_ sender: AnyObject?) {
+        delegate?.didTap(skipView: skipView)
     }
 }

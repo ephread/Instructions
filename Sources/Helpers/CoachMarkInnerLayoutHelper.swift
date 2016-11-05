@@ -27,15 +27,15 @@ class CoachMarkInnerLayoutHelper {
                                     withPosition position: ArrowPosition,
                                     horizontalOffset: CGFloat) -> NSLayoutConstraint {
         return NSLayoutConstraint(
-            item: coachMarkViews.arrowView, attribute: .CenterX, relatedBy: .Equal,
+            item: coachMarkViews.arrowView, attribute: .centerX, relatedBy: .equal,
             toItem: coachMarkViews.bodyView, attribute: position.layoutAttribute,
             multiplier: 1, constant: adaptedOffset(for: position, offset: horizontalOffset)
         )
     }
 
     func horizontalConstraints(forBody body: UIView) -> [NSLayoutConstraint] {
-        return NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|[bodyView]|",
+        return NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|[bodyView]|",
             options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil,
             views: ["bodyView": body]
@@ -49,10 +49,10 @@ class CoachMarkInnerLayoutHelper {
 
         let verticalArrowOffset = properties.verticalArrowOffset
 
-        if properties.orientation == .Top {
+        if properties.orientation == .top {
             constraints = topOrientationConstraints(for: coachMarkViews, in: parentView,
                                                     verticalArrowOffset: verticalArrowOffset)
-        } else if properties.orientation == .Bottom {
+        } else if properties.orientation == .bottom {
             constraints = bottomOrientationConstraints(for: coachMarkViews, in: parentView,
                                                        verticalArrowOffset: verticalArrowOffset)
         }
@@ -62,16 +62,16 @@ class CoachMarkInnerLayoutHelper {
 
     func topConstraint(forBody body: UIView, in parent: UIView) -> NSLayoutConstraint {
         return NSLayoutConstraint(
-            item: parent, attribute: .Top, relatedBy: .Equal,
-            toItem: body, attribute: .Top,
+            item: parent, attribute: .top, relatedBy: .equal,
+            toItem: body, attribute: .top,
             multiplier: 1, constant: 0
         )
     }
 
     func bottomConstraint(forBody body: UIView, in parent: UIView) -> NSLayoutConstraint {
         return NSLayoutConstraint(
-            item: parent, attribute: .Bottom, relatedBy: .Equal,
-            toItem: body, attribute: .Bottom,
+            item: parent, attribute: .bottom, relatedBy: .equal,
+            toItem: body, attribute: .bottom,
             multiplier: 1, constant: 0
         )
     }
@@ -82,15 +82,15 @@ class CoachMarkInnerLayoutHelper {
         var constraints = [NSLayoutConstraint]()
 
         constraints.append(NSLayoutConstraint(
-            item: parentView, attribute: .Top, relatedBy: .Equal,
-            toItem: coachMarkViews.arrowView, attribute: .Top,
+            item: parentView, attribute: .top, relatedBy: .equal,
+            toItem: coachMarkViews.arrowView, attribute: .top,
             multiplier: 1, constant: 0
         ))
 
         constraints.append(NSLayoutConstraint(
-            item: coachMarkViews.arrowView, attribute: .Bottom, relatedBy: .Equal,
-            toItem: coachMarkViews.bodyView, attribute: .Top,
-            multiplier: 1, constant: adaptedOffset(for: .Top, offset: verticalArrowOffset)
+            item: coachMarkViews.arrowView, attribute: .bottom, relatedBy: .equal,
+            toItem: coachMarkViews.bodyView, attribute: .top,
+            multiplier: 1, constant: adaptedOffset(for: .top, offset: verticalArrowOffset)
         ))
 
         constraints.append(bottomConstraint(forBody: coachMarkViews.bodyView, in: parentView))
@@ -104,15 +104,15 @@ class CoachMarkInnerLayoutHelper {
             var constraints = [NSLayoutConstraint]()
 
             constraints.append(NSLayoutConstraint(
-                item: parentView, attribute: .Bottom, relatedBy: .Equal,
-                toItem: coachMarkViews.arrowView, attribute: .Bottom,
+                item: parentView, attribute: .bottom, relatedBy: .equal,
+                toItem: coachMarkViews.arrowView, attribute: .bottom,
                 multiplier: 1, constant: 0
             ))
 
             constraints.append(NSLayoutConstraint(
-                item: coachMarkViews.arrowView, attribute: .Top, relatedBy: .Equal,
-                toItem: coachMarkViews.bodyView, attribute: .Bottom,
-                multiplier: 1, constant: adaptedOffset(for: .Bottom, offset: verticalArrowOffset)
+                item: coachMarkViews.arrowView, attribute: .top, relatedBy: .equal,
+                toItem: coachMarkViews.bodyView, attribute: .bottom,
+                multiplier: 1, constant: adaptedOffset(for: .bottom, offset: verticalArrowOffset)
             ))
 
             constraints.append(topConstraint(forBody: coachMarkViews.bodyView, in: parentView))
@@ -122,17 +122,17 @@ class CoachMarkInnerLayoutHelper {
 
     private func adaptedOffset(for arrowPosition: ArrowPosition, offset: CGFloat) -> CGFloat {
         switch arrowPosition {
-        case .Leading: return offset
-        case .Center: return -offset
-        case .Trailing: return -offset
+        case .leading: return offset
+        case .center: return -offset
+        case .trailing: return -offset
         }
     }
 
     private func adaptedOffset(for arrowOrientation: CoachMarkArrowOrientation,
                                offset: CGFloat) -> CGFloat {
         switch arrowOrientation {
-        case .Top: return offset
-        case .Bottom: return -offset
+        case .top: return offset
+        case .bottom: return -offset
         }
     }
 }

@@ -1,4 +1,4 @@
-// CoachMarkBodyHighlightArrowDelegate.swift
+// TransparentCoachMarkArrowView.swift
 //
 // Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
@@ -21,15 +21,30 @@
 // THE SOFTWARE.
 
 import UIKit
+import Instructions
 
-/// Delegate the hilight mecanism of the arrow. This protocol is
-/// useful in case the whole body itself is the active control and
-/// we want the arrow to looks like it is part of this control.
-public protocol CoachMarkBodyHighlightArrowDelegate : class {
+// Transparent coach mark (text without background, cool arrow)
+internal class TransparentCoachMarkArrowView : UIImageView, CoachMarkArrowView {
+    //mark: - Initialization
+    init(orientation: CoachMarkArrowOrientation) {
+        if orientation == .top {
+            super.init(image: UIImage(named: "arrow-top"))
+        } else {
+            super.init(image: UIImage(named: "arrow-bottom"))
+        }
 
-    /// Set wethe ror not the arrow should get in its
-    /// highlighted state.
-    ///
-    /// - Parameters highlighted: `true` if the arrow should be highlighted, `false` otherwise.
-    func highlightArrow(_ highlighted: Bool)
+        self.translatesAutoresizingMaskIntoConstraints = false
+
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal,
+            toItem: nil, attribute: .notAnAttribute,
+            multiplier: 1, constant: self.image!.size.width))
+
+        self.addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal,
+            toItem: nil, attribute: .notAnAttribute,
+            multiplier: 1, constant: self.image!.size.height))
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("This class does not support NSCoding.")
+    }
 }

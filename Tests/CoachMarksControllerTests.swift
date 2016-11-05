@@ -56,12 +56,12 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     }
 
     func testThatDidFinishShowingIsCalled() {
-        self.delegateEndExpectation = self.expectationWithDescription("DidFinishShowing")
+        self.delegateEndExpectation = self.expectation(description: "DidFinishShowing")
 
         self.coachMarksController.startOn(self.parentController)
         self.coachMarksController.stop()
 
-        self.waitForExpectationsWithTimeout(10) { error in
+        self.waitForExpectations(timeout: 10) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
@@ -69,19 +69,19 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     }
 
     func testThatCoachMarkControllerDetachItselfFromParent() {
-        self.delegateEndExpectation = self.expectationWithDescription("Detachment")
+        self.delegateEndExpectation = self.expectation(description: "Detachment")
 
         self.coachMarksController.startOn(self.parentController)
         self.coachMarksController.stop()
 
-        self.waitForExpectationsWithTimeout(10) { error in
+        self.waitForExpectations(timeout: 10) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
         }
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool) {
         guard let delegateEndExpectation = self.delegateEndExpectation else {
             XCTFail()
             return
@@ -102,7 +102,7 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
         }
     }
 
-    private func isCoachMarkViewControllerAttached(controller: [UIViewController])
+    fileprivate func isCoachMarkViewControllerAttached(_ controller: [UIViewController])
     -> Bool {
         var contains = false
 
@@ -117,27 +117,27 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
 
 internal class CoachMarkControllerMockedDataSource : CoachMarksControllerDataSource {
 
-    func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 1
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkForIndex index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
         return CoachMark()
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
         return (CoachMarkBodyDefaultView(), nil)
     }
 }
 
 internal class CoachMarkControllerMockedDataSourceUsingConstructorWithoutButton : CoachMarkControllerMockedDataSource {
-    override func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    override func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
         return (CoachMarkBodyDefaultView(hintText: "hint", nextText: nil), nil)
     }
 }
 
 internal class CoachMarkControllerMockedDataSourceUsingConstructorWithButton : CoachMarkControllerMockedDataSource {
-    override func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    override func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
         return (CoachMarkBodyDefaultView(hintText: "hint", nextText: "next"), nil)
     }
 }

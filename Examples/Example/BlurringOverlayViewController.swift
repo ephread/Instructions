@@ -1,6 +1,6 @@
-// TransparentCoachMarkArrowView.swift
+// BlurringOverlayViewController.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,28 +23,12 @@
 import UIKit
 import Instructions
 
-// Transparent coach mark (text without background, cool arrow)
-internal class TransparentCoachMarkArrowView : UIImageView, CoachMarkArrowView {
-    //mark: - Initialization
-    init(orientation: CoachMarkArrowOrientation) {
-        if orientation == .Top {
-            super.init(image: UIImage(named: "arrow-top"))
-        } else {
-            super.init(image: UIImage(named: "arrow-bottom"))
-        }
+/// Will display coach marks on top of a blurred background.
+internal class BlurringOverlayViewController: DefaultViewController {
+    //mark: - View lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-        self.translatesAutoresizingMaskIntoConstraints = false
-
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .Width, relatedBy: .Equal,
-            toItem: nil, attribute: .NotAnAttribute,
-            multiplier: 1, constant: self.image!.size.width))
-
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .Height, relatedBy: .Equal,
-            toItem: nil, attribute: .NotAnAttribute,
-            multiplier: 1, constant: self.image!.size.height))
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("This class does not support NSCoding.")
+        self.coachMarksController?.overlay.blurEffectStyle = .dark
     }
 }

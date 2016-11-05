@@ -38,12 +38,12 @@ internal class CustomViewsViewController: ProfileViewController {
         self.coachMarksController?.overlay.color = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
 
         let skipView = CoachMarkSkipDefaultView()
-        skipView.setTitle("Skip", forState: .Normal)
-        skipView.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        skipView.setBackgroundImage(nil, forState: .Normal)
-        skipView.setBackgroundImage(nil, forState: .Highlighted)
+        skipView.setTitle("Skip", for: .normal)
+        skipView.setTitleColor(UIColor.white, for: .normal)
+        skipView.setBackgroundImage(nil, for: .normal)
+        skipView.setBackgroundImage(nil, for: .highlighted)
         skipView.layer.cornerRadius = 0
-        skipView.backgroundColor = UIColor.darkGrayColor()
+        skipView.backgroundColor = UIColor.darkGray
 
         self.coachMarksController?.skipView = skipView
     }
@@ -52,15 +52,15 @@ internal class CustomViewsViewController: ProfileViewController {
 //mark: - Protocol Conformance | CoachMarksControllerDataSource
 extension CustomViewsViewController: CoachMarksControllerDataSource {
     //mark: - Protocol Conformance | CoachMarksControllerDataSource
-    func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 5
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkForIndex index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
 
         // This will create cutout path matching perfectly the given view.
         // No padding!
-        let flatBezierPathBlock = { (frame: CGRect) -> UIBezierPath in
+        let flatCutoutPathMaker = { (frame: CGRect) -> UIBezierPath in
             return UIBezierPath(rect: frame)
         }
 
@@ -68,21 +68,21 @@ extension CustomViewsViewController: CoachMarksControllerDataSource {
 
         switch(index) {
         case 0:
-            coachMark = coachMarksController.helper.coachMarkForView(self.avatar) { (frame: CGRect) -> UIBezierPath in
+            coachMark = coachMarksController.helper.makeCoachMark(for: self.avatar) { (frame: CGRect) -> UIBezierPath in
                 // This will create a circular cutoutPath, perfect for the circular avatar!
-                return UIBezierPath(ovalInRect: CGRectInset(frame, -4, -4))
+                return UIBezierPath(ovalIn: frame.insetBy(dx: -4, dy: -4))
             }
         case 1:
-            coachMark = coachMarksController.helper.coachMarkForView(self.handleLabel)
-            coachMark.arrowOrientation = .Top
+            coachMark = coachMarksController.helper.makeCoachMark(for: self.handleLabel)
+            coachMark.arrowOrientation = .top
         case 2:
-            coachMark = coachMarksController.helper.coachMarkForView(self.allView, pointOfInterest: self.emailLabel?.center, bezierPathBlock: flatBezierPathBlock)
+            coachMark = coachMarksController.helper.makeCoachMark(for: self.allView, pointOfInterest: self.emailLabel?.center, cutoutPathMaker: flatCutoutPathMaker)
         case 3:
-            coachMark = coachMarksController.helper.coachMarkForView(self.allView, pointOfInterest: self.postsLabel?.center, bezierPathBlock: flatBezierPathBlock)
+            coachMark = coachMarksController.helper.makeCoachMark(for: self.allView, pointOfInterest: self.postsLabel?.center, cutoutPathMaker: flatCutoutPathMaker)
         case 4:
-            coachMark = coachMarksController.helper.coachMarkForView(self.allView, pointOfInterest: self.reputationLabel?.center, bezierPathBlock: flatBezierPathBlock)
+            coachMark = coachMarksController.helper.makeCoachMark(for: self.allView, pointOfInterest: self.reputationLabel?.center, cutoutPathMaker: flatCutoutPathMaker)
         default:
-            coachMark = coachMarksController.helper.coachMarkForView()
+            coachMark = coachMarksController.helper.makeCoachMark()
         }
 
         coachMark.gapBetweenCoachMarkAndCutoutPath = 6.0
@@ -90,7 +90,7 @@ extension CustomViewsViewController: CoachMarksControllerDataSource {
         return coachMark
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
 
         let coachMarkBodyView = CustomCoachMarkBodyView()
         var coachMarkArrowView: CustomCoachMarkArrowView? = nil
@@ -100,35 +100,35 @@ extension CustomViewsViewController: CoachMarksControllerDataSource {
         switch(index) {
         case 0:
             coachMarkBodyView.hintLabel.text = self.avatarText
-            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, forState: .Normal)
+            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: UIControlState())
 
             if let avatar = self.avatar {
                 width = avatar.bounds.width
             }
         case 1:
             coachMarkBodyView.hintLabel.text = self.handleText
-            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, forState: .Normal)
+            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: UIControlState())
 
             if let handleLabel = self.handleLabel {
                 width = handleLabel.bounds.width
             }
         case 2:
             coachMarkBodyView.hintLabel.text = self.emailText
-            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, forState: .Normal)
+            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: UIControlState())
 
             if let emailLabel = self.emailLabel {
                 width = emailLabel.bounds.width
             }
         case 3:
             coachMarkBodyView.hintLabel.text = self.postsText
-            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, forState: .Normal)
+            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: UIControlState())
 
             if let postsLabel = self.postsLabel {
                 width = postsLabel.bounds.width
             }
         case 4:
             coachMarkBodyView.hintLabel.text = self.reputationText
-            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, forState: .Normal)
+            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: UIControlState())
 
             if let reputationLabel = self.reputationLabel {
                 width = reputationLabel.bounds.width
@@ -147,30 +147,30 @@ extension CustomViewsViewController: CoachMarksControllerDataSource {
             let oneThirdOfWidth = coachMarksController.overlay.frame.size.width / 3
             let adjustedWidth = width >= oneThirdOfWidth ? width - 2 * coachMark.horizontalMargin : width
 
-            coachMarkArrowView!.plate.addConstraint(NSLayoutConstraint(item: coachMarkArrowView!.plate, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: adjustedWidth))
+            coachMarkArrowView!.plate.addConstraint(NSLayoutConstraint(item: coachMarkArrowView!.plate, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: adjustedWidth))
         }
 
         return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]? {
+    func coachMarksController(_ coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]? {
 
         var constraints: [NSLayoutConstraint] = []
         var topMargin: CGFloat = 0.0
 
-        if !UIApplication.sharedApplication().statusBarHidden {
-            topMargin = UIApplication.sharedApplication().statusBarFrame.size.height
+        if !UIApplication.shared.isStatusBarHidden {
+            topMargin = UIApplication.shared.statusBarFrame.size.height
         }
 
-        constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("H:|[skipView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
+        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|[skipView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
 
-        if UIApplication.sharedApplication().statusBarHidden {
-            constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|[skipView]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
+        if UIApplication.shared.isStatusBarHidden {
+            constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|[skipView]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
         } else {
-            constraints.appendContentsOf(NSLayoutConstraint.constraintsWithVisualFormat("V:|-topMargin-[skipView(==44)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["topMargin": topMargin],
+            constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-topMargin-[skipView(==44)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["topMargin": topMargin],
                                                              views: ["skipView": skipView]))
         }
-        
+
         return constraints
     }
 }

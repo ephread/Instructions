@@ -30,9 +30,9 @@ internal class MixedCoachMarksViewsViewController: ProfileViewController {
     @IBOutlet var answersLabel: UILabel?
 
     //mark: - Private properties
-    private let swipeImage = UIImage(named: "swipe")
+    fileprivate let swipeImage = UIImage(named: "swipe")
 
-    private let answersText = "That's the number of answers you gave."
+    fileprivate let answersText = "That's the number of answers you gave."
 
     //mark: - View Lifecycle
     override func viewDidLoad() {
@@ -46,27 +46,27 @@ internal class MixedCoachMarksViewsViewController: ProfileViewController {
 
 //mark: - Protocol Conformance | CoachMarksControllerDataSource
 extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
-    func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 5
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkForIndex index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
 
         var coachMark : CoachMark
 
         switch(index) {
         case 0:
-            coachMark = coachMarksController.helper.coachMarkForView(self.handleLabel)
+            coachMark = coachMarksController.helper.makeCoachMark(for: self.handleLabel)
         case 1:
-            coachMark = coachMarksController.helper.coachMarkForView(self.emailLabel)
+            coachMark = coachMarksController.helper.makeCoachMark(for: self.emailLabel)
         case 2:
-            coachMark = coachMarksController.helper.coachMarkForView(self.postsLabel)
+            coachMark = coachMarksController.helper.makeCoachMark(for: self.postsLabel)
         case 3:
-            coachMark = coachMarksController.helper.coachMarkForView(self.answersLabel)
+            coachMark = coachMarksController.helper.makeCoachMark(for: self.answersLabel)
         case 4:
-            coachMark = coachMarksController.helper.coachMarkForView(self.reputationLabel)
+            coachMark = coachMarksController.helper.makeCoachMark(for: self.reputationLabel)
         default:
-            coachMark = coachMarksController.helper.coachMarkForView()
+            coachMark = coachMarksController.helper.makeCoachMark()
         }
 
         coachMark.gapBetweenCoachMarkAndCutoutPath = 6.0
@@ -74,7 +74,7 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
         return coachMark
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
 
         var bodyView : CoachMarkBodyView
         var arrowView : CoachMarkArrowView?
@@ -85,7 +85,7 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
             var coachMarkArrowView: CustomCoachMarkArrowView? = nil
 
             coachMarkBodyView.hintLabel.text = self.handleText
-            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, forState: .Normal)
+            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: UIControlState())
 
             var width: CGFloat = 0.0
 
@@ -96,13 +96,13 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
             if let arrowOrientation = coachMark.arrowOrientation {
                 coachMarkArrowView = CustomCoachMarkArrowView(orientation: arrowOrientation)
 
-                coachMarkArrowView!.plate.addConstraint(NSLayoutConstraint(item: coachMarkArrowView!.plate, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: width))
+                coachMarkArrowView!.plate.addConstraint(NSLayoutConstraint(item: coachMarkArrowView!.plate, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width))
             }
 
             bodyView = coachMarkBodyView
             arrowView = coachMarkArrowView
         case 1:
-            let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+            let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
 
             coachViews.bodyView.hintLabel.text = self.emailText
             coachViews.bodyView.nextLabel.text = self.nextButtonText
@@ -110,12 +110,12 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
             bodyView = coachViews.bodyView
             arrowView = coachViews.arrowView
         case 2:
-            let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation, hintText: self.postsText, nextText: self.nextButtonText)
+            let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation, hintText: self.postsText, nextText: self.nextButtonText)
 
             bodyView = coachViews.bodyView
             arrowView = coachViews.arrowView
         case 3:
-            let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation, hintText: self.answersText, nextText: nil)
+            let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation, hintText: self.answersText, nextText: nil)
 
             bodyView = coachViews.bodyView
             arrowView = coachViews.arrowView
@@ -132,7 +132,7 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
             bodyView = coachMarkBodyView
             arrowView = coachMarkArrowView
         default:
-            let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+            let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
             
             bodyView = coachViews.bodyView
             arrowView = coachViews.arrowView

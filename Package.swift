@@ -1,6 +1,6 @@
-// BlurringOverlayViewController.swift
+// Package.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,15 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import UIKit
-import Instructions
+import PackageDescription
 
-/// Will display coach marks on top of a blurred background.
-internal class BlurringOverlayViewController: DefaultViewController {
-    //mark: - View lifecycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        self.coachMarksController?.overlay.blurEffectStyle = .Dark
-    }
-}
+let package = Package(
+  name: "Instructions"
+)

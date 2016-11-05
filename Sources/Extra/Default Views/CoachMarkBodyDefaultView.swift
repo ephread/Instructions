@@ -28,15 +28,15 @@ import UIKit
 /// default one provided by the library.
 public class CoachMarkBodyDefaultView: UIControl, CoachMarkBodyView {
     //mark: Public properties
-    override public var highlighted: Bool {
+    override public var isHighlighted: Bool {
         didSet {
-            if self.highlighted {
+            if self.isHighlighted {
                 self.views.backgroundImageView.image = self.views.highlightedBackgroundImage
             } else {
                 self.views.backgroundImageView.image = self.views.backgroundImage
             }
 
-            self.highlightArrowDelegate?.highlightArrow(self.highlighted)
+            self.highlightArrowDelegate?.highlightArrow(self.isHighlighted)
         }
     }
 
@@ -49,7 +49,7 @@ public class CoachMarkBodyDefaultView: UIControl, CoachMarkBodyView {
 
     public weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate?
 
-    private var views = CoachMarkBodyDefaultViewHolder()
+    fileprivate var views = CoachMarkBodyDefaultViewHolder()
 
     //mark: Initialization
     override public init(frame: CGRect) {
@@ -57,7 +57,7 @@ public class CoachMarkBodyDefaultView: UIControl, CoachMarkBodyView {
 
         let helper = CoachMarkBodyDefaultViewHelper()
 
-        self.setupInnerViewHierarchy(helper)
+        self.setupInnerViewHierarchy(using: helper)
     }
 
     convenience public init() {
@@ -76,14 +76,14 @@ public class CoachMarkBodyDefaultView: UIControl, CoachMarkBodyView {
         if let next = nextText {
             views.hintLabel.text = hintText
             views.nextLabel.text = next
-            setupInnerViewHierarchy(helper)
+            setupInnerViewHierarchy(using: helper)
         } else {
             views.hintLabel.text = hintText
-            setupSimpleInnerViewHierarchy(helper)
+            setupSimpleInnerViewHierarchy(using: helper)
         }
     }
 
-    convenience public init (hintText: String, nextText: String?) {
+    convenience public init(hintText: String, nextText: String?) {
         self.init(frame: CGRect.zero, hintText: hintText, nextText: nextText)
     }
 }
@@ -91,7 +91,7 @@ public class CoachMarkBodyDefaultView: UIControl, CoachMarkBodyView {
 //mark: - Private Inner Hierarchy Setup
 private extension CoachMarkBodyDefaultView {
     //Configure the CoachMark view with a hint message and a next message
-    func setupInnerViewHierarchy(helper: CoachMarkBodyDefaultViewHelper) {
+    func setupInnerViewHierarchy(using helper: CoachMarkBodyDefaultViewHelper) {
         translatesAutoresizingMaskIntoConstraints = false
 
         helper.configureBackground(self.views.backgroundImageView, addTo: self)
@@ -102,10 +102,10 @@ private extension CoachMarkBodyDefaultView {
         let views = (hintLabel: self.views.hintLabel, nextLabel: self.views.nextLabel,
                      separator: self.views.separator)
 
-        self.addConstraints(helper.horizontalConstraintsForSubViews(views))
+        self.addConstraints(helper.makeHorizontalConstraints(for: views))
     }
 
-    private func setupSimpleInnerViewHierarchy(helper: CoachMarkBodyDefaultViewHelper) {
+    func setupSimpleInnerViewHierarchy(using helper: CoachMarkBodyDefaultViewHelper) {
         translatesAutoresizingMaskIntoConstraints = false
 
         let helper = CoachMarkBodyDefaultViewHelper()
@@ -116,7 +116,7 @@ private extension CoachMarkBodyDefaultView {
 }
 
 //mark: - View Holder
-struct CoachMarkBodyDefaultViewHolder {
+private struct CoachMarkBodyDefaultViewHolder {
     let nextLabel = UILabel()
     let hintLabel = UITextView()
     let separator = UIView()

@@ -37,7 +37,7 @@ internal class DefaultViewController: ProfileViewController {
         self.reputationLabel?.layer.cornerRadius = 4.0
 
         let skipView = CoachMarkSkipDefaultView()
-        skipView.setTitle("Skip", forState: .Normal)
+        skipView.setTitle("Skip", for: .normal)
 
         self.coachMarksController?.skipView = skipView
     }
@@ -45,34 +45,34 @@ internal class DefaultViewController: ProfileViewController {
 
 //mark: - Protocol Conformance | CoachMarksControllerDataSource
 extension DefaultViewController: CoachMarksControllerDataSource {
-    func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 5
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkForIndex index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
         switch(index) {
         case 0:
-            return coachMarksController.helper.coachMarkForView(self.navigationController?.navigationBar) { (frame: CGRect) -> UIBezierPath in
+            return coachMarksController.helper.makeCoachMark(for: self.navigationController?.navigationBar) { (frame: CGRect) -> UIBezierPath in
                 // This will make a cutoutPath matching the shape of
                 // the component (no padding, no rounded corners).
                 return UIBezierPath(rect: frame)
             }
         case 1:
-            return coachMarksController.helper.coachMarkForView(self.handleLabel)
+            return coachMarksController.helper.makeCoachMark(for: self.handleLabel)
         case 2:
-            return coachMarksController.helper.coachMarkForView(self.emailLabel)
+            return coachMarksController.helper.makeCoachMark(for: self.emailLabel)
         case 3:
-            return coachMarksController.helper.coachMarkForView(self.postsLabel)
+            return coachMarksController.helper.makeCoachMark(for: self.postsLabel)
         case 4:
-            return coachMarksController.helper.coachMarkForView(self.reputationLabel)
+            return coachMarksController.helper.makeCoachMark(for: self.reputationLabel)
         default:
-            return coachMarksController.helper.coachMarkForView()
+            return coachMarksController.helper.makeCoachMark()
         }
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
 
-        let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
 
         switch(index) {
         case 0:

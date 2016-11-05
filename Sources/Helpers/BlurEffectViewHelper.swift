@@ -24,23 +24,23 @@ import UIKit
 
 // swiftlint:disable line_length
 class BlurEffectViewHelper {
-    func buildBlurEffectView(withStyle style: UIBlurEffectStyle) -> UIVisualEffectView {
+    func makeBlurEffectView(style: UIBlurEffectStyle) -> UIVisualEffectView {
         let blurEffect = UIBlurEffect(style: style)
 
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
-        blurEffectView.userInteractionEnabled = false
+        blurEffectView.isUserInteractionEnabled = false
 
         return blurEffectView
     }
 
-    func addBlurView(view: UIVisualEffectView, to parent: UIView) {
+    func add(_ view: UIVisualEffectView, to parent: UIView) {
         parent.addSubview(view)
 
         var constraints = [NSLayoutConstraint]()
 
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[view]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": view])
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[view]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": view])
+        constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[view]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": view])
+        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[view]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["view": view])
 
         parent.addConstraints(constraints)
     }

@@ -42,7 +42,7 @@ internal class DelegateViewController: ProfileViewController {
         self.reputationLabel?.layer.cornerRadius = 4.0
 
         let skipView = CoachMarkSkipDefaultView()
-        skipView.setTitle("Skip", forState: .Normal)
+        skipView.setTitle("Skip", for: .normal)
 
         self.coachMarksController?.skipView = skipView
     }
@@ -50,32 +50,32 @@ internal class DelegateViewController: ProfileViewController {
 
 //mark: - Protocol Conformance | CoachMarksControllerDataSource
 extension DelegateViewController: CoachMarksControllerDataSource {
-    func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 5
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkForIndex index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
         switch(index) {
         case 0:
-            return coachMarksController.helper.coachMarkForView(self.avatar) { (frame: CGRect) -> UIBezierPath in
-                return UIBezierPath(ovalInRect: CGRectInset(frame, -4, -4))
+            return coachMarksController.helper.makeCoachMark(for: self.avatar) { (frame: CGRect) -> UIBezierPath in
+                return UIBezierPath(ovalIn: frame.insetBy(dx: -4, dy: -4))
             }
         case 1:
-            return coachMarksController.helper.coachMarkForView(self.handleLabel)
+            return coachMarksController.helper.makeCoachMark(for: self.handleLabel)
         case 2:
-            return coachMarksController.helper.coachMarkForView(self.emailLabel)
+            return coachMarksController.helper.makeCoachMark(for: self.emailLabel)
         case 3:
-            return coachMarksController.helper.coachMarkForView(self.postsLabel)
+            return coachMarksController.helper.makeCoachMark(for: self.postsLabel)
         case 4:
-            return coachMarksController.helper.coachMarkForView(self.reputationLabel)
+            return coachMarksController.helper.makeCoachMark(for: self.reputationLabel)
         default:
-            return coachMarksController.helper.coachMarkForView()
+            return coachMarksController.helper.makeCoachMark()
         }
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
 
-        let coachViews = coachMarksController.helper.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
 
         switch(index) {
         case 0:
@@ -102,7 +102,7 @@ extension DelegateViewController: CoachMarksControllerDataSource {
 
 //mark: - Protocol Conformance | CoachMarksControllerDelegate
 extension DelegateViewController: CoachMarksControllerDelegate {
-    func coachMarksController(coachMarksController: CoachMarksController, inout coachMarkWillShow coachMark: CoachMark, forIndex index: Int) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillShow coachMark: inout CoachMark, forIndex index: Int) {
         if index == 0 {
             // We'll need to play an animation before showing up the coach mark.
             // To be able to play the animation and then show the coach mark and not stall
@@ -113,15 +113,15 @@ extension DelegateViewController: CoachMarksControllerDelegate {
             self.avatarVerticalPositionConstraint?.constant = 30
             self.view.needsUpdateConstraints()
 
-            UIView.animateWithDuration(1, animations: { () -> Void in
+            UIView.animate(withDuration: 1, animations: { () -> Void in
                 self.view.layoutIfNeeded()
                 }, completion: { (finished: Bool) -> Void in
 
                     // Once the animation is completed, we update the coach mark,
                     // and start the display again.
-                    coachMarksController.helper.updateCurrentCoachMarkForView(self.avatar, pointOfInterest: nil) {
+                    coachMarksController.helper.updateCurrentCoachMark(usingView: self.avatar, pointOfInterest: nil) {
                         (frame: CGRect) -> UIBezierPath in
-                        return UIBezierPath(ovalInRect: CGRectInset(frame, -4, -4))
+                        return UIBezierPath(ovalIn: frame.insetBy(dx: -4, dy: -4))
                     }
 
                     coachMarksController.resume()
@@ -129,23 +129,23 @@ extension DelegateViewController: CoachMarksControllerDelegate {
         }
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, coachMarkWillDisappear coachMark: CoachMark, forIndex index: Int) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillDisappear coachMark: CoachMark, forIndex index: Int) {
         if index == 1 {
             self.avatarVerticalPositionConstraint?.constant = 0
             self.view.needsUpdateConstraints()
 
-            UIView.animateWithDuration(1, animations: { () -> Void in
+            UIView.animate(withDuration: 1, animations: { () -> Void in
                 self.view.layoutIfNeeded()
             })
         }
     }
 
-    func didFinishShowingFromCoachMarksController(coachMarksController: CoachMarksController) {
+    func didFinishShowingFromCoachMarksController(_ coachMarksController: CoachMarksController) {
         // If implemented, will fall back to the extension method,
         // thus warning that this method should not be used anymore.
     }
 
-    func coachMarksController(coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool) {
         let newColor: UIColor
 
         if skipped {
@@ -154,7 +154,7 @@ extension DelegateViewController: CoachMarksControllerDelegate {
             newColor = UIColor(red: 244.0/255.0, green: 126.0/255.0, blue: 46.0/255.0, alpha: 1.0)
         }
 
-        UIView.animateWithDuration(1, animations: { () -> Void in
+        UIView.animate(withDuration: 1, animations: { () -> Void in
             self.profileBackgroundView?.backgroundColor = newColor
         })
     }

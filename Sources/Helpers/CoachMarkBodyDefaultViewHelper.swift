@@ -27,98 +27,98 @@ import UIKit
 //mark: - Main Class
 /// A concrete implementation of the coach mark body view and the
 /// default one provided by the library.
-public class CoachMarkBodyDefaultViewHelper {
-    func horizontalConstraintsForSubViews(views: CoachMarkBodyDefaultSubViews)
+open class CoachMarkBodyDefaultViewHelper {
+    func makeHorizontalConstraints(for views: CoachMarkBodyDefaultSubViews)
     -> [NSLayoutConstraint] {
-        return NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|-(10)-[hintLabel]-(10)-[separator(==1)][nextLabel(==55)]|",
+        return NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-(10)-[hintLabel]-(10)-[separator(==1)][nextLabel(==55)]|",
             options: NSLayoutFormatOptions(rawValue: 0), metrics: nil,
             views: ["hintLabel": views.hintLabel, "separator": views.separator,
                     "nextLabel": views.nextLabel]
         )
     }
 
-    func verticalConstraintsForHint(hint: UITextView) -> [NSLayoutConstraint] {
-        return NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|-(5)-[hint]-(5)-|", options: NSLayoutFormatOptions(rawValue: 0),
+    func makeVerticalConstraints(for hint: UITextView) -> [NSLayoutConstraint] {
+        return NSLayoutConstraint.constraints(
+            withVisualFormat: "V:|-(5)-[hint]-(5)-|", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["hint": hint]
         )
     }
 
-    func configureBackground(background: UIView, addTo parent: UIView) {
+    func configureBackground(_ background: UIView, addTo parent: UIView) {
         background.translatesAutoresizingMaskIntoConstraints = false
-        background.userInteractionEnabled = false
+        background.isUserInteractionEnabled = false
 
         parent.addSubview(background)
 
         var constraints = [NSLayoutConstraint]()
 
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("V:|[background]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["background": background])
+        constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[background]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["background": background])
 
-        constraints += NSLayoutConstraint.constraintsWithVisualFormat("H:|[background]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["background": background])
+        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[background]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["background": background])
 
         parent.addConstraints(constraints)
     }
 
-    func configureHint(hint: UITextView, addTo parent: UIView) {
+    func configureHint(_ hint: UITextView, addTo parent: UIView) {
         hint.translatesAutoresizingMaskIntoConstraints = false
-        hint.userInteractionEnabled = false
-        hint.backgroundColor = UIColor.clearColor()
-        hint.scrollEnabled = false
+        hint.isUserInteractionEnabled = false
+        hint.backgroundColor = UIColor.clear
+        hint.isScrollEnabled = false
 
-        configureHintTextProperties(hint)
+        configureTextPropertiesOfHint(hint)
         parent.addSubview(hint)
-        parent.addConstraints(verticalConstraintsForHint(hint))
+        parent.addConstraints(makeVerticalConstraints(for: hint))
     }
 
-    func configureSimpleHint(hint: UITextView, addTo parent: UIView) {
+    func configureSimpleHint(_ hint: UITextView, addTo parent: UIView) {
         configureHint(hint, addTo: parent)
 
-        parent.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "H:|-(10)-[hintLabel]-(10)-|", options: NSLayoutFormatOptions(rawValue: 0),
+        parent.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "H:|-(10)-[hintLabel]-(10)-|", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["hintLabel": hint]
         ))
     }
 
-    func configureNext(next: UILabel, addTo parent: UIView) {
+    func configureNext(_ next: UILabel, addTo parent: UIView) {
         next.translatesAutoresizingMaskIntoConstraints = false
-        next.userInteractionEnabled = false
+        next.isUserInteractionEnabled = false
 
-        configureNextTextProperties(next)
+        configureTextPropertiesOfNext(next)
 
         parent.addSubview(next)
 
-        parent.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|[nextLabel]|", options: NSLayoutFormatOptions(rawValue: 0),
+        parent.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "V:|[nextLabel]|", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["nextLabel": next]
         ))
     }
 
-    func configureSeparator(separator: UIView, addTo parent: UIView) {
-        separator.backgroundColor = UIColor.grayColor()
+    func configureSeparator(_ separator: UIView, addTo parent: UIView) {
+        separator.backgroundColor = UIColor.gray
         separator.translatesAutoresizingMaskIntoConstraints = false
-        separator.userInteractionEnabled = false
+        separator.isUserInteractionEnabled = false
 
         parent.addSubview(separator)
 
-        parent.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
-            "V:|-(15)-[separator]-(15)-|", options: NSLayoutFormatOptions(rawValue: 0),
+        parent.addConstraints(NSLayoutConstraint.constraints(
+            withVisualFormat: "V:|-(15)-[separator]-(15)-|", options: NSLayoutFormatOptions(rawValue: 0),
             metrics: nil, views: ["separator": separator]
         ))
     }
 
-    private func configureHintTextProperties(hint: UITextView) {
-        hint.textColor = UIColor.darkGrayColor()
-        hint.font = UIFont.systemFontOfSize(15.0)
-        hint.textAlignment = .Justified
+    private func configureTextPropertiesOfHint(_ hint: UITextView) {
+        hint.textColor = UIColor.darkGray
+        hint.font = UIFont.systemFont(ofSize: 15.0)
+        hint.textAlignment = .justified
         hint.layoutManager.hyphenationFactor = 1.0
-        hint.editable = false
+        hint.isEditable = false
     }
 
-    private func configureNextTextProperties(next: UILabel) {
-        next.textColor = UIColor.darkGrayColor()
-        next.font = UIFont.systemFontOfSize(17.0)
-        next.textAlignment = .Center
+    private func configureTextPropertiesOfNext(_ next: UILabel) {
+        next.textColor = UIColor.darkGray
+        next.font = UIFont.systemFont(ofSize: 17.0)
+        next.textAlignment = .center
     }
 }
 

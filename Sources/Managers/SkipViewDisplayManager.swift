@@ -23,7 +23,7 @@
 import UIKit
 
 /// This class deals with the layout of the "skip" view.
-internal class SkipViewDisplayManager {
+class SkipViewDisplayManager {
     //mark: Internal properties
     /// Datasource providing the constraints to use.
     weak var dataSource: CoachMarksControllerProxyDataSource!
@@ -37,11 +37,11 @@ internal class SkipViewDisplayManager {
     ///
     /// - Parameter skipView: the skip view to hide.
     /// - Parameter duration: the duration of the fade.
-    func hideSkipView(skipView: CoachMarkSkipView, duration: NSTimeInterval = 0) {
+    func hide(skipView: CoachMarkSkipView, duration: TimeInterval = 0) {
         if duration == 0 {
             skipView.asView?.alpha = 0.0
         } else {
-            UIView.animateWithDuration(duration) { () -> Void in
+            UIView.animate(withDuration: duration) { () -> Void in
                 skipView.asView?.alpha = 0.0
             }
         }
@@ -51,7 +51,7 @@ internal class SkipViewDisplayManager {
     ///
     /// - Parameter skipView: the skip view to show.
     /// - Parameter duration: the duration of the fade.
-    func showSkipView(skipView: CoachMarkSkipView, duration: NSTimeInterval = 0) {
+    func show(skipView: CoachMarkSkipView, duration: TimeInterval = 0) {
         guard let parentView = skipView.asView?.superview else {
             print("The Skip View has no parent, aborting.")
             return
@@ -61,14 +61,14 @@ internal class SkipViewDisplayManager {
             self.dataSource.constraintsForSkipView(skipView.asView!,
                                                    inParentView: parentView)
 
-        updateSkipView(skipView, withConstraints: constraints)
+        update(skipView: skipView, withConstraints: constraints)
 
-        skipView.asView?.superview?.bringSubviewToFront(skipView.asView!)
+        skipView.asView?.superview?.bringSubview(toFront: skipView.asView!)
 
         if duration == 0 {
             skipView.asView?.alpha = 1.0
         } else {
-            UIView.animateWithDuration(duration) { () -> Void in
+            UIView.animate(withDuration: duration) { () -> Void in
                 skipView.asView?.alpha = 1.0
             }
         }
@@ -78,8 +78,8 @@ internal class SkipViewDisplayManager {
     ///
     /// - Parameter skipView: the skip view to position.
     /// - Parameter constraints: the constraints to use.
-    internal func updateSkipView(skipView: CoachMarkSkipView,
-                                 withConstraints constraints: [NSLayoutConstraint]?) {
+    func update(skipView: CoachMarkSkipView,
+                withConstraints constraints: [NSLayoutConstraint]?) {
         guard let parentView = skipView.asView?.superview else {
             print("The Skip View has no parent, aborting.")
             return
@@ -104,24 +104,24 @@ internal class SkipViewDisplayManager {
         var constraints = [NSLayoutConstraint]()
 
         constraints.append(NSLayoutConstraint(
-            item: skipView, attribute: .Trailing, relatedBy: .Equal,
-            toItem: parentView, attribute: .Trailing,
+            item: skipView, attribute: .trailing, relatedBy: .equal,
+            toItem: parentView, attribute: .trailing,
             multiplier: 1, constant: -10
         ))
 
         var topConstant: CGFloat = 0.0
 
         #if !INSTRUCTIONS_APP_EXTENSIONS
-            if !UIApplication.sharedApplication().statusBarHidden {
-                topConstant = UIApplication.sharedApplication().statusBarFrame.size.height
+            if !UIApplication.shared.isStatusBarHidden {
+                topConstant = UIApplication.shared.statusBarFrame.size.height
             }
         #endif
 
         topConstant += 2
 
         constraints.append(NSLayoutConstraint(
-            item: skipView, attribute: .Top, relatedBy: .Equal,
-            toItem: parentView, attribute: .Top,
+            item: skipView, attribute: .top, relatedBy: .equal,
+            toItem: parentView, attribute: .top,
             multiplier: 1, constant: topConstant
         ))
 

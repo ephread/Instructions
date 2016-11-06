@@ -61,7 +61,7 @@ class ViewController: UIViewController, CoachMarksControllerDataSource {
             return coachMarksController.helper.makeCoachMark(for: rectangleView)
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt: Int, coachMark: CoachMark)
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt: Int, madeFrom coachMark: CoachMark)
         -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
             let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
 

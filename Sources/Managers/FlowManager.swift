@@ -124,7 +124,7 @@ public class FlowManager {
 
         let completionBlock = {(finished: Bool) -> Void in
             self.coachMarksViewController.detachFromParentViewController()
-            if shouldCallDelegate { self.delegate?.didFinishShowingAndWasSkipped(skipped) }
+            if shouldCallDelegate { self.delegate?.didEndShowingBySkipping(skipped) }
         }
 
         if immediately {
@@ -149,7 +149,7 @@ public class FlowManager {
         }
 
         if let currentCoachMark = currentCoachMark {
-            delegate?.coachMarkWillDisappear(currentCoachMark, at: currentIndex - 1)
+            delegate?.willHide(coachMark: currentCoachMark, at: currentIndex - 1)
         }
 
         if hidePrevious {
@@ -179,7 +179,7 @@ public class FlowManager {
     internal func createAndShowCoachMark(_ shouldCallDelegate: Bool = true) {
         if disableFlow { return }
 
-        guard delegate?.coachMarkWillLoad(at: currentIndex) ?? false else {
+        guard delegate?.willLoadCoachMark(at: currentIndex) ?? false else {
             canShowCoachMark = true
             showNextCoachMark(hidePrevious: false)
             return
@@ -192,7 +192,7 @@ public class FlowManager {
         // The coach mark will soon show, we notify the delegate, so it
         // can perform some things and, if required, update the coach mark structure.
         if shouldCallDelegate {
-            self.delegate?.coachMarkWillShow(&currentCoachMark!, at: currentIndex)
+            self.delegate?.willShow(coachMark: &currentCoachMark!, at: currentIndex)
         }
 
         // The delegate might have paused the flow, he check whether or not it's

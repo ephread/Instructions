@@ -102,7 +102,7 @@ extension TransitionFromCodeViewController: CoachMarksControllerDataSource {
         }
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
 
         var coachViews: (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?)
 
@@ -144,7 +144,7 @@ extension TransitionFromCodeViewController: CoachMarksControllerDataSource {
 
 //mark: - Protocol Conformance | CoachMarksControllerDelegate
 extension TransitionFromCodeViewController: CoachMarksControllerDelegate {
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillLoadForIndex index: Int) -> Bool {
+    func coachMarksController(_ coachMarksController: CoachMarksController, willLoadCoachMarkAt index: Int) -> Bool {
         switch(index) {
         case 1:
             // Skipping the second coach mark.

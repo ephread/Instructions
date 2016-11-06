@@ -59,7 +59,7 @@ class SkipViewDisplayManager {
 
         let constraints =
             self.dataSource.constraintsForSkipView(skipView.asView!,
-                                                   inParentView: parentView)
+                                                   inParent: parentView)
 
         update(skipView: skipView, withConstraints: constraints)
 

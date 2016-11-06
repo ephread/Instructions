@@ -25,52 +25,44 @@ import UIKit
 /// Give a chance to react when coach marks are displayed
 public protocol CoachMarksControllerDelegate: class {
     func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkWillLoadAt index: Int) -> Bool
+                              willLoadCoachMarkAt index: Int) -> Bool
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkWillShow coachMark: inout CoachMark,
+                              willShow coachMark: inout CoachMark,
                               at index: Int)
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkWillDisappear coachMark: CoachMark,
+                              willHide coachMark: CoachMark,
                               at index: Int)
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didFinishShowingAndWasSkipped skipped: Bool)
+                              didEndShowingBySkipping skipped: Bool)
 }
 
 public extension CoachMarksControllerDelegate {
     func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkWillLoadAt index: Int) -> Bool {
+                              willLoadCoachMarkAt index: Int) -> Bool {
         return true
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkWillShow coachMark: inout CoachMark,
+                              willShow coachMark: inout CoachMark,
                               at index: Int) { }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkWillDisappear coachMark: CoachMark,
+                              willHide coachMark: CoachMark,
                               at index: Int) { }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didFinishShowingAndWasSkipped skipped: Bool) { }
-
-    // swiftlint:disable line_length
-    final func didFinishShowingFromCoachMarksController(_ coachMarksController: CoachMarksController) {
-        print("didFinishShowingFromCoachMarksController(_:) has been deprecated " +
-              "and won't work anymore, if you implemented this method in your " +
-              "delegate, please use coachMarksController(_:didFinishShowingAndWasSkipped:) " +
-              "instead. Otherwise, ignore this message, which will be removed with 0.5.0")
-    }
+                              didEndShowingBySkipping skipped: Bool) { }
 }
 
 protocol CoachMarksControllerProxyDelegate: class {
-    func coachMarkWillLoad(at index: Int) -> Bool
+    func willLoadCoachMark(at index: Int) -> Bool
 
-    func coachMarkWillShow(_ coachMark: inout CoachMark, at index: Int)
+    func willShow(coachMark: inout CoachMark, at index: Int)
 
-    func coachMarkWillDisappear(_ coachMark: CoachMark, at index: Int)
+    func willHide(coachMark: CoachMark, at index: Int)
 
-    func didFinishShowingAndWasSkipped(_ skipped: Bool)
+    func didEndShowingBySkipping(_ skipped: Bool)
 }

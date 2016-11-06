@@ -3,10 +3,26 @@ Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 However, until it reaches 1.0.0, some breaking changes are to be expected.
 
-## [0.5.0](https://github.com/ephread/Instructions/releases/tag/0.5.0)
-Released on 2016-09-06.
+## 0.6.0
+Released on 2016-XX-XX.
 
 ### Added
+- Support for Swift 3
+
+### Changed
+- Renamed a number of methods to make them conform to the [API Design Guidelines]
+
+### Fixed
+- Fix [#74] possible build failure on Carthage due to unneeded build dependency (PR [#76]).
+- Fix inability to detect if user has skipped the flow (PR [#81]).
+
+[API Design Guidelines]: https://swift.org/documentation/api-design-guidelines/
+[#74]: https://github.com/ephread/Instructions/issues/74
+[#76]: https://github.com/ephread/Instructions/issues/76
+[#81]: https://github.com/ephread/Instructions/issues/81
+
+## [0.5.0](https://github.com/ephread/Instructions/releases/tag/0.5.0)
+Released on 2016-09-06.
 
 ### Fixed
 - Fix [#63] dataSource methods wrongly called during idle state.

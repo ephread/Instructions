@@ -60,7 +60,7 @@ public protocol CoachMarksControllerDataSource: class {
     ///
     /// - Returns: a tuple packaging the body component and the arrow component.
     func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkViewsAt index: Int, coachMark: CoachMark)
+                              coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark)
     -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?)
 
     /// Asks for autolayout constraints needed to position `skipView` in
@@ -74,13 +74,13 @@ public protocol CoachMarksControllerDataSource: class {
     /// - Returns: an array of NSLayoutConstraint.
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               constraintsForSkipView skipView: UIView,
-                              inParentView parentView: UIView) -> [NSLayoutConstraint]?
+                              inParent parentView: UIView) -> [NSLayoutConstraint]?
 }
 
 public extension CoachMarksControllerDataSource {
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               constraintsForSkipView skipView: UIView,
-                              inParentView parentView: UIView) -> [NSLayoutConstraint]? {
+                              inParent parentView: UIView) -> [NSLayoutConstraint]? {
         return nil
     }
 }
@@ -112,7 +112,7 @@ internal protocol CoachMarksControllerProxyDataSource: class {
     /// - Parameter coachMark: the coach mark meta data.
     ///
     /// - Returns: a tuple packaging the body component and the arrow component.
-    func coachMarkViews(at index: Int, coachMark: CoachMark)
+    func coachMarkViews(at index: Int, madeFrom coachMark: CoachMark)
         -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?)
 
     /// Asks for autolayout constraints needed to position `skipView` in
@@ -123,5 +123,5 @@ internal protocol CoachMarksControllerProxyDataSource: class {
     ///
     /// - Returns: an array of NSLayoutConstraint.
     func constraintsForSkipView(_ skipView: UIView,
-                                inParentView parentView: UIView) -> [NSLayoutConstraint]?
+                                inParent parentView: UIView) -> [NSLayoutConstraint]?
 }

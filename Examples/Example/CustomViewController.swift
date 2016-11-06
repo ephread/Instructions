@@ -90,7 +90,7 @@ extension CustomViewsViewController: CoachMarksControllerDataSource {
         return coachMark
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
 
         let coachMarkBodyView = CustomCoachMarkBodyView()
         var coachMarkArrowView: CustomCoachMarkArrowView? = nil

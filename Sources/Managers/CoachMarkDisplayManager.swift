@@ -47,7 +47,7 @@ class CoachMarkDisplayManager {
     func createCoachMarkView(from coachMark: CoachMark, at index: Int) -> CoachMarkView {
         // Asks the data source for the appropriate tuple of views.
         let coachMarkComponentViews =
-            dataSource.coachMarkViews(at: index, coachMark: coachMark)
+            dataSource.coachMarkViews(at: index, madeFrom: coachMark)
 
         // Creates the CoachMarkView, from the supplied component views.
         // CoachMarkView() is not a failable initializer. We'll force unwrap

@@ -90,7 +90,7 @@ extension TestFlowViewController: CoachMarksControllerDataSource {
         }
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
         print("coachMarkViewsForIndex: \(index)")
         var coachViews: (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?)
 
@@ -116,7 +116,7 @@ extension TestFlowViewController: CoachMarksControllerDataSource {
 //mark: - Protocol Conformance | CoachMarksControllerDelegate
 extension TestFlowViewController: CoachMarksControllerDelegate {
     func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkWillLoadForIndex index: Int) -> Bool {
+                              willLoadCoachMarkAt index: Int) -> Bool {
         print("coachMarkWillLoadForIndex: \(index)")
         return true
     }

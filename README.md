@@ -25,9 +25,11 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 ## Overview
 ![Instructions Demo](http://i.imgur.com/JUlQH9F.gif)
 
-⚠️ **With 0.5.0, `CoachMarksControllerDataSource.coachMarksController(_:coachMarksForIndex:)` has been renamed to `CoachMarksControllerDataSource.coachMarksController(_:coachMarkForIndex:)`, update your code accordingly.**
+⚠️ **Swift 3 brings some changes, please take a look at the [quick guide] if you need to migrate.**
 
 ⚠️ **Until Instructions reaches 1.0.0, the API is subject to change. Please see the Features section for more information about the roadmap.**
+
+[quick guide]: https://github.com/ephread/Instructions/tree/master/Documentation/MigratingFromSwift2ToSwift3.md
 
 ## Features
 - [x] [Customizable highlight system](#advanced-usage)
@@ -46,7 +48,7 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 
 ## Requirements
 - Xcode 8 / Swift 3 (use `master`)
-- Xcode 8 / Swift 2.3 (use [`swift2`](https://github.com/ephread/Instructions/tree/swift2))
+- Xcode 8 / Swift 2.3 (use `0.5.x` or [`swift2`](https://github.com/ephread/Instructions/tree/swift2))
 - iOS 8.0+
 
 ## Asking Questions / Contributing
@@ -151,7 +153,7 @@ The third one supplies two views (much like `cellForRowAtIndexPath`) in the form
 But for now, lets just return the default views provided by Instructions.
 
 ```swift
-func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
     let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
 
     coachViews.bodyView.hintLabel.text = "Hello! I'm a Coach Mark!"
@@ -239,7 +241,7 @@ override var highlighted: Bool {
 Remember the following method, from the dataSource?
 
 ```swift
-func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
 	let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
 }
 ```
@@ -314,19 +316,19 @@ The `CoachMarkController` will notify the delegate on three occasions. All those
 First, when a coach mark will show. You might want to change something about the view. For that reason, the `CoachMark` metadata structure is passed as an `inout` object, so you can update it with new parameters.
 
 ```swift
-func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillShow coachMark: inout CoachMark, at index: Int)
+func coachMarksController(_ coachMarksController: CoachMarksController, willShow coachMark: inout CoachMark, at index: Int)
 ```
 
 Second, when a coach mark disappears.
 
 ```swift    
-func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillDisappear coachMark: CoachMark, at index: Int)
+func coachMarksController(_ coachMarksController: CoachMarksController, willHide coachMark: CoachMark, at index: Int)
 ```
 
-Third, when all coach marks have been displayed. `didFinishShowingAndWasSkipped` specify whether the flow completed because the user requested it to end.
+Third, when all coach marks have been displayed. `didEndShowingBySkipping` specify whether the flow completed because the user requested it to end.
 
 ```swift    
-func coachMarksController(_ coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool)
+func coachMarksController(_ coachMarksController: CoachMarksController, didEndShowingBySkipping skipped: Bool)
 ```
 
 ##### Performing animations before showing coach marks #####
@@ -338,7 +340,7 @@ You'll implement some logic into the `coachMarkWillShow` delegate method.
 To ensure you don't have to hack something up and turn asynchronous animation blocks into synchronous ones, you can pause the flow, perform the animation and then start the flow again. This will ensure your UI never get stalled.
 
 ```swift
-func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillShow coachMark: inout CoachMark, at index: Int) {
+func coachMarksController(_ coachMarksController: CoachMarksController, willShow coachMark: inout CoachMark, at index: Int) {
 	 // Pause to be able to play the animation and then show the coach mark.
     coachMarksController.flow.pause()
 

@@ -120,3 +120,18 @@ public struct CoachMark {
         self.pointOfInterest = CGPoint(x: x, y: y)
     }
 }
+
+extension CoachMark: Equatable {}
+
+public func == (lhs: CoachMark, rhs: CoachMark) -> Bool {
+    return lhs.animationDuration == rhs.animationDuration &&
+           lhs.cutoutPath == rhs.cutoutPath &&
+           lhs.gapBetweenBodyAndArrow == rhs.gapBetweenBodyAndArrow &&
+           lhs.arrowOrientation == rhs.arrowOrientation &&
+           lhs.pointOfInterest == rhs.pointOfInterest &&
+           lhs.gapBetweenCoachMarkAndCutoutPath == rhs.gapBetweenCoachMarkAndCutoutPath &&
+           lhs.maxWidth == rhs.maxWidth &&
+           lhs.horizontalMargin == rhs.horizontalMargin &&
+           lhs.disableOverlayTap == rhs.disableOverlayTap &&
+           lhs.allowTouchInsideCutoutPath == rhs.allowTouchInsideCutoutPath
+}

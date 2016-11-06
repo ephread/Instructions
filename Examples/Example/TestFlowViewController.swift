@@ -117,24 +117,24 @@ extension TestFlowViewController: CoachMarksControllerDataSource {
 extension TestFlowViewController: CoachMarksControllerDelegate {
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               willLoadCoachMarkAt index: Int) -> Bool {
-        print("coachMarkWillLoadForIndex: \(index)")
+        print("willLoadCoachMarkAt: \(index)")
         return true
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkWillShow coachMark: inout CoachMark,
-                                                      forIndex index: Int) {
-        print("coachMarkWillShow forIndex: \(index)")
+                              willShow coachMark: inout CoachMark,
+                              at index: Int) {
+        print("willShow forIndex: \(index)")
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkWillDisappear coachMark: CoachMark,
-                                                     forIndex index: Int) {
-        print("coachMarkWillDisappear forIndex: \(index)")
+                              willHide coachMark: CoachMark,
+                              at index: Int) {
+        print("willHide forIndex: \(index)")
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didFinishShowingAndWasSkipped skipped: Bool) {
-        print("didFinishShowingAndWasSkipped: \(skipped)")
+                              didEndShowingBySkipping skipped: Bool) {
+        print("didEndShowingBySkipping: \(skipped)")
     }
 }

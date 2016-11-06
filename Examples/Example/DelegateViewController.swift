@@ -102,12 +102,12 @@ extension DelegateViewController: CoachMarksControllerDataSource {
 
 //mark: - Protocol Conformance | CoachMarksControllerDelegate
 extension DelegateViewController: CoachMarksControllerDelegate {
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillShow coachMark: inout CoachMark, forIndex index: Int) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, willShow coachMark: inout CoachMark, at index: Int) {
         if index == 0 {
             // We'll need to play an animation before showing up the coach mark.
             // To be able to play the animation and then show the coach mark and not stall
             // the UI (i. e. keep the asynchronicity), we'll pause the controller.
-            coachMarksController.pause()
+            coachMarksController.flow.pause()
 
             // Then we run the animation.
             self.avatarVerticalPositionConstraint?.constant = 30
@@ -124,12 +124,12 @@ extension DelegateViewController: CoachMarksControllerDelegate {
                         return UIBezierPath(ovalIn: frame.insetBy(dx: -4, dy: -4))
                     }
 
-                    coachMarksController.resume()
+                    coachMarksController.flow.resume()
             })
         }
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkWillDisappear coachMark: CoachMark, forIndex index: Int) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, willHide coachMark: CoachMark, at index: Int) {
         if index == 1 {
             self.avatarVerticalPositionConstraint?.constant = 0
             self.view.needsUpdateConstraints()
@@ -140,12 +140,7 @@ extension DelegateViewController: CoachMarksControllerDelegate {
         }
     }
 
-    func didFinishShowingFromCoachMarksController(_ coachMarksController: CoachMarksController) {
-        // If implemented, will fall back to the extension method,
-        // thus warning that this method should not be used anymore.
-    }
-
-    func coachMarksController(_ coachMarksController: CoachMarksController, didFinishShowingAndWasSkipped skipped: Bool) {
+    func coachMarksController(_ coachMarksController: CoachMarksController, didEndShowingBySkipping skipped: Bool) {
         let newColor: UIColor
 
         if skipped {

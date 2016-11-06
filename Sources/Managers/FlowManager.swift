@@ -87,14 +87,14 @@ public class FlowManager {
         }
     }
 
-    func resume() {
+    public func resume() {
         if started && paused {
             paused = false
             createAndShowCoachMark(false)
         }
     }
 
-    func pause() {
+    public func pause() {
         paused = true
     }
 

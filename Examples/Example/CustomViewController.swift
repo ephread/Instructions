@@ -153,7 +153,7 @@ extension CustomViewsViewController: CoachMarksControllerDataSource {
         return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]? {
+    func coachMarksController(_ coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParent parentView: UIView) -> [NSLayoutConstraint]? {
 
         var constraints: [NSLayoutConstraint] = []
         var topMargin: CGFloat = 0.0

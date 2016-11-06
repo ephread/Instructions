@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "0810"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C6417E141D291A8A004D13EA"
-               BuildableName = "InstructionsAppExtensions.framework"
-               BlueprintName = "InstructionsAppExtensions"
-               ReferencedContainer = "container:Instructions.xcodeproj">
+               BlueprintIdentifier = "C64FB30B1BB6CB1C0081E5B6"
+               BuildableName = "Instructions Example.app"
+               BlueprintName = "Instructions Example"
+               ReferencedContainer = "container:Instructions Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -30,6 +30,15 @@
       codeCoverageEnabled = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "C64FB30B1BB6CB1C0081E5B6"
+            BuildableName = "Instructions Example.app"
+            BlueprintName = "Instructions Example"
+            ReferencedContainer = "container:Instructions Example.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -43,15 +52,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C6417E141D291A8A004D13EA"
-            BuildableName = "InstructionsAppExtensions.framework"
-            BlueprintName = "InstructionsAppExtensions"
-            ReferencedContainer = "container:Instructions.xcodeproj">
+            BlueprintIdentifier = "C64FB30B1BB6CB1C0081E5B6"
+            BuildableName = "Instructions Example.app"
+            BlueprintName = "Instructions Example"
+            ReferencedContainer = "container:Instructions Example.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -61,15 +71,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "C6417E141D291A8A004D13EA"
-            BuildableName = "InstructionsAppExtensions.framework"
-            BlueprintName = "InstructionsAppExtensions"
-            ReferencedContainer = "container:Instructions.xcodeproj">
+            BlueprintIdentifier = "C64FB30B1BB6CB1C0081E5B6"
+            BuildableName = "Instructions Example.app"
+            BlueprintName = "Instructions Example"
+            ReferencedContainer = "container:Instructions Example.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

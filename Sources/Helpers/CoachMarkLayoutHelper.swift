@@ -24,9 +24,25 @@ import UIKit
 
 // swiftlint:disable line_length
 class CoachMarkLayoutHelper {
+    var layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight
+
     // TODO: Improve the layout system. Make it smarter.
-    func constraints(for coachMarkView: CoachMarkView, coachMark: CoachMark,
-                     parentView: UIView) -> [NSLayoutConstraint] {
+    func constraints(for coachMarkView: CoachMarkView, coachMark: CoachMark, parentView: UIView,
+                     layoutDirection: UIUserInterfaceLayoutDirection? = nil) -> [NSLayoutConstraint] {
+        if coachMarkView.superview != parentView {
+            print("coachMarkView was not added to parentView, returned constraints will be empty")
+            return []
+        }
+
+        if layoutDirection == nil {
+            if #available(iOS 9, *) {
+                self.layoutDirection = UIView.userInterfaceLayoutDirection(
+                    for: parentView.semanticContentAttribute)
+            }
+        } else {
+            self.layoutDirection = layoutDirection!
+        }
+
         let computedProperties = computeProperties(for: coachMark, inParentView: parentView)
         let offset = arrowOffset(for: coachMark, withProperties: computedProperties,
                                  inParentView: parentView)
@@ -106,35 +122,50 @@ class CoachMarkLayoutHelper {
         return arrowOffset
     }
 
-    func leadingArrowOffset(for coachMark: CoachMark,
+    private func leadingArrowOffset(for coachMark: CoachMark,
                             withProperties properties: CoachMarkComputedProperties,
                             inParentView parentView: UIView) -> CGFloat {
+        guard let pointOfInterest = coachMark.pointOfInterest else {
+            print("The point of interest was found nil. Fallbacking offset will be 0")
+            return 0
+        }
+
         if properties.layoutDirection == .leftToRight {
-            return coachMark.pointOfInterest!.x - coachMark.horizontalMargin
+            return pointOfInterest.x - coachMark.horizontalMargin
         } else {
-            return parentView.bounds.size.width - coachMark.pointOfInterest!.x -
+            return parentView.bounds.size.width - pointOfInterest.x -
                 coachMark.horizontalMargin
         }
     }
 
-    func middleArrowOffset(for coachMark: CoachMark,
+    private func middleArrowOffset(for coachMark: CoachMark,
                            withProperties properties: CoachMarkComputedProperties,
                            inParentView parentView: UIView) -> CGFloat {
+        guard let pointOfInterest = coachMark.pointOfInterest else {
+            print("The point of interest was found nil. Fallbacking offset will be 0")
+            return 0
+        }
+
         if properties.layoutDirection == .leftToRight {
-            return parentView.center.x - coachMark.pointOfInterest!.x
+            return parentView.center.x - pointOfInterest.x
         } else {
-            return coachMark.pointOfInterest!.x - parentView.center.x
+            return pointOfInterest.x - parentView.center.x
         }
     }
 
-    func trailingArrowOffset(for coachMark: CoachMark,
+    private func trailingArrowOffset(for coachMark: CoachMark,
                              withProperties properties: CoachMarkComputedProperties,
                              inParentView parentView: UIView) -> CGFloat {
+        guard let pointOfInterest = coachMark.pointOfInterest else {
+            print("The point of interest was found nil. Fallbacking offset will be 0")
+            return 0
+        }
+
         if properties.layoutDirection == .leftToRight {
-            return parentView.bounds.size.width - coachMark.pointOfInterest!.x -
+            return parentView.bounds.size.width - pointOfInterest.x -
                    coachMark.horizontalMargin
         } else {
-            return coachMark.pointOfInterest!.x - coachMark.horizontalMargin
+            return pointOfInterest.x - coachMark.horizontalMargin
         }
     }
 
@@ -152,27 +183,22 @@ class CoachMarkLayoutHelper {
         forLayoutDirection layoutDirection: UIUserInterfaceLayoutDirection,
         inFrame frame: CGRect
     ) -> Int {
-        let pointOfInterest = coachMark.pointOfInterest!
-        var segmentIndex = 3 * pointOfInterest.x / frame.size.width
+        if let pointOfInterest = coachMark.pointOfInterest {
+            var segmentIndex = 3 * pointOfInterest.x / frame.size.width
 
-        if layoutDirection == .rightToLeft {
-            segmentIndex = 3 - segmentIndex
+            if layoutDirection == .rightToLeft {
+                segmentIndex = 3 - segmentIndex
+            }
+
+            return Int(ceil(segmentIndex))
+        } else {
+            print("The point of interest was found nil. Fallbacking to middle segment.")
+            return 1
         }
-
-        return Int(ceil(segmentIndex))
     }
 
     private func computeProperties(for coachMark: CoachMark, inParentView parentView: UIView)
     -> CoachMarkComputedProperties {
-        let layoutDirection: UIUserInterfaceLayoutDirection
-
-        if #available(iOS 9, *) {
-            layoutDirection = UIView.userInterfaceLayoutDirection(
-                              for: parentView.semanticContentAttribute)
-        } else {
-            layoutDirection = .leftToRight
-        }
-
         let segmentIndex = computeSegmentIndex(of: coachMark, forLayoutDirection: layoutDirection,
                                                inFrame: parentView.frame)
 

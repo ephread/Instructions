@@ -224,6 +224,7 @@
 		C64FB3041BB6CB1C0081E5B6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Ephread;
 				TargetAttributes = {

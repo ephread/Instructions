@@ -74,4 +74,5 @@ class CoachMarkDisplayManagerTests: XCTestCase {
             }
         }
     }
+
 }

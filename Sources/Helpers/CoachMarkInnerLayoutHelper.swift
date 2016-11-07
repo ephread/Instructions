@@ -34,6 +34,11 @@ class CoachMarkInnerLayoutHelper {
     }
 
     func horizontalConstraints(forBody body: UIView) -> [NSLayoutConstraint] {
+        if body.superview == nil {
+            print("Body's superview was found nil, returned array of constraint will be empty.")
+            return []
+        }
+
         return NSLayoutConstraint.constraints(
             withVisualFormat: "H:|[bodyView]|",
             options: NSLayoutFormatOptions(rawValue: 0),

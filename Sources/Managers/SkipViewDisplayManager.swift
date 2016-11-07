@@ -26,7 +26,7 @@ import UIKit
 class SkipViewDisplayManager {
     //mark: Internal properties
     /// Datasource providing the constraints to use.
-    weak var dataSource: CoachMarksControllerProxyDataSource!
+    weak var dataSource: CoachMarksControllerProxyDataSource?
 
     //mark: Private properties
     /// Constraints defining the position of the "Skip" view
@@ -57,9 +57,8 @@ class SkipViewDisplayManager {
             return
         }
 
-        let constraints =
-            self.dataSource.constraintsForSkipView(skipView.asView!,
-                                                   inParent: parentView)
+        let constraints = self.dataSource?.constraintsForSkipView(skipView.asView!,
+                                                                  inParent: parentView)
 
         update(skipView: skipView, withConstraints: constraints)
 

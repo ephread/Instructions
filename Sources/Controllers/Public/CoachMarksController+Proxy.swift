@@ -57,8 +57,16 @@ extension CoachMarksController: CoachMarksControllerProxyDelegate {
         delegate?.coachMarksController(self, willShow: &coachMark, at: index)
     }
 
+    func didShow(coachMark: CoachMark, at index: Int) {
+        delegate?.coachMarksController(self, didShow: coachMark, at: index)
+    }
+
     func willHide(coachMark: CoachMark, at index: Int) {
         delegate?.coachMarksController(self, willHide: coachMark, at: index)
+    }
+
+    func didHide(coachMark: CoachMark, at index: Int) {
+        delegate?.coachMarksController(self, didHide: coachMark, at: index)
     }
 
     func didEndShowingBySkipping(_ skipped: Bool) {

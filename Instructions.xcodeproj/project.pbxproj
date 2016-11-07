@@ -12,6 +12,9 @@
 		C62DBF4A1D53BE6300AFAAE2 /* CoachMarkInnerLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62DBF491D53BE6300AFAAE2 /* CoachMarkInnerLayoutHelper.swift */; };
 		C62DBF501D5499AB00AFAAE2 /* CoachMarkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62DBF4F1D5499AB00AFAAE2 /* CoachMarkHelper.swift */; };
 		C632DDBD1DD095F90052DBF8 /* CoachMarkLayoutHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C632DDBC1DD095F90052DBF8 /* CoachMarkLayoutHelperTests.swift */; };
+		C632DDC11DD0CAD30052DBF8 /* DataSourceBaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C632DDC01DD0CAD30052DBF8 /* DataSourceBaseTest.swift */; };
+		C632DDC51DD0CBAE0052DBF8 /* DataSourceNumberOfCoachMarksTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C632DDC41DD0CBAE0052DBF8 /* DataSourceNumberOfCoachMarksTest.swift */; };
+		C632DDC71DD0D0250052DBF8 /* DataSourceCoachMarkAtTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C632DDC61DD0D0250052DBF8 /* DataSourceCoachMarkAtTest.swift */; };
 		C633C4B61D535A990025FAE9 /* UIImage+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633C4B51D535A990025FAE9 /* UIImage+Bundle.swift */; };
 		C633C4BA1D538DA10025FAE9 /* OverlayViewLayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633C4B91D538DA10025FAE9 /* OverlayViewLayerManager.swift */; };
 		C633C4BD1D53A8E50025FAE9 /* CoachMarkLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633C4BC1D53A8E50025FAE9 /* CoachMarkLayoutHelper.swift */; };
@@ -101,6 +104,9 @@
 		C62DBF491D53BE6300AFAAE2 /* CoachMarkInnerLayoutHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkInnerLayoutHelper.swift; sourceTree = "<group>"; };
 		C62DBF4F1D5499AB00AFAAE2 /* CoachMarkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkHelper.swift; sourceTree = "<group>"; };
 		C632DDBC1DD095F90052DBF8 /* CoachMarkLayoutHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkLayoutHelperTests.swift; sourceTree = "<group>"; };
+		C632DDC01DD0CAD30052DBF8 /* DataSourceBaseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceBaseTest.swift; sourceTree = "<group>"; };
+		C632DDC41DD0CBAE0052DBF8 /* DataSourceNumberOfCoachMarksTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceNumberOfCoachMarksTest.swift; sourceTree = "<group>"; };
+		C632DDC61DD0D0250052DBF8 /* DataSourceCoachMarkAtTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceCoachMarkAtTest.swift; sourceTree = "<group>"; };
 		C633C4B51D535A990025FAE9 /* UIImage+Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Bundle.swift"; sourceTree = "<group>"; };
 		C633C4B91D538DA10025FAE9 /* OverlayViewLayerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayViewLayerManager.swift; sourceTree = "<group>"; };
 		C633C4BC1D53A8E50025FAE9 /* CoachMarkLayoutHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkLayoutHelper.swift; sourceTree = "<group>"; };
@@ -202,6 +208,16 @@
 				C6D3650D1D57B07D00D2C6A2 /* MainViewsLayoutHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		C632DDC31DD0CAE50052DBF8 /* DataSource */ = {
+			isa = PBXGroup;
+			children = (
+				C632DDC61DD0D0250052DBF8 /* DataSourceCoachMarkAtTest.swift */,
+				C632DDC41DD0CBAE0052DBF8 /* DataSourceNumberOfCoachMarksTest.swift */,
+				C632DDC01DD0CAD30052DBF8 /* DataSourceBaseTest.swift */,
+			);
+			name = DataSource;
 			sourceTree = "<group>";
 		};
 		C633C4B41D535A880025FAE9 /* Extensions */ = {
@@ -346,6 +362,7 @@
 		C6A130561DCFECE900E00E75 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				C632DDC31DD0CAE50052DBF8 /* DataSource */,
 				C63FC2381BC91D1A00132132 /* CoachMarksControllerTests.swift */,
 			);
 			name = Controllers;
@@ -615,8 +632,11 @@
 			files = (
 				C6A130721DD07B7800E00E75 /* SkipViewDisplayManagerTests.swift in Sources */,
 				C6A130521DCFB8E600E00E75 /* CoachMarkHelperTests.swift in Sources */,
+				C632DDC11DD0CAD30052DBF8 /* DataSourceBaseTest.swift in Sources */,
+				C632DDC71DD0D0250052DBF8 /* DataSourceCoachMarkAtTest.swift in Sources */,
 				C6A130741DD090AF00E00E75 /* CoachMarkInnerLayoutHelperTests.swift in Sources */,
 				C63524311BC02AD10054EA0A /* CoachMarkTests.swift in Sources */,
+				C632DDC51DD0CBAE0052DBF8 /* DataSourceNumberOfCoachMarksTest.swift in Sources */,
 				C63FC2391BC91D1A00132132 /* CoachMarksControllerTests.swift in Sources */,
 				C632DDBD1DD095F90052DBF8 /* CoachMarkLayoutHelperTests.swift in Sources */,
 				C6FD96F71BDF887B00DE5889 /* CoachMarkDisplayManagerTests.swift in Sources */,

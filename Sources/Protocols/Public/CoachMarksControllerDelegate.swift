@@ -32,7 +32,15 @@ public protocol CoachMarksControllerDelegate: class {
                               at index: Int)
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didShow coachMark: CoachMark,
+                              at index: Int)
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
                               willHide coachMark: CoachMark,
+                              at index: Int)
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didHide coachMark: CoachMark,
                               at index: Int)
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
@@ -50,7 +58,15 @@ public extension CoachMarksControllerDelegate {
                               at index: Int) { }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didShow coachMark: CoachMark,
+                              at index: Int) { }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
                               willHide coachMark: CoachMark,
+                              at index: Int) { }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didHide coachMark: CoachMark,
                               at index: Int) { }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
@@ -62,7 +78,11 @@ protocol CoachMarksControllerProxyDelegate: class {
 
     func willShow(coachMark: inout CoachMark, at index: Int)
 
+    func didShow(coachMark: CoachMark, at index: Int)
+
     func willHide(coachMark: CoachMark, at index: Int)
+
+    func didHide(coachMark: CoachMark, at index: Int)
 
     func didEndShowingBySkipping(_ skipped: Bool)
 }

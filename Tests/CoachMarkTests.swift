@@ -35,24 +35,38 @@ class CoachMarkTests: XCTestCase {
 
     func testThatOrientationIsTop() {
         var coachMark = CoachMark()
-        let overlayFrame = CGRect(x: 0, y: 0, width: 320, height: 480)
 
-        coachMark.cutoutPath = UIBezierPath(rect: CGRect(x: 30, y: 50, width: 30, height: 60))
+        computeOrientation(of: &coachMark,
+                           using: UIBezierPath(rect: CGRect(x: 30, y: 50, width: 30, height: 60)))
 
-        coachMark.computeOrientation(inFrame: overlayFrame)
-
-        XCTAssertEqual(coachMark.arrowOrientation, CoachMarkArrowOrientation.top)
+        XCTAssertEqual(coachMark.arrowOrientation, .top)
     }
 
     func testThatOrientationIsBottom() {
         var coachMark = CoachMark()
+
+        computeOrientation(of: &coachMark,
+                           using: UIBezierPath(rect: CGRect(x: 30, y: 320, width: 30, height: 60)))
+
+        XCTAssertEqual(coachMark.arrowOrientation, .bottom)
+    }
+
+    func testThatOrientationIsNotRecomputed() {
+        var coachMark = CoachMark()
+        coachMark.arrowOrientation = .bottom
+
+        computeOrientation(of: &coachMark,
+                           using: UIBezierPath(rect: CGRect(x: 30, y: 50, width: 30, height: 60)))
+
+        XCTAssertEqual(coachMark.arrowOrientation, .bottom)
+    }
+
+    func testThatOrientationIsNilWhenCutoutPathIsNil() {
+        var coachMark = CoachMark()
         let overlayFrame = CGRect(x: 0, y: 0, width: 320, height: 480)
+        coachMark.computeMetadata(inFrame: overlayFrame)
 
-        coachMark.cutoutPath = UIBezierPath(rect: CGRect(x: 30, y: 320, width: 30, height: 60))
-
-        coachMark.computeOrientation(inFrame: overlayFrame)
-
-        XCTAssertEqual(coachMark.arrowOrientation, CoachMarkArrowOrientation.bottom)
+        XCTAssertEqual(coachMark.arrowOrientation, nil)
     }
 
     func testThatPointOfInterestIsAtCenterOfCutoutPath() {
@@ -62,5 +76,24 @@ class CoachMarkTests: XCTestCase {
         coachMark.computePointOfInterest()
 
         XCTAssertEqual(coachMark.pointOfInterest, CGPoint(x: 45, y: 350))
+    }
+
+    func testThatPointOfInterestIsNotRecomputed() {
+        var coachMark = CoachMark()
+        coachMark.cutoutPath = UIBezierPath(rect: CGRect(x: 30, y: 320, width: 30, height: 60))
+        coachMark.pointOfInterest = CGPoint(x: 30, y: 20)
+
+        coachMark.computePointOfInterest()
+
+        XCTAssertEqual(coachMark.pointOfInterest, CGPoint(x: 30, y: 20))
+    }
+
+    private func computeOrientation(of coachMark: inout CoachMark,
+                                    using cutoutPath: UIBezierPath = UIBezierPath(rect: CGRect(x: 30, y: 320, width: 30, height: 60))) {
+        let overlayFrame = CGRect(x: 0, y: 0, width: 320, height: 480)
+
+        coachMark.cutoutPath = cutoutPath
+
+        coachMark.computeMetadata(inFrame: overlayFrame)
     }
 }

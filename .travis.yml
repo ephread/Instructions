@@ -38,6 +38,7 @@ branches:
   only:
     - master
     - swift3
+    - tests
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -cF ios

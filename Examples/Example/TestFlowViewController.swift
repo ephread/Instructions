@@ -124,13 +124,25 @@ extension TestFlowViewController: CoachMarksControllerDelegate {
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               willShow coachMark: inout CoachMark,
                               at index: Int) {
-        print("willShow forIndex: \(index)")
+        print("willShow at: \(index)")
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didShow coachMark: CoachMark,
+                              at index: Int) {
+        print("didShow at: \(index)")
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               willHide coachMark: CoachMark,
                               at index: Int) {
-        print("willHide forIndex: \(index)")
+        print("willHide at: \(index)")
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didHide coachMark: CoachMark,
+                              at index: Int) {
+        print("didHide at: \(index)")
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,

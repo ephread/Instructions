@@ -156,6 +156,7 @@ public class FlowManager {
             guard let currentCoachMark = currentCoachMark else { return }
 
             coachMarksViewController.hide(coachMark: currentCoachMark) {
+                self.delegate?.didHide(coachMark: self.currentCoachMark!, at: self.currentIndex)
                 self.showOrStop()
             }
         } else {
@@ -207,6 +208,10 @@ public class FlowManager {
 
             coachMarksViewController.show(coachMark: &currentCoachMark!, at: currentIndex) {
                 self.canShowCoachMark = true
+
+                if shouldCallDelegate {
+                    self.delegate?.didShow(coachMark: self.currentCoachMark!, at: self.currentIndex)
+                }
             }
         }
     }
@@ -246,6 +251,6 @@ extension FlowManager: CoachMarksViewControllerDelegate {
 
     func didTransition() {
         coachMarksViewController.restoreAfterSizeTransitionDidComplete()
-        createAndShowCoachMark()
+        createAndShowCoachMark(false)
     }
 }

@@ -26,15 +26,15 @@ import Instructions
 
 // This class mix different kind of coach marks together.
 internal class MixedCoachMarksViewsViewController: ProfileViewController {
-    //mark: - IBOutlet
+    // MARK: - IBOutlet
     @IBOutlet var answersLabel: UILabel?
 
-    //mark: - Private properties
+    // MARK: - Private properties
     fileprivate let swipeImage = UIImage(named: "swipe")
 
     fileprivate let answersText = "That's the number of answers you gave."
 
-    //mark: - View Lifecycle
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,7 +44,7 @@ internal class MixedCoachMarksViewsViewController: ProfileViewController {
     }
 }
 
-//mark: - Protocol Conformance | CoachMarksControllerDataSource
+// MARK: - Protocol Conformance | CoachMarksControllerDataSource
 extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 5

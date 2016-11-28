@@ -27,7 +27,7 @@ import Instructions
 // That's the default controller, using every defaults made available by Instructions.
 // It can't get any simpler.
 internal class OnlyHintViewController: ProfileViewController {
-    //mark: - View Lifecycle
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -44,7 +44,7 @@ internal class OnlyHintViewController: ProfileViewController {
     }
 }
 
-//mark: - Protocol Conformance | CoachMarksControllerDataSource
+// MARK: - Protocol Conformance | CoachMarksControllerDataSource
 extension OnlyHintViewController: CoachMarksControllerDataSource {
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 5

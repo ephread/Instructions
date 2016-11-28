@@ -25,11 +25,11 @@
 
 import UIKit
 
-//mark: Main Class
+// MARK: - Main Class
 /// Handles a set of coach marks, and display them successively.
 class CoachMarksViewController: UIViewController {
 
-    //mark: Internal properties
+    // MARK: - Internal properties
     /// Control or control wrapper used to skip the flow.
     var skipView: CoachMarkSkipView? {
         willSet {
@@ -69,11 +69,11 @@ class CoachMarksViewController: UIViewController {
     ///
     weak var delegate: CoachMarksViewControllerDelegate?
 
-    //mark: Private properties
+    // MARK: - Private properties
     fileprivate var onGoingSizeChange = false
     fileprivate let mainViewsLayoutHelper = MainViewsLayoutHelper()
 
-    //mark: Lifecycle
+    // MARK: - Lifecycle
     convenience init(coachMarkDisplayManager: CoachMarkDisplayManager,
                      skipViewDisplayManager: SkipViewDisplayManager) {
         self.init()
@@ -96,7 +96,7 @@ class CoachMarksViewController: UIViewController {
         unregisterFromStatusBarFrameChanges()
     }
 
-    //mark: Private Methods
+    // MARK: - Private Methods
     fileprivate func addOverlayView() {
         instructionsRootView.addSubview(overlayView)
         let constraints = mainViewsLayoutHelper.fullSizeConstraints(for: overlayView)
@@ -126,9 +126,9 @@ class CoachMarksViewController: UIViewController {
     }
 }
 
-//mark: - Coach Mark Display
+// MARK: - Coach Mark Display
 extension CoachMarksViewController {
-    //mark: Internal Methods
+    // MARK: - Internal Methods
     func prepareToShowCoachMarks(_ completion: @escaping () -> Void) {
         disableInteraction()
         overlayView.prepareForFade()
@@ -191,7 +191,7 @@ extension CoachMarksViewController {
         }
     }
 
-    //mark: Private Methods
+    // MARK: - Private Methods
     private func disableInteraction() {
         instructionsRootView.passthrough = false
         instructionsRootView.isUserInteractionEnabled = true
@@ -208,9 +208,9 @@ extension CoachMarksViewController {
     }
 }
 
-//mark: - Change Events
+// MARK: - Change Events
 extension CoachMarksViewController {
-    //mark: Overrides
+    // MARK: - Overrides
     override func viewWillTransition(to size: CGSize,
                                      with coordinator: UIViewControllerTransitionCoordinator) {
         if onGoingSizeChange { return }
@@ -228,7 +228,7 @@ extension CoachMarksViewController {
         })
     }
 
-    //mark: Internal Methods
+    // MARK: - Internal Methods
     /// Will remove currently displayed coach mark.
     func prepareForSizeTransition() {
         guard let skipView = skipView else { return }
@@ -241,7 +241,7 @@ extension CoachMarksViewController {
         skipViewDisplayManager?.show(skipView: skipView)
     }
 
-    //mark: Private methods
+    // MARK: - Private methods
     fileprivate func registerForStatusBarFrameChanges() {
         let center = NotificationCenter.default
 
@@ -270,7 +270,7 @@ extension CoachMarksViewController {
     }
 }
 
-//mark: - Extension: Controller Containment
+// MARK: - Extension: Controller Containment
 extension CoachMarksViewController {
     /// Will attach the controller as a child of the given view controller. This will
     /// allow the coach mark controller to respond to size changes, though
@@ -320,7 +320,7 @@ extension CoachMarksViewController {
     }
 }
 
-//mark: - Private Extension: User Events
+// MARK: - Private Extension: User Events
 private extension CoachMarksViewController {
     /// Add touch up target to the current coach mark view.
     func addTargetToCurrentCoachView() {

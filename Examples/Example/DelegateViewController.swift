@@ -26,11 +26,11 @@ import Instructions
 // This class show off the oportunities provided by the delegate mechanism.
 internal class DelegateViewController: ProfileViewController {
 
-    //mark: - IBOutlet
+    // MARK: - IBOutlet
     @IBOutlet var profileBackgroundView: UIView?
     @IBOutlet var avatarVerticalPositionConstraint: NSLayoutConstraint?
 
-    //mark: - View Lifecycle
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,7 +48,7 @@ internal class DelegateViewController: ProfileViewController {
     }
 }
 
-//mark: - Protocol Conformance | CoachMarksControllerDataSource
+// MARK: - Protocol Conformance | CoachMarksControllerDataSource
 extension DelegateViewController: CoachMarksControllerDataSource {
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 5
@@ -100,7 +100,7 @@ extension DelegateViewController: CoachMarksControllerDataSource {
     }
 }
 
-//mark: - Protocol Conformance | CoachMarksControllerDelegate
+// MARK: - Protocol Conformance | CoachMarksControllerDelegate
 extension DelegateViewController: CoachMarksControllerDelegate {
     func coachMarksController(_ coachMarksController: CoachMarksController, willShow coachMark: inout CoachMark, at index: Int) {
         if index == 0 {

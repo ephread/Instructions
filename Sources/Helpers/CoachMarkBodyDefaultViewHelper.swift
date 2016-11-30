@@ -24,7 +24,7 @@
 import UIKit
 
 // swiftlint:disable line_length
-//mark: - Main Class
+// MARK: - Main Class
 /// A concrete implementation of the coach mark body view and the
 /// default one provided by the library.
 open class CoachMarkBodyDefaultViewHelper {

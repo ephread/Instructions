@@ -33,7 +33,7 @@ class TestFlowViewController: ProfileViewController {
 
     @IBOutlet var tapMeButton : UIButton!
 
-    //mark: - View Lifecycle
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -64,7 +64,7 @@ class TestFlowViewController: ProfileViewController {
     }
 }
 
-//mark: - Protocol Conformance | CoachMarksControllerDataSource
+// MARK: - Protocol Conformance | CoachMarksControllerDataSource
 extension TestFlowViewController: CoachMarksControllerDataSource {
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         print("numberOfCoachMarksForCoachMarksController: \(index)")
@@ -113,7 +113,7 @@ extension TestFlowViewController: CoachMarksControllerDataSource {
     }
 }
 
-//mark: - Protocol Conformance | CoachMarksControllerDelegate
+// MARK: - Protocol Conformance | CoachMarksControllerDelegate
 extension TestFlowViewController: CoachMarksControllerDelegate {
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               willLoadCoachMarkAt index: Int) -> Bool {

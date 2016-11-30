@@ -36,7 +36,7 @@ internal class TransitionFromCodeViewController: ProfileViewController {
 
     @IBOutlet var tapMeButton : UIButton!
 
-    //mark: - View Lifecycle
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -64,7 +64,7 @@ internal class TransitionFromCodeViewController: ProfileViewController {
     }
 }
 
-//mark: - Protocol Conformance | CoachMarksControllerDataSource
+// MARK: - Protocol Conformance | CoachMarksControllerDataSource
 extension TransitionFromCodeViewController: CoachMarksControllerDataSource {
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 6
@@ -142,7 +142,7 @@ extension TransitionFromCodeViewController: CoachMarksControllerDataSource {
     }
 }
 
-//mark: - Protocol Conformance | CoachMarksControllerDelegate
+// MARK: - Protocol Conformance | CoachMarksControllerDelegate
 extension TransitionFromCodeViewController: CoachMarksControllerDelegate {
     func coachMarksController(_ coachMarksController: CoachMarksController, willLoadCoachMarkAt index: Int) -> Bool {
         switch(index) {

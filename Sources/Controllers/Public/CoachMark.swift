@@ -25,7 +25,7 @@ import UIKit
 /// This structure handle the parametrization of a given coach mark.
 /// It doesn't provide any clue about the way it will look, however.
 public struct CoachMark {
-    //mark: Public properties
+    // MARK: - Public properties
     /// Change this value to change the duration of the fade.
     public var animationDuration = Constants.coachMarkFadeAnimationDuration
 
@@ -64,13 +64,13 @@ public struct CoachMark {
     /// Set this property to `true` to allow touch forwarding inside the cutoutPath.
     public var allowTouchInsideCutoutPath: Bool = false
 
-    //mark: Initialization
+    // MARK: - Initialization
     /// Allocate and initialize a Coach mark with default values.
     public init () {
 
     }
 
-    //mark: Internal Methods
+    // MARK: - Internal Methods
     /// This method perform both `computeOrientationInFrame` and `computePointOfInterestInFrame`.
     ///
     /// - Parameter frame: the frame in which compute the orientation

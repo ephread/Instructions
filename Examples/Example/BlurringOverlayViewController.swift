@@ -25,7 +25,7 @@ import Instructions
 
 /// Will display coach marks on top of a blurred background.
 internal class BlurringOverlayViewController: DefaultViewController {
-    //mark: - View lifecycle
+    // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 

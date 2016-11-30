@@ -23,11 +23,11 @@
 import UIKit
 
 // swiftlint:disable line_length
-//mark: - Default Class
+// MARK: - Default Class
 /// A concrete implementation of the coach mark arrow view and the
 /// default one provided by the library.
 public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
-    //mark: Initialization
+    // MARK: - Initialization
     public init(orientation: CoachMarkArrowOrientation) {
         let image, highlightedImage: UIImage?
 
@@ -49,7 +49,7 @@ public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
     }
 }
 
-//mark: - Private Inner Setup
+// MARK: - Private Inner Setup
 private extension CoachMarkArrowDefaultView {
     func initializeConstraints() {
         self.translatesAutoresizingMaskIntoConstraints = false

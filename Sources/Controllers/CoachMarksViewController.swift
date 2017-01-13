@@ -213,6 +213,7 @@ extension CoachMarksViewController {
     // MARK: - Overrides
     override func viewWillTransition(to size: CGSize,
                                      with coordinator: UIViewControllerTransitionCoordinator) {
+        if currentCoachMarkView == nil { return }
         if onGoingSizeChange { return }
         onGoingSizeChange = true
 

@@ -246,7 +246,9 @@ extension FlowManager: CoachMarksViewControllerDelegate {
 
     func willTransition() {
         coachMarksViewController.prepareForSizeTransition()
-        coachMarksViewController.hide(coachMark: currentCoachMark!, animated: false)
+        if let coachMark = currentCoachMark {
+            coachMarksViewController.hide(coachMark: coachMark, animated: false)
+        }
     }
 
     func didTransition() {

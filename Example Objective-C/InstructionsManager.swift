@@ -1,6 +1,6 @@
 // InstructionsManager.swift
 //
-// Copyright (c) 2015 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015 - 2017 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@ import Instructions
 
 /// This class serves as a base for all the other examples
 @objc public class InstructionsManager: NSObject,
-                                        CoachMarksControllerDataSource {
+CoachMarksControllerDataSource {
     //MARK: - Public properties
     weak var handleLabel: UILabel!
     weak var emailLabel: UILabel!
@@ -35,7 +35,7 @@ import Instructions
     unowned let viewController: UIViewController
 
     //MARK: - Private properties
-    private var coachMarksController: CoachMarksController?
+    private var coachMarksController: CoachMarksController!
 
     let handleText = "That, here, is your name. Sounds a bit generic, don't you think?"
     let emailText = "This is your email address. Nothing too fancy."
@@ -50,39 +50,45 @@ import Instructions
 
     func startTour() {
         self.coachMarksController = CoachMarksController()
-        self.coachMarksController?.allowOverlayTap = true
-        self.coachMarksController?.datasource = self
+        self.coachMarksController.overlay.allowTap = true
+        self.coachMarksController.dataSource = self
 
         self.emailLabel?.layer.cornerRadius = 4.0
         self.postsLabel?.layer.cornerRadius = 4.0
         self.reputationLabel?.layer.cornerRadius = 4.0
 
-        self.coachMarksController?.startOn(viewController)
+        self.coachMarksController.startOn(viewController)
     }
 
     //MARK: - Protocol Conformance | CoachMarksControllerDataSource
-    public func numberOfCoachMarksForCoachMarksController(coachMarksController: CoachMarksController) -> Int {
+    public func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 4
     }
 
-    public func coachMarksController(coachMarksController: CoachMarksController, coachMarksForIndex index: Int) -> CoachMark {
-        switch(index) {
+    public func coachMarksController(_ coachMarksController: CoachMarksController,
+                              coachMarkAt index: Int) -> CoachMark {
+        switch index {
         case 0:
-            return coachMarksController.coachMarkForView(self.handleLabel)
+            return coachMarksController.helper.makeCoachMark(for: self.handleLabel)
         case 1:
-            return coachMarksController.coachMarkForView(self.emailLabel)
+            return coachMarksController.helper.makeCoachMark(for: self.emailLabel)
         case 2:
-            return coachMarksController.coachMarkForView(self.postsLabel)
+            return coachMarksController.helper.makeCoachMark(for: self.postsLabel)
         case 3:
-            return coachMarksController.coachMarkForView(self.reputationLabel)
+            return coachMarksController.helper.makeCoachMark(for: self.reputationLabel)
         default:
-            return coachMarksController.coachMarkForView()
+            return coachMarksController.helper.makeCoachMark()
         }
     }
 
-    public func coachMarksController(coachMarksController: CoachMarksController, coachMarkViewsForIndex index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
-
-        let coachViews = coachMarksController.defaultCoachViewsWithArrow(true, arrowOrientation: coachMark.arrowOrientation)
+    public func coachMarksController(
+        _ coachMarksController: CoachMarksController,
+        coachMarkViewsAt index: Int,
+        madeFrom coachMark: CoachMark
+    ) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        let coachViews =
+            coachMarksController.helper
+                .makeDefaultCoachViews(arrowOrientation: coachMark.arrowOrientation)
 
         switch(index) {
         case 0:

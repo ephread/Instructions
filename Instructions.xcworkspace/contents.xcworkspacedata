@@ -5,9 +5,18 @@
       location = "group:Instructions.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Instructions Example.xcodeproj">
+      location = "group:Examples/Instructions Example.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Examples/Instructions App Extensions Example.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Instructions Example Objective-C.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:.swiftlint.yml">
+   </FileRef>
+   <FileRef
+      location = "group:.travis.yml">
    </FileRef>
 </Workspace>

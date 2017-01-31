@@ -1,12 +1,44 @@
 language: objective-c
+osx_image: xcode8
+
+env:
+  global:
+    - LANG=en_US.UTF-8
+
+    - PROJECT="Instructions.xcodeproj"
+    - IOS_SCHEME="Instructions"
+    - IOS_SDK=iphonesimulator10.0
+
+  matrix:
+    - DESTINATION="OS=10.0,name=iPhone 7" SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" BUILD_APP_EXTENSION_EXAMPLE="YES" POD_LINT="YES"
+
+before_install:
+  - gem install cocoapods xcpretty
+
+script:
+  - if [ $POD_LINT == "YES" ]; then
+      pod lib lint;
+    fi
+
+  - if [ $BUILD_EXAMPLE == "YES" ]; then
+      set -o pipefail && xcodebuild clean build -project "Examples/Instructions Example.xcodeproj" -scheme "Instructions Example" -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=YES | xcpretty -c;
+    fi
+
+  - if [ $BUILD_APP_EXTENSION_EXAMPLE == "YES" ]; then
+      set -o pipefail && xcodebuild clean build -project "Examples/Instructions App Extensions Example.xcodeproj" -scheme "Instructions App Extensions Example" -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=YES | xcpretty -c;
+    fi
+
+  - if [ $RUN_TESTS == "YES" ]; then
+      set -o pipefail && xcodebuild test -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug -enableCodeCoverage YES ONLY_ACTIVE_ARCH=YES | xcpretty -c;
+    else
+      set -o pipefail && xcodebuild clean build -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=YES | xcpretty -c;
+    fi
 
 branches:
   only:
-  - master
-  - tests
+    - master
+    - swift3
+    - tests
 
-osx_image: xcode7
-
-xcode_project: Instructions.xcodeproj
-xcode_scheme: Instructions
-xcode_sdk: iphonesimulator9.0
+after_success:
+  - bash <(curl -s https://codecov.io/bash) -cF ios

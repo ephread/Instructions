@@ -123,7 +123,7 @@ public class FlowManager {
         }
 
         let completionBlock = {(finished: Bool) -> Void in
-            self.coachMarksViewController.detachFromParentViewController()
+            self.coachMarksViewController.detachFromWindow()
             if shouldCallDelegate { self.delegate?.didEndShowingBySkipping(skipped) }
         }
 

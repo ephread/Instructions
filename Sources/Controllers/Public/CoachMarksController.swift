@@ -64,6 +64,10 @@ public class CoachMarksController {
     }()
 
     // MARK: - Private properties
+    fileprivate var controllerWindow: UIWindow?
+
+    fileprivate var coachMarksWindow: UIWindow?
+
     /// Handle the UI part
     fileprivate lazy var coachMarksViewController: CoachMarksViewController = {
         let coachMarkController = CoachMarksViewController()
@@ -111,7 +115,9 @@ public extension CoachMarksController {
             return
         }
 
-        coachMarksViewController.attachTo(parentViewController)
+        coachMarksWindow = coachMarksWindow ?? UIWindow(frame: UIScreen.main.bounds)
+
+        coachMarksViewController.attach(to: coachMarksWindow!)
         flow.startFlow(withNumberOfCoachMarks: numberOfCoachMarks)
     }
 

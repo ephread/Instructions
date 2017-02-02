@@ -274,21 +274,16 @@ extension CoachMarksViewController {
     /// `instructionsRootView` will be a subview of `UIWindow`.
     ///
     /// - Parameter parentViewController: the controller of which become a child
-    func attachTo(_ parentViewController: UIViewController) {
-        window = UIWindow(frame: UIScreen.main.bounds)
-
+    func attach(to window: UIWindow) {
         if overlayView.isShownAboveStatusBar {
-            window!.windowLevel = UIWindowLevelStatusBar + 1
+            window.windowLevel = UIWindowLevelStatusBar + 1
         } else {
-            window!.windowLevel = UIWindowLevelNormal + 1
+            window.windowLevel = UIWindowLevelNormal + 1
         }
 
         registerForStatusBarFrameChanges()
 
-        parentViewController.addChildViewController(self)
-        parentViewController.view.addSubview(self.view)
-
-        addRootView(to: window!)
+        addRootView(to: self.view /*window!*/)
         addOverlayView()
 
         // If we're in the background we'll manually lay out the view.
@@ -303,19 +298,16 @@ extension CoachMarksViewController {
             self.view.layoutIfNeeded()
         #endif
 
-        self.didMove(toParentViewController: parentViewController)
-        window?.isHidden = false
+        window.rootViewController = self
+        window.isHidden = false
     }
 
     /// Detach the controller from its parent view controller.
-    func detachFromParentViewController() {
-        window?.isHidden = true
-        window = nil
+    func detachFromWindow() {
         self.instructionsRootView.removeFromSuperview()
-        self.willMove(toParentViewController: nil)
-        self.view.removeFromSuperview()
-        self.removeFromParentViewController()
         unregisterFromStatusBarFrameChanges()
+        self.window?.isHidden = true
+        self.window?.rootViewController = nil
     }
 }
 

@@ -76,6 +76,9 @@ public class OverlayView: UIView {
     /// Used to temporarily enable touch forwarding isnide the cutoutPath.
     public var allowTouchInsideCutoutPath: Bool = false
 
+    /// `true` to show the overlay above the status bar, `false` to show it below.
+    public var isShownAboveStatusBar = true
+
     // MARK: - Internal Properties
     /// Used to temporarily disable the tap, for a given coachmark.
     internal var enableTap: Bool = true

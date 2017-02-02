@@ -194,9 +194,13 @@ You can customized the background color of the overlay using this property:
 
 - `overlay.color`
 
-You can also make the overlay blur the content sitting behind it. Setting this property to anything else than `nil` will disable the `overlay.color`:
+You can also make the overlay blur the content sitting behind it. Setting this property to anything else than `nil` will disable the `overlay.color` (⚠️ currently broken on iOS 10):
 
 - `overlay.blurEffectStyle: UIBlurEffectStyle?`
+
+The overlay can sit above the status bar or below, the property defaults to `true`:
+
+- `overlay.isShownAboveStatusBar: Bool`
 
 Last, you can make the overlay tappable. A tap on the overlay will hide the current coach mark and display the next one.
 

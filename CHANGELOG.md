@@ -8,6 +8,7 @@ Released on 2016-XX-XX.
 
 ### Added
 - Support for Swift 3
+- Ability to choose whether the overlay will sit above or below the status bar
 
 ### Changed
 - Renamed a number of methods to make them conform to the [API Design Guidelines]

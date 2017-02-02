@@ -1,6 +1,6 @@
 // CustomViewsViewController.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015 - 2017 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,6 +36,7 @@ internal class CustomViewsViewController: ProfileViewController {
         self.coachMarksController?.dataSource = self
 
         self.coachMarksController?.overlay.color = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
+        self.coachMarksController?.overlay.isShownAboveStatusBar = false
 
         let skipView = CoachMarkSkipDefaultView()
         skipView.setTitle("Skip", for: .normal)
@@ -168,7 +169,7 @@ extension CustomViewsViewController: CoachMarksControllerDataSource {
             constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|[skipView]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
         } else {
             constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-topMargin-[skipView(==44)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["topMargin": topMargin],
-                                                             views: ["skipView": skipView]))
+                                                    views: ["skipView": skipView]))
         }
 
         return constraints

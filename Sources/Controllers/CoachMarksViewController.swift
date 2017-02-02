@@ -72,6 +72,7 @@ class CoachMarksViewController: UIViewController {
     // MARK: - Private properties
     fileprivate var onGoingSizeChange = false
     fileprivate let mainViewsLayoutHelper = MainViewsLayoutHelper()
+    fileprivate var window: UIWindow?
 
     // MARK: - Lifecycle
     convenience init(coachMarkDisplayManager: CoachMarkDisplayManager,
@@ -80,11 +81,6 @@ class CoachMarksViewController: UIViewController {
 
         self.coachMarkDisplayManager = coachMarkDisplayManager
         self.skipViewDisplayManager = skipViewDisplayManager
-    }
-
-    override func loadView() {
-        view = DummyView(frame: UIScreen.main.bounds)
-        view.translatesAutoresizingMaskIntoConstraints = false
     }
 
     // Called after the view was loaded.
@@ -105,10 +101,10 @@ class CoachMarksViewController: UIViewController {
         overlayView.alpha = 0.0
     }
 
-    fileprivate func addRootView(to window: UIWindow) {
-        window.addSubview(instructionsRootView)
+    fileprivate func addRootView(to view: UIView) {
+        view.addSubview(instructionsRootView)
         let constraints = mainViewsLayoutHelper.fullSizeConstraints(for: instructionsRootView)
-        window.addConstraints(constraints)
+        view.addConstraints(constraints)
 
         instructionsRootView.backgroundColor = UIColor.clear
     }
@@ -279,12 +275,12 @@ extension CoachMarksViewController {
     ///
     /// - Parameter parentViewController: the controller of which become a child
     func attachTo(_ parentViewController: UIViewController) {
-        guard let window = parentViewController.view?.window else {
-            print("attachToViewController: Instructions could not be properly" +
-                  "attached to the window, did you call `startOn` inside" +
-                  "`viewDidLoad` instead of `ViewDidAppear`?")
+        window = UIWindow(frame: UIScreen.main.bounds)
 
-            return
+        if overlayView.isShownAboveStatusBar {
+            window!.windowLevel = UIWindowLevelStatusBar + 1
+        } else {
+            window!.windowLevel = UIWindowLevelNormal + 1
         }
 
         registerForStatusBarFrameChanges()
@@ -292,7 +288,7 @@ extension CoachMarksViewController {
         parentViewController.addChildViewController(self)
         parentViewController.view.addSubview(self.view)
 
-        addRootView(to: window)
+        addRootView(to: window!)
         addOverlayView()
 
         // If we're in the background we'll manually lay out the view.
@@ -301,18 +297,20 @@ extension CoachMarksViewController {
         // background, likely because it's added to the window.
         #if !INSTRUCTIONS_APP_EXTENSIONS
             if UIApplication.shared.applicationState == .background {
-                window.layoutIfNeeded()
+                self.view.layoutIfNeeded()
             }
         #else
-            window.layoutIfNeeded()
+            self.view.layoutIfNeeded()
         #endif
 
         self.didMove(toParentViewController: parentViewController)
-
+        window?.isHidden = false
     }
 
     /// Detach the controller from its parent view controller.
     func detachFromParentViewController() {
+        window?.isHidden = true
+        window = nil
         self.instructionsRootView.removeFromSuperview()
         self.willMove(toParentViewController: nil)
         self.view.removeFromSuperview()

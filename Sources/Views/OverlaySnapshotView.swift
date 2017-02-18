@@ -1,6 +1,6 @@
-// MainViewsLayoutHelper.swift
+// CoachMarkView.swift
 //
-// Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,23 +22,29 @@
 
 import UIKit
 
-// swiftlint:disable line_length
-class MainViewsLayoutHelper {
-    func fullSizeConstraints(for view: UIView) -> [NSLayoutConstraint] {
-        var constraints = [NSLayoutConstraint]()
+class OverlaySnapshotView: UIView {
+    var visualEffectView: UIVisualEffectView! {
+        willSet {
+            if visualEffectView == nil { return }
+            visualEffectView.removeFromSuperview()
+        }
 
-        constraints += NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|[view]|",
-            options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["view": view]
-        )
+        didSet {
+            self.addSubview(visualEffectView)
+        }
+    }
+    var backgroundView: UIView! {
+        willSet {
+            if backgroundView == nil { return }
+            backgroundView.removeFromSuperview()
+        }
 
-        constraints += NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|[view]|",
-            options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["view": view]
-        )
+        didSet {
+            self.addSubview(backgroundView)
+        }
+    }
 
-        return constraints
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        return nil
     }
 }

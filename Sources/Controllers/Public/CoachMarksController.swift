@@ -38,17 +38,17 @@ public class CoachMarksController {
     public weak var delegate: CoachMarksControllerDelegate?
 
     /// Hide the UI.
-    fileprivate(set) public lazy var overlay: OverlayView = {
-        let overlayView = OverlayView()
-        overlayView.delegate = self
+    fileprivate(set) public lazy var overlay: OverlayManager = {
+        let overlay = OverlayManager()
+        overlay.delegate = self
 
-        return overlayView
+        return overlay
     }()
 
     /// Provide cutout path related helpers.
     fileprivate(set) public lazy var helper: CoachMarkHelper! = {
         let instructionsTopView = self.coachMarksViewController.instructionsRootView
-        return CoachMarkHelper(instructionsRootView: instructionsTopView!,
+        return CoachMarkHelper(instructionsRootView: instructionsTopView,
                                flowManager: self.flow)
     }()
 
@@ -64,7 +64,7 @@ public class CoachMarksController {
     }()
 
     // MARK: - Private properties
-    fileprivate var controllerWindow: UIWindow?
+    fileprivate weak var controllerWindow: UIWindow?
 
     fileprivate var coachMarksWindow: UIWindow?
 
@@ -74,8 +74,7 @@ public class CoachMarksController {
         coachMarkController.coachMarkDisplayManager = self.buildCoachMarkDisplayManager()
         coachMarkController.skipViewDisplayManager = self.buildSkipViewDisplayManager()
 
-        coachMarkController.overlayView = self.overlay
-        coachMarkController.instructionsRootView = InstructionsRootView()
+        coachMarkController.overlayManager = self.overlay
 
         return coachMarkController
     }()
@@ -115,7 +114,8 @@ public extension CoachMarksController {
             return
         }
 
-        coachMarksWindow = coachMarksWindow ?? UIWindow(frame: UIScreen.main.bounds)
+        controllerWindow = parentViewController.view.window
+        coachMarksWindow = coachMarksWindow ?? InstructionsWindow(frame: UIScreen.main.bounds)
 
         coachMarksViewController.attach(to: coachMarksWindow!)
         flow.startFlow(withNumberOfCoachMarks: numberOfCoachMarks)
@@ -150,7 +150,14 @@ public extension CoachMarksController {
 }
 
 // MARK: - Protocol Conformance | OverlayViewDelegate
-extension CoachMarksController: OverlayViewDelegate {
+extension CoachMarksController: Snapshottable {
+    func snapshot() -> UIView? {
+        guard let window = controllerWindow else { return nil }
+        return window.snapshotView(afterScreenUpdates: true)
+    }
+}
+
+extension CoachMarksController: OverlayManagerDelegate {
     func didReceivedSingleTap() {
         flow.showNextCoachMark()
     }

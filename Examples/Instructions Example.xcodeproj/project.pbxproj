@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5B84A3AE1BF48BE200C795F8 /* OnlyHintsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B84A3AD1BF48BE200C795F8 /* OnlyHintsViewController.swift */; };
+		B6A74FC61E3658C6001D8991 /* Instructions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6EF65691D92EA6700BE5B66 /* Instructions.framework */; };
+		B6A74FC71E3658C6001D8991 /* Instructions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C6EF65691D92EA6700BE5B66 /* Instructions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C615FBAF1D7A1BB500EAEEFB /* TestFlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C615FBAE1D7A1BB500EAEEFB /* TestFlowViewController.swift */; };
 		C636FFAA1BBBD99200EB243B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C636FFA91BBBD99200EB243B /* Assets.xcassets */; };
 		C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */; };
@@ -20,8 +22,6 @@
 		C64FB33A1BB6CC180081E5B6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3341BB6CC180081E5B6 /* ProfileViewController.swift */; };
 		C64FB3841BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3831BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift */; };
 		C64FB3861BB98EC20081E5B6 /* CustomCoachMarkArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3851BB98EC20081E5B6 /* CustomCoachMarkArrowView.swift */; };
-		C68B1A031DCE9D61007D7185 /* Instructions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6EF65691D92EA6700BE5B66 /* Instructions.framework */; };
-		C68B1A041DCE9D61007D7185 /* Instructions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C6EF65691D92EA6700BE5B66 /* Instructions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C6CE542C1BBD435500154266 /* BlurringOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE54291BBD435500154266 /* BlurringOverlayViewController.swift */; };
 		C6CE542D1BBD435500154266 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE542A1BBD435500154266 /* CustomViewController.swift */; };
 		C6CE542E1BBD435500154266 /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE542B1BBD435500154266 /* DefaultViewController.swift */; };
@@ -30,7 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		C68B1A051DCE9D61007D7185 /* PBXContainerItemProxy */ = {
+		B6A74FC81E3658C6001D8991 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C6EF65621D92EA6700BE5B66 /* Instructions.xcodeproj */;
 			proxyType = 1;
@@ -61,13 +61,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		C60FA0A21D2993E40055B60B /* Embed Frameworks */ = {
+		B6A74FCA1E3658C6001D8991 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				C68B1A041DCE9D61007D7185 /* Instructions.framework in Embed Frameworks */,
+				B6A74FC71E3658C6001D8991 /* Instructions.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -103,7 +103,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C68B1A031DCE9D61007D7185 /* Instructions.framework in Frameworks */,
+				B6A74FC61E3658C6001D8991 /* Instructions.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,12 +206,12 @@
 				C64FB3081BB6CB1C0081E5B6 /* Sources */,
 				C64FB3091BB6CB1C0081E5B6 /* Frameworks */,
 				C64FB30A1BB6CB1C0081E5B6 /* Resources */,
-				C60FA0A21D2993E40055B60B /* Embed Frameworks */,
+				B6A74FCA1E3658C6001D8991 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C68B1A061DCE9D61007D7185 /* PBXTargetDependency */,
+				B6A74FC91E3658C6001D8991 /* PBXTargetDependency */,
 			);
 			name = "Instructions Example";
 			productName = "Instructions Example";
@@ -322,10 +322,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		C68B1A061DCE9D61007D7185 /* PBXTargetDependency */ = {
+		B6A74FC91E3658C6001D8991 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Instructions;
-			targetProxy = C68B1A051DCE9D61007D7185 /* PBXContainerItemProxy */;
+			targetProxy = B6A74FC81E3658C6001D8991 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -387,7 +387,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -428,7 +428,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

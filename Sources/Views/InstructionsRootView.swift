@@ -1,6 +1,6 @@
 // InstructionsRootView.swift
 //
-// Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2016, 2017 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,16 +27,6 @@ class InstructionsRootView: UIView {
 
     var passthrough: Bool = false
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        initialize()
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        initialize()
-    }
-
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let hitView = super.hitTest(point, with: event)
 
@@ -45,9 +35,5 @@ class InstructionsRootView: UIView {
         }
 
         return hitView
-    }
-
-    private func initialize() {
-        translatesAutoresizingMaskIntoConstraints = false
     }
 }

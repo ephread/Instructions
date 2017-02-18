@@ -1,6 +1,6 @@
-// MainViewsLayoutHelper.swift
+// OverlayManager.swift
 //
-// Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2017 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,25 +20,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import UIKit
+import Foundation
 
-// swiftlint:disable line_length
-class MainViewsLayoutHelper {
-    func fullSizeConstraints(for view: UIView) -> [NSLayoutConstraint] {
-        var constraints = [NSLayoutConstraint]()
+/// This protocol expected to be implemented by CoachMarkManager, so
+/// it can be notified when a tap occured on the overlay.
+internal protocol Snapshottable: class {
+    func snapshot() -> UIView?
+}
 
-        constraints += NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|[view]|",
-            options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["view": view]
-        )
+protocol OverlayAnimator: class {
+    var overlayView: OverlayView? { get set }
 
-        constraints += NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|[view]|",
-            options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["view": view]
-        )
-
-        return constraints
-    }
+    func viewWillTransition()
+    func viewDidTransition()
+    func showOverlay(_ show: Bool, withDuration duration: TimeInterval,
+                     completion: ((Bool) -> Void)?)
+    func showCutout(_ show: Bool, withDuration duration: TimeInterval,
+                    completion: ((Bool) -> Void)?)
 }

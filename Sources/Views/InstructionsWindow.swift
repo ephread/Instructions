@@ -1,6 +1,6 @@
-// OverlayView.swift
+// InstructionsWindow.swift
 //
-// Copyright (c) 2015 - 2017 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2017 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,44 +22,13 @@
 
 import UIKit
 
-// Overlay a blocking view on top of the screen and handle the cutout path
-// around the point of interest.
-public class OverlayView: UIView {
-    internal static let sublayerName = "Instructions.OverlaySublayer"
 
-    var cutoutPath: UIBezierPath?
-
-    /// Used to temporarily enable touch forwarding isnide the cutoutPath.
-    public var allowTouchInsideCutoutPath: Bool = false
-
-    // MARK: - Initialization
-    init() {
-        super.init(frame: CGRect.zero)
-        translatesAutoresizingMaskIntoConstraints = false
-    }
-
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("This class does not support NSCoding")
-    }
-
-    // MARK: - Internal methods
-    override public func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+class InstructionsWindow: UIWindow {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let hitView = super.hitTest(point, with: event)
 
         if hitView == self {
-            guard let cutoutPath = self.cutoutPath else {
-                return hitView
-            }
-
-            if !self.allowTouchInsideCutoutPath {
-                return hitView
-            }
-
-            if cutoutPath.contains(point) {
-                return nil
-            } else {
-                return hitView
-            }
+            return nil
         }
 
         return hitView

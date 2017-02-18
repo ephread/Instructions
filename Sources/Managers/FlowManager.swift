@@ -117,7 +117,6 @@ public class FlowManager {
         reset()
 
         let animationBlock = { () -> Void in
-            self.coachMarksViewController.overlayView.alpha = 0.0
             self.coachMarksViewController.skipView?.asView?.alpha = 0.0
             self.coachMarksViewController.currentCoachMarkView?.alpha = 0.0
         }
@@ -131,9 +130,13 @@ public class FlowManager {
             disableFlow = true
             animationBlock()
             completionBlock(true)
+            // TODO: SoC
+            self.coachMarksViewController.overlayManager.overlayView.alpha = 0
         } else {
-            UIView.animate(withDuration: coachMarksViewController.overlayView.fadeAnimationDuration,
-                                       animations: animationBlock, completion: completionBlock)
+            UIView.animate(withDuration: coachMarksViewController.overlayManager.fadeAnimationDuration,
+                                         animations: animationBlock)
+
+            self.coachMarksViewController.overlayManager.showOverlay(false, completion: completionBlock)
         }
     }
 
@@ -247,7 +250,8 @@ extension FlowManager: CoachMarksViewControllerDelegate {
     func willTransition() {
         coachMarksViewController.prepareForSizeTransition()
         if let coachMark = currentCoachMark {
-            coachMarksViewController.hide(coachMark: coachMark, animated: false)
+            coachMarksViewController.hide(coachMark: coachMark, animated: false,
+                                          beforeTransition: true)
         }
     }
 

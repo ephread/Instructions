@@ -65,18 +65,27 @@ class CoachMarkDisplayManager {
     /// - Parameter overlayView: the overlay to which update the cutout path
     /// - Parameter animationDuration: the duration of the fade
     /// - Parameter completion: a block to execute after the coach mark was hidden
-    func hide(coachMarkView: UIView?, overlayView: OverlayView, animationDuration: TimeInterval,
-              completion: (() -> Void)? = nil) {
-        overlayView.showCutoutPath(false, withAnimationDuration: animationDuration)
+    func hide(coachMarkView: UIView?, overlay: OverlayManager, animationDuration: TimeInterval,
+              beforeTransition: Bool, completion: (() -> Void)? = nil) {
+        if !beforeTransition {
+            overlay.showCutoutPath(false, withDuration: animationDuration)
+        }
+
         coachMarkView?.layer.removeAllAnimations()
         //removeTargetFromCurrentCoachView()
 
-        UIView.animate(withDuration: animationDuration, animations: { () -> Void in
+        if animationDuration == 0 {
             coachMarkView?.alpha = 0.0
-        }, completion: {(finished: Bool) -> Void in
             coachMarkView?.removeFromSuperview()
             completion?()
-        })
+        } else {
+            UIView.animate(withDuration: animationDuration, animations: { () -> Void in
+                coachMarkView?.alpha = 0.0
+            }, completion: {(finished: Bool) -> Void in
+                coachMarkView?.removeFromSuperview()
+                completion?()
+            })
+        }
     }
 
     /// Display the given CoachMark View
@@ -89,19 +98,19 @@ class CoachMarkDisplayManager {
     /// - Parameter completion: a handler to call after the coach mark
     ///                         was successfully displayed.
     func showNew(coachMarkView: CoachMarkView, from coachMark: CoachMark,
-                 on overlayView: OverlayView, animated: Bool = true,
+                 on overlay: OverlayManager, animated: Bool = true,
                  completion: (() -> Void)? = nil) {
-        prepare(coachMarkView: coachMarkView, forDisplayIn: overlayView.superview!,
-                usingCoachMark: coachMark, andOverlayView: overlayView)
+        prepare(coachMarkView: coachMarkView, forDisplayIn: overlay.overlayView.superview!,
+                usingCoachMark: coachMark, andOverlayView: overlay.overlayView)
 
-        overlayView.enableTap = !coachMark.disableOverlayTap
-        overlayView.allowTouchInsideCutoutPath = coachMark.allowTouchInsideCutoutPath
+        overlay.enableTap = !coachMark.disableOverlayTap
+        overlay.allowTouchInsideCutoutPath = coachMark.allowTouchInsideCutoutPath
 
         // The view shall be invisible, 'cause we'll animate its entry.
         coachMarkView.alpha = 0.0
 
         // Animate the view entry
-        overlayView.showCutoutPath(true, withAnimationDuration: coachMark.animationDuration)
+        overlay.showCutoutPath(true, withDuration: coachMark.animationDuration)
 
         if animated {
             UIView.animate(withDuration: coachMark.animationDuration, animations: { () -> Void in
@@ -193,9 +202,11 @@ class CoachMarkDisplayManager {
                                                                 parentView: parentView)
 
             parentView.addConstraints(constraints)
-            overlayView.update(cutoutPath: cutoutPath)
+            overlayView.cutoutPath = cutoutPath
+            //overlayView.update(cutoutPath: cutoutPath)
         } else {
-            overlayView.update(cutoutPath: nil)
+            overlayView.cutoutPath = nil
+            //overlayView.update(cutoutPath: nil)
         }
     }
 }

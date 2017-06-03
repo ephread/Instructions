@@ -26,6 +26,7 @@ import XCTest
 class CoachMarkDisplayManagerTests: XCTestCase {
 
     let overlayView = OverlayView()
+    let overlay = OverlayManager()
     let instructionsRootView = UIView()
     let coachMarksController = CoachMarksController()
     var coachMarkDisplayManager: CoachMarkDisplayManager!
@@ -39,6 +40,8 @@ class CoachMarkDisplayManagerTests: XCTestCase {
         self.instructionsRootView.frame = CGRect(x: 0, y: 0, width: 365, height: 667)
 
         instructionsRootView.addSubview(overlayView)
+
+        overlay.overlayView = overlayView
 
         self.coachMarkDisplayManager =
             CoachMarkDisplayManager(coachMarkLayoutHelper: CoachMarkLayoutHelper())
@@ -61,7 +64,7 @@ class CoachMarkDisplayManagerTests: XCTestCase {
         coachMark.computePointOfInterest()
 
         self.coachMarkDisplayManager.showNew(coachMarkView: coachMarkView, from: coachMark,
-                                             on: self.overlayView) {
+                                             on: self.overlay) {
             XCTAssertEqual(coachMarkView.alpha, 1.0)
             XCTAssertEqual(coachMarkView.isHidden, false)
 

@@ -38,24 +38,6 @@ class CoachMarkInnerLayoutHelperTests: XCTestCase {
         super.tearDown()
     }
 
-    func testThatHorizontalConstraintArrayIsEmptyWhenSuperviewDoesNotExist() {
-        let constraints =
-            layoutHelper.horizontalConstraints(forBody: UIView())
-
-        XCTAssertTrue(constraints.isEmpty)
-    }
-
-    func testThatHorizontalConstraintArrayIsNotEmptyWhenSuperviewExists() {
-        let parent = UIView()
-        let body = UIView()
-        parent.addSubview(body)
-
-        let constraints =
-            layoutHelper.horizontalConstraints(forBody: body)
-
-        XCTAssertFalse(constraints.isEmpty)
-    }
-
     func testThatVerticalConstraintArrayIsNotEmpty() {
         let parent = UIView()
         let body = UIView()

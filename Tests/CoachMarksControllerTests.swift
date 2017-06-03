@@ -46,30 +46,8 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
         super.tearDown()
     }
 
-    func testThatCoachMarkControllerAttachItselfToParent() {
-        self.coachMarksController.startOn(self.parentController)
-
-        let contains =
-            isCoachMarkViewControllerAttached(self.parentController.childViewControllers)
-
-        XCTAssertTrue(contains)
-    }
-
     func testThatDidFinishShowingIsCalled() {
         self.delegateEndExpectation = self.expectation(description: "DidFinishShowing")
-
-        self.coachMarksController.startOn(self.parentController)
-        self.coachMarksController.stop()
-
-        self.waitForExpectations(timeout: 10) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
-    }
-
-    func testThatCoachMarkControllerDetachItselfFromParent() {
-        self.delegateEndExpectation = self.expectation(description: "Detachment")
 
         self.coachMarksController.startOn(self.parentController)
         self.coachMarksController.stop()
@@ -87,31 +65,12 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
             return
         }
 
-        if (delegateEndExpectation.description == "Detachment") {
-            let contains =
-                isCoachMarkViewControllerAttached(self.parentController.childViewControllers)
-
-            XCTAssertFalse(contains)
-
-            delegateEndExpectation.fulfill()
-        } else if (delegateEndExpectation.description == "DidFinishShowing") {
+        if (delegateEndExpectation.description == "DidFinishShowing") {
             XCTAssertTrue(true)
             delegateEndExpectation.fulfill()
         } else {
             XCTFail()
         }
-    }
-
-    fileprivate func isCoachMarkViewControllerAttached(_ controller: [UIViewController])
-    -> Bool {
-        var contains = false
-
-        for controller in controller {
-            contains = controller is CoachMarksViewController
-            if contains { break }
-        }
-
-        return contains
     }
 }
 

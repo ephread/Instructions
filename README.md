@@ -20,6 +20,7 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
       * [Getting Started](#getting-started)
       * [Advanced Usage](#advanced-usage)
   * [Usage within App Extensions](#instructions-within-app-extensions)
+  * [Using Instructions in Objective-C code](#using-instructions-in-objective-c-code)
   * [License](#license)
 
 ## Overview
@@ -423,6 +424,12 @@ import InstructionsAppExtensions
 ```
 
 ⚠️ **Please be extremely careful**, as you will be able to import regular _Instructions_ from within an app extension without breaking anything. It will work. However, you're at a high risk of rejection from the Apple Store. Uses of `UIApplication.sharedApplication()` are statically checked during compilation but nothing prevents you from performing the calls at runtime. Fortunately Xcode should warn you if you've mistakenly linked with a framework not suited for App Extensions.
+
+## Using Instructions in Objective-C code
+
+Since Instructions uses Tuples and Struct, it can't be fully bridged to Objective-C. However, you can easily create a swift class conforming to CoachMarkControllerDataSource and CoachMarksControllerDelegate in swift, bridge it to Objective-C and then use this class in your Objective-C code.
+
+Check out the `Example Objective-C/` directory for a possible solution.
 
 ## License
 

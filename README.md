@@ -38,7 +38,7 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 - [x] [App Extensions support](#usage-within-app-extensions)
 - [x] Right-to-left support
 - [x] Size transition support (orientation and multi-tasking)
-- [x] Partial UIVisualEffectView support
+- [x] Partial `UIVisualEffectView` support
 - [ ] Coach marks animation
 - [ ] Cross controllers walkthrough
 - [ ] Multiple coach marks support

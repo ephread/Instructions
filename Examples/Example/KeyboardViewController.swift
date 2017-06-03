@@ -161,7 +161,6 @@ extension KeyboardViewController: CoachMarksControllerDelegate {
 extension KeyboardViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         coachMarksController.flow.showNext()
-
         return true
     }
 }

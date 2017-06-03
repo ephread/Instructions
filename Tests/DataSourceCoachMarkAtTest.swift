@@ -74,8 +74,12 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
         return nil
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, didShow coachMark: CoachMark, at index: Int) {
-        coachMarksController.flow.showNext()
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didShow coachMark: CoachMark, afterSizeTransition: Bool,
+                              at index: Int) {
+        if !afterSizeTransition {
+            coachMarksController.flow.showNext()
+        }
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController, didEndShowingBySkipping skipped: Bool) {

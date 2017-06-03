@@ -27,7 +27,7 @@ import Instructions
 // This class mix different kind of coach marks together.
 internal class MixedCoachMarksViewsViewController: ProfileViewController {
     // MARK: - IBOutlet
-    @IBOutlet var answersLabel: UILabel?
+    @IBOutlet weak var answersLabel: UILabel?
 
     // MARK: - Private properties
     fileprivate let swipeImage = UIImage(named: "swipe")
@@ -38,9 +38,9 @@ internal class MixedCoachMarksViewsViewController: ProfileViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.coachMarksController?.dataSource = self
+        self.coachMarksController.dataSource = self
 
-        self.coachMarksController?.overlay.color = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
+        self.coachMarksController.overlay.color = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
     }
 }
 

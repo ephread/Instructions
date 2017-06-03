@@ -94,7 +94,7 @@ class CoachMarksViewController: UIViewController {
     }
 
     deinit {
-        unregisterFromStatusBarFrameChanges()
+        deregisterFromSystemEventChanges()
     }
 
     // MARK: - Private Methods
@@ -227,32 +227,35 @@ extension CoachMarksViewController {
         skipViewDisplayManager?.show(skipView: skipView)
     }
 
-    // MARK: - Private methods
-    fileprivate func registerForStatusBarFrameChanges() {
-        let center = NotificationCenter.default
-
-        center.addObserver(self, selector: #selector(prepareForStatusBarChange),
-                           name: .UIApplicationWillChangeStatusBarFrame, object: nil)
-
-        center.addObserver(self, selector: #selector(restoreAfterStatusBarChangeDidComplete),
-                           name: .UIApplicationDidChangeStatusBarFrame, object: nil)
-    }
-
-    fileprivate func unregisterFromStatusBarFrameChanges() {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     /// Same as `prepareForSizeTransition`, but for status bar changes.
-    @objc fileprivate func prepareForStatusBarChange() {
-        if !onGoingSizeChange { prepareForSizeTransition() }
+    @objc public func prepareForChange() {
+        if !onGoingSizeChange {
+            delegate?.willTransition()
+            overlayManager.viewWillTransition()
+        }
     }
 
     /// Same as `restoreAfterSizeTransitionDidComplete`, but for status bar changes.
-    @objc fileprivate func restoreAfterStatusBarChangeDidComplete() {
+    @objc public func restoreAfterChangeDidComplete() {
         if !onGoingSizeChange {
-            prepareForSizeTransition()
-            restoreAfterSizeTransitionDidComplete()
+            overlayManager.viewDidTransition()
+            delegate?.didTransition()
         }
+    }
+
+    // MARK: - Private methods
+    fileprivate func registerForSystemEventChanges() {
+        let center = NotificationCenter.default
+
+        center.addObserver(self, selector: #selector(prepareForChange),
+                           name: .UIApplicationWillChangeStatusBarFrame, object: nil)
+
+        center.addObserver(self, selector: #selector(restoreAfterChangeDidComplete),
+                           name: .UIApplicationDidChangeStatusBarFrame, object: nil)
+    }
+
+    fileprivate func deregisterFromSystemEventChanges() {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -264,13 +267,9 @@ extension CoachMarksViewController {
     ///
     /// - Parameter parentViewController: the controller of which become a child
     func attach(to window: UIWindow) {
-        if overlayManager.isShownAboveStatusBar {
-            window.windowLevel = UIWindowLevelStatusBar + 1
-        } else {
-            window.windowLevel = UIWindowLevelNormal + 1
-        }
+        window.windowLevel = overlayManager.windowLevel
 
-        registerForStatusBarFrameChanges()
+        registerForSystemEventChanges()
         addOverlayView()
 
         // If we're in the background we'll manually lay out the view.
@@ -291,7 +290,7 @@ extension CoachMarksViewController {
 
     /// Detach the controller from its parent view controller.
     func detachFromWindow() {
-        unregisterFromStatusBarFrameChanges()
+        deregisterFromSystemEventChanges()
         self.view.window?.isHidden = true
         self.view.window?.rootViewController = nil
     }

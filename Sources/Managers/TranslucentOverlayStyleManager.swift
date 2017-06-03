@@ -51,8 +51,6 @@ class TranslucentOverlayStyleManager: OverlayStyleManager {
         onGoingTransition = true
         self.overlayLayer.removeFromSuperlayer()
         overlay.backgroundColor = color
-        overlay.isHidden = false
-        overlay.alpha = 1.0
     }
 
     func viewDidTransition() {
@@ -68,7 +66,7 @@ class TranslucentOverlayStyleManager: OverlayStyleManager {
         overlay.layer.addSublayer(overlayLayer)
         updateCutoutPath()
 
-        overlay.backgroundColor = UIColor.clear
+        overlay.backgroundColor = color
     }
 
     func showOverlay(_ show: Bool, withDuration duration: TimeInterval,

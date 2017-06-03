@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		5B84A3AE1BF48BE200C795F8 /* OnlyHintsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B84A3AD1BF48BE200C795F8 /* OnlyHintsViewController.swift */; };
 		B65DDDC21EE2C5F1002618AF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDC11EE2C5F1002618AF /* Extensions.swift */; };
+		B65DDDD41EE2EED0002618AF /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDD31EE2EED0002618AF /* KeyboardViewController.swift */; };
+		B65DDDD61EE34330002618AF /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDD51EE34330002618AF /* MainTableViewController.swift */; };
 		B6A74FC61E3658C6001D8991 /* Instructions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C6EF65691D92EA6700BE5B66 /* Instructions.framework */; };
 		B6A74FC71E3658C6001D8991 /* Instructions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C6EF65691D92EA6700BE5B66 /* Instructions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C615FBAF1D7A1BB500EAEEFB /* TestFlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C615FBAE1D7A1BB500EAEEFB /* TestFlowViewController.swift */; };
@@ -78,6 +80,8 @@
 /* Begin PBXFileReference section */
 		5B84A3AD1BF48BE200C795F8 /* OnlyHintsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlyHintsViewController.swift; sourceTree = "<group>"; };
 		B65DDDC11EE2C5F1002618AF /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		B65DDDD31EE2EED0002618AF /* KeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		B65DDDD51EE34330002618AF /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		C615FBAE1D7A1BB500EAEEFB /* TestFlowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFlowViewController.swift; sourceTree = "<group>"; };
 		C636FFA91BBBD99200EB243B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Example/Assets.xcassets; sourceTree = "<group>"; };
 		C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentCoachMarkArrowView.swift; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 				C6CE54301BBD43CB00154266 /* MixedCoachMarksViewController.swift */,
 				C63BB9151C73CDD600C81A4D /* TransitionFromCodeViewController.swift */,
 				C615FBAE1D7A1BB500EAEEFB /* TestFlowViewController.swift */,
+				B65DDDD31EE2EED0002618AF /* KeyboardViewController.swift */,
+				B65DDDD51EE34330002618AF /* MainTableViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -308,6 +314,7 @@
 				C64FB3841BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift in Sources */,
 				C63935DB1D2837EF002DCABF /* BackgroundNetworkingViewController.swift in Sources */,
 				C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */,
+				B65DDDD61EE34330002618AF /* MainTableViewController.swift in Sources */,
 				5B84A3AE1BF48BE200C795F8 /* OnlyHintsViewController.swift in Sources */,
 				C6CE542C1BBD435500154266 /* BlurringOverlayViewController.swift in Sources */,
 				C63BB9161C73CDD600C81A4D /* TransitionFromCodeViewController.swift in Sources */,
@@ -319,6 +326,7 @@
 				C636FFB21BBC329600EB243B /* TransparentCoachMarkBodyView.swift in Sources */,
 				C6CE54321BBD43CB00154266 /* MixedCoachMarksViewController.swift in Sources */,
 				C6CE542D1BBD435500154266 /* CustomViewController.swift in Sources */,
+				B65DDDD41EE2EED0002618AF /* KeyboardViewController.swift in Sources */,
 				C615FBAF1D7A1BB500EAEEFB /* TestFlowViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

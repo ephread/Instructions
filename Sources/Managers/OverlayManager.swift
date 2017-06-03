@@ -84,8 +84,8 @@ public class OverlayManager {
         }
     }
 
-    /// `true` to show the overlay above the status bar, `false` to show it below.
-    public var isShownAboveStatusBar = false
+    /// Define the window level for the overlay.
+    public var windowLevel = UIWindowLevelNormal + 1
 
     // MARK: - Internal Properties
     /// Delegate to which tell that the overlay view received a tap event.
@@ -140,11 +140,6 @@ public class OverlayManager {
     func viewDidTransition() {
         cutoutPath = nil
         overlayStyleManager.viewDidTransition()
-    }
-
-    /// Prepare for the fade, by removing the cutout shape.
-    func prepareForSizeTransition() {
-
     }
 
     private func updateDependencies(of overlayAnimator: BlurringOverlayStyleManager) {

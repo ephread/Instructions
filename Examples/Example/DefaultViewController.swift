@@ -30,7 +30,7 @@ internal class DefaultViewController: ProfileViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.coachMarksController?.dataSource = self
+        self.coachMarksController.dataSource = self
 
         self.emailLabel?.layer.cornerRadius = 4.0
         self.postsLabel?.layer.cornerRadius = 4.0
@@ -39,7 +39,7 @@ internal class DefaultViewController: ProfileViewController {
         let skipView = CoachMarkSkipDefaultView()
         skipView.setTitle("Skip", for: .normal)
 
-        self.coachMarksController?.skipView = skipView
+        self.coachMarksController.skipView = skipView
     }
 }
 

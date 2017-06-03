@@ -26,14 +26,14 @@ import Instructions
 /// This class serves as a base for all the other examples
 internal class ProfileViewController: UIViewController {
     // MARK: - IBOutlet
-    @IBOutlet var handleLabel: UILabel?
-    @IBOutlet var emailLabel: UILabel?
-    @IBOutlet var postsLabel: UILabel?
-    @IBOutlet var reputationLabel: UILabel?
-    @IBOutlet var avatar: UIImageView?
+    @IBOutlet weak var handleLabel: UILabel?
+    @IBOutlet weak var emailLabel: UILabel?
+    @IBOutlet weak var postsLabel: UILabel?
+    @IBOutlet weak var reputationLabel: UILabel?
+    @IBOutlet weak var avatar: UIImageView?
 
     // MARK: - Public properties
-    var coachMarksController: CoachMarksController?
+    var coachMarksController = CoachMarksController()
 
     let avatarText = "That's your profile picture. You look gorgeous!"
     let profileSectionText = "You are in the profile section, where you can review all your informations."
@@ -49,8 +49,7 @@ internal class ProfileViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        self.coachMarksController = CoachMarksController()
-        self.coachMarksController?.overlay.allowTap = true
+        self.coachMarksController.overlay.allowTap = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -62,11 +61,11 @@ internal class ProfileViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        self.coachMarksController?.stop(immediately: true)
+        self.coachMarksController.stop(immediately: true)
     }
 
     func startInstructions() {
-        self.coachMarksController?.startOn(self)
+        self.coachMarksController.startOn(self)
     }
 
 

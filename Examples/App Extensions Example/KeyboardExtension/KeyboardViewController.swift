@@ -29,6 +29,7 @@ class KeyboardViewController: UIInputViewController, CoachMarksControllerDataSou
     @IBOutlet var nextKeyboardButton: UIButton!
     @IBOutlet var secondButton: UIButton!
 
+    @IBOutlet weak var textField: UITextField!
     var keyboardView: UIView!
     var coachMarksController: CoachMarksController?
 

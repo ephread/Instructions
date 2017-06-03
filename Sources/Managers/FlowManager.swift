@@ -90,7 +90,7 @@ public class FlowManager {
     public func resume() {
         if started && paused {
             paused = false
-            createAndShowCoachMark(false)
+            createAndShowCoachMark(afterResuming: true)
         }
     }
 
@@ -180,23 +180,25 @@ public class FlowManager {
     /// the delegate is not notified.
     ///
     /// - Parameter shouldCallDelegate: `true` to call delegate methods, `false` otherwise.
-    internal func createAndShowCoachMark(_ shouldCallDelegate: Bool = true) {
+    internal func createAndShowCoachMark(afterResuming: Bool = false,
+                                         recreatedAfterTransition recreated: Bool = false) {
         if disableFlow { return }
 
-        guard delegate?.willLoadCoachMark(at: currentIndex) ?? false else {
-            canShowCoachMark = true
-            showNextCoachMark(hidePrevious: false)
-            return
-        }
+        if !afterResuming {
+            guard delegate?.willLoadCoachMark(at: currentIndex) ?? false else {
+                canShowCoachMark = true
+                showNextCoachMark(hidePrevious: false)
+                return
+            }
 
-        // Retrieves the current coach mark structure from the datasource.
-        // It can't be nil, that's why we'll force unwrap it everywhere.
-        currentCoachMark = self.dataSource!.coachMark(at: currentIndex)
+            // Retrieves the current coach mark structure from the datasource.
+            // It can't be nil, that's why we'll force unwrap it everywhere.
+            currentCoachMark = self.dataSource!.coachMark(at: currentIndex)
 
-        // The coach mark will soon show, we notify the delegate, so it
-        // can perform some things and, if required, update the coach mark structure.
-        if shouldCallDelegate {
-            self.delegate?.willShow(coachMark: &currentCoachMark!, at: currentIndex)
+            // The coach mark will soon show, we notify the delegate, so it
+            // can perform some things and, if required, update the coach mark structure.
+            self.delegate?.willShow(coachMark: &currentCoachMark!,
+                                    afterSizeTransition: recreated, at: currentIndex)
         }
 
         // The delegate might have paused the flow, he check whether or not it's
@@ -212,9 +214,8 @@ public class FlowManager {
             coachMarksViewController.show(coachMark: &currentCoachMark!, at: currentIndex) {
                 self.canShowCoachMark = true
 
-                if shouldCallDelegate {
-                    self.delegate?.didShow(coachMark: self.currentCoachMark!, at: self.currentIndex)
-                }
+                self.delegate?.didShow(coachMark: self.currentCoachMark!,
+                                       afterSizeTransition: recreated, at: self.currentIndex)
             }
         }
     }
@@ -257,6 +258,6 @@ extension FlowManager: CoachMarksViewControllerDelegate {
 
     func didTransition() {
         coachMarksViewController.restoreAfterSizeTransitionDidComplete()
-        createAndShowCoachMark(false)
+        createAndShowCoachMark(recreatedAfterTransition: true)
     }
 }

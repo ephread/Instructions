@@ -37,8 +37,8 @@ class TestFlowViewController: ProfileViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.coachMarksController?.dataSource = self
-        self.coachMarksController?.delegate = self
+        self.coachMarksController.dataSource = self
+        self.coachMarksController.delegate = self
 
         self.emailLabel?.layer.cornerRadius = 4.0
         self.postsLabel?.layer.cornerRadius = 4.0
@@ -47,8 +47,8 @@ class TestFlowViewController: ProfileViewController {
         let skipView = CoachMarkSkipDefaultView()
         skipView.setTitle("Skip", for: .normal)
 
-        self.coachMarksController?.skipView = skipView
-        self.coachMarksController?.overlay.allowTap = true
+        self.coachMarksController.skipView = skipView
+        self.coachMarksController.overlay.allowTap = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -57,10 +57,10 @@ class TestFlowViewController: ProfileViewController {
 
     @IBAction func performButtonTap(_ sender: AnyObject) {
         // The user tapped on the button, so let's carry on!
-        //self.coachMarksController?.flow.showNext()
+        //self.coachMarksController.flow.showNext()
 
-        self.coachMarksController?.stop(immediately: true)
-        self.coachMarksController?.startOn(self)
+        self.coachMarksController.stop(immediately: true)
+        self.coachMarksController.startOn(self)
     }
 }
 
@@ -123,14 +123,16 @@ extension TestFlowViewController: CoachMarksControllerDelegate {
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               willShow coachMark: inout CoachMark,
+                              afterSizeTransition: Bool,
                               at index: Int) {
-        print("willShow at: \(index)")
+        print("willShow at: \(index), afterSizeTransition: \(afterSizeTransition)")
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               didShow coachMark: CoachMark,
+                              afterSizeTransition: Bool,
                               at index: Int) {
-        print("didShow at: \(index)")
+        print("didShow at: \(index), afterSizeTransition: \(afterSizeTransition)")
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,

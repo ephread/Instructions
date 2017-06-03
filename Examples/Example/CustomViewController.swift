@@ -33,10 +33,9 @@ internal class CustomViewsViewController: ProfileViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.coachMarksController?.dataSource = self
+        self.coachMarksController.dataSource = self
 
-        self.coachMarksController?.overlay.color = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
-        self.coachMarksController?.overlay.isShownAboveStatusBar = false
+        self.coachMarksController.overlay.color = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
 
         let skipView = CoachMarkSkipDefaultView()
         skipView.setTitle("Skip", for: .normal)
@@ -46,7 +45,7 @@ internal class CustomViewsViewController: ProfileViewController {
         skipView.layer.cornerRadius = 0
         skipView.backgroundColor = UIColor.darkGray
 
-        self.coachMarksController?.skipView = skipView
+        self.coachMarksController.skipView = skipView
     }
 }
 

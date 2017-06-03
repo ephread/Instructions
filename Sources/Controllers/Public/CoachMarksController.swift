@@ -133,6 +133,14 @@ public extension CoachMarksController {
         }
     }
 
+    public func prepareForChange() {
+        coachMarksViewController.prepareForChange()
+    }
+
+    public func restoreAfterChangeDidComplete() {
+        coachMarksViewController.restoreAfterChangeDidComplete()
+    }
+
     /// Pause the display.
     /// This method is expected to be used by the delegate to
     /// stop the display, perform animation and resume display with `resume()`

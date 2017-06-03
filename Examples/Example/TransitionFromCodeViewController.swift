@@ -40,8 +40,8 @@ internal class TransitionFromCodeViewController: ProfileViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.coachMarksController?.dataSource = self
-        self.coachMarksController?.delegate = self
+        self.coachMarksController.dataSource = self
+        self.coachMarksController.delegate = self
 
         self.emailLabel?.layer.cornerRadius = 4.0
         self.postsLabel?.layer.cornerRadius = 4.0
@@ -50,8 +50,8 @@ internal class TransitionFromCodeViewController: ProfileViewController {
         let skipView = CoachMarkSkipDefaultView()
         skipView.setTitle("Skip", for: .normal)
 
-        self.coachMarksController?.skipView = skipView
-        self.coachMarksController?.overlay.allowTap = true
+        self.coachMarksController.skipView = skipView
+        self.coachMarksController.overlay.allowTap = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -60,7 +60,7 @@ internal class TransitionFromCodeViewController: ProfileViewController {
 
     @IBAction func performButtonTap(_ sender: AnyObject) {
         // The user tapped on the button, so let's carry on!
-        self.coachMarksController?.flow.showNext()
+        self.coachMarksController.flow.showNext()
     }
 }
 

@@ -15,6 +15,9 @@
 		B61E448F1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61E448D1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift */; };
 		B65DDDBF1EE2C43E002618AF /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDBE1EE2C43E002618AF /* UIView+Layout.swift */; };
 		B65DDDC01EE2C43E002618AF /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDBE1EE2C43E002618AF /* UIView+Layout.swift */; };
+		B65DDDD71EE34BE4002618AF /* OverlayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69B6D7B1E9CD5C000BE032D /* OverlayManager.swift */; };
+		B65DDDD81EE34BE4002618AF /* OverlayStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683D2471EA7815600E4798F /* OverlayStyleManager.swift */; };
+		B65DDDD91EE34BE4002618AF /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A102A81DFC8EFE009C73DF /* MaskView.swift */; };
 		B683D2481EA7815600E4798F /* OverlayStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683D2471EA7815600E4798F /* OverlayStyleManager.swift */; };
 		B683D24F1EA7D5E000E4798F /* OverlaySnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683D24E1EA7D5E000E4798F /* OverlaySnapshotView.swift */; };
 		B683D2501EA7D5E000E4798F /* OverlaySnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683D24E1EA7D5E000E4798F /* OverlaySnapshotView.swift */; };
@@ -643,6 +646,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B65DDDD71EE34BE4002618AF /* OverlayManager.swift in Sources */,
+				B65DDDD81EE34BE4002618AF /* OverlayStyleManager.swift in Sources */,
+				B65DDDD91EE34BE4002618AF /* MaskView.swift in Sources */,
 				C6D4D0F41D5B2DA300F14FC5 /* CoachMarksController+Proxy.swift in Sources */,
 				B683D2501EA7D5E000E4798F /* OverlaySnapshotView.swift in Sources */,
 				C6D4D0F51D5B2DA300F14FC5 /* CoachMarksController.swift in Sources */,

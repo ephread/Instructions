@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   spec.cocoapods_version = '>= 0.39'
 
-  spec.name             = "InstructionsAppExtensions"
+  spec.name             = "Instructions-AppExtensions"
   spec.version          = "1.0.0-beta.1"
   spec.summary          = "[App Extensions] Create walkthroughs and guided tours (with coach marks) in a simple way, using Swift."
   spec.homepage         = "https://github.com/ephread/Instructions"

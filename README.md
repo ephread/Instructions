@@ -25,7 +25,8 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 ## Overview
 ![Instructions Demo](http://i.imgur.com/JUlQH9F.gif)
 
-⚠️ **Until Instructions reaches 1.0.0, the API is subject to change. Please see the Features section for more information about the roadmap.**
+⚠️ **Until Instructions reaches 1.0.0, the API is subject to change.
+     Please see the Features section for more information about the roadmap.**
 
 [quick guide]: https://github.com/ephread/Instructions/tree/master/Documentation/MigratingFromSwift2ToSwift3.md
 
@@ -108,7 +109,7 @@ If you rather stay away from both CocoaPods and Carthage, you can also install I
 ## Usage
 
 ### Getting started
-Open up the controller for which you wish to display coach marks and instanciate a new `CoachMarksController`. You should also provide a `dataSource`, which is an object conforming to the `CoachMarksControllerDataSource` protocol.
+Open up the controller for which you wish to display coach marks and instantiate a new `CoachMarksController`. You should also provide a `dataSource`, which is an object conforming to the `CoachMarksControllerDataSource` protocol.
 
 ```swift
 class DefaultViewController: UIViewController, CoachMarksControllerDataSource, CoachMarksControllerDelegate {
@@ -125,7 +126,7 @@ class DefaultViewController: UIViewController, CoachMarksControllerDataSource, C
 #### Data Source
 `CoachMarksControllerDataSource` declares three mandatory methods.
 
-The first one asks for the number of coach marks to display. Let's pretend that you want to display only one coach mark. Note that the `CoachMarksController` requesting the information is supplied, allowing you to supply data for mutiple `CoachMarksController`, within a single dataSource.
+The first one asks for the number of coach marks to display. Let's pretend that you want to display only one coach mark. Note that the `CoachMarksController` requesting the information is supplied, allowing you to supply data for multiple `CoachMarksController`, within a single dataSource.
 
 ```swift
 func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int
@@ -190,7 +191,7 @@ You can customized the background color of the overlay using this property:
 
 - `overlay.color`
 
-You can also make the overlay blur the content sitting behind it. Setting this property to anything else than `nil` will disable the `overlay.color` (⚠️ currently broken on iOS 10):
+You can also make the overlay blur the content sitting behind it. Setting this property to anything else than `nil` will disable the `overlay.color`:
 
 - `overlay.blurEffectStyle: UIBlurEffectStyle?`
 
@@ -198,9 +199,16 @@ The overlay can sit above the status bar or below, the property defaults to `tru
 
 - `overlay.isShownAboveStatusBar: Bool`
 
+The window level at which show the overlay and the coach mark, by default, the property holds `UIWindowLevelNormal + 1`.
+
+- `overlay.windowLevel: UIWindowLevel`
+
 Last, you can make the overlay tappable. A tap on the overlay will hide the current coach mark and display the next one.
 
 - `overlay.allowTap: Bool`
+
+⚠️ When using a blur effect, setting the window level to anything above `UIWindowLevelStatusBar`
+is not supported.
 
 #### Providing a custom cutout path
 If you dislike how the default cutout path looks like, you can customize it by providing a block to `makeCoachMark(for:)`. The cutout path will automatically be stored in the `cutoutPath` property of the returning `CoachMark` object:
@@ -358,6 +366,10 @@ func coachMarksController(_ coachMarksController: CoachMarksController, willShow
 }
 ```
 
+⚠️ Since the blurring overlay snapshots the view during coach mark appearance/disappearance,
+you should make sure that animations targeting your own view don't occur while a coach mark
+is appearing or disappearing. Otherwise, the animation won't be visible.
+
 ##### Skipping a coach mark
 
 You can skip a given coach mark by implementing the following method defined in `CoachMarksControllerDelegate`:
@@ -368,8 +380,28 @@ func coachMarksController(_ coachMarksController: CoachMarksController, coachMar
 
 `coachMarkWillLoadAt:` is called right before a given coach mark will show. To prevent a CoachMark from showing, you can return `false` from this method.
 
+#### Dealing with frame changes
+
+Since Instructions doesn't hold any reference to the _views of interest_, it cannot respond to their
+change of frame automatically.
+
+Instructions provide two methods to deal with frame changes.
+
+- `CoachMarkController.prepareForChange()`, called before a change of frame, to hide
+  the coach mark and the cutout path.
+- `CoachMarkController.restoreAfterChangeDidComplete()`, called after a change of frame
+  to show the coach mark and the cutout again.
+
+Although you can call these methods at any time while Instructions is idle, the result will not
+look smooth if the coach mark is already displayed. It's make the changes occur between
+two coach marks, by pausing and resuming the flow. [`KeyboardViewController`] shows an
+example of this technique.
+
+[`KeyboardViewController`]: https://github.com/ephread/Instructions/blob/master/Examples/Example/KeyboardViewController.swift
+
 ### Usage within App Extensions
-If you wish to add Instructions within App Extensions, there's additional work you need to perform. An example is available in the `App Extensions Example/` directory.
+If you wish to add Instructions within App Extensions, there's additional work you need to perform.
+An example is available in the `App Extensions Example/` directory.
 
 #### Dependencies
 Instructions comes with two shared schemes, `Instructions` and `InstructionsAppExtensions`. The only differences between the two is that `InstructionsAppExtensions` does not depend upon the `UIApplication.sharedApplication()`, making it suitable for App Extensions.
@@ -378,27 +410,32 @@ In the following examples, let's consider a project with two targets, one for a 
 
 #### CocoaPods
 
-If you're importing Instructions with CocoaPods, you'll need to edit your `Podfile` to make it look like this:
+If you're importing Instructions with CocoaPods, you'll need to edit your `Podfile` to make it look
+like this:
 
 ```ruby
 target 'Instructions App Extensions Example' do
-  pod 'Instructions', '~> 0.5'
+  pod 'Instructions', '~> 1.0.0'
 end
 
 target 'Keyboard Extension' do
-  pod 'Instructions/AppExtensions', '~> 0.5'
+  pod 'Instructions-AppExtensions', '~> 1.0.0'
 end
 ```
 
-If Instructions only imported from within App Extension target, you don't need the first block.
+If Instructions is only imported from within App Extension target, you don't need the first block.
 
-When compiling either targets, CocoaPods will make sure the appropriate flags are set, thus allowing/forbidding calls to `UIApplication.sharedApplication()`. You don't need to change your code.
+When compiling either targets, CocoaPods will make sure the appropriate flags are set, thus
+allowing/forbidding calls to `UIApplication.sharedApplication()`.
+You don't need to change your code.
 
 #### Frameworks (Carthage / Manual management)
 
-If you're importing Instructions through frameworks, you'll notice that the two shared schemes (`Instructions` and `InstructionsAppExtensions`) both result in different frameworks.
+If you're importing Instructions through frameworks, you'll notice that the two shared schemes
+(`Instructions` and `InstructionsAppExtensions`) both result in different frameworks.
 
-You need to embed both frameworks and link them to the proper targets. Make sure they look like theses:
+You need to embed both frameworks and link them to the proper targets.
+Make sure they look like theses:
 
 **Instructions App Extensions Example**
 ![Imgur](http://i.imgur.com/3M3BQaO.png)
@@ -410,19 +447,26 @@ If you plan to add Instructions only to the App Extension target, you don't need
 
 ##### Import statements
 
-When importing Instructions from files within `Instructions App Extensions Example`, you should use the regular import statement:
+When importing Instructions from files within `Instructions App Extensions Example`,
+you should use the regular import statement:
 
 ```swift
 import Instructions
 ```
 
-However, when importing Instructions from files within `Keyboard Extension`, you should use the specific statement:
+However, when importing Instructions from files within `Keyboard Extension`, you should
+use the specific statement:
 
 ```swift
 import InstructionsAppExtensions
 ```
 
-⚠️ **Please be extremely careful**, as you will be able to import regular _Instructions_ from within an app extension without breaking anything. It will work. However, you're at a high risk of rejection from the Apple Store. Uses of `UIApplication.sharedApplication()` are statically checked during compilation but nothing prevents you from performing the calls at runtime. Fortunately Xcode should warn you if you've mistakenly linked with a framework not suited for App Extensions.
+⚠️ **Please be extremely careful**, as you will be able to import regular _Instructions_
+from within an app extension without breaking anything. It will work. However, you're at a
+high risk of rejection from the Apple Store. Uses of `UIApplication.sharedApplication()`
+are statically checked during compilation but nothing prevents you from performing the calls
+at runtime. Fortunately Xcode should warn you if you've mistakenly linked with a framework
+not suited for App Extensions.
 
 ## License
 

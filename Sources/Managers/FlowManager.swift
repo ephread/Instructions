@@ -183,6 +183,21 @@ public class FlowManager {
     internal func createAndShowCoachMark(afterResuming: Bool = false,
                                          recreatedAfterTransition recreated: Bool = false) {
         if disableFlow { return }
+        
+        // Check if the next CoachMark should be loaded
+        // Else find the next one that should
+        if let delegate = self.delegate {
+            while !delegate.coachMarkWillLoadForIndex(currentIndex) && currentIndex < numberOfCoachMarks {
+                currentIndex += 1
+            }
+        }
+        
+        // Check if there is more CoachMark to show
+        // Else stop the flow
+        if currentIndex >= numberOfCoachMarks {
+            self.stopFlow()
+            return
+        }
 
         if !afterResuming {
             guard delegate?.willLoadCoachMark(at: currentIndex) ?? false else {

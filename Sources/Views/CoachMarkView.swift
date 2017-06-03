@@ -43,9 +43,7 @@ class CoachMarkView: UIView {
 
     /// The control used to get to the next coach mark.
     var nextControl: UIControl? {
-        get {
-            return bodyView.nextControl
-        }
+        return bodyView.nextControl
     }
 
     // MARK: - Private properties

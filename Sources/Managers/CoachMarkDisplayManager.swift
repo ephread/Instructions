@@ -81,7 +81,7 @@ class CoachMarkDisplayManager {
         } else {
             UIView.animate(withDuration: animationDuration, animations: { () -> Void in
                 coachMarkView?.alpha = 0.0
-            }, completion: {(finished: Bool) -> Void in
+            }, completion: { _ in
                 coachMarkView?.removeFromSuperview()
                 completion?()
             })
@@ -115,8 +115,8 @@ class CoachMarkDisplayManager {
         if animated {
             UIView.animate(withDuration: coachMark.animationDuration, animations: { () -> Void in
                 coachMarkView.alpha = 1.0
-                }, completion: {(finished: Bool) -> Void in
-                    completion?()
+            }, completion: { _ in
+                completion?()
             })
         } else {
             coachMarkView.alpha = 1.0

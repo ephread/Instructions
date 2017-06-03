@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Foundation
+import UIKit
 
 // Overlay a blocking view on top of the screen and handle the cutout path
 // around the point of interest.
@@ -78,7 +78,7 @@ public class OverlayManager {
         get {
             return overlayView.allowTouchInsideCutoutPath
         }
-        
+
         set {
             overlayView.allowTouchInsideCutoutPath = newValue
         }

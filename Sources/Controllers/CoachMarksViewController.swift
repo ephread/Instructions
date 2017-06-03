@@ -59,7 +59,9 @@ class CoachMarksViewController: UIViewController {
 
     ///
     var instructionsRootView: InstructionsRootView {
+        //swiftlint:disable force_cast
         return view as! InstructionsRootView
+        //swiftlint:enable force_cast
     }
 
     ///
@@ -127,7 +129,7 @@ extension CoachMarksViewController {
                                              duration: overlayManager.fadeAnimationDuration)
         }
 
-        overlayManager.showOverlay(true, completion: { (finished: Bool) -> Void in
+        overlayManager.showOverlay(true, completion: { _ in
             self.enableInteraction()
             completion()
         })
@@ -206,8 +208,7 @@ extension CoachMarksViewController {
 
         super.viewWillTransition(to: size, with: coordinator)
 
-        coordinator.animate(alongsideTransition: nil, completion: {
-            (context: UIViewControllerTransitionCoordinatorContext) -> Void in
+        coordinator.animate(alongsideTransition: nil, completion: { _ in
             self.onGoingSizeChange = false
             self.overlayManager.viewDidTransition()
             self.delegate?.didTransition()

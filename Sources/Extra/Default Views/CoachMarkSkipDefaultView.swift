@@ -27,9 +27,7 @@ import UIKit
 public class CoachMarkSkipDefaultView: UIButton, CoachMarkSkipView {
     // MARK: - Public properties
     public var skipControl: UIControl? {
-        get {
-            return self
-        }
+        return self
     }
 
     // MARK: - Private properties

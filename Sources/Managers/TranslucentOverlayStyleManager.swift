@@ -20,7 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Foundation
+import UIKit
+
 class TranslucentOverlayStyleManager: OverlayStyleManager {
     // MARK: Properties
     weak var overlayView: OverlayView?
@@ -115,7 +116,7 @@ class TranslucentOverlayStyleManager: OverlayStyleManager {
         }
 
         fullMaskLayer.add(animation, forKey: "opacityAnimationFade")
-        
+
         CATransaction.commit()
     }
 
@@ -162,7 +163,7 @@ class TranslucentOverlayStyleManager: OverlayStyleManager {
 
         let fullMaskLayerPath = UIBezierPath()
         fullMaskLayerPath.append(UIBezierPath(rect: overlayLayer.bounds))
-        
+
         fullMaskLayer.path = fullMaskLayerPath.cgPath
     }
 

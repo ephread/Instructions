@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import Foundation
+import UIKit
 
 /// This protocol expected to be implemented by the CoachMarkController.
 /// A snapshottable object will return a snapshot view of its content.
@@ -43,7 +43,6 @@ protocol OverlayStyleManager: class {
 
     /// Called when the size of usable screen space did change.
     func viewDidTransition()
-
 
     /// Show/hide the overlay.
     ///

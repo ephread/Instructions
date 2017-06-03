@@ -34,7 +34,7 @@ public class FlowManager {
     /// `false` otherwise.
     private(set) open var paused = false
 
-    internal unowned let coachMarksViewController: CoachMarksViewController
+    internal weak var coachMarksViewController: CoachMarksViewController?
     internal weak var dataSource: CoachMarksControllerProxyDataSource?
 
     /// An object implementing the delegate data source protocol,
@@ -82,7 +82,7 @@ public class FlowManager {
 
         self.numberOfCoachMarks = numberOfCoachMarks
 
-        coachMarksViewController.prepareToShowCoachMarks {
+        coachMarksViewController?.prepareToShowCoachMarks {
             self.showNextCoachMark()
         }
     }
@@ -117,13 +117,13 @@ public class FlowManager {
         reset()
 
         let animationBlock = { () -> Void in
-            self.coachMarksViewController.overlayView.alpha = 0.0
-            self.coachMarksViewController.skipView?.asView?.alpha = 0.0
-            self.coachMarksViewController.currentCoachMarkView?.alpha = 0.0
+            self.coachMarksViewController?.overlayView.alpha = 0.0
+            self.coachMarksViewController?.skipView?.asView?.alpha = 0.0
+            self.coachMarksViewController?.currentCoachMarkView?.alpha = 0.0
         }
 
         let completionBlock = {(finished: Bool) -> Void in
-            self.coachMarksViewController.detachFromParentViewController()
+            self.coachMarksViewController?.detachFromParentViewController()
             if shouldCallDelegate { self.delegate?.didEndShowingBySkipping(skipped) }
         }
 
@@ -132,6 +132,10 @@ public class FlowManager {
             animationBlock()
             completionBlock(true)
         } else {
+			guard let coachMarksViewController = self.coachMarksViewController else {
+				return
+			}
+			
             UIView.animate(withDuration: coachMarksViewController.overlayView.fadeAnimationDuration,
                                        animations: animationBlock, completion: completionBlock)
         }
@@ -155,7 +159,7 @@ public class FlowManager {
         if hidePrevious {
             guard let currentCoachMark = currentCoachMark else { return }
 
-            coachMarksViewController.hide(coachMark: currentCoachMark) {
+            coachMarksViewController?.hide(coachMark: currentCoachMark) {
                 self.delegate?.didHide(coachMark: self.currentCoachMark!, at: self.currentIndex)
                 self.showOrStop()
             }
@@ -199,6 +203,10 @@ public class FlowManager {
         // The delegate might have paused the flow, he check whether or not it's
         // the case.
         if !self.paused {
+			guard let coachMarksViewController = self.coachMarksViewController else {
+				return
+			}
+			
             if coachMarksViewController.instructionsRootView.bounds.isEmpty {
                 print("The overlay view added to the window has empty bounds, " +
                       "Instructions will stop.")
@@ -245,14 +253,14 @@ extension FlowManager: CoachMarksViewControllerDelegate {
     }
 
     func willTransition() {
-        coachMarksViewController.prepareForSizeTransition()
+        coachMarksViewController?.prepareForSizeTransition()
         if let coachMark = currentCoachMark {
-            coachMarksViewController.hide(coachMark: coachMark, animated: false)
+            coachMarksViewController?.hide(coachMark: coachMark, animated: false)
         }
     }
 
     func didTransition() {
-        coachMarksViewController.restoreAfterSizeTransitionDidComplete()
+        coachMarksViewController?.restoreAfterSizeTransitionDidComplete()
         createAndShowCoachMark(false)
     }
 }

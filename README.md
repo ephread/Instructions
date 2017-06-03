@@ -25,8 +25,6 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 ## Overview
 ![Instructions Demo](http://i.imgur.com/JUlQH9F.gif)
 
-⚠️ **Swift 3 brings some changes, please take a look at the [quick guide] if you need to migrate.**
-
 ⚠️ **Until Instructions reaches 1.0.0, the API is subject to change. Please see the Features section for more information about the roadmap.**
 
 [quick guide]: https://github.com/ephread/Instructions/tree/master/Documentation/MigratingFromSwift2ToSwift3.md
@@ -40,16 +38,14 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 - [x] [App Extensions support](#usage-within-app-extensions)
 - [x] Right-to-left support
 - [x] Size transition support (orientation and multi-tasking)
-- [ ] Good test coverage • **Once done, it should bump version to 1.0.0**
-- [ ] Cross controllers walkthrough
-- [ ] Full UIVisualEffectView support
-- [ ] Multiple coach marks support
+- [x] Partial UIVisualEffectView support
 - [ ] Coach marks animation
+- [ ] Cross controllers walkthrough
+- [ ] Multiple coach marks support
 
 ## Requirements
 - Xcode 8 / Swift 3 (use `master`)
-- Xcode 8 / Swift 2.3 (use `0.5.x` or [`swift2`](https://github.com/ephread/Instructions/tree/swift2))
-- iOS 8.0+
+- iOS 9.0+
 
 ## Asking Questions / Contributing
 
@@ -74,10 +70,10 @@ Add Instructions to your Podfile:
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
-pod 'Instructions', '~> 0.5'
+pod 'Instructions', '~> 1.0.0'
 ```
 
 Then, run the following command:
@@ -90,7 +86,7 @@ $ pod install
 Add Instructions to your Cartfile:
 
 ```
-github "ephread/Instructions" ~> 0.5
+github "ephread/Instructions" ~> 1.0.0
 ```
 
 You can then update, build and drag the generated framework into your project:

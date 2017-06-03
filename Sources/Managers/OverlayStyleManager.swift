@@ -1,4 +1,4 @@
-// OverlayManager.swift
+// OverlayStyleManager.swift
 //
 // Copyright (c) 2017 Frédéric Maquin <fred@ephread.com>
 //
@@ -22,19 +22,44 @@
 
 import Foundation
 
-/// This protocol expected to be implemented by CoachMarkManager, so
-/// it can be notified when a tap occured on the overlay.
-internal protocol Snapshottable: class {
+/// This protocol expected to be implemented by the CoachMarkController.
+/// A snapshottable object will return a snapshot view of its content.
+/// Useful when dealing with multiple windows.
+protocol Snapshottable: class {
+    /// Returns: A snapshot of the view hierarchy.
     func snapshot() -> UIView?
 }
 
-protocol OverlayAnimator: class {
+/// Define a common API for different types of overlay.
+/// (Blurring the content behind, simple background color, etc.)
+/// Takes care of displaying and animating the overlay / cutout path (doesn't
+/// deals with the coach mark view itself).
+protocol OverlayStyleManager: class {
+    /// The overlay managed by the styleManager.
     var overlayView: OverlayView? { get set }
 
+    /// Called when the size of usable screen space will change.
     func viewWillTransition()
+
+    /// Called when the size of usable screen space did change.
     func viewDidTransition()
+
+
+    /// Show/hide the overlay.
+    ///
+    /// - Parameters:
+    ///   - show: `true` to show the overlay, `false` to hide.
+    ///   - duration: duration of the animation
+    ///   - completion: a block to execute after compleion.
     func showOverlay(_ show: Bool, withDuration duration: TimeInterval,
                      completion: ((Bool) -> Void)?)
+
+    /// Show/hide the cutout.
+    ///
+    /// - Parameters:
+    ///   - show: `true` to show the overlay, `false` to hide.
+    ///   - duration: duration of the animation
+    ///   - completion: a block to execute after compleion.
     func showCutout(_ show: Bool, withDuration duration: TimeInterval,
                     completion: ((Bool) -> Void)?)
 }

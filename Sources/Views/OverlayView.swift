@@ -24,7 +24,7 @@ import UIKit
 
 // Overlay a blocking view on top of the screen and handle the cutout path
 // around the point of interest.
-public class OverlayView: UIView {
+class OverlayView: UIView {
     internal static let sublayerName = "Instructions.OverlaySublayer"
 
     var cutoutPath: UIBezierPath?

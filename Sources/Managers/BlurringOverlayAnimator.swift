@@ -22,28 +22,50 @@
 
 import Foundation
 
-class BlurringOverlayAnimator: OverlayAnimator {
+/// The idea is simple:
+///
+/// 1. Snapshot what's behind the overlay twice (let's call those foreground and background).
+/// 2. Blur them (Hypothetical improvement -> pre-render the foregorund overlay)
+/// 3. Show them on top of one another, the foreground one will hold the mask
+///    displaying the cutout.
+/// 4. Fade out the background to make it look it the cutout is appearing.
+///
+/// All that work because UIVisualEffectView doesn't support:
+///
+/// 1. Opacity animation
+/// 2. Mask animation
+///
+/// TODO: Look for ways to improve everything, I'm fairly confident we can optimize
+///       a bunch of things.
+class BlurringOverlayStyleManager: OverlayStyleManager {
+    // MARK: Properties
     weak var overlayView: OverlayView? {
         didSet {
-            rotationOverlay = UIVisualEffectView(effect: blurEffect)
-            rotationOverlay?.translatesAutoresizingMaskIntoConstraints = false
+            sizeTransitionOverlay = UIVisualEffectView(effect: blurEffect)
+            sizeTransitionOverlay?.translatesAutoresizingMaskIntoConstraints = false
+            sizeTransitionOverlay?.isHidden = true
 
-            overlayView?.addSubview(rotationOverlay!)
-
-            rotationOverlay?.fillSuperview()
-
-            rotationOverlay?.isHidden = true
+            overlayView?.addSubview(sizeTransitionOverlay!)
+            sizeTransitionOverlay?.fillSuperview()
         }
     }
+
+    /// Will provide shapshot to use for animations involving blurs.
     weak var snapshotDelegate: Snapshottable?
 
-    var rotationOverlay: UIView?
-    var subOverlay: UIView?
-    var cutoutOverlays: (background: OverlaySnapshotView, foreground: OverlaySnapshotView)?
+    // MARK: Private Properties
+    /// Basic blurring overlay used during size transitions
+    private var sizeTransitionOverlay: UIView?
+    /// Subview holding the actual bunch.
+    private var subOverlay: UIView?
+    /// Foreground and background overlay.
+    private var cutoutOverlays: (background: OverlaySnapshotView, foreground: OverlaySnapshotView)?
 
+    // `true` is a size change is on going, `false` otherwise.
     private var onGoingTransition = false
 
-    var mask: MaskView {
+    // Used to mask the `foreground`, thus showing the cutout.
+    private var mask: MaskView {
         let view = MaskView()
         view.backgroundColor = UIColor.clear
 
@@ -62,31 +84,26 @@ class BlurringOverlayAnimator: OverlayAnimator {
         return view
     }
 
-    private let style: UIBlurEffectStyle
     private var blurEffect: UIVisualEffect {
         return UIBlurEffect(style: style)
     }
 
+    private let style: UIBlurEffectStyle
+
+    // MARK: Initialization
     init(style: UIBlurEffectStyle) {
         self.style = style
     }
 
-    private func setUpOverlay() {
-        guard let cutoutOverlays = self.makeSnapshotOverlays() else { return }
-
-        self.cutoutOverlays = cutoutOverlays
-
-        subOverlay = UIVisualEffectView(effect: blurEffect)
-        subOverlay?.translatesAutoresizingMaskIntoConstraints = false
-    }
+    // MARK: OverlayStyleManager
 
     func viewWillTransition() {
         onGoingTransition = true
         guard let overlay = overlayView else { return }
 
-        overlay.subviews.forEach { if $0 !== rotationOverlay { $0.removeFromSuperview() } }
+        overlay.subviews.forEach { if $0 !== sizeTransitionOverlay { $0.removeFromSuperview() } }
 
-        rotationOverlay?.isHidden = false
+        sizeTransitionOverlay?.isHidden = false
     }
 
     func viewDidTransition() {
@@ -95,7 +112,7 @@ class BlurringOverlayAnimator: OverlayAnimator {
 
     func showOverlay(_ show: Bool, withDuration duration: TimeInterval,
                      completion: ((Bool) -> Void)?) {
-        rotationOverlay?.isHidden = true
+        sizeTransitionOverlay?.isHidden = true
         let subviews = overlayView?.subviews
 
         setUpOverlay()
@@ -112,7 +129,7 @@ class BlurringOverlayAnimator: OverlayAnimator {
         subOverlay.frame = overlay.bounds
         subOverlay.effect = show ? nil : self.blurEffect
 
-        subviews?.forEach { if $0 !== rotationOverlay { $0.removeFromSuperview() } }
+        subviews?.forEach { if $0 !== sizeTransitionOverlay { $0.removeFromSuperview() } }
         overlay.addSubview(subOverlay)
 
         UIView.animate(withDuration: duration, animations: {
@@ -132,7 +149,7 @@ class BlurringOverlayAnimator: OverlayAnimator {
         let subviews = overlayView?.subviews
 
         setUpOverlay()
-        rotationOverlay?.isHidden = true
+        sizeTransitionOverlay?.isHidden = true
         guard let overlay = overlayView,
             let background = cutoutOverlays?.background,
             let foreground = cutoutOverlays?.foreground else {
@@ -147,7 +164,7 @@ class BlurringOverlayAnimator: OverlayAnimator {
         foreground.visualEffectView.effect = self.blurEffect
         foreground.mask = self.mask
 
-        subviews?.forEach { if $0 !== rotationOverlay { $0.removeFromSuperview() } }
+        subviews?.forEach { if $0 !== sizeTransitionOverlay { $0.removeFromSuperview() } }
 
         overlay.addSubview(background)
         overlay.addSubview(foreground)
@@ -162,7 +179,17 @@ class BlurringOverlayAnimator: OverlayAnimator {
         })
     }
 
-    func makeSnapshotView() -> OverlaySnapshotView? {
+    // MARK: Private methods
+    private func setUpOverlay() {
+        guard let cutoutOverlays = self.makeSnapshotOverlays() else { return }
+
+        self.cutoutOverlays = cutoutOverlays
+
+        subOverlay = UIVisualEffectView(effect: blurEffect)
+        subOverlay?.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    private func makeSnapshotView() -> OverlaySnapshotView? {
         guard let overlayView = overlayView,
               let snapshot = snapshotDelegate?.snapshot() else {
             return nil
@@ -180,7 +207,7 @@ class BlurringOverlayAnimator: OverlayAnimator {
         return view
     }
 
-    func makeSnapshotOverlays() -> (background: OverlaySnapshotView,
+    private func makeSnapshotOverlays() -> (background: OverlaySnapshotView,
         foreground: OverlaySnapshotView)? {
             guard let background = makeSnapshotView(),
                 let foreground = makeSnapshotView() else {
@@ -188,11 +215,5 @@ class BlurringOverlayAnimator: OverlayAnimator {
             }
 
             return (background: background, foreground: foreground)
-    }
-
-    func cleanupOverlay() {
-        subOverlay?.removeFromSuperview()
-        cutoutOverlays?.foreground.removeFromSuperview()
-        cutoutOverlays?.background.removeFromSuperview()
     }
 }

@@ -29,7 +29,7 @@ public class OverlayManager {
     /// The background color of the overlay
     public var color: UIColor = Constants.overlayColor {
         didSet {
-            overlayAnimator = updateOverlayAnimator()
+            overlayStyleManager = updateOverlayStyleManager()
         }
     }
 
@@ -42,7 +42,7 @@ public class OverlayManager {
     /// property is set.
     public var blurEffectStyle: UIBlurEffectStyle? {
         didSet {
-            overlayAnimator = updateOverlayAnimator()
+            overlayStyleManager = updateOverlayStyleManager()
         }
     }
 
@@ -97,8 +97,8 @@ public class OverlayManager {
     internal lazy var overlayView: OverlayView = OverlayView()
 
     // MARK: - Private Properties
-    private lazy var overlayAnimator: OverlayAnimator = {
-        return self.updateOverlayAnimator()
+    private lazy var overlayStyleManager: OverlayStyleManager = {
+        return self.updateOverlayStyleManager()
     }()
 
     /// TapGestureRecognizer that will catch tap event performed on the overlay
@@ -124,22 +124,22 @@ public class OverlayManager {
     /// - Parameter show: `true` to show the cutout path, `false` to hide.
     /// - Parameter duration: duration of the animation
     func showCutoutPath(_ show: Bool, withDuration duration: TimeInterval) {
-        overlayAnimator.showCutout(show, withDuration: duration, completion: nil)
+        overlayStyleManager.showCutout(show, withDuration: duration, completion: nil)
     }
 
     func showOverlay(_ show: Bool, completion: ((Bool) -> Void)?) {
-        overlayAnimator.showOverlay(show, withDuration: fadeAnimationDuration,
+        overlayStyleManager.showOverlay(show, withDuration: fadeAnimationDuration,
                                     completion: completion)
     }
 
     func viewWillTransition() {
         cutoutPath = nil
-        overlayAnimator.viewWillTransition()
+        overlayStyleManager.viewWillTransition()
     }
 
     func viewDidTransition() {
         cutoutPath = nil
-        overlayAnimator.viewDidTransition()
+        overlayStyleManager.viewDidTransition()
     }
 
     /// Prepare for the fade, by removing the cutout shape.
@@ -147,24 +147,24 @@ public class OverlayManager {
 
     }
 
-    private func updateDependencies(of overlayAnimator: BlurringOverlayAnimator) {
+    private func updateDependencies(of overlayAnimator: BlurringOverlayStyleManager) {
         overlayAnimator.overlayView = self.overlayView
         overlayAnimator.snapshotDelegate = self.delegate
     }
 
-    private func updateDependencies(of overlayAnimator: OpaqueOverlayAnimator) {
+    private func updateDependencies(of overlayAnimator: TranslucentOverlayStyleManager) {
         overlayAnimator.overlayView = self.overlayView
     }
 
-    private func updateOverlayAnimator() -> OverlayAnimator {
+    private func updateOverlayStyleManager() -> OverlayStyleManager {
         if let style = blurEffectStyle {
-            let blurringOverlayAnimator = BlurringOverlayAnimator(style: style)
-            self.updateDependencies(of: blurringOverlayAnimator)
-            return blurringOverlayAnimator
+            let blurringOverlayStyleManager = BlurringOverlayStyleManager(style: style)
+            self.updateDependencies(of: blurringOverlayStyleManager)
+            return blurringOverlayStyleManager
         } else {
-            let opaqueOverlayAnimator = OpaqueOverlayAnimator(color: color)
-            self.updateDependencies(of: opaqueOverlayAnimator)
-            return opaqueOverlayAnimator
+            let translucentOverlayStyleManager = TranslucentOverlayStyleManager(color: color)
+            self.updateDependencies(of: translucentOverlayStyleManager)
+            return translucentOverlayStyleManager
         }
     }
 }

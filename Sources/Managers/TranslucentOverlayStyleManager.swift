@@ -21,26 +21,31 @@
 // THE SOFTWARE.
 
 import Foundation
-
-class OpaqueOverlayAnimator: OverlayAnimator {
+class TranslucentOverlayStyleManager: OverlayStyleManager {
+    // MARK: Properties
     weak var overlayView: OverlayView?
-    var subOverlay: UIView?
 
-    fileprivate var cutoutMaskLayer = CAShapeLayer()
-    fileprivate var fullMaskLayer = CAShapeLayer()
-    fileprivate lazy var overlayLayer: CALayer = {
+    // MARK: Private Properties
+    private var onGoingTransition = false
+    private let color: UIColor
+
+    // MARK: Layer Mask related properties
+    private var cutoutMaskLayer = CAShapeLayer()
+    private var fullMaskLayer = CAShapeLayer()
+    private lazy var overlayLayer: CALayer = {
         return self.createSublayer()
     }()
 
-    private var onGoingTransition = false
-
-    private let color: UIColor
-
+    // MARK: Initialization
     init(color: UIColor) {
         self.color = color
     }
 
+    // MARK: OverlayStyleManager
     func viewWillTransition() {
+        // Basically removes everything except the overlay itself.
+        // Background color duty, handled by the sublayer, it transfered to
+        // the overlay itself.
         guard let overlay = overlayView else { return }
 
         onGoingTransition = true
@@ -51,6 +56,7 @@ class OpaqueOverlayAnimator: OverlayAnimator {
     }
 
     func viewDidTransition() {
+        // Back to business, recreating the sublayer.
         guard let overlay = overlayView else { return }
 
         onGoingTransition = false
@@ -73,9 +79,7 @@ class OpaqueOverlayAnimator: OverlayAnimator {
         overlay.alpha = show ? 0.0 : 1.0
         overlay.backgroundColor = color
 
-        if !show {
-            self.overlayLayer.removeFromSuperlayer()
-        }
+        if !show { self.overlayLayer.removeFromSuperlayer() }
 
         UIView.animate(withDuration: duration, animations: {
             overlay.alpha = show ? 1.0 : 0.0
@@ -117,7 +121,8 @@ class OpaqueOverlayAnimator: OverlayAnimator {
         CATransaction.commit()
     }
 
-    func updateCutoutPath() {
+    // MARK: Private methods
+    private func updateCutoutPath() {
         cutoutMaskLayer.removeFromSuperlayer()
         fullMaskLayer.removeFromSuperlayer()
 
@@ -137,7 +142,7 @@ class OpaqueOverlayAnimator: OverlayAnimator {
         overlayLayer.mask = maskLayer
     }
 
-    func configureCutoutMask(usingCutoutPath cutoutPath: UIBezierPath) {
+    private func configureCutoutMask(usingCutoutPath cutoutPath: UIBezierPath) {
         cutoutMaskLayer = CAShapeLayer()
         cutoutMaskLayer.name = "cutoutMaskLayer"
         cutoutMaskLayer.fillRule = kCAFillRuleEvenOdd
@@ -150,7 +155,7 @@ class OpaqueOverlayAnimator: OverlayAnimator {
         cutoutMaskLayer.path = cutoutMaskLayerPath.cgPath
     }
 
-    func configureFullMask() {
+    private func configureFullMask() {
         fullMaskLayer = CAShapeLayer()
         fullMaskLayer.name = "fullMaskLayer"
         fullMaskLayer.fillRule = kCAFillRuleEvenOdd
@@ -163,7 +168,7 @@ class OpaqueOverlayAnimator: OverlayAnimator {
         fullMaskLayer.path = fullMaskLayerPath.cgPath
     }
 
-    func createSublayer() -> CALayer {
+    private func createSublayer() -> CALayer {
         let layer = CALayer()
         layer.name = OverlayView.sublayerName
 

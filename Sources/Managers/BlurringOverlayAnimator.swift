@@ -30,10 +30,7 @@ class BlurringOverlayAnimator: OverlayAnimator {
 
             overlayView?.addSubview(rotationOverlay!)
 
-            rotationOverlay?.topAnchor.constraint(equalTo: overlayView!.topAnchor).isActive = true
-            rotationOverlay?.leadingAnchor.constraint(equalTo: overlayView!.leadingAnchor).isActive = true
-            rotationOverlay?.trailingAnchor.constraint(equalTo: overlayView!.trailingAnchor).isActive = true
-            rotationOverlay?.bottomAnchor.constraint(equalTo: overlayView!.bottomAnchor).isActive = true
+            rotationOverlay?.fillSuperview()
 
             rotationOverlay?.isHidden = true
         }

@@ -73,7 +73,6 @@ class CoachMarksViewController: UIViewController {
 
     // MARK: - Private properties
     fileprivate var onGoingSizeChange = false
-    fileprivate let mainViewsLayoutHelper = MainViewsLayoutHelper()
 
     // MARK: - Lifecycle
     convenience init(coachMarkDisplayManager: CoachMarkDisplayManager,
@@ -101,8 +100,7 @@ class CoachMarksViewController: UIViewController {
     // MARK: - Private Methods
     fileprivate func addOverlayView() {
         instructionsRootView.addSubview(overlayManager.overlayView)
-        let constraints = mainViewsLayoutHelper.fullSizeConstraints(for: overlayManager.overlayView)
-        instructionsRootView.addConstraints(constraints)
+        overlayManager.overlayView.fillSuperview()
     }
 
     /// Add a the "Skip view" to the main view container.

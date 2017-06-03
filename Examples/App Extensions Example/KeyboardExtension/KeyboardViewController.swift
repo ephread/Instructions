@@ -111,14 +111,21 @@ class KeyboardViewController: UIInputViewController, CoachMarksControllerDataSou
         let nib = UINib(nibName: "Keyboard", bundle: nil)
         // instantiate the view
         keyboardView = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
-
+        keyboardView.translatesAutoresizingMaskIntoConstraints = false
+        
         // add the interface to the main view
         view.addSubview(keyboardView)
+        keyboardView.fillSuperview()
+    }
+}
 
-        keyboardView.translatesAutoresizingMaskIntoConstraints = false
+extension UIView {
+    func fillSuperview() {
+        guard let superview = superview else { return }
 
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[keyboardView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["keyboardView" : keyboardView]))
-
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[keyboardView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["keyboardView" : keyboardView]))
+        self.topAnchor.constraint(equalTo: superview.topAnchor).isActive = true
+        self.bottomAnchor.constraint(equalTo: superview.bottomAnchor).isActive = true
+        self.leadingAnchor.constraint(equalTo: superview.leadingAnchor).isActive = true
+        self.trailingAnchor.constraint(equalTo: superview.trailingAnchor).isActive = true
     }
 }

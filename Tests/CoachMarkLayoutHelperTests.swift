@@ -93,7 +93,8 @@ class CoachMarkLayoutHelperTests: XCTestCase {
         XCTAssertTrue(constraintsToTest[2] != constraintsToTest[3])
     }
 
-    private func constraints(using layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight) -> [[NSLayoutConstraint]] {
+    private func constraints(using layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight)
+    -> [[NSLayoutConstraint]] {
         var coachMark1 = CoachMark()
 
         coachMark1.cutoutPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -135,19 +136,23 @@ class CoachMarkLayoutHelperTests: XCTestCase {
         parentView.addSubview(coachMarkView4)
 
         let constraints1 =
-            layoutHelper.constraints(for: coachMarkView1, coachMark: coachMark1, parentView: parentView,
+            layoutHelper.constraints(for: coachMarkView1, coachMark: coachMark1,
+                                     parentView: parentView,
                                      layoutDirection: layoutDirection)
 
         let constraints2 =
-            layoutHelper.constraints(for: coachMarkView2, coachMark: coachMark2, parentView: parentView,
+            layoutHelper.constraints(for: coachMarkView2, coachMark: coachMark2,
+                                     parentView: parentView,
                                      layoutDirection: layoutDirection)
 
         let constraints3 =
-            layoutHelper.constraints(for: coachMarkView3, coachMark: coachMark3, parentView: parentView,
+            layoutHelper.constraints(for: coachMarkView3, coachMark: coachMark3,
+                                     parentView: parentView,
                                      layoutDirection: layoutDirection)
 
         let constraints4 =
-            layoutHelper.constraints(for: coachMarkView4, coachMark: coachMark4, parentView: parentView,
+            layoutHelper.constraints(for: coachMarkView4, coachMark: coachMark4,
+                                     parentView: parentView,
                                      layoutDirection: layoutDirection)
 
         return [constraints1, constraints2, constraints3, constraints4]

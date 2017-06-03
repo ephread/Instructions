@@ -1,6 +1,6 @@
-// MainViewsLayoutHelper.swift
+// Extensions.swift
 //
-// Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2017 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,23 +22,13 @@
 
 import UIKit
 
-// swiftlint:disable line_length
-class MainViewsLayoutHelper {
-    func fullSizeConstraints(for view: UIView) -> [NSLayoutConstraint] {
-        var constraints = [NSLayoutConstraint]()
+extension UIView {
+    internal func fillSuperview() {
+        guard let superview = superview else { return }
 
-        constraints += NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|[view]|",
-            options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["view": view]
-        )
-
-        constraints += NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|[view]|",
-            options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["view": view]
-        )
-
-        return constraints
+        self.topAnchor.constraint(equalTo: superview.topAnchor).isActive = true
+        self.bottomAnchor.constraint(equalTo: superview.bottomAnchor).isActive = true
+        self.leadingAnchor.constraint(equalTo: superview.leadingAnchor).isActive = true
+        self.trailingAnchor.constraint(equalTo: superview.trailingAnchor).isActive = true
     }
 }

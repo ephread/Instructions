@@ -1,7 +1,7 @@
 // CoachMarkBodyDefaultViewHelper.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
-//                          Esteban Soto <esteban.soto.dev@gmail.com>
+// Copyright (c) 2015 - 2017 Frédéric Maquin <fred@ephread.com>
+//                           Esteban Soto <esteban.soto.dev@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,6 @@
 
 import UIKit
 
-// swiftlint:disable line_length
 // MARK: - Main Class
 /// A concrete implementation of the coach mark body view and the
 /// default one provided by the library.
@@ -39,10 +38,12 @@ open class CoachMarkBodyDefaultViewHelper {
     }
 
     func makeVerticalConstraints(for hint: UITextView) -> [NSLayoutConstraint] {
-        return NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-(5)-[hint]-(5)-|", options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["hint": hint]
-        )
+        guard let superview = hint.superview else { return [] }
+
+        return [
+            hint.topAnchor.constraint(equalTo: superview.topAnchor, constant: 5),
+            superview.bottomAnchor.constraint(equalTo: hint.bottomAnchor, constant: 5)
+        ]
     }
 
     func configureBackground(_ background: UIView, addTo parent: UIView) {
@@ -50,14 +51,7 @@ open class CoachMarkBodyDefaultViewHelper {
         background.isUserInteractionEnabled = false
 
         parent.addSubview(background)
-
-        var constraints = [NSLayoutConstraint]()
-
-        constraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[background]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["background": background])
-
-        constraints += NSLayoutConstraint.constraints(withVisualFormat: "H:|[background]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["background": background])
-
-        parent.addConstraints(constraints)
+        background.fillSuperview()
     }
 
     func configureHint(_ hint: UITextView, addTo parent: UIView) {
@@ -74,10 +68,8 @@ open class CoachMarkBodyDefaultViewHelper {
     func configureSimpleHint(_ hint: UITextView, addTo parent: UIView) {
         configureHint(hint, addTo: parent)
 
-        parent.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "H:|-(10)-[hintLabel]-(10)-|", options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["hintLabel": hint]
-        ))
+        hint.leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: 10).isActive = true
+        parent.trailingAnchor.constraint(equalTo: hint.trailingAnchor, constant: 10).isActive = true
     }
 
     func configureNext(_ next: UILabel, addTo parent: UIView) {
@@ -87,11 +79,7 @@ open class CoachMarkBodyDefaultViewHelper {
         configureTextPropertiesOfNext(next)
 
         parent.addSubview(next)
-
-        parent.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|[nextLabel]|", options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["nextLabel": next]
-        ))
+        next.fillSuperviewVertically()
     }
 
     func configureSeparator(_ separator: UIView, addTo parent: UIView) {
@@ -101,10 +89,10 @@ open class CoachMarkBodyDefaultViewHelper {
 
         parent.addSubview(separator)
 
-        parent.addConstraints(NSLayoutConstraint.constraints(
-            withVisualFormat: "V:|-(15)-[separator]-(15)-|", options: NSLayoutFormatOptions(rawValue: 0),
-            metrics: nil, views: ["separator": separator]
-        ))
+        separator.topAnchor.constraint(equalTo: parent.topAnchor,
+                                       constant: 15).isActive = true
+        parent.bottomAnchor.constraint(equalTo: separator.bottomAnchor,
+                                       constant: 15).isActive = true
     }
 
     private func configureTextPropertiesOfHint(_ hint: UITextView) {

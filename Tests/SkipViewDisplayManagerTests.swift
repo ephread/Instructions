@@ -152,5 +152,5 @@ class ConstraintsMockedDataSource: MockedDataSource {
 }
 
 private func makeConstraint(skipView: UIView, inParent parentView: UIView) -> NSLayoutConstraint {
-    return NSLayoutConstraint(item: skipView, attribute: .bottom, relatedBy: .equal, toItem: parentView, attribute: .bottom, multiplier: 1, constant: 0)
+    return skipView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor)
 }

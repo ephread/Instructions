@@ -135,7 +135,7 @@ class CoachMarkView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
 
         self.addSubview(bodyUIView)
-        self.addConstraints(coachMarkLayoutHelper.horizontalConstraints(forBody: bodyUIView))
+        self.addConstraints(bodyUIView.makeConstraintToFillSuperviewHorizontally())
 
         if let arrowUIView = arrowUIView, let arrowOrientation = self.arrowOrientation {
             self.addSubview(arrowUIView)
@@ -150,8 +150,8 @@ class CoachMarkView: UIView {
                 withProperties: (orientation: arrowOrientation, verticalArrowOffset: arrowOffset)
             ))
         } else {
-            self.addConstraint(coachMarkLayoutHelper.topConstraint(forBody: bodyUIView, in: self))
-            self.addConstraint(coachMarkLayoutHelper.topConstraint(forBody: bodyUIView, in: self))
+            self.addConstraint(bodyUIView.topAnchor.constraint(equalTo: topAnchor))
+            self.addConstraint(bodyUIView.bottomAnchor.constraint(equalTo: bottomAnchor))
         }
     }
 }

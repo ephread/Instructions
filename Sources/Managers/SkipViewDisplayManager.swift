@@ -100,13 +100,15 @@ class SkipViewDisplayManager {
 
     private func defaultConstraints(for skipView: CoachMarkSkipView, in parentView: UIView)
     -> [NSLayoutConstraint] {
+        guard let skipView = skipView as? UIView else {
+            print("Skip View is not an UIVIew, aborting.")
+            return []
+        }
+
         var constraints = [NSLayoutConstraint]()
 
-        constraints.append(NSLayoutConstraint(
-            item: skipView, attribute: .trailing, relatedBy: .equal,
-            toItem: parentView, attribute: .trailing,
-            multiplier: 1, constant: -10
-        ))
+        constraints.append(skipView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor,
+                                                              constant: -10))
 
         var topConstant: CGFloat = 0.0
 
@@ -118,11 +120,8 @@ class SkipViewDisplayManager {
 
         topConstant += 2
 
-        constraints.append(NSLayoutConstraint(
-            item: skipView, attribute: .top, relatedBy: .equal,
-            toItem: parentView, attribute: .top,
-            multiplier: 1, constant: topConstant
-        ))
+        constraints.append(skipView.topAnchor.constraint(equalTo: parentView.topAnchor,
+                                                         constant: topConstant))
 
         return constraints
     }

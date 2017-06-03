@@ -177,22 +177,18 @@ class CoachMarkDisplayManager {
                 let constant = -(parentView.frame.size.height -
                                  cutoutPath.bounds.origin.y + offset)
 
-                let coachMarkViewConstraint = NSLayoutConstraint(
-                    item: coachMarkView, attribute: .bottom, relatedBy: .equal,
-                    toItem: parentView, attribute: .bottom,
-                    multiplier: 1, constant: constant
-                )
+                let coachMarkViewConstraint =
+                    coachMarkView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor,
+                                                          constant: constant)
 
                 parentView.addConstraint(coachMarkViewConstraint)
             } else {
                 let constant = (cutoutPath.bounds.origin.y +
                                 cutoutPath.bounds.size.height) + offset
 
-                let coachMarkViewConstraint = NSLayoutConstraint(
-                    item: coachMarkView, attribute: .top, relatedBy: .equal,
-                    toItem: parentView, attribute: .top,
-                    multiplier: 1, constant: constant
-                )
+                let coachMarkViewConstraint =
+                    coachMarkView.topAnchor.constraint(equalTo: parentView.topAnchor,
+                                                       constant: constant)
 
                 parentView.addConstraint(coachMarkViewConstraint)
             }
@@ -203,10 +199,8 @@ class CoachMarkDisplayManager {
 
             parentView.addConstraints(constraints)
             overlayView.cutoutPath = cutoutPath
-            //overlayView.update(cutoutPath: cutoutPath)
         } else {
             overlayView.cutoutPath = nil
-            //overlayView.update(cutoutPath: nil)
         }
     }
 }

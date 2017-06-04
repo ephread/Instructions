@@ -276,6 +276,51 @@
 			path = Internal;
 			sourceTree = "<group>";
 		};
+		B6CCD0F31EE40F2C00D02022 /* Instructions */ = {
+			isa = PBXGroup;
+			children = (
+				C6D4D0E41D592D9800F14FC5 /* Core */,
+				C61458B51BBB0201006EB4F2 /* Extra */,
+				C62DBF481D53BE2500AFAAE2 /* Helpers */,
+				C633C4BB1D539C460025FAE9 /* Managers */,
+				C64FB33C1BB6CDBB0081E5B6 /* Protocols */,
+				C64FB33B1BB6CC5B0081E5B6 /* Supporting Files */,
+				C633C4B81D538D4A0025FAE9 /* Views */,
+				C64FB3531BB747590081E5B6 /* Instructions.swift */,
+			);
+			path = Instructions;
+			sourceTree = "<group>";
+		};
+		B6CCD0F41EE40FF100D02022 /* InstructionsTests */ = {
+			isa = PBXGroup;
+			children = (
+				B6CCD0F61EE4101600D02022 /* Core */,
+				C6A1304F1DCFB4A100E00E75 /* Helpers */,
+				C6A1304E1DCFB47E00E00E75 /* Managers */,
+				B6CCD0F51EE4100100D02022 /* Supporting Files */,
+			);
+			name = InstructionsTests;
+			path = InstructionsTests;
+			sourceTree = "<group>";
+		};
+		B6CCD0F51EE4100100D02022 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C64FB3271BB6CB680081E5B6 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B6CCD0F61EE4101600D02022 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				C632DDC31DD0CAE50052DBF8 /* DataSource */,
+				C63524301BC02AD10054EA0A /* CoachMarkTests.swift */,
+				C63FC2381BC91D1A00132132 /* CoachMarksControllerTests.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 		C61458B41BBB01F2006EB4F2 /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -388,14 +433,7 @@
 		C64FB3211BB6CB5C0081E5B6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				C6D4D0E41D592D9800F14FC5 /* Core */,
-				C61458B51BBB0201006EB4F2 /* Extra */,
-				C62DBF481D53BE2500AFAAE2 /* Helpers */,
-				C633C4BB1D539C460025FAE9 /* Managers */,
-				C64FB33C1BB6CDBB0081E5B6 /* Protocols */,
-				C64FB33B1BB6CC5B0081E5B6 /* Supporting Files */,
-				C633C4B81D538D4A0025FAE9 /* Views */,
-				C64FB3531BB747590081E5B6 /* Instructions.swift */,
+				B6CCD0F31EE40F2C00D02022 /* Instructions */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -403,11 +441,7 @@
 		C64FB3261BB6CB680081E5B6 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				C6A130561DCFECE900E00E75 /* Controllers */,
-				C6A1304F1DCFB4A100E00E75 /* Helpers */,
-				C6A1304E1DCFB47E00E00E75 /* Managers */,
-				C63524301BC02AD10054EA0A /* CoachMarkTests.swift */,
-				C64FB3271BB6CB680081E5B6 /* Info.plist */,
+				B6CCD0F41EE40FF100D02022 /* InstructionsTests */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -449,15 +483,6 @@
 				C632DDBC1DD095F90052DBF8 /* CoachMarkLayoutHelperTests.swift */,
 			);
 			path = Helpers;
-			sourceTree = "<group>";
-		};
-		C6A130561DCFECE900E00E75 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				C632DDC31DD0CAE50052DBF8 /* DataSource */,
-				C63FC2381BC91D1A00132132 /* CoachMarksControllerTests.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		C6D4D0E41D592D9800F14FC5 /* Core */ = {
@@ -904,7 +929,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "Sources/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Sources/Instructions/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
@@ -924,7 +949,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Sources/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Sources/Instructions/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
@@ -938,7 +963,7 @@
 		C64FB3011BB6CA8A0081E5B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = "Tests/InstructionsTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.InstructionsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -949,7 +974,7 @@
 		C64FB3021BB6CA8A0081E5B6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = "Tests/InstructionsTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.InstructionsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -290,8 +290,8 @@ extension CoachMarksViewController {
 extension CoachMarksViewController {
 #if INSTRUCTIONS_APP_EXTENSIONS
     /// Will attach the controller as a child of the given view controller. This will
-    /// allow the coach mark controller to respond to size changes, though
-    /// `instructionsRootView` will be a subview of `UIWindow`.
+    /// allow the coach mark controller to respond to size changes.
+    /// `instructionsRootView` will be a subview of `parentViewController.view`.
     ///
     /// - Parameter parentViewController: the controller of which become a child
     func attach(to parentViewController: UIViewController) {
@@ -324,11 +324,11 @@ extension CoachMarksViewController {
         deregisterFromSystemEventChanges()
     }
 #else
-    /// Will attach the controller as a child of the given view controller. This will
-    /// allow the coach mark controller to respond to size changes, though
-    /// `instructionsRootView` will be a subview of `UIWindow`.
+    /// Will attach the controller as the rootViewController of a given window. This will
+    /// allow the coach mark controller to respond to size changes and present itself
+    /// above evrything.
     ///
-    /// - Parameter parentViewController: the controller of which become a child
+    /// - Parameter window: the window holding the controller
     func attach(to window: UIWindow) {
         window.windowLevel = overlayManager.windowLevel
 

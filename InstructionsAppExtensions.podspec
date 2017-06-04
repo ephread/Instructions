@@ -3,7 +3,7 @@ Pod::Spec.new do |spec|
 
   spec.name             = "InstructionsAppExtensions"
   spec.version          = "1.0.0-beta.1"
-  spec.summary          = "[App Extensions] Create walkthroughs and guided tours (with coach marks) in a simple way, using Swift."
+  spec.summary          = "[App Extensions Version] Create walkthroughs and guided tours (with coach marks) in a simple way, using Swift."
   spec.homepage         = "https://github.com/ephread/Instructions"
   spec.license          = 'MIT'
   spec.author           = { "Frédéric Maquin" => "fred@ephread.com" }

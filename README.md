@@ -28,8 +28,6 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 ⚠️ **Until Instructions reaches 1.0.0, the API is subject to change.
      Please see the Features section for more information about the roadmap.**
 
-[quick guide]: https://github.com/ephread/Instructions/tree/master/Documentation/MigratingFromSwift2ToSwift3.md
-
 ## Features
 - [x] [Customizable highlight system](#advanced-usage)
 - [x] [Customizable views](#providing-custom-views)
@@ -419,7 +417,7 @@ target 'Instructions App Extensions Example' do
 end
 
 target 'Keyboard Extension' do
-  pod 'Instructions-AppExtensions', '~> 1.0.0'
+  pod 'InstructionsAppExtensions', '~> 1.0.0'
 end
 ```
 

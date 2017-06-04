@@ -3,12 +3,13 @@ Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 However, until it reaches 1.0.0, some breaking changes are to be expected.
 
-## 1.0.0-beta.1
-Released on 2017-06-XX.
+## [1.0.0-beta.1](https://github.com/ephread/Instructions/releases/tag/1.0.0-beta.1)
+Released on 2017-06-04.
 
 ### Added
 - Support for Swift 3.
 - Ability to choose the `UIWindowLevel` for the overlay.
+- Ability to prepare Instructions for frame changes manually.
 
 ### Changed
 - Renamed a number of methods to make them conform to the [API Design Guidelines]

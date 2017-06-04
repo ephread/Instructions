@@ -60,7 +60,7 @@ class TestFlowViewController: ProfileViewController {
         //self.coachMarksController.flow.showNext()
 
         self.coachMarksController.stop(immediately: true)
-        self.coachMarksController.startOn(self)
+        self.coachMarksController.start(on: self)
     }
 }
 

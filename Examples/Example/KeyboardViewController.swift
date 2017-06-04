@@ -74,7 +74,7 @@ internal class KeyboardViewController: UIViewController {
     }
 
     func startInstructions() {
-        self.coachMarksController.startOn(self)
+        self.coachMarksController.start(on: self)
     }
 
     @objc func keyboardWillShow() {

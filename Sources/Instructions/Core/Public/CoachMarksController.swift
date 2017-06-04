@@ -97,7 +97,7 @@ public extension CoachMarksController {
     /// Start displaying the coach marks.
     ///
     /// - Parameter parentViewController: View Controller to which attach self.
-    public func startOn(_ parentViewController: UIViewController) {
+    public func start(on parentViewController: UIViewController) {
         guard let dataSource = self.dataSource else {
             print("startOn: snap! you didn't setup any datasource, the" +
                   "coach mark manager won't do anything.")

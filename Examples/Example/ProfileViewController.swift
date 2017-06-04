@@ -65,7 +65,7 @@ internal class ProfileViewController: UIViewController {
     }
 
     func startInstructions() {
-        self.coachMarksController.startOn(self)
+        self.coachMarksController.start(on: self)
     }
 
 

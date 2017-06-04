@@ -299,7 +299,6 @@
 				C6A1304E1DCFB47E00E00E75 /* Managers */,
 				B6CCD0F51EE4100100D02022 /* Supporting Files */,
 			);
-			name = InstructionsTests;
 			path = InstructionsTests;
 			sourceTree = "<group>";
 		};
@@ -789,7 +788,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Supporting Files/InfoAppExtensions.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Instructions/Supporting Files/InfoAppExtensions.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS_APP_EXTENSIONS";
@@ -810,7 +809,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Supporting Files/InfoAppExtensions.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Instructions/Supporting Files/InfoAppExtensions.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS_APP_EXTENSIONS";

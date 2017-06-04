@@ -37,7 +37,7 @@ class DataSourceNumberOfCoachMarksTest: DataSourceBaseTest,
     func testNumberOfCoachMarksIsCalled() {
         self.delegateEndExpectation = self.expectation(description: "numberOfCoachMarks")
 
-        self.coachMarksController.startOn(self.parentController)
+        self.coachMarksController.start(on: self.parentController)
 
         self.waitForExpectations(timeout: 2) { error in
             if let error = error {

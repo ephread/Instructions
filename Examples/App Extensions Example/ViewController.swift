@@ -44,7 +44,7 @@ class ViewController: UIViewController, CoachMarksControllerDataSource {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.coachMarksController.startOn(self)
+        self.coachMarksController.start(on: self)
     }
 
     override func didReceiveMemoryWarning() {

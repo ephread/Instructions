@@ -49,7 +49,7 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     func testThatDidFinishShowingIsCalled() {
         self.delegateEndExpectation = self.expectation(description: "DidFinishShowing")
 
-        self.coachMarksController.startOn(self.parentController)
+        self.coachMarksController.start(on: self.parentController)
         self.coachMarksController.stop()
 
         self.waitForExpectations(timeout: 10) { error in

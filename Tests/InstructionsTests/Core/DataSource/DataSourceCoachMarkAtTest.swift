@@ -40,7 +40,7 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
     func testThatCoachMarkAtIsCalledAtLeastTheNumberOfExpectedTimes() {
         self.delegateEndExpectation = self.expectation(description: "CoachMarkA")
 
-        self.coachMarksController.startOn(self.parentController)
+        self.coachMarksController.start(on: self.parentController)
 
         self.waitForExpectations(timeout: 2) { error in
             if let error = error {

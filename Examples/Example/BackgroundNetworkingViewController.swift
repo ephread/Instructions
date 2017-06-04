@@ -87,7 +87,7 @@ extension BackgroundNetworkingViewController: URLSessionDownloadDelegate {
 
         DispatchQueue.main.async {
             if !self.coachMarksController.flow.started {
-                self.coachMarksController.startOn(self)
+                self.coachMarksController.start(on: self)
             } else {
                 self.coachMarksController.flow.resume()
             }

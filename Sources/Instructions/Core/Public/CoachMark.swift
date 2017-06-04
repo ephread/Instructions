@@ -22,6 +22,7 @@
 
 import UIKit
 
+// codebeat:disable[TOO_MANY_IVARS]
 /// This structure handle the parametrization of a given coach mark.
 /// It doesn't provide any clue about the way it will look, however.
 public struct CoachMark {

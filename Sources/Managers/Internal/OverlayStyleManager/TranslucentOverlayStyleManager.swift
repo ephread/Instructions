@@ -67,7 +67,7 @@ class TranslucentOverlayStyleManager: OverlayStyleManager {
         overlay.layer.addSublayer(overlayLayer)
         updateCutoutPath()
 
-        overlay.backgroundColor = color
+        overlay.backgroundColor = UIColor.clear
     }
 
     func showOverlay(_ show: Bool, withDuration duration: TimeInterval,

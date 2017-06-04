@@ -59,9 +59,13 @@ class CoachMarksViewController: UIViewController {
 
     ///
     var instructionsRootView: InstructionsRootView {
+#if INSTRUCTIONS_APP_EXTENSIONS
+        return appExtensionsRootView
+#else
         //swiftlint:disable force_cast
         return view as! InstructionsRootView
         //swiftlint:enable force_cast
+#endif
     }
 
     ///
@@ -76,6 +80,15 @@ class CoachMarksViewController: UIViewController {
     // MARK: - Private properties
     fileprivate var onGoingSizeChange = false
 
+#if INSTRUCTIONS_APP_EXTENSIONS
+    fileprivate lazy var appExtensionsRootView: InstructionsRootView = {
+        let view = InstructionsRootView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        return view
+    }()
+#endif
+
     // MARK: - Lifecycle
     convenience init(coachMarkDisplayManager: CoachMarkDisplayManager,
                      skipViewDisplayManager: SkipViewDisplayManager) {
@@ -86,7 +99,11 @@ class CoachMarksViewController: UIViewController {
     }
 
     override func loadView() {
+#if INSTRUCTIONS_APP_EXTENSIONS
+        view = UIView()
+#else
         view = InstructionsRootView()
+#endif
         view.backgroundColor = UIColor.clear
     }
 
@@ -100,6 +117,15 @@ class CoachMarksViewController: UIViewController {
     }
 
     // MARK: - Private Methods
+
+#if INSTRUCTIONS_APP_EXTENSIONS
+    fileprivate func addRootView(to window: UIWindow) {
+        window.addSubview(instructionsRootView)
+        instructionsRootView.fillSuperview()
+        instructionsRootView.backgroundColor = UIColor.clear
+    }
+#endif
+
     fileprivate func addOverlayView() {
         instructionsRootView.addSubview(overlayManager.overlayView)
         overlayManager.overlayView.fillSuperview()
@@ -262,6 +288,42 @@ extension CoachMarksViewController {
 
 // MARK: - Extension: Controller Containment
 extension CoachMarksViewController {
+#if INSTRUCTIONS_APP_EXTENSIONS
+    /// Will attach the controller as a child of the given view controller. This will
+    /// allow the coach mark controller to respond to size changes, though
+    /// `instructionsRootView` will be a subview of `UIWindow`.
+    ///
+    /// - Parameter parentViewController: the controller of which become a child
+    func attach(to parentViewController: UIViewController) {
+        guard let window = parentViewController.view?.window else {
+            print("attachToViewController: Instructions could not be properly" +
+                "attached to the window, did you call `startOn` inside" +
+                "`viewDidLoad` instead of `ViewDidAppear`?")
+
+            return
+        }
+
+        parentViewController.addChildViewController(self)
+        parentViewController.view.addSubview(self.view)
+
+        registerForSystemEventChanges()
+        addRootView(to: window)
+        addOverlayView()
+
+        self.didMove(toParentViewController: parentViewController)
+
+        window.layoutIfNeeded()
+    }
+
+    /// Detach the controller from its parent view controller.
+    func detachFromWindow() {
+        self.instructionsRootView.removeFromSuperview()
+        self.willMove(toParentViewController: nil)
+        self.view.removeFromSuperview()
+        self.removeFromParentViewController()
+        deregisterFromSystemEventChanges()
+    }
+#else
     /// Will attach the controller as a child of the given view controller. This will
     /// allow the coach mark controller to respond to size changes, though
     /// `instructionsRootView` will be a subview of `UIWindow`.
@@ -273,18 +335,6 @@ extension CoachMarksViewController {
         registerForSystemEventChanges()
         addOverlayView()
 
-        // If we're in the background we'll manually lay out the view.
-        //
-        // `instructionsRootView` is not laid out automatically in the
-        // background, likely because it's added to the window.
-        #if !INSTRUCTIONS_APP_EXTENSIONS
-            if UIApplication.shared.applicationState == .background {
-                self.view.layoutIfNeeded()
-            }
-        #else
-            self.view.layoutIfNeeded()
-        #endif
-
         window.rootViewController = self
         window.isHidden = false
     }
@@ -295,6 +345,7 @@ extension CoachMarksViewController {
         self.view.window?.isHidden = true
         self.view.window?.rootViewController = nil
     }
+#endif
 }
 
 // MARK: - Private Extension: User Events

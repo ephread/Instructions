@@ -43,7 +43,7 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 - [ ] Multiple coach marks support
 
 ## Requirements
-- Xcode 8 / Swift 3 (use `master`)
+- Xcode 8 or 9 / Swift 3 or 4 (`1.0.0-beta.1`)
 - iOS 9.0+
 
 ## Asking Questions / Contributing

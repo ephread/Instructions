@@ -30,7 +30,7 @@ internal class CustomCoachMarkArrowView : UIView, CoachMarkArrowView {
     var bottomPlateImage = UIImage(named: "coach-mark-bottom-plate")
     var plate = UIImageView()
 
-    var highlighted: Bool = false
+    var isHighlighted: Bool = false
 
     // MARK: - Private properties
     fileprivate var column = UIView()

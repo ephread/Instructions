@@ -29,6 +29,8 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
 
     var delegateEndExpectation: XCTestExpectation? = nil
     var numberOfTimesCoachMarkAtWasCalled = 0
+    var numberOfTimesCoachMarkViewsAtWasCalled = 0
+    var numberOfTimesConstraintsForSkipViewWasCalled = 0
 
     override func setUp() {
         super.setUp()
@@ -38,7 +40,7 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
     }
 
     func testThatCoachMarkAtIsCalledAtLeastTheNumberOfExpectedTimes() {
-        self.delegateEndExpectation = self.expectation(description: "CoachMarkA")
+        self.delegateEndExpectation = self.expectation(description: "CoachMarkAt")
 
         self.coachMarksController.start(on: self.parentController)
 
@@ -49,11 +51,33 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
         }
     }
 
+    func testThatCoachMarkViewsAtIsCalledAtLeastTheNumberOfExpectedTimes() {
+        self.delegateEndExpectation = self.expectation(description: "CoachMarkViewsAt")
+
+        self.coachMarksController.start(on: self.parentController)
+
+        self.waitForExpectations(timeout: 2) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    func testThatConstraintsForSkipViewIsCalledAtLeastTheNumberOfExpectedTimes() {
+        self.delegateEndExpectation = self.expectation(description: "ConstraintsForSkipView")
+
+        self.coachMarksController.start(on: self.parentController)
+
+        self.waitForExpectations(timeout: 2) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
 
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 4
     }
-
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               coachMarkAt index: Int) -> CoachMark {
@@ -64,13 +88,15 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark)
-        -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+            numberOfTimesCoachMarkViewsAtWasCalled += 1
             return (bodyView: CoachMarkBodyDefaultView(), arrowView: nil)
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               constraintsForSkipView skipView: UIView,
                               inParent parentView: UIView) -> [NSLayoutConstraint]? {
+        numberOfTimesConstraintsForSkipViewWasCalled += 1
         return nil
     }
 
@@ -88,8 +114,20 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
             return
         }
 
-        if (delegateEndExpectation.description == "CoachMarkA") {
+        if (delegateEndExpectation.description == "CoachMarkAt") {
             if numberOfTimesCoachMarkAtWasCalled >= 4 {
+                delegateEndExpectation.fulfill()
+            } else {
+                XCTFail()
+            }
+        } else if (delegateEndExpectation.description == "CoachMarkViewsAt") {
+            if numberOfTimesCoachMarkViewsAtWasCalled >= 4 {
+                delegateEndExpectation.fulfill()
+            } else {
+                XCTFail()
+            }
+        } else if (delegateEndExpectation.description == "ConstraintsForSkipView") {
+            if numberOfTimesCoachMarkViewsAtWasCalled >= 1 {
                 delegateEndExpectation.fulfill()
             } else {
                 XCTFail()

@@ -27,5 +27,5 @@ public protocol CoachMarkArrowView : class {
     /// A method to change the arrow highlighted state.
     /// If you feel the arrow should mirror the state of the "body view",
     /// You will most likely change the background color of the view here.
-    var highlighted: Bool { set get }
+    var isHighlighted: Bool { set get }
 }

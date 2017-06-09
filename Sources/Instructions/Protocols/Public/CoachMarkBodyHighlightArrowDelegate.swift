@@ -30,6 +30,6 @@ public protocol CoachMarkBodyHighlightArrowDelegate : class {
     /// Set wethe ror not the arrow should get in its
     /// highlighted state.
     ///
-    /// - Parameters highlighted: `true` if the arrow should be highlighted, `false` otherwise.
+    /// - Parameters isHighlighted: `true` if the arrow should be highlighted, `false` otherwise.
     func highlightArrow(_ highlighted: Bool)
 }

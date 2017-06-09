@@ -59,17 +59,43 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
         }
     }
 
+    func testThatCoachMarkControllerAttachItselfToParent() {
+        self.coachMarksController.start(on: self.parentController)
+
+        let attached = (coachMarksController.overlay.overlayView.window != nil &&
+                        coachMarksController.overlay.overlayView.window != mockedWindow)
+
+        XCTAssertTrue(attached)
+    }
+
     func coachMarksController(_ coachMarksController: CoachMarksController, didEndShowingBySkipping skipped: Bool) {
         guard let delegateEndExpectation = self.delegateEndExpectation else {
             XCTFail()
             return
         }
 
-        if (delegateEndExpectation.description == "DidFinishShowing") {
+        if (delegateEndExpectation.description == "Detachment") {
+            XCTAssertTrue(coachMarksController.overlay.overlayView.window == nil)
+
+            delegateEndExpectation.fulfill()
+        } else if (delegateEndExpectation.description == "DidFinishShowing") {
             XCTAssertTrue(true)
             delegateEndExpectation.fulfill()
         } else {
             XCTFail()
+        }
+    }
+
+    func testThatCoachMarkControllerDetachItselfFromParent() {
+        self.delegateEndExpectation = self.expectation(description: "Detachment")
+
+        self.coachMarksController.start(on: self.parentController)
+        self.coachMarksController.stop()
+
+        self.waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
         }
     }
 }

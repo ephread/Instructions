@@ -157,7 +157,7 @@ class CoachMarkView: UIView {
 // MARK: - Protocol conformance | CoachMarkBodyHighlightArrowDelegate
 extension CoachMarkView: CoachMarkBodyHighlightArrowDelegate {
     func highlightArrow(_ highlighted: Bool) {
-        self.arrowView?.highlighted = highlighted
+        self.arrowView?.isHighlighted = highlighted
     }
 }
 

@@ -94,16 +94,16 @@
 
 /* Begin PBXFileReference section */
 		C60FA0AC1D29A2770055B60B /* Instructions App Extensions Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Instructions App Extensions Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C60FA0C21D29A3580055B60B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = "App Extensions Example/Assets.xcassets"; sourceTree = SOURCE_ROOT; };
-		C60FA0C41D29A3780055B60B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "App Extensions Example/Info.plist"; sourceTree = SOURCE_ROOT; };
-		C60FA0C81D29A3B10055B60B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "App Extensions Example/AppDelegate.swift"; sourceTree = SOURCE_ROOT; };
-		C60FA0CD1D29A3DF0055B60B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "App Extensions Example/Base.lproj/LaunchScreen.storyboard"; sourceTree = SOURCE_ROOT; };
-		C60FA0CF1D29A3DF0055B60B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "App Extensions Example/Base.lproj/Main.storyboard"; sourceTree = SOURCE_ROOT; };
+		C60FA0C21D29A3580055B60B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Assets.xcassets; sourceTree = "<group>"; };
+		C60FA0C41D29A3780055B60B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Info.plist; sourceTree = "<group>"; };
+		C60FA0C81D29A3B10055B60B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		C60FA0CD1D29A3DF0055B60B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		C60FA0CF1D29A3DF0055B60B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C60FA0E71D29A4AF0055B60B /* KeyboardExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = KeyboardExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		C60FA0E91D29A4AF0055B60B /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeyboardViewController.swift; path = "App Extensions Example/KeyboardExtension/KeyboardViewController.swift"; sourceTree = SOURCE_ROOT; };
-		C60FA0EB1D29A4AF0055B60B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "App Extensions Example/KeyboardExtension/Info.plist"; sourceTree = SOURCE_ROOT; };
-		C60FA0FA1D29AC640055B60B /* Keyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Keyboard.xib; path = "App Extensions Example/KeyboardExtension/Keyboard.xib"; sourceTree = SOURCE_ROOT; };
-		C60FA1021D29B65D0055B60B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = "App Extensions Example/ViewController.swift"; sourceTree = SOURCE_ROOT; };
+		C60FA0E91D29A4AF0055B60B /* KeyboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = KeyboardViewController.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
+		C60FA0EB1D29A4AF0055B60B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Info.plist; sourceTree = "<group>"; };
+		C60FA0FA1D29AC640055B60B /* Keyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Keyboard.xib; path = Keyboard.xib; sourceTree = "<group>"; };
+		C60FA1021D29B65D0055B60B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C6EF65561D92EA5100BE5B66 /* Instructions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Instructions.xcodeproj; path = ../Instructions.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,13 +127,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B6DD39E71EEA91C00076DC18 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				C60FA0C61D29A3810055B60B /* Storyboards */,
+				C60FA1011D29B63E0055B60B /* View Controllers */,
+				C60FA0C81D29A3B10055B60B /* AppDelegate.swift */,
+			);
+			name = Core;
+			path = Core;
+			sourceTree = "<group>";
+		};
 		C60FA0A31D29A2770055B60B = {
 			isa = PBXGroup;
 			children = (
-				C60FA0AE1D29A2770055B60B /* Source */,
-				C60FA0C11D29A2D60055B60B /* Supporting Files */,
-				C60FA0E81D29A4AF0055B60B /* KeyboardExtension */,
 				C60FA0AD1D29A2770055B60B /* Products */,
+				C60FA0AE1D29A2770055B60B /* Source */,
 				C6EF65561D92EA5100BE5B66 /* Instructions.xcodeproj */,
 			);
 			sourceTree = "<group>";
@@ -150,12 +159,12 @@
 		C60FA0AE1D29A2770055B60B /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				C60FA0C81D29A3B10055B60B /* AppDelegate.swift */,
-				C60FA0C61D29A3810055B60B /* Storyboards */,
-				C60FA1011D29B63E0055B60B /* View Controllers */,
+				B6DD39E71EEA91C00076DC18 /* Core */,
+				C60FA0E81D29A4AF0055B60B /* KeyboardExtension */,
+				C60FA0C11D29A2D60055B60B /* Supporting Files */,
 			);
 			name = Source;
-			path = "Instructions App Extensions Example";
+			path = Source;
 			sourceTree = "<group>";
 		};
 		C60FA0C11D29A2D60055B60B /* Supporting Files */ = {
@@ -165,7 +174,7 @@
 				C60FA0C41D29A3780055B60B /* Info.plist */,
 			);
 			name = "Supporting Files";
-			path = "Instructions App Extensions Example";
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		C60FA0C61D29A3810055B60B /* Storyboards */ = {
@@ -175,15 +184,17 @@
 				C60FA0CE1D29A3DF0055B60B /* Main.storyboard */,
 			);
 			name = Storyboards;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		C60FA0E81D29A4AF0055B60B /* KeyboardExtension */ = {
 			isa = PBXGroup;
 			children = (
 				C60FA0F91D29AC060055B60B /* UI */,
-				C60FA0E91D29A4AF0055B60B /* KeyboardViewController.swift */,
 				C60FA0EB1D29A4AF0055B60B /* Info.plist */,
+				C60FA0E91D29A4AF0055B60B /* KeyboardViewController.swift */,
 			);
+			name = KeyboardExtension;
 			path = KeyboardExtension;
 			sourceTree = "<group>";
 		};
@@ -193,6 +204,7 @@
 				C60FA0FA1D29AC640055B60B /* Keyboard.xib */,
 			);
 			name = UI;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		C60FA1011D29B63E0055B60B /* View Controllers */ = {
@@ -201,6 +213,7 @@
 				C60FA1021D29B65D0055B60B /* ViewController.swift */,
 			);
 			name = "View Controllers";
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		C6EF65571D92EA5100BE5B66 /* Products */ = {
@@ -392,6 +405,7 @@
 				C60FA0CD1D29A3DF0055B60B /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 		C60FA0CE1D29A3DF0055B60B /* Main.storyboard */ = {
@@ -400,6 +414,7 @@
 				C60FA0CF1D29A3DF0055B60B /* Base */,
 			);
 			name = Main.storyboard;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

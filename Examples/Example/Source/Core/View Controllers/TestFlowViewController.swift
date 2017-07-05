@@ -56,9 +56,6 @@ class TestFlowViewController: ProfileViewController {
     }
 
     @IBAction func performButtonTap(_ sender: AnyObject) {
-        // The user tapped on the button, so let's carry on!
-        //self.coachMarksController.flow.showNext()
-
         self.coachMarksController.stop(immediately: true)
         self.coachMarksController.start(on: self)
     }

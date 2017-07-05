@@ -25,9 +25,6 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 ## Overview
 ![Instructions Demo](http://i.imgur.com/JUlQH9F.gif)
 
-⚠️ **Until Instructions reaches 1.0.0, the API is subject to change.
-     Please see the Features section for more information about the roadmap.**
-
 ## Features
 - [x] [Customizable highlight system](#advanced-usage)
 - [x] [Customizable views](#providing-custom-views)
@@ -43,7 +40,7 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 - [ ] Multiple coach marks support
 
 ## Requirements
-- Xcode 8 or 9 / Swift 3 or 4 (`1.0.0-beta.1`)
+- Xcode 8 or 9 / Swift 3 or 4
 - iOS 9.0+
 
 ## Asking Questions / Contributing
@@ -72,7 +69,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 use_frameworks!
 
-pod 'Instructions', '1.0.0'
+pod 'Instructions', '~> 1.0.0'
 ```
 
 Then, run the following command:
@@ -85,7 +82,7 @@ $ pod install
 Add Instructions to your Cartfile:
 
 ```
-github "ephread/Instructions" "1.0.0"
+github "ephread/Instructions" ~> "1.0.0"
 ```
 
 You can then update, build and drag the generated framework into your project:
@@ -159,13 +156,13 @@ func coachMarksController(_ coachMarksController: CoachMarksController, coachMar
 ```
 
 #### Starting the coach marks flow
-Once the `dataSource` is set up, you can start displaying the coach marks. You will most likely supply `self` to `startOn`. While the overlay adds itself as a child of the current window (to be on top of everything), the `CoachMarksController` will add itself as a child of the view controller you provide. That way, the `CoachMarksController` will receive size change events and react accordingly. Be careful, you can't call `startOn` in the `viewDidLoad` method, since the view hierarchy has to be set up and ready for Instructions to work properly.
+Once the `dataSource` is set up, you can start displaying the coach marks. You will most likely supply `self` to `start`. While the overlay adds itself as a child of the current window (to be on top of everything), the `CoachMarksController` will add itself as a child of the view controller you provide. That way, the `CoachMarksController` will receive size change events and react accordingly. Be careful, you can't call `start` in the `viewDidLoad` method, since the view hierarchy has to be set up and ready for Instructions to work properly.
 
 ```swift
 override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
-    self.coachMarksController.startOn(self)
+    self.coachMarksController.start(on: self)
 }
 ```
 

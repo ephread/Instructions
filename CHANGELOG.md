@@ -1,7 +1,11 @@
 # Change Log
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
-However, until it reaches 1.0.0, some breaking changes are to be expected.
+
+## [1.0.0](https://github.com/ephread/Instructions/releases/tag/1.0.0)
+Released on 2017-07-05.
+
+No changes.
 
 ## [1.0.0-beta.1](https://github.com/ephread/Instructions/releases/tag/1.0.0-beta.1)
 Released on 2017-06-04.

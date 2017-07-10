@@ -124,7 +124,7 @@ class DefaultViewController: UIViewController, CoachMarksControllerDataSource, C
 The first one asks for the number of coach marks to display. Let's pretend that you want to display only one coach mark. Note that the `CoachMarksController` requesting the information is supplied, allowing you to supply data for multiple `CoachMarksController`, within a single dataSource.
 
 ```swift
-func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int
+func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
     return 1
 }
 ```

@@ -136,7 +136,7 @@ let pointOfInterest = UIView()
 
 func coachMarksController(_ coachMarksController: CoachMarksController,
                               coachMarkAt index: Int) -> CoachMark {
-    return coachMarksController.helper.makeCoachMark(for: self.reputationLabel)
+    return coachMarksController.helper.makeCoachMark(for: pointOfInterest)
 }
 ```
 

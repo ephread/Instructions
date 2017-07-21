@@ -91,11 +91,17 @@ public class FlowManager {
         if started && paused {
             paused = false
             createAndShowCoachMark(afterResuming: true)
+            if self.coachMarksViewController.overlayManager.overlayView.alpha == 0.0{
+                self.coachMarksViewController.overlayManager.showOverlay(true, completion: nil)
+            }
         }
     }
 
-    public func pause() {
+    public func pause(hideOverlay: Bool = false) {
         paused = true
+        if hideOverlay {
+            self.coachMarksViewController.overlayManager.showOverlay(false, completion: nil)
+        }
     }
 
     internal func reset() {

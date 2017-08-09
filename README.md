@@ -334,6 +334,18 @@ Third, when all coach marks have been displayed. `didEndShowingBySkipping` speci
 func coachMarksController(_ coachMarksController: CoachMarksController, didEndShowingBySkipping skipped: Bool)
 ```
 
+##### React when the user tap the overlay #####
+
+Whenever the user will tap the overlay, you will get notified through:
+
+```swift    
+func shouldHandleOverlayTap(in coachMarksController: CoachMarksController, at index: Int) -> Bool
+```
+
+Returning `true` will let Instructions continue the flow normally, while returning `false` will interrupt it. If you choose to interrupt the flow, you're responsible for either stopping or pausing it or manually show the next coach marks (see [Piloting the flow from the code](#piloting-the-flow-from-the-code)).
+
+`index` is the index of the coach mark currently displayed.
+
 ##### Performing animations before showing coach marks #####
 You can perform animation on views, before or after showing a given coach mark.
 For instance, you might want to collapse a table view and show only its header, before referring to those headers with a coach mark. Instructions offers a simple way to insert your own animations into the flow.

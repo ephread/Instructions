@@ -171,7 +171,9 @@ extension CoachMarksController: Snapshottable {
 
 extension CoachMarksController: OverlayManagerDelegate {
     func didReceivedSingleTap() {
-        flow.showNextCoachMark()
+        if delegate?.shouldHandleOverlayTap(in: self, at: flow.currentIndex) ?? true {
+            flow.showNextCoachMark()
+        }
     }
 }
 

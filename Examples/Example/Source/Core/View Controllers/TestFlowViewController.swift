@@ -30,6 +30,7 @@ class TestFlowViewController: ProfileViewController {
     let text1 = "CoachMark 1"
     let text2 = "CoachMark 2"
     let text3 = "CoachMark 3"
+    let text4 = "CoachMark 4"
 
     @IBOutlet var tapMeButton : UIButton!
 
@@ -65,7 +66,7 @@ class TestFlowViewController: ProfileViewController {
 extension TestFlowViewController: CoachMarksControllerDataSource {
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         print("numberOfCoachMarksForCoachMarksController: \(index)")
-        return 3
+        return 4
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
@@ -82,6 +83,8 @@ extension TestFlowViewController: CoachMarksControllerDataSource {
             coachMark.allowTouchInsideCutoutPath = true
 
             return coachMark
+        case 3:
+            return coachMarksController.helper.makeCoachMark(for: self.reputationLabel)
         default:
             return coachMarksController.helper.makeCoachMark()
         }
@@ -102,6 +105,9 @@ extension TestFlowViewController: CoachMarksControllerDataSource {
             coachViews.bodyView.nextLabel.text = self.nextButtonText
         case 2:
             coachViews.bodyView.hintLabel.text = self.text3
+            coachViews.bodyView.nextLabel.text = self.nextButtonText
+        case 3:
+            coachViews.bodyView.hintLabel.text = self.text4
             coachViews.bodyView.nextLabel.text = self.nextButtonText
         default: break
         }
@@ -147,5 +153,18 @@ extension TestFlowViewController: CoachMarksControllerDelegate {
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               didEndShowingBySkipping skipped: Bool) {
         print("didEndShowingBySkipping: \(skipped)")
+    }
+
+    func shouldHandleOverlayTap(in coachMarksController: CoachMarksController,
+                                at index: Int) -> Bool {
+        print("shouldHandleOverlayTap at index: \(index)")
+
+        if index >= 2 {
+            print("Index greater than or equal to 2, skipping")
+            coachMarksController.stop()
+            return false
+        } else {
+            return true
+        }
     }
 }

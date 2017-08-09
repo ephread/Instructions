@@ -2,6 +2,12 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
+## 1.1.0
+Released on 2017-08-XX.
+
+### Fixed
+- Fix [#127] & [#132] by retrieve configuration from parent controller.
+
 ## [1.0.0](https://github.com/ephread/Instructions/releases/tag/1.0.0)
 Released on 2017-07-05.
 

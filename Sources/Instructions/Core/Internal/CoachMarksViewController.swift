@@ -89,6 +89,10 @@ class CoachMarksViewController: UIViewController {
     }()
 #endif
 
+    fileprivate var _shouldAutorotate: Bool = true
+    fileprivate var _prefersStatusBarHidden: Bool = false
+    fileprivate var _supportedInterfaceOrientations: UIInterfaceOrientationMask = [.portrait]
+
     // MARK: - Lifecycle
     convenience init(coachMarkDisplayManager: CoachMarkDisplayManager,
                      skipViewDisplayManager: SkipViewDisplayManager) {
@@ -141,6 +145,18 @@ class CoachMarksViewController: UIViewController {
                                         for: .touchUpInside)
 
         instructionsRootView.addSubview(skipView.asView!)
+    }
+
+    override var shouldAutorotate: Bool {
+        return _shouldAutorotate
+    }
+
+    override var prefersStatusBarHidden: Bool {
+        return _prefersStatusBarHidden
+    }
+
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return _supportedInterfaceOrientations
     }
 }
 
@@ -303,6 +319,8 @@ extension CoachMarksViewController {
             return
         }
 
+        retrieveConfig(from: parentViewController)
+
         parentViewController.addChildViewController(self)
         parentViewController.view.addSubview(self.view)
 
@@ -329,8 +347,10 @@ extension CoachMarksViewController {
     /// above evrything.
     ///
     /// - Parameter window: the window holding the controller
-    func attach(to window: UIWindow) {
+    func attach(to window: UIWindow, of viewController: UIViewController) {
         window.windowLevel = overlayManager.windowLevel
+
+        retrieveConfig(from: viewController)
 
         registerForSystemEventChanges()
         addOverlayView()
@@ -374,5 +394,11 @@ private extension CoachMarksViewController {
     /// - Parameter sender: the object sending the message
     @objc func skipCoachMarksTour(_ sender: AnyObject?) {
         delegate?.didTap(skipView: skipView)
+    }
+
+    func retrieveConfig(from parentViewController: UIViewController) {
+        _shouldAutorotate = parentViewController.shouldAutorotate
+        _prefersStatusBarHidden = parentViewController.prefersStatusBarHidden
+        _supportedInterfaceOrientations = parentViewController.supportedInterfaceOrientations
     }
 }

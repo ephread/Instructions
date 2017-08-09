@@ -120,7 +120,7 @@ public extension CoachMarksController {
         controllerWindow = parentViewController.view.window
         coachMarksWindow = coachMarksWindow ?? InstructionsWindow(frame: UIScreen.main.bounds)
 
-        coachMarksViewController.attach(to: coachMarksWindow!)
+        coachMarksViewController.attach(to: coachMarksWindow!, of: parentViewController)
 #endif
         flow.startFlow(withNumberOfCoachMarks: numberOfCoachMarks)
     }

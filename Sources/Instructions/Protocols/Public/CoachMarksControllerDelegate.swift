@@ -47,6 +47,9 @@ public protocol CoachMarksControllerDelegate: class {
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               didEndShowingBySkipping skipped: Bool)
+
+    func shouldHandleOverlayTap(in coachMarksController: CoachMarksController,
+                                at index: Int) -> Bool
 }
 
 public extension CoachMarksControllerDelegate {
@@ -75,6 +78,11 @@ public extension CoachMarksControllerDelegate {
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               didEndShowingBySkipping skipped: Bool) { }
+
+    func shouldHandleOverlayTap(in coachMarksController: CoachMarksController,
+                                at index: Int) -> Bool {
+        return true
+    }
 }
 
 protocol CoachMarksControllerProxyDelegate: class {
@@ -89,4 +97,6 @@ protocol CoachMarksControllerProxyDelegate: class {
     func didHide(coachMark: CoachMark, at index: Int)
 
     func didEndShowingBySkipping(_ skipped: Bool)
+
+    func shouldHandleOverlayTap(at index: Int) -> Bool
 }

@@ -74,4 +74,8 @@ extension CoachMarksController: CoachMarksControllerProxyDelegate {
     func didEndShowingBySkipping(_ skipped: Bool) {
         delegate?.coachMarksController(self, didEndShowingBySkipping: skipped)
     }
+
+    func shouldHandleOverlayTap(at index: Int) -> Bool {
+        return delegate?.shouldHandleOverlayTap(in: self, at: index) ?? true
+    }
 }

@@ -67,6 +67,14 @@ class CoachMarksViewController: UIViewController {
         //swiftlint:enable force_cast
 #endif
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        var alpha: CGFloat = 1.0
+        var white: CGFloat = 1.0
+        overlayManager.color.getWhite(&white, alpha: &alpha)
+        
+        return white >= 0.5 ? .default : .lightContent
+    }
 
     ///
     var coachMarkDisplayManager: CoachMarkDisplayManager!

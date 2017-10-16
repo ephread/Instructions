@@ -93,10 +93,7 @@ public class FlowManager {
             coachMarksViewController.view.window?.isHidden = false
             if(showNext){
                 showNextCoachMark(hidePrevious: true, hideAnimated: false)
-            }else{
-                createAndShowCoachMark(afterResuming: true)
-            }
-            
+            }            
         }
     }
     

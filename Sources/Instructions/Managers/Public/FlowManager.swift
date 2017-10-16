@@ -71,7 +71,7 @@ public class FlowManager {
     private var canShowCoachMark = true
 
     /// The index (in `coachMarks`) of the coach mark being currently displayed.
-    public internal(set) var currentIndex = -1 
+    public internal(set) var currentIndex = -1  
 
     init(coachMarksViewController: CoachMarksViewController) {
         self.coachMarksViewController = coachMarksViewController

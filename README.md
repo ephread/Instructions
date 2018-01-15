@@ -82,7 +82,7 @@ $ pod install
 Add Instructions to your Cartfile:
 
 ```
-github "ephread/Instructions" ~> "1.0.0"
+github "ephread/Instructions" ~> 1.0.0
 ```
 
 You can then update, build and drag the generated framework into your project:

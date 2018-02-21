@@ -27,22 +27,35 @@ import UIKit
 /// default one provided by the library.
 public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
     // MARK: - Initialization
-    public init(orientation: CoachMarkArrowOrientation) {
+    public init(orientation: CoachMarkArrowOrientation,withCustomColor color:UIColor? = nil) {
         let image, highlightedImage: UIImage?
-
-        if orientation == .top {
-            image = UIImage(namedInInstructions: "arrow-top")
-            highlightedImage = UIImage(namedInInstructions: "arrow-top-highlighted")
-        } else {
-            image = UIImage(namedInInstructions: "arrow-bottom")
-            highlightedImage = UIImage(namedInInstructions: "arrow-bottom-highlighted")
+        
+        guard let color = color else {
+            if orientation == .top {
+                image = UIImage(namedInInstructions: "arrow-top")
+                highlightedImage = UIImage(namedInInstructions: "arrow-top-highlighted")
+            } else {
+                image = UIImage(namedInInstructions: "arrow-bottom")
+                highlightedImage = UIImage(namedInInstructions: "arrow-bottom-highlighted")
+            }
+            
+            super.init(image: image, highlightedImage: highlightedImage)
+            initializeConstraints()
+            return
         }
-
+        
+        if orientation == .top {
+            image = UIImage(namedInInstructions: "arrow-top")?.tint(with: color)
+            highlightedImage = UIImage(namedInInstructions: "arrow-top-highlighted")?.tint(with: color)
+        } else {
+            image = UIImage(namedInInstructions: "arrow-bottom")?.tint(with: color)
+            highlightedImage = UIImage(namedInInstructions: "arrow-bottom-highlighted")?.tint(with: color)
+        }
+        
         super.init(image: image, highlightedImage: highlightedImage)
-
         initializeConstraints()
     }
-
+    
     required public init?(coder aDecoder: NSCoder) {
         fatalError("This class does not support NSCoding.")
     }

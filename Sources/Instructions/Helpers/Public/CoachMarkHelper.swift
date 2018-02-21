@@ -68,15 +68,16 @@ public class CoachMarkHelper {
     /// - Returns: new instances of the default coach views.
     public func makeDefaultCoachViews(withArrow arrow: Bool = true,
                                       withNextText nextText: Bool = true,
-                                      arrowOrientation: CoachMarkArrowOrientation? = .top)
+                                      arrowOrientation: CoachMarkArrowOrientation? = .top,
+                                      withCustomColor color:UIColor? = nil)
     -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
 
         var coachMarkBodyView: CoachMarkBodyDefaultView
 
         if nextText {
-            coachMarkBodyView = CoachMarkBodyDefaultView()
+            coachMarkBodyView = CoachMarkBodyDefaultView(customColor: color)
         } else {
-            coachMarkBodyView = CoachMarkBodyDefaultView(hintText: "", nextText: nil)
+            coachMarkBodyView = CoachMarkBodyDefaultView(hintText: "", nextText: nil,withCustomColor:color)
         }
 
         var coachMarkArrowView: CoachMarkArrowDefaultView? = nil
@@ -98,9 +99,11 @@ public class CoachMarkHelper {
     /// - Returns: new instances of the default coach views.
     public func makeDefaultCoachViews(withArrow arrow: Bool = true,
                                       arrowOrientation: CoachMarkArrowOrientation? = .top,
-                                      hintText: String, nextText: String? = nil)
+                                      hintText: String,
+                                      nextText: String? = nil,
+                                      withCustomColor color:UIColor? = nil)
     -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
-        let coachMarkBodyView = CoachMarkBodyDefaultView(hintText: hintText, nextText: nextText)
+        let coachMarkBodyView = CoachMarkBodyDefaultView(hintText: hintText, nextText: nextText,withCustomColor:color)
 
         var coachMarkArrowView: CoachMarkArrowDefaultView? = nil
 

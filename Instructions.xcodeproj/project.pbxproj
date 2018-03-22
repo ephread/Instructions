@@ -17,7 +17,7 @@
 		B63613DD2063AF54002168EA /* SkipViewDisplayManager+Regular.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63613DC2063AF54002168EA /* SkipViewDisplayManager+Regular.swift */; };
 		B63613DF2063B988002168EA /* SkipViewDisplayManager+AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63613DE2063B987002168EA /* SkipViewDisplayManager+AppExtensions.swift */; };
 		B63613E12063BBD3002168EA /* CoachMarksViewController+Regular.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63613E02063BBD3002168EA /* CoachMarksViewController+Regular.swift */; };
-		B63613E32063BCED002168EA /* CoachMarksViewController+AppExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63613E22063BCED002168EA /* CoachMarksViewController+AppExtension.swift */; };
+		B63613E32063BCED002168EA /* CoachMarksViewController+AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63613E22063BCED002168EA /* CoachMarksViewController+AppExtensions.swift */; };
 		B65DDDBF1EE2C43E002618AF /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDBE1EE2C43E002618AF /* UIView+Layout.swift */; };
 		B65DDDC01EE2C43E002618AF /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDBE1EE2C43E002618AF /* UIView+Layout.swift */; };
 		B65DDDD71EE34BE4002618AF /* OverlayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69B6D7B1E9CD5C000BE032D /* OverlayManager.swift */; };
@@ -122,7 +122,7 @@
 		B63613DC2063AF54002168EA /* SkipViewDisplayManager+Regular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkipViewDisplayManager+Regular.swift"; sourceTree = "<group>"; };
 		B63613DE2063B987002168EA /* SkipViewDisplayManager+AppExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SkipViewDisplayManager+AppExtensions.swift"; sourceTree = "<group>"; };
 		B63613E02063BBD3002168EA /* CoachMarksViewController+Regular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoachMarksViewController+Regular.swift"; sourceTree = "<group>"; };
-		B63613E22063BCED002168EA /* CoachMarksViewController+AppExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoachMarksViewController+AppExtension.swift"; sourceTree = "<group>"; };
+		B63613E22063BCED002168EA /* CoachMarksViewController+AppExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoachMarksViewController+AppExtensions.swift"; sourceTree = "<group>"; };
 		B65DDDBE1EE2C43E002618AF /* UIView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		B683D2471EA7815600E4798F /* OverlayStyleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayStyleManager.swift; sourceTree = "<group>"; };
 		B683D24E1EA7D5E000E4798F /* OverlaySnapshotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlaySnapshotView.swift; sourceTree = "<group>"; };
@@ -561,7 +561,7 @@
 			isa = PBXGroup;
 			children = (
 				C64FB3411BB6D1020081E5B6 /* CoachMarksViewController.swift */,
-				B63613E22063BCED002168EA /* CoachMarksViewController+AppExtension.swift */,
+				B63613E22063BCED002168EA /* CoachMarksViewController+AppExtensions.swift */,
 				B63613E02063BBD3002168EA /* CoachMarksViewController+Regular.swift */,
 			);
 			path = Internal;
@@ -770,7 +770,7 @@
 				C6D365131D57E97700D2C6A2 /* FlowManager.swift in Sources */,
 				C6417E291D291A8A004D13EA /* CoachMarkBodyView.swift in Sources */,
 				C6417E2A1D291A8A004D13EA /* CoachMark.swift in Sources */,
-				B63613E32063BCED002168EA /* CoachMarksViewController+AppExtension.swift in Sources */,
+				B63613E32063BCED002168EA /* CoachMarksViewController+AppExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

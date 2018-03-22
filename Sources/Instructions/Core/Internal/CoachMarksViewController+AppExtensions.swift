@@ -1,4 +1,4 @@
-// CoachMarksViewController+AppExtension.swift
+// CoachMarksViewController+AppExtensions.swift
 //
 // Copyright (c) 2018 Frédéric Maquin <fred@ephread.com>
 //

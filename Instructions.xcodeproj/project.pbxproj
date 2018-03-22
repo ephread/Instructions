@@ -3,16 +3,41 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B6072E0E1EE1C39400758C22 /* InstructionsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6072E0D1EE1C39400758C22 /* InstructionsWindow.swift */; };
+		B6072E0F1EE1C39400758C22 /* InstructionsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6072E0D1EE1C39400758C22 /* InstructionsWindow.swift */; };
+		B61B99DC1EEA86D0006725D9 /* TranslucentOverlayStyleManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B99DB1EEA8670006725D9 /* TranslucentOverlayStyleManagerTest.swift */; };
+		B61E448B1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61E448A1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift */; };
+		B61E448C1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61E448A1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift */; };
+		B61E448E1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61E448D1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift */; };
+		B61E448F1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61E448D1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift */; };
+		B63613DD2063AF54002168EA /* SkipViewDisplayManager+Regular.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63613DC2063AF54002168EA /* SkipViewDisplayManager+Regular.swift */; };
+		B63613DF2063B988002168EA /* SkipViewDisplayManager+AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63613DE2063B987002168EA /* SkipViewDisplayManager+AppExtensions.swift */; };
+		B63613E12063BBD3002168EA /* CoachMarksViewController+Regular.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63613E02063BBD3002168EA /* CoachMarksViewController+Regular.swift */; };
+		B63613E32063BCED002168EA /* CoachMarksViewController+AppExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63613E22063BCED002168EA /* CoachMarksViewController+AppExtension.swift */; };
+		B65DDDBF1EE2C43E002618AF /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDBE1EE2C43E002618AF /* UIView+Layout.swift */; };
+		B65DDDC01EE2C43E002618AF /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDBE1EE2C43E002618AF /* UIView+Layout.swift */; };
+		B65DDDD71EE34BE4002618AF /* OverlayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69B6D7B1E9CD5C000BE032D /* OverlayManager.swift */; };
+		B65DDDD81EE34BE4002618AF /* OverlayStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683D2471EA7815600E4798F /* OverlayStyleManager.swift */; };
+		B65DDDD91EE34BE4002618AF /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A102A81DFC8EFE009C73DF /* MaskView.swift */; };
+		B683D2481EA7815600E4798F /* OverlayStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683D2471EA7815600E4798F /* OverlayStyleManager.swift */; };
+		B683D24F1EA7D5E000E4798F /* OverlaySnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683D24E1EA7D5E000E4798F /* OverlaySnapshotView.swift */; };
+		B683D2501EA7D5E000E4798F /* OverlaySnapshotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B683D24E1EA7D5E000E4798F /* OverlaySnapshotView.swift */; };
+		B68ABD2E1EEA0CCD0090A541 /* BlurringOverlayStyleManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68ABD2D1EEA09D10090A541 /* BlurringOverlayStyleManagerTest.swift */; };
+		B69B6D7C1E9CD5C000BE032D /* OverlayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69B6D7B1E9CD5C000BE032D /* OverlayManager.swift */; };
+		B6A102A91DFC8EFE009C73DF /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A102A81DFC8EFE009C73DF /* MaskView.swift */; };
 		C61458B31BBB01DE006EB4F2 /* CoachMarkArrowOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61458B21BBB01DE006EB4F2 /* CoachMarkArrowOrientation.swift */; };
 		C61A76BD1BDC16D700F131BF /* CoachMarkDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61A76BC1BDC16D700F131BF /* CoachMarkDisplayManager.swift */; };
 		C62DBF4A1D53BE6300AFAAE2 /* CoachMarkInnerLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62DBF491D53BE6300AFAAE2 /* CoachMarkInnerLayoutHelper.swift */; };
 		C62DBF501D5499AB00AFAAE2 /* CoachMarkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62DBF4F1D5499AB00AFAAE2 /* CoachMarkHelper.swift */; };
+		C632DDBD1DD095F90052DBF8 /* CoachMarkLayoutHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C632DDBC1DD095F90052DBF8 /* CoachMarkLayoutHelperTests.swift */; };
+		C632DDC11DD0CAD30052DBF8 /* DataSourceBaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C632DDC01DD0CAD30052DBF8 /* DataSourceBaseTest.swift */; };
+		C632DDC51DD0CBAE0052DBF8 /* DataSourceNumberOfCoachMarksTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C632DDC41DD0CBAE0052DBF8 /* DataSourceNumberOfCoachMarksTest.swift */; };
+		C632DDC71DD0D0250052DBF8 /* DataSourceCoachMarkAtTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C632DDC61DD0D0250052DBF8 /* DataSourceCoachMarkAtTest.swift */; };
 		C633C4B61D535A990025FAE9 /* UIImage+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633C4B51D535A990025FAE9 /* UIImage+Bundle.swift */; };
-		C633C4BA1D538DA10025FAE9 /* OverlayViewLayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633C4B91D538DA10025FAE9 /* OverlayViewLayerManager.swift */; };
 		C633C4BD1D53A8E50025FAE9 /* CoachMarkLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633C4BC1D53A8E50025FAE9 /* CoachMarkLayoutHelper.swift */; };
 		C63524311BC02AD10054EA0A /* CoachMarkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63524301BC02AD10054EA0A /* CoachMarkTests.swift */; };
 		C636FFB91BBC8F3100EB243B /* CoachMarkBodyDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFB81BBC8F3100EB243B /* CoachMarkBodyDefaultView.swift */; };
@@ -58,24 +83,22 @@
 		C64FB37A1BB7DE930081E5B6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C64FB3791BB7DE930081E5B6 /* Images.xcassets */; };
 		C64FB37E1BB828E50081E5B6 /* CoachMarkBodyHighlightArrowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB37D1BB828E50081E5B6 /* CoachMarkBodyHighlightArrowDelegate.swift */; };
 		C67101001BBFE3C50005DAFC /* CoachMarkPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67100FF1BBFE3C50005DAFC /* CoachMarkPosition.swift */; };
-		C6D3650E1D57B07D00D2C6A2 /* MainViewsLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3650D1D57B07D00D2C6A2 /* MainViewsLayoutHelper.swift */; };
+		C6A130521DCFB8E600E00E75 /* CoachMarkHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A130501DCFB50D00E00E75 /* CoachMarkHelperTests.swift */; };
+		C6A130721DD07B7800E00E75 /* SkipViewDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A130701DD07A5A00E00E75 /* SkipViewDisplayManagerTests.swift */; };
+		C6A130741DD090AF00E00E75 /* CoachMarkInnerLayoutHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6A130731DD090AF00E00E75 /* CoachMarkInnerLayoutHelperTests.swift */; };
 		C6D365101D57C5BB00D2C6A2 /* CoachMarksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3650F1D57C5BB00D2C6A2 /* CoachMarksController.swift */; };
 		C6D365121D57E97600D2C6A2 /* FlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D365111D57E97600D2C6A2 /* FlowManager.swift */; };
 		C6D365131D57E97700D2C6A2 /* FlowManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D365111D57E97600D2C6A2 /* FlowManager.swift */; };
 		C6D4D0E31D58E74B00F14FC5 /* CoachMarksController+Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4D0E21D58E74B00F14FC5 /* CoachMarksController+Proxy.swift */; };
 		C6D4D0E71D59E4AF00F14FC5 /* CoachMarkViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4D0E61D59E4AF00F14FC5 /* CoachMarkViewControllerDelegate.swift */; };
 		C6D4D0EC1D5A774F00F14FC5 /* CoachMarkBodyDefaultViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4D0EB1D5A774F00F14FC5 /* CoachMarkBodyDefaultViewHelper.swift */; };
-		C6D4D0EE1D5A908100F14FC5 /* BlurEffectViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4D0ED1D5A908100F14FC5 /* BlurEffectViewHelper.swift */; };
 		C6D4D0F41D5B2DA300F14FC5 /* CoachMarksController+Proxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4D0E21D58E74B00F14FC5 /* CoachMarksController+Proxy.swift */; };
 		C6D4D0F51D5B2DA300F14FC5 /* CoachMarksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3650F1D57C5BB00D2C6A2 /* CoachMarksController.swift */; };
 		C6D4D0F61D5B2DA300F14FC5 /* UIImage+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633C4B51D535A990025FAE9 /* UIImage+Bundle.swift */; };
-		C6D4D0F71D5B2DA300F14FC5 /* BlurEffectViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4D0ED1D5A908100F14FC5 /* BlurEffectViewHelper.swift */; };
 		C6D4D0F81D5B2DA300F14FC5 /* CoachMarkBodyDefaultViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4D0EB1D5A774F00F14FC5 /* CoachMarkBodyDefaultViewHelper.swift */; };
 		C6D4D0F91D5B2DA300F14FC5 /* CoachMarkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62DBF4F1D5499AB00AFAAE2 /* CoachMarkHelper.swift */; };
 		C6D4D0FA1D5B2DA300F14FC5 /* CoachMarkInnerLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62DBF491D53BE6300AFAAE2 /* CoachMarkInnerLayoutHelper.swift */; };
 		C6D4D0FB1D5B2DA300F14FC5 /* CoachMarkLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633C4BC1D53A8E50025FAE9 /* CoachMarkLayoutHelper.swift */; };
-		C6D4D0FC1D5B2DA300F14FC5 /* MainViewsLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3650D1D57B07D00D2C6A2 /* MainViewsLayoutHelper.swift */; };
-		C6D4D0FD1D5B2DA300F14FC5 /* OverlayViewLayerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C633C4B91D538DA10025FAE9 /* OverlayViewLayerManager.swift */; };
 		C6D4D0FE1D5B2DA300F14FC5 /* CoachMarkViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D4D0E61D59E4AF00F14FC5 /* CoachMarkViewControllerDelegate.swift */; };
 		C6FAE2B11BDCFE4D0080DF69 /* SkipViewDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FAE2B01BDCFE4D0080DF69 /* SkipViewDisplayManager.swift */; };
 		C6FD96F71BDF887B00DE5889 /* CoachMarkDisplayManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6FD96F61BDF887B00DE5889 /* CoachMarkDisplayManagerTests.swift */; };
@@ -92,12 +115,29 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B6072E0D1EE1C39400758C22 /* InstructionsWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsWindow.swift; sourceTree = "<group>"; };
+		B61B99DB1EEA8670006725D9 /* TranslucentOverlayStyleManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslucentOverlayStyleManagerTest.swift; sourceTree = "<group>"; };
+		B61E448A1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurringOverlayStyleManager.swift; sourceTree = "<group>"; };
+		B61E448D1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslucentOverlayStyleManager.swift; sourceTree = "<group>"; };
+		B63613DC2063AF54002168EA /* SkipViewDisplayManager+Regular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SkipViewDisplayManager+Regular.swift"; sourceTree = "<group>"; };
+		B63613DE2063B987002168EA /* SkipViewDisplayManager+AppExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SkipViewDisplayManager+AppExtensions.swift"; sourceTree = "<group>"; };
+		B63613E02063BBD3002168EA /* CoachMarksViewController+Regular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoachMarksViewController+Regular.swift"; sourceTree = "<group>"; };
+		B63613E22063BCED002168EA /* CoachMarksViewController+AppExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoachMarksViewController+AppExtension.swift"; sourceTree = "<group>"; };
+		B65DDDBE1EE2C43E002618AF /* UIView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
+		B683D2471EA7815600E4798F /* OverlayStyleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayStyleManager.swift; sourceTree = "<group>"; };
+		B683D24E1EA7D5E000E4798F /* OverlaySnapshotView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlaySnapshotView.swift; sourceTree = "<group>"; };
+		B68ABD2D1EEA09D10090A541 /* BlurringOverlayStyleManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurringOverlayStyleManagerTest.swift; sourceTree = "<group>"; };
+		B69B6D7B1E9CD5C000BE032D /* OverlayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayManager.swift; sourceTree = "<group>"; };
+		B6A102A81DFC8EFE009C73DF /* MaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
 		C61458B21BBB01DE006EB4F2 /* CoachMarkArrowOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkArrowOrientation.swift; sourceTree = "<group>"; };
 		C61A76BC1BDC16D700F131BF /* CoachMarkDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkDisplayManager.swift; sourceTree = "<group>"; };
 		C62DBF491D53BE6300AFAAE2 /* CoachMarkInnerLayoutHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkInnerLayoutHelper.swift; sourceTree = "<group>"; };
 		C62DBF4F1D5499AB00AFAAE2 /* CoachMarkHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkHelper.swift; sourceTree = "<group>"; };
+		C632DDBC1DD095F90052DBF8 /* CoachMarkLayoutHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkLayoutHelperTests.swift; sourceTree = "<group>"; };
+		C632DDC01DD0CAD30052DBF8 /* DataSourceBaseTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceBaseTest.swift; sourceTree = "<group>"; };
+		C632DDC41DD0CBAE0052DBF8 /* DataSourceNumberOfCoachMarksTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceNumberOfCoachMarksTest.swift; sourceTree = "<group>"; };
+		C632DDC61DD0D0250052DBF8 /* DataSourceCoachMarkAtTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceCoachMarkAtTest.swift; sourceTree = "<group>"; };
 		C633C4B51D535A990025FAE9 /* UIImage+Bundle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Bundle.swift"; sourceTree = "<group>"; };
-		C633C4B91D538DA10025FAE9 /* OverlayViewLayerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayViewLayerManager.swift; sourceTree = "<group>"; };
 		C633C4BC1D53A8E50025FAE9 /* CoachMarkLayoutHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkLayoutHelper.swift; sourceTree = "<group>"; };
 		C63524301BC02AD10054EA0A /* CoachMarkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkTests.swift; sourceTree = "<group>"; };
 		C636FFB81BBC8F3100EB243B /* CoachMarkBodyDefaultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkBodyDefaultView.swift; sourceTree = "<group>"; };
@@ -116,7 +156,7 @@
 		C64FB3271BB6CB680081E5B6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C64FB33D1BB6CE2C0081E5B6 /* CoachMarksControllerDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CoachMarksControllerDataSource.swift; sourceTree = "<group>"; };
 		C64FB33F1BB6D0160081E5B6 /* CoachMarksControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarksControllerDelegate.swift; sourceTree = "<group>"; };
-		C64FB3411BB6D1020081E5B6 /* CoachMarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CoachMarksViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		C64FB3411BB6D1020081E5B6 /* CoachMarksViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CoachMarksViewController.swift; sourceTree = "<group>"; };
 		C64FB3461BB6D91E0081E5B6 /* CoachMark.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMark.swift; sourceTree = "<group>"; };
 		C64FB3481BB6DC3B0081E5B6 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		C64FB34A1BB6DD1B0081E5B6 /* CoachMarkBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkBodyView.swift; sourceTree = "<group>"; };
@@ -126,13 +166,14 @@
 		C64FB3791BB7DE930081E5B6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C64FB37D1BB828E50081E5B6 /* CoachMarkBodyHighlightArrowDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkBodyHighlightArrowDelegate.swift; sourceTree = "<group>"; };
 		C67100FF1BBFE3C50005DAFC /* CoachMarkPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkPosition.swift; sourceTree = "<group>"; };
-		C6D3650D1D57B07D00D2C6A2 /* MainViewsLayoutHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewsLayoutHelper.swift; sourceTree = "<group>"; };
+		C6A130501DCFB50D00E00E75 /* CoachMarkHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkHelperTests.swift; sourceTree = "<group>"; };
+		C6A130701DD07A5A00E00E75 /* SkipViewDisplayManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkipViewDisplayManagerTests.swift; sourceTree = "<group>"; };
+		C6A130731DD090AF00E00E75 /* CoachMarkInnerLayoutHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkInnerLayoutHelperTests.swift; sourceTree = "<group>"; };
 		C6D3650F1D57C5BB00D2C6A2 /* CoachMarksController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarksController.swift; sourceTree = "<group>"; };
 		C6D365111D57E97600D2C6A2 /* FlowManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowManager.swift; sourceTree = "<group>"; };
 		C6D4D0E21D58E74B00F14FC5 /* CoachMarksController+Proxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoachMarksController+Proxy.swift"; sourceTree = "<group>"; };
 		C6D4D0E61D59E4AF00F14FC5 /* CoachMarkViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkViewControllerDelegate.swift; sourceTree = "<group>"; };
 		C6D4D0EB1D5A774F00F14FC5 /* CoachMarkBodyDefaultViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkBodyDefaultViewHelper.swift; sourceTree = "<group>"; };
-		C6D4D0ED1D5A908100F14FC5 /* BlurEffectViewHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurEffectViewHelper.swift; sourceTree = "<group>"; };
 		C6FAE2B01BDCFE4D0080DF69 /* SkipViewDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkipViewDisplayManager.swift; sourceTree = "<group>"; };
 		C6FD96F61BDF887B00DE5889 /* CoachMarkDisplayManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkDisplayManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -163,14 +204,194 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C61458B41BBB01F2006EB4F2 /* Enums */ = {
+		B61E44891EA8C47400D82BA1 /* OverlayStyleManager */ = {
+			isa = PBXGroup;
+			children = (
+				B61E448A1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift */,
+				B683D2471EA7815600E4798F /* OverlayStyleManager.swift */,
+				B61E448D1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift */,
+			);
+			path = OverlayStyleManager;
+			sourceTree = "<group>";
+		};
+		B65DDDBD1EE2C418002618AF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C6D4D0E21D58E74B00F14FC5 /* CoachMarksController+Proxy.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		B65DDDC51EE2D985002618AF /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				B65DDDBD1EE2C418002618AF /* Extensions */,
+				C64FB3461BB6D91E0081E5B6 /* CoachMark.swift */,
+				C6D3650F1D57C5BB00D2C6A2 /* CoachMarksController.swift */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		B65DDDC61EE2D98E002618AF /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				C61458B41BBB01F2006EB4F2 /* Enums */,
+				C633C4B41D535A880025FAE9 /* Extensions */,
+				C62DBF491D53BE6300AFAAE2 /* CoachMarkInnerLayoutHelper.swift */,
+				C633C4BC1D53A8E50025FAE9 /* CoachMarkLayoutHelper.swift */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		B65DDDC71EE2D9BB002618AF /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				B65DDDC81EE2D9C2002618AF /* Enums */,
+				C6D4D0EB1D5A774F00F14FC5 /* CoachMarkBodyDefaultViewHelper.swift */,
+				C62DBF4F1D5499AB00AFAAE2 /* CoachMarkHelper.swift */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		B65DDDC81EE2D9C2002618AF /* Enums */ = {
 			isa = PBXGroup;
 			children = (
 				C61458B21BBB01DE006EB4F2 /* CoachMarkArrowOrientation.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		B65DDDC91EE2DEBE002618AF /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				B61E44891EA8C47400D82BA1 /* OverlayStyleManager */,
+				C61A76BC1BDC16D700F131BF /* CoachMarkDisplayManager.swift */,
+				C6FAE2B01BDCFE4D0080DF69 /* SkipViewDisplayManager.swift */,
+				B63613DC2063AF54002168EA /* SkipViewDisplayManager+Regular.swift */,
+				B63613DE2063B987002168EA /* SkipViewDisplayManager+AppExtensions.swift */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		B65DDDCA1EE2DED7002618AF /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				C6D365111D57E97600D2C6A2 /* FlowManager.swift */,
+				B69B6D7B1E9CD5C000BE032D /* OverlayManager.swift */,
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		B65DDDCC1EE2E2B7002618AF /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				C6D4D0E61D59E4AF00F14FC5 /* CoachMarkViewControllerDelegate.swift */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		B68ABD271EEA017F0090A541 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		B68ABD281EEA01C20090A541 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B68ABD291EEA01D40090A541 /* Internal */,
+				B68ABD2A1EEA01DA0090A541 /* Public */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B68ABD291EEA01D40090A541 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				C632DDC01DD0CAD30052DBF8 /* DataSourceBaseTest.swift */,
+				C632DDC61DD0D0250052DBF8 /* DataSourceCoachMarkAtTest.swift */,
+				C632DDC41DD0CBAE0052DBF8 /* DataSourceNumberOfCoachMarksTest.swift */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		B68ABD2A1EEA01DA0090A541 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Public;
+			sourceTree = "<group>";
+		};
+		B68ABD2B1EEA09AF0090A541 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				B68ABD2C1EEA09B70090A541 /* OverlayStyleManager */,
+				C6FD96F61BDF887B00DE5889 /* CoachMarkDisplayManagerTests.swift */,
+				C6A130701DD07A5A00E00E75 /* SkipViewDisplayManagerTests.swift */,
+			);
+			path = Internal;
+			sourceTree = "<group>";
+		};
+		B68ABD2C1EEA09B70090A541 /* OverlayStyleManager */ = {
+			isa = PBXGroup;
+			children = (
+				B68ABD2D1EEA09D10090A541 /* BlurringOverlayStyleManagerTest.swift */,
+				B61B99DB1EEA8670006725D9 /* TranslucentOverlayStyleManagerTest.swift */,
+			);
+			path = OverlayStyleManager;
+			sourceTree = "<group>";
+		};
+		B6CCD0F31EE40F2C00D02022 /* Instructions */ = {
+			isa = PBXGroup;
+			children = (
+				C6D4D0E41D592D9800F14FC5 /* Core */,
+				C61458B51BBB0201006EB4F2 /* Extra */,
+				C62DBF481D53BE2500AFAAE2 /* Helpers */,
+				C633C4BB1D539C460025FAE9 /* Managers */,
+				C64FB33C1BB6CDBB0081E5B6 /* Protocols */,
+				C64FB33B1BB6CC5B0081E5B6 /* Supporting Files */,
+				C633C4B81D538D4A0025FAE9 /* Views */,
+				C64FB3531BB747590081E5B6 /* Instructions.swift */,
+			);
+			path = Instructions;
+			sourceTree = "<group>";
+		};
+		B6CCD0F41EE40FF100D02022 /* InstructionsTests */ = {
+			isa = PBXGroup;
+			children = (
+				B6CCD0F61EE4101600D02022 /* Core */,
+				C6A1304F1DCFB4A100E00E75 /* Helpers */,
+				C6A1304E1DCFB47E00E00E75 /* Managers */,
+				B68ABD281EEA01C20090A541 /* Protocols */,
+				B6CCD0F51EE4100100D02022 /* Supporting Files */,
+			);
+			path = InstructionsTests;
+			sourceTree = "<group>";
+		};
+		B6CCD0F51EE4100100D02022 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C64FB3271BB6CB680081E5B6 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B6CCD0F61EE4101600D02022 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B68ABD271EEA017F0090A541 /* Internal */,
+				C632DDC31DD0CAE50052DBF8 /* Public */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		C61458B41BBB01F2006EB4F2 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
 				C67100FF1BBFE3C50005DAFC /* CoachMarkPosition.swift */,
 			);
-			name = Enums;
-			path = ../Extra/Enums;
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		C61458B51BBB0201006EB4F2 /* Extra */ = {
@@ -184,25 +405,28 @@
 		C62DBF481D53BE2500AFAAE2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				C61458B41BBB01F2006EB4F2 /* Enums */,
-				C633C4B41D535A880025FAE9 /* Extensions */,
-				C6D4D0ED1D5A908100F14FC5 /* BlurEffectViewHelper.swift */,
-				C6D4D0EB1D5A774F00F14FC5 /* CoachMarkBodyDefaultViewHelper.swift */,
-				C62DBF4F1D5499AB00AFAAE2 /* CoachMarkHelper.swift */,
-				C62DBF491D53BE6300AFAAE2 /* CoachMarkInnerLayoutHelper.swift */,
-				C633C4BC1D53A8E50025FAE9 /* CoachMarkLayoutHelper.swift */,
-				C6D3650D1D57B07D00D2C6A2 /* MainViewsLayoutHelper.swift */,
+				B65DDDC61EE2D98E002618AF /* Internal */,
+				B65DDDC71EE2D9BB002618AF /* Public */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		C632DDC31DD0CAE50052DBF8 /* Public */ = {
+			isa = PBXGroup;
+			children = (
+				C63524301BC02AD10054EA0A /* CoachMarkTests.swift */,
+				C63FC2381BC91D1A00132132 /* CoachMarksControllerTests.swift */,
+			);
+			path = Public;
 			sourceTree = "<group>";
 		};
 		C633C4B41D535A880025FAE9 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				C633C4B51D535A990025FAE9 /* UIImage+Bundle.swift */,
+				B65DDDBE1EE2C43E002618AF /* UIView+Layout.swift */,
 			);
-			name = Extensions;
-			path = ../Extra/Extensions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C633C4B81D538D4A0025FAE9 /* Views */ = {
@@ -211,6 +435,9 @@
 				C64FB3511BB6FA250081E5B6 /* CoachMarkView.swift */,
 				C63BB9171C73CDE200C81A4D /* DummyView.swift */,
 				C63BB9181C73CDE200C81A4D /* InstructionsRootView.swift */,
+				B6072E0D1EE1C39400758C22 /* InstructionsWindow.swift */,
+				B6A102A81DFC8EFE009C73DF /* MaskView.swift */,
+				B683D24E1EA7D5E000E4798F /* OverlaySnapshotView.swift */,
 				C64FB3481BB6DC3B0081E5B6 /* OverlayView.swift */,
 			);
 			path = Views;
@@ -219,10 +446,8 @@
 		C633C4BB1D539C460025FAE9 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				C61A76BC1BDC16D700F131BF /* CoachMarkDisplayManager.swift */,
-				C6D365111D57E97600D2C6A2 /* FlowManager.swift */,
-				C633C4B91D538DA10025FAE9 /* OverlayViewLayerManager.swift */,
-				C6FAE2B01BDCFE4D0080DF69 /* SkipViewDisplayManager.swift */,
+				B65DDDC91EE2DEBE002618AF /* Internal */,
+				B65DDDCA1EE2DED7002618AF /* Public */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -253,9 +478,9 @@
 		C64FB2DF1BB6CA8A0081E5B6 = {
 			isa = PBXGroup;
 			children = (
+				C64FB2EA1BB6CA8A0081E5B6 /* Products */,
 				C64FB3211BB6CB5C0081E5B6 /* Sources */,
 				C64FB3261BB6CB680081E5B6 /* Tests */,
-				C64FB2EA1BB6CA8A0081E5B6 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -272,14 +497,7 @@
 		C64FB3211BB6CB5C0081E5B6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				C64FB3531BB747590081E5B6 /* Instructions.swift */,
-				C6D4D0E41D592D9800F14FC5 /* Controllers */,
-				C62DBF481D53BE2500AFAAE2 /* Helpers */,
-				C633C4BB1D539C460025FAE9 /* Managers */,
-				C64FB33C1BB6CDBB0081E5B6 /* Protocols */,
-				C633C4B81D538D4A0025FAE9 /* Views */,
-				C61458B51BBB0201006EB4F2 /* Extra */,
-				C64FB33B1BB6CC5B0081E5B6 /* Supporting Files */,
+				B6CCD0F31EE40F2C00D02022 /* Instructions */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -287,10 +505,7 @@
 		C64FB3261BB6CB680081E5B6 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				C6FD96F61BDF887B00DE5889 /* CoachMarkDisplayManagerTests.swift */,
-				C63524301BC02AD10054EA0A /* CoachMarkTests.swift */,
-				C63FC2381BC91D1A00132132 /* CoachMarksControllerTests.swift */,
-				C64FB3271BB6CB680081E5B6 /* Info.plist */,
+				B6CCD0F41EE40FF100D02022 /* InstructionsTests */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -309,29 +524,47 @@
 		C64FB33C1BB6CDBB0081E5B6 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				B65DDDCC1EE2E2B7002618AF /* Internal */,
 				C636FFB61BBC8ED600EB243B /* Public */,
-				C6D4D0E61D59E4AF00F14FC5 /* CoachMarkViewControllerDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		C6D4D0E41D592D9800F14FC5 /* Controllers */ = {
+		C6A1304E1DCFB47E00E00E75 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				C6D4D0F11D5B2A9800F14FC5 /* Public */,
-				C64FB3411BB6D1020081E5B6 /* CoachMarksViewController.swift */,
+				B68ABD2B1EEA09AF0090A541 /* Internal */,
 			);
-			path = Controllers;
+			path = Managers;
 			sourceTree = "<group>";
 		};
-		C6D4D0F11D5B2A9800F14FC5 /* Public */ = {
+		C6A1304F1DCFB4A100E00E75 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				C64FB3461BB6D91E0081E5B6 /* CoachMark.swift */,
-				C6D4D0E21D58E74B00F14FC5 /* CoachMarksController+Proxy.swift */,
-				C6D3650F1D57C5BB00D2C6A2 /* CoachMarksController.swift */,
+				C6A130501DCFB50D00E00E75 /* CoachMarkHelperTests.swift */,
+				C6A130731DD090AF00E00E75 /* CoachMarkInnerLayoutHelperTests.swift */,
+				C632DDBC1DD095F90052DBF8 /* CoachMarkLayoutHelperTests.swift */,
 			);
-			path = Public;
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		C6D4D0E41D592D9800F14FC5 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				C6D4D0F11D5B2A9800F14FC5 /* Internal */,
+				B65DDDC51EE2D985002618AF /* Public */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		C6D4D0F11D5B2A9800F14FC5 /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				C64FB3411BB6D1020081E5B6 /* CoachMarksViewController.swift */,
+				B63613E22063BCED002168EA /* CoachMarksViewController+AppExtension.swift */,
+				B63613E02063BBD3002168EA /* CoachMarksViewController+Regular.swift */,
+			);
+			path = Internal;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -417,24 +650,24 @@
 		C64FB2E01BB6CA8A0081E5B6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Ephread;
 				TargetAttributes = {
 					C6417E141D291A8A004D13EA = {
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0920;
 					};
 					C64FB2E81BB6CA8A0081E5B6 = {
 						CreatedOnToolsVersion = 7.0;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0920;
 					};
 					C64FB2F21BB6CA8A0081E5B6 = {
 						CreatedOnToolsVersion = 7.0;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0920;
 					};
 				};
 			};
 			buildConfigurationList = C64FB2E31BB6CA8A0081E5B6 /* Build configuration list for PBXProject "Instructions" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -490,7 +723,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ ${CARTHAGE} ];then\n    exit\nfi\nsource ~/.profile\nif which swiftlint > /dev/null; then\n    swiftlint\nelse\n    echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+			shellScript = "if [ ${CARTHAGE} ]; then\n    exit\nfi\n\nif [ -f ~/.profile ]; then\n    source ~/.profile\n\n    if which swiftlint > /dev/null; then\n        swiftlint\n    fi\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -499,17 +732,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B65DDDD71EE34BE4002618AF /* OverlayManager.swift in Sources */,
+				B65DDDD81EE34BE4002618AF /* OverlayStyleManager.swift in Sources */,
+				B65DDDD91EE34BE4002618AF /* MaskView.swift in Sources */,
 				C6D4D0F41D5B2DA300F14FC5 /* CoachMarksController+Proxy.swift in Sources */,
+				B683D2501EA7D5E000E4798F /* OverlaySnapshotView.swift in Sources */,
 				C6D4D0F51D5B2DA300F14FC5 /* CoachMarksController.swift in Sources */,
 				C6D4D0F61D5B2DA300F14FC5 /* UIImage+Bundle.swift in Sources */,
-				C6D4D0F71D5B2DA300F14FC5 /* BlurEffectViewHelper.swift in Sources */,
+				B6072E0F1EE1C39400758C22 /* InstructionsWindow.swift in Sources */,
 				C6D4D0F81D5B2DA300F14FC5 /* CoachMarkBodyDefaultViewHelper.swift in Sources */,
 				C6D4D0F91D5B2DA300F14FC5 /* CoachMarkHelper.swift in Sources */,
 				C6D4D0FA1D5B2DA300F14FC5 /* CoachMarkInnerLayoutHelper.swift in Sources */,
 				C6D4D0FB1D5B2DA300F14FC5 /* CoachMarkLayoutHelper.swift in Sources */,
-				C6D4D0FC1D5B2DA300F14FC5 /* MainViewsLayoutHelper.swift in Sources */,
-				C6D4D0FD1D5B2DA300F14FC5 /* OverlayViewLayerManager.swift in Sources */,
 				C6D4D0FE1D5B2DA300F14FC5 /* CoachMarkViewControllerDelegate.swift in Sources */,
+				B61E448C1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift in Sources */,
 				C6417E161D291A8A004D13EA /* CoachMarkArrowDefaultView.swift in Sources */,
 				C6417E171D291A8A004D13EA /* CoachMarksViewController.swift in Sources */,
 				C6417E181D291A8A004D13EA /* CoachMarkDisplayManager.swift in Sources */,
@@ -520,7 +756,9 @@
 				C6417E1D1D291A8A004D13EA /* SkipViewDisplayManager.swift in Sources */,
 				C6417E1E1D291A8A004D13EA /* CoachMarkArrowOrientation.swift in Sources */,
 				C6417E1F1D291A8A004D13EA /* CoachMarkBodyDefaultView.swift in Sources */,
+				B61E448F1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift in Sources */,
 				C6417E201D291A8A004D13EA /* CoachMarkSkipDefaultView.swift in Sources */,
+				B63613DF2063B988002168EA /* SkipViewDisplayManager+AppExtensions.swift in Sources */,
 				C6417E211D291A8A004D13EA /* CoachMarkPosition.swift in Sources */,
 				C6417E221D291A8A004D13EA /* OverlayView.swift in Sources */,
 				C6417E231D291A8A004D13EA /* CoachMarkBodyHighlightArrowDelegate.swift in Sources */,
@@ -528,9 +766,11 @@
 				C6417E251D291A8A004D13EA /* Instructions.swift in Sources */,
 				C6417E271D291A8A004D13EA /* CoachMarkArrowView.swift in Sources */,
 				C6417E281D291A8A004D13EA /* CoachMarkSkipView.swift in Sources */,
+				B65DDDC01EE2C43E002618AF /* UIView+Layout.swift in Sources */,
 				C6D365131D57E97700D2C6A2 /* FlowManager.swift in Sources */,
 				C6417E291D291A8A004D13EA /* CoachMarkBodyView.swift in Sources */,
 				C6417E2A1D291A8A004D13EA /* CoachMark.swift in Sources */,
+				B63613E32063BCED002168EA /* CoachMarksViewController+AppExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +779,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C636FFBB1BBC8FC300EB243B /* CoachMarkArrowDefaultView.swift in Sources */,
+				B63613DD2063AF54002168EA /* SkipViewDisplayManager+Regular.swift in Sources */,
+				B683D2481EA7815600E4798F /* OverlayStyleManager.swift in Sources */,
 				C64FB3431BB6D81C0081E5B6 /* CoachMarksViewController.swift in Sources */,
 				C62DBF4A1D53BE6300AFAAE2 /* CoachMarkInnerLayoutHelper.swift in Sources */,
 				C6D4D0E71D59E4AF00F14FC5 /* CoachMarkViewControllerDelegate.swift in Sources */,
@@ -548,19 +790,24 @@
 				C63BB9191C73CDE200C81A4D /* DummyView.swift in Sources */,
 				C63BB91A1C73CDE200C81A4D /* InstructionsRootView.swift in Sources */,
 				C6D4D0E31D58E74B00F14FC5 /* CoachMarksController+Proxy.swift in Sources */,
+				B683D24F1EA7D5E000E4798F /* OverlaySnapshotView.swift in Sources */,
+				B63613E12063BBD3002168EA /* CoachMarksViewController+Regular.swift in Sources */,
 				C6FAE2B11BDCFE4D0080DF69 /* SkipViewDisplayManager.swift in Sources */,
+				B61E448E1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift in Sources */,
 				C61458B31BBB01DE006EB4F2 /* CoachMarkArrowOrientation.swift in Sources */,
+				B69B6D7C1E9CD5C000BE032D /* OverlayManager.swift in Sources */,
 				C633C4B61D535A990025FAE9 /* UIImage+Bundle.swift in Sources */,
 				C636FFB91BBC8F3100EB243B /* CoachMarkBodyDefaultView.swift in Sources */,
 				C63FC23D1BC9BF3E00132132 /* CoachMarkSkipDefaultView.swift in Sources */,
 				C6D365101D57C5BB00D2C6A2 /* CoachMarksController.swift in Sources */,
-				C6D3650E1D57B07D00D2C6A2 /* MainViewsLayoutHelper.swift in Sources */,
-				C633C4BA1D538DA10025FAE9 /* OverlayViewLayerManager.swift in Sources */,
+				B65DDDBF1EE2C43E002618AF /* UIView+Layout.swift in Sources */,
 				C67101001BBFE3C50005DAFC /* CoachMarkPosition.swift in Sources */,
-				C6D4D0EE1D5A908100F14FC5 /* BlurEffectViewHelper.swift in Sources */,
+				B6A102A91DFC8EFE009C73DF /* MaskView.swift in Sources */,
+				B6072E0E1EE1C39400758C22 /* InstructionsWindow.swift in Sources */,
 				C6D4D0EC1D5A774F00F14FC5 /* CoachMarkBodyDefaultViewHelper.swift in Sources */,
 				C6D365121D57E97600D2C6A2 /* FlowManager.swift in Sources */,
 				C64FB3491BB6DC3B0081E5B6 /* OverlayView.swift in Sources */,
+				B61E448B1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift in Sources */,
 				C64FB37E1BB828E50081E5B6 /* CoachMarkBodyHighlightArrowDelegate.swift in Sources */,
 				C64FB3451BB6D81C0081E5B6 /* CoachMarksControllerDelegate.swift in Sources */,
 				C64FB3541BB747590081E5B6 /* Instructions.swift in Sources */,
@@ -577,8 +824,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B61B99DC1EEA86D0006725D9 /* TranslucentOverlayStyleManagerTest.swift in Sources */,
+				B68ABD2E1EEA0CCD0090A541 /* BlurringOverlayStyleManagerTest.swift in Sources */,
+				C6A130721DD07B7800E00E75 /* SkipViewDisplayManagerTests.swift in Sources */,
+				C6A130521DCFB8E600E00E75 /* CoachMarkHelperTests.swift in Sources */,
+				C632DDC11DD0CAD30052DBF8 /* DataSourceBaseTest.swift in Sources */,
+				C632DDC71DD0D0250052DBF8 /* DataSourceCoachMarkAtTest.swift in Sources */,
+				C6A130741DD090AF00E00E75 /* CoachMarkInnerLayoutHelperTests.swift in Sources */,
 				C63524311BC02AD10054EA0A /* CoachMarkTests.swift in Sources */,
+				C632DDC51DD0CBAE0052DBF8 /* DataSourceNumberOfCoachMarksTest.swift in Sources */,
 				C63FC2391BC91D1A00132132 /* CoachMarksControllerTests.swift in Sources */,
+				C632DDBD1DD095F90052DBF8 /* CoachMarkLayoutHelperTests.swift in Sources */,
 				C6FD96F71BDF887B00DE5889 /* CoachMarkDisplayManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -604,14 +860,15 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Supporting Files/InfoAppExtensions.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Instructions/Supporting Files/InfoAppExtensions.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS_APP_EXTENSIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.InstructionsAppExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -625,14 +882,15 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Supporting Files/InfoAppExtensions.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Sources/Instructions/Supporting Files/InfoAppExtensions.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS_APP_EXTENSIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.InstructionsAppExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -644,14 +902,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -675,12 +939,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -695,14 +961,20 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -720,11 +992,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_SWIFT_FLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -742,14 +1016,15 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "Sources/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Sources/Instructions/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -762,36 +1037,39 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Sources/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Sources/Instructions/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
 		C64FB3011BB6CA8A0081E5B6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = "Tests/InstructionsTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.InstructionsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
 		C64FB3021BB6CA8A0081E5B6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = Tests/Info.plist;
+				INFOPLIST_FILE = "Tests/InstructionsTests/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.InstructionsTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};

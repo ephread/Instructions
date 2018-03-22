@@ -1,6 +1,6 @@
 # ![Instructions](http://i.imgur.com/K51lqvW.png)
 
-[![Travis build status](https://img.shields.io/travis/ephread/Instructions.svg)](https://travis-ci.org/ephread/Instructions) [![codebeat badge](https://codebeat.co/badges/7bbb17b5-2cde-4108-aac0-eefcd439cf9f)](https://codebeat.co/projects/github-com-ephread-instructions) [![CocoaPods Shield](https://img.shields.io/cocoapods/v/Instructions.svg)](https://cocoapods.org/pods/Instructions) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Join the chat at https://gitter.im/ephread/Instructions](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ephread/Instructions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Travis build status](https://img.shields.io/travis/ephread/Instructions.svg)](https://travis-ci.org/ephread/Instructions) [![codebeat badge](https://codebeat.co/badges/7bbb17b5-2cde-4108-aac0-eefcd439cf9f)](https://codebeat.co/projects/github-com-ephread-instructions) [![codecov](https://codecov.io/gh/ephread/Instructions/branch/master/graph/badge.svg)](https://codecov.io/gh/ephread/Instructions) [![CocoaPods Shield](https://img.shields.io/cocoapods/v/Instructions.svg)](https://cocoapods.org/pods/Instructions) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Join the chat at https://gitter.im/ephread/Instructions](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ephread/Instructions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Add customizable coach marks into your iOS project. Available for both iPhone and iPad.
 
@@ -25,12 +25,6 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 ## Overview
 ![Instructions Demo](http://i.imgur.com/JUlQH9F.gif)
 
-⚠️ **Swift 3 brings some changes, please take a look at the [quick guide] if you need to migrate.**
-
-⚠️ **Until Instructions reaches 1.0.0, the API is subject to change. Please see the Features section for more information about the roadmap.**
-
-[quick guide]: https://github.com/ephread/Instructions/tree/master/Documentation/MigratingFromSwift2ToSwift3.md
-
 ## Features
 - [x] [Customizable highlight system](#advanced-usage)
 - [x] [Customizable views](#providing-custom-views)
@@ -40,16 +34,14 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 - [x] [App Extensions support](#usage-within-app-extensions)
 - [x] Right-to-left support
 - [x] Size transition support (orientation and multi-tasking)
-- [ ] Good test coverage • **Once done, it should bump version to 1.0.0**
-- [ ] Cross controllers walkthrough
-- [ ] Full UIVisualEffectView support
-- [ ] Multiple coach marks support
+- [x] Partial `UIVisualEffectView` support
 - [ ] Coach marks animation
+- [ ] Cross controllers walkthrough
+- [ ] Multiple coach marks support
 
 ## Requirements
-- Xcode 8 / Swift 3 (use `master`)
-- Xcode 8 / Swift 2.3 (use `0.5.x` or [`swift2`](https://github.com/ephread/Instructions/tree/swift2))
-- iOS 8.0+
+- Xcode 9 / Swift 3.2, Swift 4+
+- iOS 10.0+
 
 ## Asking Questions / Contributing
 
@@ -74,10 +66,10 @@ Add Instructions to your Podfile:
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
-pod 'Instructions', '~> 0.5'
+pod 'Instructions', '~> 1.0.0'
 ```
 
 Then, run the following command:
@@ -90,7 +82,7 @@ $ pod install
 Add Instructions to your Cartfile:
 
 ```
-github "ephread/Instructions" ~> 0.5
+github "ephread/Instructions" ~> 1.0.0
 ```
 
 You can then update, build and drag the generated framework into your project:
@@ -112,7 +104,7 @@ If you rather stay away from both CocoaPods and Carthage, you can also install I
 ## Usage
 
 ### Getting started
-Open up the controller for which you wish to display coach marks and instanciate a new `CoachMarksController`. You should also provide a `dataSource`, which is an object conforming to the `CoachMarksControllerDataSource` protocol.
+Open up the controller for which you wish to display coach marks and instantiate a new `CoachMarksController`. You should also provide a `dataSource`, which is an object conforming to the `CoachMarksControllerDataSource` protocol.
 
 ```swift
 class DefaultViewController: UIViewController, CoachMarksControllerDataSource, CoachMarksControllerDelegate {
@@ -129,10 +121,10 @@ class DefaultViewController: UIViewController, CoachMarksControllerDataSource, C
 #### Data Source
 `CoachMarksControllerDataSource` declares three mandatory methods.
 
-The first one asks for the number of coach marks to display. Let's pretend that you want to display only one coach mark. Note that the `CoachMarksController` requesting the information is supplied, allowing you to supply data for mutiple `CoachMarksController`, within a single dataSource.
+The first one asks for the number of coach marks to display. Let's pretend that you want to display only one coach mark. Note that the `CoachMarksController` requesting the information is supplied, allowing you to supply data for multiple `CoachMarksController`, within a single dataSource.
 
 ```swift
-func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int
+func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
     return 1
 }
 ```
@@ -144,7 +136,7 @@ let pointOfInterest = UIView()
 
 func coachMarksController(_ coachMarksController: CoachMarksController,
                               coachMarkAt index: Int) -> CoachMark {
-    return coachMarksController.helper.makeCoachMark(for: self.reputationLabel)
+    return coachMarksController.helper.makeCoachMark(for: pointOfInterest)
 }
 ```
 
@@ -164,13 +156,13 @@ func coachMarksController(_ coachMarksController: CoachMarksController, coachMar
 ```
 
 #### Starting the coach marks flow
-Once the `dataSource` is set up, you can start displaying the coach marks. You will most likely supply `self` to `startOn`. While the overlay adds itself as a child of the current window (to be on top of everything), the `CoachMarksController` will add itself as a child of the view controller you provide. That way, the `CoachMarksController` will receive size change events and react accordingly. Be careful, you can't call `startOn` in the `viewDidLoad` method, since the view hierarchy has to be set up and ready for Instructions to work properly.
+Once the `dataSource` is set up, you can start displaying the coach marks. You will most likely supply `self` to `start`. While the overlay adds itself as a child of the current window (to be on top of everything), the `CoachMarksController` will add itself as a child of the view controller you provide. That way, the `CoachMarksController` will receive size change events and react accordingly. Be careful, you can't call `start` in the `viewDidLoad` method, since the view hierarchy has to be set up and ready for Instructions to work properly.
 
 ```swift
 override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
-    self.coachMarksController.startOn(self)
+    self.coachMarksController.start(on: self)
 }
 ```
 
@@ -198,9 +190,20 @@ You can also make the overlay blur the content sitting behind it. Setting this p
 
 - `overlay.blurEffectStyle: UIBlurEffectStyle?`
 
+The overlay can sit above the status bar or below, the property defaults to `true`:
+
+- `overlay.isShownAboveStatusBar: Bool`
+
+The window level at which show the overlay and the coach mark, by default, the property holds `UIWindowLevelNormal + 1`.
+
+- `overlay.windowLevel: UIWindowLevel`
+
 Last, you can make the overlay tappable. A tap on the overlay will hide the current coach mark and display the next one.
 
 - `overlay.allowTap: Bool`
+
+⚠️ When using a blur effect, setting the window level to anything above `UIWindowLevelStatusBar`
+is not supported.
 
 #### Providing a custom cutout path
 If you dislike how the default cutout path looks like, you can customize it by providing a block to `makeCoachMark(for:)`. The cutout path will automatically be stored in the `cutoutPath` property of the returning `CoachMark` object:
@@ -290,7 +293,7 @@ As usual, Instructions provides a default implementation of `CoachMarkSkipView` 
 To define how the view will position itself, you can use a method from the `CoachMarkControllerDataSource` protocol. This method is optional.
 
 ```swift
-func coachMarksController(_ coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParentView parentView: UIView) -> [NSLayoutConstraint]?
+func coachMarksController(_ coachMarksController: CoachMarksController, constraintsForSkipView skipView: UIView, inParent parentView: UIView) -> [NSLayoutConstraint]?
 ```
 
 This method will be called by the `CoachMarksController` before starting the tour and whenever there is a size change. It gives you the _skip button_ and the view in which it will be positioned and expects an array of `NSLayoutConstraints` in return. These constraints will define how the _skip button_ will be positioned in its parent. You should not add the constraints yourself, just return them.
@@ -331,6 +334,18 @@ Third, when all coach marks have been displayed. `didEndShowingBySkipping` speci
 func coachMarksController(_ coachMarksController: CoachMarksController, didEndShowingBySkipping skipped: Bool)
 ```
 
+##### React when the user tap the overlay #####
+
+Whenever the user will tap the overlay, you will get notified through:
+
+```swift    
+func shouldHandleOverlayTap(in coachMarksController: CoachMarksController, at index: Int) -> Bool
+```
+
+Returning `true` will let Instructions continue the flow normally, while returning `false` will interrupt it. If you choose to interrupt the flow, you're responsible for either stopping or pausing it or manually show the next coach marks (see [Piloting the flow from the code](#piloting-the-flow-from-the-code)).
+
+`index` is the index of the coach mark currently displayed.
+
 ##### Performing animations before showing coach marks #####
 You can perform animation on views, before or after showing a given coach mark.
 For instance, you might want to collapse a table view and show only its header, before referring to those headers with a coach mark. Instructions offers a simple way to insert your own animations into the flow.
@@ -358,6 +373,10 @@ func coachMarksController(_ coachMarksController: CoachMarksController, willShow
 }
 ```
 
+⚠️ Since the blurring overlay snapshots the view during coach mark appearance/disappearance,
+you should make sure that animations targeting your own view don't occur while a coach mark
+is appearing or disappearing. Otherwise, the animation won't be visible.
+
 ##### Skipping a coach mark
 
 You can skip a given coach mark by implementing the following method defined in `CoachMarksControllerDelegate`:
@@ -368,8 +387,28 @@ func coachMarksController(_ coachMarksController: CoachMarksController, coachMar
 
 `coachMarkWillLoadAt:` is called right before a given coach mark will show. To prevent a CoachMark from showing, you can return `false` from this method.
 
+#### Dealing with frame changes
+
+Since Instructions doesn't hold any reference to the _views of interest_, it cannot respond to their
+change of frame automatically.
+
+Instructions provide two methods to deal with frame changes.
+
+- `CoachMarkController.prepareForChange()`, called before a change of frame, to hide
+  the coach mark and the cutout path.
+- `CoachMarkController.restoreAfterChangeDidComplete()`, called after a change of frame
+  to show the coach mark and the cutout again.
+
+Although you can call these methods at any time while Instructions is idle, the result will not
+look smooth if the coach mark is already displayed. It's make the changes occur between
+two coach marks, by pausing and resuming the flow. [`KeyboardViewController`] shows an
+example of this technique.
+
+[`KeyboardViewController`]: https://github.com/ephread/Instructions/blob/master/Examples/Example/KeyboardViewController.swift
+
 ### Usage within App Extensions
-If you wish to add Instructions within App Extensions, there's additional work you need to perform. An example is available in the `App Extensions Example/` directory.
+If you wish to add Instructions within App Extensions, there's additional work you need to perform.
+An example is available in the `App Extensions Example/` directory.
 
 #### Dependencies
 Instructions comes with two shared schemes, `Instructions` and `InstructionsAppExtensions`. The only differences between the two is that `InstructionsAppExtensions` does not depend upon the `UIApplication.sharedApplication()`, making it suitable for App Extensions.
@@ -378,27 +417,32 @@ In the following examples, let's consider a project with two targets, one for a 
 
 #### CocoaPods
 
-If you're importing Instructions with CocoaPods, you'll need to edit your `Podfile` to make it look like this:
+If you're importing Instructions with CocoaPods, you'll need to edit your `Podfile` to make it look
+like this:
 
 ```ruby
 target 'Instructions App Extensions Example' do
-  pod 'Instructions', '~> 0.5'
+  pod 'Instructions', '~> 1.0.0'
 end
 
 target 'Keyboard Extension' do
-  pod 'Instructions/AppExtensions', '~> 0.5'
+  pod 'InstructionsAppExtensions', '~> 1.0.0'
 end
 ```
 
-If Instructions only imported from within App Extension target, you don't need the first block.
+If Instructions is only imported from within App Extension target, you don't need the first block.
 
-When compiling either targets, CocoaPods will make sure the appropriate flags are set, thus allowing/forbidding calls to `UIApplication.sharedApplication()`. You don't need to change your code.
+When compiling either targets, CocoaPods will make sure the appropriate flags are set, thus
+allowing/forbidding calls to `UIApplication.sharedApplication()`.
+You don't need to change your code.
 
 #### Frameworks (Carthage / Manual management)
 
-If you're importing Instructions through frameworks, you'll notice that the two shared schemes (`Instructions` and `InstructionsAppExtensions`) both result in different frameworks.
+If you're importing Instructions through frameworks, you'll notice that the two shared schemes
+(`Instructions` and `InstructionsAppExtensions`) both result in different frameworks.
 
-You need to embed both frameworks and link them to the proper targets. Make sure they look like theses:
+You need to embed both frameworks and link them to the proper targets.
+Make sure they look like theses:
 
 **Instructions App Extensions Example**
 ![Imgur](http://i.imgur.com/3M3BQaO.png)
@@ -410,19 +454,26 @@ If you plan to add Instructions only to the App Extension target, you don't need
 
 ##### Import statements
 
-When importing Instructions from files within `Instructions App Extensions Example`, you should use the regular import statement:
+When importing Instructions from files within `Instructions App Extensions Example`,
+you should use the regular import statement:
 
 ```swift
 import Instructions
 ```
 
-However, when importing Instructions from files within `Keyboard Extension`, you should use the specific statement:
+However, when importing Instructions from files within `Keyboard Extension`, you should
+use the specific statement:
 
 ```swift
 import InstructionsAppExtensions
 ```
 
-⚠️ **Please be extremely careful**, as you will be able to import regular _Instructions_ from within an app extension without breaking anything. It will work. However, you're at a high risk of rejection from the Apple Store. Uses of `UIApplication.sharedApplication()` are statically checked during compilation but nothing prevents you from performing the calls at runtime. Fortunately Xcode should warn you if you've mistakenly linked with a framework not suited for App Extensions.
+⚠️ **Please be extremely careful**, as you will be able to import regular _Instructions_
+from within an app extension without breaking anything. It will work. However, you're at a
+high risk of rejection from the Apple Store. Uses of `UIApplication.sharedApplication()`
+are statically checked during compilation but nothing prevents you from performing the calls
+at runtime. Fortunately Xcode should warn you if you've mistakenly linked with a framework
+not suited for App Extensions.
 
 ## License
 

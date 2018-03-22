@@ -1,13 +1,28 @@
 # Change Log
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
-However, until it reaches 1.0.0, some breaking changes are to be expected.
 
-## 0.6.0
-Released on 2016-XX-XX.
+## [1.1.0](https://github.com/ephread/Instructions/releases/tag/1.1.0)
+Released on 2017-08-09.
 
 ### Added
-- Support for Swift 3
+- Add a new delegate method to handle tap on the overlay ([#100]).
+
+### Fixed
+- Fix [#127] & [#132] by retrieve configuration from parent controller.
+
+## [1.0.0](https://github.com/ephread/Instructions/releases/tag/1.0.0)
+Released on 2017-07-05.
+
+No changes.
+
+## [1.0.0-beta.1](https://github.com/ephread/Instructions/releases/tag/1.0.0-beta.1)
+Released on 2017-06-04.
+
+### Added
+- Support for Swift 3.
+- Ability to choose the `UIWindowLevel` for the overlay.
+- Ability to prepare Instructions for frame changes manually.
 
 ### Changed
 - Renamed a number of methods to make them conform to the [API Design Guidelines]
@@ -15,11 +30,13 @@ Released on 2016-XX-XX.
 ### Fixed
 - Fix [#74] possible build failure on Carthage due to unneeded build dependency (PR [#76]).
 - Fix inability to detect if user has skipped the flow (PR [#81]).
+- Fix blur effect on iOS 10 [#80].
 
 [API Design Guidelines]: https://swift.org/documentation/api-design-guidelines/
 [#74]: https://github.com/ephread/Instructions/issues/74
 [#76]: https://github.com/ephread/Instructions/issues/76
 [#81]: https://github.com/ephread/Instructions/issues/81
+[#80]: https://github.com/ephread/Instructions/issues/80
 
 ## [0.5.0](https://github.com/ephread/Instructions/releases/tag/0.5.0)
 Released on 2016-09-06.

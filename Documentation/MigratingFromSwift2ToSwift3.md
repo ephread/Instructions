@@ -60,9 +60,9 @@ func coachMarksController(_ coachMarksController: CoachMarksController, didEndSh
 
 ```swift
 public func coachMarkForView(view: UIView? = nil, pointOfInterest: CGPoint? = nil, bezierPathBlock: ((_ frame: CGRect) -> UIBezierPath)? = nil) -> CoachMark
-                             
+
 public func defaultCoachViewsWithArrow(arrow: Bool = true, withNextText nextText: Bool = true, arrowOrientation: CoachMarkArrowOrientation? = .Top) -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?)
-                                       
+
 public func updateCurrentCoachMarkForView(view: UIView? = nil, pointOfInterest: CGPoint? = nil , bezierPathBlock: ((_ frame: CGRect) -> UIBezierPath)? = nil)
 ```
 **Swift 3**
@@ -70,8 +70,21 @@ public func updateCurrentCoachMarkForView(view: UIView? = nil, pointOfInterest: 
 ```swift
 public func makeCoachMark(for view: UIView? = nil, pointOfInterest: CGPoint? = nil,
                           cutoutPathMaker: ((_ frame: CGRect) -> UIBezierPath)? = nil) -> CoachMark
-                          
+
 public func makeDefaultCoachViews(withArrow arrow: Bool = true, withNextText nextText: Bool = true, arrowOrientation: CoachMarkArrowOrientation? = .top) -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?)
 
 public func updateCurrentCoachMark(usingView view: UIView? = nil, pointOfInterest: CGPoint? = nil, cutoutPathMaker: CutoutPathMaker? = nil)
+```
+
+## `CoachMarksController`
+
+**Swift 2**
+
+```swift
+public func startOn(parentViewController: UIViewController)
+```
+**Swift 3**
+
+```swift
+public func start(on parentViewController: UIViewController)
 ```

@@ -120,21 +120,20 @@ class CoachMarksViewController: UIViewController {
         deregisterFromSystemEventChanges()
     }
 
-    // MARK: - Private Methods
-
 #if INSTRUCTIONS_APP_EXTENSIONS
-    fileprivate func addRootView(to window: UIWindow) {
+    func addRootView(to window: UIWindow) {
         window.addSubview(instructionsRootView)
         instructionsRootView.fillSuperview()
         instructionsRootView.backgroundColor = UIColor.clear
     }
 #endif
 
-    fileprivate func addOverlayView() {
+    func addOverlayView() {
         instructionsRootView.addSubview(overlayManager.overlayView)
         overlayManager.overlayView.fillSuperview()
     }
 
+    // MARK: - Private Methods
     /// Add a the "Skip view" to the main view container.
     fileprivate func addSkipView() {
         guard let skipView = skipView else { return }
@@ -286,8 +285,7 @@ extension CoachMarksViewController {
         }
     }
 
-    // MARK: - Private methods
-    fileprivate func registerForSystemEventChanges() {
+    func registerForSystemEventChanges() {
         let center = NotificationCenter.default
 
         center.addObserver(self, selector: #selector(prepareForChange),
@@ -297,75 +295,15 @@ extension CoachMarksViewController {
                            name: .UIApplicationDidChangeStatusBarFrame, object: nil)
     }
 
-    fileprivate func deregisterFromSystemEventChanges() {
+    func deregisterFromSystemEventChanges() {
         NotificationCenter.default.removeObserver(self)
     }
-}
 
-// MARK: - Extension: Controller Containment
-extension CoachMarksViewController {
-#if INSTRUCTIONS_APP_EXTENSIONS
-    /// Will attach the controller as a child of the given view controller. This will
-    /// allow the coach mark controller to respond to size changes.
-    /// `instructionsRootView` will be a subview of `parentViewController.view`.
-    ///
-    /// - Parameter parentViewController: the controller of which become a child
-    func attach(to parentViewController: UIViewController) {
-        guard let window = parentViewController.view?.window else {
-            print("attachToViewController: Instructions could not be properly" +
-                "attached to the window, did you call `startOn` inside" +
-                "`viewDidLoad` instead of `ViewDidAppear`?")
-
-            return
-        }
-
-        retrieveConfig(from: parentViewController)
-
-        parentViewController.addChildViewController(self)
-        parentViewController.view.addSubview(self.view)
-
-        registerForSystemEventChanges()
-        addRootView(to: window)
-        addOverlayView()
-
-        self.didMove(toParentViewController: parentViewController)
-
-        window.layoutIfNeeded()
+    func retrieveConfig(from parentViewController: UIViewController) {
+        _shouldAutorotate = parentViewController.shouldAutorotate
+        _prefersStatusBarHidden = parentViewController.prefersStatusBarHidden
+        _supportedInterfaceOrientations = parentViewController.supportedInterfaceOrientations
     }
-
-    /// Detach the controller from its parent view controller.
-    func detachFromWindow() {
-        self.instructionsRootView.removeFromSuperview()
-        self.willMove(toParentViewController: nil)
-        self.view.removeFromSuperview()
-        self.removeFromParentViewController()
-        deregisterFromSystemEventChanges()
-    }
-#else
-    /// Will attach the controller as the rootViewController of a given window. This will
-    /// allow the coach mark controller to respond to size changes and present itself
-    /// above evrything.
-    ///
-    /// - Parameter window: the window holding the controller
-    func attach(to window: UIWindow, of viewController: UIViewController) {
-        window.windowLevel = overlayManager.windowLevel
-
-        retrieveConfig(from: viewController)
-
-        registerForSystemEventChanges()
-        addOverlayView()
-
-        window.rootViewController = self
-        window.isHidden = false
-    }
-
-    /// Detach the controller from its parent view controller.
-    func detachFromWindow() {
-        deregisterFromSystemEventChanges()
-        self.view.window?.isHidden = true
-        self.view.window?.rootViewController = nil
-    }
-#endif
 }
 
 // MARK: - Private Extension: User Events
@@ -394,11 +332,5 @@ private extension CoachMarksViewController {
     /// - Parameter sender: the object sending the message
     @objc func skipCoachMarksTour(_ sender: AnyObject?) {
         delegate?.didTap(skipView: skipView)
-    }
-
-    func retrieveConfig(from parentViewController: UIViewController) {
-        _shouldAutorotate = parentViewController.shouldAutorotate
-        _prefersStatusBarHidden = parentViewController.prefersStatusBarHidden
-        _supportedInterfaceOrientations = parentViewController.supportedInterfaceOrientations
     }
 }

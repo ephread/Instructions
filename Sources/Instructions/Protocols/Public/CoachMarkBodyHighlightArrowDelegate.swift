@@ -25,7 +25,7 @@ import UIKit
 /// Delegate the hilight mecanism of the arrow. This protocol is
 /// useful in case the whole body itself is the active control and
 /// we want the arrow to looks like it is part of this control.
-public protocol CoachMarkBodyHighlightArrowDelegate : class {
+public protocol CoachMarkBodyHighlightArrowDelegate: class {
 
     /// Set wethe ror not the arrow should get in its
     /// highlighted state.

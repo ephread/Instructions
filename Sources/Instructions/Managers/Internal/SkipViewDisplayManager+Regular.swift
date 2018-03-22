@@ -1,6 +1,6 @@
-// CoachMarkBodyView.swift
+// SkipViewDisplayManager.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2018 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,17 +22,15 @@
 
 import UIKit
 
-/// A protocol to which all the "body views" of a coach mark must conform.
-public protocol CoachMarkBodyView: class {
-    /// The control that will trigger the change between the current coach mark
-    /// and the next one.
-    var nextControl: UIControl? { get }
+extension SkipViewDisplayManager {
+    func updateTopConstant(from original: CGFloat) -> CGFloat {
+        if #available(iOS 11.0, *) {
+            let window = UIApplication.shared.keyWindow
+            return window?.safeAreaInsets.top ?? original
+        } else if !UIApplication.shared.isStatusBarHidden {
+            return UIApplication.shared.statusBarFrame.size.height
+        }
 
-    /// A delegate to call, when the arrow view to mirror the current highlight
-    /// state of the body view. This is useful in case the entier view is actually a `UIControl`.
-    ///
-    /// The `CoachMarkView`, of which the current view must be
-    /// part, will automatically set itself as the delegate and will take care
-    /// of fowarding the state to the arrow view.
-    weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate? { get set }
+        return original
+    }
 }

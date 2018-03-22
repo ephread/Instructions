@@ -164,6 +164,7 @@ public class OverlayManager {
     }
 }
 
+// swiftlint:disable class_delegate_protocol
 /// This protocol expected to be implemented by CoachMarkManager, so
 /// it can be notified when a tap occured on the overlay.
 internal protocol OverlayManagerDelegate: Snapshottable {

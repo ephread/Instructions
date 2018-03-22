@@ -1,6 +1,6 @@
-// CoachMarkBodyView.swift
+// CoachMarksViewController+Regular.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2018 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,17 +22,29 @@
 
 import UIKit
 
-/// A protocol to which all the "body views" of a coach mark must conform.
-public protocol CoachMarkBodyView: class {
-    /// The control that will trigger the change between the current coach mark
-    /// and the next one.
-    var nextControl: UIControl? { get }
-
-    /// A delegate to call, when the arrow view to mirror the current highlight
-    /// state of the body view. This is useful in case the entier view is actually a `UIControl`.
+// MARK: - Extension: Controller Containment
+extension CoachMarksViewController {
+    /// Will attach the controller as the rootViewController of a given window. This will
+    /// allow the coach mark controller to respond to size changes and present itself
+    /// above evrything.
     ///
-    /// The `CoachMarkView`, of which the current view must be
-    /// part, will automatically set itself as the delegate and will take care
-    /// of fowarding the state to the arrow view.
-    weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate? { get set }
+    /// - Parameter window: the window holding the controller
+    func attach(to window: UIWindow, of viewController: UIViewController) {
+        window.windowLevel = overlayManager.windowLevel
+
+        retrieveConfig(from: viewController)
+
+        registerForSystemEventChanges()
+        addOverlayView()
+
+        window.rootViewController = self
+        window.isHidden = false
+    }
+
+    /// Detach the controller from its parent view controller.
+    func detachFromWindow() {
+        deregisterFromSystemEventChanges()
+        self.view.window?.isHidden = true
+        self.view.window?.rootViewController = nil
+    }
 }

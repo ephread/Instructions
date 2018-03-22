@@ -116,15 +116,14 @@ class CoachMarkLayoutHelper {
                                               inParentView: parentView)
         default:
             arrowOffset = 0
-            break
         }
 
         return arrowOffset
     }
 
     private func leadingArrowOffset(for coachMark: CoachMark,
-                            withProperties properties: CoachMarkComputedProperties,
-                            inParentView parentView: UIView) -> CGFloat {
+                                    withProperties properties: CoachMarkComputedProperties,
+                                    inParentView parentView: UIView) -> CGFloat {
         guard let pointOfInterest = coachMark.pointOfInterest else {
             print("The point of interest was found nil. Fallbacking offset will be 0")
             return 0
@@ -139,8 +138,8 @@ class CoachMarkLayoutHelper {
     }
 
     private func middleArrowOffset(for coachMark: CoachMark,
-                           withProperties properties: CoachMarkComputedProperties,
-                           inParentView parentView: UIView) -> CGFloat {
+                                   withProperties properties: CoachMarkComputedProperties,
+                                   inParentView parentView: UIView) -> CGFloat {
         guard let pointOfInterest = coachMark.pointOfInterest else {
             print("The point of interest was found nil. Fallbacking offset will be 0")
             return 0
@@ -154,8 +153,8 @@ class CoachMarkLayoutHelper {
     }
 
     private func trailingArrowOffset(for coachMark: CoachMark,
-                             withProperties properties: CoachMarkComputedProperties,
-                             inParentView parentView: UIView) -> CGFloat {
+                                     withProperties properties: CoachMarkComputedProperties,
+                                     inParentView parentView: UIView) -> CGFloat {
         guard let pointOfInterest = coachMark.pointOfInterest else {
             print("The point of interest was found nil. Fallbacking offset will be 0")
             return 0

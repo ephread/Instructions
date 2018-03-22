@@ -107,20 +107,32 @@ class SkipViewDisplayManager {
 
         var constraints = [NSLayoutConstraint]()
 
-        constraints.append(skipView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor,
+        let trailingAnchor: NSLayoutXAxisAnchor
+        if #available(iOS 11.0, *) {
+            trailingAnchor = parentView.safeAreaLayoutGuide.trailingAnchor
+        } else {
+            trailingAnchor = parentView.trailingAnchor
+        }
+
+        constraints.append(skipView.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                               constant: -10))
 
         var topConstant: CGFloat = 0.0
 
-        #if !INSTRUCTIONS_APP_EXTENSIONS
-            if !UIApplication.shared.isStatusBarHidden {
-                topConstant = UIApplication.shared.statusBarFrame.size.height
-            }
-        #endif
+        let topAnchor: NSLayoutYAxisAnchor
+        if #available(iOS 11.0, *) {
+            topAnchor = parentView.safeAreaLayoutGuide.topAnchor
+        } else {
+            topAnchor = parentView.topAnchor
+
+            #if !INSTRUCTIONS_APP_EXTENSIONS
+                topConstant = updateTopConstant(from: topConstant)
+            #endif
+        }
 
         topConstant += 2
 
-        constraints.append(skipView.topAnchor.constraint(equalTo: parentView.topAnchor,
+        constraints.append(skipView.topAnchor.constraint(equalTo: topAnchor,
                                                          constant: topConstant))
 
         return constraints

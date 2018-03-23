@@ -37,6 +37,7 @@ script:
 branches:
   only:
     - travis
+    - master
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -cF ios

@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode8
+osx_image: xcode9.2
 
 env:
   global:
@@ -7,10 +7,10 @@ env:
 
     - PROJECT="Instructions.xcodeproj"
     - IOS_SCHEME="Instructions"
-    - IOS_SDK=iphonesimulator10.0
+    - IOS_SDK=iphonesimulator11.2
 
   matrix:
-    - DESTINATION="OS=10.0,name=iPhone 7" SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" BUILD_APP_EXTENSION_EXAMPLE="YES" POD_LINT="YES"
+    - DESTINATION="OS=11.2,name=iPhone X" SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" BUILD_APP_EXTENSION_EXAMPLE="YES" POD_LINT="YES"
 
 before_install:
   - gem install cocoapods xcpretty
@@ -36,9 +36,7 @@ script:
 
 branches:
   only:
-    - master
-    - swift3
-    - tests
+    - travis
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -cF ios

@@ -2,6 +2,16 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
+## X.X.X
+Released on 2018-XX-XX.
+
+### Changed
+- Migrated to Swift 4
+
+### Added
+- Proper support for iPhone X
+
+
 ## [1.1.0](https://github.com/ephread/Instructions/releases/tag/1.1.0)
 Released on 2017-08-09.
 

@@ -40,7 +40,7 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 - [ ] Multiple coach marks support
 
 ## Requirements
-- Xcode 9 / Swift 3.2, Swift 4+
+- Xcode 9 / Swift 4+
 - iOS 10.0+
 
 ## Asking Questions / Contributing

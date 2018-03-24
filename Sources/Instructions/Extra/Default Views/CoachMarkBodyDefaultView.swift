@@ -35,82 +35,98 @@ public class CoachMarkBodyDefaultView: UIControl, CoachMarkBodyView {
             } else {
                 self.views.backgroundImageView.image = self.views.backgroundImage
             }
-
+            
             self.highlightArrowDelegate?.highlightArrow(self.isHighlighted)
         }
     }
-
+    
     public var nextControl: UIControl? {
         return self
     }
-
+    
     public var nextLabel: UILabel { return views.nextLabel }
     public var hintLabel: UITextView { return views.hintLabel }
-
+    
     public weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate?
-
+    
     fileprivate var views = CoachMarkBodyDefaultViewHolder()
-
+    
     // MARK: - Initialization
     override public init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         let helper = CoachMarkBodyDefaultViewHelper()
-
+        
         self.setupInnerViewHierarchy(using: helper)
     }
-
+    
     convenience public init() {
         self.init(frame: CGRect.zero)
     }
-
+    
+    public init (customColor:UIColor?) {
+        super.init(frame: CGRect.zero)
+        let helper = CoachMarkBodyDefaultViewHelper()
+        self.setupInnerViewHierarchy(using: helper,withCustomColor: customColor)
+    }
+    
     required public init?(coder aDecoder: NSCoder) {
         fatalError("This class does not support NSCoding.")
     }
-
-    public init(frame: CGRect, hintText: String, nextText: String?) {
+    
+    public init(frame: CGRect, hintText: String, nextText: String?,withCustomColor color:UIColor?) {
         super.init(frame: frame)
-
+        
         let helper = CoachMarkBodyDefaultViewHelper()
-
+        
         if let next = nextText {
             views.hintLabel.text = hintText
             views.nextLabel.text = next
-            setupInnerViewHierarchy(using: helper)
+            setupInnerViewHierarchy(using: helper,withCustomColor: color)
         } else {
             views.hintLabel.text = hintText
-            setupSimpleInnerViewHierarchy(using: helper)
+            setupSimpleInnerViewHierarchy(using: helper,withCustomColor: color)
         }
     }
-
-    convenience public init(hintText: String, nextText: String?) {
-        self.init(frame: CGRect.zero, hintText: hintText, nextText: nextText)
+    
+    convenience public init(hintText: String, nextText: String?,withCustomColor color:UIColor?) {
+        self.init(frame: CGRect.zero, hintText: hintText, nextText: nextText,withCustomColor:color)
     }
 }
 
 // MARK: - Private Inner Hierarchy Setup
 private extension CoachMarkBodyDefaultView {
     //Configure the CoachMark view with a hint message and a next message
-    func setupInnerViewHierarchy(using helper: CoachMarkBodyDefaultViewHelper) {
+    func setupInnerViewHierarchy(using helper: CoachMarkBodyDefaultViewHelper,withCustomColor color:UIColor? = nil) {
         translatesAutoresizingMaskIntoConstraints = false
-
-        helper.configureBackground(self.views.backgroundImageView, addTo: self)
+        
+        if let customColor = color {
+            self.backgroundColor = customColor
+        }else {
+            helper.configureBackground(self.views.backgroundImageView, addTo: self)
+        }
+        
         helper.configureHint(hintLabel, addTo: self)
         helper.configureNext(nextLabel, addTo: self)
         helper.configureSeparator(self.views.separator, addTo: self)
-
+        
         let views = (hintLabel: self.views.hintLabel, nextLabel: self.views.nextLabel,
                      separator: self.views.separator)
-
+        
         self.addConstraints(helper.makeHorizontalConstraints(for: views))
     }
-
-    func setupSimpleInnerViewHierarchy(using helper: CoachMarkBodyDefaultViewHelper) {
+    
+    func setupSimpleInnerViewHierarchy(using helper: CoachMarkBodyDefaultViewHelper,withCustomColor color:UIColor? = nil) {
         translatesAutoresizingMaskIntoConstraints = false
-
+        
         let helper = CoachMarkBodyDefaultViewHelper()
+        
+        if let customColor = color {
+            self.backgroundColor = customColor
+        }else {
+           helper.configureBackground(self.views.backgroundImageView, addTo: self)
+        }
 
-        helper.configureBackground(self.views.backgroundImageView, addTo: self)
         helper.configureSimpleHint(hintLabel, addTo: self)
     }
 }
@@ -120,13 +136,13 @@ private struct CoachMarkBodyDefaultViewHolder {
     let nextLabel = UILabel()
     let hintLabel = UITextView()
     let separator = UIView()
-
+    
     lazy var backgroundImageView: UIImageView = {
         return UIImageView(image: self.backgroundImage)
     }()
-
+    
     let backgroundImage = UIImage(namedInInstructions: "background")
     let highlightedBackgroundImage = UIImage(namedInInstructions: "background-highlighted")
-
+    
     init() { }
 }

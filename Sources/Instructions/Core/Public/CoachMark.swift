@@ -115,10 +115,10 @@ public struct CoachMark {
         /// That way, no orientation computation is needed.
         guard let cutoutPath = self.cutoutPath else { return }
 
-        let x = cutoutPath.bounds.origin.x + cutoutPath.bounds.width / 2
-        let y = cutoutPath.bounds.origin.y + cutoutPath.bounds.height / 2
+        let xVal = cutoutPath.bounds.origin.x + cutoutPath.bounds.width / 2
+        let yVal = cutoutPath.bounds.origin.y + cutoutPath.bounds.height / 2
 
-        self.pointOfInterest = CGPoint(x: x, y: y)
+        self.pointOfInterest = CGPoint(x: xVal, y: yVal)
     }
 }
 

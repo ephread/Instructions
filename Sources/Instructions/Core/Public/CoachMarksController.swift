@@ -69,7 +69,7 @@ public class CoachMarksController {
     fileprivate var coachMarksWindow: UIWindow?
 
     /// Handle the UI part
-    fileprivate lazy var coachMarksViewController: CoachMarksViewController = {
+    public lazy var coachMarksViewController: CoachMarksViewController = {
         let coachMarkController = CoachMarksViewController()
         coachMarkController.coachMarkDisplayManager = self.buildCoachMarkDisplayManager()
         coachMarkController.skipViewDisplayManager = self.buildSkipViewDisplayManager()

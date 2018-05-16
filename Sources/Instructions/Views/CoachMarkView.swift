@@ -25,7 +25,7 @@ import UIKit
 // swiftlint:disable force_cast
 
 /// The actual coach mark that will be displayed.
-class CoachMarkView: UIView {
+public class CoachMarkView: UIView {
     // MARK: - Internal properties
 
     /// The body of the coach mark (likely to contain some text).
@@ -96,7 +96,7 @@ class CoachMarkView: UIView {
         self.layoutViewComposition()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("This class does not support NSCoding.")
     }
 
@@ -133,16 +133,18 @@ class CoachMarkView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
 
         self.addSubview(bodyUIView)
+        //水平方向，bodyView全部填充
         self.addConstraints(bodyUIView.makeConstraintToFillSuperviewHorizontally())
 
         if let arrowUIView = arrowUIView, let arrowOrientation = self.arrowOrientation {
             self.addSubview(arrowUIView)
-
+            //水平方向的约束
             innerConstraints.arrowXposition = coachMarkLayoutHelper.horizontalArrowConstraints(
                 for: (bodyView: bodyUIView, arrowView: arrowUIView), withPosition: .center,
                 horizontalOffset: 0)
 
             self.addConstraint(innerConstraints.arrowXposition!)
+            //竖直方向的约束
             self.addConstraints(coachMarkLayoutHelper.verticalConstraints(
                 for: (bodyView: bodyUIView, arrowView: arrowUIView), in: self,
                 withProperties: (orientation: arrowOrientation, verticalArrowOffset: arrowOffset)
@@ -156,7 +158,7 @@ class CoachMarkView: UIView {
 
 // MARK: - Protocol conformance | CoachMarkBodyHighlightArrowDelegate
 extension CoachMarkView: CoachMarkBodyHighlightArrowDelegate {
-    func highlightArrow(_ highlighted: Bool) {
+    public func highlightArrow(_ highlighted: Bool) {
         self.arrowView?.isHighlighted = highlighted
     }
 }

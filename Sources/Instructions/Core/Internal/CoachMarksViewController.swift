@@ -114,6 +114,7 @@ class CoachMarksViewController: UIViewController {
     // Called after the view was loaded.
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.clear
     }
 
     deinit {

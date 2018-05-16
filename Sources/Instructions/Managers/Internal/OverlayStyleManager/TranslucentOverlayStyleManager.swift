@@ -129,8 +129,13 @@ class TranslucentOverlayStyleManager: OverlayStyleManager {
             overlayLayer.mask = nil
             return
         }
+        
+        if let extraCutoutPath = overlayView?.extraCutoutPath {
+            configureCutoutMask(usingCutoutPath: cutoutPath, extraCotoutPath: extraCutoutPath)
+        } else {
+            configureCutoutMask(usingCutoutPath: cutoutPath)
+        }
 
-        configureCutoutMask(usingCutoutPath: cutoutPath)
         configureFullMask()
 
         let maskLayer = CALayer()
@@ -141,7 +146,7 @@ class TranslucentOverlayStyleManager: OverlayStyleManager {
         overlayLayer.mask = maskLayer
     }
 
-    private func configureCutoutMask(usingCutoutPath cutoutPath: UIBezierPath) {
+    private func configureCutoutMask(usingCutoutPath cutoutPath: UIBezierPath,extraCotoutPath:[UIBezierPath]? = nil) {
         cutoutMaskLayer = CAShapeLayer()
         cutoutMaskLayer.name = "cutoutMaskLayer"
         cutoutMaskLayer.fillRule = kCAFillRuleEvenOdd
@@ -150,6 +155,12 @@ class TranslucentOverlayStyleManager: OverlayStyleManager {
         let cutoutMaskLayerPath = UIBezierPath()
         cutoutMaskLayerPath.append(UIBezierPath(rect: overlayLayer.bounds))
         cutoutMaskLayerPath.append(cutoutPath)
+        
+        if let extraPath = extraCotoutPath {
+            for aPath in extraPath{
+                cutoutMaskLayerPath.append(aPath)
+            }
+        }
 
         cutoutMaskLayer.path = cutoutMaskLayerPath.cgPath
     }

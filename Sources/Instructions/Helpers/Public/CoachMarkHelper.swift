@@ -43,7 +43,7 @@ public class CoachMarkHelper {
     /// - Parameter view: the view around which create the cutoutPath
     /// - Parameter pointOfInterest: the point of interest toward which the arrow should point
     /// - Parameter bezierPathBlock: a block customizing the cutoutPath
-    public func makeCoachMark(for view: UIView? = nil, pointOfInterest: CGPoint? = nil,
+    public func makeCoachMark(for view: UIView? = nil , extraViews:[UIView]? = nil, pointOfInterest: CGPoint? = nil,
                               cutoutPathMaker: CutoutPathMaker? = nil) -> CoachMark {
         var coachMark = CoachMark()
 
@@ -51,7 +51,7 @@ public class CoachMarkHelper {
             return coachMark
         }
 
-        self.update(coachMark: &coachMark, usingView: view,
+        self.update(coachMark: &coachMark, usingView: view, extraViews:extraViews,
                     pointOfInterest: pointOfInterest, cutoutPathMaker: cutoutPathMaker)
 
         return coachMark
@@ -151,7 +151,7 @@ public class CoachMarkHelper {
     /// - Parameter pointOfInterest: the point of interest toward which the arrow should point
     /// - Parameter bezierPathBlock: a block customizing the cutoutPath
     internal func update(coachMark: inout CoachMark,
-                         usingView view: UIView? = nil, pointOfInterest: CGPoint?,
+                         usingView view: UIView? = nil , extraViews:[UIView]? = nil, pointOfInterest: CGPoint?,
                          cutoutPathMaker: CutoutPathMaker? = nil) {
         guard let view = view else { return }
 
@@ -168,6 +168,18 @@ public class CoachMarkHelper {
         }
 
         coachMark.cutoutPath = bezierPath
+        
+        if let extraViewList = extraViews {
+            var extraPaths = [UIBezierPath]()
+            for view in extraViewList{
+                var frame = instructionsRootView.convert(view.frame, from: view.superview)
+                var extraPath = UIBezierPath(roundedRect: frame.insetBy(dx: -4, dy: -4),
+                                             byRoundingCorners:.allCorners,
+                                             cornerRadii: CGSize(width: 4, height: 4))
+                extraPaths.append(extraPath)
+            }
+            coachMark.extraCutoutPath = extraPaths
+        }
 
         if let pointOfInterest = pointOfInterest {
             coachMark.pointOfInterest = instructionsRootView.convert(pointOfInterest,

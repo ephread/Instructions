@@ -28,6 +28,8 @@ class OverlayView: UIView {
     internal static let sublayerName = "Instructions.OverlaySublayer"
 
     var cutoutPath: UIBezierPath?
+    
+    var extraCutoutPath: [UIBezierPath]?
 
     /// Used to temporarily enable touch forwarding isnide the cutoutPath.
     public var allowTouchInsideCutoutPath: Bool = false

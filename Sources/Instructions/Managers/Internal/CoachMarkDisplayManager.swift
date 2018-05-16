@@ -199,6 +199,7 @@ class CoachMarkDisplayManager {
 
             parentView.addConstraints(constraints)
             overlayView.cutoutPath = cutoutPath
+            overlayView.extraCutoutPath = coachMark.extraCutoutPath
         } else {
             overlayView.cutoutPath = nil
         }

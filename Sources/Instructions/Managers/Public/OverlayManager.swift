@@ -24,7 +24,7 @@ import UIKit
 
 // Overlay a blocking view on top of the screen and handle the cutout path
 // around the point of interest.
-public class OverlayManager {
+public class OverlayManager:NSObject {
     // MARK: - Public properties
     /// The background color of the overlay
     public var color: UIColor = Constants.overlayColor {

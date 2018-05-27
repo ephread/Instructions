@@ -8,6 +8,10 @@ Released on 2018-XX-XX.
 ### Changed
 - Migrated to Swift 4
 
+### Fixed
+- Fix #163 - Silly weak modifier in protocol property
+- Fix #90 - Crash occuring infrequently if the view controller is dismissed too quickly
+
 ### Added
 - Proper support for iPhone X
 

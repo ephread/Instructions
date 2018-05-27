@@ -45,7 +45,7 @@ class BlurringOverlayStyleManager: OverlayStyleManager {
             sizeTransitionOverlay?.translatesAutoresizingMaskIntoConstraints = false
             sizeTransitionOverlay?.isHidden = true
 
-            overlayView?.addSubview(sizeTransitionOverlay!)
+            overlayView?.holder.addSubview(sizeTransitionOverlay!)
             sizeTransitionOverlay?.fillSuperview()
         }
     }
@@ -101,7 +101,7 @@ class BlurringOverlayStyleManager: OverlayStyleManager {
         onGoingTransition = true
         guard let overlay = overlayView else { return }
 
-        overlay.subviews.forEach { if $0 !== sizeTransitionOverlay { $0.removeFromSuperview() } }
+        overlay.holder.subviews.forEach { if $0 !== sizeTransitionOverlay { $0.removeFromSuperview() } }
 
         sizeTransitionOverlay?.isHidden = false
     }
@@ -113,7 +113,7 @@ class BlurringOverlayStyleManager: OverlayStyleManager {
     func showOverlay(_ show: Bool, withDuration duration: TimeInterval,
                      completion: ((Bool) -> Void)?) {
         sizeTransitionOverlay?.isHidden = true
-        let subviews = overlayView?.subviews
+        let subviews = overlayView?.holder.subviews
 
         setUpOverlay()
 
@@ -130,10 +130,11 @@ class BlurringOverlayStyleManager: OverlayStyleManager {
         subOverlay.effect = show ? nil : self.blurEffect
 
         subviews?.forEach { if $0 !== sizeTransitionOverlay { $0.removeFromSuperview() } }
-        overlay.addSubview(subOverlay)
+        overlay.holder.addSubview(subOverlay)
 
         UIView.animate(withDuration: duration, animations: {
             subOverlay.effect = show ? self.blurEffect : nil
+            overlay.ornaments.alpha = show ? 1.0 : 0.0
         }, completion: { success in
             if !show {
                 subOverlay.removeFromSuperview()
@@ -146,7 +147,7 @@ class BlurringOverlayStyleManager: OverlayStyleManager {
     func showCutout(_ show: Bool, withDuration duration: TimeInterval,
                     completion: ((Bool) -> Void)?) {
         if onGoingTransition { return }
-        let subviews = overlayView?.subviews
+        let subviews = overlayView?.holder.subviews
 
         setUpOverlay()
         sizeTransitionOverlay?.isHidden = true
@@ -166,8 +167,8 @@ class BlurringOverlayStyleManager: OverlayStyleManager {
 
         subviews?.forEach { if $0 !== sizeTransitionOverlay { $0.removeFromSuperview() } }
 
-        overlay.addSubview(background)
-        overlay.addSubview(foreground)
+        overlay.holder.addSubview(background)
+        overlay.holder.addSubview(foreground)
 
         UIView.animate(withDuration: duration, animations: {
             if duration > 0 {

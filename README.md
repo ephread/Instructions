@@ -314,7 +314,7 @@ You can specify a number of coach marks to skip (effectively jumping to a furthe
 Take a look at `TransitionFromCodeViewController`, in the `Example/` directory, to get an idea of how you can leverage this method, in order to ask the user to perform certain actions.
 
 #### Using a delegate
-The `CoachMarkController` will notify the delegate on three occasions. All those methods are optionals.
+The `CoachMarkController` will notify the delegate on multiple occasions. All those methods are optionals.
 
 First, when a coach mark will show. You might want to change something about the view. For that reason, the `CoachMark` metadata structure is passed as an `inout` object, so you can update it with new parameters.
 
@@ -377,6 +377,8 @@ func coachMarksController(_ coachMarksController: CoachMarksController, willShow
 you should make sure that animations targeting your own view don't occur while a coach mark
 is appearing or disappearing. Otherwise, the animation won't be visible.
 
+You may also want to customize the properties defining the of for the classic transparency overlay, as Instructions will fall back to using the classic type if `UIAccessibilityIsReduceTransparencyEnabled()` returns true.
+
 ##### Skipping a coach mark
 
 You can skip a given coach mark by implementing the following method defined in `CoachMarksControllerDelegate`:
@@ -386,6 +388,17 @@ func coachMarksController(_ coachMarksController: CoachMarksController, coachMar
 ```
 
 `coachMarkWillLoadAt:` is called right before a given coach mark will show. To prevent a CoachMark from showing, you can return `false` from this method.
+
+##### Customizing ornaments of the overlay
+
+It's possible to add custom views which will be displayed above the overlay by implementing the following method of `CoachMarksControllerDelegate`:
+
+```swift
+func coachMarksController(_ coachMarksController: CoachMarksController,
+                          configureOrnamentsOfOverlay overlay: UIView)
+```
+
+Just add the ornaments to the provided view (`overlay`) and Instructions should take care of the rest. Please note, however, that these ornaments will be displayed above the cutout, but below the coach marks.
 
 #### Dealing with frame changes
 

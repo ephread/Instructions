@@ -103,6 +103,20 @@ extension DelegateViewController: CoachMarksControllerDataSource {
 // MARK: - Protocol Conformance | CoachMarksControllerDelegate
 extension DelegateViewController: CoachMarksControllerDelegate {
     func coachMarksController(_ coachMarksController: CoachMarksController,
+                              configureOrnamentsOfOverlay overlay: UIView) {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        overlay.addSubview(label)
+
+        label.text = "OVERLAY"
+        label.alpha = 0.5
+        label.font = label.font.withSize(60.0)
+
+        label.centerXAnchor.constraint(equalTo: overlay.centerXAnchor).isActive = true
+        label.topAnchor.constraint(equalTo: overlay.topAnchor, constant: 100).isActive = true
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
                               willShow coachMark: inout CoachMark,
                               afterSizeTransition: Bool, at index: Int) {
         if index == 0 && !afterSizeTransition {

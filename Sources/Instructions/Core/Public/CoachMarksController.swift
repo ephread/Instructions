@@ -40,7 +40,7 @@ public class CoachMarksController {
     /// Hide the UI.
     fileprivate(set) public lazy var overlay: OverlayManager = {
         let overlay = OverlayManager()
-        overlay.delegate = self
+        overlay.overlayDelegate = self
 
         return overlay
     }()
@@ -122,6 +122,10 @@ public extension CoachMarksController {
 
         coachMarksViewController.attach(to: coachMarksWindow!, of: parentViewController)
 #endif
+
+        delegate?.coachMarksController(self,
+                                       configureOrnamentsOfOverlay: overlay.overlayView.ornaments)
+
         flow.startFlow(withNumberOfCoachMarks: numberOfCoachMarks)
     }
 

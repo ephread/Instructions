@@ -190,7 +190,7 @@ You can also make the overlay blur the content sitting behind it. Setting this p
 
 - `overlay.blurEffectStyle: UIBlurEffectStyle?`
 
-The overlay can sit above the status bar or below, the property defaults to `true`:
+The overlay can sit over the status bar or under, the property defaults to `true`:
 
 - `overlay.isShownAboveStatusBar: Bool`
 
@@ -391,14 +391,14 @@ func coachMarksController(_ coachMarksController: CoachMarksController, coachMar
 
 ##### Customizing ornaments of the overlay
 
-It's possible to add custom views which will be displayed above the overlay by implementing the following method of `CoachMarksControllerDelegate`:
+It's possible to add custom views which will be displayed over the overlay by implementing the following method of `CoachMarksControllerDelegate`:
 
 ```swift
 func coachMarksController(_ coachMarksController: CoachMarksController,
                           configureOrnamentsOfOverlay overlay: UIView)
 ```
 
-Just add the ornaments to the provided view (`overlay`) and Instructions should take care of the rest. Please note, however, that these ornaments will be displayed above the cutout, but below the coach marks.
+Just add the ornaments to the provided view (`overlay`) and Instructions should take care of the rest. Please note, however, that these ornaments will be displayed over the cutout, but under the coach marks.
 
 #### Dealing with frame changes
 

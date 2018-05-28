@@ -76,6 +76,14 @@ class CoachMarksViewController: UIViewController {
 
     ///
     weak var delegate: CoachMarksViewControllerDelegate?
+    
+    ///
+    var statusBarStyle:UIStatusBarStyle = .default
+    
+    ///
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return statusBarStyle
+    }
 
     // MARK: - Private properties
     fileprivate var onGoingSizeChange = false
@@ -92,7 +100,6 @@ class CoachMarksViewController: UIViewController {
     fileprivate var _shouldAutorotate: Bool = true
     fileprivate var _prefersStatusBarHidden: Bool = false
     fileprivate var _supportedInterfaceOrientations: UIInterfaceOrientationMask = [.portrait]
-
     // MARK: - Lifecycle
     convenience init(coachMarkDisplayManager: CoachMarkDisplayManager,
                      skipViewDisplayManager: SkipViewDisplayManager) {

@@ -52,7 +52,7 @@ class BlurringOverlayStyleManagerTest: XCTestCase {
             XCTAssertEqual(self.overlayView.alpha, 1.0)
             XCTAssertEqual(self.overlayView.isHidden, false)
 
-            let containsBlur = self.overlayView.subviews
+            let containsBlur = self.overlayView.holder.subviews
                                                .filter { $0 is UIVisualEffectView }
                                                .count == 2
 
@@ -74,7 +74,7 @@ class BlurringOverlayStyleManagerTest: XCTestCase {
         blurringStyleManager.showOverlay(false, withDuration: 1.0) { _ in
             XCTAssertEqual(self.overlayView.alpha, 0.0)
 
-            XCTAssertTrue(self.overlayView.subviews.count == 1)
+            XCTAssertTrue(self.overlayView.holder.subviews.count == 1)
 
             self.viewIsVisibleExpectation?.fulfill()
         }

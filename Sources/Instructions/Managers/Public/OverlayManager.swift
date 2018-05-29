@@ -56,9 +56,9 @@ public class OverlayManager {
 
         set {
             if newValue == true {
-                self.overlayView.holder.addGestureRecognizer(self.singleTapGestureRecognizer)
+                self.overlayView.addGestureRecognizer(self.singleTapGestureRecognizer)
             } else {
-                self.overlayView.holder.removeGestureRecognizer(self.singleTapGestureRecognizer)
+                self.overlayView.removeGestureRecognizer(self.singleTapGestureRecognizer)
             }
         }
     }

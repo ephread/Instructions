@@ -46,15 +46,7 @@ public class CoachMarkBodyDefaultView: UIControl, CoachMarkBodyView {
 
     public var nextLabel: UILabel { return views.nextLabel }
     public var hintLabel: UITextView { return views.hintLabel }
-    public var backgroundImageView: UIImageView {
-        set{
-            views.backgroundImageView = newValue
-        }
-        get{
-            return views.backgroundImageView
-        }
-        
-    }
+    public var backgroundImageView: UIImageView { return views.backgroundImageView }
 
     public weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate?
 

@@ -89,7 +89,7 @@ public class OverlayManager:NSObject {
 
     // MARK: - Internal Properties
     /// Delegate to which tell that the overlay view received a tap event.
-    internal weak var delegate: OverlayManagerDelegate?
+    internal weak var overlayDelegate: OverlayManagerDelegate?
 
     /// Used to temporarily disable the tap, for a given coachmark.
     internal var enableTap: Bool = true
@@ -115,7 +115,7 @@ public class OverlayManager:NSObject {
     /// - Parameter sender: the object which sent the event
     @objc fileprivate func handleSingleTap(_ sender: AnyObject?) {
         if enableTap {
-            self.delegate?.didReceivedSingleTap()
+            self.overlayDelegate?.didReceivedSingleTap()
         }
     }
 
@@ -129,7 +129,7 @@ public class OverlayManager:NSObject {
 
     func showOverlay(_ show: Bool, completion: ((Bool) -> Void)?) {
         overlayStyleManager.showOverlay(show, withDuration: fadeAnimationDuration,
-                                    completion: completion)
+                                        completion: completion)
     }
 
     func viewWillTransition() {
@@ -144,7 +144,7 @@ public class OverlayManager:NSObject {
 
     private func updateDependencies(of overlayAnimator: BlurringOverlayStyleManager) {
         overlayAnimator.overlayView = self.overlayView
-        overlayAnimator.snapshotDelegate = self.delegate
+        overlayAnimator.snapshotDelegate = self.overlayDelegate
     }
 
     private func updateDependencies(of overlayAnimator: TranslucentOverlayStyleManager) {
@@ -152,7 +152,7 @@ public class OverlayManager:NSObject {
     }
 
     private func updateOverlayStyleManager() -> OverlayStyleManager {
-        if let style = blurEffectStyle {
+        if let style = blurEffectStyle, !UIAccessibilityIsReduceTransparencyEnabled() {
             let blurringOverlayStyleManager = BlurringOverlayStyleManager(style: style)
             self.updateDependencies(of: blurringOverlayStyleManager)
             return blurringOverlayStyleManager

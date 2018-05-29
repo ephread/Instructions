@@ -25,6 +25,9 @@ import UIKit
 /// Give a chance to react when coach marks are displayed
 public protocol CoachMarksControllerDelegate: class {
     func coachMarksController(_ coachMarksController: CoachMarksController,
+                              configureOrnamentsOfOverlay overlay: UIView)
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
                               willLoadCoachMarkAt index: Int) -> Bool
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
@@ -53,6 +56,9 @@ public protocol CoachMarksControllerDelegate: class {
 }
 
 public extension CoachMarksControllerDelegate {
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              configureOrnamentsOfOverlay overlay: UIView) { }
+
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               willLoadCoachMarkAt index: Int) -> Bool {
         return true
@@ -86,6 +92,8 @@ public extension CoachMarksControllerDelegate {
 }
 
 protocol CoachMarksControllerProxyDelegate: class {
+    func configureOrnaments(ofOverlay: UIView)
+
     func willLoadCoachMark(at index: Int) -> Bool
 
     func willShow(coachMark: inout CoachMark, afterSizeTransition: Bool, at index: Int)

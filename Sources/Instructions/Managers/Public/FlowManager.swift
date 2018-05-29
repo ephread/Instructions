@@ -121,9 +121,10 @@ public class FlowManager {
             self.coachMarksViewController.currentCoachMarkView?.alpha = 0.0
         }
 
-        let completionBlock = {(finished: Bool) -> Void in
-            self.coachMarksViewController.detachFromWindow()
-            if shouldCallDelegate { self.delegate?.didEndShowingBySkipping(skipped) }
+        let completionBlock = { [weak self] (finished: Bool) -> Void in
+            guard let strongSelf = self else { return }
+            strongSelf.coachMarksViewController.detachFromWindow()
+            if shouldCallDelegate { strongSelf.delegate?.didEndShowingBySkipping(skipped) }
         }
 
         if immediately {

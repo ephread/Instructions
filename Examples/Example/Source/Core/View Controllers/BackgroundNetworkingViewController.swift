@@ -83,9 +83,8 @@ extension BackgroundNetworkingViewController: URLSessionDownloadDelegate {
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         print("Finished.")
 
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-
         DispatchQueue.main.async {
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if !self.coachMarksController.flow.started {
                 self.coachMarksController.start(on: self)
             } else {

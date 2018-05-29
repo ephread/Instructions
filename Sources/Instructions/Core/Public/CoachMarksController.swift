@@ -38,16 +38,17 @@ public class CoachMarksController {
     public weak var delegate: CoachMarksControllerDelegate?
 
     /// Controls the style of the status bar when coach marks are displayed
-    public var statusBarStyle:UIStatusBarStyle {
-        set(value) {
-            coachMarksViewController.statusBarStyle = value
+    public var statusBarStyle: UIStatusBarStyle? {
+        get {
+            return coachMarksViewController.customStatusBarStyle
+        }
+
+        set {
+            coachMarksViewController.customStatusBarStyle = newValue
             coachMarksViewController.setNeedsStatusBarAppearanceUpdate()
         }
-        get {
-            return coachMarksViewController.statusBarStyle
-        }
     }
-    
+
     /// Hide the UI.
     fileprivate(set) public lazy var overlay: OverlayManager = {
         let overlay = OverlayManager()

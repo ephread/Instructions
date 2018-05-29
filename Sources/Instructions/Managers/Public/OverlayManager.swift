@@ -96,6 +96,22 @@ public class OverlayManager {
 
     internal lazy var overlayView: OverlayView = OverlayView()
 
+    internal var statusBarStyle: UIStatusBarStyle {
+        if let blurEffectStyle = blurEffectStyle {
+            if blurEffectStyle == .dark {
+                return .lightContent
+            } else {
+                return .default
+            }
+        } else {
+            var alpha: CGFloat = 1.0
+            var white: CGFloat = 1.0
+            color.getWhite(&white, alpha: &alpha)
+
+            return white >= 0.5 ? .default : .lightContent
+        }
+    }
+
     // MARK: - Private Properties
     private lazy var overlayStyleManager: OverlayStyleManager = {
         return self.updateOverlayStyleManager()

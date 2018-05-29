@@ -67,14 +67,6 @@ class CoachMarksViewController: UIViewController {
         //swiftlint:enable force_cast
 #endif
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        var alpha: CGFloat = 1.0
-        var white: CGFloat = 1.0
-        overlayManager.color.getWhite(&white, alpha: &alpha)
-        
-        return white >= 0.5 ? .default : .lightContent
-    }
 
     ///
     var coachMarkDisplayManager: CoachMarkDisplayManager!
@@ -84,13 +76,17 @@ class CoachMarksViewController: UIViewController {
 
     ///
     weak var delegate: CoachMarksViewControllerDelegate?
-    
+
     ///
-    var statusBarStyle:UIStatusBarStyle = .default
-    
+    var customStatusBarStyle: UIStatusBarStyle?
+
     ///
-    override var preferredStatusBarStyle : UIStatusBarStyle {
-        return statusBarStyle
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if let statusBarStyle = customStatusBarStyle {
+            return statusBarStyle
+        } else {
+            return overlayManager.statusBarStyle
+        }
     }
 
     // MARK: - Private properties

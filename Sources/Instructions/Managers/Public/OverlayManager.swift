@@ -56,9 +56,9 @@ public class OverlayManager:NSObject {
 
         set {
             if newValue == true {
-                self.overlayView.addGestureRecognizer(self.singleTapGestureRecognizer)
+                self.overlayView.holder.addGestureRecognizer(self.singleTapGestureRecognizer)
             } else {
-                self.overlayView.removeGestureRecognizer(self.singleTapGestureRecognizer)
+                self.overlayView.holder.removeGestureRecognizer(self.singleTapGestureRecognizer)
             }
         }
     }

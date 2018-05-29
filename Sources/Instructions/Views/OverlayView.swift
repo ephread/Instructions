@@ -39,7 +39,7 @@ class OverlayView: UIView {
     init() {
         holder = UIView()
         ornaments = UIView()
-        
+
         super.init(frame: CGRect.zero)
         translatesAutoresizingMaskIntoConstraints = false
 

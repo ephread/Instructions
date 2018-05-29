@@ -13,8 +13,8 @@ Released on 2018-XX-XX.
 - Fix #90 - Crash occuring infrequently if the view controller is dismissed too quickly
 
 ### Added
+- Status bar style customization
 - Proper support for iPhone X
-
 
 ## [1.1.0](https://github.com/ephread/Instructions/releases/tag/1.1.0)
 Released on 2017-08-09.

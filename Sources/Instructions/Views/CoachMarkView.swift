@@ -133,23 +133,45 @@ public class CoachMarkView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
 
         self.addSubview(bodyUIView)
-        //水平方向，bodyView全部填充
-        self.addConstraints(bodyUIView.makeConstraintToFillSuperviewHorizontally())
+       
 
         if let arrowUIView = arrowUIView, let arrowOrientation = self.arrowOrientation {
+            //有箭头时，arrow和body一起添加约束
             self.addSubview(arrowUIView)
-            //水平方向的约束
-            innerConstraints.arrowXposition = coachMarkLayoutHelper.horizontalArrowConstraints(
-                for: (bodyView: bodyUIView, arrowView: arrowUIView), withPosition: .center,
-                horizontalOffset: 0)
-
-            self.addConstraint(innerConstraints.arrowXposition!)
-            //竖直方向的约束
-            self.addConstraints(coachMarkLayoutHelper.verticalConstraints(
-                for: (bodyView: bodyUIView, arrowView: arrowUIView), in: self,
-                withProperties: (orientation: arrowOrientation, verticalArrowOffset: arrowOffset)
-            ))
+            
+            switch arrowOrientation {
+            case .bottom,.top:
+    //                水平方向bodyView填充完整coachMarkView
+                    let horizontalConstraints = coachMarkLayoutHelper.horizontalConstraints(for: (bodyView:bodyUIView, arrowView:arrowUIView), withArrowOrientation: arrowOrientation, horizontalOffset: 0)
+                    self.addConstraints(horizontalConstraints)
+                    //水平方向的约束,初始arrow和bodyView,centerX对齐
+                    innerConstraints.arrowXposition = coachMarkLayoutHelper.horizontalArrowConstraints(
+                        for: (bodyView: bodyUIView, arrowView: arrowUIView), withPosition: .center,
+                        horizontalOffset: 0)
+                
+                    self.addConstraint(innerConstraints.arrowXposition!)
+                    //竖直方向的约束，按照箭头的方向，调整上下的位置
+                    self.addConstraints(coachMarkLayoutHelper.verticalConstraints(
+                        for: (bodyView: bodyUIView, arrowView: arrowUIView), in: self,
+                        withProperties: (orientation: arrowOrientation, verticalArrowOffset: arrowOffset)
+                    ))
+            case .left,.right:
+                print("test left and right")
+                //水平方向，bodyView和arrowView连接填充完整coachMarkView
+                let horizontalConstraints = coachMarkLayoutHelper.horizontalConstraints(for: (bodyView:bodyUIView, arrowView:arrowUIView), withArrowOrientation: arrowOrientation, horizontalOffset: 0)
+                self.addConstraints(horizontalConstraints)
+                //竖直方向，居中对齐
+                self.addConstraint(bodyUIView.topAnchor.constraint(equalTo: topAnchor))
+                self.addConstraint(bodyUIView.bottomAnchor.constraint(equalTo: bottomAnchor))
+                self.addConstraint(arrowUIView.centerYAnchor.constraint(equalTo: bodyUIView.centerYAnchor, constant: 0))
+            }
+            
+            
         } else {
+            //无箭头时，只为body添加约束
+            //水平
+            self.addConstraints(bodyUIView.makeConstraintToFillSuperviewHorizontally())
+            //竖直
             self.addConstraint(bodyUIView.topAnchor.constraint(equalTo: topAnchor))
             self.addConstraint(bodyUIView.bottomAnchor.constraint(equalTo: bottomAnchor))
         }

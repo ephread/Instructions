@@ -32,6 +32,19 @@ class CoachMarkInnerLayoutHelper {
             multiplier: 1, constant: adaptedOffset(for: position, offset: horizontalOffset)
         )
     }
+    
+    func horizontalConstraints(for coachMarkViews: CoachMarkViews,
+                               withArrowOrientation arrowOrientation: CoachMarkArrowOrientation,
+                               horizontalOffset: CGFloat) -> [NSLayoutConstraint] {
+        switch arrowOrientation {
+        case .top,.bottom:
+            return coachMarkViews.bodyView.makeConstraintToFillSuperviewHorizontally()
+        case .left:
+            return NSLayoutConstraint.constraints(withVisualFormat: "H:|-(==\(horizontalOffset))-[coachMarkArrowView][coachMarkBodyView]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["coachMarkArrowView": coachMarkViews.arrowView,"coachMarkBodyView": coachMarkViews.bodyView])
+        case .right:
+            return NSLayoutConstraint.constraints(withVisualFormat: "H:|-(==\(horizontalOffset))-[coachMarkBodyView][coachMarkArrowView]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["coachMarkBodyView": coachMarkViews.bodyView,"coachMarkArrowView": coachMarkViews.arrowView])
+        }
+    }
 
     func verticalConstraints(for coachMarkViews: CoachMarkViews, in parentView: UIView,
                              withProperties properties: CoachMarkViewProperties)
@@ -93,6 +106,8 @@ class CoachMarkInnerLayoutHelper {
         switch arrowOrientation {
         case .top: return offset
         case .bottom: return -offset
+        case .left: return offset
+        case .right: return -offset
         }
     }
 }

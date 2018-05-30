@@ -42,26 +42,40 @@ class CoachMarkLayoutHelper {
         } else {
             self.layoutDirection = layoutDirection!
         }
-
-        let computedProperties = computeProperties(for: coachMark, inParentView: parentView)
-        let offset = arrowOffset(for: coachMark, withProperties: computedProperties,
-                                 inParentView: parentView)
-
-        switch computedProperties.segmentIndex {
-        case 1:
-            coachMarkView.changeArrowPosition(to: .leading, offset: offset)
-            return leadingConstraints(for: coachMarkView, withCoachMark: coachMark,
-                                      inParentView: parentView)
-        case 2:
-            coachMarkView.changeArrowPosition(to: .center, offset: offset)
-            return middleConstraints(for: coachMarkView, withCoachMark: coachMark,
+//根据coachMark内的poointOfInterest信息，把页面水平切分为3个部分，判定焦点是在左中右哪边，对应segmentIndex为1，2，3
+//？？？这里的coachMarkView和parentView的水平布局，写得有些过于复杂了吧！
+        if coachMark.arrowOrientation == .top || coachMark.arrowOrientation == .bottom {
+            let computedProperties = computeProperties(for: coachMark, inParentView: parentView)
+            let offset = arrowOffset(for: coachMark, withProperties: computedProperties,
                                      inParentView: parentView)
-        case 3:
-            coachMarkView.changeArrowPosition(to: .trailing, offset: offset)
-            return trailingConstraints(for: coachMarkView, withCoachMark: coachMark,
-                                       inParentView: parentView)
-        default: return [NSLayoutConstraint]()
+            
+            switch computedProperties.segmentIndex {
+            case 1:
+                coachMarkView.changeArrowPosition(to: .leading, offset: offset)
+                return leadingConstraints(for: coachMarkView, withCoachMark: coachMark,
+                                          inParentView: parentView)
+            case 2:
+                coachMarkView.changeArrowPosition(to: .center, offset: offset)
+                return middleConstraints(for: coachMarkView, withCoachMark: coachMark,
+                                         inParentView: parentView)
+            case 3:
+                coachMarkView.changeArrowPosition(to: .trailing, offset: offset)
+                return trailingConstraints(for: coachMarkView, withCoachMark: coachMark,
+                                           inParentView: parentView)
+            default: return [NSLayoutConstraint]()
+            }
+        } else {//arrow left or right
+            let horizontalConstraint:NSLayoutConstraint
+            if coachMark.arrowOrientation == .left {
+                var constant = coachMark.cutoutPath!.bounds.maxX + coachMark.gapBetweenCoachMarkAndCutoutPath
+                horizontalConstraint = coachMarkView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor , constant: constant)
+            } else {
+                var constant = -(parentView.frame.size.width - coachMark.cutoutPath!.bounds.minX) - coachMark.gapBetweenCoachMarkAndCutoutPath
+                horizontalConstraint = coachMarkView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: constant)
+            }
+            return [horizontalConstraint]
         }
+        
     }
 
     private func leadingConstraints(for coachMarkView: CoachMarkView,

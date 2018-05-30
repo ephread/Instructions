@@ -45,6 +45,9 @@ class OverlayView: UIView {
 
         holder.translatesAutoresizingMaskIntoConstraints = false
         ornaments.translatesAutoresizingMaskIntoConstraints = false
+        
+        holder.isUserInteractionEnabled = false
+        ornaments.isUserInteractionEnabled = false
 
         addSubview(holder)
         addSubview(ornaments)

@@ -41,13 +41,14 @@ class OverlayView: UIView {
     init() {
         holder = UIView()
         ornaments = UIView()
-        
+
         super.init(frame: CGRect.zero)
         translatesAutoresizingMaskIntoConstraints = false
 
         holder.translatesAutoresizingMaskIntoConstraints = false
         ornaments.translatesAutoresizingMaskIntoConstraints = false
         
+        holder.isUserInteractionEnabled = false
         ornaments.isUserInteractionEnabled = false
 
         addSubview(holder)
@@ -65,7 +66,7 @@ class OverlayView: UIView {
     override public func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let hitView = super.hitTest(point, with: event)
 
-        if hitView == self.holder {
+        if hitView == self {
             guard let cutoutPath = self.cutoutPath else {
                 return hitView
             }

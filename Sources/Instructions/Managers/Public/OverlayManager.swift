@@ -56,9 +56,9 @@ public class OverlayManager:NSObject {
 
         set {
             if newValue == true {
-                self.overlayView.holder.addGestureRecognizer(self.singleTapGestureRecognizer)
+                self.overlayView.addGestureRecognizer(self.singleTapGestureRecognizer)
             } else {
-                self.overlayView.holder.removeGestureRecognizer(self.singleTapGestureRecognizer)
+                self.overlayView.removeGestureRecognizer(self.singleTapGestureRecognizer)
             }
         }
     }
@@ -95,6 +95,22 @@ public class OverlayManager:NSObject {
     internal var enableTap: Bool = true
 
     internal lazy var overlayView: OverlayView = OverlayView()
+
+    internal var statusBarStyle: UIStatusBarStyle {
+        if let blurEffectStyle = blurEffectStyle {
+            if blurEffectStyle == .dark {
+                return .lightContent
+            } else {
+                return .default
+            }
+        } else {
+            var alpha: CGFloat = 1.0
+            var white: CGFloat = 1.0
+            color.getWhite(&white, alpha: &alpha)
+
+            return white >= 0.5 ? .default : .lightContent
+        }
+    }
 
     // MARK: - Private Properties
     private lazy var overlayStyleManager: OverlayStyleManager = {

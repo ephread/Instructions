@@ -77,15 +77,15 @@ public class CoachMarkArrowDefaultView: UIView, CoachMarkArrowView {
             context?.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
             context?.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
             
-//        case .left:
-//            context?.move(to: CGPoint(x: rect.minX, y: rect.midY))
-//            context?.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
-//            context?.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
-//
-//        case .right:
-//            context?.move(to: CGPoint(x: rect.minX, y: rect.minY))
-//            context?.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
-//            context?.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+        case .left:
+            context?.move(to: CGPoint(x: rect.minX, y: rect.midY))
+            context?.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+            context?.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+
+        case .right:
+            context?.move(to: CGPoint(x: rect.minX, y: rect.minY))
+            context?.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
+            context?.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
         default:
             return
         }
@@ -102,9 +102,9 @@ private extension CoachMarkArrowDefaultView {
         case .top,.bottom:
             self.widthAnchor.constraint(equalToConstant: Constants.arrowViewDefaultWidth).isActive = true
             self.heightAnchor.constraint(equalToConstant: Constants.arrowViewDefaultHeight).isActive = true
-//        case .left,.right:
-//            self.widthAnchor.constraint(equalToConstant: Constants.arrowViewDefaultHeight).isActive = true
-//            self.heightAnchor.constraint(equalToConstant: Constants.arrowViewDefaultWidth).isActive = true
+        case .left,.right:
+            self.widthAnchor.constraint(equalToConstant: Constants.arrowViewDefaultHeight).isActive = true
+            self.heightAnchor.constraint(equalToConstant: Constants.arrowViewDefaultWidth).isActive = true
         default:
             return
         }

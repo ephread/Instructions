@@ -28,6 +28,6 @@ import UIKit
 public enum CoachMarkArrowOrientation {
     case top
     case bottom
-//    case left
-//    case right
+    case left
+    case right
 }

@@ -45,7 +45,7 @@ class OverlayView: UIView {
 
         holder.translatesAutoresizingMaskIntoConstraints = false
         ornaments.translatesAutoresizingMaskIntoConstraints = false
-        
+
         holder.isUserInteractionEnabled = false
         ornaments.isUserInteractionEnabled = false
 
@@ -54,6 +54,8 @@ class OverlayView: UIView {
 
         holder.fillSuperview()
         ornaments.fillSuperview()
+
+        accessibilityIdentifier = AccessibilityIdentifiers.overlayView
     }
 
     required public init?(coder aDecoder: NSCoder) {

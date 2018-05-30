@@ -183,15 +183,14 @@ class CoachMarkDisplayManager {
                 cutoutPath.bounds.midY)
                 coachMarkViewConstraint = coachMarkView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor,
                                                       constant: constant)
-            case .top: constant = -(parentView.frame.size.height -
-                cutoutPath.bounds.origin.y + offset)
-                coachMarkViewConstraint = coachMarkView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor,
-                                                      constant: constant)
-            case .bottom:
-                constant = (cutoutPath.bounds.origin.y +
-                    cutoutPath.bounds.size.height) + offset
+            case .top:
+                constant = (cutoutPath.bounds.origin.y + cutoutPath.bounds.size.height) + offset
                 coachMarkViewConstraint = coachMarkView.topAnchor.constraint(equalTo: parentView.topAnchor,
-                                                       constant: constant)
+                                                                         constant: constant)                
+            case .bottom:
+                constant = -(parentView.frame.size.height - cutoutPath.bounds.origin.y + offset)
+                coachMarkViewConstraint = coachMarkView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor,
+                                                                                constant: constant)
             }
             parentView.addConstraint(coachMarkViewConstraint)
             

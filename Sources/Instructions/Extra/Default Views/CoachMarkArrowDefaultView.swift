@@ -28,7 +28,7 @@ import UIKit
 public class CoachMarkArrowDefaultView: UIView, CoachMarkArrowView {
     // MARK: - Initialization
     var orientation:CoachMarkArrowOrientation = CoachMarkArrowOrientation.top
-    public var color:UIColor = UIColor.red {
+    public var color:UIColor = UIColor.white {
         didSet {
             self.layoutIfNeeded()
         }

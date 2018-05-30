@@ -81,7 +81,7 @@ public class CoachMarksViewController: UIViewController {
     var customStatusBarStyle: UIStatusBarStyle?
 
     ///
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    override public var preferredStatusBarStyle: UIStatusBarStyle {
         if let statusBarStyle = customStatusBarStyle {
             return statusBarStyle
         } else {

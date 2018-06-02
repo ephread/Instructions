@@ -215,7 +215,8 @@ extension CoachMarksViewController {
 
         let coachMarkView = coachMarkDisplayManager.createCoachMarkView(from: coachMark,
                                                                         at: index)
-
+        let disableCoachMarkTap = coachMark.disableCoachmarkTap
+        
         currentCoachMarkView = coachMarkView
 
         addTargetToCurrentCoachView()
@@ -225,6 +226,7 @@ extension CoachMarksViewController {
                                         animated: animated) {
             self.instructionsRootView.passthrough = passthrough
             self.enableInteraction()
+            self.currentCoachMarkView?.isUserInteractionEnabled = !disableCoachMarkTap
             completion?()
         }
     }

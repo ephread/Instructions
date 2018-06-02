@@ -71,7 +71,7 @@ public class FlowManager {
     private var canShowCoachMark = true
 
     /// The index (in `coachMarks`) of the coach mark being currently displayed.
-    internal var currentIndex = -1
+    public internal(set) var currentIndex = -1   
 
     init(coachMarksViewController: CoachMarksViewController) {
         self.coachMarksViewController = coachMarksViewController
@@ -87,15 +87,23 @@ public class FlowManager {
         }
     }
 
-    public func resume() {
+    public func resume(showNext: Bool = false) {
         if started && paused {
             paused = false
-            createAndShowCoachMark(afterResuming: true)
+            coachMarksViewController.view.window?.isHidden = false
+            if(showNext){
+                showNextCoachMark(hidePrevious: true, hideAnimated: false)
+            }            
         }
     }
+    
+    
 
-    public func pause() {
+    public func pause(hideOverlay: Bool = false) {
         paused = true
+        if hideOverlay {
+            coachMarksViewController.view.window?.isHidden = true
+        }
     }
 
     internal func reset() {
@@ -141,7 +149,7 @@ public class FlowManager {
         }
     }
 
-    internal func showNextCoachMark(hidePrevious: Bool = true) {
+    internal func showNextCoachMark(hidePrevious: Bool = true, hideAnimated: Bool = true) {
         if disableFlow || paused || !canShowCoachMark { return }
 
         canShowCoachMark = false
@@ -159,7 +167,7 @@ public class FlowManager {
         if hidePrevious {
             guard let currentCoachMark = currentCoachMark else { return }
 
-            coachMarksViewController.hide(coachMark: currentCoachMark) {
+            coachMarksViewController.hide(coachMark: currentCoachMark, animated: hideAnimated) {
                 self.delegate?.didHide(coachMark: self.currentCoachMark!, at: self.currentIndex)
                 self.showOrStop()
             }

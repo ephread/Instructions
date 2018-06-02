@@ -65,3 +65,7 @@ given file starts to grow too much, it can be replaced by _Instructions contribu
 
 We expect you to follow that convention. Instructions isn't a giant project with a hefty number of contributors,
 so please don't be shy and credit yourself when you make a pull request. 👏
+
+### Documentation
+
+If you're adding a new feature, you should most likely update the README with a quick description of the feature.

@@ -66,10 +66,10 @@ Add Instructions to your Podfile:
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '9.0'
+platform :ios, '10.0'
 use_frameworks!
 
-pod 'Instructions', '~> 1.0.0'
+pod 'Instructions', '~> 1.1.0'
 ```
 
 Then, run the following command:
@@ -82,7 +82,7 @@ $ pod install
 Add Instructions to your Cartfile:
 
 ```
-github "ephread/Instructions" ~> 1.0.0
+github "ephread/Instructions" ~> 1.1.0
 ```
 
 You can then update, build and drag the generated framework into your project:

@@ -90,9 +90,12 @@ public class FlowManager {
     public func resume() {
         if started && paused {
             paused = false
-            createAndShowCoachMark(afterResuming: true)
-            if self.coachMarksViewController.overlayManager.overlayView.alpha == 0.0{
-                self.coachMarksViewController.overlayManager.showOverlay(true, completion: nil)
+            if self.coachMarksViewController.overlayManager.overlayView.alpha == 0.0 {
+                self.coachMarksViewController.overlayManager.showOverlay(true) { _ in
+                    self.createAndShowCoachMark(afterResuming: true)
+                }
+            } else {
+                createAndShowCoachMark(afterResuming: true)
             }
         }
     }

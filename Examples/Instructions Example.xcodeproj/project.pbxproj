@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5B84A3AE1BF48BE200C795F8 /* OnlyHintsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B84A3AD1BF48BE200C795F8 /* OnlyHintsViewController.swift */; };
+		B618494220C2472200315E1C /* PausingCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618494120C2472100315E1C /* PausingCodeViewController.swift */; };
 		B65DDDC21EE2C5F1002618AF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDC11EE2C5F1002618AF /* Extensions.swift */; };
 		B65DDDD41EE2EED0002618AF /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDD31EE2EED0002618AF /* KeyboardViewController.swift */; };
 		B65DDDD61EE34330002618AF /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDD51EE34330002618AF /* MainTableViewController.swift */; };
@@ -92,6 +93,7 @@
 
 /* Begin PBXFileReference section */
 		5B84A3AD1BF48BE200C795F8 /* OnlyHintsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlyHintsViewController.swift; sourceTree = "<group>"; };
+		B618494120C2472100315E1C /* PausingCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PausingCodeViewController.swift; sourceTree = "<group>"; };
 		B65DDDC11EE2C5F1002618AF /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B65DDDD31EE2EED0002618AF /* KeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
 		B65DDDD51EE34330002618AF /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
@@ -144,6 +146,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B618494620C2608000315E1C /* Basic Examples */ = {
+			isa = PBXGroup;
+			children = (
+				5B84A3AD1BF48BE200C795F8 /* OnlyHintsViewController.swift */,
+				C6CE54291BBD435500154266 /* BlurringOverlayViewController.swift */,
+				C6CE542A1BBD435500154266 /* CustomViewController.swift */,
+				C6CE542B1BBD435500154266 /* DefaultViewController.swift */,
+				C6CE54301BBD43CB00154266 /* MixedCoachMarksViewController.swift */,
+			);
+			path = "Basic Examples";
+			sourceTree = "<group>";
+		};
+		B618494720C260A000315E1C /* Delegate Examples */ = {
+			isa = PBXGroup;
+			children = (
+				C6CE542F1BBD43CB00154266 /* DelegateViewController.swift */,
+				B65DDDD31EE2EED0002618AF /* KeyboardViewController.swift */,
+				C63BB9151C73CDD600C81A4D /* TransitionFromCodeViewController.swift */,
+				B661D5B31F3AFA48000D29D3 /* ConfigurationViewController.swift */,
+				B618494120C2472100315E1C /* PausingCodeViewController.swift */,
+			);
+			path = "Delegate Examples";
+			sourceTree = "<group>";
+		};
+		B618494820C260D300315E1C /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				C63935DA1D2837EF002DCABF /* BackgroundNetworkingViewController.swift */,
+				C615FBAE1D7A1BB500EAEEFB /* TestFlowViewController.swift */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
 		B690138320BE6B2E00E706B2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,19 +272,11 @@
 		C6CE54261BBD42D300154266 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C63935DA1D2837EF002DCABF /* BackgroundNetworkingViewController.swift */,
-				C6CE54291BBD435500154266 /* BlurringOverlayViewController.swift */,
-				C6CE542A1BBD435500154266 /* CustomViewController.swift */,
-				C6CE542B1BBD435500154266 /* DefaultViewController.swift */,
-				C6CE542F1BBD43CB00154266 /* DelegateViewController.swift */,
-				B65DDDD31EE2EED0002618AF /* KeyboardViewController.swift */,
+				B618494820C260D300315E1C /* Debug */,
+				B618494720C260A000315E1C /* Delegate Examples */,
+				B618494620C2608000315E1C /* Basic Examples */,
 				B65DDDD51EE34330002618AF /* MainTableViewController.swift */,
-				C6CE54301BBD43CB00154266 /* MixedCoachMarksViewController.swift */,
-				5B84A3AD1BF48BE200C795F8 /* OnlyHintsViewController.swift */,
 				C64FB3341BB6CC180081E5B6 /* ProfileViewController.swift */,
-				C615FBAE1D7A1BB500EAEEFB /* TestFlowViewController.swift */,
-				C63BB9151C73CDD600C81A4D /* TransitionFromCodeViewController.swift */,
-				B661D5B31F3AFA48000D29D3 /* ConfigurationViewController.swift */,
 				B661D5B71F3B00FB000D29D3 /* InstructionsNavigationController.swift */,
 			);
 			path = "View Controllers";
@@ -415,6 +442,7 @@
 				C64FB3861BB98EC20081E5B6 /* CustomCoachMarkArrowView.swift in Sources */,
 				C64FB3841BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift in Sources */,
 				C63935DB1D2837EF002DCABF /* BackgroundNetworkingViewController.swift in Sources */,
+				B618494220C2472200315E1C /* PausingCodeViewController.swift in Sources */,
 				C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */,
 				B65DDDD61EE34330002618AF /* MainTableViewController.swift in Sources */,
 				5B84A3AE1BF48BE200C795F8 /* OnlyHintsViewController.swift in Sources */,

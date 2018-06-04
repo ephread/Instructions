@@ -202,8 +202,7 @@ Last, you can make the overlay tappable. A tap on the overlay will hide the curr
 
 - `overlay.allowTap: Bool`
 
-⚠️ When using a blur effect, setting the window level to anything above `UIWindowLevelStatusBar`
-is not supported.
+⚠️ When using a blur effect, setting the window level to anything above `UIWindowLevelStatusBar` is not supported. Additionally, the blurring overlay is not supported in app extensions.
 
 #### Providing a custom cutout path
 If you dislike how the default cutout path looks like, you can customize it by providing a block to `makeCoachMark(for:)`. The cutout path will automatically be stored in the `cutoutPath` property of the returning `CoachMark` object:
@@ -345,6 +344,9 @@ func shouldHandleOverlayTap(in coachMarksController: CoachMarksController, at in
 Returning `true` will let Instructions continue the flow normally, while returning `false` will interrupt it. If you choose to interrupt the flow, you're responsible for either stopping or pausing it or manually show the next coach marks (see [Piloting the flow from the code](#piloting-the-flow-from-the-code)).
 
 `index` is the index of the coach mark currently displayed.
+
+##### Pausing and resuming the flow
+It's as simple as calling `coachMarksController.flow.pause()` and `coachMarksController.flow.resume()`. While pausing, you can also choose to hide Instructions's overlay altogether (`.pause(and: hideInstructions)`), or only hide the overlay and retain its touch blocking capabilities (`.pause(and: hideOverlay)`).
 
 ##### Performing animations before showing coach marks #####
 You can perform animation on views, before or after showing a given coach mark.

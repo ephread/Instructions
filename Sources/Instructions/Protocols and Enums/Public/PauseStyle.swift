@@ -1,4 +1,4 @@
-// AccessibilityIdentifiers
+// PauseStyle.swift
 //
 // Copyright (c) 2018 Frédéric Maquin <fred@ephread.com>
 //
@@ -19,14 +19,8 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-
 import Foundation
 
-struct AccessibilityIdentifiers {
-    static let coachMarkNext = "AccessibilityIdentifiers.coachMarkNext"
-    static let coachMarkHint = "AccessibilityIdentifiers.coachMarkHint"
-    static let coachMarkBody = "AccessibilityIdentifiers.coachMarkBody"
-
-    static let skipButton = "AccessibilityIdentifiers.skipButton"
-    static let overlayView = "AccessibilityIdentifiers.overlayView"
+public enum PauseStyle {
+    case hideInstructions, hideOverlay, hideNothing
 }

@@ -75,7 +75,7 @@ class TranslucentOverlayStyleManager: OverlayStyleManager {
         guard let overlay = overlayView else { return }
 
         overlay.isHidden = false
-        overlay.alpha = show ? 0.0 : 1.0
+        overlay.alpha = show ? 0.0 : overlay.alpha
         overlay.backgroundColor = .clear
         overlay.holder.backgroundColor = color
 

@@ -19,7 +19,7 @@ class TransitionExampleTests: XCTestCase {
 
     func testTapThroughCutout() {
         let app = XCUIApplication()
-        app.tables/*@START_MENU_TOKEN@*/.staticTexts["Transition From Code"]/*[[".cells.staticTexts[\"Transition From Code\"]",".staticTexts[\"Transition From Code\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.tables.staticTexts["Transitioning from code"].tap()
         
         let overlay = app.otherElements["AccessibilityIdentifiers.overlayView"]
         _ = overlay.waitForExistence(timeout: 5)
@@ -39,7 +39,7 @@ class TransitionExampleTests: XCTestCase {
 
     func testTapThroughOverlay() {
         let app = XCUIApplication()
-        app.tables/*@START_MENU_TOKEN@*/.staticTexts["Transition From Code"]/*[[".cells.staticTexts[\"Transition From Code\"]",".staticTexts[\"Transition From Code\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        app.tables.staticTexts["Transitioning from code"].tap()
 
         let overlay = app.otherElements["AccessibilityIdentifiers.overlayView"]
         _ = overlay.waitForExistence(timeout: 5)

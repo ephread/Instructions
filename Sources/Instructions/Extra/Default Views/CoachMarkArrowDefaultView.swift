@@ -86,8 +86,6 @@ public class CoachMarkArrowDefaultView: UIView, CoachMarkArrowView {
             context?.move(to: CGPoint(x: rect.minX, y: rect.minY))
             context?.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
             context?.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
-        default:
-            return
         }
         context?.closePath()
         context?.drawPath(using: .fillStroke)
@@ -105,8 +103,6 @@ private extension CoachMarkArrowDefaultView {
         case .left,.right:
             self.widthAnchor.constraint(equalToConstant: Constants.arrowViewDefaultHeight).isActive = true
             self.heightAnchor.constraint(equalToConstant: Constants.arrowViewDefaultWidth).isActive = true
-        default:
-            return
         }
     }
 }

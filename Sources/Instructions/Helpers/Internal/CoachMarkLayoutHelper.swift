@@ -67,10 +67,10 @@ class CoachMarkLayoutHelper {
         } else {//arrow left or right
             let horizontalConstraint:NSLayoutConstraint
             if coachMark.arrowOrientation == .left {
-                var constant = coachMark.cutoutPath!.bounds.maxX + coachMark.gapBetweenCoachMarkAndCutoutPath
+                let constant = coachMark.cutoutPath!.bounds.maxX + coachMark.gapBetweenCoachMarkAndCutoutPath
                 horizontalConstraint = coachMarkView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor , constant: constant)
             } else {
-                var constant = -(parentView.frame.size.width - coachMark.cutoutPath!.bounds.minX) - coachMark.gapBetweenCoachMarkAndCutoutPath
+                let constant = -(parentView.frame.size.width - coachMark.cutoutPath!.bounds.minX) - coachMark.gapBetweenCoachMarkAndCutoutPath
                 horizontalConstraint = coachMarkView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: constant)
             }
             return [horizontalConstraint]

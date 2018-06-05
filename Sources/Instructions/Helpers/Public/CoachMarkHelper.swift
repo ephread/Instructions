@@ -172,8 +172,8 @@ public class CoachMarkHelper {
         if let extraViewList = extraViews {
             var extraPaths = [UIBezierPath]()
             for view in extraViewList{
-                var frame = instructionsRootView.convert(view.frame, from: view.superview)
-                var extraPath = UIBezierPath(roundedRect: frame.insetBy(dx: -4, dy: -4),
+                let frame = instructionsRootView.convert(view.frame, from: view.superview)
+                let extraPath = UIBezierPath(roundedRect: frame.insetBy(dx: -4, dy: -4),
                                              byRoundingCorners:.allCorners,
                                              cornerRadii: CGSize(width: 4, height: 4))
                 extraPaths.append(extraPath)

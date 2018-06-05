@@ -658,7 +658,7 @@
 		C64FB2E01BB6CA8A0081E5B6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0940;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = Ephread;
 				TargetAttributes = {
 					C6417E141D291A8A004D13EA = {

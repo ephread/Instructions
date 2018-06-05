@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		016E729D20BECD30003B634E /* ArrowOrientationLeftAndRightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016E729C20BECD30003B634E /* ArrowOrientationLeftAndRightViewController.swift */; };
+		01D1C5A620C664D40003EA7B /* ArrowOrientationLeftAndRightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1C5A520C664D40003EA7B /* ArrowOrientationLeftAndRightViewController.swift */; };
 		5B84A3AE1BF48BE200C795F8 /* OnlyHintsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B84A3AD1BF48BE200C795F8 /* OnlyHintsViewController.swift */; };
 		B618494220C2472200315E1C /* PausingCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618494120C2472100315E1C /* PausingCodeViewController.swift */; };
 		B65DDDC21EE2C5F1002618AF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDC11EE2C5F1002618AF /* Extensions.swift */; };
@@ -93,7 +93,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		016E729C20BECD30003B634E /* ArrowOrientationLeftAndRightViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrowOrientationLeftAndRightViewController.swift; sourceTree = "<group>"; };
+		01D1C5A520C664D40003EA7B /* ArrowOrientationLeftAndRightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowOrientationLeftAndRightViewController.swift; sourceTree = "<group>"; };
 		5B84A3AD1BF48BE200C795F8 /* OnlyHintsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlyHintsViewController.swift; sourceTree = "<group>"; };
 		B618494120C2472100315E1C /* PausingCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PausingCodeViewController.swift; sourceTree = "<group>"; };
 		B65DDDC11EE2C5F1002618AF /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -151,6 +151,7 @@
 		B618494620C2608000315E1C /* Basic Examples */ = {
 			isa = PBXGroup;
 			children = (
+				01D1C5A520C664D40003EA7B /* ArrowOrientationLeftAndRightViewController.swift */,
 				5B84A3AD1BF48BE200C795F8 /* OnlyHintsViewController.swift */,
 				C6CE54291BBD435500154266 /* BlurringOverlayViewController.swift */,
 				C6CE542A1BBD435500154266 /* CustomViewController.swift */,
@@ -280,7 +281,6 @@
 				B65DDDD51EE34330002618AF /* MainTableViewController.swift */,
 				C64FB3341BB6CC180081E5B6 /* ProfileViewController.swift */,
 				B661D5B71F3B00FB000D29D3 /* InstructionsNavigationController.swift */,
-				016E729C20BECD30003B634E /* ArrowOrientationLeftAndRightViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -442,9 +442,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				016E729D20BECD30003B634E /* ArrowOrientationLeftAndRightViewController.swift in Sources */,
 				C64FB3861BB98EC20081E5B6 /* CustomCoachMarkArrowView.swift in Sources */,
 				C64FB3841BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift in Sources */,
+				01D1C5A620C664D40003EA7B /* ArrowOrientationLeftAndRightViewController.swift in Sources */,
 				C63935DB1D2837EF002DCABF /* BackgroundNetworkingViewController.swift in Sources */,
 				B618494220C2472200315E1C /* PausingCodeViewController.swift in Sources */,
 				C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */,

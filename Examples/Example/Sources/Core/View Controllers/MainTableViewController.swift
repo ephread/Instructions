@@ -15,6 +15,14 @@ class MainTableViewController: UITableViewController {
             if let controller = segue.destination as? DefaultViewController {
                 controller.coachMarksController.overlay.windowLevel = UIWindowLevelStatusBar + 1
             }
+        } else if segue.identifier == "PausingOverlay" {
+            if let controller = segue.destination as? PausingCodeViewController {
+                controller.pauseStyle = .hideOverlay
+            }
+        } else if segue.identifier == "PausingInstructions" {
+            if let controller = segue.destination as? PausingCodeViewController {
+                controller.pauseStyle = .hideInstructions
+            }
         }
     }
 

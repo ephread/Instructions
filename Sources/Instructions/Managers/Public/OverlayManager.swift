@@ -112,6 +112,18 @@ public class OverlayManager:NSObject {
         }
     }
 
+    internal var isWindowHidden: Bool {
+#if INSTRUCTIONS_APP_EXTENSIONS
+        return overlayView.superview?.isHidden ?? true
+#else
+        return overlayView.window?.isHidden ?? true
+#endif
+    }
+
+    internal var isOverlayInvisible: Bool {
+        return overlayView.alpha == 0
+    }
+
     // MARK: - Private Properties
     private lazy var overlayStyleManager: OverlayStyleManager = {
         return self.updateOverlayStyleManager()
@@ -146,6 +158,52 @@ public class OverlayManager:NSObject {
     func showOverlay(_ show: Bool, completion: ((Bool) -> Void)?) {
         overlayStyleManager.showOverlay(show, withDuration: fadeAnimationDuration,
                                         completion: completion)
+    }
+
+    func showWindow(_ show: Bool, completion: ((Bool) -> Void)?) {
+#if INSTRUCTIONS_APP_EXTENSIONS
+        guard let topView = overlayView.superview else {
+            completion?(false)
+            return
+        }
+
+        if show {
+            overlayView.alpha = 1.0
+            topView.isHidden = false
+            UIView.animate(withDuration: fadeAnimationDuration, animations: {
+                topView.alpha = 1.0
+            }, completion: completion)
+        } else {
+            topView.isHidden = false
+            UIView.animate(withDuration: fadeAnimationDuration, animations: {
+                topView.alpha = 0.0
+            }, completion: { (success) in
+                topView.isHidden = true
+                completion?(success)
+            })
+        }
+#else
+        guard let window = overlayView.window else {
+            completion?(false)
+            return
+        }
+
+        if show {
+            overlayView.alpha = 1.0
+            window.isHidden = false
+            UIView.animate(withDuration: fadeAnimationDuration, animations: {
+                window.alpha = 1.0
+            }, completion: completion)
+        } else {
+            overlayView.window?.isHidden = false
+            UIView.animate(withDuration: fadeAnimationDuration, animations: {
+                window.alpha = 0.0
+            }, completion: { (success) in
+                window.isHidden = true
+                completion?(success)
+            })
+        }
+#endif
     }
 
     func viewWillTransition() {

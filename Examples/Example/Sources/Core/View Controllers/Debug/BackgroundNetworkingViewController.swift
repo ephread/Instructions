@@ -38,6 +38,8 @@ internal class BackgroundNetworkingViewController: DefaultViewController {
 
     fileprivate var downloadTask: URLSessionDownloadTask?
 
+    var stopInstructions: Bool = false
+
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +49,14 @@ internal class BackgroundNetworkingViewController: DefaultViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+        stopInstructions = false
         startDownload()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        stopInstructions = true
     }
 
     // MARK: - Internal Methods
@@ -58,7 +67,7 @@ internal class BackgroundNetworkingViewController: DefaultViewController {
     func startDownload() {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
 
-        if let url = URL(string: "http://ephread.com/assets/videos/instructions.mp4") {
+        if let url = URL(string: "https://ephread.com/assets/videos/instructions.mp4") {
             downloadTask = urlSession.downloadTask(with: url)
             downloadTask?.resume()
         }
@@ -85,6 +94,8 @@ extension BackgroundNetworkingViewController: URLSessionDownloadDelegate {
 
         DispatchQueue.main.async {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            if self.stopInstructions { return }
+
             if !self.coachMarksController.flow.started {
                 self.coachMarksController.start(on: self)
             } else {

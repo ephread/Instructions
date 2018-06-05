@@ -90,6 +90,8 @@ class BlurringOverlayStyleManager: OverlayStyleManager {
 
     private let style: UIBlurEffectStyle
 
+    private var isOverlayHidden: Bool = true
+
     // MARK: Initialization
     init(style: UIBlurEffectStyle) {
         self.style = style
@@ -127,7 +129,7 @@ class BlurringOverlayStyleManager: OverlayStyleManager {
         overlay.alpha = 1.0
 
         subOverlay.frame = overlay.bounds
-        subOverlay.effect = show ? nil : self.blurEffect
+        subOverlay.effect = (show || isOverlayHidden) ? nil : blurEffect
 
         subviews?.forEach { if $0 !== sizeTransitionOverlay { $0.removeFromSuperview() } }
         overlay.holder.addSubview(subOverlay)
@@ -135,6 +137,8 @@ class BlurringOverlayStyleManager: OverlayStyleManager {
         UIView.animate(withDuration: duration, animations: {
             subOverlay.effect = show ? self.blurEffect : nil
             overlay.ornaments.alpha = show ? 1.0 : 0.0
+
+            self.isOverlayHidden = !show
         }, completion: { success in
             if !show {
                 subOverlay.removeFromSuperview()

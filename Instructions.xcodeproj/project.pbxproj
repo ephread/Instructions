@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B6072E0E1EE1C39400758C22 /* InstructionsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6072E0D1EE1C39400758C22 /* InstructionsWindow.swift */; };
 		B6072E0F1EE1C39400758C22 /* InstructionsWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6072E0D1EE1C39400758C22 /* InstructionsWindow.swift */; };
+		B618494420C24D7D00315E1C /* PauseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618494320C24D7D00315E1C /* PauseStyle.swift */; };
+		B618494520C24D7D00315E1C /* PauseStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618494320C24D7D00315E1C /* PauseStyle.swift */; };
 		B61B99DC1EEA86D0006725D9 /* TranslucentOverlayStyleManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61B99DB1EEA8670006725D9 /* TranslucentOverlayStyleManagerTest.swift */; };
 		B61E448B1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61E448A1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift */; };
 		B61E448C1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61E448A1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift */; };
@@ -29,6 +31,8 @@
 		B68ABD2E1EEA0CCD0090A541 /* BlurringOverlayStyleManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68ABD2D1EEA09D10090A541 /* BlurringOverlayStyleManagerTest.swift */; };
 		B69B6D7C1E9CD5C000BE032D /* OverlayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B69B6D7B1E9CD5C000BE032D /* OverlayManager.swift */; };
 		B6A102A91DFC8EFE009C73DF /* MaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A102A81DFC8EFE009C73DF /* MaskView.swift */; };
+		B6CA4A8F20BE73A5006F42AC /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CA4A8E20BE73A5006F42AC /* AccessibilityIdentifiers.swift */; };
+		B6CA4A9520BE8F59006F42AC /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CA4A8E20BE73A5006F42AC /* AccessibilityIdentifiers.swift */; };
 		C61458B31BBB01DE006EB4F2 /* CoachMarkArrowOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61458B21BBB01DE006EB4F2 /* CoachMarkArrowOrientation.swift */; };
 		C61A76BD1BDC16D700F131BF /* CoachMarkDisplayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C61A76BC1BDC16D700F131BF /* CoachMarkDisplayManager.swift */; };
 		C62DBF4A1D53BE6300AFAAE2 /* CoachMarkInnerLayoutHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C62DBF491D53BE6300AFAAE2 /* CoachMarkInnerLayoutHelper.swift */; };
@@ -116,6 +120,7 @@
 
 /* Begin PBXFileReference section */
 		B6072E0D1EE1C39400758C22 /* InstructionsWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstructionsWindow.swift; sourceTree = "<group>"; };
+		B618494320C24D7D00315E1C /* PauseStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseStyle.swift; sourceTree = "<group>"; };
 		B61B99DB1EEA8670006725D9 /* TranslucentOverlayStyleManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslucentOverlayStyleManagerTest.swift; sourceTree = "<group>"; };
 		B61E448A1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurringOverlayStyleManager.swift; sourceTree = "<group>"; };
 		B61E448D1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslucentOverlayStyleManager.swift; sourceTree = "<group>"; };
@@ -129,6 +134,7 @@
 		B68ABD2D1EEA09D10090A541 /* BlurringOverlayStyleManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurringOverlayStyleManagerTest.swift; sourceTree = "<group>"; };
 		B69B6D7B1E9CD5C000BE032D /* OverlayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayManager.swift; sourceTree = "<group>"; };
 		B6A102A81DFC8EFE009C73DF /* MaskView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaskView.swift; sourceTree = "<group>"; };
+		B6CA4A8E20BE73A5006F42AC /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
 		C61458B21BBB01DE006EB4F2 /* CoachMarkArrowOrientation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkArrowOrientation.swift; sourceTree = "<group>"; };
 		C61A76BC1BDC16D700F131BF /* CoachMarkDisplayManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkDisplayManager.swift; sourceTree = "<group>"; };
 		C62DBF491D53BE6300AFAAE2 /* CoachMarkInnerLayoutHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkInnerLayoutHelper.swift; sourceTree = "<group>"; };
@@ -239,6 +245,7 @@
 				C633C4B41D535A880025FAE9 /* Extensions */,
 				C62DBF491D53BE6300AFAAE2 /* CoachMarkInnerLayoutHelper.swift */,
 				C633C4BC1D53A8E50025FAE9 /* CoachMarkLayoutHelper.swift */,
+				B6CA4A8E20BE73A5006F42AC /* AccessibilityIdentifiers.swift */,
 			);
 			path = Internal;
 			sourceTree = "<group>";
@@ -349,7 +356,7 @@
 				C61458B51BBB0201006EB4F2 /* Extra */,
 				C62DBF481D53BE2500AFAAE2 /* Helpers */,
 				C633C4BB1D539C460025FAE9 /* Managers */,
-				C64FB33C1BB6CDBB0081E5B6 /* Protocols */,
+				C64FB33C1BB6CDBB0081E5B6 /* Protocols and Enums */,
 				C64FB33B1BB6CC5B0081E5B6 /* Supporting Files */,
 				C633C4B81D538D4A0025FAE9 /* Views */,
 				C64FB3531BB747590081E5B6 /* Instructions.swift */,
@@ -461,6 +468,7 @@
 				C63FC23A1BC9BB8100132132 /* CoachMarkSkipView.swift */,
 				C64FB33D1BB6CE2C0081E5B6 /* CoachMarksControllerDataSource.swift */,
 				C64FB33F1BB6D0160081E5B6 /* CoachMarksControllerDelegate.swift */,
+				B618494320C24D7D00315E1C /* PauseStyle.swift */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -521,13 +529,13 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		C64FB33C1BB6CDBB0081E5B6 /* Protocols */ = {
+		C64FB33C1BB6CDBB0081E5B6 /* Protocols and Enums */ = {
 			isa = PBXGroup;
 			children = (
 				B65DDDCC1EE2E2B7002618AF /* Internal */,
 				C636FFB61BBC8ED600EB243B /* Public */,
 			);
-			path = Protocols;
+			path = "Protocols and Enums";
 			sourceTree = "<group>";
 		};
 		C6A1304E1DCFB47E00E00E75 /* Managers */ = {
@@ -650,11 +658,12 @@
 		C64FB2E01BB6CA8A0081E5B6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Ephread;
 				TargetAttributes = {
 					C6417E141D291A8A004D13EA = {
 						LastSwiftMigration = 0920;
+						ProvisioningStyle = Automatic;
 					};
 					C64FB2E81BB6CA8A0081E5B6 = {
 						CreatedOnToolsVersion = 7.0;
@@ -733,6 +742,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6CA4A9520BE8F59006F42AC /* AccessibilityIdentifiers.swift in Sources */,
 				B65DDDD71EE34BE4002618AF /* OverlayManager.swift in Sources */,
 				B65DDDD81EE34BE4002618AF /* OverlayStyleManager.swift in Sources */,
 				B65DDDD91EE34BE4002618AF /* MaskView.swift in Sources */,
@@ -767,6 +777,7 @@
 				C6417E251D291A8A004D13EA /* Instructions.swift in Sources */,
 				C6417E271D291A8A004D13EA /* CoachMarkArrowView.swift in Sources */,
 				C6417E281D291A8A004D13EA /* CoachMarkSkipView.swift in Sources */,
+				B618494520C24D7D00315E1C /* PauseStyle.swift in Sources */,
 				B65DDDC01EE2C43E002618AF /* UIView+Layout.swift in Sources */,
 				C6D365131D57E97700D2C6A2 /* FlowManager.swift in Sources */,
 				C6417E291D291A8A004D13EA /* CoachMarkBodyView.swift in Sources */,
@@ -786,6 +797,7 @@
 				C62DBF4A1D53BE6300AFAAE2 /* CoachMarkInnerLayoutHelper.swift in Sources */,
 				C6D4D0E71D59E4AF00F14FC5 /* CoachMarkViewControllerDelegate.swift in Sources */,
 				C61A76BD1BDC16D700F131BF /* CoachMarkDisplayManager.swift in Sources */,
+				B6CA4A8F20BE73A5006F42AC /* AccessibilityIdentifiers.swift in Sources */,
 				C64FB3521BB6FA250081E5B6 /* CoachMarkView.swift in Sources */,
 				C64FB3441BB6D81C0081E5B6 /* CoachMarksControllerDataSource.swift in Sources */,
 				C63BB9191C73CDE200C81A4D /* DummyView.swift in Sources */,
@@ -813,6 +825,7 @@
 				C64FB3451BB6D81C0081E5B6 /* CoachMarksControllerDelegate.swift in Sources */,
 				C64FB3541BB747590081E5B6 /* Instructions.swift in Sources */,
 				C62DBF501D5499AB00AFAAE2 /* CoachMarkHelper.swift in Sources */,
+				B618494420C24D7D00315E1C /* PauseStyle.swift in Sources */,
 				C64FB34D1BB6DEDC0081E5B6 /* CoachMarkArrowView.swift in Sources */,
 				C633C4BD1D53A8E50025FAE9 /* CoachMarkLayoutHelper.swift in Sources */,
 				C63FC23B1BC9BB8100132132 /* CoachMarkSkipView.swift in Sources */,
@@ -855,8 +868,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -867,6 +883,7 @@
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS_APP_EXTENSIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.InstructionsAppExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.1;
@@ -877,8 +894,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -889,6 +909,7 @@
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS_APP_EXTENSIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.InstructionsAppExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.1;
@@ -1019,7 +1040,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = EV2G94D75V;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1045,7 +1066,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = EV2G94D75V;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";

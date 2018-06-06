@@ -24,20 +24,19 @@ import UIKit
 import InstructionsAppExtensions // <-- If you're using Carthage or managing frameworks manually.
 //import Instructions <-- If you're using CocoaPods.
 
-class KeyboardViewController: UIInputViewController, CoachMarksControllerDataSource {
+class KeyboardViewController: UIInputViewController,
+                              CoachMarksControllerDataSource,
+                              CoachMarksControllerDelegate {
 
-    @IBOutlet var nextKeyboardButton: UIButton!
-    @IBOutlet var secondButton: UIButton!
+    @IBOutlet weak var nextKeyboardButton: UIButton!
+    @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var footBallKey: UIButton!
+    @IBOutlet weak var basketBallKey: UIButton!
 
     @IBOutlet weak var textField: UITextField!
+
     var keyboardView: UIView!
     var coachMarksController: CoachMarksController?
-
-    override func updateViewConstraints() {
-        super.updateViewConstraints()
-
-        // Add custom view sizing constraints here
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +47,9 @@ class KeyboardViewController: UIInputViewController, CoachMarksControllerDataSou
 
         self.coachMarksController = CoachMarksController()
         self.coachMarksController?.dataSource = self
+        self.coachMarksController?.delegate = self
+
+        //self.coachMarksController?.overlay.blurEffectStyle = .light
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -75,7 +77,7 @@ class KeyboardViewController: UIInputViewController, CoachMarksControllerDataSou
     }
 
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
-        return 2;
+        return 4;
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
@@ -83,7 +85,11 @@ class KeyboardViewController: UIInputViewController, CoachMarksControllerDataSou
         case 0:
             return coachMarksController.helper.makeCoachMark(for: self.nextKeyboardButton)
         case 1:
-            return coachMarksController.helper.makeCoachMark(for: self.secondButton)
+            return coachMarksController.helper.makeCoachMark(for: self.continueButton)
+        case 2:
+            return coachMarksController.helper.makeCoachMark(for: self.footBallKey)
+        case 3:
+            return coachMarksController.helper.makeCoachMark(for: self.basketBallKey)
         default:
             return CoachMark()
         }
@@ -99,12 +105,24 @@ class KeyboardViewController: UIInputViewController, CoachMarksControllerDataSou
             coachViews.bodyView.hintLabel.text = "Tap here to change the keyboard."
             coachViews.bodyView.nextLabel.text = "Next"
         case 1:
-            coachViews.bodyView.hintLabel.text = "Button that does nothing."
+            coachViews.bodyView.hintLabel.text = "Touch this button to continue the flow"
+            coachViews.bodyView.nextLabel.text = "Ok!"
+        case 2:
+            coachViews.bodyView.hintLabel.text = "Football?"
+            coachViews.bodyView.nextLabel.text = "Next"
+        case 3:
+            coachViews.bodyView.hintLabel.text = "Basketball?"
             coachViews.bodyView.nextLabel.text = "Finish"
         default: break
         }
         
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController, willShow coachMark: inout CoachMark, afterSizeTransition: Bool, at index: Int) {
+        if index == 2 && !afterSizeTransition {
+            coachMarksController.flow.pause(and: .hideInstructions)
+        }
     }
 
     private func loadInterface() {
@@ -117,6 +135,10 @@ class KeyboardViewController: UIInputViewController, CoachMarksControllerDataSou
         // add the interface to the main view
         view.addSubview(keyboardView)
         keyboardView.fillSuperview()
+    }
+
+    @IBAction func resumeFlow() {
+        coachMarksController?.flow.resume()
     }
 }
 

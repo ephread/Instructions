@@ -27,7 +27,7 @@ import UIKit
 
 // MARK: - Main Class
 /// Handles a set of coach marks, and display them successively.
-class CoachMarksViewController: UIViewController {
+public class CoachMarksViewController: UIViewController {
 
     // MARK: - Internal properties
     /// Control or control wrapper used to skip the flow.
@@ -52,7 +52,7 @@ class CoachMarksViewController: UIViewController {
     }
 
     ///
-    var currentCoachMarkView: CoachMarkView?
+    public var currentCoachMarkView: CoachMarkView?
 
     ///
     var overlayManager: OverlayManager!
@@ -81,7 +81,7 @@ class CoachMarksViewController: UIViewController {
     var customStatusBarStyle: UIStatusBarStyle?
 
     ///
-    override var preferredStatusBarStyle: UIStatusBarStyle {
+    override public var preferredStatusBarStyle: UIStatusBarStyle {
         if let statusBarStyle = customStatusBarStyle {
             return statusBarStyle
         } else {
@@ -113,7 +113,7 @@ class CoachMarksViewController: UIViewController {
         self.skipViewDisplayManager = skipViewDisplayManager
     }
 
-    override func loadView() {
+    override public func loadView() {
 #if INSTRUCTIONS_APP_EXTENSIONS
         view = UIView()
 #else
@@ -123,7 +123,7 @@ class CoachMarksViewController: UIViewController {
     }
 
     // Called after the view was loaded.
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
     }
 
@@ -157,15 +157,15 @@ class CoachMarksViewController: UIViewController {
         instructionsRootView.addSubview(skipView.asView!)
     }
 
-    override var shouldAutorotate: Bool {
+    override public var shouldAutorotate: Bool {
         return _shouldAutorotate
     }
 
-    override var prefersStatusBarHidden: Bool {
+    override public var prefersStatusBarHidden: Bool {
         return _prefersStatusBarHidden
     }
 
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+    override public var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return _supportedInterfaceOrientations
     }
 }
@@ -249,7 +249,7 @@ extension CoachMarksViewController {
 // MARK: - Change Events
 extension CoachMarksViewController {
     // MARK: - Overrides
-    override func viewWillTransition(to size: CGSize,
+    override public func viewWillTransition(to size: CGSize,
                                      with coordinator: UIViewControllerTransitionCoordinator) {
         if currentCoachMarkView == nil { return }
         if onGoingSizeChange { return }

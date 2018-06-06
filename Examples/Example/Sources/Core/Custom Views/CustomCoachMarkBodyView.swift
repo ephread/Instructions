@@ -34,7 +34,13 @@ internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
 
     var highlighted: Bool = false
 
-    var nextButton = UIButton()
+    var nextButton: UIButton = {
+        let nextButton = UIButton()
+        nextButton.accessibilityIdentifier = AccessibilityIdentifiers.next
+
+        return nextButton
+    }()
+
     var hintLabel = UITextView()
 
     weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate? = nil

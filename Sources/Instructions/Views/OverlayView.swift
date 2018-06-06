@@ -28,6 +28,8 @@ class OverlayView: UIView {
     internal static let sublayerName = "Instructions.OverlaySublayer"
 
     var cutoutPath: UIBezierPath?
+    
+    var extraCutoutPath: [UIBezierPath]?
 
     let holder: UIView
     let ornaments: UIView
@@ -45,7 +47,7 @@ class OverlayView: UIView {
 
         holder.translatesAutoresizingMaskIntoConstraints = false
         ornaments.translatesAutoresizingMaskIntoConstraints = false
-        
+
         holder.isUserInteractionEnabled = false
         ornaments.isUserInteractionEnabled = false
 
@@ -54,6 +56,8 @@ class OverlayView: UIView {
 
         holder.fillSuperview()
         ornaments.fillSuperview()
+
+        accessibilityIdentifier = AccessibilityIdentifiers.overlayView
     }
 
     required public init?(coder aDecoder: NSCoder) {

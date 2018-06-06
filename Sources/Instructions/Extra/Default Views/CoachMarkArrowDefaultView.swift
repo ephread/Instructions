@@ -25,20 +25,32 @@ import UIKit
 // MARK: - Default Class
 /// A concrete implementation of the coach mark arrow view and the
 /// default one provided by the library.
-public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
+public class CoachMarkArrowDefaultView: UIView, CoachMarkArrowView {
     // MARK: - Initialization
-    public init(orientation: CoachMarkArrowOrientation) {
-        let image, highlightedImage: UIImage?
-
-        if orientation == .top {
-            image = UIImage(namedInInstructions: "arrow-top")
-            highlightedImage = UIImage(namedInInstructions: "arrow-top-highlighted")
-        } else {
-            image = UIImage(namedInInstructions: "arrow-bottom")
-            highlightedImage = UIImage(namedInInstructions: "arrow-bottom-highlighted")
+    var orientation:CoachMarkArrowOrientation = CoachMarkArrowOrientation.top
+    public var color:UIColor = UIColor.white {
+        didSet {
+            self.layoutIfNeeded()
         }
-
-        super.init(image: image, highlightedImage: highlightedImage)
+    }
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    public init(orientation: CoachMarkArrowOrientation) {
+        self.orientation = orientation
+        super.init(frame: CGRect.zero)
+        self.backgroundColor = UIColor.clear
+//        let image, highlightedImage: UIImage?
+//
+//        if orientation == .top {
+//            image = UIImage(namedInInstructions: "arrow-top")
+//            highlightedImage = UIImage(namedInInstructions: "arrow-top-highlighted")
+//        } else {
+//            image = UIImage(namedInInstructions: "arrow-bottom")
+//            highlightedImage = UIImage(namedInInstructions: "arrow-bottom-highlighted")
+//        }
+        
+//        super.init(image: image, highlightedImage: highlightedImage)
 
         initializeConstraints()
     }
@@ -46,13 +58,51 @@ public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("This class does not support NSCoding.")
     }
-}
+    public var isHighlighted: Bool = false
 
+    override public func draw(_ rect: CGRect) {
+        let context = UIGraphicsGetCurrentContext()
+        context?.setStrokeColor(self.color.cgColor)
+        context?.setFillColor(self.color.cgColor)
+        switch self.orientation {
+        case .top:
+            //        left down corner
+            context?.move(to: CGPoint(x: rect.minX, y: rect.maxY))
+            //        top middle point
+            context?.addLine(to: CGPoint(x: rect.midX, y: rect.minY))
+            //        right down corner
+            context?.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        case .bottom:
+            context?.move(to: CGPoint(x: rect.minX, y: rect.minY))
+            context?.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+            context?.addLine(to: CGPoint(x: rect.midX, y: rect.maxY))
+            
+        case .left:
+            context?.move(to: CGPoint(x: rect.minX, y: rect.midY))
+            context?.addLine(to: CGPoint(x: rect.maxX, y: rect.minY))
+            context?.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+
+        case .right:
+            context?.move(to: CGPoint(x: rect.minX, y: rect.minY))
+            context?.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
+            context?.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+        }
+        context?.closePath()
+        context?.drawPath(using: .fillStroke)
+        context?.strokePath()
+    }
+}
 // MARK: - Private Inner Setup
 private extension CoachMarkArrowDefaultView {
     func initializeConstraints() {
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.widthAnchor.constraint(equalToConstant: self.image!.size.width).isActive = true
-        self.heightAnchor.constraint(equalToConstant: self.image!.size.height).isActive = true
+        switch self.orientation {
+        case .top,.bottom:
+            self.widthAnchor.constraint(equalToConstant: Constants.arrowViewDefaultWidth).isActive = true
+            self.heightAnchor.constraint(equalToConstant: Constants.arrowViewDefaultHeight).isActive = true
+        case .left,.right:
+            self.widthAnchor.constraint(equalToConstant: Constants.arrowViewDefaultHeight).isActive = true
+            self.heightAnchor.constraint(equalToConstant: Constants.arrowViewDefaultWidth).isActive = true
+        }
     }
 }

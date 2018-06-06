@@ -33,6 +33,7 @@ public class CoachMarkSkipDefaultView: UIButton, CoachMarkSkipView {
     // MARK: - Private properties
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        accessibilityIdentifier = AccessibilityIdentifiers.skipButton
     }
 
     public convenience init() {

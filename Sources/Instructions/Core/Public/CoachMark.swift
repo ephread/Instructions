@@ -33,6 +33,7 @@ public struct CoachMark {
     /// The path to cut in the overlay, so the point of interest will be visible.
     public var cutoutPath: UIBezierPath?
 
+    public var extraCutoutPath : [UIBezierPath]?
     /// The vertical offset for the arrow (in rare cases, the arrow might need to overlap with
     /// the coach mark body).
     public var gapBetweenBodyAndArrow: CGFloat = 2.0
@@ -97,7 +98,7 @@ public struct CoachMark {
         if self.arrowOrientation != nil {
             return
         }
-
+        //计算箭头方向，这里只计算上下，左右必须指定
         if cutoutPath.bounds.origin.y > frame.size.height / 2 {
             self.arrowOrientation = .bottom
         } else {

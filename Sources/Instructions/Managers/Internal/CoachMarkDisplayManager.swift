@@ -146,7 +146,7 @@ class CoachMarkDisplayManager {
     }
 
     /// Add the current coach mark to the view, making sure it is
-    /// properly positioned.
+    /// properly positioned. 设置coachMarkView和其parentView之间的位置约束关系
     ///
     /// - Parameter coachMarkView: the coach mark to display
     /// - Parameter parentView: the view in which display coach marks
@@ -157,9 +157,11 @@ class CoachMarkDisplayManager {
                              andOverlayView overlayView: OverlayView) {
         // Add the view and compute its associated constraints.
         parentView.addSubview(coachMarkView)
-
+        
         parentView.addConstraints(
-            NSLayoutConstraint.constraints(
+            NSLayoutConstraint.constraints(//coachMarkView的最大宽度布局,
+//        /// Maximum width for a coach mark.
+//        public var maxWidth: CGFloat = 350, 这里直接固定写死350也有逻辑问题啊！！
                 withVisualFormat: "H:[currentCoachMarkView(<=\(coachMark.maxWidth))]",
                 options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil,
@@ -173,32 +175,33 @@ class CoachMarkDisplayManager {
 
             // Depending where the cutoutPath sits, the coach mark will either
             // stand above or below it.
-            if coachMark.arrowOrientation! == .bottom {
-                let constant = -(parentView.frame.size.height -
-                                 cutoutPath.bounds.origin.y + offset)
-
-                let coachMarkViewConstraint =
-                    coachMarkView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor,
-                                                          constant: constant)
-
-                parentView.addConstraint(coachMarkViewConstraint)
-            } else {
-                let constant = (cutoutPath.bounds.origin.y +
-                                cutoutPath.bounds.size.height) + offset
-
-                let coachMarkViewConstraint =
-                    coachMarkView.topAnchor.constraint(equalTo: parentView.topAnchor,
-                                                       constant: constant)
-
-                parentView.addConstraint(coachMarkViewConstraint)
+            //竖直方向，根据箭头方向，设定coachMarkView竖直约束
+            var constant:CGFloat = 0;
+            var coachMarkViewConstraint:NSLayoutConstraint
+            switch coachMark.arrowOrientation! {
+            case .left,.right: constant = -(parentView.frame.midY -
+                cutoutPath.bounds.midY)
+                coachMarkViewConstraint = coachMarkView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor,
+                                                      constant: constant)
+            case .top:
+                constant = (cutoutPath.bounds.origin.y + cutoutPath.bounds.size.height) + offset
+                coachMarkViewConstraint = coachMarkView.topAnchor.constraint(equalTo: parentView.topAnchor,
+                                                                         constant: constant)                
+            case .bottom:
+                constant = -(parentView.frame.size.height - cutoutPath.bounds.origin.y + offset)
+                coachMarkViewConstraint = coachMarkView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor,
+                                                                                constant: constant)
             }
-
+            parentView.addConstraint(coachMarkViewConstraint)
+            
+            //水平方向布局
             let constraints = coachMarkLayoutHelper.constraints(for: coachMarkView,
                                                                 coachMark: coachMark,
                                                                 parentView: parentView)
 
             parentView.addConstraints(constraints)
             overlayView.cutoutPath = cutoutPath
+            overlayView.extraCutoutPath = coachMark.extraCutoutPath
         } else {
             overlayView.cutoutPath = nil
         }

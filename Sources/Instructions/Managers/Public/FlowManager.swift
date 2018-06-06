@@ -90,12 +90,31 @@ public class FlowManager {
     public func resume() {
         if started && paused {
             paused = false
-            createAndShowCoachMark(afterResuming: true)
+
+            let completion: (Bool) -> Void = { _ in
+                self.createAndShowCoachMark(afterResuming: true)
+            }
+
+            if coachMarksViewController.overlayManager.isWindowHidden {
+                coachMarksViewController.overlayManager.showWindow(true, completion: completion)
+            } else if coachMarksViewController.overlayManager.isOverlayInvisible {
+                coachMarksViewController.overlayManager.showOverlay(true, completion: completion)
+            } else {
+                completion(true)
+            }
         }
     }
 
-    public func pause() {
+    public func pause(and pauseStyle: PauseStyle = .hideNothing) {
         paused = true
+
+        switch pauseStyle {
+        case .hideInstructions:
+            coachMarksViewController.overlayManager.showWindow(false, completion: nil)
+        case .hideOverlay:
+            coachMarksViewController.overlayManager.showOverlay(false, completion: nil)
+        case .hideNothing: break
+        }
     }
 
     internal func reset() {

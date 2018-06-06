@@ -42,8 +42,7 @@ class CoachMarkLayoutHelper {
         } else {
             self.layoutDirection = layoutDirection!
         }
-//根据coachMark内的poointOfInterest信息，把页面水平切分为3个部分，判定焦点是在左中右哪边，对应segmentIndex为1，2，3
-//？？？这里的coachMarkView和parentView的水平布局，写得有些过于复杂了吧！
+        
         if coachMark.arrowOrientation == .top || coachMark.arrowOrientation == .bottom {
             let computedProperties = computeProperties(for: coachMark, inParentView: parentView)
             let offset = arrowOffset(for: coachMark, withProperties: computedProperties,
@@ -64,7 +63,7 @@ class CoachMarkLayoutHelper {
                                            inParentView: parentView)
             default: return [NSLayoutConstraint]()
             }
-        } else {//arrow left or right
+        } else {//arrow left or right, the layout constraints diff with top and bottom, and layout around cutoutPath
             let horizontalConstraint:NSLayoutConstraint
             if coachMark.arrowOrientation == .left {
                 let constant = coachMark.cutoutPath!.bounds.maxX + coachMark.gapBetweenCoachMarkAndCutoutPath

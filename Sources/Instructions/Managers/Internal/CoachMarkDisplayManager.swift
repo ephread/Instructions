@@ -146,7 +146,7 @@ class CoachMarkDisplayManager {
     }
 
     /// Add the current coach mark to the view, making sure it is
-    /// properly positioned. 设置coachMarkView和其parentView之间的位置约束关系
+    /// properly positioned.
     ///
     /// - Parameter coachMarkView: the coach mark to display
     /// - Parameter parentView: the view in which display coach marks
@@ -157,11 +157,10 @@ class CoachMarkDisplayManager {
                              andOverlayView overlayView: OverlayView) {
         // Add the view and compute its associated constraints.
         parentView.addSubview(coachMarkView)
-        
+        /// TODO  the maxWidth have a default value 350, which should be calculated with screenWidth and other parameters
         parentView.addConstraints(
-            NSLayoutConstraint.constraints(//coachMarkView的最大宽度布局,
-//        /// Maximum width for a coach mark.
-//        public var maxWidth: CGFloat = 350, 这里直接固定写死350也有逻辑问题啊！！
+            NSLayoutConstraint.constraints(
+        /// Maximum width for a coach mark.
                 withVisualFormat: "H:[currentCoachMarkView(<=\(coachMark.maxWidth))]",
                 options: NSLayoutFormatOptions(rawValue: 0),
                 metrics: nil,
@@ -175,7 +174,7 @@ class CoachMarkDisplayManager {
 
             // Depending where the cutoutPath sits, the coach mark will either
             // stand above or below it.
-            //竖直方向，根据箭头方向，设定coachMarkView竖直约束
+            // vertical layout constraints
             var constant:CGFloat = 0;
             var coachMarkViewConstraint:NSLayoutConstraint
             switch coachMark.arrowOrientation! {
@@ -194,7 +193,7 @@ class CoachMarkDisplayManager {
             }
             parentView.addConstraint(coachMarkViewConstraint)
             
-            //水平方向布局
+            // horizontal layout constraints
             let constraints = coachMarkLayoutHelper.constraints(for: coachMarkView,
                                                                 coachMark: coachMark,
                                                                 parentView: parentView)

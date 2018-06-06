@@ -98,7 +98,8 @@ public struct CoachMark {
         if self.arrowOrientation != nil {
             return
         }
-        //计算箭头方向，这里只计算上下，左右必须指定
+        // TODO: find a way to compute left or right orientation
+        //computer orientation only for bottom and top, if want left and right, it must set manually
         if cutoutPath.bounds.origin.y > frame.size.height / 2 {
             self.arrowOrientation = .bottom
         } else {

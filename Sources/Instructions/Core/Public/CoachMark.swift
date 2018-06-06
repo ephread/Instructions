@@ -55,6 +55,9 @@ public struct CoachMark {
     /// Trailing and leading margin of the coach mark.
     public var horizontalMargin: CGFloat = 20
 
+    /// Set this property to `true` to display the coach mark over the cutoutPath.
+    public var displayOverCutoutPath: Bool = false
+
     /// Set this property to `true` to disable a tap on the overlay.
     /// (only if the tap capture was enabled)
     ///
@@ -119,6 +122,10 @@ public struct CoachMark {
         let yVal = cutoutPath.bounds.origin.y + cutoutPath.bounds.height / 2
 
         self.pointOfInterest = CGPoint(x: xVal, y: yVal)
+    }
+
+    internal func ceiledMaxWidth(in frame: CGRect) -> CGFloat {
+        return min(maxWidth, frame.width - 2 * horizontalMargin)
     }
 }
 

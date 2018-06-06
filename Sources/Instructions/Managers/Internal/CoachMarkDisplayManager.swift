@@ -52,11 +52,17 @@ class CoachMarkDisplayManager {
         // Creates the CoachMarkView, from the supplied component views.
         // CoachMarkView() is not a failable initializer. We'll force unwrap
         // currentCoachMarkView everywhere.
-        return CoachMarkView(bodyView: coachMarkComponentViews.bodyView,
-                             arrowView: coachMarkComponentViews.arrowView,
-                             arrowOrientation: coachMark.arrowOrientation,
-                             arrowOffset: coachMark.gapBetweenBodyAndArrow,
-                             coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper())
+        if coachMark.displayOverCutoutPath {
+            // No arrow should be shown when displayed above the cutoutPath.
+            return CoachMarkView(bodyView: coachMarkComponentViews.bodyView,
+                                 coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper())
+        } else {
+            return CoachMarkView(bodyView: coachMarkComponentViews.bodyView,
+                                 arrowView: coachMarkComponentViews.arrowView,
+                                 arrowOrientation: coachMark.arrowOrientation,
+                                 arrowOffset: coachMark.gapBetweenBodyAndArrow,
+                                 coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper())
+        }
     }
 
     /// Hides the given CoachMark View
@@ -116,6 +122,7 @@ class CoachMarkDisplayManager {
             UIView.animate(withDuration: coachMark.animationDuration, animations: { () -> Void in
                 coachMarkView.alpha = 1.0
             }, completion: { _ in
+                print(coachMarkView)
                 completion?()
             })
         } else {
@@ -148,49 +155,112 @@ class CoachMarkDisplayManager {
     /// Add the current coach mark to the view, making sure it is
     /// properly positioned.
     ///
-    /// - Parameter coachMarkView: the coach mark to display
-    /// - Parameter parentView: the view in which display coach marks
-    /// - Parameter coachMark: the coachmark data
-    /// - Parameter overlayView: the overlayView (covering everything and showing cutouts)
+    /// - Parameters:
+    ///   - coachMarkView: the coach mark to display
+    ///   - parentView: the view in which display coach marks
+    ///   - coachMark: the coachmark data
+    ///   - overlayView: the overlayView (covering everything and showing cutouts)
     fileprivate func prepare(coachMarkView: CoachMarkView, forDisplayIn parentView: UIView,
                              usingCoachMark coachMark: CoachMark,
                              andOverlayView overlayView: OverlayView) {
         // Add the view and compute its associated constraints.
         parentView.addSubview(coachMarkView)
 
-        parentView.addConstraints(
-            NSLayoutConstraint.constraints(
-                withVisualFormat: "H:[currentCoachMarkView(<=\(coachMark.maxWidth))]",
-                options: NSLayoutFormatOptions(rawValue: 0),
-                metrics: nil,
-                views: ["currentCoachMarkView": coachMarkView]
-            )
-        )
+        coachMarkView.widthAnchor
+                     .constraint(lessThanOrEqualToConstant: coachMark.maxWidth).isActive = true
 
         // No cutoutPath, no arrow.
         if let cutoutPath = coachMark.cutoutPath {
-            let offset = coachMark.gapBetweenCoachMarkAndCutoutPath
 
-            // Depending where the cutoutPath sits, the coach mark will either
-            // stand above or below it.
-            if coachMark.arrowOrientation! == .bottom {
-                let constant = -(parentView.frame.size.height -
-                                 cutoutPath.bounds.origin.y + offset)
+            generateAndEnableVerticalConstraints(of: coachMarkView, forDisplayIn: parentView,
+                                                 usingCoachMark: coachMark, cutoutPath: cutoutPath,
+                                                 andOverlayView: overlayView)
 
-                let coachMarkViewConstraint =
-                    coachMarkView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor,
-                                                          constant: constant)
+            generateAndEnableHorizontalConstraints(of: coachMarkView, forDisplayIn: parentView,
+                                                  usingCoachMark: coachMark,
+                                                  andOverlayView: overlayView)
 
-                parentView.addConstraint(coachMarkViewConstraint)
-            } else {
-                let constant = (cutoutPath.bounds.origin.y +
-                                cutoutPath.bounds.size.height) + offset
+            overlayView.cutoutPath = cutoutPath
+        } else {
+            overlayView.cutoutPath = nil
+        }
+    }
 
-                let coachMarkViewConstraint =
-                    coachMarkView.topAnchor.constraint(equalTo: parentView.topAnchor,
-                                                       constant: constant)
+    /// Generate the vertical constraints needed to lay out `coachMarkView` above or below the
+    /// cutout path.
+    ///
+    /// - Parameters:
+    ///   - coachMarkView: the coach mark to display
+    ///   - parentView: the view in which display coach marks
+    ///   - coachMark: the coachmark data
+    ///   - cutoutPath: the cutout path
+    ///   - overlayView: the overlayView (covering everything and showing cutouts)
+    func generateAndEnableVerticalConstraints(of coachMarkView: CoachMarkView,
+                                              forDisplayIn parentView: UIView,
+                                              usingCoachMark coachMark: CoachMark,
+                                              cutoutPath: UIBezierPath,
+                                              andOverlayView overlayView: OverlayView) {
+        let offset = coachMark.gapBetweenCoachMarkAndCutoutPath
 
-                parentView.addConstraint(coachMarkViewConstraint)
+        // Depending where the cutoutPath sits, the coach mark will either
+        // stand above or below it. Alternatively, it can also be displayed
+        // over the cutoutPath.
+        if coachMark.displayOverCutoutPath {
+            let constant = cutoutPath.bounds.midY - parentView.frame.size.height / 2
+
+            coachMarkView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor,
+                                                   constant: constant).isActive = true
+        } else if coachMark.arrowOrientation! == .bottom {
+            let constant = -(parentView.frame.size.height -
+                cutoutPath.bounds.origin.y + offset)
+
+            coachMarkView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor,
+                                                  constant: constant).isActive = true
+        } else {
+            let constant = (cutoutPath.bounds.origin.y +
+                cutoutPath.bounds.size.height) + offset
+
+            coachMarkView.topAnchor.constraint(equalTo: parentView.topAnchor,
+                                               constant: constant).isActive = true
+        }
+    }
+
+    /// Generate horizontal constraints needed to lay out `coachMarkView` at the
+    /// right place. This method uses a two-pass mechanism, whereby the `coachMarkView` is
+    /// at first laid out around the center of the point of interest. If it turns out
+    /// that the `coachMarkView` is partially out of the bounds of its parent (margins included),
+    /// the view is laid out again using the 3-segment mechanism.
+    ///
+    /// - Parameters:
+    ///   - coachMarkView: the coach mark to display
+    ///   - parentView: the view in which display coach marks
+    ///   - coachMark: the coachmark data
+    ///   - overlayView: the overlayView (covering everything and showing cutouts)
+    func generateAndEnableHorizontalConstraints(of coachMarkView: CoachMarkView,
+                                                forDisplayIn parentView: UIView,
+                                                usingCoachMark coachMark: CoachMark,
+                                                andOverlayView overlayView: OverlayView) {
+        // Generating the constraints for the first pass. This constraints center
+        // the view around the point of interest.
+        let constraints = coachMarkLayoutHelper.constraints(for: coachMarkView,
+                                                            coachMark: coachMark,
+                                                            parentView: parentView,
+                                                            firstPass: true)
+
+        // Laying out the view
+        parentView.addConstraints(constraints)
+        parentView.setNeedsLayout()
+        parentView.layoutIfNeeded()
+
+        // If the view turns out to be partially outside of the screen, constraints are
+        // computed again and the view is laid out for the second time.
+        let insets = UIEdgeInsets(top: 0, left: coachMark.horizontalMargin,
+                                  bottom: 0, right: coachMark.horizontalMargin)
+
+        if coachMarkView.isOutOfSuperview(consideringInsets: insets) {
+            // Removing previous constraints.
+            for constraint in constraints {
+                parentView.removeConstraint(constraint)
             }
 
             let constraints = coachMarkLayoutHelper.constraints(for: coachMarkView,
@@ -198,9 +268,6 @@ class CoachMarkDisplayManager {
                                                                 parentView: parentView)
 
             parentView.addConstraints(constraints)
-            overlayView.cutoutPath = cutoutPath
-        } else {
-            overlayView.cutoutPath = nil
         }
     }
 }

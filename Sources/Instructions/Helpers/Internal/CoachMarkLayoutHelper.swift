@@ -1,6 +1,6 @@
 // CoachMarkLayoutHelper.swift
 //
-// Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2016, 2018 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -22,13 +22,17 @@
 
 import UIKit
 
-// swiftlint:disable line_length
 class CoachMarkLayoutHelper {
     var layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight
 
     // TODO: Improve the layout system. Make it smarter.
-    func constraints(for coachMarkView: CoachMarkView, coachMark: CoachMark, parentView: UIView,
-                     layoutDirection: UIUserInterfaceLayoutDirection? = nil) -> [NSLayoutConstraint] {
+    func constraints(
+        for coachMarkView: CoachMarkView,
+        coachMark: CoachMark,
+        parentView: UIView,
+        layoutDirection: UIUserInterfaceLayoutDirection? = nil,
+        firstPass: Bool = false
+    ) -> [NSLayoutConstraint] {
         if coachMarkView.superview != parentView {
             print("coachMarkView was not added to parentView, returned constraints will be empty")
             return []
@@ -37,15 +41,25 @@ class CoachMarkLayoutHelper {
         if layoutDirection == nil {
             if #available(iOS 9, *) {
                 self.layoutDirection = UIView.userInterfaceLayoutDirection(
-                    for: parentView.semanticContentAttribute)
+                    for: parentView.semanticContentAttribute
+                )
             }
         } else {
             self.layoutDirection = layoutDirection!
         }
 
-        let computedProperties = computeProperties(for: coachMark, inParentView: parentView)
-        let offset = arrowOffset(for: coachMark, withProperties: computedProperties,
+        let computedProperties: CoachMarkComputedProperties
+        let offset: CGFloat
+
+        if firstPass {
+            computedProperties = CoachMarkComputedProperties(layoutDirection: self.layoutDirection,
+                                                             segmentIndex: 2)
+            offset = 0
+        } else {
+            computedProperties = computeProperties(for: coachMark, inParentView: parentView)
+            offset = arrowOffset(for: coachMark, withProperties: computedProperties,
                                  inParentView: parentView)
+        }
 
         switch computedProperties.segmentIndex {
         case 1:
@@ -68,19 +82,45 @@ class CoachMarkLayoutHelper {
                                     withCoachMark coachMark: CoachMark,
                                     inParentView parentView: UIView
     ) -> [NSLayoutConstraint] {
-        return NSLayoutConstraint.constraints(withVisualFormat: "H:|-(==\(coachMark.horizontalMargin))-[currentCoachMarkView(<=\(coachMark.maxWidth))]-(>=\(coachMark.horizontalMargin))-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["currentCoachMarkView": coachMarkView])
+        let visualFormat = "H:|-(==\(coachMark.horizontalMargin))-" +
+                           "[currentCoachMarkView(<=\(coachMark.maxWidth))]-" +
+                           "(>=\(coachMark.horizontalMargin))-|"
+
+        return NSLayoutConstraint.constraints(withVisualFormat: visualFormat,
+                                              options: NSLayoutFormatOptions(rawValue: 0),
+                                              metrics: nil,
+                                              views: ["currentCoachMarkView": coachMarkView])
     }
 
     private func middleConstraints(for coachMarkView: CoachMarkView,
                                    withCoachMark coachMark: CoachMark,
                                    inParentView parentView: UIView
     ) -> [NSLayoutConstraint] {
-        var constraints = NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=\(coachMark.horizontalMargin))-[currentCoachMarkView(<=\(coachMark.maxWidth)@1000)]-(>=\(coachMark.horizontalMargin))-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["currentCoachMarkView": coachMarkView])
+        let maxWidth = min(coachMark.maxWidth, (parentView.bounds.width - 2 *
+                                                coachMark.horizontalMargin))
+
+        let visualFormat = "H:[currentCoachMarkView(<=\(maxWidth)@1000)]"
+
+        var constraints =
+            NSLayoutConstraint.constraints(withVisualFormat: visualFormat,
+                                           options: NSLayoutFormatOptions(rawValue: 0),
+                                           metrics: nil,
+                                           views: ["currentCoachMarkView": coachMarkView])
+
+        var offset: CGFloat = 0
+
+        if let pointOfInterest = coachMark.pointOfInterest {
+            if layoutDirection == .leftToRight {
+                offset = parentView.center.x - pointOfInterest.x
+            } else {
+                offset = pointOfInterest.x - parentView.center.x
+            }
+        }
 
         constraints.append(NSLayoutConstraint(
             item: coachMarkView, attribute: .centerX, relatedBy: .equal,
             toItem: parentView, attribute: .centerX,
-            multiplier: 1, constant: 0
+            multiplier: 1, constant: -offset
         ))
 
         return constraints
@@ -90,7 +130,14 @@ class CoachMarkLayoutHelper {
                                      withCoachMark coachMark: CoachMark,
                                      inParentView parentView: UIView
     ) -> [NSLayoutConstraint] {
-        return NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=\(coachMark.horizontalMargin))-[currentCoachMarkView(<=\(coachMark.maxWidth))]-(==\(coachMark.horizontalMargin))-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["currentCoachMarkView": coachMarkView])
+        let visualFormat = "H:|-(>=\(coachMark.horizontalMargin))-" +
+                           "[currentCoachMarkView(<=\(coachMark.maxWidth))]-" +
+                           "(==\(coachMark.horizontalMargin))-|"
+
+        return NSLayoutConstraint.constraints(withVisualFormat: visualFormat,
+                                              options: NSLayoutFormatOptions(rawValue: 0),
+                                              metrics: nil,
+                                              views: ["currentCoachMarkView": coachMarkView])
     }
 
     /// Returns the arrow offset, based on the layout and the
@@ -133,7 +180,7 @@ class CoachMarkLayoutHelper {
             return pointOfInterest.x - coachMark.horizontalMargin
         } else {
             return parentView.bounds.size.width - pointOfInterest.x -
-                coachMark.horizontalMargin
+                   coachMark.horizontalMargin
         }
     }
 

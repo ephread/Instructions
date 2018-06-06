@@ -1,6 +1,6 @@
 // CoachMarkArrowOrientation.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015, 2016, 2018 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,8 +23,8 @@
 import UIKit
 
 /// Available orientations for the arrow.
-/// An arrow can either sit at the top and point upward (.Top) or
-/// sit at the bottom and point downward. (.Bottom)
+/// An arrow can either sit at the top of the body and point upward (.Top) or
+/// sit at the bottom of the body and point downward. (.Bottom)
 public enum CoachMarkArrowOrientation {
     case top
     case bottom

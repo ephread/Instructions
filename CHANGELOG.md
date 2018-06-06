@@ -2,8 +2,20 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
+## 1.2.1
+Released on 2018-XX-XX.
+
+### Fixed
+- Fix [#160] - CoachMark misplaced on iPad
+
+### Added
+- Add support for coach marks placed over cutout paths. ([#152])
+
+[#152]: https://github.com/ephread/Instructions/issues/152
+[#160]: https://github.com/ephread/Instructions/issues/160
+
 ## [1.2.0](https://github.com/ephread/Instructions/releases/tag/1.2.0)
-Released on 2018-06-XX.
+Released on 2018-06-04.
 
 ### Changed
 - Migrated to Swift 4.1 (PR [#159])

@@ -27,7 +27,7 @@ import UIKit
 
 // MARK: - Main Class
 /// Handles a set of coach marks, and display them successively.
-public class CoachMarksViewController: UIViewController {
+class CoachMarksViewController: UIViewController {
 
     // MARK: - Internal properties
     /// Control or control wrapper used to skip the flow.
@@ -52,7 +52,7 @@ public class CoachMarksViewController: UIViewController {
     }
 
     ///
-    public var currentCoachMarkView: CoachMarkView?
+    var currentCoachMarkView: CoachMarkView?
 
     ///
     var overlayManager: OverlayManager!
@@ -113,7 +113,7 @@ public class CoachMarksViewController: UIViewController {
         self.skipViewDisplayManager = skipViewDisplayManager
     }
 
-    override public func loadView() {
+    override func loadView() {
 #if INSTRUCTIONS_APP_EXTENSIONS
         view = UIView()
 #else
@@ -123,7 +123,7 @@ public class CoachMarksViewController: UIViewController {
     }
 
     // Called after the view was loaded.
-    override public func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
     }
 
@@ -157,15 +157,15 @@ public class CoachMarksViewController: UIViewController {
         instructionsRootView.addSubview(skipView.asView!)
     }
 
-    override public var shouldAutorotate: Bool {
+    override var shouldAutorotate: Bool {
         return _shouldAutorotate
     }
 
-    override public var prefersStatusBarHidden: Bool {
+    override var prefersStatusBarHidden: Bool {
         return _prefersStatusBarHidden
     }
 
-    override public var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return _supportedInterfaceOrientations
     }
 }
@@ -249,7 +249,7 @@ extension CoachMarksViewController {
 // MARK: - Change Events
 extension CoachMarksViewController {
     // MARK: - Overrides
-    override public func viewWillTransition(to size: CGSize,
+    override func viewWillTransition(to size: CGSize,
                                      with coordinator: UIViewControllerTransitionCoordinator) {
         if currentCoachMarkView == nil { return }
         if onGoingSizeChange { return }

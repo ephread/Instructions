@@ -25,7 +25,7 @@ import UIKit
 // swiftlint:disable force_cast
 
 /// The actual coach mark that will be displayed.
-public class CoachMarkView: UIView {
+class CoachMarkView: UIView {
     // MARK: - Internal properties
 
     /// The body of the coach mark (likely to contain some text).
@@ -96,7 +96,7 @@ public class CoachMarkView: UIView {
         self.layoutViewComposition()
     }
 
-    required public init?(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("This class does not support NSCoding.")
     }
 
@@ -180,7 +180,7 @@ public class CoachMarkView: UIView {
 
 // MARK: - Protocol conformance | CoachMarkBodyHighlightArrowDelegate
 extension CoachMarkView: CoachMarkBodyHighlightArrowDelegate {
-    public func highlightArrow(_ highlighted: Bool) {
+    func highlightArrow(_ highlighted: Bool) {
         self.arrowView?.isHighlighted = highlighted
     }
 }

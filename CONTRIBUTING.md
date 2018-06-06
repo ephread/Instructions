@@ -40,6 +40,8 @@ they will try to respond as quickly as possible!
 
 If you're tackling new code, here are a few things to remember.
 
+**Don't be afraid to ask questions!** If anything seems unclear, ask away! We need to make sure that everyone is on the same page.
+
 ### Style guide & linting
 
 Instructions doesn't really have a style guide. We simply expect you to follow the existing style
@@ -56,6 +58,17 @@ expected to be written in English 😉. Speaking of comments, they look better w
 with a period. 🤘
 
 [Swiftlint]: https://github.com/realm/SwiftLint
+
+### Git branching model & pull requests
+
+Instructions has a very loose branching model. All improvements and fixes happen in `master`, since there isn't a real need to support different versions. Branches are created for two reasons:
+
+1. to deal with new features or large fixes, these will eventually be merged back into master;
+2. to keep legacy code working with older versions of Swift or experiment with new versions of Swift / iOS.
+
+Pull requests need to focus on specific new features, changes or fixes. Keep them short and try to keep the number of files involved as low as possible, to ensure that the code review will be manageable.
+
+If you are making a non-trivial changes, which will require back and forth exchanges on the PR, the maintainer will often ask you to create (or move) your PR against a specific branch. The feature can then be dealt with in isolation. Therefore, you shouldn't merge any subsequent commit added to `master` into your PR without discussing it first with the maintainer.
 
 ### License & contribution
 

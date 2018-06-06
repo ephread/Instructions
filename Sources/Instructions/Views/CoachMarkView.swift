@@ -136,7 +136,6 @@ class CoachMarkView: UIView {
        
 
         if let arrowUIView = arrowUIView, let arrowOrientation = self.arrowOrientation {
-            //有箭头时，arrow和body一起添加约束
             self.addSubview(arrowUIView)
             
             switch arrowOrientation {

@@ -23,6 +23,37 @@
 import UIKit
 
 internal extension UIView {
+
+    var isOutOfSuperview: Bool {
+        guard let superview = self.superview else {
+            return true
+        }
+
+        let intersectedFrame = superview.bounds.intersection(self.frame)
+
+        let isInBounds = fabs(intersectedFrame.origin.x - self.frame.origin.x) < 1 &&
+            fabs(intersectedFrame.origin.y - self.frame.origin.y) < 1 &&
+            fabs(intersectedFrame.size.width - self.frame.size.width) < 1 &&
+            fabs(intersectedFrame.size.height - self.frame.size.height) < 1
+
+        return !isInBounds
+    }
+
+    func isOutOfSuperview(consideringInsets insets: UIEdgeInsets) -> Bool {
+        guard let superview = self.superview else {
+            return true
+        }
+
+        let intersectedFrame = superview.bounds.intersection(self.frame)
+
+        let isInBounds = fabs(intersectedFrame.origin.x - (self.frame.origin.x + insets.left)) < 1 &&
+            fabs(intersectedFrame.origin.y - (self.frame.origin.y + insets.top)) < 1 &&
+            fabs(intersectedFrame.size.width - self.frame.size.width - (insets.left + insets.right)) < 1 &&
+            fabs(intersectedFrame.size.height - self.frame.size.height - (insets.top + insets.bottom)) < 1
+
+        return !isInBounds
+    }
+
     func fillSuperview() {
         fillSuperviewVertically()
         fillSuperviewHorizontally()

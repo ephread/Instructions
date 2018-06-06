@@ -120,6 +120,10 @@ public struct CoachMark {
 
         self.pointOfInterest = CGPoint(x: xVal, y: yVal)
     }
+
+    internal func ceiledMaxWidth(in frame: CGRect) -> CGFloat {
+        return min(maxWidth, frame.width - 2 * horizontalMargin)
+    }
 }
 
 extension CoachMark: Equatable {}

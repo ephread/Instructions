@@ -28,8 +28,6 @@ class OverlayView: UIView {
     internal static let sublayerName = "Instructions.OverlaySublayer"
 
     var cutoutPath: UIBezierPath?
-    
-    var extraCutoutPath: [UIBezierPath]?
 
     let holder: UIView
     let ornaments: UIView

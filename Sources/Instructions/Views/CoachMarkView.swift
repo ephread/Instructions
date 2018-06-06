@@ -64,7 +64,7 @@ class CoachMarkView: UIView {
     ///                               will make the arrow overlap.
     /// - Parameter coachMarkInnerLayoutHelper: auto-layout constraints helper.
     init(bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView? = nil,
-         arrowOrientation: CoachMarkArrowOrientation? = nil, arrowOffset: CGFloat? = 0.0,
+         arrowOrientation: CoachMarkArrowOrientation? = nil, arrowOffset: CGFloat? = nil,
          coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper) {
 
         // Due to the fact Swift 2 compiler doesn't let us enforce type check of

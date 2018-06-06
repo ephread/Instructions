@@ -52,11 +52,17 @@ class CoachMarkDisplayManager {
         // Creates the CoachMarkView, from the supplied component views.
         // CoachMarkView() is not a failable initializer. We'll force unwrap
         // currentCoachMarkView everywhere.
-        return CoachMarkView(bodyView: coachMarkComponentViews.bodyView,
-                             arrowView: coachMarkComponentViews.arrowView,
-                             arrowOrientation: coachMark.arrowOrientation,
-                             arrowOffset: coachMark.gapBetweenBodyAndArrow,
-                             coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper())
+        if coachMark.displayOverCutoutPath {
+            // No arrow should be shown when displayed above the cutoutPath.
+            return CoachMarkView(bodyView: coachMarkComponentViews.bodyView,
+                                 coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper())
+        } else {
+            return CoachMarkView(bodyView: coachMarkComponentViews.bodyView,
+                                 arrowView: coachMarkComponentViews.arrowView,
+                                 arrowOrientation: coachMark.arrowOrientation,
+                                 arrowOffset: coachMark.gapBetweenBodyAndArrow,
+                                 coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper())
+        }
     }
 
     /// Hides the given CoachMark View
@@ -197,25 +203,25 @@ class CoachMarkDisplayManager {
         let offset = coachMark.gapBetweenCoachMarkAndCutoutPath
 
         // Depending where the cutoutPath sits, the coach mark will either
-        // stand above or below it.
-        if coachMark.arrowOrientation! == .bottom {
+        // stand above or below it. Alternatively, it can also be displayed
+        // over the cutoutPath.
+        if coachMark.displayOverCutoutPath {
+            let constant = cutoutPath.bounds.midY - parentView.frame.size.height / 2
+
+            coachMarkView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor,
+                                                   constant: constant).isActive = true
+        } else if coachMark.arrowOrientation! == .bottom {
             let constant = -(parentView.frame.size.height -
                 cutoutPath.bounds.origin.y + offset)
 
-            let coachMarkViewConstraint =
-                coachMarkView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor,
-                                                      constant: constant)
-
-            parentView.addConstraint(coachMarkViewConstraint)
+            coachMarkView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor,
+                                                  constant: constant).isActive = true
         } else {
             let constant = (cutoutPath.bounds.origin.y +
                 cutoutPath.bounds.size.height) + offset
 
-            let coachMarkViewConstraint =
-                coachMarkView.topAnchor.constraint(equalTo: parentView.topAnchor,
-                                                   constant: constant)
-
-            parentView.addConstraint(coachMarkViewConstraint)
+            coachMarkView.topAnchor.constraint(equalTo: parentView.topAnchor,
+                                               constant: constant).isActive = true
         }
     }
 

@@ -39,10 +39,10 @@ class CoachMarkInnerLayoutHelper {
         switch arrowOrientation {
         case .top,.bottom:
             return coachMarkViews.bodyView.makeConstraintToFillSuperviewHorizontally()
-        case .left:
-            return NSLayoutConstraint.constraints(withVisualFormat: "H:|-(==\(horizontalOffset))-[coachMarkArrowView][coachMarkBodyView]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["coachMarkArrowView": coachMarkViews.arrowView,"coachMarkBodyView": coachMarkViews.bodyView])
+        case .left://left and right orientation , the arrow might need to overlap with the coach mark body
+            return NSLayoutConstraint.constraints(withVisualFormat: "H:|[coachMarkArrowView]-(==\(-2))-[coachMarkBodyView]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["coachMarkArrowView": coachMarkViews.arrowView,"coachMarkBodyView": coachMarkViews.bodyView])
         case .right:
-            return NSLayoutConstraint.constraints(withVisualFormat: "H:|-(==\(horizontalOffset))-[coachMarkBodyView][coachMarkArrowView]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["coachMarkBodyView": coachMarkViews.bodyView,"coachMarkArrowView": coachMarkViews.arrowView])
+            return NSLayoutConstraint.constraints(withVisualFormat: "H:|[coachMarkBodyView]-(==\(-2))-[coachMarkArrowView]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["coachMarkBodyView": coachMarkViews.bodyView,"coachMarkArrowView": coachMarkViews.arrowView])
         }
     }
 

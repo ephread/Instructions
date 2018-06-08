@@ -43,8 +43,9 @@ class CoachMarkDisplayManagerTests: XCTestCase {
 
         overlay.overlayView = overlayView
 
-        self.coachMarkDisplayManager =
+        coachMarkDisplayManager =
             CoachMarkDisplayManager(coachMarkLayoutHelper: CoachMarkLayoutHelper())
+        coachMarkDisplayManager.overlayManager = overlay
     }
 
     override func tearDown() {
@@ -64,7 +65,7 @@ class CoachMarkDisplayManagerTests: XCTestCase {
         coachMark.computePointOfInterest()
 
         self.coachMarkDisplayManager.showNew(coachMarkView: coachMarkView, from: coachMark,
-                                             on: self.overlay) {
+                                             at: 0) {
             XCTAssertEqual(coachMarkView.alpha, 1.0)
             XCTAssertEqual(coachMarkView.isHidden, false)
 

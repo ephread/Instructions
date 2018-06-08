@@ -16,15 +16,6 @@ class DefaultExampleTests: XCTestCase {
         XCUIApplication().launch()
     }
 
-    func testThatOverlayCoversAllInteractions() {
-        let app = XCUIApplication()
-        app.tables/*@START_MENU_TOKEN@*/.staticTexts["Default"]/*[[".cells.staticTexts[\"Default\"]",".staticTexts[\"Default\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
-
-        if app.navigationBars["Profile"].buttons["Instructions"].isHittable {
-            XCTFail("Back button is hittable.")
-        }
-    }
-
     func testTapOnBody() {
         let app = XCUIApplication()
         app.tables/*@START_MENU_TOKEN@*/.staticTexts["Default"]/*[[".cells.staticTexts[\"Default\"]",".staticTexts[\"Default\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()

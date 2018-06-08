@@ -32,10 +32,10 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 - [x] [Skipable tour](#let-users-skip-the-tour)
 - [x] [Pilotable from code](#piloting-the-flow-from-the-code)
 - [x] [App Extensions support](#usage-within-app-extensions)
+- [x] [Animatable coach marks](#animating-coach-marks)
 - [x] Right-to-left support
 - [x] Size transition support (orientation and multi-tasking)
 - [x] Partial `UIVisualEffectView` support
-- [ ] Coach marks animation
 - [ ] Cross controllers walkthrough
 - [ ] Multiple coach marks support
 
@@ -274,6 +274,36 @@ You can customize the following properties:
 - `disableOverlayTap: Bool` is used to disable the ability to tap on the overlay to show the next coach mark, on a case-by-case basis.
 
 - `allowTouchInsideCutoutPath: Bool` is used to allow touch forwarding inside the cutout path. Take a look at `TransitionFromCodeViewController`, in the `Example/` directory, for more information.
+
+#### Animating coach marks
+To animates coach marks, you will need to implement the `CoachMarksControllerAnimationDelegate` protocol.
+
+```swift
+coachMarksController(_ coachMarksController: CoachMarksController, fetchAppearanceTransitionOfCoachMark coachMarkView: UIView, at index: Int, using manager: CoachMarkTransitionManager)
+
+func coachMarksController(_ coachMarksController: CoachMarksController, fetchDisappearanceTransitionOfCoachMark coachMarkView: UIView, at index: Int, using manager: CoachMarkTransitionManager)
+
+func coachMarksController(_ coachMarksController: CoachMarksController, fetchIdleAnimationOfCoachMark coachMarkView: UIView, at index: Int, using manager: CoachMarkAnimationManager)
+```
+
+All methods from this delegate work in similar ways. First, you will need to specify the general parameters of the animation via `manager.parameters` properties. These properties match the configuration parameters that you can provide to `UIView.animate`.
+
+- `duration: TimeInterval`: the total duration of the animation.
+
+- `delay: TimeInterval`: the amount of time to wai before beginning the animations
+
+- `options: UIViewAnimationOptions`: a mask of options indicating how you want to perform the animations (for regular animations).
+
+- `keyframeOptions: UIViewKeyframeAnimationOptions`: a mask of options indicating how you want to perform the animations (for keyframe animations).
+
+Once you've set the parameters, you should provide your animations by calling `manager.animate`. The method signature is different wether you are animating the idle state of coach marks, or making them appear/disappear.
+
+You should provide your animations in a block passed to the `animate` parameter, in a similar fashion to `UIView.animate`. If you need to access the animation parameters or the coach mark metadata, a `CoachMarkAnimationManagementContext` containing these will be provided to your animation block. You shouldn't capture a reference to manager from the animation block.
+
+For an implemntation example, you can also take a look a the `DelegateViewController` class found in the `Example` directory.
+
+##### Appearance and disappearance specifics
+If you need to define an initial state, you should do so by providing a block to the `fromInitialState` property. While directly setting values on `coachMarkView` in the method before calling `manager.animate()` might work, it's not garanteed to.
 
 #### Let users skip the tour
 ##### Control

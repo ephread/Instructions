@@ -83,3 +83,31 @@ extension CoachMarksController: CoachMarksControllerProxyDelegate {
         return delegate?.shouldHandleOverlayTap(in: self, at: index) ?? true
     }
 }
+
+extension CoachMarksController: CoachMarksControllerAnimationProxyDelegate {
+    func fetchAppearanceTransition(OfCoachMark coachMarkView: UIView,
+                                   at index: Int,
+                                   using manager: CoachMarkTransitionManager) {
+        animationDelegate?.coachMarksController(
+            self, fetchAppearanceTransitionOfCoachMark: coachMarkView,
+            at: index, using: manager
+        )
+    }
+
+    func fetchDisappearanceTransition(OfCoachMark coachMarkView: UIView,
+                                      at index: Int,
+                                      using manager: CoachMarkTransitionManager) {
+        animationDelegate?.coachMarksController(
+            self, fetchDisappearanceTransitionOfCoachMark: coachMarkView,
+            at: index, using: manager
+        )
+    }
+
+    func fetchIdleAnimationOfCoachMark(OfCoachMark coachMarkView: UIView,
+                                       at index: Int,
+                                       using manager: CoachMarkAnimationManager) {
+        animationDelegate?.coachMarksController(self,
+                                                fetchIdleAnimationOfCoachMark: coachMarkView,
+                                                at: index, using: manager)
+    }
+}

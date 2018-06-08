@@ -1,9 +1,9 @@
 // CoachMarksController.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>,
-//                          Daniel Basedow <daniel.basedow@gmail.com>,
-//                          Esteban Soto <esteban.soto.dev@gmail.com>,
-//                          Ogan Topkaya <>
+// Copyright (c) 2015-2016, 2018 Frédéric Maquin <fred@ephread.com>,
+//                               Daniel Basedow <daniel.basedow@gmail.com>,
+//                               Esteban Soto <esteban.soto.dev@gmail.com>,
+//                               Ogan Topkaya <>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -36,6 +36,10 @@ public class CoachMarksController {
     /// Implement the delegate protocol, which methods will
     /// be called at various points.
     public weak var delegate: CoachMarksControllerDelegate?
+
+    /// Implement the animation delegate protocol, which methods will
+    /// be called at various points.
+    public weak var animationDelegate: CoachMarksControllerAnimationDelegate?
 
     /// Controls the style of the status bar when coach marks are displayed
     public var statusBarStyle: UIStatusBarStyle? {
@@ -199,6 +203,7 @@ private extension CoachMarksController {
         let coachMarkDisplayManager =
             CoachMarkDisplayManager(coachMarkLayoutHelper: CoachMarkLayoutHelper())
         coachMarkDisplayManager.dataSource = self
+        coachMarkDisplayManager.animationDelegate = self
 
         return coachMarkDisplayManager
     }

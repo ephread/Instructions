@@ -1,9 +1,9 @@
 // CoachMarksViewController.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>,
-//                          Daniel Basedow <daniel.basedow@gmail.com>,
-//                          Esteban Soto <esteban.soto.dev@gmail.com>,
-//                          Ogan Topkaya <>
+// Copyright (c) 2015-2018 Frédéric Maquin <fred@ephread.com>,
+//                         Daniel Basedow <daniel.basedow@gmail.com>,
+//                         Esteban Soto <esteban.soto.dev@gmail.com>,
+//                         Ogan Topkaya <>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -55,7 +55,11 @@ class CoachMarksViewController: UIViewController {
     var currentCoachMarkView: CoachMarkView?
 
     ///
-    var overlayManager: OverlayManager!
+    var overlayManager: OverlayManager! {
+        didSet {
+            coachMarkDisplayManager.overlayManager = overlayManager
+        }
+    }
 
     ///
     var instructionsRootView: InstructionsRootView {
@@ -90,10 +94,10 @@ class CoachMarksViewController: UIViewController {
     }
 
     // MARK: - Private properties
-    fileprivate var onGoingSizeChange = false
+    private var onGoingSizeChange = false
 
 #if INSTRUCTIONS_APP_EXTENSIONS
-    fileprivate lazy var appExtensionsRootView: InstructionsRootView = {
+    private lazy var appExtensionsRootView: InstructionsRootView = {
         let view = InstructionsRootView()
         view.translatesAutoresizingMaskIntoConstraints = false
 
@@ -101,9 +105,10 @@ class CoachMarksViewController: UIViewController {
     }()
 #endif
 
-    fileprivate var _shouldAutorotate: Bool = true
-    fileprivate var _prefersStatusBarHidden: Bool = false
-    fileprivate var _supportedInterfaceOrientations: UIInterfaceOrientationMask = [.portrait]
+    private var _shouldAutorotate: Bool = true
+    private var _prefersStatusBarHidden: Bool = false
+    private var _supportedInterfaceOrientations: UIInterfaceOrientationMask = [.portrait]
+
     // MARK: - Lifecycle
     convenience init(coachMarkDisplayManager: CoachMarkDisplayManager,
                      skipViewDisplayManager: SkipViewDisplayManager) {
@@ -146,7 +151,7 @@ class CoachMarksViewController: UIViewController {
 
     // MARK: - Private Methods
     /// Add a the "Skip view" to the main view container.
-    fileprivate func addSkipView() {
+    private func addSkipView() {
         guard let skipView = skipView else { return }
 
         skipView.asView?.alpha = 0.0
@@ -187,20 +192,18 @@ extension CoachMarksViewController {
         })
     }
 
-    func hide(coachMark: CoachMark, animated: Bool = true, beforeTransition: Bool = false,
-              completion: (() -> Void)? = nil) {
+    func hide(coachMark: CoachMark, at index: Int, animated: Bool = true,
+              beforeTransition: Bool = false, completion: (() -> Void)? = nil) {
         guard let currentCoachMarkView = currentCoachMarkView else {
             completion?()
             return
         }
 
         disableInteraction()
-        let duration: TimeInterval = animated ? coachMark.animationDuration : 0
 
         self.coachMarkDisplayManager.hide(coachMarkView: currentCoachMarkView,
-                                          overlay: overlayManager,
-                                          animationDuration: duration,
-                                          beforeTransition: beforeTransition) {
+                                          from: coachMark, at: index,
+                                          animated: animated, beforeTransition: beforeTransition) {
             self.enableInteraction()
             self.removeTargetFromCurrentCoachView()
             completion?()
@@ -221,8 +224,7 @@ extension CoachMarksViewController {
         addTargetToCurrentCoachView()
 
         coachMarkDisplayManager.showNew(coachMarkView: coachMarkView, from: coachMark,
-                                        on: overlayManager,
-                                        animated: animated) {
+                                        at: index, animated: animated) {
             self.instructionsRootView.passthrough = passthrough
             self.enableInteraction()
             completion?()

@@ -16,14 +16,20 @@ env:
     - IOS_SDK=iphonesimulator11.3
 
   matrix:
-    - DESTINATION="OS=11.3,name=iPhone X" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES" BUILD_APP_EXTENSION_EXAMPLE="YES" POD_LINT="YES"
+    - DESTINATION="OS=11.3,name=iPhone X" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES" BUILD_APP_EXTENSION_EXAMPLE="YES" POD_LINT="YES" ALLOW_WARNINGS="YES"
 
 before_install:
   - gem install cocoapods xcpretty
 
 script:
+# Warnings might be allowed in versions where Instructions continue to support
+# deprecated methods.
   - if [ $POD_LINT == "YES" ]; then
-      pod lib lint;
+      if [ $ALLOW_WARNINGS == "YES" ]; then
+        pod lib lint --allow-warnings;
+      else
+        pod lib lint;
+      fi
     fi
 
   - if [ $BUILD_EXAMPLE == "YES" ]; then

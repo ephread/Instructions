@@ -124,10 +124,7 @@ class SkipViewDisplayManager {
             topAnchor = parentView.safeAreaLayoutGuide.topAnchor
         } else {
             topAnchor = parentView.topAnchor
-
-            #if !INSTRUCTIONS_APP_EXTENSIONS
-                topConstant = updateTopConstant(from: topConstant)
-            #endif
+            topConstant = updateTopConstant(from: topConstant)
         }
 
         topConstant += 2
@@ -136,5 +133,18 @@ class SkipViewDisplayManager {
                                                          constant: topConstant))
 
         return constraints
+    }
+
+    func updateTopConstant(from original: CGFloat) -> CGFloat {
+#if !INSTRUCTIONS_APP_EXTENSIONS
+        if #available(iOS 11.0, *) {
+            let window = UIApplication.shared.keyWindow
+            return window?.safeAreaInsets.top ?? original
+        } else if !UIApplication.shared.isStatusBarHidden {
+            return UIApplication.shared.statusBarFrame.size.height
+        }
+#endif
+
+        return original
     }
 }

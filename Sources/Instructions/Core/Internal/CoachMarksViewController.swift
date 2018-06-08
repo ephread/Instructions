@@ -62,15 +62,13 @@ class CoachMarksViewController: UIViewController {
     }
 
     ///
-    var instructionsRootView: InstructionsRootView {
-#if INSTRUCTIONS_APP_EXTENSIONS
-        return appExtensionsRootView
-#else
-        //swiftlint:disable force_cast
-        return view as! InstructionsRootView
-        //swiftlint:enable force_cast
-#endif
-    }
+    lazy var instructionsRootView: InstructionsRootView = {
+        let view = InstructionsRootView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.clear
+
+        return view
+    }()
 
     ///
     var coachMarkDisplayManager: CoachMarkDisplayManager!
@@ -95,15 +93,7 @@ class CoachMarksViewController: UIViewController {
 
     // MARK: - Private properties
     private var onGoingSizeChange = false
-
-#if INSTRUCTIONS_APP_EXTENSIONS
-    private lazy var appExtensionsRootView: InstructionsRootView = {
-        let view = InstructionsRootView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-
-        return view
-    }()
-#endif
+    private var presentationFashion: PresentationFashion = .window
 
     private var _shouldAutorotate: Bool = true
     private var _prefersStatusBarHidden: Bool = false
@@ -118,31 +108,16 @@ class CoachMarksViewController: UIViewController {
         self.skipViewDisplayManager = skipViewDisplayManager
     }
 
-    override func loadView() {
-#if INSTRUCTIONS_APP_EXTENSIONS
-        view = UIView()
-#else
-        view = InstructionsRootView()
-#endif
-        view.backgroundColor = UIColor.clear
-    }
-
     // Called after the view was loaded.
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        view.backgroundColor = UIColor.clear
     }
 
     deinit {
         deregisterFromSystemEventChanges()
     }
-
-#if INSTRUCTIONS_APP_EXTENSIONS
-    func addRootView(to window: UIWindow) {
-        window.addSubview(instructionsRootView)
-        instructionsRootView.fillSuperview()
-        instructionsRootView.backgroundColor = UIColor.clear
-    }
-#endif
 
     func addOverlayView() {
         instructionsRootView.addSubview(overlayManager.overlayView)
@@ -173,6 +148,82 @@ class CoachMarksViewController: UIViewController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return _supportedInterfaceOrientations
     }
+
+    /// Will attach the controller as the rootViewController of a given window. This will
+    /// allow the coach mark controller to respond to size changes and present itself
+    /// above evrything.
+    ///
+    /// - Parameter window: the window holding the controller
+    func attach(to window: UIWindow, above viewController: UIViewController) {
+        presentationFashion = .window
+        window.windowLevel = overlayManager.windowLevel
+
+        retrieveConfig(from: viewController)
+
+        registerForSystemEventChanges()
+
+        view.addSubview(instructionsRootView)
+        instructionsRootView.fillSuperview()
+
+        addOverlayView()
+
+        window.rootViewController = self
+        window.isHidden = false
+    }
+
+    /// Will attach the controller as a child of the given view controller. This will
+    /// allow the coach mark controller to respond to size changes.
+    /// `instructionsRootView` will be a subview of `parentViewController.view`.
+    ///
+    /// - Parameter parentViewController: the controller of which become a child
+    func attachToWindow(of viewController: UIViewController) {
+        guard let window = viewController.view?.window else {
+            print("attachToViewController: Instructions could not be properly" +
+                  "attached to the window, did you call `start` inside" +
+                  "`viewDidLoad` instead of `ViewDidAppear`?")
+
+            return
+        }
+
+        presentationFashion = .viewController
+
+        retrieveConfig(from: viewController)
+
+        viewController.addChildViewController(self)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        viewController.view.addSubview(view)
+
+        view.isUserInteractionEnabled = false
+
+        registerForSystemEventChanges()
+        addRootView(to: window)
+        addOverlayView()
+
+        self.didMove(toParentViewController: viewController)
+
+        window.layoutIfNeeded()
+    }
+
+    func addRootView(to window: UIWindow) {
+        window.addSubview(instructionsRootView)
+        instructionsRootView.fillSuperview()
+    }
+
+    /// Detach the controller from its parent view controller.
+    func detachFromWindow() {
+        switch presentationFashion {
+        case .window:
+            deregisterFromSystemEventChanges()
+            self.view.window?.isHidden = true
+            self.view.window?.rootViewController = nil
+        case .viewController:
+            self.instructionsRootView.removeFromSuperview()
+            self.willMove(toParentViewController: nil)
+            self.view.removeFromSuperview()
+            self.removeFromParentViewController()
+            deregisterFromSystemEventChanges()
+        }
+    }
 }
 
 // MARK: - Coach Mark Display
@@ -181,12 +232,12 @@ extension CoachMarksViewController {
     func prepareToShowCoachMarks(_ completion: @escaping () -> Void) {
         disableInteraction()
 
-        if let skipView = skipView {
-            self.skipViewDisplayManager.show(skipView: skipView,
-                                             duration: overlayManager.fadeAnimationDuration)
-        }
-
         overlayManager.showOverlay(true, completion: { _ in
+            if let skipView = self.skipView {
+                self.skipViewDisplayManager.show(skipView: skipView,
+                                                 duration: self.overlayManager.fadeAnimationDuration)
+            }
+
             self.enableInteraction()
             completion()
         })

@@ -31,29 +31,23 @@ class CoachMarkLayoutHelper {
         coachMark: CoachMark,
         parentView: UIView,
         layoutDirection: UIUserInterfaceLayoutDirection? = nil,
-        firstPass: Bool = false
+        passNumber: Int = 0
     ) -> [NSLayoutConstraint] {
         if coachMarkView.superview != parentView {
             print("coachMarkView was not added to parentView, returned constraints will be empty")
             return []
         }
 
-        if layoutDirection == nil {
-            if #available(iOS 9, *) {
-                self.layoutDirection = UIView.userInterfaceLayoutDirection(
-                    for: parentView.semanticContentAttribute
-                )
-            }
-        } else {
-            self.layoutDirection = layoutDirection!
-        }
+        self.layoutDirection = UIView.userInterfaceLayoutDirection(
+            for: parentView.semanticContentAttribute
+        )
 
         let computedProperties: CoachMarkComputedProperties
         let offset: CGFloat
 
-        if firstPass {
+        if passNumber == 0 {
             computedProperties = CoachMarkComputedProperties(layoutDirection: self.layoutDirection,
-                                                             segmentIndex: 2)
+                                                             horizontalAligment: .centered)
             offset = 0
         } else {
             computedProperties = computeProperties(for: coachMark, inParentView: parentView)
@@ -61,20 +55,19 @@ class CoachMarkLayoutHelper {
                                  inParentView: parentView)
         }
 
-        switch computedProperties.segmentIndex {
-        case 1:
+        switch computedProperties.horizontalAligment {
+        case .leading:
             coachMarkView.changeArrowPosition(to: .leading, offset: offset)
             return leadingConstraints(for: coachMarkView, withCoachMark: coachMark,
                                       inParentView: parentView)
-        case 2:
+        case .centered:
             coachMarkView.changeArrowPosition(to: .center, offset: offset)
             return middleConstraints(for: coachMarkView, withCoachMark: coachMark,
                                      inParentView: parentView)
-        case 3:
+        case .trailing:
             coachMarkView.changeArrowPosition(to: .trailing, offset: offset)
             return trailingConstraints(for: coachMarkView, withCoachMark: coachMark,
                                        inParentView: parentView)
-        default: return [NSLayoutConstraint]()
         }
     }
 
@@ -151,18 +144,16 @@ class CoachMarkLayoutHelper {
                              inParentView parentView: UIView) -> CGFloat {
         var arrowOffset: CGFloat
 
-        switch properties.segmentIndex {
-        case 1:
-            arrowOffset = leadingArrowOffset(for: coachMark, withProperties: properties,
-                                             inParentView: parentView)
-        case 2:
+        switch properties.horizontalAligment {
+        case .centered:
             arrowOffset = middleArrowOffset(for: coachMark, withProperties: properties,
                                             inParentView: parentView)
-        case 3:
+        case .leading:
+            arrowOffset = leadingArrowOffset(for: coachMark, withProperties: properties,
+                                             inParentView: parentView)
+        case .trailing:
             arrowOffset = trailingArrowOffset(for: coachMark, withProperties: properties,
                                               inParentView: parentView)
-        default:
-            arrowOffset = 0
         }
 
         return arrowOffset
@@ -203,7 +194,7 @@ class CoachMarkLayoutHelper {
                                      withProperties properties: CoachMarkComputedProperties,
                                      inParentView parentView: UIView) -> CGFloat {
         guard let pointOfInterest = coachMark.pointOfInterest else {
-            print("The point of interest was found nil. Fallbacking offset will be 0")
+            print("The point of interest was found nil. Falling back to offset = 0")
             return 0
         }
 
@@ -216,46 +207,55 @@ class CoachMarkLayoutHelper {
     }
 
     /// Compute the segment index (for now the screen is separated
-    /// in three horizontal areas and depending in which one the coach
+    /// in two horizontal areas and depending in which one the coach
     /// mark stand, it will be layed out in a different way.
     ///
-    /// - Parameter coachMark: coachmark data.
-    /// - Parameter layoutDirection: the layout direction (LTR or RTL)
-    /// - Parameter frame: frame of the parent view
+    /// - Parameters:
+    ///   - coachMark: coachmark data.
+    ///   - layoutDirection: the layout direction (LTR or RTL)
+    ///   - frame: frame of the parent view
     ///
-    /// - Returns: the segment index (either 1, 2 or 3)
-    private func computeSegmentIndex(
+    /// - Returns: the aligment
+    private func computeHorizontalAligment(
         of coachMark: CoachMark,
         forLayoutDirection layoutDirection: UIUserInterfaceLayoutDirection,
         inFrame frame: CGRect
-    ) -> Int {
+    ) -> CoachMarkHorizontalAligment {
         if let pointOfInterest = coachMark.pointOfInterest {
-            var segmentIndex = 3 * pointOfInterest.x / frame.size.width
+            let segmentIndex = Int(ceil(2 * pointOfInterest.x / frame.size.width))
 
-            if layoutDirection == .rightToLeft {
-                segmentIndex = 3 - segmentIndex
+            switch (segmentIndex, layoutDirection) {
+            case (1, .leftToRight): return .leading
+            case (2, .leftToRight): return .trailing
+            case (1, .rightToLeft): return .trailing
+            case (2, .rightToLeft): return .leading
+            default: return .centered
             }
-
-            return Int(ceil(segmentIndex))
         } else {
-            print("The point of interest was found nil. Fallbacking to middle segment.")
-            return 1
+            print("The point of interest was found nil: falling back to centered.")
+            return .centered
         }
     }
 
-    private func computeProperties(for coachMark: CoachMark, inParentView parentView: UIView)
+    private func computeProperties(for coachMark: CoachMark,
+                                   inParentView parentView: UIView)
     -> CoachMarkComputedProperties {
-        let segmentIndex = computeSegmentIndex(of: coachMark, forLayoutDirection: layoutDirection,
-                                               inFrame: parentView.frame)
+        let horizontalAligment = computeHorizontalAligment(of: coachMark,
+                                                           forLayoutDirection: layoutDirection,
+                                                           inFrame: parentView.frame)
 
         return CoachMarkComputedProperties(
             layoutDirection: layoutDirection,
-            segmentIndex: segmentIndex
+            horizontalAligment: horizontalAligment
         )
     }
 }
 
 struct CoachMarkComputedProperties {
     let layoutDirection: UIUserInterfaceLayoutDirection
-    let segmentIndex: Int
+    let horizontalAligment: CoachMarkHorizontalAligment
+}
+
+enum CoachMarkHorizontalAligment {
+    case leading, centered, trailing
 }

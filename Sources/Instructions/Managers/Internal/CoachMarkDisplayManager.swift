@@ -303,8 +303,7 @@ class CoachMarkDisplayManager {
         // the view around the point of interest.
         let constraints = coachMarkLayoutHelper.constraints(for: coachMarkView,
                                                             coachMark: coachMark,
-                                                            parentView: parentView,
-                                                            firstPass: true)
+                                                            parentView: parentView)
 
         // Laying out the view
         parentView.addConstraints(constraints)
@@ -324,7 +323,8 @@ class CoachMarkDisplayManager {
 
             let constraints = coachMarkLayoutHelper.constraints(for: coachMarkView,
                                                                 coachMark: coachMark,
-                                                                parentView: parentView)
+                                                                parentView: parentView,
+                                                                passNumber: 1)
 
             parentView.addConstraints(constraints)
         }

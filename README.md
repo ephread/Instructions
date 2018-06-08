@@ -255,7 +255,7 @@ Browse the `Example/` directory for more details.
 #### Customizing how the coach mark will show
 You can customize the following properties:
 
-- `animationDuration: NSTimeInterval`: the time it will take for a coach mark to appear or disappear on the screen.
+- `animationDuration: TimeInterval`: the time it will take for a coach mark to appear or disappear on the screen.
 
 - `gapBetweenBodyAndArrow: CGFloat`: the vertical gap between the _body_ and the _arrow_ in a given coach mark.
 

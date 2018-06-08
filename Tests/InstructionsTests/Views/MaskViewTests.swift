@@ -1,6 +1,6 @@
-// CoachMarkView.swift
+// PassthroughGenericTests.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2018 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,35 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import UIKit
+import XCTest
+@testable import Instructions
 
-class OverlaySnapshotView: UIView {
-    var visualEffectView: UIVisualEffectView! {
-        willSet {
-            if visualEffectView == nil { return }
-            visualEffectView.removeFromSuperview()
-        }
+class MaskViewTests: XCTestCase {
+    func testLayerClass() {
+        let maskView = MaskView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
 
-        didSet {
-            if visualEffectView != nil {
-                self.addSubview(visualEffectView)
-            }
-        }
-    }
-    var backgroundView: UIView! {
-        willSet {
-            if backgroundView == nil { return }
-            backgroundView.removeFromSuperview()
-        }
-
-        didSet {
-            if backgroundView != nil {
-                self.addSubview(backgroundView)
-            }
-        }
-    }
-
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        return nil
+        XCTAssertTrue(maskView.layer is CAShapeLayer)
+        XCTAssertEqual(maskView.shapeLayer, maskView.layer)
     }
 }

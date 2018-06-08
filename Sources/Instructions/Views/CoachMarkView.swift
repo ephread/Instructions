@@ -73,6 +73,10 @@ class CoachMarkView: UIView {
         // I haven't found any better way to enforce that they both are subclasses
         // of `UIView` and conform to the `CoachMarkBodyView` and
         // `CoachMarkArrowView` protocols.
+        //
+        // TODO: ❗️Use class/protocol composition to enforce both constraints.
+        //       As this will require change in the dataSource/delegate method signature
+        //       this change should be targeted for Instructions 2.0.0
         if !(bodyView is UIView) {
             fatalError("Body view must conform to CoachMarkBodyView but also be a UIView.")
         }
@@ -86,8 +90,8 @@ class CoachMarkView: UIView {
         self.arrowOrientation = arrowOrientation
         self.coachMarkLayoutHelper = coachMarkInnerLayoutHelper
 
-        if arrowOffset != nil {
-            self.arrowOffset = arrowOffset!
+        if let arrowOffset = arrowOffset {
+            self.arrowOffset = arrowOffset
         }
 
         super.init(frame: CGRect.zero)

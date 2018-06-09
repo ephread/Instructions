@@ -33,7 +33,6 @@ class ViewController: UIViewController, CoachMarksControllerDataSource {
         super.viewDidLoad()
 
         self.coachMarksController.dataSource = self
-        coachMarksController.overlay.windowLevel = UIWindowLevelStatusBar + 1
 
         let skipView = CoachMarkSkipDefaultView()
         skipView.setTitle("Skip", for: .normal)
@@ -44,7 +43,8 @@ class ViewController: UIViewController, CoachMarksControllerDataSource {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.coachMarksController.start(on: self)
+        self.coachMarksController.start(in: .newWindow(over: self,
+                                                       at: UIWindowLevelStatusBar + 1))
     }
 
     override func didReceiveMemoryWarning() {

@@ -28,6 +28,8 @@ class SkipViewDisplayManager {
     /// Datasource providing the constraints to use.
     weak var dataSource: CoachMarksControllerProxyDataSource?
 
+    var presentationFashion: PresentationFashion = .window
+
     // MARK: - Private properties
     /// Constraints defining the position of the "Skip" view
     private var skipViewConstraints: [NSLayoutConstraint] = []
@@ -118,13 +120,34 @@ class SkipViewDisplayManager {
                                                               constant: -10))
 
         var topConstant: CGFloat = 0.0
-
         let topAnchor: NSLayoutYAxisAnchor
-        if #available(iOS 11.0, *) {
-            topAnchor = parentView.safeAreaLayoutGuide.topAnchor
-        } else {
-            topAnchor = parentView.topAnchor
-            topConstant = updateTopConstant(from: topConstant)
+
+        switch presentationFashion {
+        case .window:
+            if #available(iOS 11.0, *) {
+                topAnchor = parentView.safeAreaLayoutGuide.topAnchor
+            } else {
+                topAnchor = parentView.topAnchor
+                topConstant = updateTopConstant(from: topConstant)
+            }
+        case .viewControllerWindow:
+            if #available(iOS 11.0, *), let window = parentView.window,
+               let safeAreaInsets = window.rootViewController?.view.safeAreaInsets {
+                // For some reasons I don't fully understand, window.safeAreaInsets.top is correctly
+                // set for the iPhone X, but not for other iPhones. That's why we have this
+                // awkward "hack", whereby the top inset is added manually.
+                topAnchor = parentView.topAnchor
+                topConstant = safeAreaInsets.top
+            } else {
+                topAnchor = parentView.topAnchor
+                topConstant = updateTopConstant(from: topConstant)
+            }
+        case .viewController:
+            if #available(iOS 11.0, *) {
+                topAnchor = parentView.safeAreaLayoutGuide.topAnchor
+            } else {
+                topAnchor = parentView.topAnchor
+            }
         }
 
         topConstant += 2
@@ -137,10 +160,7 @@ class SkipViewDisplayManager {
 
     func updateTopConstant(from original: CGFloat) -> CGFloat {
 #if !INSTRUCTIONS_APP_EXTENSIONS
-        if #available(iOS 11.0, *) {
-            let window = UIApplication.shared.keyWindow
-            return window?.safeAreaInsets.top ?? original
-        } else if !UIApplication.shared.isStatusBarHidden {
+        if !UIApplication.shared.isStatusBarHidden {
             return UIApplication.shared.statusBarFrame.size.height
         }
 #endif

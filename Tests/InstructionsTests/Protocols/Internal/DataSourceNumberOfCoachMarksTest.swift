@@ -30,16 +30,14 @@ class DataSourceNumberOfCoachMarksTest: DataSourceBaseTest,
 
     override func setUp() {
         super.setUp()
-
-        self.coachMarksController.dataSource = self
+        coachMarksController.dataSource = self
     }
 
     func testNumberOfCoachMarksIsCalled() {
-        self.delegateEndExpectation = self.expectation(description: "numberOfCoachMarks")
+        delegateEndExpectation = self.expectation(description: "numberOfCoachMarks")
+        coachMarksController.start(in: .window(over: parentController))
 
-        self.coachMarksController.start(on: self.parentController)
-
-        self.waitForExpectations(timeout: 2) { error in
+        waitForExpectations(timeout: 2) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }

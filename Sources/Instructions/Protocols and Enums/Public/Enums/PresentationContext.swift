@@ -23,10 +23,15 @@
 import UIKit
 
 public enum PresentationContext {
-    case newWindow(above: UIViewController)
+    case newWindow(over: UIViewController, at: UIWindowLevel?)
     case currentWindow(of: UIViewController)
+    case viewController(_: UIViewController)
+
+    public static func window(over: UIViewController) -> PresentationContext {
+        return newWindow(over: over, at: nil)
+    }
 }
 
 internal enum PresentationFashion {
-    case window, viewController
+    case window, viewControllerWindow, viewController
 }

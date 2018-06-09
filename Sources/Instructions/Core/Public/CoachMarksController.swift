@@ -53,6 +53,21 @@ public class CoachMarksController {
         }
     }
 
+    public var rotationStyle: RotationStyle {
+        get { return coachMarksViewController.rotationStyle }
+        set { coachMarksViewController.rotationStyle = newValue }
+    }
+
+    public var statusBarVisibility: StatusBarVisibility {
+        get { return coachMarksViewController.statusBarVisibility }
+        set { coachMarksViewController.statusBarVisibility = newValue }
+    }
+
+    public var interfaceOrientations: InterfaceOrientations {
+        get { return coachMarksViewController.interfaceOrientations }
+        set { coachMarksViewController.interfaceOrientations = newValue }
+    }
+
     /// Hide the UI.
     fileprivate(set) public lazy var overlay: OverlayManager = {
         let overlay = OverlayManager()
@@ -81,7 +96,6 @@ public class CoachMarksController {
 
     // MARK: - Private properties
     fileprivate weak var controllerWindow: UIWindow?
-
     fileprivate var coachMarksWindow: UIWindow?
 
     /// Handle the UI part
@@ -110,34 +124,40 @@ public extension CoachMarksController {
 
 // MARK: - Flow management
 public extension CoachMarksController {
+    /// Start instructions in the given context.
+    ///
+    /// - Parameter presentationContext: the context in which show Instructions
     public func start(in presentationContext: PresentationContext) {
         guard let dataSource = self.dataSource else {
             print("startOn: snap! you didn't setup any datasource, the" +
-                "coach mark manager won't do anything.")
+                  "coach mark manager won't do anything.")
             return
         }
 
-        // If coach marks are currently being displayed, calling `start()` doesn't do anything.
+        // If coach marks are currently being displayed, calling `start(in: )` doesn't do anything.
         if flow.started { return }
 
         let numberOfCoachMarks = dataSource.numberOfCoachMarks(for: self)
         if numberOfCoachMarks <= 0 {
             print("startOn: the dataSource returned an invalid value for " +
-                "numberOfCoachMarksForCoachMarksController(_:)")
+                  "numberOfCoachMarksForCoachMarksController(_:)")
             return
         }
 
         switch presentationContext {
-        case .newWindow(let viewController):
+        case .newWindow(let viewController, let windowLevel):
 #if INSTRUCTIONS_APP_EXTENSIONS
             fatalError("PresentationContext.newWindow(above:) is not available in App Extensions.")
 #else
             controllerWindow = viewController.view.window
             coachMarksWindow = coachMarksWindow ?? InstructionsWindow(frame: UIScreen.main.bounds)
-            coachMarksViewController.attach(to: coachMarksWindow!, above: viewController)
+            coachMarksViewController.attach(to: coachMarksWindow!, over: viewController,
+                                            at: windowLevel)
 #endif
         case .currentWindow(let viewController):
             coachMarksViewController.attachToWindow(of: viewController)
+        case .viewController(let viewController):
+            coachMarksViewController.attach(to: viewController)
         }
 
         delegate?.coachMarksController(self,
@@ -154,7 +174,7 @@ public extension CoachMarksController {
 #if INSTRUCTIONS_APP_EXTENSIONS
         start(in: .currentWindow(of: parentViewController))
 #else
-        start(in: .newWindow(above: parentViewController))
+        start(in: .newWindow(over: parentViewController, at: nil))
 #endif
     }
 

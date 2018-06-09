@@ -72,10 +72,8 @@ internal class BackgroundNetworkingViewController: DefaultViewController {
             downloadTask?.resume()
         }
     }
-}
 
-// MARK: - CoachMarksControllerDelegate
-extension BackgroundNetworkingViewController: CoachMarksControllerDelegate {
+    // MARK: CoachMarksControllerDelegate
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               willShow coachMark: inout CoachMark, afterSizeTransition: Bool,
                               at index: Int) {
@@ -84,7 +82,6 @@ extension BackgroundNetworkingViewController: CoachMarksControllerDelegate {
             startDownload()
         }
     }
-
 }
 
 // MARK: - NSURLSessionDownloadDelegate
@@ -97,7 +94,7 @@ extension BackgroundNetworkingViewController: URLSessionDownloadDelegate {
             if self.stopInstructions { return }
 
             if !self.coachMarksController.flow.started {
-                self.coachMarksController.start(on: self)
+                self.coachMarksController.start(in: .window(over: self))
             } else {
                 self.coachMarksController.flow.resume()
             }

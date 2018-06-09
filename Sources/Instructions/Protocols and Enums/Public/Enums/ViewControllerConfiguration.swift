@@ -1,6 +1,6 @@
-// InstructionsRootView.swift
+// ViewControllerConfiguration.swift
 //
-// Copyright (c) 2016, 2017 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2018 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,20 +20,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import UIKit
+import Foundation
 
-/// Top view added to the window, forwarding touch events.
-class InstructionsRootView: UIView {
+public enum RotationStyle {
+    case systemDefined
+    case automatic
+    case manual
+}
 
-    var passthrough: Bool = false
+public enum StatusBarVisibility {
+    case systemDefined
+    case visible
+    case hidden
+}
 
-    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        let hitView = super.hitTest(point, with: event)
-
-        if hitView == self && passthrough {
-            return nil
-        }
-
-        return hitView
-    }
+public enum InterfaceOrientations {
+    case systemDefined
+    case userDefined(as: UIInterfaceOrientationMask)
 }

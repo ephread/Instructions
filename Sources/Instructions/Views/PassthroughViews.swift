@@ -1,6 +1,6 @@
-// InstructionsWindow.swift
+// InstructionsRootView.swift
 //
-// Copyright (c) 2017 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2016, 2017 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,6 +27,34 @@ class InstructionsWindow: UIWindow {
         let hitView = super.hitTest(point, with: event)
 
         if hitView == self {
+            return nil
+        }
+
+        return hitView
+    }
+}
+
+class PassthroughView: UIView {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let hitView = super.hitTest(point, with: event)
+
+        if hitView == self {
+            return nil
+        }
+
+        return hitView
+    }
+}
+
+/// Top view added to the window, forwarding touch events.
+class InstructionsRootView: UIView {
+
+    var passthrough: Bool = false
+
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let hitView = super.hitTest(point, with: event)
+
+        if hitView == self && passthrough {
             return nil
         }
 

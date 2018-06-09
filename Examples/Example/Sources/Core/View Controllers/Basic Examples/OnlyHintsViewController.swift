@@ -42,6 +42,10 @@ internal class OnlyHintViewController: ProfileViewController {
         
         self.coachMarksController.skipView = skipView
     }
+
+    override func startInstructions() {
+        coachMarksController.start(in: .window(over: self))
+    }
 }
 
 // MARK: - Protocol Conformance | CoachMarksControllerDataSource

@@ -11,11 +11,7 @@ import UIKit
 class MainTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "WindowLevel" {
-            if let controller = segue.destination as? DefaultViewController {
-                controller.coachMarksController.overlay.windowLevel = UIWindowLevelStatusBar + 1
-            }
-        } else if segue.identifier == "PausingOverlay" {
+        if segue.identifier == "PausingOverlay" {
             if let controller = segue.destination as? PausingCodeViewController {
                 controller.pauseStyle = .hideOverlay
             }
@@ -23,7 +19,21 @@ class MainTableViewController: UITableViewController {
             if let controller = segue.destination as? PausingCodeViewController {
                 controller.pauseStyle = .hideInstructions
             }
+        } else if segue.identifier == "IndependantWindowContext" {
+            if let controller = segue.destination as? DefaultViewController {
+                controller.presentationContext = .independantWindow
+                controller.windowLevel = UIWindowLevelStatusBar + 1
+            }
+        } else if segue.identifier == "ControllerWindowContext" {
+            if let controller = segue.destination as? DefaultViewController {
+                controller.presentationContext = .controllerWindow
+            }
+        } else if segue.identifier == "ControllerContext" {
+            if let controller = segue.destination as? DefaultViewController {
+                controller.presentationContext = .controller
+            }
         }
-    }
 
+
+    }
 }

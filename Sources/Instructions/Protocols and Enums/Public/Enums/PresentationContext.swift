@@ -1,4 +1,4 @@
-// CoachMarksViewController+Regular.swift
+// PresentationContext.swift
 //
 // Copyright (c) 2018 Frédéric Maquin <fred@ephread.com>
 //
@@ -22,29 +22,16 @@
 
 import UIKit
 
-// MARK: - Extension: Controller Containment
-extension CoachMarksViewController {
-    /// Will attach the controller as the rootViewController of a given window. This will
-    /// allow the coach mark controller to respond to size changes and present itself
-    /// above evrything.
-    ///
-    /// - Parameter window: the window holding the controller
-    func attach(to window: UIWindow, of viewController: UIViewController) {
-        window.windowLevel = overlayManager.windowLevel
+public enum PresentationContext {
+    case newWindow(over: UIViewController, at: UIWindowLevel?)
+    case currentWindow(of: UIViewController)
+    case viewController(_: UIViewController)
 
-        retrieveConfig(from: viewController)
-
-        registerForSystemEventChanges()
-        addOverlayView()
-
-        window.rootViewController = self
-        window.isHidden = false
+    public static func window(over: UIViewController) -> PresentationContext {
+        return newWindow(over: over, at: nil)
     }
+}
 
-    /// Detach the controller from its parent view controller.
-    func detachFromWindow() {
-        deregisterFromSystemEventChanges()
-        self.view.window?.isHidden = true
-        self.view.window?.rootViewController = nil
-    }
+internal enum PresentationFashion {
+    case window, viewControllerWindow, viewController
 }

@@ -36,23 +36,19 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     override func setUp() {
         super.setUp()
         
-        self.coachMarksController.dataSource = self.mockedDataSource
-        self.coachMarksController.delegate = self
+        coachMarksController.dataSource = self.mockedDataSource
+        coachMarksController.delegate = self
 
-        self.mockedWindow.addSubview(self.parentController.view)
-    }
-    
-    override func tearDown() {
-        super.tearDown()
+        mockedWindow.addSubview(self.parentController.view)
     }
 
     func testThatDidFinishShowingIsCalled() {
-        self.delegateEndExpectation = self.expectation(description: "DidFinishShowing")
+        delegateEndExpectation = self.expectation(description: "DidFinishShowing")
 
-        self.coachMarksController.start(on: self.parentController)
-        self.coachMarksController.stop()
+        coachMarksController.start(in: .window(over: parentController))
+        coachMarksController.stop()
 
-        self.waitForExpectations(timeout: 10) { error in
+        waitForExpectations(timeout: 10) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
@@ -60,7 +56,7 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     }
 
     func testThatCoachMarkControllerAttachItselfToParent() {
-        self.coachMarksController.start(on: self.parentController)
+        coachMarksController.start(in: .window(over: parentController))
 
         let attached = (coachMarksController.overlay.overlayView.window != nil &&
                         coachMarksController.overlay.overlayView.window != mockedWindow)
@@ -87,12 +83,12 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     }
 
     func testThatCoachMarkControllerDetachItselfFromParent() {
-        self.delegateEndExpectation = self.expectation(description: "Detachment")
+        delegateEndExpectation = self.expectation(description: "Detachment")
 
-        self.coachMarksController.start(on: self.parentController)
-        self.coachMarksController.stop()
+        coachMarksController.start(in: .window(over: parentController))
+        coachMarksController.stop()
 
-        self.waitForExpectations(timeout: 10) { error in
+        waitForExpectations(timeout: 10) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
@@ -101,7 +97,6 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
 }
 
 internal class CoachMarkControllerMockedDataSource : CoachMarksControllerDataSource {
-
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 1
     }

@@ -26,11 +26,15 @@ import Instructions
 // That's the default controller, using every defaults made available by Instructions.
 // It can't get any simpler.
 internal class DefaultViewController: ProfileViewController {
+    var windowLevel: UIWindowLevel?
+    var presentationContext: Context = .independantWindow
+
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.coachMarksController.dataSource = self
+        self.coachMarksController.delegate = self
 
         self.emailLabel?.layer.cornerRadius = 4.0
         self.postsLabel?.layer.cornerRadius = 4.0
@@ -40,6 +44,24 @@ internal class DefaultViewController: ProfileViewController {
         skipView.setTitle("Skip", for: .normal)
 
         self.coachMarksController.skipView = skipView
+    }
+
+    override func startInstructions() {
+        if presentationContext == .controllerWindow {
+            self.coachMarksController.start(in: .currentWindow(of: self))
+        } else if presentationContext == .controller {
+            self.coachMarksController.start(in: .viewController(self))
+        } else {
+            if let windowLevel = windowLevel {
+                self.coachMarksController.start(in: .newWindow(over: self, at: windowLevel))
+            } else {
+                self.coachMarksController.start(in: .window(over: self))
+            }
+        }
+    }
+
+    enum Context {
+        case independantWindow, controllerWindow, controller
     }
 }
 
@@ -94,5 +116,16 @@ extension DefaultViewController: CoachMarksControllerDataSource {
         }
 
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+    }
+}
+
+extension DefaultViewController: CoachMarksControllerDelegate {
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              willLoadCoachMarkAt index: Int) -> Bool {
+        if index == 0 && presentationContext == .controller {
+            return false
+        }
+
+        return true
     }
 }

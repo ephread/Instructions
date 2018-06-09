@@ -58,7 +58,7 @@ class TestFlowViewController: ProfileViewController {
 
     @IBAction func performButtonTap(_ sender: AnyObject) {
         self.coachMarksController.stop(immediately: true)
-        self.coachMarksController.start(on: self)
+        self.coachMarksController.start(in: .window(over: self))
     }
 }
 

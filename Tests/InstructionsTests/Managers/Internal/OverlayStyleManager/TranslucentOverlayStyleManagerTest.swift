@@ -50,7 +50,7 @@ class TranslucentOverlayStyleManagerTest: XCTestCase {
             XCTAssertEqual(self.overlayView.alpha, 1.0)
             XCTAssertEqual(self.overlayView.isHidden, false)
             XCTAssertEqual(self.overlayView.backgroundColor, UIColor.clear)
-            XCTAssertEqual(self.overlayView.layer.sublayers?[0].backgroundColor,
+            XCTAssertEqual(self.overlayView.holder.layer.sublayers?[0].backgroundColor,
                            UIColor.gray.cgColor)
 
             self.viewIsVisibleExpectation?.fulfill()

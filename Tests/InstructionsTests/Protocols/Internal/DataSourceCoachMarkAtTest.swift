@@ -35,16 +35,15 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
     override func setUp() {
         super.setUp()
 
-        self.coachMarksController.dataSource = self
-        self.coachMarksController.delegate = self
+        coachMarksController.dataSource = self
+        coachMarksController.delegate = self
     }
 
     func testThatCoachMarkAtIsCalledAtLeastTheNumberOfExpectedTimes() {
-        self.delegateEndExpectation = self.expectation(description: "CoachMarkAt")
+        delegateEndExpectation = self.expectation(description: "CoachMarkAt")
+        coachMarksController.start(in: .window(over: parentController))
 
-        self.coachMarksController.start(on: self.parentController)
-
-        self.waitForExpectations(timeout: 2) { error in
+        waitForExpectations(timeout: 2) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
@@ -52,11 +51,10 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
     }
 
     func testThatCoachMarkViewsAtIsCalledAtLeastTheNumberOfExpectedTimes() {
-        self.delegateEndExpectation = self.expectation(description: "CoachMarkViewsAt")
+        delegateEndExpectation = self.expectation(description: "CoachMarkViewsAt")
+        coachMarksController.start(in: .window(over: parentController))
 
-        self.coachMarksController.start(on: self.parentController)
-
-        self.waitForExpectations(timeout: 2) { error in
+        waitForExpectations(timeout: 2) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
@@ -64,11 +62,10 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
     }
 
     func testThatConstraintsForSkipViewIsCalledAtLeastTheNumberOfExpectedTimes() {
-        self.delegateEndExpectation = self.expectation(description: "ConstraintsForSkipView")
+        delegateEndExpectation = self.expectation(description: "ConstraintsForSkipView")
+        coachMarksController.start(in: .window(over: parentController))
 
-        self.coachMarksController.start(on: self.parentController)
-
-        self.waitForExpectations(timeout: 2) { error in
+        waitForExpectations(timeout: 2) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }

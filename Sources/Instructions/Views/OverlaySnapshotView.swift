@@ -30,7 +30,9 @@ class OverlaySnapshotView: UIView {
         }
 
         didSet {
-            self.addSubview(visualEffectView)
+            if visualEffectView != nil {
+                self.addSubview(visualEffectView)
+            }
         }
     }
     var backgroundView: UIView! {
@@ -40,7 +42,9 @@ class OverlaySnapshotView: UIView {
         }
 
         didSet {
-            self.addSubview(backgroundView)
+            if backgroundView != nil {
+                self.addSubview(backgroundView)
+            }
         }
     }
 

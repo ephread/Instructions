@@ -47,6 +47,10 @@ extension CoachMarksController: CoachMarksControllerProxyDataSource {
 }
 
 extension CoachMarksController: CoachMarksControllerProxyDelegate {
+    func configureOrnaments(ofOverlay overlay: UIView) {
+        delegate?.coachMarksController(self, configureOrnamentsOfOverlay: overlay)
+    }
+
     func willLoadCoachMark(at index: Int) -> Bool {
         guard let delegate = delegate else { return true }
 
@@ -77,5 +81,33 @@ extension CoachMarksController: CoachMarksControllerProxyDelegate {
 
     func shouldHandleOverlayTap(at index: Int) -> Bool {
         return delegate?.shouldHandleOverlayTap(in: self, at: index) ?? true
+    }
+}
+
+extension CoachMarksController: CoachMarksControllerAnimationProxyDelegate {
+    func fetchAppearanceTransition(OfCoachMark coachMarkView: UIView,
+                                   at index: Int,
+                                   using manager: CoachMarkTransitionManager) {
+        animationDelegate?.coachMarksController(
+            self, fetchAppearanceTransitionOfCoachMark: coachMarkView,
+            at: index, using: manager
+        )
+    }
+
+    func fetchDisappearanceTransition(OfCoachMark coachMarkView: UIView,
+                                      at index: Int,
+                                      using manager: CoachMarkTransitionManager) {
+        animationDelegate?.coachMarksController(
+            self, fetchDisappearanceTransitionOfCoachMark: coachMarkView,
+            at: index, using: manager
+        )
+    }
+
+    func fetchIdleAnimationOfCoachMark(OfCoachMark coachMarkView: UIView,
+                                       at index: Int,
+                                       using manager: CoachMarkAnimationManager) {
+        animationDelegate?.coachMarksController(self,
+                                                fetchIdleAnimationOfCoachMark: coachMarkView,
+                                                at: index, using: manager)
     }
 }

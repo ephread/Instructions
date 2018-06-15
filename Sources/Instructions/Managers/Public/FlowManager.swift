@@ -1,6 +1,6 @@
 // FlowManager.swift
 //
-// Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2016, 2018 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -77,6 +77,7 @@ public class FlowManager {
         self.coachMarksViewController = coachMarksViewController
     }
 
+    // MARK: Internal methods
     internal func startFlow(withNumberOfCoachMarks numberOfCoachMarks: Int) {
         disableFlow = false
 
@@ -85,17 +86,6 @@ public class FlowManager {
         coachMarksViewController.prepareToShowCoachMarks {
             self.showNextCoachMark()
         }
-    }
-
-    public func resume() {
-        if started && paused {
-            paused = false
-            createAndShowCoachMark(afterResuming: true)
-        }
-    }
-
-    public func pause() {
-        paused = true
     }
 
     internal func reset() {
@@ -121,9 +111,10 @@ public class FlowManager {
             self.coachMarksViewController.currentCoachMarkView?.alpha = 0.0
         }
 
-        let completionBlock = {(finished: Bool) -> Void in
-            self.coachMarksViewController.detachFromWindow()
-            if shouldCallDelegate { self.delegate?.didEndShowingBySkipping(skipped) }
+        let completionBlock = { [weak self] (finished: Bool) -> Void in
+            guard let strongSelf = self else { return }
+            strongSelf.coachMarksViewController.detachFromWindow()
+            if shouldCallDelegate { strongSelf.delegate?.didEndShowingBySkipping(skipped) }
         }
 
         if immediately {
@@ -133,15 +124,19 @@ public class FlowManager {
             // TODO: SoC
             self.coachMarksViewController.overlayManager.overlayView.alpha = 0
         } else {
-            UIView.animate(withDuration: coachMarksViewController.overlayManager.fadeAnimationDuration,
-                                         animations: animationBlock)
+            UIView.animate(withDuration: coachMarksViewController.overlayManager
+                                                                 .fadeAnimationDuration,
+                           animations: animationBlock)
 
-            self.coachMarksViewController.overlayManager.showOverlay(false, completion: completionBlock)
+            self.coachMarksViewController.overlayManager.showOverlay(false,
+                                                                     completion: completionBlock)
         }
     }
 
     internal func showNextCoachMark(hidePrevious: Bool = true) {
         if disableFlow || paused || !canShowCoachMark { return }
+
+        let previousIndex = currentIndex
 
         canShowCoachMark = false
         currentIndex += 1
@@ -158,7 +153,7 @@ public class FlowManager {
         if hidePrevious {
             guard let currentCoachMark = currentCoachMark else { return }
 
-            coachMarksViewController.hide(coachMark: currentCoachMark) {
+            coachMarksViewController.hide(coachMark: currentCoachMark, at: previousIndex) {
                 self.delegate?.didHide(coachMark: self.currentCoachMark!, at: self.currentIndex)
                 self.showOrStop()
             }
@@ -220,11 +215,42 @@ public class FlowManager {
         }
     }
 
+    // MARK: Public methods
+    public func resume() {
+        if started && paused {
+            paused = false
+
+            let completion: (Bool) -> Void = { _ in
+                self.createAndShowCoachMark(afterResuming: true)
+            }
+
+            if coachMarksViewController.overlayManager.isWindowHidden {
+                coachMarksViewController.overlayManager.showWindow(true, completion: completion)
+            } else if coachMarksViewController.overlayManager.isOverlayInvisible {
+                coachMarksViewController.overlayManager.showOverlay(true, completion: completion)
+            } else {
+                completion(true)
+            }
+        }
+    }
+
+    public func pause(and pauseStyle: PauseStyle = .hideNothing) {
+        paused = true
+
+        switch pauseStyle {
+        case .hideInstructions:
+            coachMarksViewController.overlayManager.showWindow(false, completion: nil)
+        case .hideOverlay:
+            coachMarksViewController.overlayManager.showOverlay(false, completion: nil)
+        case .hideNothing: break
+        }
+    }
+
     /// Show the next specified Coach Mark.
     ///
     /// - Parameter numberOfCoachMarksToSkip: the number of coach marks
     ///                                       to skip.
-    open func showNext(numberOfCoachMarksToSkip numberToSkip: Int = 0) {
+    public func showNext(numberOfCoachMarksToSkip numberToSkip: Int = 0) {
         if !self.started || !canShowCoachMark { return }
 
         if numberToSkip < 0 {
@@ -251,8 +277,8 @@ extension FlowManager: CoachMarksViewControllerDelegate {
     func willTransition() {
         coachMarksViewController.prepareForSizeTransition()
         if let coachMark = currentCoachMark {
-            coachMarksViewController.hide(coachMark: coachMark, animated: false,
-                                          beforeTransition: true)
+            coachMarksViewController.hide(coachMark: coachMark, at: currentIndex,
+                                          animated: false, beforeTransition: true)
         }
     }
 

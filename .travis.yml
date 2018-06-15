@@ -1,35 +1,49 @@
 language: objective-c
-osx_image: xcode9.2
+osx_image: xcode9.3
 
 env:
   global:
     - LANG=en_US.UTF-8
 
     - PROJECT="Instructions.xcodeproj"
-    - IOS_SCHEME="Instructions"
-    - IOS_SDK=iphonesimulator11.2
+    - EXAMPLE_PROJECT="Examples/Instructions Example.xcodeproj"
+    - APPEX_EXAMPLE_PROJECT="Examples/Instructions App Extensions Example.xcodeproj"
+
+    - SCHEME="Instructions"
+    - EXAMPLE_SCHEME="Instructions Example"
+    - APPEX_EXAMPLE_SCHEME="Instructions App Extensions Example"
+
+    - IOS_SDK=iphonesimulator11.3
 
   matrix:
-    - DESTINATION="OS=11.2,name=iPhone X" SDK="$IOS_SDK" SCHEME="$IOS_SCHEME" RUN_TESTS="YES" BUILD_EXAMPLE="YES" BUILD_APP_EXTENSION_EXAMPLE="YES" POD_LINT="YES"
+    - DESTINATION="OS=11.3,name=iPhone X" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES" BUILD_APP_EXTENSION_EXAMPLE="YES" POD_LINT="YES" ALLOW_WARNINGS="YES"
 
 before_install:
   - gem install cocoapods xcpretty
 
 script:
+# Warnings might be allowed in versions where Instructions continue to support
+# deprecated methods.
   - if [ $POD_LINT == "YES" ]; then
-      pod lib lint;
+      if [ $ALLOW_WARNINGS == "YES" ]; then
+        pod lib lint --allow-warnings;
+      else
+        pod lib lint;
+      fi
     fi
 
   - if [ $BUILD_EXAMPLE == "YES" ]; then
-      set -o pipefail && xcodebuild clean build -project "Examples/Instructions Example.xcodeproj" -scheme "Instructions Example" -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=YES | xcpretty -c;
+      set -o pipefail && xcodebuild clean build -project "$EXAMPLE_PROJECT" -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=YES | xcpretty -c;
     fi
 
   - if [ $BUILD_APP_EXTENSION_EXAMPLE == "YES" ]; then
-      set -o pipefail && xcodebuild clean build -project "Examples/Instructions App Extensions Example.xcodeproj" -scheme "Instructions App Extensions Example" -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=YES | xcpretty -c;
+      set -o pipefail && xcodebuild clean build -project "$APPEX_EXAMPLE_PROJECT" -scheme "$APPEX_EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=YES | xcpretty -c;
     fi
 
   - if [ $RUN_TESTS == "YES" ]; then
       set -o pipefail && xcodebuild test -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug -enableCodeCoverage YES ONLY_ACTIVE_ARCH=YES | xcpretty -c;
+
+      set -o pipefail && xcodebuild test -project "$EXAMPLE_PROJECT" -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug -enableCodeCoverage YES ONLY_ACTIVE_ARCH=YES | xcpretty -c;
     else
       set -o pipefail && xcodebuild clean build -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=YES | xcpretty -c;
     fi
@@ -37,6 +51,7 @@ script:
 branches:
   only:
     - travis
+    - master
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) -cF ios

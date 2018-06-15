@@ -2,6 +2,44 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
+## 1.2.1
+Released on 2018-XX-XX.
+
+### Fixed
+- Fix [#160] - CoachMark misplaced on iPad
+
+### Added
+- Add support for coach marks placed over cutout paths. ([#152])
+
+[#152]: https://github.com/ephread/Instructions/issues/152
+[#160]: https://github.com/ephread/Instructions/issues/160
+
+## [1.2.0](https://github.com/ephread/Instructions/releases/tag/1.2.0)
+Released on 2018-06-04.
+
+### Changed
+- Migrated to Swift 4.1 (PR [#159])
+
+### Fixed
+- Fix [#163] - Silly weak modifier in protocol property.
+- Fix [#166] - `UIApplication.networkActivityIndicatorVisible` called from background queue.
+- Fix [#90] - Crash occuring infrequently if the view controller is dismissed too quickly. (PR [#161])
+
+### Added
+- Add supports for ornaments on the overlay.
+- Add (partially implemented by [#131]).
+- Add status bar style customization (PR [#164], PR [#139]).
+- Add proper support for iPhone X.
+
+[#90]: https://github.com/ephread/Instructions/issues/90
+[#131]: https://github.com/ephread/Instructions/pull/131
+[#139]: https://github.com/ephread/Instructions/pull/139
+[#159]: https://github.com/ephread/Instructions/pull/159
+[#161]: https://github.com/ephread/Instructions/pull/161
+[#163]: https://github.com/ephread/Instructions/issues/163
+[#164]: https://github.com/ephread/Instructions/pull/164
+[#166]: https://github.com/ephread/Instructions/issues/166
+
 ## [1.1.0](https://github.com/ephread/Instructions/releases/tag/1.1.0)
 Released on 2017-08-09.
 
@@ -10,6 +48,10 @@ Released on 2017-08-09.
 
 ### Fixed
 - Fix [#127] & [#132] by retrieve configuration from parent controller.
+
+[#100]: https://github.com/ephread/Instructions/issues/100
+[#127]: https://github.com/ephread/Instructions/issues/127
+[#132]: https://github.com/ephread/Instructions/issues/132
 
 ## [1.0.0](https://github.com/ephread/Instructions/releases/tag/1.0.0)
 Released on 2017-07-05.

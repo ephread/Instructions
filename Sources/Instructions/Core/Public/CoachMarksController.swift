@@ -100,9 +100,10 @@ public class CoachMarksController {
 
     /// Handle the UI part
     fileprivate lazy var coachMarksViewController: CoachMarksViewController = {
-        let coachMarkController = CoachMarksViewController()
-        coachMarkController.coachMarkDisplayManager = self.buildCoachMarkDisplayManager()
-        coachMarkController.skipViewDisplayManager = self.buildSkipViewDisplayManager()
+        let coachMarkController = CoachMarksViewController(
+            coachMarkDisplayManager: self.buildCoachMarkDisplayManager(),
+            skipViewDisplayManager: self.buildSkipViewDisplayManager()
+        )
 
         coachMarkController.overlayManager = self.overlay
 

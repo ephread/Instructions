@@ -21,6 +21,9 @@ env:
 before_install:
   - gem install cocoapods xcpretty
 
+install:
+  - brew update && brew install swiftlint
+
 script:
 # Warnings might be allowed in versions where Instructions continue to support
 # deprecated methods.

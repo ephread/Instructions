@@ -1,7 +1,7 @@
 // CoachMarkTests.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
-//                          Esteban Soto <esteban.soto.dev@gmail.com>
+// Copyright (c) 2015-2018 Frédéric Maquin <fred@ephread.com>
+//                         Esteban Soto <esteban.soto.dev@gmail.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -64,24 +64,6 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
         XCTAssertTrue(attached)
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, didEndShowingBySkipping skipped: Bool) {
-        guard let delegateEndExpectation = self.delegateEndExpectation else {
-            XCTFail()
-            return
-        }
-
-        if (delegateEndExpectation.description == "Detachment") {
-            XCTAssertTrue(coachMarksController.overlay.overlayView.window == nil)
-
-            delegateEndExpectation.fulfill()
-        } else if (delegateEndExpectation.description == "DidFinishShowing") {
-            XCTAssertTrue(true)
-            delegateEndExpectation.fulfill()
-        } else {
-            XCTFail()
-        }
-    }
-
     func testThatCoachMarkControllerDetachItselfFromParent() {
         delegateEndExpectation = self.expectation(description: "Detachment")
 
@@ -94,6 +76,46 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
             }
         }
     }
+
+    func testThatCoachMarkStoppedBySkipping() {
+        delegateEndExpectation = self.expectation(description: "DidFinishShowingBySkipping")
+
+        let skipView = CoachMarkSkipDefaultView(frame: CGRect(x: 0, y: 0, width: 20, height: 30))
+        coachMarksController.skipView = skipView
+
+        coachMarksController.start(in: .window(over: parentController))
+
+        skipView.skipControl?.sendActions(for: .touchUpInside)
+
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didEndShowingBySkipping skipped: Bool) {
+        guard let delegateEndExpectation = self.delegateEndExpectation else {
+            XCTFail()
+            return
+        }
+
+        if (delegateEndExpectation.description == "Detachment") {
+            XCTAssertTrue(coachMarksController.overlay.overlayView.window == nil)
+
+            delegateEndExpectation.fulfill()
+        } else if (delegateEndExpectation.description == "DidFinishShowing") {
+            XCTAssertTrue(true)
+            delegateEndExpectation.fulfill()
+        } else if (delegateEndExpectation.description == "DidFinishShowingBySkipping") {
+            XCTAssertTrue(skipped)
+            delegateEndExpectation.fulfill()
+        } else {
+            XCTFail()
+        }
+    }
 }
 
 internal class CoachMarkControllerMockedDataSource : CoachMarksControllerDataSource {
@@ -101,23 +123,37 @@ internal class CoachMarkControllerMockedDataSource : CoachMarksControllerDataSou
         return 1
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              coachMarkAt index: Int) -> CoachMark {
         return CoachMark()
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(
+        _ coachMarksController: CoachMarksController,
+        coachMarkViewsAt index: Int,
+        madeFrom coachMark: CoachMark
+    ) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
         return (CoachMarkBodyDefaultView(), nil)
     }
 }
 
 internal class CoachMarkControllerMockedDataSourceUsingConstructorWithoutButton : CoachMarkControllerMockedDataSource {
-    override func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    override func coachMarksController(
+        _ coachMarksController: CoachMarksController,
+        coachMarkViewsAt index: Int,
+        madeFrom coachMark: CoachMark
+    ) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
         return (CoachMarkBodyDefaultView(hintText: "hint", nextText: nil), nil)
     }
 }
 
-internal class CoachMarkControllerMockedDataSourceUsingConstructorWithButton : CoachMarkControllerMockedDataSource {
-    override func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+internal class CoachMarkControllerMockedDataSourceUsingConstructorWithButton :
+               CoachMarkControllerMockedDataSource {
+    override func coachMarksController(
+        _ coachMarksController: CoachMarksController,
+        coachMarkViewsAt index: Int,
+        madeFrom coachMark: CoachMark
+    ) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
         return (CoachMarkBodyDefaultView(hintText: "hint", nextText: "next"), nil)
     }
 }

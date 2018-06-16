@@ -25,7 +25,7 @@ import Instructions
 
 // MARK: - Main Controller
 // This class is an example of what can be achieved with the delegate methods.
-class DelegateViewController: ProfileViewController {
+class DelegateViewController: ProfileViewController, CoachMarksControllerDataSource {
 
     // MARK: IBOutlets
     @IBOutlet weak var profileBackgroundView: UIView?
@@ -48,10 +48,8 @@ class DelegateViewController: ProfileViewController {
 
         coachMarksController.skipView = skipView
     }
-}
 
-// MARK: - Protocol Conformance | CoachMarksControllerDataSource
-extension DelegateViewController: CoachMarksControllerDataSource {
+    // MARK: - Protocol Conformance | CoachMarksControllerDataSource
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 5
     }
@@ -110,12 +108,10 @@ extension DelegateViewController: CoachMarksControllerDataSource {
 
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
-}
 
-// MARK: - Protocol Conformance | CoachMarksControllerDelegate
-extension DelegateViewController: CoachMarksControllerDelegate {
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              configureOrnamentsOfOverlay overlay: UIView) {
+    // MARK: - Protocol Conformance | CoachMarksControllerDelegate
+    override func coachMarksController(_ coachMarksController: CoachMarksController,
+                                       configureOrnamentsOfOverlay overlay: UIView) {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         overlay.addSubview(label)
@@ -128,7 +124,7 @@ extension DelegateViewController: CoachMarksControllerDelegate {
         label.topAnchor.constraint(equalTo: overlay.topAnchor, constant: 100).isActive = true
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
+    override func coachMarksController(_ coachMarksController: CoachMarksController,
                               willShow coachMark: inout CoachMark,
                               beforeChanging change: ConfigurationChange, at index: Int) {
         if index == 0 && change == .nothing {
@@ -160,7 +156,7 @@ extension DelegateViewController: CoachMarksControllerDelegate {
         }
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
+    override func coachMarksController(_ coachMarksController: CoachMarksController,
                               willHide coachMark: CoachMark, at index: Int) {
         if index == 1 {
             avatarVerticalPositionConstraint?.constant = 0
@@ -172,7 +168,7 @@ extension DelegateViewController: CoachMarksControllerDelegate {
         }
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
+    override func coachMarksController(_ coachMarksController: CoachMarksController,
                               didEndShowingBySkipping skipped: Bool) {
         let newColor: UIColor
 

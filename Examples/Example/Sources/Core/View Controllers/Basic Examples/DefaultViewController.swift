@@ -1,6 +1,6 @@
 // DefaultViewController.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015-2018 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,8 @@ import Instructions
 
 // That's the default controller, using every defaults made available by Instructions.
 // It can't get any simpler.
-internal class DefaultViewController: ProfileViewController {
+internal class DefaultViewController: ProfileViewController,
+                                      CoachMarksControllerDataSource {
     var windowLevel: UIWindowLevel?
     var presentationContext: Context = .independantWindow
 
@@ -63,10 +64,8 @@ internal class DefaultViewController: ProfileViewController {
     enum Context {
         case independantWindow, controllerWindow, controller
     }
-}
 
-// MARK: - Protocol Conformance | CoachMarksControllerDataSource
-extension DefaultViewController: CoachMarksControllerDataSource {
+    // MARK: - Protocol Conformance | CoachMarksControllerDataSource
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 5
     }
@@ -117,9 +116,8 @@ extension DefaultViewController: CoachMarksControllerDataSource {
 
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
-}
 
-extension DefaultViewController: CoachMarksControllerDelegate {
+    // MARK: Protocol Conformance - CoachMarkControllerDelegate
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               willLoadCoachMarkAt index: Int) -> Bool {
         if index == 0 && presentationContext == .controller {

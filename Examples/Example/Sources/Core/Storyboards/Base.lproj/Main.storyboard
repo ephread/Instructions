@@ -15,7 +15,7 @@
         <!--Profile-->
         <scene sceneID="WBD-GZ-Xaa">
             <objects>
-                <viewController title="Profile" id="YJG-tQ-EGf" customClass="DefaultViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DefaultViewController" title="Profile" id="YJG-tQ-EGf" customClass="DefaultViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yyL-TN-CqH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

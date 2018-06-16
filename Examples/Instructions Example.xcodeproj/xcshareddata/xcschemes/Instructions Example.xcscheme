@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C64FB30B1BB6CB1C0081E5B6"
-               BuildableName = "Instructions Example.app"
-               BlueprintName = "Instructions Example"
+               BuildableName = "InstructionsExample.app"
+               BlueprintName = "InstructionsExample"
                ReferencedContainer = "container:Instructions Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -24,8 +24,8 @@
    </BuildAction>
    <TestAction
       buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = ""
-      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
@@ -49,13 +49,23 @@
                ReferencedContainer = "container:Instructions Example.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B639B28020D4E71D009996CF"
+               BuildableName = "InstructionsSnapshotTests.xctest"
+               BlueprintName = "InstructionsSnapshotTests"
+               ReferencedContainer = "container:Instructions Example.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C64FB30B1BB6CB1C0081E5B6"
-            BuildableName = "Instructions Example.app"
-            BlueprintName = "Instructions Example"
+            BuildableName = "InstructionsExample.app"
+            BlueprintName = "InstructionsExample"
             ReferencedContainer = "container:Instructions Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -77,11 +87,23 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C64FB30B1BB6CB1C0081E5B6"
-            BuildableName = "Instructions Example.app"
-            BlueprintName = "Instructions Example"
+            BuildableName = "InstructionsExample.app"
+            BlueprintName = "InstructionsExample"
             ReferencedContainer = "container:Instructions Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "FB_REFERENCE_IMAGE_DIR"
+            value = "$(SRCROOT)/Example/Unit Tests/Supporting Files/Snapshots/ReferenceImages"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "IMAGE_DIFF_DIR"
+            value = "$(SRCROOT)/Example/Unit Tests/Supporting Files/Snapshots/FailureDiffs"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -96,8 +118,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C64FB30B1BB6CB1C0081E5B6"
-            BuildableName = "Instructions Example.app"
-            BlueprintName = "Instructions Example"
+            BuildableName = "InstructionsExample.app"
+            BlueprintName = "InstructionsExample"
             ReferencedContainer = "container:Instructions Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

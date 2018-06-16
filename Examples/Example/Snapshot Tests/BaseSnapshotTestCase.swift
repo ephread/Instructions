@@ -1,4 +1,4 @@
-// AccessibilityIdentifiers
+// BaseSnapshotTests.swift
 //
 // Copyright (c) 2018 Frédéric Maquin <fred@ephread.com>
 //
@@ -22,13 +22,34 @@
 
 import Foundation
 
-struct AccessibilityIdentifiers {
-    static let coachMarkNext = "AccessibilityIdentifiers.coachMarkNext"
-    static let coachMarkHint = "AccessibilityIdentifiers.coachMarkHint"
-    static let coachMarkBody = "AccessibilityIdentifiers.coachMarkBody"
+@testable import Instructions
+@testable import InstructionsExample
+import FBSnapshotTestCase
 
-    static let skipButton = "AccessibilityIdentifiers.skipButton"
-    static let overlayView = "AccessibilityIdentifiers.overlayView"
+class BaseSnapshotTests: FBSnapshotTestCase {
+    var window: UIWindow!
 
-    static let window = "AccessibilityIdentifiers.window"
+    override func setUp() {
+        super.setUp()
+
+        window = UIWindow()
+        window.frame = UIScreen.main.bounds
+        isDeviceAgnostic = true
+        //recordMode = true
+    }
+
+    override func tearDown() {
+        super.tearDown()
+        UIApplication.shared.delegate?.window??.makeKeyAndVisible()
+        window.isHidden = true
+        window = nil
+    }
+
+    func instructionsWindow() -> UIWindow? {
+        let windows = UIApplication.shared.windows
+
+        return windows.filter {
+            $0.accessibilityIdentifier == "AccessibilityIdentifiers.window"
+            }.first
+    }
 }

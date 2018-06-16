@@ -185,9 +185,14 @@ public extension CoachMarksController {
     /// - Parameter immediately: `true` to stop immediately, without animations.
     public func stop(immediately: Bool = false) {
         if immediately {
-            flow.stopFlow(immediately: true, userDidSkip: false, shouldCallDelegate: false)
+            flow.stopFlow(immediately: true, userDidSkip: false,
+                          shouldCallDelegate: false) { [weak self] in
+                self?.coachMarksWindow = nil
+            }
         } else {
-            flow.stopFlow()
+            flow.stopFlow { [weak self] in
+                self?.coachMarksWindow = nil
+            }
         }
     }
 

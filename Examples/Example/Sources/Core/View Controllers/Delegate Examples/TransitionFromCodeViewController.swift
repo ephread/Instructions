@@ -140,10 +140,8 @@ extension TransitionFromCodeViewController: CoachMarksControllerDataSource {
 
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
-}
 
-// MARK: - Protocol Conformance | CoachMarksControllerDelegate
-extension TransitionFromCodeViewController: CoachMarksControllerDelegate {
+    // MARK: - Protocol Conformance | CoachMarksControllerDelegate
     func coachMarksController(_ coachMarksController: CoachMarksController, willLoadCoachMarkAt index: Int) -> Bool {
         switch(index) {
         case 1:

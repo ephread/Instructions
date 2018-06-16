@@ -225,8 +225,10 @@ class CoachMarksViewController: UIViewController {
         switch presentationFashion {
         case .window:
             deregisterFromSystemEventChanges()
-            self.view.window?.isHidden = true
-            self.view.window?.rootViewController = nil
+            let window = view.window
+            window?.isHidden = true
+            window?.rootViewController = nil
+            window?.accessibilityIdentifier = nil
         case .viewControllerWindow, .viewController:
             self.instructionsRootView.removeFromSuperview()
             self.willMove(toParentViewController: nil)

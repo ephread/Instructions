@@ -1,5 +1,5 @@
 language: objective-c
-osx_image: xcode9.3
+osx_image: xcode9.4
 
 env:
   global:
@@ -13,16 +13,17 @@ env:
     - EXAMPLE_SCHEME="Instructions Example"
     - APPEX_EXAMPLE_SCHEME="Instructions App Extensions Example"
 
-    - IOS_SDK=iphonesimulator11.3
+    - IOS_SDK=iphonesimulator11.4
 
   matrix:
-    - DESTINATION="OS=11.3,name=iPhone X" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES" BUILD_APP_EXTENSION_EXAMPLE="YES" POD_LINT="YES" ALLOW_WARNINGS="YES"
+    - DESTINATION="OS=11.4,name=iPhone X" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES" BUILD_APP_EXTENSION_EXAMPLE="YES" POD_LINT="YES" ALLOW_WARNINGS="YES"
 
 before_install:
   - gem install cocoapods xcpretty
 
 install:
-  - brew update && brew install swiftlint
+  - brew update && brew install swiftlint carthage
+  - cd "Examples" && carthage bootstrap --platform ios
 
 script:
 # Warnings might be allowed in versions where Instructions continue to support

@@ -35,7 +35,7 @@ class BaseSnapshotTests: FBSnapshotTestCase {
         window = UIWindow()
         window.frame = UIScreen.main.bounds
         isDeviceAgnostic = true
-        recordMode = true
+        //recordMode = true
     }
 
     override func tearDown() {

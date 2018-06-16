@@ -22,8 +22,7 @@ before_install:
   - gem install cocoapods xcpretty
 
 install:
-  - brew update && brew install swiftlint carthage
-  - cd "Examples" && carthage bootstrap --platform ios
+  - cd "Examples" && carthage bootstrap --platform ios && cd ..
 
 script:
 # Warnings might be allowed in versions where Instructions continue to support

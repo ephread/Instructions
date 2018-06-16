@@ -95,12 +95,12 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "FB_REFERENCE_IMAGE_DIR"
-            value = "$(SRCROOT)/Example/Unit Tests/Supporting Files/Snapshots/ReferenceImages"
+            value = "$(SRCROOT)/Example/Snapshot Tests/Supporting Files/Snapshots/ReferenceImages"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "IMAGE_DIFF_DIR"
-            value = "$(SRCROOT)/Example/Unit Tests/Supporting Files/Snapshots/FailureDiffs"
+            value = "$(SRCROOT)/Example/Snapshot Tests/Supporting Files/Snapshots/FailureDiffs"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

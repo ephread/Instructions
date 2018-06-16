@@ -1,6 +1,6 @@
-// CoachMarksViewControllerDelegate.swift
+// ConfigurationChange.swift
 //
-// Copyright (c) 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2018 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,21 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-/// Used by the CoachMarksViewController to notify user or system related events.
-protocol CoachMarksViewControllerDelegate: class {
-    /// The given `coachMarkView` was tapped.
-    ///
-    /// - Parameter coachMarkView: the view that was tapped.
-    func didTap(coachMarkView: CoachMarkView?)
+import Foundation
 
-    /// The given `skipView` was tapped.
-    ///
-    /// - Parameter skipView: the view that was tapped.
-    func didTap(skipView: CoachMarkSkipView?)
-
-    /// The delegate should prepare for the upcoming size transition.
-    func willTransition()
-
-    /// The delegate should perform action, after for the size transition was completed
-    func didTransition(afterChanging change: ConfigurationChange)
+/// Define the type of change involved during a configuration change.
+public enum ConfigurationChange {
+    case nothing, size, statusBar
 }

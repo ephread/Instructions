@@ -128,14 +128,28 @@ extension TestFlowViewController: CoachMarksControllerDelegate {
                               willShow coachMark: inout CoachMark,
                               afterSizeTransition: Bool,
                               at index: Int) {
-        print("willShow at: \(index), afterSizeTransition: \(afterSizeTransition)")
+        print("[DEPRECATED] willShow at: \(index), afterSizeTransition: \(afterSizeTransition)")
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               didShow coachMark: CoachMark,
                               afterSizeTransition: Bool,
                               at index: Int) {
-        print("didShow at: \(index), afterSizeTransition: \(afterSizeTransition)")
+        print("[DEPRECATED] didShow at: \(index), afterSizeTransition: \(afterSizeTransition)")
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              willShow coachMark: inout CoachMark,
+                              beforeChanging change: ConfigurationChange,
+                              at index: Int) {
+        print("willShow at: \(index), beforeChanging: \(change)")
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didShow coachMark: CoachMark,
+                              afterChanging change: ConfigurationChange,
+                              at index: Int) {
+        print("didShow at: \(index), afterChanging: \(change)")
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,

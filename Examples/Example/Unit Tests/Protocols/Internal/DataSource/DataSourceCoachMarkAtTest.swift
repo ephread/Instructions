@@ -98,9 +98,10 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didShow coachMark: CoachMark, afterSizeTransition: Bool,
+                              didShow coachMark: CoachMark,
+                              afterChanging change: ConfigurationChange,
                               at index: Int) {
-        if !afterSizeTransition {
+        if change == .nothing {
             coachMarksController.flow.showNext()
         }
     }

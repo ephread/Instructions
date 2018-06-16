@@ -130,8 +130,8 @@ extension DelegateViewController: CoachMarksControllerDelegate {
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               willShow coachMark: inout CoachMark,
-                              afterSizeTransition: Bool, at index: Int) {
-        if index == 0 && !afterSizeTransition {
+                              beforeChanging change: ConfigurationChange, at index: Int) {
+        if index == 0 && change == .nothing {
             // We'll need to play an animation before showing up the coach mark.
             // To be able to play the animation and then show the coach mark and not stall
             // the UI (i. e. keep the asynchronicity), we'll pause the controller.

@@ -340,7 +340,7 @@ extension CoachMarksViewController {
         coordinator.animate(alongsideTransition: nil, completion: { _ in
             self.onGoingSizeChange = false
             self.overlayManager.viewDidTransition()
-            self.delegate?.didTransition()
+            self.delegate?.didTransition(afterChanging: .size)
         })
     }
 
@@ -369,7 +369,7 @@ extension CoachMarksViewController {
     @objc public func restoreAfterChangeDidComplete() {
         if !onGoingSizeChange {
             overlayManager.viewDidTransition()
-            delegate?.didTransition()
+            delegate?.didTransition(afterChanging: .statusBar)
         }
     }
 

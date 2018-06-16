@@ -176,7 +176,7 @@ public class FlowManager {
     ///
     /// - Parameter shouldCallDelegate: `true` to call delegate methods, `false` otherwise.
     internal func createAndShowCoachMark(afterResuming: Bool = false,
-                                         recreatedAfterTransition recreated: Bool = false) {
+                                         changing change: ConfigurationChange = .nothing) {
         if disableFlow { return }
 
         if !afterResuming {
@@ -193,7 +193,11 @@ public class FlowManager {
             // The coach mark will soon show, we notify the delegate, so it
             // can perform some things and, if required, update the coach mark structure.
             self.delegate?.willShow(coachMark: &currentCoachMark!,
-                                    afterSizeTransition: recreated, at: currentIndex)
+                                    beforeChanging: change, at: currentIndex)
+
+            // TODO: ❗️ To remove in 2.0.0
+            self.delegate?.willShow(coachMark: &currentCoachMark!,
+                                    afterSizeTransition: (change == .size), at: currentIndex)
         }
 
         // The delegate might have paused the flow, he check whether or not it's
@@ -210,7 +214,12 @@ public class FlowManager {
                 self.canShowCoachMark = true
 
                 self.delegate?.didShow(coachMark: self.currentCoachMark!,
-                                       afterSizeTransition: recreated, at: self.currentIndex)
+                                       afterChanging: change, at: self.currentIndex)
+
+                // TODO: ❗️ To remove in 2.0.0
+                self.delegate?.didShow(coachMark: self.currentCoachMark!,
+                                       afterSizeTransition: (change == .size),
+                                       at: self.currentIndex)
             }
         }
     }
@@ -282,8 +291,8 @@ extension FlowManager: CoachMarksViewControllerDelegate {
         }
     }
 
-    func didTransition() {
+    func didTransition(afterChanging change: ConfigurationChange) {
         coachMarksViewController.restoreAfterSizeTransitionDidComplete()
-        createAndShowCoachMark(recreatedAfterTransition: true)
+        createAndShowCoachMark(changing: change)
     }
 }

@@ -30,14 +30,28 @@ public protocol CoachMarksControllerDelegate: class {
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               willLoadCoachMarkAt index: Int) -> Bool
 
+    @available(iOS, deprecated: 1.3.0,
+               message: "use coachMarksController(_:willShow:afterChanging:at:)")
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               willShow coachMark: inout CoachMark,
                               afterSizeTransition: Bool,
                               at index: Int)
 
+    @available(iOS, deprecated: 1.3.0,
+               message: "use coachMarksController(_:didShow:afterChanging:at:)")
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               didShow coachMark: CoachMark,
                               afterSizeTransition: Bool,
+                              at index: Int)
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              willShow coachMark: inout CoachMark,
+                              beforeChanging change: ConfigurationChange,
+                              at index: Int)
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didShow coachMark: CoachMark,
+                              afterChanging change: ConfigurationChange,
                               at index: Int)
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
@@ -75,6 +89,16 @@ public extension CoachMarksControllerDelegate {
                               at index: Int) { }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
+                              willShow coachMark: inout CoachMark,
+                              beforeChanging change: ConfigurationChange,
+                              at index: Int) { }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didShow coachMark: CoachMark,
+                              afterChanging change: ConfigurationChange,
+                              at index: Int) { }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
                               willHide coachMark: CoachMark,
                               at index: Int) { }
 
@@ -99,6 +123,11 @@ protocol CoachMarksControllerProxyDelegate: class {
     func willShow(coachMark: inout CoachMark, afterSizeTransition: Bool, at index: Int)
 
     func didShow(coachMark: CoachMark, afterSizeTransition: Bool, at index: Int)
+
+    func willShow(coachMark: inout CoachMark, beforeChanging change: ConfigurationChange,
+                  at index: Int)
+
+    func didShow(coachMark: CoachMark, afterChanging change: ConfigurationChange, at index: Int)
 
     func willHide(coachMark: CoachMark, at index: Int)
 

@@ -1,4 +1,4 @@
-// CustomExampleTests.swift
+// BaseSnapshotTests.swift
 //
 // Copyright (c) 2018 Frédéric Maquin <fred@ephread.com>
 //
@@ -20,29 +20,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-import XCTest
+import Foundation
 
-class CustomExampleTests: XCTestCase {
-        
+@testable import Instructions
+@testable import InstructionsExample
+import FBSnapshotTestCase
+
+class BaseSnapshotTests: FBSnapshotTestCase {
+    var window: UIWindow!
+
     override func setUp() {
         super.setUp()
-        continueAfterFailure = false
-        XCUIApplication().launch()
+
+        window = UIWindow()
+        window.frame = UIScreen.main.bounds
+        isDeviceAgnostic = true
+        recordMode = true
     }
 
-    func testTapOnNextButton() {
-        let app = XCUIApplication()
-        app.tables.staticTexts["Custom"].tap()
+    override func tearDown() {
+        super.tearDown()
+        UIApplication.shared.delegate?.window??.makeKeyAndVisible()
+        window.isHidden = true
+        window = nil
+    }
 
-        let nextButton = app.buttons["AccessibilityIdentifiers.next"]
-        _ = nextButton.waitForExistence(timeout: 5)
+    func instructionsWindow() -> UIWindow? {
+        let windows = UIApplication.shared.windows
 
-        nextButton.tap()
-        nextButton.tap()
-        nextButton.tap()
-        nextButton.tap()
-        nextButton.tap()
-
-        app.navigationBars["Custom"].buttons["Instructions"].tap()
+        return windows.filter {
+            $0.accessibilityIdentifier == "AccessibilityIdentifiers.window"
+            }.first
     }
 }

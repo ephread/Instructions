@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C64FB30B1BB6CB1C0081E5B6"
-               BuildableName = "Instructions Example.app"
-               BlueprintName = "Instructions Example"
+               BuildableName = "InstructionsExample.app"
+               BlueprintName = "InstructionsExample"
                ReferencedContainer = "container:Instructions Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -49,13 +49,23 @@
                ReferencedContainer = "container:Instructions Example.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B639B28020D4E71D009996CF"
+               BuildableName = "InstructionsSnapshotTests.xctest"
+               BlueprintName = "InstructionsSnapshotTests"
+               ReferencedContainer = "container:Instructions Example.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C64FB30B1BB6CB1C0081E5B6"
-            BuildableName = "Instructions Example.app"
-            BlueprintName = "Instructions Example"
+            BuildableName = "InstructionsExample.app"
+            BlueprintName = "InstructionsExample"
             ReferencedContainer = "container:Instructions Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -77,8 +87,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C64FB30B1BB6CB1C0081E5B6"
-            BuildableName = "Instructions Example.app"
-            BlueprintName = "Instructions Example"
+            BuildableName = "InstructionsExample.app"
+            BlueprintName = "InstructionsExample"
             ReferencedContainer = "container:Instructions Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -108,8 +118,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C64FB30B1BB6CB1C0081E5B6"
-            BuildableName = "Instructions Example.app"
-            BlueprintName = "Instructions Example"
+            BuildableName = "InstructionsExample.app"
+            BlueprintName = "InstructionsExample"
             ReferencedContainer = "container:Instructions Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

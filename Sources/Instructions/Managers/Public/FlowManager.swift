@@ -103,7 +103,7 @@ public class FlowManager {
     /// - Parameter shouldCallDelegate: `true` to notify the delegate that the flow
     ///                                 was stop.
     internal func stopFlow(immediately: Bool = false, userDidSkip skipped: Bool = false,
-                           shouldCallDelegate: Bool = true ) {
+                           shouldCallDelegate: Bool = true, completion: (() -> Void)? = nil) {
         reset()
 
         let animationBlock = { () -> Void in
@@ -115,6 +115,7 @@ public class FlowManager {
             guard let strongSelf = self else { return }
             strongSelf.coachMarksViewController.detachFromWindow()
             if shouldCallDelegate { strongSelf.delegate?.didEndShowingBySkipping(skipped) }
+            completion?()
         }
 
         if immediately {

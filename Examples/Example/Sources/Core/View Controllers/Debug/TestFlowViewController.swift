@@ -68,18 +68,32 @@ class TestFlowViewController: ProfileViewController {
         return true
     }
 
-    override func coachMarksController(_ coachMarksController: CoachMarksController,
+    func coachMarksController(_ coachMarksController: CoachMarksController,
                               willShow coachMark: inout CoachMark,
                               afterSizeTransition: Bool,
                               at index: Int) {
-        print("willShow at: \(index), afterSizeTransition: \(afterSizeTransition)")
+        print("[DEPRECATED] willShow at: \(index), afterSizeTransition: \(afterSizeTransition)")
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didShow coachMark: CoachMark,
+                              afterSizeTransition: Bool,
+                              at index: Int) {
+        print("[DEPRECATED] didShow at: \(index), afterSizeTransition: \(afterSizeTransition)")
+    }
+
+    override func coachMarksController(_ coachMarksController: CoachMarksController,
+                              willShow coachMark: inout CoachMark,
+                              beforeChanging change: ConfigurationChange,
+                              at index: Int) {
+        print("willShow at: \(index), beforeChanging: \(change)")
     }
 
     override func coachMarksController(_ coachMarksController: CoachMarksController,
                               didShow coachMark: CoachMark,
-                              afterSizeTransition: Bool,
+                              afterChanging change: ConfigurationChange,
                               at index: Int) {
-        print("didShow at: \(index), afterSizeTransition: \(afterSizeTransition)")
+        print("didShow at: \(index), afterChanging: \(change)")
     }
 
     override func coachMarksController(_ coachMarksController: CoachMarksController,

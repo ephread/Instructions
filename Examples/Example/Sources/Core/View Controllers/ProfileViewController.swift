@@ -81,19 +81,19 @@ internal class ProfileViewController: UIViewController,
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               willShow coachMark: inout CoachMark,
-                              afterSizeTransition: Bool,
+                              beforeChanging change: ConfigurationChange,
                               at index: Int) {
         snapshotDelegate?.coachMarksController(coachMarksController, willShow: &coachMark,
-                                               afterSizeTransition: afterSizeTransition,
+                                               beforeChanging: change,
                                                at: index)
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               didShow coachMark: CoachMark,
-                              afterSizeTransition: Bool,
+                              afterChanging change: ConfigurationChange,
                               at index: Int) {
         snapshotDelegate?.coachMarksController(coachMarksController, didShow: coachMark,
-                                               afterSizeTransition: afterSizeTransition,
+                                               afterChanging: change,
                                                at: index)
     }
 

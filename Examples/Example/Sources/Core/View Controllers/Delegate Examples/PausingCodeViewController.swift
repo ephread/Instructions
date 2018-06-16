@@ -66,9 +66,10 @@ internal class PausingCodeViewController: ProfileViewController {
 
     // MARK: - Protocol Conformance | CoachMarksControllerDelegate
     override func coachMarksController(_ coachMarksController: CoachMarksController,
-                              willShow coachMark: inout CoachMark,
-                              afterSizeTransition: Bool, at index: Int) {
-        if index == 2 && !afterSizeTransition {
+                                       willShow coachMark: inout CoachMark,
+                                       beforeChanging change: ConfigurationChange,
+                                       at index: Int) {
+        if index == 2 && change == .nothing {
             coachMarksController.flow.pause(and: pauseStyle)
         }
     }

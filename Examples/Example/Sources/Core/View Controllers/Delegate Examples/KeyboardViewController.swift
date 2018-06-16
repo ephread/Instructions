@@ -140,11 +140,11 @@ extension KeyboardViewController: CoachMarksControllerDataSource {
 extension KeyboardViewController: CoachMarksControllerDelegate {
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               willShow coachMark: inout CoachMark,
-                              afterSizeTransition: Bool,
+                              beforeChanging change: ConfigurationChange,
                               at index: Int) {
         if index == 1 {
             coachMark.arrowOrientation = .bottom
-            if !afterSizeTransition {
+            if change == .nothing {
                 textField.becomeFirstResponder()
                 coachMarksController.flow.pause()
             }

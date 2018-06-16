@@ -42,7 +42,9 @@ If you're tackling new code, here are a few things to remember.
 
 **Don't be afraid to ask questions!** If anything seems unclear, ask away! We need to make sure that everyone is on the same page.
 
-### Style guide & linting
+### Style guide, linting and testing
+
+#### Style guide & linting
 
 Instructions doesn't really have a style guide. We simply expect you to follow the existing style
 (which more or less matches Apple recommendations). Instructions does come, however, with a [Swiftlint] configuration.
@@ -58,6 +60,34 @@ expected to be written in English 😉. Speaking of comments, they look better w
 with a period. 🤘
 
 [Swiftlint]: https://github.com/realm/SwiftLint
+
+#### Testing
+
+Make sure all the tests are green for all projects! Unit & UI tests are fairly classic and use the built-in XCTest APIs. Additionally, there's also a set of [snapshot tests]. Adding tests to your PR is not expected, but feel free to do so 😉.
+
+Two steps are required to be able to run the snapshot tests.
+
+###### 1. Install [Git LFS] and pull the test cases
+Run the following command to initialize the submodule containing the test cases.
+```shell
+$ git submodule update --init --recursive
+```
+
+Alternatively, if you initialized the submodules before installing git LFS, you can run the following command in the `Snapshots` directory to pull the snapshots.
+
+```shell
+$ git lfs pull
+```
+
+[Git LFS]: https://git-lfs.github.com/
+[snapshot tests]: https://github.com/uber/ios-snapshot-test-case
+
+###### 2. Install and run Carthage to build iOSSsnapshotTestCase
+Run the following command from the root directory, and you should be good to go:
+
+```shell
+$ cd 'Examples' && carthage bootstrap --platform ios
+```
 
 ### Git branching model & pull requests
 

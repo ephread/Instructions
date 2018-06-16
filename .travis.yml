@@ -20,6 +20,8 @@ env:
 
 before_install:
   - gem install cocoapods xcpretty
+  - brew update && brew install git-lfs && git lfs install
+  - cd "Examples/Example/Unit Tests/Supporting Files/Snapshots" && git lfs pull && cd -
 
 install:
   - cd "Examples" && carthage bootstrap --platform ios && cd ..

@@ -60,6 +60,57 @@ class TestFlowViewController: ProfileViewController {
         self.coachMarksController.stop(immediately: true)
         self.coachMarksController.start(in: .window(over: self))
     }
+
+    // MARK: - Protocol Conformance | CoachMarksControllerDelegate
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              willLoadCoachMarkAt index: Int) -> Bool {
+        print("willLoadCoachMarkAt: \(index)")
+        return true
+    }
+
+    override func coachMarksController(_ coachMarksController: CoachMarksController,
+                              willShow coachMark: inout CoachMark,
+                              afterSizeTransition: Bool,
+                              at index: Int) {
+        print("willShow at: \(index), afterSizeTransition: \(afterSizeTransition)")
+    }
+
+    override func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didShow coachMark: CoachMark,
+                              afterSizeTransition: Bool,
+                              at index: Int) {
+        print("didShow at: \(index), afterSizeTransition: \(afterSizeTransition)")
+    }
+
+    override func coachMarksController(_ coachMarksController: CoachMarksController,
+                              willHide coachMark: CoachMark,
+                              at index: Int) {
+        print("willHide at: \(index)")
+    }
+
+    override func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didHide coachMark: CoachMark,
+                              at index: Int) {
+        print("didHide at: \(index)")
+    }
+
+    override func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didEndShowingBySkipping skipped: Bool) {
+        print("didEndShowingBySkipping: \(skipped)")
+    }
+
+    func shouldHandleOverlayTap(in coachMarksController: CoachMarksController,
+                                at index: Int) -> Bool {
+        print("shouldHandleOverlayTap at index: \(index)")
+
+        if index >= 2 {
+            print("Index greater than or equal to 2, skipping")
+            coachMarksController.stop()
+            return false
+        } else {
+            return true
+        }
+    }
 }
 
 // MARK: - Protocol Conformance | CoachMarksControllerDataSource
@@ -113,58 +164,5 @@ extension TestFlowViewController: CoachMarksControllerDataSource {
         }
 
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
-    }
-}
-
-// MARK: - Protocol Conformance | CoachMarksControllerDelegate
-extension TestFlowViewController: CoachMarksControllerDelegate {
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              willLoadCoachMarkAt index: Int) -> Bool {
-        print("willLoadCoachMarkAt: \(index)")
-        return true
-    }
-
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              willShow coachMark: inout CoachMark,
-                              afterSizeTransition: Bool,
-                              at index: Int) {
-        print("willShow at: \(index), afterSizeTransition: \(afterSizeTransition)")
-    }
-
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didShow coachMark: CoachMark,
-                              afterSizeTransition: Bool,
-                              at index: Int) {
-        print("didShow at: \(index), afterSizeTransition: \(afterSizeTransition)")
-    }
-
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              willHide coachMark: CoachMark,
-                              at index: Int) {
-        print("willHide at: \(index)")
-    }
-
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didHide coachMark: CoachMark,
-                              at index: Int) {
-        print("didHide at: \(index)")
-    }
-
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didEndShowingBySkipping skipped: Bool) {
-        print("didEndShowingBySkipping: \(skipped)")
-    }
-
-    func shouldHandleOverlayTap(in coachMarksController: CoachMarksController,
-                                at index: Int) -> Bool {
-        print("shouldHandleOverlayTap at index: \(index)")
-
-        if index >= 2 {
-            print("Index greater than or equal to 2, skipping")
-            coachMarksController.stop()
-            return false
-        } else {
-            return true
-        }
     }
 }

@@ -1,6 +1,6 @@
 // ProfileViewController.swift
 //
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2015-2018 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,8 @@ import UIKit
 import Instructions
 
 /// This class serves as a base for all the other examples
-internal class ProfileViewController: UIViewController {
+internal class ProfileViewController: UIViewController,
+                                      CoachMarksControllerDelegate {
     // MARK: - IBOutlet
     @IBOutlet weak var handleLabel: UILabel?
     @IBOutlet weak var emailLabel: UILabel?
@@ -36,7 +37,8 @@ internal class ProfileViewController: UIViewController {
     var coachMarksController = CoachMarksController()
 
     let avatarText = "That's your profile picture. You look gorgeous!"
-    let profileSectionText = "You are in the profile section, where you can review all your informations."
+    let profileSectionText = "You are in the profile section, where you can review " +
+                             "all your informations."
     let handleText = "That, here, is your name. Sounds a bit generic, don't you think?"
     let emailText = "This is your email address. Nothing too fancy."
     let postsText = "Here, is the number of posts you made. You are just starting up!"
@@ -44,12 +46,13 @@ internal class ProfileViewController: UIViewController {
 
     let nextButtonText = "Ok!"
 
+    // Used for Snapshot testing (i. e. has nothing to do with the example)
+    var snapshotDelegate: CoachMarksControllerDelegate?
+
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-
-        self.coachMarksController.overlay.allowTap = true
+        coachMarksController.overlay.allowTap = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -61,10 +64,56 @@ internal class ProfileViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        self.coachMarksController.stop(immediately: true)
+        coachMarksController.stop(immediately: true)
     }
 
     func startInstructions() {
-        self.coachMarksController.start(in: .window(over: self))
+        coachMarksController.start(in: .window(over: self))
+    }
+
+    // MARK: Protocol Conformance | CoachMarksControllerDelegate
+    // Used for Snapshot testing (i. e. has nothing to do with the example)
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              configureOrnamentsOfOverlay overlay: UIView) {
+        snapshotDelegate?.coachMarksController(coachMarksController,
+                                               configureOrnamentsOfOverlay: overlay)
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              willShow coachMark: inout CoachMark,
+                              afterSizeTransition: Bool,
+                              at index: Int) {
+        snapshotDelegate?.coachMarksController(coachMarksController, willShow: &coachMark,
+                                               afterSizeTransition: afterSizeTransition,
+                                               at: index)
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didShow coachMark: CoachMark,
+                              afterSizeTransition: Bool,
+                              at index: Int) {
+        snapshotDelegate?.coachMarksController(coachMarksController, didShow: coachMark,
+                                               afterSizeTransition: afterSizeTransition,
+                                               at: index)
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              willHide coachMark: CoachMark,
+                              at index: Int) {
+        snapshotDelegate?.coachMarksController(coachMarksController, willHide: coachMark,
+                                               at: index)
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didHide coachMark: CoachMark,
+                              at index: Int) {
+        snapshotDelegate?.coachMarksController(coachMarksController, didHide: coachMark,
+                                               at: index)
+    }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didEndShowingBySkipping skipped: Bool) {
+        snapshotDelegate?.coachMarksController(coachMarksController,
+                                               didEndShowingBySkipping: skipped)
     }
 }

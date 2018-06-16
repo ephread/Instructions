@@ -63,6 +63,15 @@ internal class PausingCodeViewController: ProfileViewController {
         // The user tapped on the button, so let's carry on!
         coachMarksController.flow.resume()
     }
+
+    // MARK: - Protocol Conformance | CoachMarksControllerDelegate
+    override func coachMarksController(_ coachMarksController: CoachMarksController,
+                              willShow coachMark: inout CoachMark,
+                              afterSizeTransition: Bool, at index: Int) {
+        if index == 2 && !afterSizeTransition {
+            coachMarksController.flow.pause(and: pauseStyle)
+        }
+    }
 }
 
 // MARK: - Protocol Conformance | CoachMarksControllerDataSource
@@ -119,16 +128,5 @@ extension PausingCodeViewController: CoachMarksControllerDataSource {
         }
 
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
-    }
-}
-
-// MARK: - Protocol Conformance | CoachMarksControllerDelegate
-extension PausingCodeViewController: CoachMarksControllerDelegate {
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              willShow coachMark: inout CoachMark,
-                              afterSizeTransition: Bool, at index: Int) {
-        if index == 2 && !afterSizeTransition {
-            coachMarksController.flow.pause(and: pauseStyle)
-        }
     }
 }

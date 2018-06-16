@@ -15,7 +15,6 @@
 		B65DDDD61EE34330002618AF /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDD51EE34330002618AF /* MainTableViewController.swift */; };
 		B661D5B61F3AFA48000D29D3 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B661D5B31F3AFA48000D29D3 /* ConfigurationViewController.swift */; };
 		B661D5B81F3B00FB000D29D3 /* InstructionsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B661D5B71F3B00FB000D29D3 /* InstructionsNavigationController.swift */; };
-		B6C9D65B20D3B84D00EBC03A /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B6C9D65920D3B84D00EBC03A /* Info.plist */; };
 		B6C9D67920D3B90D00EBC03A /* CoachMarkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C9D65F20D3B90D00EBC03A /* CoachMarkTests.swift */; };
 		B6C9D67A20D3B90D00EBC03A /* CoachMarksControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C9D66020D3B90D00EBC03A /* CoachMarksControllerTests.swift */; };
 		B6C9D67B20D3B90D00EBC03A /* DataSourceCoachMarkAtTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C9D66420D3B90D00EBC03A /* DataSourceCoachMarkAtTest.swift */; };
@@ -34,6 +33,8 @@
 		B6C9D68820D3B90D00EBC03A /* CoachMarkLayoutHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C9D67720D3B90D00EBC03A /* CoachMarkLayoutHelperTests.swift */; };
 		B6C9D68920D3B90D00EBC03A /* CoachMarkInnerLayoutHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C9D67820D3B90D00EBC03A /* CoachMarkInnerLayoutHelperTests.swift */; };
 		B6C9D68C20D3C02400EBC03A /* CoachMarksViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C9D68B20D3C02400EBC03A /* CoachMarksViewControllerTests.swift */; };
+		B6C9D6A220D410EC00EBC03A /* DefaultExampleSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C9D6A020D4103700EBC03A /* DefaultExampleSnapshotTests.swift */; };
+		B6C9D6A320D4114300EBC03A /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6C9D69A20D40DFD00EBC03A /* FBSnapshotTestCase.framework */; };
 		B6CA4A8720BE7141006F42AC /* DefaultExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CA4A8620BE7141006F42AC /* DefaultExampleTests.swift */; };
 		B6CA4A9120BE8033006F42AC /* Instructions.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B690138920BE6B2E00E706B2 /* Instructions.framework */; };
 		B6CA4A9220BE8033006F42AC /* Instructions.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B690138920BE6B2E00E706B2 /* Instructions.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -141,6 +142,8 @@
 		B6C9D67720D3B90D00EBC03A /* CoachMarkLayoutHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkLayoutHelperTests.swift; sourceTree = "<group>"; };
 		B6C9D67820D3B90D00EBC03A /* CoachMarkInnerLayoutHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkInnerLayoutHelperTests.swift; sourceTree = "<group>"; };
 		B6C9D68B20D3C02400EBC03A /* CoachMarksViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachMarksViewControllerTests.swift; sourceTree = "<group>"; };
+		B6C9D69A20D40DFD00EBC03A /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
+		B6C9D6A020D4103700EBC03A /* DefaultExampleSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultExampleSnapshotTests.swift; sourceTree = "<group>"; };
 		B6CA4A8420BE7141006F42AC /* InstructionsExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstructionsExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6CA4A8620BE7141006F42AC /* DefaultExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultExampleTests.swift; sourceTree = "<group>"; };
 		B6CA4A8820BE7141006F42AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -173,6 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6C9D6A320D4114300EBC03A /* FBSnapshotTestCase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,6 +257,7 @@
 		B6C9D65720D3B84D00EBC03A /* Unit Tests */ = {
 			isa = PBXGroup;
 			children = (
+				B6C9D69F20D4102100EBC03A /* Snapshot */,
 				B6C9D65D20D3B90D00EBC03A /* Core */,
 				B6C9D67520D3B90D00EBC03A /* Helpers */,
 				B6C9D66D20D3B90D00EBC03A /* Managers */,
@@ -381,6 +386,22 @@
 			path = Internal;
 			sourceTree = "<group>";
 		};
+		B6C9D69120D40BDA00EBC03A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B6C9D69A20D40DFD00EBC03A /* FBSnapshotTestCase.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B6C9D69F20D4102100EBC03A /* Snapshot */ = {
+			isa = PBXGroup;
+			children = (
+				B6C9D6A020D4103700EBC03A /* DefaultExampleSnapshotTests.swift */,
+			);
+			path = Snapshot;
+			sourceTree = "<group>";
+		};
 		B6CA4A8520BE7141006F42AC /* UI Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,6 +443,7 @@
 		C64FB3031BB6CB1C0081E5B6 = {
 			isa = PBXGroup;
 			children = (
+				B6C9D69120D40BDA00EBC03A /* Frameworks */,
 				C64FB30D1BB6CB1C0081E5B6 /* Products */,
 				C64FB32C1BB6CC180081E5B6 /* Sources */,
 				B6C9D65720D3B84D00EBC03A /* Unit Tests */,
@@ -484,6 +506,7 @@
 				B6C9D64920D3B7FC00EBC03A /* Sources */,
 				B6C9D64A20D3B7FC00EBC03A /* Frameworks */,
 				B6C9D64B20D3B7FC00EBC03A /* Resources */,
+				B6C9D6A420D4163000EBC03A /* Carthage Copy */,
 			);
 			buildRules = (
 			);
@@ -607,7 +630,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B6C9D65B20D3B84D00EBC03A /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,11 +652,30 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		B6C9D6A420D4163000EBC03A /* Carthage Copy */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/FBSnapshotTestCase.framework",
+			);
+			name = "Carthage Copy";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B6C9D64920D3B7FC00EBC03A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6C9D6A220D410EC00EBC03A /* DefaultExampleSnapshotTests.swift in Sources */,
 				B6C9D68520D3B90D00EBC03A /* TranslucentOverlayStyleManagerTest.swift in Sources */,
 				B6C9D68320D3B90D00EBC03A /* CoachMarkDisplayManagerTests.swift in Sources */,
 				B6C9D67920D3B90D00EBC03A /* CoachMarkTests.swift in Sources */,
@@ -750,6 +791,10 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Unit Tests/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
@@ -775,6 +820,10 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Unit Tests/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
@@ -798,6 +847,10 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/UI Tests/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
@@ -822,6 +875,10 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/UI Tests/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;

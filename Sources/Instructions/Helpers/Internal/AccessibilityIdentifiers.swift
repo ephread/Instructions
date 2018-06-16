@@ -29,4 +29,6 @@ struct AccessibilityIdentifiers {
 
     static let skipButton = "AccessibilityIdentifiers.skipButton"
     static let overlayView = "AccessibilityIdentifiers.overlayView"
+
+    static let window = "AccessibilityIdentifiers.window"
 }

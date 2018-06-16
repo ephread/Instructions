@@ -23,6 +23,16 @@
 import UIKit
 
 class InstructionsWindow: UIWindow {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        accessibilityIdentifier = AccessibilityIdentifiers.window
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        accessibilityIdentifier = AccessibilityIdentifiers.window
+    }
+
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let hitView = super.hitTest(point, with: event)
 

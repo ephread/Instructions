@@ -2,6 +2,9 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
+### Added 
+- coachMark arrow view support left and right
+
 ## X.X.X
 Released on 2018-XX-XX.
 

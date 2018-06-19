@@ -64,15 +64,13 @@ class CoachMarkLayoutHelper {
             default: return [NSLayoutConstraint]()
             }
         } else {//arrow left or right, the layout constraints diff with top and bottom, and layout around cutoutPath
-            let horizontalConstraint: NSLayoutConstraint
             if coachMark.arrowOrientation == .left {
                 let constant = coachMark.cutoutPath!.bounds.maxX + coachMark.gapBetweenCoachMarkAndCutoutPath
-                horizontalConstraint = coachMarkView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor, constant: constant)
+                return NSLayoutConstraint.constraints(withVisualFormat: "H:|-(==\(constant))-[currentCoachMarkView(<=\(coachMark.maxWidth))]-(>=\(coachMark.horizontalMargin))-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["currentCoachMarkView": coachMarkView])
             } else {
-                let constant = -(parentView.frame.size.width - coachMark.cutoutPath!.bounds.minX) - coachMark.gapBetweenCoachMarkAndCutoutPath
-                horizontalConstraint = coachMarkView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: constant)
+                let constant = (parentView.frame.size.width - coachMark.cutoutPath!.bounds.minX) + coachMark.gapBetweenCoachMarkAndCutoutPath
+                return NSLayoutConstraint.constraints(withVisualFormat: "H:|-(>=\(coachMark.horizontalMargin))-[currentCoachMarkView(<=\(coachMark.maxWidth))]-(==\(constant))-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["currentCoachMarkView": coachMarkView])
             }
-            return [horizontalConstraint]
         }
 
     }

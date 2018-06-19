@@ -178,8 +178,8 @@ class CoachMarkDisplayManager {
             var constant: CGFloat = 0
             var coachMarkViewConstraint: NSLayoutConstraint
             switch coachMark.arrowOrientation! {
-            case .left, .right: constant = -(parentView.frame.midY -
-                cutoutPath.bounds.midY)
+            case .left, .right:
+                constant = -(parentView.frame.midY - cutoutPath.bounds.midY)
                 coachMarkViewConstraint = coachMarkView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor,
                                                       constant: constant)
             case .top:

@@ -65,7 +65,6 @@ extension ArrowOrientationLeftAndRightViewController: CoachMarksControllerDataSo
         case 0:
             var coachMark =  coachMarksController.helper.makeCoachMark(for: self.leftBtn)
             coachMark.arrowOrientation = .left
-            coachMark.maxWidth = 250
             return coachMark
         case 1:
             var coachMark =  coachMarksController.helper.makeCoachMark(for: self.rightBtn)
@@ -81,9 +80,9 @@ extension ArrowOrientationLeftAndRightViewController: CoachMarksControllerDataSo
         
         switch(index) {
         case 0:
-            hintText = "left and right orientation should set with delegate, and if too much info, you should set coachMark.maxWidth with delegate too!"
+            hintText = "left and right orientation should set with delegate, default orientation is top or bottom!"
         case 1:
-            hintText = "default orientation is top or bottom"
+            hintText = "left and right orientation should set with delegate, default orientation is top or bottom!"
         default: break
         }
         let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation, hintText: hintText, nextText: nil)

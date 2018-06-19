@@ -157,7 +157,7 @@ class CoachMarkDisplayManager {
                              andOverlayView overlayView: OverlayView) {
         // Add the view and compute its associated constraints.
         parentView.addSubview(coachMarkView)
-        /// TODO  the maxWidth have a default value 350, which should be calculated with screenWidth and other parameters
+        /// TODO the maxWidth have a default value 350, which should be calculated with screenWidth and other parameters
         parentView.addConstraints(
             NSLayoutConstraint.constraints(
         /// Maximum width for a coach mark.
@@ -175,24 +175,24 @@ class CoachMarkDisplayManager {
             // Depending where the cutoutPath sits, the coach mark will either
             // stand above or below it.
             // vertical layout constraints
-            var constant:CGFloat = 0;
-            var coachMarkViewConstraint:NSLayoutConstraint
+            var constant: CGFloat = 0
+            var coachMarkViewConstraint: NSLayoutConstraint
             switch coachMark.arrowOrientation! {
-            case .left,.right: constant = -(parentView.frame.midY -
+            case .left, .right: constant = -(parentView.frame.midY -
                 cutoutPath.bounds.midY)
                 coachMarkViewConstraint = coachMarkView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor,
                                                       constant: constant)
             case .top:
                 constant = (cutoutPath.bounds.origin.y + cutoutPath.bounds.size.height) + offset
                 coachMarkViewConstraint = coachMarkView.topAnchor.constraint(equalTo: parentView.topAnchor,
-                                                                         constant: constant)                
+                                                                             constant: constant)
             case .bottom:
                 constant = -(parentView.frame.size.height - cutoutPath.bounds.origin.y + offset)
                 coachMarkViewConstraint = coachMarkView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor,
                                                                                 constant: constant)
             }
             parentView.addConstraint(coachMarkViewConstraint)
-            
+
             // horizontal layout constraints
             let constraints = coachMarkLayoutHelper.constraints(for: coachMarkView,
                                                                 coachMark: coachMark,

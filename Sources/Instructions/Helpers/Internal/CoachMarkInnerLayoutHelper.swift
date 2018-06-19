@@ -22,6 +22,7 @@
 
 import UIKit
 
+// swiftlint:disable line_length
 class CoachMarkInnerLayoutHelper {
     func horizontalArrowConstraints(for coachMarkViews: CoachMarkViews,
                                     withPosition position: ArrowPosition,
@@ -32,17 +33,17 @@ class CoachMarkInnerLayoutHelper {
             multiplier: 1, constant: adaptedOffset(for: position, offset: horizontalOffset)
         )
     }
-    
+
     func horizontalConstraints(for coachMarkViews: CoachMarkViews,
                                withArrowOrientation arrowOrientation: CoachMarkArrowOrientation,
                                horizontalOffset: CGFloat) -> [NSLayoutConstraint] {
         switch arrowOrientation {
-        case .top,.bottom:
+        case .top, .bottom:
             return coachMarkViews.bodyView.makeConstraintToFillSuperviewHorizontally()
         case .left://left and right orientation , the arrow might need to overlap with the coach mark body
-            return NSLayoutConstraint.constraints(withVisualFormat: "H:|[coachMarkArrowView]-(==\(-2))-[coachMarkBodyView]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["coachMarkArrowView": coachMarkViews.arrowView,"coachMarkBodyView": coachMarkViews.bodyView])
+            return NSLayoutConstraint.constraints(withVisualFormat: "H:|[coachMarkArrowView]-(==\(-2))-[coachMarkBodyView]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["coachMarkArrowView": coachMarkViews.arrowView, "coachMarkBodyView": coachMarkViews.bodyView])
         case .right:
-            return NSLayoutConstraint.constraints(withVisualFormat: "H:|[coachMarkBodyView]-(==\(-2))-[coachMarkArrowView]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["coachMarkBodyView": coachMarkViews.bodyView,"coachMarkArrowView": coachMarkViews.arrowView])
+            return NSLayoutConstraint.constraints(withVisualFormat: "H:|[coachMarkBodyView]-(==\(-2))-[coachMarkArrowView]-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["coachMarkBodyView": coachMarkViews.bodyView, "coachMarkArrowView": coachMarkViews.arrowView])
         }
     }
 

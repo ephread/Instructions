@@ -23,6 +23,7 @@
 import UIKit
 
 // swiftlint:disable force_cast
+// swiftlint:disable line_length
 
 /// The actual coach mark that will be displayed.
 class CoachMarkView: UIView {
@@ -133,14 +134,13 @@ class CoachMarkView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
 
         self.addSubview(bodyUIView)
-       
 
         if let arrowUIView = arrowUIView, let arrowOrientation = self.arrowOrientation {
             self.addSubview(arrowUIView)
-            
+
             switch arrowOrientation {
-            case .bottom,.top:
-                
+            case .bottom, .top:
+
                     // horizontal bodyView and arrowView full fill coachMarkView
                     let horizontalConstraints = coachMarkLayoutHelper.horizontalConstraints(for: (bodyView:bodyUIView, arrowView:arrowUIView), withArrowOrientation: arrowOrientation, horizontalOffset: 0)
                     self.addConstraints(horizontalConstraints)
@@ -148,14 +148,14 @@ class CoachMarkView: UIView {
                     innerConstraints.arrowXposition = coachMarkLayoutHelper.horizontalArrowConstraints(
                         for: (bodyView: bodyUIView, arrowView: arrowUIView), withPosition: .center,
                         horizontalOffset: 0)
-                
+
                     self.addConstraint(innerConstraints.arrowXposition!)
                     // vertical layout constraints depend on arrow orientation
                     self.addConstraints(coachMarkLayoutHelper.verticalConstraints(
                         for: (bodyView: bodyUIView, arrowView: arrowUIView), in: self,
                         withProperties: (orientation: arrowOrientation, verticalArrowOffset: arrowOffset)
                     ))
-            case .left,.right:
+            case .left, .right:
                 // horizontal bodyView and arrowView full fill coachMarkView
                 let horizontalConstraints = coachMarkLayoutHelper.horizontalConstraints(for: (bodyView:bodyUIView, arrowView:arrowUIView), withArrowOrientation: arrowOrientation, horizontalOffset: 0)
                 self.addConstraints(horizontalConstraints)
@@ -164,8 +164,7 @@ class CoachMarkView: UIView {
                 self.addConstraint(bodyUIView.bottomAnchor.constraint(equalTo: bottomAnchor))
                 self.addConstraint(arrowUIView.centerYAnchor.constraint(equalTo: bodyUIView.centerYAnchor, constant: 0))
             }
-            
-            
+
         } else { // no arrow view,only body view
             // horizontal layout
             self.addConstraints(bodyUIView.makeConstraintToFillSuperviewHorizontally())

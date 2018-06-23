@@ -30,14 +30,20 @@ public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
     public init(orientation: CoachMarkArrowOrientation) {
         let image, highlightedImage: UIImage?
 
-        if orientation == .top {
+        switch orientation {
+        case .left:
+            image = UIImage(namedInInstructions: "arrow-left")
+            highlightedImage = UIImage(namedInInstructions: "arrow-left-highlighted")
+        case .right:
+            image = UIImage(namedInInstructions: "arrow-right")
+            highlightedImage = UIImage(namedInInstructions: "arrow-right-highlighted")
+        case .top:
             image = UIImage(namedInInstructions: "arrow-top")
             highlightedImage = UIImage(namedInInstructions: "arrow-top-highlighted")
-        } else {
+        case .bottom:
             image = UIImage(namedInInstructions: "arrow-bottom")
             highlightedImage = UIImage(namedInInstructions: "arrow-bottom-highlighted")
         }
-
         super.init(image: image, highlightedImage: highlightedImage)
 
         initializeConstraints()
@@ -47,7 +53,6 @@ public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
         fatalError("This class does not support NSCoding.")
     }
 }
-
 // MARK: - Private Inner Setup
 private extension CoachMarkArrowDefaultView {
     func initializeConstraints() {

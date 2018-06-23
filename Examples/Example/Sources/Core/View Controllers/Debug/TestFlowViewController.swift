@@ -113,8 +113,8 @@ class TestFlowViewController: ProfileViewController {
         print("didEndShowingBySkipping: \(skipped)")
     }
 
-    func shouldHandleOverlayTap(in coachMarksController: CoachMarksController,
-                                at index: Int) -> Bool {
+    override func shouldHandleOverlayTap(in coachMarksController: CoachMarksController,
+                                         at index: Int) -> Bool {
         print("shouldHandleOverlayTap at index: \(index)")
 
         if index >= 2 {

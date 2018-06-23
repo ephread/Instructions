@@ -116,4 +116,9 @@ internal class ProfileViewController: UIViewController,
         snapshotDelegate?.coachMarksController(coachMarksController,
                                                didEndShowingBySkipping: skipped)
     }
+
+    func shouldHandleOverlayTap(in coachMarksController: CoachMarksController,
+                                at index: Int) -> Bool {
+        return true
+    }
 }

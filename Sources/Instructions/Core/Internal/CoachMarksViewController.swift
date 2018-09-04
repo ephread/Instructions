@@ -31,7 +31,7 @@ import UIKit
 /// Handles a set of coach marks, and display them successively.
 class CoachMarksViewController: UIViewController {
     // MARK: - Private properties
-    private var onGoingSizeChange = false
+    fileprivate var onGoingSizeChange = false
     private var presentationFashion: PresentationFashion = .window {
         didSet {
             if let skipViewDisplayManager = skipViewDisplayManager {

@@ -1,0 +1,3 @@
+[submodule "Examples/Example/Unit Tests/Supporting Files/Snapshots"]
+	path = Examples/Example/Snapshot Tests/Supporting Files/Snapshots
+	url = https://github.com/ephread/InstructionsSnapshots.git

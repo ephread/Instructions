@@ -54,6 +54,7 @@ public class CoachMarkBodyDefaultView: UIControl, CoachMarkBodyView {
     // MARK: - Initialization
     override public init(frame: CGRect) {
         super.init(frame: frame)
+        setupAccessibilityIdentifier()
 
         let helper = CoachMarkBodyDefaultViewHelper()
 
@@ -113,12 +114,26 @@ private extension CoachMarkBodyDefaultView {
         helper.configureBackground(self.views.backgroundImageView, addTo: self)
         helper.configureSimpleHint(hintLabel, addTo: self)
     }
+
+    func setupAccessibilityIdentifier() {
+        accessibilityIdentifier = AccessibilityIdentifiers.coachMarkBody
+    }
 }
 
 // MARK: - View Holder
 private struct CoachMarkBodyDefaultViewHolder {
-    let nextLabel = UILabel()
-    let hintLabel = UITextView()
+    let nextLabel: UILabel = {
+        let nextLabel = UILabel()
+        nextLabel.accessibilityIdentifier = AccessibilityIdentifiers.coachMarkNext
+        return nextLabel
+    }()
+
+    let hintLabel: UITextView = {
+        let nextLabel = UITextView()
+        nextLabel.accessibilityIdentifier = AccessibilityIdentifiers.coachMarkHint
+        return nextLabel
+    }()
+
     let separator = UIView()
 
     lazy var backgroundImageView: UIImageView = {

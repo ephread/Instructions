@@ -1,6 +1,6 @@
 // OverlayManager.swift
 //
-// Copyright (c) 2017 Frédéric Maquin <fred@ephread.com>
+// Copyright (c) 2017-2018 Frédéric Maquin <fred@ephread.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -85,16 +85,42 @@ public class OverlayManager {
     }
 
     /// Define the window level for the overlay.
+    @available(iOS, deprecated: 1.3.0,
+               message: "specify the window level using CoachMarkController.start(in: ) instead")
     public var windowLevel = UIWindowLevelNormal + 1
 
     // MARK: - Internal Properties
     /// Delegate to which tell that the overlay view received a tap event.
-    internal weak var delegate: OverlayManagerDelegate?
+    internal weak var overlayDelegate: OverlayManagerDelegate?
 
     /// Used to temporarily disable the tap, for a given coachmark.
     internal var enableTap: Bool = true
 
     internal lazy var overlayView: OverlayView = OverlayView()
+
+    internal var statusBarStyle: UIStatusBarStyle {
+        if let blurEffectStyle = blurEffectStyle {
+            if blurEffectStyle == .dark {
+                return .lightContent
+            } else {
+                return .default
+            }
+        } else {
+            var alpha: CGFloat = 1.0
+            var white: CGFloat = 1.0
+            color.getWhite(&white, alpha: &alpha)
+
+            return white >= 0.5 ? .default : .lightContent
+        }
+    }
+
+    internal var isWindowHidden: Bool {
+        return overlayView.superview?.isHidden ?? true
+    }
+
+    internal var isOverlayInvisible: Bool {
+        return overlayView.alpha == 0
+    }
 
     // MARK: - Private Properties
     private lazy var overlayStyleManager: OverlayStyleManager = {
@@ -115,7 +141,7 @@ public class OverlayManager {
     /// - Parameter sender: the object which sent the event
     @objc fileprivate func handleSingleTap(_ sender: AnyObject?) {
         if enableTap {
-            self.delegate?.didReceivedSingleTap()
+            self.overlayDelegate?.didReceivedSingleTap()
         }
     }
 
@@ -129,7 +155,30 @@ public class OverlayManager {
 
     func showOverlay(_ show: Bool, completion: ((Bool) -> Void)?) {
         overlayStyleManager.showOverlay(show, withDuration: fadeAnimationDuration,
-                                    completion: completion)
+                                        completion: completion)
+    }
+
+    func showWindow(_ show: Bool, completion: ((Bool) -> Void)?) {
+        guard let rootView = overlayView.superview else {
+            completion?(false)
+            return
+        }
+
+        if show {
+            overlayView.alpha = 1.0
+            rootView.isHidden = false
+            UIView.animate(withDuration: fadeAnimationDuration, animations: {
+                rootView.alpha = 1.0
+            }, completion: completion)
+        } else {
+            overlayView.window?.isHidden = false
+            UIView.animate(withDuration: fadeAnimationDuration, animations: {
+                rootView.alpha = 0.0
+            }, completion: { (success) in
+                rootView.isHidden = true
+                completion?(success)
+            })
+        }
     }
 
     func viewWillTransition() {
@@ -144,7 +193,7 @@ public class OverlayManager {
 
     private func updateDependencies(of overlayAnimator: BlurringOverlayStyleManager) {
         overlayAnimator.overlayView = self.overlayView
-        overlayAnimator.snapshotDelegate = self.delegate
+        overlayAnimator.snapshotDelegate = self.overlayDelegate
     }
 
     private func updateDependencies(of overlayAnimator: TranslucentOverlayStyleManager) {
@@ -152,7 +201,7 @@ public class OverlayManager {
     }
 
     private func updateOverlayStyleManager() -> OverlayStyleManager {
-        if let style = blurEffectStyle {
+        if let style = blurEffectStyle, !UIAccessibilityIsReduceTransparencyEnabled() {
             let blurringOverlayStyleManager = BlurringOverlayStyleManager(style: style)
             self.updateDependencies(of: blurringOverlayStyleManager)
             return blurringOverlayStyleManager

@@ -1,4 +1,4 @@
-# ![Instructions](http://i.imgur.com/K51lqvW.png)
+# ![Instructions](https://i.imgur.com/0WFRs8e.png)
 
 [![Travis build status](https://img.shields.io/travis/ephread/Instructions.svg)](https://travis-ci.org/ephread/Instructions) [![codebeat badge](https://codebeat.co/badges/7bbb17b5-2cde-4108-aac0-eefcd439cf9f)](https://codebeat.co/projects/github-com-ephread-instructions) [![codecov](https://codecov.io/gh/ephread/Instructions/branch/master/graph/badge.svg)](https://codecov.io/gh/ephread/Instructions) [![CocoaPods Shield](https://img.shields.io/cocoapods/v/Instructions.svg)](https://cocoapods.org/pods/Instructions) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Join the chat at https://gitter.im/ephread/Instructions](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ephread/Instructions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
@@ -32,10 +32,10 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 - [x] [Skipable tour](#let-users-skip-the-tour)
 - [x] [Pilotable from code](#piloting-the-flow-from-the-code)
 - [x] [App Extensions support](#usage-within-app-extensions)
+- [x] [Animatable coach marks](#animating-coach-marks)
 - [x] Right-to-left support
 - [x] Size transition support (orientation and multi-tasking)
 - [x] Partial `UIVisualEffectView` support
-- [ ] Coach marks animation
 - [ ] Cross controllers walkthrough
 - [ ] Multiple coach marks support
 
@@ -66,10 +66,10 @@ Add Instructions to your Podfile:
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '9.0'
+platform :ios, '10.0'
 use_frameworks!
 
-pod 'Instructions', '~> 1.0.0'
+pod 'Instructions', '~> 1.2.0'
 ```
 
 Then, run the following command:
@@ -82,7 +82,7 @@ $ pod install
 Add Instructions to your Cartfile:
 
 ```
-github "ephread/Instructions" ~> 1.0.0
+github "ephread/Instructions" ~> 1.2.0
 ```
 
 You can then update, build and drag the generated framework into your project:
@@ -190,7 +190,7 @@ You can also make the overlay blur the content sitting behind it. Setting this p
 
 - `overlay.blurEffectStyle: UIBlurEffectStyle?`
 
-The overlay can sit above the status bar or below, the property defaults to `true`:
+The overlay can sit over the status bar or under, the property defaults to `true`:
 
 - `overlay.isShownAboveStatusBar: Bool`
 
@@ -202,8 +202,7 @@ Last, you can make the overlay tappable. A tap on the overlay will hide the curr
 
 - `overlay.allowTap: Bool`
 
-⚠️ When using a blur effect, setting the window level to anything above `UIWindowLevelStatusBar`
-is not supported.
+⚠️ When using a blur effect, setting the window level to anything above `UIWindowLevelStatusBar` is not supported. Additionally, the blurring overlay is not supported in app extensions.
 
 #### Providing a custom cutout path
 If you dislike how the default cutout path looks like, you can customize it by providing a block to `makeCoachMark(for:)`. The cutout path will automatically be stored in the `cutoutPath` property of the returning `CoachMark` object:
@@ -256,7 +255,7 @@ Browse the `Example/` directory for more details.
 #### Customizing how the coach mark will show
 You can customize the following properties:
 
-- `animationDuration: NSTimeInterval`: the time it will take for a coach mark to appear or disappear on the screen.
+- `animationDuration: TimeInterval`: the time it will take for a coach mark to appear or disappear on the screen.
 
 - `gapBetweenBodyAndArrow: CGFloat`: the vertical gap between the _body_ and the _arrow_ in a given coach mark.
 
@@ -270,9 +269,41 @@ You can customize the following properties:
 
 - `arrowOrientation: CoachMarkArrowOrientation?` is the orientation of the arrow (not the coach mark, meaning setting this property to `.Top` will display the coach mark below the point of interest). Although it's usually pre-computed by the library, you can override it in `coachMarksForIndex:` or in `coachMarkWillShow:`.
 
+- `displayOverCutoutPath: Bool` enables the coach mark to be displayed over the cutout path; please note that arrows won't be visible if you set this property to `true`
+
 - `disableOverlayTap: Bool` is used to disable the ability to tap on the overlay to show the next coach mark, on a case-by-case basis.
 
 - `allowTouchInsideCutoutPath: Bool` is used to allow touch forwarding inside the cutout path. Take a look at `TransitionFromCodeViewController`, in the `Example/` directory, for more information.
+
+#### Animating coach marks
+To animates coach marks, you will need to implement the `CoachMarksControllerAnimationDelegate` protocol.
+
+```swift
+func coachMarksController(_ coachMarksController: CoachMarksController, fetchAppearanceTransitionOfCoachMark coachMarkView: UIView, at index: Int, using manager: CoachMarkTransitionManager)
+
+func coachMarksController(_ coachMarksController: CoachMarksController, fetchDisappearanceTransitionOfCoachMark coachMarkView: UIView, at index: Int, using manager: CoachMarkTransitionManager)
+
+func coachMarksController(_ coachMarksController: CoachMarksController, fetchIdleAnimationOfCoachMark coachMarkView: UIView, at index: Int, using manager: CoachMarkAnimationManager)
+```
+
+All methods from this delegate work in similar ways. First, you will need to specify the general parameters of the animation via `manager.parameters` properties. These properties match the configuration parameters that you can provide to `UIView.animate`.
+
+- `duration: TimeInterval`: the total duration of the animation.
+
+- `delay: TimeInterval`: the amount of time to wai before beginning the animations
+
+- `options: UIViewAnimationOptions`: a mask of options indicating how you want to perform the animations (for regular animations).
+
+- `keyframeOptions: UIViewKeyframeAnimationOptions`: a mask of options indicating how you want to perform the animations (for keyframe animations).
+
+Once you've set the parameters, you should provide your animations by calling `manager.animate`. The method signature is different wether you are animating the idle state of coach marks, or making them appear/disappear.
+
+You should provide your animations in a block passed to the `animate` parameter, in a similar fashion to `UIView.animate`. If you need to access the animation parameters or the coach mark metadata, a `CoachMarkAnimationManagementContext` containing these will be provided to your animation block. You shouldn't capture a reference to manager from the animation block.
+
+For an implemntation example, you can also take a look a the `DelegateViewController` class found in the `Example` directory.
+
+##### Appearance and disappearance specifics
+If you need to define an initial state, you should do so by providing a block to the `fromInitialState` property. While directly setting values on `coachMarkView` in the method before calling `manager.animate()` might work, it's not garanteed to.
 
 #### Let users skip the tour
 ##### Control
@@ -314,7 +345,7 @@ You can specify a number of coach marks to skip (effectively jumping to a furthe
 Take a look at `TransitionFromCodeViewController`, in the `Example/` directory, to get an idea of how you can leverage this method, in order to ask the user to perform certain actions.
 
 #### Using a delegate
-The `CoachMarkController` will notify the delegate on three occasions. All those methods are optionals.
+The `CoachMarkController` will notify the delegate on multiple occasions. All those methods are optionals.
 
 First, when a coach mark will show. You might want to change something about the view. For that reason, the `CoachMark` metadata structure is passed as an `inout` object, so you can update it with new parameters.
 
@@ -345,6 +376,9 @@ func shouldHandleOverlayTap(in coachMarksController: CoachMarksController, at in
 Returning `true` will let Instructions continue the flow normally, while returning `false` will interrupt it. If you choose to interrupt the flow, you're responsible for either stopping or pausing it or manually show the next coach marks (see [Piloting the flow from the code](#piloting-the-flow-from-the-code)).
 
 `index` is the index of the coach mark currently displayed.
+
+##### Pausing and resuming the flow
+It's as simple as calling `coachMarksController.flow.pause()` and `coachMarksController.flow.resume()`. While pausing, you can also choose to hide Instructions's overlay altogether (`.pause(and: hideInstructions)`), or only hide the overlay and retain its touch blocking capabilities (`.pause(and: hideOverlay)`).
 
 ##### Performing animations before showing coach marks #####
 You can perform animation on views, before or after showing a given coach mark.
@@ -377,6 +411,8 @@ func coachMarksController(_ coachMarksController: CoachMarksController, willShow
 you should make sure that animations targeting your own view don't occur while a coach mark
 is appearing or disappearing. Otherwise, the animation won't be visible.
 
+You may also want to customize the properties defining the of for the classic transparency overlay, as Instructions will fall back to using the classic type if `UIAccessibilityIsReduceTransparencyEnabled()` returns true.
+
 ##### Skipping a coach mark
 
 You can skip a given coach mark by implementing the following method defined in `CoachMarksControllerDelegate`:
@@ -386,6 +422,17 @@ func coachMarksController(_ coachMarksController: CoachMarksController, coachMar
 ```
 
 `coachMarkWillLoadAt:` is called right before a given coach mark will show. To prevent a CoachMark from showing, you can return `false` from this method.
+
+##### Customizing ornaments of the overlay
+
+It's possible to add custom views which will be displayed over the overlay by implementing the following method of `CoachMarksControllerDelegate`:
+
+```swift
+func coachMarksController(_ coachMarksController: CoachMarksController,
+                          configureOrnamentsOfOverlay overlay: UIView)
+```
+
+Just add the ornaments to the provided view (`overlay`) and Instructions should take care of the rest. Please note, however, that these ornaments will be displayed over the cutout, but under the coach marks.
 
 #### Dealing with frame changes
 

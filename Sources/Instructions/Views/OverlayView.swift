@@ -29,13 +29,33 @@ class OverlayView: UIView {
 
     var cutoutPath: UIBezierPath?
 
+    let holder: UIView
+    let ornaments: UIView
+
     /// Used to temporarily enable touch forwarding isnide the cutoutPath.
     public var allowTouchInsideCutoutPath: Bool = false
 
     // MARK: - Initialization
     init() {
+        holder = UIView()
+        ornaments = UIView()
+
         super.init(frame: CGRect.zero)
         translatesAutoresizingMaskIntoConstraints = false
+
+        holder.translatesAutoresizingMaskIntoConstraints = false
+        ornaments.translatesAutoresizingMaskIntoConstraints = false
+
+        holder.isUserInteractionEnabled = false
+        ornaments.isUserInteractionEnabled = false
+
+        addSubview(holder)
+        addSubview(ornaments)
+
+        holder.fillSuperview()
+        ornaments.fillSuperview()
+
+        accessibilityIdentifier = AccessibilityIdentifiers.overlayView
     }
 
     required public init?(coder aDecoder: NSCoder) {

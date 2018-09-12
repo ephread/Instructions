@@ -302,6 +302,24 @@ public class FlowManager {
 
         showNextCoachMark(hidePrevious: true)
     }
+    
+    /// Show the previous specified Coach Mark.
+    ///
+    /// - Parameter numberOfCoachMarksToSkip: the number of coach marks
+    ///                                       to skip.
+    public func showPrevious(numberOfCoachMarksToSkip numberToSkip: Int = 0) {
+        if !self.started || !canShowCoachMark { return }
+        
+        if numberToSkip < 0 {
+            print("showPrevious: The specified number of coach marks to skip" +
+                  "was negative, nothing to do.")
+            return
+        }
+        
+        currentIndex -= numberToSkip
+        
+        showPreviousCoachMark(hidePrevious: true)
+    }
 }
 
 extension FlowManager: CoachMarksViewControllerDelegate {

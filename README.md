@@ -334,13 +334,17 @@ Returning `nil` will tell the `CoachMarksController` to use the defaults constra
 For more information about the skip mechanism, you can check the `Example/` directory.
 
 #### Piloting the flow from the code
-Should you ever need to programmatically show the coach mark, `CoachMarkController.flow` also provides the following method:
+Should you ever need to programmatically show the coach mark, `CoachMarkController.flow` also provides the following methods:
 
 ```swift
 func showNext(numberOfCoachMarksToSkip numberToSkip: Int = 0)
 ```
 
-You can specify a number of coach marks to skip (effectively jumping to a further index).
+```swift
+func showPrevious(numberOfCoachMarksToSkip numberToSkip: Int = 0)
+```
+
+You can specify a number of coach marks to skip (effectively jumping forward or backward to a further index).
 
 Take a look at `TransitionFromCodeViewController`, in the `Example/` directory, to get an idea of how you can leverage this method, in order to ask the user to perform certain actions.
 

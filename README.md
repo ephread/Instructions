@@ -61,6 +61,10 @@ And don't forget to credit yourself! :clap:
 
 ## Installation
 
+⚠️ [Git LFS] is required to clone Instructions or build it through your favorite package manager (all the snapshots used in the tests are stored in a submodule through LFS).
+
+[Git LFS]: https://git-lfs.github.com/
+
 ### CocoaPods
 Add Instructions to your Podfile:
 

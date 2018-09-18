@@ -22,7 +22,7 @@ class MainTableViewController: UITableViewController {
         } else if segue.identifier == "IndependantWindowContext" {
             if let controller = segue.destination as? DefaultViewController {
                 controller.presentationContext = .independantWindow
-                controller.windowLevel = UIWindowLevelStatusBar + 1
+                controller.windowLevel = UIWindow.Level.statusBar + 1
             }
         } else if segue.identifier == "ControllerWindowContext" {
             if let controller = segue.destination as? DefaultViewController {

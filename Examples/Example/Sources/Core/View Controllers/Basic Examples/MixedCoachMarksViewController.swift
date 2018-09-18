@@ -85,7 +85,7 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
             var coachMarkArrowView: CustomCoachMarkArrowView? = nil
 
             coachMarkBodyView.hintLabel.text = self.handleText
-            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: UIControlState())
+            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: UIControl.State())
 
             var width: CGFloat = 0.0
 

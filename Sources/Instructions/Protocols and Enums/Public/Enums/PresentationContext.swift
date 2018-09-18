@@ -23,7 +23,7 @@
 import UIKit
 
 public enum PresentationContext {
-    case newWindow(over: UIViewController, at: UIWindowLevel?)
+    case newWindow(over: UIViewController, at: UIWindow.Level?)
     case currentWindow(of: UIViewController)
     case viewController(_: UIViewController)
 

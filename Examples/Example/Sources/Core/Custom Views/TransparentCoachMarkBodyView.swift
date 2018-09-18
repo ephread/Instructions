@@ -68,10 +68,10 @@ internal class TransparentCoachMarkBodyView : UIControl, CoachMarkBodyView {
 
         self.addSubview(hintLabel)
 
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[hintLabel]|", options: NSLayoutFormatOptions(rawValue: 0),
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[hintLabel]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0),
             metrics: nil, views: ["hintLabel": hintLabel]))
 
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[hintLabel]|", options: NSLayoutFormatOptions(rawValue: 0),
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[hintLabel]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0),
             metrics: nil, views: ["hintLabel": hintLabel]))
     }
 }

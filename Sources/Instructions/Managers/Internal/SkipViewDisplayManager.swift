@@ -64,7 +64,7 @@ class SkipViewDisplayManager {
 
         update(skipView: skipView, withConstraints: constraints)
 
-        skipView.asView?.superview?.bringSubview(toFront: skipView.asView!)
+        skipView.asView?.superview?.bringSubviewToFront(skipView.asView!)
 
         if duration == 0 {
             skipView.asView?.alpha = 1.0

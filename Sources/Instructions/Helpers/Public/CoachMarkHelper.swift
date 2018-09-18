@@ -79,7 +79,7 @@ public class CoachMarkHelper {
             coachMarkBodyView = CoachMarkBodyDefaultView(hintText: "", nextText: nil)
         }
 
-        var coachMarkArrowView: CoachMarkArrowDefaultView? = nil
+        var coachMarkArrowView: CoachMarkArrowDefaultView?
 
         if arrow { coachMarkArrowView = makeDefaultArrow(withOrientation: arrowOrientation) }
 
@@ -102,7 +102,7 @@ public class CoachMarkHelper {
     -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
         let coachMarkBodyView = CoachMarkBodyDefaultView(hintText: hintText, nextText: nextText)
 
-        var coachMarkArrowView: CoachMarkArrowDefaultView? = nil
+        var coachMarkArrowView: CoachMarkArrowDefaultView?
 
         if arrow { coachMarkArrowView = makeDefaultArrow(withOrientation: arrowOrientation) }
 

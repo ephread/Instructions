@@ -22,6 +22,9 @@
 
 import UIKit
 
+// TODO: Remove the override once the bug is fixed.
+// swiftlint:disable identifier_name
+
 public enum PresentationContext {
     case newWindow(over: UIViewController, at: UIWindowLevel?)
     case currentWindow(of: UIViewController)

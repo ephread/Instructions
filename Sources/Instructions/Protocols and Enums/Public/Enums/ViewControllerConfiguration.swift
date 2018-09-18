@@ -22,6 +22,9 @@
 
 import UIKit
 
+// TODO: Remove the override once the bug is fixed.
+// swiftlint:disable identifier_name
+
 public enum RotationStyle {
     case systemDefined
     case automatic

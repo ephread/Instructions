@@ -706,7 +706,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.1;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -732,7 +732,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.1;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

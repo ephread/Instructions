@@ -131,7 +131,7 @@ class KeyboardViewController: UIInputViewController,
         // load the nib file
         let nib = UINib(nibName: "Keyboard", bundle: nil)
         // instantiate the view
-        keyboardView = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
+        keyboardView = (nib.instantiate(withOwner: self, options: nil)[0] as! UIView)
         keyboardView.translatesAutoresizingMaskIntoConstraints = false
         
         // add the interface to the main view

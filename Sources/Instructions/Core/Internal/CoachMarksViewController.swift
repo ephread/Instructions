@@ -182,13 +182,13 @@ class CoachMarksViewController: UIViewController {
 
         presentationFashion = .viewControllerWindow
 
-        viewController.addChildViewController(self)
+        viewController.addChild(self)
         view.translatesAutoresizingMaskIntoConstraints = false
         viewController.view.addSubview(view)
         view.fillSuperview()
 
         registerForSystemEventChanges()
-        self.didMove(toParentViewController: viewController)
+        self.didMove(toParent: viewController)
 
         addRootView(to: window)
         addOverlayView()
@@ -202,7 +202,7 @@ class CoachMarksViewController: UIViewController {
     func attach(to viewController: UIViewController) {
         presentationFashion = .viewController
 
-        viewController.addChildViewController(self)
+        viewController.addChild(self)
         view.translatesAutoresizingMaskIntoConstraints = false
         viewController.view.addSubview(view)
         view.fillSuperview()
@@ -212,7 +212,7 @@ class CoachMarksViewController: UIViewController {
         instructionsRootView.fillSuperview()
         addOverlayView()
 
-        self.didMove(toParentViewController: viewController)
+        self.didMove(toParent: viewController)
     }
 
     func addRootView(to window: UIWindow) {
@@ -231,9 +231,9 @@ class CoachMarksViewController: UIViewController {
             window?.accessibilityIdentifier = nil
         case .viewControllerWindow, .viewController:
             self.instructionsRootView.removeFromSuperview()
-            self.willMove(toParentViewController: nil)
+            self.willMove(toParent: nil)
             self.view.removeFromSuperview()
-            self.removeFromParentViewController()
+            self.removeFromParent()
             deregisterFromSystemEventChanges()
         }
     }
@@ -378,9 +378,9 @@ extension CoachMarksViewController {
     func registerForSystemEventChanges() {
         let center = NotificationCenter.default
         center.addObserver(self, selector: #selector(prepareForChange),
-                           name: .UIApplicationWillChangeStatusBarFrame, object: nil)
+                           name: UIApplication.willChangeStatusBarFrameNotification, object: nil)
         center.addObserver(self, selector: #selector(restoreAfterChangeDidComplete),
-                           name: .UIApplicationDidChangeStatusBarFrame, object: nil)
+                           name: UIApplication.didChangeStatusBarFrameNotification, object: nil)
     }
 
     func deregisterFromSystemEventChanges() {

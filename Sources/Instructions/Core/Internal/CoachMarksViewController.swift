@@ -150,7 +150,7 @@ class CoachMarksViewController: UIViewController {
     ///   - viewController: the controller displayed under the window
     ///   - windowLevel: the level at whcih display the window.
     func attach(to window: UIWindow, over viewController: UIViewController,
-                at windowLevel: UIWindowLevel? = nil) {
+                at windowLevel: UIWindow.Level? = nil) {
         presentationFashion = .window
         window.windowLevel = windowLevel ?? overlayManager.windowLevel
 

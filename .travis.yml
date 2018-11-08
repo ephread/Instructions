@@ -16,11 +16,13 @@ env:
     - IOS_SDK=iphonesimulator12.0
 
   matrix:
+    - DESTINATION="OS=11.4,name=iPhone X" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES" BUILD_APP_EXTENSION_EXAMPLE="YES" POD_LINT="YES" ALLOW_WARNINGS="YES"
     - DESTINATION="OS=12.0,name=iPhone X" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES" BUILD_APP_EXTENSION_EXAMPLE="YES" POD_LINT="YES" ALLOW_WARNINGS="YES"
 
 before_install:
   - gem install cocoapods xcpretty
-  - brew update && brew install git-lfs && git lfs install
+  - brew update && brew upgrade
+  - brew install git-lfs && git lfs install
   - cd "Examples/Example/Snapshot Tests/Supporting Files/Snapshots" && git lfs pull && cd -
 
 install:

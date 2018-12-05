@@ -40,7 +40,7 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 - [ ] Multiple coach marks support
 
 ## Requirements
-- Xcode 9 / Swift 4+
+- Xcode 10 / Swift 4+
 - iOS 10.0+
 
 ## Asking Questions / Contributing
@@ -51,13 +51,9 @@ If you need help with something in particular, ask a question in the [Gitter roo
 
 ### Contributing
 
-If you found a bug, open issue **or** fix it yourself and submit a pull request!
+If you want to contribute, be sure to take a look at [the contributing guide].
 
-If you have an idea for a missing feature, open an issue.
-
-If you want to develop a specific feature and merge it back, it's better to notify me beforehand. You can either open a issue, poke me on gitter or send me an email, I'll respond as fast as possible!
-
-And don't forget to credit yourself! :clap:
+[the contributing guide]: https://github.com/ephread/Instructions/blob/master/CONTRIBUTING.md
 
 ## Installation
 
@@ -73,7 +69,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 use_frameworks!
 
-pod 'Instructions', '~> 1.2.0'
+pod 'Instructions', '~> 1.2.1'
 ```
 
 Then, run the following command:
@@ -86,7 +82,7 @@ $ pod install
 Add Instructions to your Cartfile:
 
 ```
-github "ephread/Instructions" ~> 1.2.0
+github "ephread/Instructions" ~> 1.2.1
 ```
 
 You can then update, build and drag the generated framework into your project:
@@ -166,7 +162,7 @@ Once the `dataSource` is set up, you can start displaying the coach marks. You w
 override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
-    self.coachMarksController.start(on: self)
+    self.coachMarksController.start(in: .window(over: self))
 }
 ```
 
@@ -194,19 +190,11 @@ You can also make the overlay blur the content sitting behind it. Setting this p
 
 - `overlay.blurEffectStyle: UIBlurEffectStyle?`
 
-The overlay can sit over the status bar or under, the property defaults to `true`:
-
-- `overlay.isShownAboveStatusBar: Bool`
-
-The window level at which show the overlay and the coach mark, by default, the property holds `UIWindowLevelNormal + 1`.
-
-- `overlay.windowLevel: UIWindowLevel`
-
 Last, you can make the overlay tappable. A tap on the overlay will hide the current coach mark and display the next one.
 
 - `overlay.allowTap: Bool`
 
-⚠️ When using a blur effect, setting the window level to anything above `UIWindowLevelStatusBar` is not supported. Additionally, the blurring overlay is not supported in app extensions.
+⚠️ The blurring overlay is not supported in app extensions.
 
 #### Providing a custom cutout path
 If you dislike how the default cutout path looks like, you can customize it by providing a block to `makeCoachMark(for:)`. The cutout path will automatically be stored in the `cutoutPath` property of the returning `CoachMark` object:
@@ -256,10 +244,20 @@ When providing a customized view, you need to provide an _arrow_ view with the a
 
 Browse the `Example/` directory for more details.
 
+#### Presentation Context
+
+You can choose in which context the coach marks will be displayed, by passing it to `start(in: PresentationContext). The available contexts are:
+
+- `.newWindow(over: UIViewController, at: UIWindowLevel?)` – A new window created at the given `UIWindowLevel` (not available in app extensions);
+- `.currentWindow(of: UIViewController)` – The window displaying the given `UIViewController` (not available in app extensions);
+- `.viewController(_: UIViewController)` – In the `view` of the given `UIViewController`.
+
+Additionally, you can also provide use `window(over: UIViewController)`, which is a convience static method equivalent to calling `.newWindow(over: UIViewController, at: UIWindowLevelNormal + 1)`.
+
+⚠️ When using a blur effect on the overlay, setting the window level to anything above `UIWindowLevelStatusBar` is not supported.
+
 #### Customizing how the coach mark will show
 You can customize the following properties:
-
-- `animationDuration: TimeInterval`: the time it will take for a coach mark to appear or disappear on the screen.
 
 - `gapBetweenBodyAndArrow: CGFloat`: the vertical gap between the _body_ and the _arrow_ in a given coach mark.
 
@@ -359,13 +357,13 @@ func coachMarksController(_ coachMarksController: CoachMarksController, willShow
 
 Second, when a coach mark disappears.
 
-```swift    
+```swift
 func coachMarksController(_ coachMarksController: CoachMarksController, willHide coachMark: CoachMark, at index: Int)
 ```
 
 Third, when all coach marks have been displayed. `didEndShowingBySkipping` specify whether the flow completed because the user requested it to end.
 
-```swift    
+```swift
 func coachMarksController(_ coachMarksController: CoachMarksController, didEndShowingBySkipping skipped: Bool)
 ```
 
@@ -373,7 +371,7 @@ func coachMarksController(_ coachMarksController: CoachMarksController, didEndSh
 
 Whenever the user will tap the overlay, you will get notified through:
 
-```swift    
+```swift
 func shouldHandleOverlayTap(in coachMarksController: CoachMarksController, at index: Int) -> Bool
 ```
 

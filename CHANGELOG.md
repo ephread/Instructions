@@ -3,14 +3,21 @@ Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
 ## 1.2.1
-Released on 2018-XX-XX.
+Released on 2018-12-05.
 
 ### Fixed
 - Fix [#160] - CoachMark misplaced on iPad
 
 ### Added
 - Add support for coach marks placed over cutout paths. ([#152])
+- Add support for presentation contexts. ([#84])
+- Add support for animated coach marks.
 
+### Changed
+- Change willSHow and didShow coachmark delegate methods to discrimate between
+  different configuration changes.
+
+[#84]: https://github.com/ephread/Instructions/issues/84
 [#152]: https://github.com/ephread/Instructions/issues/152
 [#160]: https://github.com/ephread/Instructions/issues/160
 

@@ -85,7 +85,7 @@ public class OverlayManager {
     }
 
     /// Define the window level for the overlay.
-    @available(iOS, deprecated: 1.3.0,
+    @available(iOS, deprecated: 1.2.1,
                message: "specify the window level using CoachMarkController.start(in: ) instead")
     public var windowLevel = UIWindowLevelNormal + 1
 

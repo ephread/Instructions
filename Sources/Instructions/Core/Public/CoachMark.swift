@@ -28,7 +28,7 @@ import UIKit
 public struct CoachMark {
     // MARK: - Public properties
     /// Change this value to change the duration of the fade.
-    @available(iOS, deprecated: 1.3.0, message: "use the custom coach mark animation API instead.")
+    @available(iOS, deprecated: 1.2.1, message: "use the custom coach mark animation API instead.")
     public var animationDuration = Constants.coachMarkFadeAnimationDuration
 
     /// The path to cut in the overlay, so the point of interest will be visible.

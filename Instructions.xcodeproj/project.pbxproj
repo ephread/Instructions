@@ -510,7 +510,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = Ephread;
 				TargetAttributes = {
 					C6417E141D291A8A004D13EA = {
@@ -519,7 +519,7 @@
 					};
 					C64FB2E81BB6CA8A0081E5B6 = {
 						CreatedOnToolsVersion = 7.0;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -706,7 +706,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.1;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -732,7 +732,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.1;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -873,8 +873,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.1;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -898,8 +897,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.1;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

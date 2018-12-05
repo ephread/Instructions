@@ -56,12 +56,12 @@ public struct AnimationParameters {
     /// A mask of options indicating how you want to perform the animations.
     /// For a list of valid constants, see UIView.AnimationOptions.
     /// The value of this property will only be used for regular animations.
-    public var options: UIViewAnimationOptions = []
+    public var options: UIView.AnimationOptions = []
 
     /// A mask of options indicating how you want to perform the animations.
     /// For a list of valid constants, see UIView.KeyframeAnimationOptions.
     /// The value of this property will only be used for keyframe animations.
-    public var keyframeOptions: UIViewKeyframeAnimationOptions = []
+    public var keyframeOptions: UIView.KeyframeAnimationOptions = []
 }
 
 internal struct CoachMarkAnimationManagerContext: CoachMarkAnimationManagementContext {

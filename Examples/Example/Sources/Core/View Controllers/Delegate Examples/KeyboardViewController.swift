@@ -49,16 +49,16 @@ internal class KeyboardViewController: UIViewController {
         textField.returnKeyType = UIReturnKeyType.done;
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
-                                               name: .UIKeyboardWillShow, object: nil)
+                                               name: UIResponder.keyboardWillShowNotification, object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide),
-                                               name: .UIKeyboardWillHide, object: nil)
+                                               name: UIResponder.keyboardWillHideNotification, object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow),
-                                               name: .UIKeyboardDidShow, object: nil)
+                                               name: UIResponder.keyboardDidShowNotification, object: nil)
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide),
-                                               name: .UIKeyboardDidHide, object: nil)
+                                               name: UIResponder.keyboardDidHideNotification, object: nil)
     }
 
     override func viewDidAppear(_ animated: Bool) {

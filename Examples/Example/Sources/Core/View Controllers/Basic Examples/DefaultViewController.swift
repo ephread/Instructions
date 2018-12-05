@@ -27,7 +27,7 @@ import Instructions
 // It can't get any simpler.
 internal class DefaultViewController: ProfileViewController,
                                       CoachMarksControllerDataSource {
-    var windowLevel: UIWindowLevel?
+    var windowLevel: UIWindow.Level?
     var presentationContext: Context = .independantWindow
 
     // MARK: - View Lifecycle

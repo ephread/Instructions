@@ -82,10 +82,12 @@ internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
         self.nextButton.isUserInteractionEnabled = true
         self.hintLabel.isUserInteractionEnabled = false
 
-        self.nextButton.setBackgroundImage(UIImage(named: "button-background"), for: UIControlState())
-        self.nextButton.setBackgroundImage(UIImage(named: "button-background-highlighted"), for: .highlighted)
+        self.nextButton.setBackgroundImage(UIImage(named: "button-background"),
+                                           for: .normal)
+        self.nextButton.setBackgroundImage(UIImage(named: "button-background-highlighted"),
+                                           for: .highlighted)
 
-        self.nextButton.setTitleColor(UIColor.white, for: UIControlState())
+        self.nextButton.setTitleColor(UIColor.white, for: .normal)
         self.nextButton.titleLabel?.font = UIFont.systemFont(ofSize: 15.0)
 
         self.addSubview(nextButton)
@@ -93,13 +95,13 @@ internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
 
         self.addConstraint(NSLayoutConstraint(item: nextButton, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
 
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[nextButton(==30)]", options: NSLayoutFormatOptions(rawValue: 0),
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[nextButton(==30)]", options: NSLayoutConstraint.FormatOptions(rawValue: 0),
             metrics: nil, views: ["nextButton": nextButton]))
 
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(5)-[hintLabel]-(5)-|", options: NSLayoutFormatOptions(rawValue: 0),
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(5)-[hintLabel]-(5)-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0),
             metrics: nil, views: ["hintLabel": hintLabel]))
 
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[hintLabel]-(10)-[nextButton(==40)]-(10)-|", options: NSLayoutFormatOptions(rawValue: 0),
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[hintLabel]-(10)-[nextButton(==40)]-(10)-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0),
             metrics: nil, views: ["hintLabel": hintLabel, "nextButton": nextButton]))
     }
 }

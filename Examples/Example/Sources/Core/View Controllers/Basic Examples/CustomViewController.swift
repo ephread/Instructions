@@ -100,35 +100,35 @@ extension CustomViewsViewController: CoachMarksControllerDataSource {
         switch(index) {
         case 0:
             coachMarkBodyView.hintLabel.text = self.avatarText
-            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: UIControlState())
+            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: .normal)
 
             if let avatar = self.avatar {
                 width = avatar.bounds.width
             }
         case 1:
             coachMarkBodyView.hintLabel.text = self.handleText
-            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: UIControlState())
+            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: .normal)
 
             if let handleLabel = self.handleLabel {
                 width = handleLabel.bounds.width
             }
         case 2:
             coachMarkBodyView.hintLabel.text = self.emailText
-            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: UIControlState())
+            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: .normal)
 
             if let emailLabel = self.emailLabel {
                 width = emailLabel.bounds.width
             }
         case 3:
             coachMarkBodyView.hintLabel.text = self.postsText
-            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: UIControlState())
+            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: .normal)
 
             if let postsLabel = self.postsLabel {
                 width = postsLabel.bounds.width
             }
         case 4:
             coachMarkBodyView.hintLabel.text = self.reputationText
-            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: UIControlState())
+            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: .normal)
 
             if let reputationLabel = self.reputationLabel {
                 width = reputationLabel.bounds.width
@@ -162,12 +162,12 @@ extension CustomViewsViewController: CoachMarksControllerDataSource {
             topMargin = UIApplication.shared.statusBarFrame.size.height
         }
 
-        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|[skipView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
+        constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "H:|[skipView]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
 
         if UIApplication.shared.isStatusBarHidden {
-            constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|[skipView]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
+            constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|[skipView]", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: ["skipView": skipView]))
         } else {
-            constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-topMargin-[skipView(==44)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: ["topMargin": topMargin],
+            constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "V:|-topMargin-[skipView(==44)]", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: ["topMargin": topMargin],
                                                     views: ["skipView": skipView]))
         }
 

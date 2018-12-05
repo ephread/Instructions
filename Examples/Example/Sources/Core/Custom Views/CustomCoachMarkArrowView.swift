@@ -55,16 +55,16 @@ internal class CustomCoachMarkArrowView : UIView, CoachMarkArrowView {
         plate.backgroundColor = UIColor.clear
         column.backgroundColor = UIColor.white
 
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[plate]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["plate" : plate]))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[plate]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: ["plate" : plate]))
 
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[column(==3)]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["column" : column]))
+        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:[column(==3)]", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: ["column" : column]))
 
         self.addConstraint(NSLayoutConstraint(item: column, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
 
         if orientation == .top {
-            self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[plate(==5)][column(==10)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["plate" : plate, "column" : column]))
+            self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[plate(==5)][column(==10)]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: ["plate" : plate, "column" : column]))
         } else {
-            self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[column(==10)][plate(==5)]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["plate" : plate, "column" : column]))
+            self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[column(==10)][plate(==5)]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: ["plate" : plate, "column" : column]))
         }
     }
 

@@ -80,7 +80,7 @@ class CoachMarkLayoutHelper {
                            "(>=\(coachMark.horizontalMargin))-|"
 
         return NSLayoutConstraint.constraints(withVisualFormat: visualFormat,
-                                              options: NSLayoutFormatOptions(rawValue: 0),
+                                              options: NSLayoutConstraint.FormatOptions(rawValue: 0),
                                               metrics: nil,
                                               views: ["currentCoachMarkView": coachMarkView])
     }
@@ -96,7 +96,7 @@ class CoachMarkLayoutHelper {
 
         var constraints =
             NSLayoutConstraint.constraints(withVisualFormat: visualFormat,
-                                           options: NSLayoutFormatOptions(rawValue: 0),
+                                           options: NSLayoutConstraint.FormatOptions(rawValue: 0),
                                            metrics: nil,
                                            views: ["currentCoachMarkView": coachMarkView])
 
@@ -128,7 +128,7 @@ class CoachMarkLayoutHelper {
                            "(==\(coachMark.horizontalMargin))-|"
 
         return NSLayoutConstraint.constraints(withVisualFormat: visualFormat,
-                                              options: NSLayoutFormatOptions(rawValue: 0),
+                                              options: NSLayoutConstraint.FormatOptions(rawValue: 0),
                                               metrics: nil,
                                               views: ["currentCoachMarkView": coachMarkView])
     }

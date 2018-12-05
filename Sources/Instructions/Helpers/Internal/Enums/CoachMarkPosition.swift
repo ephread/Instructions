@@ -24,7 +24,7 @@ import UIKit
 
 /// Define the horizontal position of the coach mark.
 enum CoachMarkPosition {
-    var layoutAttribute: NSLayoutAttribute {
+    var layoutAttribute: NSLayoutConstraint.Attribute {
         switch self {
         case .leading: return .leading
         case .center: return .centerX

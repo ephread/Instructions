@@ -60,7 +60,7 @@ class KeyboardViewController: UIInputViewController,
 
         self.coachMarksController?.skipView = skipView
 
-        self.coachMarksController?.start(on: self)
+        self.coachMarksController?.start(in: .currentWindow(of: self))
     }
 
     override func didReceiveMemoryWarning() {

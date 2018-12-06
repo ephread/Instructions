@@ -44,7 +44,7 @@ class ViewController: UIViewController, CoachMarksControllerDataSource {
         super.viewDidAppear(animated)
 
         self.coachMarksController.start(in: .newWindow(over: self,
-                                                       at: UIWindowLevelStatusBar + 1))
+                                                       at: UIWindow.Level.statusBar + 1))
     }
 
     override func didReceiveMemoryWarning() {

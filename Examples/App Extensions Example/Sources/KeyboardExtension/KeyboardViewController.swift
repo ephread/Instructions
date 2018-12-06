@@ -59,7 +59,6 @@ class KeyboardViewController: UIInputViewController,
         skipView.setTitle("Skip", for: .normal)
 
         self.coachMarksController?.skipView = skipView
-
         self.coachMarksController?.start(in: .currentWindow(of: self))
     }
 

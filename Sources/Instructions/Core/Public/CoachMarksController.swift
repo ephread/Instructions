@@ -128,10 +128,11 @@ public extension CoachMarksController {
     /// Start instructions in the given context.
     ///
     /// - Parameter presentationContext: the context in which show Instructions
+
     public func start(in presentationContext: PresentationContext) {
         guard let dataSource = self.dataSource else {
             print("startOn: snap! you didn't setup any datasource, the" +
-                  "coach mark manager won't do anything.")
+                "coach mark manager won't do anything.")
             return
         }
 
@@ -141,7 +142,7 @@ public extension CoachMarksController {
         let numberOfCoachMarks = dataSource.numberOfCoachMarks(for: self)
         if numberOfCoachMarks <= 0 {
             print("startOn: the dataSource returned an invalid value for " +
-                  "numberOfCoachMarksForCoachMarksController(_:)")
+                "numberOfCoachMarksForCoachMarksController(_:)")
             return
         }
 

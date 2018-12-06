@@ -43,13 +43,6 @@
 			remoteGlobalIDString = C6417E331D291A8A004D13EA;
 			remoteInfo = InstructionsAppExtensions;
 		};
-		C6EF65601D92EA5100BE5B66 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C6EF65561D92EA5100BE5B66 /* Instructions.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = C64FB2F31BB6CA8A0081E5B6;
-			remoteInfo = InstructionsTests;
-		};
 		C6EF65701D92EA9400BE5B66 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = C6EF65561D92EA5100BE5B66 /* Instructions.xcodeproj */;
@@ -215,7 +208,6 @@
 			children = (
 				C6EF655D1D92EA5100BE5B66 /* Instructions.framework */,
 				C6EF655F1D92EA5100BE5B66 /* InstructionsAppExtensions.framework */,
-				C6EF65611D92EA5100BE5B66 /* InstructionsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -322,13 +314,6 @@
 			fileType = wrapper.framework;
 			path = InstructionsAppExtensions.framework;
 			remoteRef = C6EF655E1D92EA5100BE5B66 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		C6EF65611D92EA5100BE5B66 /* InstructionsTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = InstructionsTests.xctest;
-			remoteRef = C6EF65601D92EA5100BE5B66 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -534,7 +519,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -552,7 +537,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ephread.Instructions-App-Extensions-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -568,7 +553,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -583,7 +568,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

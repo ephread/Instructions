@@ -2,8 +2,11 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
-## 1.2.1
-Released on 2018-12-05.
+## [1.2.2](https://github.com/ephread/Instructions/releases/tag/1.2.2)
+Released on 2018-12-06.
+
+## [1.2.1](https://github.com/ephread/Instructions/releases/tag/1.2.1)
+Released on 2018-12-05. ⚠️ Defective version
 
 ### Fixed
 - Fix [#160] - CoachMark misplaced on iPad

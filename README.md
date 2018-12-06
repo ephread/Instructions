@@ -69,7 +69,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 use_frameworks!
 
-pod 'Instructions', '~> 1.2.1'
+pod 'Instructions', '~> 1.2.2'
 ```
 
 Then, run the following command:
@@ -82,7 +82,7 @@ $ pod install
 Add Instructions to your Cartfile:
 
 ```
-github "ephread/Instructions" ~> 1.2.1
+github "ephread/Instructions" ~> 1.2.2
 ```
 
 You can then update, build and drag the generated framework into your project:
@@ -249,7 +249,7 @@ Browse the `Example/` directory for more details.
 You can choose in which context the coach marks will be displayed, by passing it to `start(in: PresentationContext). The available contexts are:
 
 - `.newWindow(over: UIViewController, at: UIWindowLevel?)` – A new window created at the given `UIWindowLevel` (not available in app extensions);
-- `.currentWindow(of: UIViewController)` – The window displaying the given `UIViewController` (not available in app extensions);
+- `.currentWindow(of: UIViewController)` – The window displaying the given `UIViewController`;
 - `.viewController(_: UIViewController)` – In the `view` of the given `UIViewController`.
 
 Additionally, you can also provide use `window(over: UIViewController)`, which is a convience static method equivalent to calling `.newWindow(over: UIViewController, at: UIWindowLevelNormal + 1)`.

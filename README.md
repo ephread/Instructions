@@ -64,12 +64,15 @@ If you want to contribute, be sure to take a look at [the contributing guide].
 ### CocoaPods
 Add Instructions to your Podfile:
 
+Due to a bug with 1.2.2, ⚠️ CocoaPods should refer to the podspec in the main repo directly.
+See [below](#presentation-context) for mor information.
+
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 use_frameworks!
 
-pod 'Instructions', '~> 1.2.2'
+pod 'Instructions', :git => 'https://github.com/ephread/Instructions.git', :tag => '1.2.2-workaround'
 ```
 
 Then, run the following command:
@@ -248,13 +251,31 @@ Browse the `Example/` directory for more details.
 
 You can choose in which context the coach marks will be displayed, by passing it to `start(in: PresentationContext). The available contexts are:
 
-- `.newWindow(over: UIViewController, at: UIWindowLevel?)` – A new window created at the given `UIWindowLevel` (not available in app extensions);
+- `.newWindow(over: UIViewController, at: UIWindow.Level?)` – A new window created at the given `UIWindowLevel` (not available in app extensions);
 - `.currentWindow(of: UIViewController)` – The window displaying the given `UIViewController`;
 - `.viewController(_: UIViewController)` – In the `view` of the given `UIViewController`.
 
 Additionally, you can also provide use `window(over: UIViewController)`, which is a convience static method equivalent to calling `.newWindow(over: UIViewController, at: UIWindowLevelNormal + 1)`.
 
 ⚠️ When using a blur effect on the overlay, setting the window level to anything above `UIWindowLevelStatusBar` is not supported.
+
+##### ⚠️ CocoaPods users
+
+Due to a bug still being investigated, CocoaPods user should use the version tagged `1.2.2-workaround`, which diverges slightly from `master`. In this version, `UIWindow.Level?` is replaced by its `CGFloat` raw value: `.newWindow(over: UIViewController, at: CGFloat?)`.
+
+For instance, instead of writing:
+
+```swift
+coachMarksController.start(in: .newWindow(over: self, at: UIWindow.Level.alert)
+```
+
+You should write:
+
+```swift
+coachMarksController.start(in: .newWindow(over: self, at: UIWindow.Level.alert.rawValue)
+```
+
+See [#198](https://github.com/ephread/Instructions/issues/198) for additional details.
 
 #### Customizing how the coach mark will show
 You can customize the following properties:

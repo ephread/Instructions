@@ -147,12 +147,20 @@ public extension CoachMarksController {
         }
 
         switch presentationContext {
-        case .newWindow(let viewController, let windowLevel):
+        case .newWindow(let viewController, let rawWindowLevel):
 #if INSTRUCTIONS_APP_EXTENSIONS
-            fatalError("PresentationContext.newWindow(above:) is not available in App Extensions.")
+            fatalError("PresentationContext.newWindow is not available in App Extensions.")
 #else
             controllerWindow = viewController.view.window
             coachMarksWindow = coachMarksWindow ?? InstructionsWindow(frame: UIScreen.main.bounds)
+
+            let windowLevel: UIWindow.Level?
+            if let rawWindowLevel = rawWindowLevel {
+                windowLevel = UIWindow.Level(rawWindowLevel)
+            } else {
+                windowLevel = nil
+            }
+
             coachMarksViewController.attach(to: coachMarksWindow!, over: viewController,
                                             at: windowLevel)
 #endif

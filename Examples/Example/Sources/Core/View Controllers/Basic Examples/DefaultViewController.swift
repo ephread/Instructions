@@ -53,8 +53,8 @@ internal class DefaultViewController: ProfileViewController,
         } else if presentationContext == .controller {
             self.coachMarksController.start(in: .viewController(self))
         } else {
-            if let windowLevel = windowLevel {
-                self.coachMarksController.start(in: .newWindow(over: self, at: windowLevel))
+            if let rawWindowLevel = windowLevel?.rawValue {
+                self.coachMarksController.start(in: .newWindow(over: self, at: rawWindowLevel))
             } else {
                 self.coachMarksController.start(in: .window(over: self))
             }

@@ -37,7 +37,7 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
         navigationController = UINavigationController()
 
         storyboard = UIStoryboard(name: "Main", bundle: nil)
-        isDeviceAgnostic = true
+        fileNameOptions = [.device, .OS, .screenSize, .screenScale]
 
         UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue,
                                   forKey: "orientation")

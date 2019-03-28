@@ -34,7 +34,7 @@ class BaseSnapshotTests: FBSnapshotTestCase {
 
         window = UIWindow()
         window.frame = UIScreen.main.bounds
-        isDeviceAgnostic = true
+        fileNameOptions  = [.device, .OS, .screenSize, .screenScale]
         //recordMode = true
     }
 

@@ -130,7 +130,7 @@ class TestFlowViewController: ProfileViewController {
 // MARK: - Protocol Conformance | CoachMarksControllerDataSource
 extension TestFlowViewController: CoachMarksControllerDataSource {
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
-        print("numberOfCoachMarksForCoachMarksController: \(index)")
+        print("numberOfCoachMarksForCoachMarksController: \(String(describing: index))")
         return 4
     }
 

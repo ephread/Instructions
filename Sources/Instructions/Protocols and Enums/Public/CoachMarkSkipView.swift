@@ -30,13 +30,13 @@ public protocol CoachMarkSkipView: class {
 }
 
 public extension CoachMarkSkipView {
-    public var skipControl: UIControl? {
+    var skipControl: UIControl? {
         return nil
     }
 }
 
 public extension CoachMarkSkipView where Self: UIView {
-    public var asView: UIView? {
+    var asView: UIView? {
         return self
     }
 }

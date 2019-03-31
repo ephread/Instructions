@@ -155,7 +155,7 @@ public class FlowManager {
             guard let currentCoachMark = currentCoachMark else { return }
 
             coachMarksViewController.hide(coachMark: currentCoachMark, at: previousIndex) {
-                self.delegate?.didHide(coachMark: self.currentCoachMark!, at: self.currentIndex)
+                self.delegate?.didHide(coachMark: self.currentCoachMark!, at: self.currentIndex - 1)
                 self.showOrStop()
             }
         } else {

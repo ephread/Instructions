@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qDO-rU-uyK">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qDO-rU-uyK">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +13,7 @@
         <!--Profile-->
         <scene sceneID="WBD-GZ-Xaa">
             <objects>
-                <viewController storyboardIdentifier="DefaultViewController" title="Profile" id="YJG-tQ-EGf" customClass="DefaultViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DefaultViewController" title="Profile" id="YJG-tQ-EGf" customClass="DefaultViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yyL-TN-CqH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,7 +25,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTA-XT-Eed">
-                                                <rect key="frame" x="123.5" y="216.5" width="128" height="171"/>
+                                                <rect key="frame" x="123.5" y="216" width="128" height="171"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face-female" translatesAutoresizingMaskIntoConstraints="NO" id="jo9-uJ-Ki6">
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -37,7 +35,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S5s-V0-jGe">
-                                                        <rect key="frame" x="22" y="148" width="85" height="23"/>
+                                                        <rect key="frame" x="21.5" y="148" width="85" height="23"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -178,7 +176,7 @@
         <!--Custom-->
         <scene sceneID="z7i-Fs-Ody">
             <objects>
-                <viewController title="Custom" id="lon-7h-axN" customClass="CustomViewsViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Custom" id="lon-7h-axN" customClass="CustomViewsViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sSt-Dc-fyX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -187,7 +185,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5bc-wN-frs">
-                                        <rect key="frame" x="123.5" y="216.5" width="128" height="171"/>
+                                        <rect key="frame" x="123.5" y="216" width="128" height="171"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face-female" translatesAutoresizingMaskIntoConstraints="NO" id="ttT-vE-Fj2">
                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -291,9 +289,9 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Tu8-tc-hZ3" secondAttribute="bottom" id="0oa-FP-ZgQ"/>
-                            <constraint firstItem="hKN-b4-STX" firstAttribute="trailing" secondItem="Tu8-tc-hZ3" secondAttribute="trailing" id="0s2-ZD-Amq"/>
-                            <constraint firstItem="Tu8-tc-hZ3" firstAttribute="leading" secondItem="hKN-b4-STX" secondAttribute="leading" id="0vt-SJ-0N0"/>
-                            <constraint firstItem="Tu8-tc-hZ3" firstAttribute="top" secondItem="hKN-b4-STX" secondAttribute="top" id="uUb-Ro-LoK"/>
+                            <constraint firstAttribute="trailing" secondItem="Tu8-tc-hZ3" secondAttribute="trailing" id="0s2-ZD-Amq"/>
+                            <constraint firstItem="Tu8-tc-hZ3" firstAttribute="leading" secondItem="sSt-Dc-fyX" secondAttribute="leading" id="0vt-SJ-0N0"/>
+                            <constraint firstItem="Tu8-tc-hZ3" firstAttribute="top" secondItem="sSt-Dc-fyX" secondAttribute="top" id="uUb-Ro-LoK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hKN-b4-STX"/>
                     </view>
@@ -313,7 +311,7 @@
         <!--Mixed-->
         <scene sceneID="nqG-vh-iZl">
             <objects>
-                <viewController title="Mixed" id="1l9-fd-3CB" customClass="MixedCoachMarksViewsViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Mixed" id="1l9-fd-3CB" customClass="MixedCoachMarksViewsViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pci-fI-IZi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -325,7 +323,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ojD-jA-glW">
-                                                <rect key="frame" x="123.5" y="216.5" width="128" height="171"/>
+                                                <rect key="frame" x="123.5" y="216" width="128" height="171"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face-male" translatesAutoresizingMaskIntoConstraints="NO" id="wgZ-R5-ya0">
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -335,7 +333,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GTv-j4-wTp">
-                                                        <rect key="frame" x="22" y="148" width="85" height="23"/>
+                                                        <rect key="frame" x="21.5" y="148" width="85" height="23"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -473,7 +471,7 @@
         <!--Instructions Navigation Controller-->
         <scene sceneID="7jA-vH-ImG">
             <objects>
-                <navigationController id="qDO-rU-uyK" customClass="InstructionsNavigationController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="qDO-rU-uyK" customClass="InstructionsNavigationController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="0Ty-M6-E86">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -493,7 +491,7 @@
         <!--Blur-->
         <scene sceneID="T1c-jH-ZkX">
             <objects>
-                <viewController title="Blur" id="JPH-zv-4qh" customClass="BlurringOverlayViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Blur" id="JPH-zv-4qh" customClass="BlurringOverlayViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iYM-PT-qgX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -505,7 +503,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aly-6p-fWL">
-                                                <rect key="frame" x="123.5" y="216.5" width="128" height="171"/>
+                                                <rect key="frame" x="123.5" y="216" width="128" height="171"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face-female" translatesAutoresizingMaskIntoConstraints="NO" id="f65-5s-cDB">
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -645,7 +643,7 @@
         <!--Delegation-->
         <scene sceneID="2uk-Kf-Bqw">
             <objects>
-                <viewController title="Delegation" id="JVX-fG-PE3" customClass="DelegateViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Delegation" id="JVX-fG-PE3" customClass="DelegateViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fWf-kj-wHs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -657,7 +655,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MmA-b6-XBb">
-                                                <rect key="frame" x="123.5" y="216.5" width="128" height="171"/>
+                                                <rect key="frame" x="123.5" y="216" width="128" height="171"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face-male" translatesAutoresizingMaskIntoConstraints="NO" id="cuh-og-gtZ">
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -667,7 +665,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pyE-E3-Q5l">
-                                                        <rect key="frame" x="22" y="148" width="85" height="23"/>
+                                                        <rect key="frame" x="21.5" y="148" width="85" height="23"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -799,7 +797,7 @@
         <!--Only Hints-->
         <scene sceneID="i3x-6u-3Mu">
             <objects>
-                <viewController title="Hint Only" id="m02-Ki-OP4" userLabel="Only Hints" customClass="OnlyHintViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Hint Only" id="m02-Ki-OP4" userLabel="Only Hints" customClass="OnlyHintViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gwe-KZ-BIi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -811,7 +809,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5z1-3t-rkt">
-                                                <rect key="frame" x="123.5" y="216.5" width="128" height="171"/>
+                                                <rect key="frame" x="123.5" y="216" width="128" height="171"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face-male" translatesAutoresizingMaskIntoConstraints="NO" id="iPI-BN-x5y">
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -821,7 +819,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ei-vp-2B8">
-                                                        <rect key="frame" x="22" y="148" width="85" height="23"/>
+                                                        <rect key="frame" x="21.5" y="148" width="85" height="23"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -963,7 +961,7 @@
         <!--Profile-->
         <scene sceneID="oq1-Qx-rNf">
             <objects>
-                <viewController title="Profile" id="qd1-hW-2X1" customClass="BackgroundNetworkingViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Profile" id="qd1-hW-2X1" customClass="BackgroundNetworkingViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="87c-3a-vz8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -975,7 +973,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Nd-Qh-ziy">
-                                                <rect key="frame" x="123.5" y="216.5" width="128" height="171"/>
+                                                <rect key="frame" x="123.5" y="216" width="128" height="171"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face-female" translatesAutoresizingMaskIntoConstraints="NO" id="THa-gb-dAB">
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -985,7 +983,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FnD-kX-3TD">
-                                                        <rect key="frame" x="22" y="148" width="85" height="23"/>
+                                                        <rect key="frame" x="21.5" y="148" width="85" height="23"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1126,7 +1124,7 @@
         <!--Test Flow-->
         <scene sceneID="0Vm-j7-dws">
             <objects>
-                <viewController title="Test Flow" extendedLayoutIncludesOpaqueBars="YES" id="Du1-lv-XD7" customClass="TestFlowViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Test Flow" extendedLayoutIncludesOpaqueBars="YES" id="Du1-lv-XD7" customClass="TestFlowViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9kn-nS-xNA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1148,7 +1146,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5C6-sx-987">
-                                                        <rect key="frame" x="22" y="148" width="85" height="23"/>
+                                                        <rect key="frame" x="21.5" y="148" width="85" height="23"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1343,7 +1341,7 @@
         <!--Profile-->
         <scene sceneID="PiD-UI-nCj">
             <objects>
-                <viewController title="Profile" id="uPX-OC-8sF" customClass="DefaultViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Profile" id="uPX-OC-8sF" customClass="DefaultViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mpq-Uv-BK7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="403"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1355,7 +1353,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="403"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6gz-KN-Wgl">
-                                                <rect key="frame" x="124" y="116" width="128" height="171"/>
+                                                <rect key="frame" x="123.5" y="116" width="128" height="171"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face-female" translatesAutoresizingMaskIntoConstraints="NO" id="gM6-AP-4al">
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -1365,7 +1363,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="faU-yS-jHy">
-                                                        <rect key="frame" x="22" y="148" width="85" height="23"/>
+                                                        <rect key="frame" x="21.5" y="148" width="85" height="23"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1506,13 +1504,13 @@
         <!--Transition From Code-->
         <scene sceneID="i0N-e6-uEa">
             <objects>
-                <viewController title="Transition From Code" id="qVy-lC-tjE" customClass="KeyboardViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Transition From Code" id="qVy-lC-tjE" customClass="KeyboardViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cu5-Ih-2qK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face-female" translatesAutoresizingMaskIntoConstraints="NO" id="0Jt-4M-tUo">
-                                <rect key="frame" x="123" y="25" width="128" height="128"/>
+                                <rect key="frame" x="123.5" y="25" width="128" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="xwr-T1-OP4"/>
                                     <constraint firstAttribute="height" constant="128" id="zVv-by-IH9"/>
@@ -1547,7 +1545,7 @@
         <!--Profile-->
         <scene sceneID="tsM-hu-L7b">
             <objects>
-                <viewController title="Profile" id="2Ts-a5-a1k" customClass="ConfigurationViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Profile" id="2Ts-a5-a1k" customClass="ConfigurationViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3C0-Bh-kbu">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1559,7 +1557,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0AS-0e-mIR">
-                                                <rect key="frame" x="123.5" y="216.5" width="128" height="171"/>
+                                                <rect key="frame" x="123.5" y="216" width="128" height="171"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face-female" translatesAutoresizingMaskIntoConstraints="NO" id="V2s-eP-y4S">
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -1569,7 +1567,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="40O-vL-kCI">
-                                                        <rect key="frame" x="22" y="148" width="85" height="23"/>
+                                                        <rect key="frame" x="21.5" y="148" width="85" height="23"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1710,7 +1708,7 @@
         <!--Transition From Code-->
         <scene sceneID="6Zr-V0-jWV">
             <objects>
-                <viewController title="Transition From Code" extendedLayoutIncludesOpaqueBars="YES" id="tpt-aH-dNs" customClass="TransitionFromCodeViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Transition From Code" extendedLayoutIncludesOpaqueBars="YES" id="tpt-aH-dNs" customClass="TransitionFromCodeViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3wU-jX-d22">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1732,7 +1730,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dUb-rQ-ee2">
-                                                        <rect key="frame" x="22" y="148" width="85" height="23"/>
+                                                        <rect key="frame" x="21.5" y="148" width="85" height="23"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -1887,7 +1885,7 @@
         <!--Pausing-->
         <scene sceneID="KaW-Qy-8Gt">
             <objects>
-                <viewController title="Pausing" extendedLayoutIncludesOpaqueBars="YES" id="XAz-4U-taU" customClass="PausingCodeViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Pausing" extendedLayoutIncludesOpaqueBars="YES" id="XAz-4U-taU" customClass="PausingCodeViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sNk-j8-kk7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1909,7 +1907,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ibb-W4-6VA">
-                                                        <rect key="frame" x="25" y="148" width="85" height="23"/>
+                                                        <rect key="frame" x="24.5" y="148" width="85" height="23"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -2065,7 +2063,7 @@
         <!--Instructions-->
         <scene sceneID="ar1-jm-avL">
             <objects>
-                <tableViewController id="cV1-ff-cQn" customClass="MainTableViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="cV1-ff-cQn" customClass="MainTableViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="M6x-ba-n3g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2506,7 +2504,7 @@
         <!--Large Cutout-->
         <scene sceneID="vz7-qM-2K1">
             <objects>
-                <viewController title="Large Cutout" id="8h9-zA-fQ5" customClass="LargeCutoutViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Large Cutout" id="8h9-zA-fQ5" customClass="LargeCutoutViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hcu-h7-JyD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2549,7 +2547,7 @@
         <!--Profile-->
         <scene sceneID="CxP-Wg-yI4">
             <objects>
-                <viewController title="Profile" id="UEq-YB-c7M" customClass="DefaultViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Profile" id="UEq-YB-c7M" customClass="DefaultViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dZX-7u-g52">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2561,7 +2559,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5wu-0S-LsI">
-                                                <rect key="frame" x="123.5" y="216.5" width="128" height="171"/>
+                                                <rect key="frame" x="123.5" y="216" width="128" height="171"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face-female" translatesAutoresizingMaskIntoConstraints="NO" id="pbs-hQ-SqL">
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -2571,7 +2569,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ee-uZ-cqM">
-                                                        <rect key="frame" x="22" y="148" width="85" height="23"/>
+                                                        <rect key="frame" x="21.5" y="148" width="85" height="23"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -2712,7 +2710,7 @@
         <!--Profile-->
         <scene sceneID="GJo-BX-8Ng">
             <objects>
-                <viewController title="Profile" id="7xP-qO-gqk" customClass="DefaultViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Profile" id="7xP-qO-gqk" customClass="DefaultViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oZ6-d6-vkW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2724,7 +2722,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K2w-Xr-0cM">
-                                                <rect key="frame" x="123.5" y="216.5" width="128" height="171"/>
+                                                <rect key="frame" x="123.5" y="216" width="128" height="171"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face-female" translatesAutoresizingMaskIntoConstraints="NO" id="xyW-0Q-uy1">
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -2734,7 +2732,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rZz-r8-3F9">
-                                                        <rect key="frame" x="22" y="148" width="85" height="23"/>
+                                                        <rect key="frame" x="21.5" y="148" width="85" height="23"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -2875,7 +2873,7 @@
         <!--Profile-->
         <scene sceneID="XfS-sy-sLL">
             <objects>
-                <viewController title="Profile" id="vOE-zY-0Bq" customClass="DefaultViewController" customModule="Instructions_Example" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Profile" id="vOE-zY-0Bq" customClass="DefaultViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="46E-eW-9ce">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2887,7 +2885,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="brO-56-2EO">
-                                                <rect key="frame" x="123.5" y="216.5" width="128" height="171"/>
+                                                <rect key="frame" x="123.5" y="216" width="128" height="171"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face-female" translatesAutoresizingMaskIntoConstraints="NO" id="G3l-l1-wZG">
                                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -2897,7 +2895,7 @@
                                                         </constraints>
                                                     </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3vO-LY-t95">
-                                                        <rect key="frame" x="22" y="148" width="85" height="23"/>
+                                                        <rect key="frame" x="21.5" y="148" width="85" height="23"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>

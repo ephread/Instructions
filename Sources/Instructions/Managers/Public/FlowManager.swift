@@ -162,27 +162,27 @@ public class FlowManager {
             showOrStop()
         }
     }
-    
+
     internal func showPreviousCoachMark(hidePrevious: Bool = true) {
         if disableFlow || paused || !canShowCoachMark { return }
-        
+
         let previousIndex = currentIndex
-        
+
         canShowCoachMark = false
         currentIndex -= 1
-        
+
         if currentIndex < 0 {
             stopFlow()
             return
         }
-        
+
         if let currentCoachMark = currentCoachMark {
             delegate?.willHide(coachMark: currentCoachMark, at: currentIndex + 1)
         }
-        
+
         if hidePrevious {
             guard let currentCoachMark = currentCoachMark else { return }
-            
+
             coachMarksViewController.hide(coachMark: currentCoachMark, at: previousIndex) {
                 self.delegate?.didHide(coachMark: self.currentCoachMark!, at: self.currentIndex)
                 self.showOrStop()
@@ -302,22 +302,22 @@ public class FlowManager {
 
         showNextCoachMark(hidePrevious: true)
     }
-    
+
     /// Show the previous specified Coach Mark.
     ///
     /// - Parameter numberOfCoachMarksToSkip: the number of coach marks
     ///                                       to skip.
     public func showPrevious(numberOfCoachMarksToSkip numberToSkip: Int = 0) {
         if !self.started || !canShowCoachMark { return }
-        
+
         if numberToSkip < 0 {
             print("showPrevious: The specified number of coach marks to skip" +
                   "was negative, nothing to do.")
             return
         }
-        
+
         currentIndex -= numberToSkip
-        
+
         showPreviousCoachMark(hidePrevious: true)
     }
 }

@@ -2,6 +2,14 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
+## [1.3.1](https://github.com/ephread/Instructions/releases/tag/1.3.1)
+Released on 2019-05-04.
+
+### Fixed
+- Fix [#204] - `spec.swift_version` set to 5 instead of 5.0
+
+[#204]: https://github.com/ephread/Instructions/issues/204
+
 ## [1.3.0](https://github.com/ephread/Instructions/releases/tag/1.3.0)
 Released on 2019-04-11.
 

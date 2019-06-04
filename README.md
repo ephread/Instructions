@@ -453,7 +453,7 @@ Instructions provide two methods to deal with frame changes.
   to show the coach mark and the cutout again.
 
 Although you can call these methods at any time while Instructions is idle, the result will not
-look smooth if the coach mark is already displayed. It's make the changes occur between
+look smooth if the coach mark is already displayed. It's better to perform the changes between
 two coach marks, by pausing and resuming the flow. [`KeyboardViewController`] shows an
 example of this technique.
 

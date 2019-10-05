@@ -16,13 +16,15 @@ env:
     - IOS_SDK=iphonesimulator13.0
 
   matrix:
-#    - DESTINATION="OS=12.1,name=iPhone XS" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES" BUILD_APP_EXTENSION_EXAMPLE="YES" POD_LINT="YES" ALLOW_WARNINGS="YES"
-    - DESTINATION="OS=13.0,name=iPhone 11" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES" BUILD_APP_EXTENSION_EXAMPLE="YES" POD_LINT="YES" ALLOW_WARNINGS="YES"
+# For some reasons tests don't run on older simulators when built with Xcode 11. Disabling
+# temporarily.
+#    - DESTINATION="OS=12.1,name=iPhone XS" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES" BUILD_APP_EXTENSION_EXAMPLE="YES" POD_LINT="YES" ALLOW_WARNINGS="NO"
+    - DESTINATION="OS=13.0,name=iPhone 11" SDK="$IOS_SDK" RUN_TESTS="YES" BUILD_EXAMPLE="YES" BUILD_APP_EXTENSION_EXAMPLE="YES" POD_LINT="YES" ALLOW_WARNINGS="NO"
 
 before_install:
   - gem install cocoapods xcpretty
   - brew update && brew upgrade
-  - cd "Examples/Example/Snapshot Tests/Supporting Files/Snapshots" && git pull && cd -
+  - git submodule update
 
 install:
   - cd "Examples" && carthage bootstrap --platform ios && cd ..

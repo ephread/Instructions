@@ -139,7 +139,9 @@ public extension CoachMarksController {
         if flow.started { return }
 
         let numberOfCoachMarks = dataSource.numberOfCoachMarks(for: self)
-        if numberOfCoachMarks <= 0 {
+        if numberOfCoachMarks < 0 {
+            fatalError("dataSource.numberOfCoachMarks(for:) returned a negative number.")
+        } else if numberOfCoachMarks == 0 {
             print("[WARNING] dataSource.numberOfCoachMarks(for:) returned 0.")
             return
         }

@@ -234,7 +234,7 @@ public class FlowManager {
         // the case.
         if !self.paused {
             if coachMarksViewController.instructionsRootView.bounds.isEmpty {
-                print("The overlay view added to the window has empty bounds, " +
+                print("[ERROR] The overlay view added to the window has empty bounds, " +
                       "Instructions will stop.")
                 self.stopFlow()
                 return
@@ -293,8 +293,7 @@ public class FlowManager {
         if !self.started || !canShowCoachMark { return }
 
         if numberToSkip < 0 {
-            print("showNext: The specified number of coach marks to skip" +
-                  "was negative, nothing to do.")
+            print("[WARNING] numberToSkip is negative, ignoring.")
             return
         }
 
@@ -311,8 +310,7 @@ public class FlowManager {
         if !self.started || !canShowCoachMark { return }
 
         if numberToSkip < 0 {
-            print("showPrevious: The specified number of coach marks to skip" +
-                  "was negative, nothing to do.")
+            print("[WARNING] numberToSkip is negative, ignoring.")
             return
         }
 

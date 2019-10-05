@@ -60,7 +60,7 @@ internal extension UIView {
 
     func makeConstraintToFillSuperviewVertically() -> [NSLayoutConstraint] {
         guard let superview = superview else {
-            print("Warning: View has no parent, can't make fill constraints.")
+            print("[WARNING] View has no parent, cannot define constraints.")
             return []
         }
 
@@ -72,7 +72,7 @@ internal extension UIView {
 
     func makeConstraintToFillSuperviewHorizontally() -> [NSLayoutConstraint] {
         guard let superview = superview else {
-            print("Warning: View has no parent, can't make fill constraints.")
+            print("[WARNING] View has no parent, cannot define constraints.")
             return []
         }
 

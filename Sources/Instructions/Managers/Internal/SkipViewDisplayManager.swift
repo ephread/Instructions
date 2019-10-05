@@ -39,7 +39,7 @@ class SkipViewDisplayManager {
     ///
     /// - Parameter skipView: the skip view to hide.
     /// - Parameter duration: the duration of the fade.
-    func hide(skipView: CoachMarkSkipView, duration: TimeInterval = 0) {
+    func hide(skipView: (UIView & CoachMarkSkipView), duration: TimeInterval = 0) {
         if duration == 0 {
             skipView.asView?.alpha = 0.0
         } else {
@@ -53,9 +53,9 @@ class SkipViewDisplayManager {
     ///
     /// - Parameter skipView: the skip view to show.
     /// - Parameter duration: the duration of the fade.
-    func show(skipView: CoachMarkSkipView, duration: TimeInterval = 0) {
+    func show(skipView: (UIView & CoachMarkSkipView), duration: TimeInterval = 0) {
         guard let parentView = skipView.asView?.superview else {
-            print("The Skip View has no parent, aborting.")
+            print("[INFO] skipView has no superview and won't be shown.")
             return
         }
 
@@ -79,10 +79,10 @@ class SkipViewDisplayManager {
     ///
     /// - Parameter skipView: the skip view to position.
     /// - Parameter constraints: the constraints to use.
-    func update(skipView: CoachMarkSkipView,
+    func update(skipView: (UIView & CoachMarkSkipView),
                 withConstraints constraints: [NSLayoutConstraint]?) {
         guard let parentView = skipView.asView?.superview else {
-            print("The Skip View has no parent, aborting.")
+            print("[INFO] skipView has no superview and won't be updated.")
             return
         }
 
@@ -100,13 +100,8 @@ class SkipViewDisplayManager {
         parentView.addConstraints(self.skipViewConstraints)
     }
 
-    private func defaultConstraints(for skipView: CoachMarkSkipView, in parentView: UIView)
+    private func defaultConstraints(for skipView: (UIView & CoachMarkSkipView), in parentView: UIView)
     -> [NSLayoutConstraint] {
-        guard let skipView = skipView as? UIView else {
-            print("Skip View is not an UIVIew, aborting.")
-            return []
-        }
-
         var constraints = [NSLayoutConstraint]()
 
         let trailingAnchor: NSLayoutXAxisAnchor

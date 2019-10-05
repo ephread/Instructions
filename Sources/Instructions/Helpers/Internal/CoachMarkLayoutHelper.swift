@@ -34,7 +34,8 @@ class CoachMarkLayoutHelper {
         passNumber: Int = 0
     ) -> [NSLayoutConstraint] {
         if coachMarkView.superview != parentView {
-            print("coachMarkView was not added to parentView, returned constraints will be empty")
+            print("[WARNING] `coachMarkView` is not a child of `parentView`. " +
+                  "The array of constraints will be empty.")
             return []
         }
 
@@ -163,7 +164,7 @@ class CoachMarkLayoutHelper {
                                     withProperties properties: CoachMarkComputedProperties,
                                     inParentView parentView: UIView) -> CGFloat {
         guard let pointOfInterest = coachMark.pointOfInterest else {
-            print("The point of interest was found nil. Fallbacking offset will be 0")
+            print("[INFO] The point of interest is nil, offset will be zero.")
             return 0
         }
 
@@ -179,7 +180,7 @@ class CoachMarkLayoutHelper {
                                    withProperties properties: CoachMarkComputedProperties,
                                    inParentView parentView: UIView) -> CGFloat {
         guard let pointOfInterest = coachMark.pointOfInterest else {
-            print("The point of interest was found nil. Fallbacking offset will be 0")
+            print("[INFO] The point of interest was found nil. Fallbacking offset will be 0")
             return 0
         }
 
@@ -194,7 +195,7 @@ class CoachMarkLayoutHelper {
                                      withProperties properties: CoachMarkComputedProperties,
                                      inParentView parentView: UIView) -> CGFloat {
         guard let pointOfInterest = coachMark.pointOfInterest else {
-            print("The point of interest was found nil. Falling back to offset = 0")
+            print("[INFO] The point of interest is nil, offset will be zero.")
             return 0
         }
 
@@ -232,7 +233,7 @@ class CoachMarkLayoutHelper {
             default: return .centered
             }
         } else {
-            print("The point of interest was found nil: falling back to centered.")
+            print("[INFO] The point of interest is nil, alignment will fall back to .center.")
             return .centered
         }
     }

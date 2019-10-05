@@ -117,7 +117,7 @@ public class CoachMarksController {
 // MARK: - Forwarded Properties
 public extension CoachMarksController {
     /// Control or control wrapper used to skip the flow.
-    var skipView: CoachMarkSkipView? {
+    var skipView: (UIView & CoachMarkSkipView)? {
         get { return coachMarksViewController.skipView }
         set { coachMarksViewController.skipView = newValue }
     }
@@ -131,8 +131,7 @@ public extension CoachMarksController {
 
     func start(in presentationContext: PresentationContext) {
         guard let dataSource = self.dataSource else {
-            print("startOn: snap! you didn't setup any datasource, the" +
-                "coach mark manager won't do anything.")
+            print("[WARNING] dataSource is nil.")
             return
         }
 
@@ -141,8 +140,7 @@ public extension CoachMarksController {
 
         let numberOfCoachMarks = dataSource.numberOfCoachMarks(for: self)
         if numberOfCoachMarks <= 0 {
-            print("startOn: the dataSource returned an invalid value for " +
-                "numberOfCoachMarksForCoachMarksController(_:)")
+            print("[WARNING] dataSource.numberOfCoachMarks(for:) returned 0.")
             return
         }
 

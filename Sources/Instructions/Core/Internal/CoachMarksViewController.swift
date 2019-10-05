@@ -60,7 +60,7 @@ class CoachMarksViewController: UIViewController {
     var customStatusBarStyle: UIStatusBarStyle?
 
     var currentCoachMarkView: CoachMarkView?
-    var skipView: CoachMarkSkipView? {
+    var skipView: (UIView & CoachMarkSkipView)? {
         willSet {
             if newValue == nil {
                 self.skipView?.asView?.removeFromSuperview()
@@ -71,10 +71,7 @@ class CoachMarksViewController: UIViewController {
         }
 
         didSet {
-            guard let skipView = skipView else { return }
-            guard skipView is UIView else {
-                fatalError("skipView must conform to CoachMarkBodyView but also be a UIView.")
-            }
+            guard skipView != nil else { return }
 
             addSkipView()
         }
@@ -167,15 +164,14 @@ class CoachMarksViewController: UIViewController {
         window.isHidden = false
     }
 
-    /// Will attach the controller as a child of the given view controller, will adding
+    /// Will attach the controller as a child of the given view controller and add
     /// Instructions-related view to the window of the given view controller.
     ///
     /// - Parameter viewController: the controller to which attach Instructions
     func attachToWindow(of viewController: UIViewController) {
         guard let window = viewController.view?.window else {
-            print("attachToViewController: Instructions could not be properly" +
-                  "attached to the window, did you call `start` inside" +
-                  "`viewDidLoad` instead of `ViewDidAppear`?")
+            print("[ERROR] Instructions could not be properly attached to the window" +
+                  "did you call `start(in:)` inside `viewDidLoad` instead of `viewDidAppear`?")
 
             return
         }

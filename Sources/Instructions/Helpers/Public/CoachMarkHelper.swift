@@ -128,9 +128,8 @@ public class CoachMarkHelper {
                                        pointOfInterest: CGPoint? = nil,
                                        cutoutPathMaker: CutoutPathMaker? = nil) {
         if !flowManager.paused || flowManager.currentCoachMark == nil {
-            print("updateCurrentCoachMarkForView: Something is wrong, did you" +
-                  "call updateCurrentCoachMarkForView without pausing" +
-                  "the controller first?")
+            print("[ERROR] Something went wrong, did you call " +
+                  "`updateCurrentCoachMark()` without pausing the controller first?")
             return
         }
 

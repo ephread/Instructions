@@ -84,11 +84,6 @@ public class OverlayManager {
         }
     }
 
-    /// Define the window level for the overlay.
-    @available(iOS, deprecated: 1.2.1,
-               message: "specify the window level using CoachMarkController.start(in: ) instead")
-    public var windowLevel = UIWindow.Level.normal + 1
-
     // MARK: - Internal Properties
     /// Delegate to which tell that the overlay view received a tap event.
     internal weak var overlayDelegate: OverlayManagerDelegate?

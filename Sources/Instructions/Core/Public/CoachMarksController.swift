@@ -168,18 +168,6 @@ public extension CoachMarksController {
         flow.startFlow(withNumberOfCoachMarks: numberOfCoachMarks)
     }
 
-    /// Start displaying the coach marks.
-    ///
-    /// - Parameter parentViewController: View Controller to which attach self.
-    @available(iOS, deprecated: 1.2.1, message: "use start(in:) instead.")
-    func start(on parentViewController: UIViewController) {
-#if INSTRUCTIONS_APP_EXTENSIONS
-        start(in: .currentWindow(of: parentViewController))
-#else
-        start(in: .newWindow(over: parentViewController, at: nil))
-#endif
-    }
-
     /// Stop the flow of coach marks. Don't forget to call this method in viewDidDisappear or
     /// viewWillDisappear.
     ///

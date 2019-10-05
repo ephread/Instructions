@@ -30,20 +30,6 @@ public protocol CoachMarksControllerDelegate: class {
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               willLoadCoachMarkAt index: Int) -> Bool
 
-    @available(iOS, deprecated: 1.2.1,
-               message: "use coachMarksController(_:willShow:afterChanging:at:)")
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              willShow coachMark: inout CoachMark,
-                              afterSizeTransition: Bool,
-                              at index: Int)
-
-    @available(iOS, deprecated: 1.2.1,
-               message: "use coachMarksController(_:didShow:afterChanging:at:)")
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didShow coachMark: CoachMark,
-                              afterSizeTransition: Bool,
-                              at index: Int)
-
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               willShow coachMark: inout CoachMark,
                               beforeChanging change: ConfigurationChange,

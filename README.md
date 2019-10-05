@@ -40,8 +40,8 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 - [ ] Multiple coach marks support
 
 ## Requirements
-- Xcode 10 / Swift 4+
-- iOS 10.0+
+- Xcode 11 / Swift 5+
+- iOS 11.0+
 
 ## Asking Questions / Contributing
 
@@ -56,10 +56,6 @@ If you want to contribute, be sure to take a look at [the contributing guide].
 [the contributing guide]: https://github.com/ephread/Instructions/blob/master/CONTRIBUTING.md
 
 ## Installation
-
-⚠️ [Git LFS] is required to clone Instructions or build it through your favorite package manager (all the snapshots used in the tests are stored in a submodule through LFS).
-
-[Git LFS]: https://git-lfs.github.com/
 
 ### CocoaPods
 Add Instructions to your Podfile:

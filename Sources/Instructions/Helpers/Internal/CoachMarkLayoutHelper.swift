@@ -222,7 +222,7 @@ class CoachMarkLayoutHelper {
         forLayoutDirection layoutDirection: UIUserInterfaceLayoutDirection,
         inFrame frame: CGRect
     ) -> CoachMarkHorizontalAligment {
-        if let pointOfInterest = coachMark.pointOfInterest {
+        if let pointOfInterest = coachMark.pointOfInterest, frame.size.width > 0 {
             let segmentIndex = Int(ceil(2 * pointOfInterest.x / frame.size.width))
 
             switch (segmentIndex, layoutDirection) {
@@ -233,7 +233,12 @@ class CoachMarkLayoutHelper {
             default: return .centered
             }
         } else {
-            print("[INFO] The point of interest is nil, alignment will fall back to .center.")
+            if coachMark.pointOfInterest == nil {
+                print("[INFO] The point of interest is nil, alignment will fall back to .center.")
+            } else {
+                print("[WARNING] frame has no width, alignment will fall back to .center.")
+            }
+
             return .centered
         }
     }

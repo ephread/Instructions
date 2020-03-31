@@ -213,9 +213,9 @@ class BlurringOverlayStyleManager: OverlayStyleManager {
     }
 
     private func makeSnapshotOverlays() -> (background: OverlaySnapshotView,
-        foreground: OverlaySnapshotView)? {
+                                            foreground: OverlaySnapshotView)? {
             guard let background = makeSnapshotView(),
-                let foreground = makeSnapshotView() else {
+                  let foreground = makeSnapshotView() else {
                     return nil
             }
 

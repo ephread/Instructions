@@ -151,6 +151,7 @@ public extension CoachMarksController {
 #if INSTRUCTIONS_APP_EXTENSIONS
             fatalError("PresentationContext.newWindow(above:) is not available in App Extensions.")
 #else
+            controllerWindow = viewController.view.window
             coachMarksWindow = coachMarksWindow ?? buildNewWindow()
             coachMarksViewController.attach(to: coachMarksWindow!, over: viewController,
                                             at: windowLevel)

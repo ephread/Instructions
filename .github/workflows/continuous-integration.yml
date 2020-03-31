@@ -40,6 +40,9 @@ jobs:
       - name: Switch Xcode version
         run: sudo xcode-select --switch /Applications/Xcode_11.4_beta.app
 
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
       - name: Update Git submodules
         run: git submodule update
 

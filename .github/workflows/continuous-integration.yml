@@ -50,7 +50,7 @@ jobs:
         run: cd "Examples" && carthage bootstrap --platform ios && cd ..
 
       - name: Run Cocoapods' linter
-        if: env.run_pod_lint == true
+        if: env.run_pod_lint == 'true'
         # Warnings might be allowed in versions where Instructions continue to support
         # deprecated methods.
         run: |
@@ -61,29 +61,29 @@ jobs:
           fi
 
       - name: Build example project
-        if: env.build_example == true
+        if: env.build_example == 'true'
         env:
           DESTINATION: ${{ matrix.destination }}
         run: set -o pipefail && xcodebuild clean build -project "$EXAMPLE_PROJECT" -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=YES | xcpretty -c;
 
-      - name: Build example project
-        if: env.build_app_extension_example == true
+      - name: Build App Extensions example project
+        if: env.build_app_extension_example == 'true'
         env:
           DESTINATION: ${{ matrix.destination }}
         run: set -o pipefail && xcodebuild clean build -project "$APPEX_EXAMPLE_PROJECT" -scheme "$APPEX_EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" ONLY_ACTIVE_ARCH=YES | xcpretty -c;
 
       - name: Build frameworks
-        if: env.run_tests == false # Will be built by the test task anyway.
+        if: env.run_tests != 'true' # Will be built by the test task anyway.
         env:
           DESTINATION: ${{ matrix.destination }}
         run: set -o pipefail && xcodebuild clean build -project "$PROJECT" -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug ONLY_ACTIVE_ARCH=YES | xcpretty -c;
 
       - name: Run tests
-        if: env.run_tests == true
+        if: env.run_tests == 'true'
         env:
           DESTINATION: ${{ matrix.destination }}
         run: set -o pipefail && xcodebuild test -project "$EXAMPLE_PROJECT" -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug -enableCodeCoverage YES ONLY_ACTIVE_ARCH=YES | xcpretty -c;
 
       - name: Upload coverage
-        if: success() && env.run_tests == true
+        if: success() && env.run_tests == 'true'
         run: bash <(curl -s https://codecov.io/bash) -cF ios

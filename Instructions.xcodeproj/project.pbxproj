@@ -726,7 +726,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MARKETING_VERSION = 1.4.0;
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS_APP_EXTENSIONS";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.InstructionsAppExtensions;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions.AppExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -752,7 +752,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MARKETING_VERSION = 1.4.0;
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS_APP_EXTENSIONS";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.InstructionsAppExtensions;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions.AppExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;

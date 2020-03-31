@@ -1,10 +1,5 @@
-//
-//  AccessibilityIdentifiers.swift
-//  Instructions Example
-//
-//  Created by Frédéric on 30/05/2018.
-//  Copyright © 2018 Ephread. All rights reserved.
-//
+// Copyright (c) 2018-present Frédéric Maquin <fred@ephread.com> and contributors.
+// Licensed under the terms of the MIT License.
 
 import Foundation
 

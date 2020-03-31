@@ -6,22 +6,56 @@ import UIKit
 // MARK: - Default Class
 /// A concrete implementation of the coach mark arrow view and the
 /// default one provided by the library.
-public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
+public class CoachMarkArrowDefaultView: UIView,
+                                        CoachMarkArrowView,
+                                        CoachMarkComponent {
+
+    // MARK: Private Constants
+    private let defaultWidth: CGFloat = 15
+    private let defaultHeight: CGFloat = 9
+
+    private let orientation: CoachMarkArrowOrientation
+
+    private let foregroundLayer = CAShapeLayer()
+    private let backgroundLayer = CAShapeLayer()
+
+    // MARK: Public Properties
+    public var isHighlighted: Bool = false {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+
+    public var background = CoachMarkArrowBackground()
+
     // MARK: - Initialization
     public init(orientation: CoachMarkArrowOrientation) {
-        let image, highlightedImage: UIImage?
+        self.orientation = orientation
 
-        if orientation == .top {
-            image = UIImage(namedInInstructions: "arrow-top")
-            highlightedImage = UIImage(namedInInstructions: "arrow-top-highlighted")
-        } else {
-            image = UIImage(namedInInstructions: "arrow-bottom")
-            highlightedImage = UIImage(namedInInstructions: "arrow-bottom-highlighted")
-        }
+        super.init(frame: .zero)
 
-        super.init(image: image, highlightedImage: highlightedImage)
+        layer.addSublayer(backgroundLayer)
+        layer.addSublayer(foregroundLayer)
 
         initializeConstraints()
+    }
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+
+        foregroundLayer.frame = bounds
+        backgroundLayer.frame = bounds
+
+        if isHighlighted {
+            foregroundLayer.fillColor = background.highlightedInnerColor.cgColor
+            backgroundLayer.fillColor = background.highlightedBorderColor.cgColor
+        } else {
+            foregroundLayer.fillColor = background.innerColor.cgColor
+            backgroundLayer.fillColor = background.borderColor.cgColor
+        }
+
+        foregroundLayer.path = makeInnerTrianglePath(orientation: orientation)
+        backgroundLayer.path = makeOuterTrianglePath(orientation: orientation)
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -32,8 +66,19 @@ public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
 // MARK: - Private Inner Setup
 private extension CoachMarkArrowDefaultView {
     func initializeConstraints() {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.widthAnchor.constraint(equalToConstant: self.image!.size.width).isActive = true
-        self.heightAnchor.constraint(equalToConstant: self.image!.size.height).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            widthAnchor.constraint(equalToConstant: defaultWidth),
+            heightAnchor.constraint(equalToConstant: defaultHeight)
+        ])
     }
+}
+
+public struct CoachMarkArrowBackground: CoachMarkBackground {
+    public lazy var innerColor: UIColor = makeInnerColor()
+    public lazy var borderColor: UIColor = makeBorderColor()
+
+    public lazy var highlightedInnerColor: UIColor = makeHighlightedInnerColor()
+    public lazy var highlightedBorderColor: UIColor = makeBorderColor()
 }

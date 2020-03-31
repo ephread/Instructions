@@ -12,7 +12,8 @@ open class CoachMarkBodyDefaultViewHelper {
         return NSLayoutConstraint.constraints(
             withVisualFormat: "H:|-(10)-[hintLabel]-(10)-[separator(==1)][nextLabel(==55)]|",
             options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil,
-            views: ["hintLabel": views.hintLabel, "separator": views.separator,
+            views: ["hintLabel": views.hintLabel,
+                    "separator": views.separator,
                     "nextLabel": views.nextLabel]
         )
     }

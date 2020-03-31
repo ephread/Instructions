@@ -11,6 +11,15 @@ public class CoachMarkSkipDefaultView: UIButton, CoachMarkSkipView {
         return self
     }
 
+    public override var isHighlighted: Bool {
+        didSet {
+            bodyBackground.isHighlighted = isHighlighted
+        }
+    }
+
+    public var background: CoachMarkBackground { return bodyBackground }
+    private var bodyBackground: CoachMarkBodyBackground & UIView = CoachMarkBodyBackgroundView()
+
     // MARK: - Private properties
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,12 +33,13 @@ public class CoachMarkSkipDefaultView: UIButton, CoachMarkSkipView {
         titleLabel?.font = UIFont.systemFont(ofSize: 17.0)
         titleLabel?.textAlignment = .center
 
-        setBackgroundImage(UIImage(namedInInstructions: "background"), for: .normal)
+        bodyBackground.translatesAutoresizingMaskIntoConstraints = false
+        bodyBackground.isUserInteractionEnabled = false
 
-        setBackgroundImage(UIImage(namedInInstructions: "background-highlighted"),
-                           for: .highlighted)
+        addSubview(bodyBackground)
+        sendSubviewToBack(bodyBackground)
+        bodyBackground.fillSuperview()
 
-        layer.cornerRadius = 4
         contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 15.0, bottom: 10.0, right: 15.0)
         sizeToFit()
     }

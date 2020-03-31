@@ -13,7 +13,4 @@
    <FileRef
       location = "group:.swiftlint.yml">
    </FileRef>
-   <FileRef
-      location = "group:.travis.yml">
-   </FileRef>
 </Workspace>

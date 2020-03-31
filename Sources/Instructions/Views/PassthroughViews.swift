@@ -36,6 +36,7 @@ class InstructionsWindow: UIWindow {
     @available(iOS 13.0, *)
     override init(windowScene: UIWindowScene) {
         super.init(windowScene: windowScene)
+        accessibilityIdentifier = AccessibilityIdentifiers.window
     }
 
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {

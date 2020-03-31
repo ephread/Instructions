@@ -33,9 +33,15 @@ class BaseSnapshotTests: FBSnapshotTestCase {
         super.setUp()
 
         window = UIWindow()
+        if #available(iOS 13.0, *) {
+            if let windowScene = UIApplication.shared.activeScene {
+                window = UIWindow(windowScene: windowScene)
+            }
+        }
+
         window.frame = UIScreen.main.bounds
         fileNameOptions  = [.device, .OS, .screenSize, .screenScale]
-        //recordMode = true
+//        recordMode = true
     }
 
     override func tearDown() {
@@ -50,6 +56,6 @@ class BaseSnapshotTests: FBSnapshotTestCase {
 
         return windows.filter {
             $0.accessibilityIdentifier == "AccessibilityIdentifiers.window"
-            }.first
+        }.first
     }
 }

@@ -42,9 +42,8 @@ jobs:
 
       - name: Check out the repository
         uses: actions/checkout@v2
-
-      - name: Update Git submodules
-        run: git submodule update
+        with:
+          submodules: 'recursive'
 
       - name: Install test dependencies
         run: cd "Examples" && carthage bootstrap --platform ios && cd ..

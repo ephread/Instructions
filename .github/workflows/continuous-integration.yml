@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: build
 
 on:
   push:
@@ -24,7 +24,7 @@ env:
   run_pod_lint: true
   build_example: true
   build_app_extension_example: true
-  run_tests: false
+  run_tests: true
 
 jobs:
   test:

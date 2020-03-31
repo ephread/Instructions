@@ -151,8 +151,7 @@ public extension CoachMarksController {
 #if INSTRUCTIONS_APP_EXTENSIONS
             fatalError("PresentationContext.newWindow(above:) is not available in App Extensions.")
 #else
-            controllerWindow = viewController.view.window
-            coachMarksWindow = coachMarksWindow ?? InstructionsWindow(frame: UIScreen.main.bounds)
+            coachMarksWindow = coachMarksWindow ?? buildNewWindow()
             coachMarksViewController.attach(to: coachMarksWindow!, over: viewController,
                                             at: windowLevel)
 #endif
@@ -226,5 +225,18 @@ private extension CoachMarksController {
         skipViewDisplayManager.dataSource = self
 
         return skipViewDisplayManager
+    }
+
+    func buildNewWindow() -> UIWindow {
+        if #available(iOS 13.0, *) {
+            if let windowScene = UIApplication.shared.activeScene {
+                let window = InstructionsWindow(windowScene: windowScene)
+                window.frame = UIScreen.main.bounds
+
+                return window
+            }
+        }
+
+        return InstructionsWindow(frame: UIScreen.main.bounds)
     }
 }

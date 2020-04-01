@@ -6,8 +6,10 @@ Instructions follows [Semantic Versioning](http://semver.org/).
 Released on 2020-XX-XX.
 
 ### Fixed
+- Fix [#205] - Safe area insets ignored by coach mark layout system
 - Fix [#231] - Support iOS 13's `WindowScene`
 
+[#205]: https://github.com/ephread/Instructions/issues/205
 [#231]: https://github.com/ephread/Instructions/issues/231
 
 ### Changed

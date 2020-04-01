@@ -57,6 +57,22 @@ class CoachMarkLayoutHelper {
                                     withCoachMark coachMark: CoachMark,
                                     inParentView parentView: UIView
     ) -> [NSLayoutConstraint] {
+
+        if #available(iOS 11.0, *) {
+            let layoutGuide = parentView.safeAreaLayoutGuide
+
+            return [
+                coachMarkView.leadingAnchor
+                             .constraint(equalTo: layoutGuide.leadingAnchor,
+                                         constant: coachMark.horizontalMargin),
+                coachMarkView.widthAnchor
+                             .constraint(lessThanOrEqualToConstant: coachMark.maxWidth),
+                coachMarkView.trailingAnchor
+                             .constraint(lessThanOrEqualTo: layoutGuide.trailingAnchor,
+                                         constant: -coachMark.horizontalMargin)
+            ]
+        }
+
         let visualFormat = "H:|-(==\(coachMark.horizontalMargin))-" +
                            "[currentCoachMarkView(<=\(coachMark.maxWidth))]-" +
                            "(>=\(coachMark.horizontalMargin))-|"
@@ -105,6 +121,21 @@ class CoachMarkLayoutHelper {
                                      withCoachMark coachMark: CoachMark,
                                      inParentView parentView: UIView
     ) -> [NSLayoutConstraint] {
+        if #available(iOS 11.0, *) {
+            let layoutGuide = parentView.safeAreaLayoutGuide
+
+            return [
+                coachMarkView.leadingAnchor
+                    .constraint(greaterThanOrEqualTo: layoutGuide.leadingAnchor,
+                                constant: coachMark.horizontalMargin),
+                coachMarkView.widthAnchor
+                    .constraint(lessThanOrEqualToConstant: coachMark.maxWidth),
+                coachMarkView.trailingAnchor
+                    .constraint(equalTo: layoutGuide.trailingAnchor,
+                                constant: -coachMark.horizontalMargin)
+            ]
+        }
+
         let visualFormat = "H:|-(>=\(coachMark.horizontalMargin))-" +
                            "[currentCoachMarkView(<=\(coachMark.maxWidth))]-" +
                            "(==\(coachMark.horizontalMargin))-|"
@@ -149,11 +180,13 @@ class CoachMarkLayoutHelper {
             return 0
         }
 
+        let compensation = safeAreaCompensation(for: parentView, with: properties)
+
         if properties.layoutDirection == .leftToRight {
-            return pointOfInterest.x - coachMark.horizontalMargin
+            return pointOfInterest.x - coachMark.horizontalMargin - compensation
         } else {
             return parentView.bounds.size.width - pointOfInterest.x -
-                   coachMark.horizontalMargin
+                   coachMark.horizontalMargin - compensation
         }
     }
 
@@ -180,12 +213,30 @@ class CoachMarkLayoutHelper {
             return 0
         }
 
+        let compensation = safeAreaCompensation(for: parentView, with: properties)
+
         if properties.layoutDirection == .leftToRight {
             return parentView.bounds.size.width - pointOfInterest.x -
-                   coachMark.horizontalMargin
+                   coachMark.horizontalMargin - compensation
         } else {
-            return pointOfInterest.x - coachMark.horizontalMargin
+            return pointOfInterest.x - coachMark.horizontalMargin - compensation
         }
+    }
+
+    private func safeAreaCompensation(for parentView: UIView,
+                                      with properties: CoachMarkComputedProperties) -> CGFloat {
+        if #available(iOS 11.0, *) {
+            switch (properties.horizontalAligment, properties.layoutDirection) {
+
+            case (.leading, .leftToRight), (.trailing, .rightToLeft):
+                return parentView.safeAreaInsets.left
+            case (.leading, .rightToLeft), (.trailing, .leftToRight):
+                return parentView.safeAreaInsets.right
+            default: break
+            }
+        }
+
+        return 0
     }
 
     /// Compute the segment index (for now the screen is separated

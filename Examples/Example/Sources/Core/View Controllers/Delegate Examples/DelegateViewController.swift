@@ -9,7 +9,6 @@ import Instructions
 class DelegateViewController: ProfileViewController, CoachMarksControllerDataSource {
 
     // MARK: IBOutlets
-    @IBOutlet weak var profileBackgroundView: UIView?
     @IBOutlet var avatarVerticalPositionConstraint: NSLayoutConstraint?
 
     // MARK: View Lifecycle
@@ -151,16 +150,10 @@ class DelegateViewController: ProfileViewController, CoachMarksControllerDataSou
 
     override func coachMarksController(_ coachMarksController: CoachMarksController,
                               didEndShowingBySkipping skipped: Bool) {
-        let newColor: UIColor
-
-        if skipped {
-            newColor = UIColor(red: 144.0/255.0, green: 26.0/255.0, blue: 146.0/255.0, alpha: 1.0)
-        } else {
-            newColor = UIColor(red: 244.0/255.0, green: 126.0/255.0, blue: 46.0/255.0, alpha: 1.0)
-        }
+        let newColor: UIColor = skipped ? .systemPurple : .systemOrange
 
         UIView.animate(withDuration: 1, animations: { () -> Void in
-            self.profileBackgroundView?.backgroundColor = newColor
+            self.view.backgroundColor = newColor
         })
     }
 }

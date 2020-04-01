@@ -11,6 +11,9 @@
       location = "group:Examples/Instructions App Extensions Example.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:Package.swift">
+   </FileRef>
+   <FileRef
       location = "group:codecov.yml">
    </FileRef>
    <FileRef

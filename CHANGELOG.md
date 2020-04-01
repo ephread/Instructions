@@ -19,6 +19,7 @@ Released on 2020-XX-XX.
 ### Added
 - Full dark mode support
 - Customizable default Coachmark
+- Support of Swift Package Manager
 
 ### Removed
 - Asset Bundles

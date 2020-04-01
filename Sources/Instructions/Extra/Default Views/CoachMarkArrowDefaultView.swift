@@ -14,10 +14,10 @@ public class CoachMarkArrowDefaultView: UIView,
     private let defaultWidth: CGFloat = 15
     private let defaultHeight: CGFloat = 9
 
-    private let orientation: CoachMarkArrowOrientation
-
     private let foregroundLayer = CAShapeLayer()
     private let backgroundLayer = CAShapeLayer()
+
+    private let orientation: CoachMarkArrowOrientation
 
     // MARK: Public Properties
     public var isHighlighted: Bool = false {
@@ -63,7 +63,7 @@ public class CoachMarkArrowDefaultView: UIView,
     }
 }
 
-// MARK: - Private Inner Setup
+// MARK: - Private Methods
 private extension CoachMarkArrowDefaultView {
     func initializeConstraints() {
         translatesAutoresizingMaskIntoConstraints = false
@@ -75,7 +75,8 @@ private extension CoachMarkArrowDefaultView {
     }
 }
 
-public struct CoachMarkArrowBackground: CoachMarkBackground {
+// MARK: - Background Style
+public struct CoachMarkArrowBackground: CoachMarkBackgroundStyle {
     public lazy var innerColor = InstructionsColor.coachMarkInner
     public lazy var borderColor = InstructionsColor.coachMarkOuter
 

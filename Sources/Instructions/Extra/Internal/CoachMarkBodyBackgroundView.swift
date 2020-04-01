@@ -4,7 +4,7 @@
 import UIKit
 
 class CoachMarkBodyBackgroundView: UIView,
-                                   CoachMarkBodyBackground,
+                                   CoachMarkBodyBackgroundStyle,
                                    CoachMarkComponent {
     // MARK: Private Constants
     private let minimumWidth: CGFloat = 17
@@ -32,6 +32,8 @@ class CoachMarkBodyBackgroundView: UIView,
     override public init(frame: CGRect) {
         super.init(frame: frame)
 
+        isUserInteractionEnabled = false
+
         layer.addSublayer(backgroundLayer)
         layer.addSublayer(foregroundLayer)
 
@@ -46,6 +48,7 @@ class CoachMarkBodyBackgroundView: UIView,
         fatalError("This class does not support NSCoding.")
     }
 
+    // MARK: - Layout
     public override func layoutSubviews() {
         super.layoutSubviews()
 
@@ -64,7 +67,8 @@ class CoachMarkBodyBackgroundView: UIView,
         backgroundLayer.path = makeOuterRoundedPath(cornerRadius: cornerRadius)
     }
 
-    func initializeConstraints() {
+    // MARK: - Private Methods
+    private func initializeConstraints() {
         NSLayoutConstraint.activate([
             widthAnchor.constraint(greaterThanOrEqualToConstant: minimumWidth),
             heightAnchor.constraint(greaterThanOrEqualToConstant: minimumHeight)

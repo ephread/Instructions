@@ -26,17 +26,31 @@ internal extension UIView {
         return !isInBounds
     }
 
+    func fillSuperview(insets: UIEdgeInsets) {
+        guard let superview = superview else {
+            print("[WARNING] View has no parent, cannot define constraints.")
+            return
+        }
+
+        NSLayoutConstraint.activate([
+            topAnchor.constraint(equalTo: superview.topAnchor, constant: insets.top),
+            bottomAnchor.constraint(equalTo: superview.bottomAnchor, constant: -insets.bottom),
+            leadingAnchor.constraint(equalTo: superview.leadingAnchor, constant: insets.left),
+            trailingAnchor.constraint(equalTo: superview.trailingAnchor, constant: -insets.right)
+        ])
+    }
+
     func fillSuperview() {
         fillSuperviewVertically()
         fillSuperviewHorizontally()
     }
 
     func fillSuperviewVertically() {
-        for constraint in makeConstraintToFillSuperviewVertically() { constraint.isActive = true }
+        NSLayoutConstraint.activate(makeConstraintToFillSuperviewVertically())
     }
 
     func fillSuperviewHorizontally() {
-        for constraint in makeConstraintToFillSuperviewHorizontally() { constraint.isActive = true }
+        NSLayoutConstraint.activate(makeConstraintToFillSuperviewHorizontally())
     }
 
     func makeConstraintToFillSuperviewVertically() -> [NSLayoutConstraint] {
@@ -61,5 +75,11 @@ internal extension UIView {
             leadingAnchor.constraint(equalTo: superview.leadingAnchor),
             trailingAnchor.constraint(equalTo: superview.trailingAnchor)
         ]
+    }
+
+    func preparedForAutoLayout() -> Self {
+        translatesAutoresizingMaskIntoConstraints = false
+
+        return self
     }
 }

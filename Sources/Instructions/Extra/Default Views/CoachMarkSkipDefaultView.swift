@@ -6,7 +6,7 @@ import UIKit
 /// A concrete implementation of the coach mark skip view and the
 /// default one provided by the library.
 public class CoachMarkSkipDefaultView: UIButton, CoachMarkSkipView {
-    // MARK: - Public properties
+    // MARK: Public properties
     public var skipControl: UIControl? {
         return self
     }
@@ -17,10 +17,17 @@ public class CoachMarkSkipDefaultView: UIButton, CoachMarkSkipView {
         }
     }
 
-    public var background: CoachMarkBackground { return bodyBackground }
-    private var bodyBackground: CoachMarkBodyBackground & UIView = CoachMarkBodyBackgroundView()
+    public var background: CoachMarkBodyBackgroundStyle { return bodyBackground }
+    public var isStyledByInstructions = true {
+        didSet {
+            bodyBackground.isHidden = !isStyledByInstructions
+        }
+    }
 
-    // MARK: - Private properties
+    // MARK: Private properties
+    private var bodyBackground = CoachMarkBodyBackgroundView()
+
+    // MARK: Initialization
     public override init(frame: CGRect) {
         super.init(frame: frame)
         accessibilityIdentifier = AccessibilityIdentifiers.skipButton

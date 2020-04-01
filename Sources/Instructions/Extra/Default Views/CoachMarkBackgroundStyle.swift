@@ -3,18 +3,14 @@
 
 import UIKit
 
-public protocol CoachMarkBackground {
+public protocol CoachMarkBackgroundStyle {
     var innerColor: UIColor { mutating get set }
     var borderColor: UIColor { mutating get set }
     var highlightedInnerColor: UIColor { mutating get set }
     var highlightedBorderColor: UIColor { mutating get set }
 }
 
-public protocol CoachMarkBodyBackground: CoachMarkBackground {
+public protocol CoachMarkBodyBackgroundStyle: CoachMarkBackgroundStyle {
     var isHighlighted: Bool { get set }
     var cornerRadius: CGFloat { get set }
-}
-
-extension CoachMarkBackground {
-
 }

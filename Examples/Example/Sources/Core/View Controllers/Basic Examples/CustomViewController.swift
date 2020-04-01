@@ -19,6 +19,7 @@ internal class CustomViewsViewController: ProfileViewController {
         self.coachMarksController.overlay.color = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.5)
 
         let skipView = CoachMarkSkipDefaultView()
+        skipView.isStyledByInstructions = false
         skipView.setTitle("Skip", for: .normal)
         skipView.setTitleColor(UIColor.white, for: .normal)
         skipView.setBackgroundImage(nil, for: .normal)

@@ -8,7 +8,7 @@ import UIKit
 /// default one provided by the library.
 public class CoachMarkBodyDefaultView: UIControl,
                                        CoachMarkBodyView {
-    // MARK: Public Properties
+    // MARK: Overriden Properties
     public override var isHighlighted: Bool {
         didSet {
             bodyBackground.isHighlighted = isHighlighted
@@ -16,28 +16,44 @@ public class CoachMarkBodyDefaultView: UIControl,
         }
     }
 
+    // MARK: Public Properties
     public var nextControl: UIControl? {
         return self
     }
 
-    public var nextLabel: UILabel { return views.nextLabel }
-    public var hintLabel: UITextView { return views.hintLabel }
-    public var background: CoachMarkBackground { return bodyBackground }
+    public lazy var nextLabel: UILabel = makeNextLabel()
+    public lazy var hintLabel: UITextView = makeHintTextView()
+    public lazy var separator: UIView = makeSeparator()
 
+    public var background: CoachMarkBodyBackgroundStyle { return bodyBackground }
+
+    // MARK: Delegates
     public weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate?
 
-    fileprivate var views = CoachMarkBodyDefaultViewHolder()
+    // MARK: Private Properties
+    private lazy var labelStackView: UIStackView = makeStackView()
 
-    private var bodyBackground: CoachMarkBodyBackground & UIView = CoachMarkBodyBackgroundView()
+    private let bodyBackground = CoachMarkBodyBackgroundView().preparedForAutoLayout()
 
     // MARK: - Initialization
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        setupAccessibilityIdentifier()
+        initializeViewHierarchy()
+    }
 
-        let helper = CoachMarkBodyDefaultViewHelper()
+    public init(frame: CGRect, hintText: String, nextText: String?) {
+        super.init(frame: frame)
+        initializeViewHierarchy()
 
-        createInnerViewHierarchy(using: helper)
+        separator.isHidden = (nextText == nil)
+        nextLabel.isHidden = (nextText == nil)
+
+        nextLabel.text = nextText
+        hintLabel.text = hintText
+    }
+
+    convenience public init(hintText: String, nextText: String?) {
+        self.init(frame: CGRect.zero, hintText: hintText, nextText: nextText)
     }
 
     convenience public init() {
@@ -47,70 +63,98 @@ public class CoachMarkBodyDefaultView: UIControl,
     required public init?(coder aDecoder: NSCoder) {
         fatalError("This class does not support NSCoding.")
     }
-
-    public init(frame: CGRect, hintText: String, nextText: String?) {
-        super.init(frame: frame)
-
-        let helper = CoachMarkBodyDefaultViewHelper()
-
-        if let next = nextText {
-            views.hintLabel.text = hintText
-            views.nextLabel.text = next
-            createInnerViewHierarchy(using: helper)
-        } else {
-            views.hintLabel.text = hintText
-            setupSimpleInnerViewHierarchy(using: helper)
-        }
-    }
-
-    convenience public init(hintText: String, nextText: String?) {
-        self.init(frame: CGRect.zero, hintText: hintText, nextText: nextText)
-    }
 }
 
-// MARK: - Private Inner Hierarchy create
+// MARK: - Private Methods
 private extension CoachMarkBodyDefaultView {
-    //Configure the CoachMark view with a hint message and a next message
-    func createInnerViewHierarchy(using helper: CoachMarkBodyDefaultViewHelper) {
+    func initializeViewHierarchy() {
+        backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = false
 
-        helper.configureBackground(bodyBackground, addTo: self)
-        helper.configureHint(hintLabel, addTo: self)
-        helper.configureNext(nextLabel, addTo: self)
-        helper.configureSeparator(self.views.separator, addTo: self)
+        initializeAccessibilityIdentifier()
 
-        let views = (hintLabel: self.views.hintLabel, nextLabel: self.views.nextLabel,
-                     separator: self.views.separator)
+        addSubview(bodyBackground)
+        addSubview(labelStackView)
 
-        self.addConstraints(helper.makeHorizontalConstraints(for: views))
+        bodyBackground.fillSuperview()
+        labelStackView.fillSuperview(insets: UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15))
+
+        labelStackView.addArrangedSubview(hintLabel)
+        labelStackView.addArrangedSubview(separator)
+        labelStackView.addArrangedSubview(nextLabel)
+
+        separator.heightAnchor.constraint(equalTo: labelStackView.heightAnchor,
+                                          constant: -10).isActive = true
     }
 
-    func setupSimpleInnerViewHierarchy(using helper: CoachMarkBodyDefaultViewHelper) {
-        translatesAutoresizingMaskIntoConstraints = false
-
-        let helper = CoachMarkBodyDefaultViewHelper()
-        helper.configureBackground(bodyBackground, addTo: self)
-        helper.configureSimpleHint(hintLabel, addTo: self)
-    }
-
-    func setupAccessibilityIdentifier() {
+    func initializeAccessibilityIdentifier() {
         accessibilityIdentifier = AccessibilityIdentifiers.coachMarkBody
-    }
-}
-
-// MARK: - View Holder
-private struct CoachMarkBodyDefaultViewHolder {
-    let nextLabel: UILabel = {
-        let nextLabel = UILabel()
         nextLabel.accessibilityIdentifier = AccessibilityIdentifiers.coachMarkNext
-        return nextLabel
-    }()
+        hintLabel.accessibilityIdentifier = AccessibilityIdentifiers.coachMarkHint
+    }
 
-    let hintLabel: UITextView = {
-        let nextLabel = UITextView()
-        nextLabel.accessibilityIdentifier = AccessibilityIdentifiers.coachMarkHint
-        return nextLabel
-    }()
+    // MARK: Builders
+    func makeHintTextView() -> UITextView {
+        let textView = UITextView().preparedForAutoLayout()
 
-    let separator = UIView()
+        textView.layoutManager.hyphenationFactor = 1.0
+        textView.textAlignment = .justified
+        textView.textColor = InstructionsColor.coachMarkLabel
+        textView.font = UIFont.systemFont(ofSize: 15.0)
+
+        textView.backgroundColor = .clear
+
+        textView.textContainerInset = .zero
+        textView.textContainer.lineFragmentPadding = 0
+
+        textView.isEditable = false
+        textView.isScrollEnabled = false
+        textView.isUserInteractionEnabled = false
+
+        textView.setContentCompressionResistancePriority(UILayoutPriority.required,
+                                                         for: .horizontal)
+        textView.setContentCompressionResistancePriority(UILayoutPriority.required,
+                                                         for: .vertical)
+        textView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .horizontal)
+        textView.setContentHuggingPriority(UILayoutPriority.defaultHigh, for: .vertical)
+
+        return textView
+    }
+
+    func makeNextLabel() -> UILabel {
+        let label = UILabel().preparedForAutoLayout()
+
+        label.textAlignment = .center
+        label.textColor = InstructionsColor.coachMarkLabel
+        label.font = UIFont.systemFont(ofSize: 17.0)
+
+        label.isUserInteractionEnabled = false
+
+        label.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
+        label.setContentCompressionResistancePriority(UILayoutPriority.required, for: .vertical)
+        label.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
+        label.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
+
+        return label
+    }
+
+    func makeSeparator() -> UIView {
+        let separator = UIView().preparedForAutoLayout()
+
+        separator.backgroundColor = InstructionsColor.coachMarkLabel
+
+        separator.widthAnchor.constraint(equalToConstant: 1).isActive = true
+
+        return separator
+    }
+
+    func makeStackView() -> UIStackView {
+        let stackView = UIStackView().preparedForAutoLayout()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.isUserInteractionEnabled = false
+        stackView.alignment = .center
+
+        return stackView
+    }
 }

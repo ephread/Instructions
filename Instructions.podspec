@@ -15,5 +15,4 @@ Pod::Spec.new do |spec|
 
   spec.source_files     = 'Instructions', 'Sources/**/*.swift'
   spec.exclude_files    = '**/*+AppExtensions.swift'
-  spec.resources        = ["Sources/**/*.xcassets"]
 end

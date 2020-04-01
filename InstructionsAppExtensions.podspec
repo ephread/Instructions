@@ -15,6 +15,5 @@ Pod::Spec.new do |spec|
 
   spec.source_files     = 'Instructions', 'Sources/**/*.swift'
   spec.exclude_files    = '**/*+Regular.swift'
-  spec.resources        = ["Sources/**/*.xcassets"]
   spec.pod_target_xcconfig = {'OTHER_SWIFT_FLAGS' => '-DINSTRUCTIONS_APP_EXTENSIONS'}
 end

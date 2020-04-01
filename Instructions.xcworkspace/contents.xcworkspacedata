@@ -17,6 +17,12 @@
       location = "group:.swiftlint.yml">
    </FileRef>
    <FileRef
+      location = "group:Instructions.podspec">
+   </FileRef>
+   <FileRef
+      location = "group:InstructionsAppExtensions.podspec">
+   </FileRef>
+   <FileRef
       location = "group:CHANGELOG.md">
    </FileRef>
    <FileRef

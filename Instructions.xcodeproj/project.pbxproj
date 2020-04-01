@@ -103,6 +103,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B6105E45243518FD00B45CDA /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B618494320C24D7D00315E1C /* PauseStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PauseStyle.swift; sourceTree = "<group>"; };
 		B61E448A1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurringOverlayStyleManager.swift; sourceTree = "<group>"; };
 		B61E448D1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslucentOverlayStyleManager.swift; sourceTree = "<group>"; };
@@ -298,7 +299,7 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		B6CCD0F31EE40F2C00D02022 /* Instructions */ = {
+		B6CCD0F31EE40F2C00D02022 /* InstructionsPackage */ = {
 			isa = PBXGroup;
 			children = (
 				C6D4D0E41D592D9800F14FC5 /* Core */,
@@ -310,7 +311,7 @@
 				C64FB33B1BB6CC5B0081E5B6 /* Supporting Files */,
 				C64FB3531BB747590081E5B6 /* Instructions.swift */,
 			);
-			path = Instructions;
+			path = InstructionsPackage;
 			sourceTree = "<group>";
 		};
 		C61458B41BBB01F2006EB4F2 /* Enums */ = {
@@ -399,6 +400,7 @@
 			children = (
 				C64FB2EA1BB6CA8A0081E5B6 /* Products */,
 				C64FB3211BB6CB5C0081E5B6 /* Sources */,
+				B6105E45243518FD00B45CDA /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -414,7 +416,7 @@
 		C64FB3211BB6CB5C0081E5B6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				B6CCD0F31EE40F2C00D02022 /* Instructions */,
+				B6CCD0F31EE40F2C00D02022 /* InstructionsPackage */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -728,7 +730,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Instructions/Supporting Files/InfoAppExtensions.plist";
+				INFOPLIST_FILE = "Sources/InstructionsPackage/Supporting Files/InfoAppExtensions.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -758,7 +760,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "$(SRCROOT)/Sources/Instructions/Supporting Files/InfoAppExtensions.plist";
+				INFOPLIST_FILE = "Sources/InstructionsPackage/Supporting Files/InfoAppExtensions.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -907,7 +909,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "Sources/Instructions/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Sources/InstructionsPackage/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -936,7 +938,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Sources/Instructions/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Sources/InstructionsPackage/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

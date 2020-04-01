@@ -299,7 +299,7 @@
 			path = Enums;
 			sourceTree = "<group>";
 		};
-		B6CCD0F31EE40F2C00D02022 /* InstructionsPackage */ = {
+		B6CCD0F31EE40F2C00D02022 /* Instructions */ = {
 			isa = PBXGroup;
 			children = (
 				C6D4D0E41D592D9800F14FC5 /* Core */,
@@ -311,7 +311,7 @@
 				C64FB33B1BB6CC5B0081E5B6 /* Supporting Files */,
 				C64FB3531BB747590081E5B6 /* Instructions.swift */,
 			);
-			path = InstructionsPackage;
+			path = Instructions;
 			sourceTree = "<group>";
 		};
 		C61458B41BBB01F2006EB4F2 /* Enums */ = {
@@ -416,7 +416,7 @@
 		C64FB3211BB6CB5C0081E5B6 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				B6CCD0F31EE40F2C00D02022 /* InstructionsPackage */,
+				B6CCD0F31EE40F2C00D02022 /* Instructions */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -730,7 +730,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "Sources/InstructionsPackage/Supporting Files/InfoAppExtensions.plist";
+				INFOPLIST_FILE = "Sources/Instructions/Supporting Files/InfoAppExtensions.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -760,7 +760,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "Sources/InstructionsPackage/Supporting Files/InfoAppExtensions.plist";
+				INFOPLIST_FILE = "Sources/Instructions/Supporting Files/InfoAppExtensions.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -909,7 +909,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
-				INFOPLIST_FILE = "Sources/InstructionsPackage/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Sources/Instructions/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -938,7 +938,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Sources/InstructionsPackage/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Sources/Instructions/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -8,7 +8,7 @@ class CustomExampleTests: XCTestCase {
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
-        XCUIApplication().launch()
+        XCUIApplication().launchWithAnimationsDisabled()
     }
 
     func testTapOnNextButton() {

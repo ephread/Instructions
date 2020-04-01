@@ -9,7 +9,7 @@ class TransitionExampleTests: XCTestCase {
         super.setUp()
         continueAfterFailure = false
 
-        XCUIApplication().launch()
+        XCUIApplication().launchWithAnimationsDisabled()
     }
 
     func testTapThroughCutout() {

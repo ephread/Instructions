@@ -207,6 +207,7 @@ private extension CoachMarksController {
     }
 
     func buildNewWindow() -> UIWindow {
+#if !INSTRUCTIONS_APP_EXTENSIONS
         if #available(iOS 13.0, *) {
             if let windowScene = UIApplication.shared.activeScene {
                 let window = InstructionsWindow(windowScene: windowScene)
@@ -214,9 +215,11 @@ private extension CoachMarksController {
 
                 return window
             }
+        } else {
+            let bounds = UIApplication.shared.keyWindow?.bounds ?? UIScreen.main.bounds
+            return InstructionsWindow(frame: bounds)
         }
-
-        let bounds = UIApplication.shared.keyWindow?.bounds ?? UIScreen.main.bounds
-        return InstructionsWindow(frame: bounds)
+#endif
+        return InstructionsWindow(frame: UIScreen.main.bounds)
     }
 }

@@ -45,24 +45,19 @@ public class OverlayManager {
     }
 
     public var cutoutPath: UIBezierPath? {
-        get {
-            return overlayView.cutoutPath
-        }
-
-        set {
-            overlayView.cutoutPath = newValue
-        }
+        get { return overlayView.cutoutPath }
+        set { overlayView.cutoutPath = newValue }
     }
 
     /// Used to temporarily enable touch forwarding isnide the cutoutPath.
     public var allowTouchInsideCutoutPath: Bool {
-        get {
-            return overlayView.allowTouchInsideCutoutPath
-        }
+        get { return overlayView.allowTouchInsideCutoutPath }
+        set { overlayView.allowTouchInsideCutoutPath = newValue }
+    }
 
-        set {
-            overlayView.allowTouchInsideCutoutPath = newValue
-        }
+    public var forwardTouchEvents: Bool {
+        get { return overlayView.forwardTouchEvents }
+        set { overlayView.forwardTouchEvents = newValue }
     }
 
     // MARK: - Internal Properties

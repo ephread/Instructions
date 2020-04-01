@@ -21,6 +21,9 @@ Released on 2020-XX-XX.
 - Full dark mode support
 - Customizable default Coachmark
 - Support of Swift Package Manager
+- Let overlay forward touch events with a new option [#212] 
+
+[#212]: https://github.com/ephread/Instructions/issues/212
 
 ### Removed
 - Asset Bundles

@@ -273,7 +273,8 @@ extension CoachMarksViewController {
               completion: (() -> Void)? = nil) {
         disableInteraction()
         coachMark.computeMetadata(inFrame: instructionsRootView.frame)
-        let passthrough = coachMark.allowTouchInsideCutoutPath
+        let passthrough =
+            coachMark.allowTouchInsideCutoutPath || overlayManager.forwardTouchEvents
         let coachMarkView = coachMarkDisplayManager.createCoachMarkView(from: coachMark,
                                                                         at: index)
 

@@ -15,6 +15,7 @@ class OverlayView: UIView {
 
     /// Used to temporarily enable touch forwarding isnide the cutoutPath.
     public var allowTouchInsideCutoutPath: Bool = false
+    public var forwardTouchEvents: Bool = false
 
     // MARK: - Initialization
     init() {
@@ -48,6 +49,8 @@ class OverlayView: UIView {
         let hitView = super.hitTest(point, with: event)
 
         if hitView == self {
+            guard !forwardTouchEvents else { return nil }
+
             guard let cutoutPath = self.cutoutPath else {
                 return hitView
             }

@@ -211,7 +211,7 @@ private extension CoachMarksController {
         if #available(iOS 13.0, *) {
             if let windowScene = UIApplication.shared.activeScene {
                 let window = InstructionsWindow(windowScene: windowScene)
-                window.frame = UIScreen.main.bounds
+                window.frame = UIApplication.shared.keyWindow?.bounds ?? UIScreen.main.bounds
 
                 return window
             }

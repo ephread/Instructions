@@ -69,44 +69,6 @@ class CoachMarkHelperTests: XCTestCase {
         XCTAssertTrue(control)
     }
 
-    func testThatTopArrowIsLoaded() {
-        let views = coachMarkHelper.makeDefaultCoachViews(arrowOrientation: .top)
-        let views2 = coachMarkHelper.makeDefaultCoachViews(withArrow: true,
-                                                           arrowOrientation: .top,
-                                                           hintText: "", nextText: nil)
-
-        let image = UIImage(namedInInstructions: "arrow-top")
-
-        XCTAssertTrue(views.arrowView?.image == image)
-        XCTAssertTrue(views2.arrowView?.image == image)
-    }
-
-    func testThatTopArrowIsLoadedByDefault() {
-        let views = coachMarkHelper.makeDefaultCoachViews()
-        let views2 = coachMarkHelper.makeDefaultCoachViews(arrowOrientation: nil)
-        let views3 = coachMarkHelper.makeDefaultCoachViews(withArrow: true,
-                                                           arrowOrientation: nil,
-                                                           hintText: "", nextText: nil)
-
-        let image = UIImage(namedInInstructions: "arrow-top")
-
-        XCTAssertTrue(views.arrowView?.image == image)
-        XCTAssertTrue(views2.arrowView?.image == image)
-        XCTAssertTrue(views3.arrowView?.image == image)
-    }
-
-    func testThatBottomArrowIsLoaded() {
-        let views = coachMarkHelper.makeDefaultCoachViews(arrowOrientation: .bottom)
-        let views2 = coachMarkHelper.makeDefaultCoachViews(withArrow: true,
-                                                           arrowOrientation: .bottom,
-                                                           hintText: "", nextText: nil)
-
-        let image = UIImage(namedInInstructions: "arrow-bottom")
-
-        XCTAssertTrue(views.arrowView?.image == image)
-        XCTAssertTrue(views2.arrowView?.image == image)
-    }
-
     func testThatCoachMarkViewHasNoArrow() {
         let views1 = coachMarkHelper.makeDefaultCoachViews(withArrow: false)
         let views2 = coachMarkHelper.makeDefaultCoachViews(withArrow: false, arrowOrientation: .bottom)
@@ -128,7 +90,7 @@ class CoachMarkHelperTests: XCTestCase {
     func testThatCoachMarkBodyDoesNotHaveNextText() {
         let views = coachMarkHelper.makeDefaultCoachViews(withNextText: false)
 
-        XCTAssertTrue(views.bodyView.nextLabel.superview == nil)
+        XCTAssertTrue(views.bodyView.nextLabel.isHidden)
     }
 
     func testThatCoachMarkBodyHasRightText() {
@@ -137,11 +99,11 @@ class CoachMarkHelperTests: XCTestCase {
 
         XCTAssertTrue(views.bodyView.hintLabel.text == "Hint")
         XCTAssertTrue(views.bodyView.nextLabel.text == nil)
-        XCTAssertTrue(views.bodyView.nextLabel.superview == nil)
+        XCTAssertTrue(views.bodyView.nextLabel.isHidden)
 
         XCTAssertTrue(views2.bodyView.hintLabel.text == "Hint")
         XCTAssertTrue(views2.bodyView.nextLabel.text == "Next")
-        XCTAssertTrue(views2.bodyView.nextLabel.superview != nil)
+        XCTAssertFalse(views2.bodyView.nextLabel.isHidden)
     }
 
     func testThatUpdateDidNotOccur() {

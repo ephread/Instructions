@@ -102,6 +102,11 @@ class TranslucentOverlayStyleManager: OverlayStyleManager {
         CATransaction.commit()
     }
 
+    func updateStyle(with traitCollection: UITraitCollection) {
+        overlayLayer.backgroundColor = self.color.cgColor
+        overlayView?.setNeedsDisplay()
+    }
+
     // MARK: Private methods
     private func updateCutoutPath() {
         cutoutMaskLayer.removeFromSuperlayer()

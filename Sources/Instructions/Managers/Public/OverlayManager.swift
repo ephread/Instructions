@@ -8,7 +8,7 @@ import UIKit
 public class OverlayManager {
     // MARK: - Public properties
     /// The background color of the overlay
-    public var color: UIColor = Constants.overlayColor {
+    public var color: UIColor = InstructionsColor.overlay {
         didSet {
             overlayStyleManager = updateOverlayStyleManager()
         }
@@ -165,6 +165,10 @@ public class OverlayManager {
     func viewDidTransition() {
         cutoutPath = nil
         overlayStyleManager.viewDidTransition()
+    }
+
+    func updateStyle(with traitCollection: UITraitCollection) {
+        overlayStyleManager.updateStyle(with: traitCollection)
     }
 
     private func updateDependencies(of overlayAnimator: BlurringOverlayStyleManager) {

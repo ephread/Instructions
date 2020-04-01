@@ -42,4 +42,6 @@ protocol OverlayStyleManager: class {
     ///   - completion: a block to execute after compleion.
     func showCutout(_ show: Bool, withDuration duration: TimeInterval,
                     completion: ((Bool) -> Void)?)
+
+    func updateStyle(with traitCollection: UITraitCollection)
 }

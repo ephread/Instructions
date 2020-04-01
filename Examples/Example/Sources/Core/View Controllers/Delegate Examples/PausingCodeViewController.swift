@@ -10,8 +10,10 @@ internal class PausingCodeViewController: ProfileViewController {
 
     let text1 = "That's a beautiful navigation bar."
     let text2 = "We're going to pause the flow. Use this button to start it again."
-    let text2Alternate = "We're going to pause the flow, without hiding anything. " +
-                         "Use the skip button to get out."
+    let text2HideNothing = "We're going to pause the flow, without hiding anything (which means " +
+                           "that the UI will be blocked). Use the skip button to get out."
+    let text2HideOverlay = "We're going to pause the flow, hiding the overlay (while " +
+                           "keeping the UI blocked). Use the skip button to get out."
     let text3 = "Good job, that's all folks!"
 
     var pauseStyle: PauseStyle = .hideNothing
@@ -96,10 +98,13 @@ extension PausingCodeViewController: CoachMarksControllerDataSource {
             coachViews.bodyView.hintLabel.text = text1
             coachViews.bodyView.nextLabel.text = nextButtonText
         case 1:
-            if pauseStyle == .hideInstructions {
+            switch pauseStyle {
+            case .hideInstructions:
                 coachViews.bodyView.hintLabel.text = text2
-            } else {
-                coachViews.bodyView.hintLabel.text = text2Alternate
+            case .hideOverlay:
+                coachViews.bodyView.hintLabel.text = text2HideOverlay
+            case .hideNothing:
+                coachViews.bodyView.hintLabel.text = text2HideNothing
             }
 
             coachViews.bodyView.nextLabel.text = nextButtonText

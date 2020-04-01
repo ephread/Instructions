@@ -23,7 +23,7 @@ class DefaultExampleTests: XCTestCase {
         coachMark.tap()
         coachMark.tap()
 
-        app.navigationBars["Profile"].buttons["Instructions"].tap()
+        app.navigationBars["Default"].buttons["Instructions"].tap()
     }
 
     func testTapOnOverlay() {
@@ -39,7 +39,7 @@ class DefaultExampleTests: XCTestCase {
         overlay.tap()
         overlay.tap()
 
-        app.navigationBars["Profile"].buttons["Instructions"].tap()
+        app.navigationBars["Default"].buttons["Instructions"].tap()
     }
 
     func testTapOnSkip() {
@@ -50,7 +50,7 @@ class DefaultExampleTests: XCTestCase {
         _ = skipButton.waitForExistence(timeout: 5)
         skipButton.tap()
 
-        app.navigationBars["Profile"].buttons["Instructions"].tap()
+        app.navigationBars["Default"].buttons["Instructions"].tap()
     }
 
     func testMixedTaps() {
@@ -70,6 +70,6 @@ class DefaultExampleTests: XCTestCase {
         let skipButton = app.buttons["AccessibilityIdentifiers.skipButton"]
         skipButton.tap()
 
-        app.navigationBars["Profile"].buttons["Instructions"].tap()
+        app.navigationBars["Default"].buttons["Instructions"].tap()
     }
 }

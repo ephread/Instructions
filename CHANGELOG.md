@@ -2,8 +2,43 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
-## [1.3.1](https://github.com/ephread/Instructions/releases/tag/1.3.1)
+## [1.5.0](https://github.com/ephread/Instructions/releases/tag/1.5.0)
+Released on 2020-XX-XX.
+
+### Fixed
+- Fix [#231] - Support iOS 13's `WindowScene`
+
+[#231]: https://github.com/ephread/Instructions/issues/231
+
+### Changed
+- Move from Travis to Github Actions
+- Refactor example project
+
+### Added
+- Full dark mode support
+- Customizable default Coachmark
+
+### Removed
+- Asset Bundles
+
+## [1.4.0](https://github.com/ephread/Instructions/releases/tag/1.4.0)
 Released on 2019-05-04.
+
+### Fixed
+- Fix [#218] - Division by zero during layout phase
+
+### Changed
+- Turn runtime checks into cimpile time checks (protocol composition)
+- Improve error message when `numberOfCoachMarks <= 0`
+
+### Removed
+- Remove deprecated methods
+- Remove LFS in snapshot submodule
+
+[#218]: https://github.com/ephread/Instructions/issues/218
+
+## [1.3.1](https://github.com/ephread/Instructions/releases/tag/1.3.1)
+Released on 2019-10-05.
 
 ### Fixed
 - Fix [#204] - `spec.swift_version` set to 5 instead of 5.0

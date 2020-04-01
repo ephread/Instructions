@@ -167,6 +167,10 @@ public class OverlayManager {
         overlayStyleManager.viewDidTransition()
     }
 
+    func updateStyle(with traitCollection: UITraitCollection) {
+        overlayStyleManager.updateStyle(with: traitCollection)
+    }
+
     private func updateDependencies(of overlayAnimator: BlurringOverlayStyleManager) {
         overlayAnimator.overlayView = self.overlayView
         overlayAnimator.snapshotDelegate = self.overlayDelegate

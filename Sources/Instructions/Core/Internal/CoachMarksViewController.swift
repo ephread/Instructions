@@ -116,6 +116,11 @@ class CoachMarksViewController: UIViewController {
 
     override func loadView() { view = PassthroughView() }
 
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        overlayManager.updateStyle(with: traitCollection)
+    }
+
     // MARK: - Internal Methods
     /// Will attach the controller as a child of the given window.
     ///

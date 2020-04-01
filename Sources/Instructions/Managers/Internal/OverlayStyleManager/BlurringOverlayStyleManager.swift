@@ -165,6 +165,10 @@ class BlurringOverlayStyleManager: OverlayStyleManager {
         })
     }
 
+    func updateStyle(with traitCollection: UITraitCollection) {
+        overlayView?.setNeedsDisplay()
+    }
+
     // MARK: Private methods
     private func setUpOverlay() {
         guard let cutoutOverlays = self.makeSnapshotOverlays() else { return }

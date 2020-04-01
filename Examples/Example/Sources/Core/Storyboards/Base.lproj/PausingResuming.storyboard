@@ -35,8 +35,8 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgL-fl-PLX">
-                                                <rect key="frame" x="34.5" y="191" width="59" height="30"/>
-                                                <state key="normal" title="Tap Me !">
+                                                <rect key="frame" x="36.5" y="191" width="55" height="30"/>
+                                                <state key="normal" title="Tap Me!">
                                                     <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
                                                 <connections>

@@ -69,44 +69,6 @@ class CoachMarkHelperTests: XCTestCase {
         XCTAssertTrue(control)
     }
 
-    func testThatTopArrowIsLoaded() {
-        let views = coachMarkHelper.makeDefaultCoachViews(arrowOrientation: .top)
-        let views2 = coachMarkHelper.makeDefaultCoachViews(withArrow: true,
-                                                           arrowOrientation: .top,
-                                                           hintText: "", nextText: nil)
-
-        let image = UIImage(namedInInstructions: "arrow-top")
-
-        XCTAssertTrue(views.arrowView?.image == image)
-        XCTAssertTrue(views2.arrowView?.image == image)
-    }
-
-    func testThatTopArrowIsLoadedByDefault() {
-        let views = coachMarkHelper.makeDefaultCoachViews()
-        let views2 = coachMarkHelper.makeDefaultCoachViews(arrowOrientation: nil)
-        let views3 = coachMarkHelper.makeDefaultCoachViews(withArrow: true,
-                                                           arrowOrientation: nil,
-                                                           hintText: "", nextText: nil)
-
-        let image = UIImage(namedInInstructions: "arrow-top")
-
-        XCTAssertTrue(views.arrowView?.image == image)
-        XCTAssertTrue(views2.arrowView?.image == image)
-        XCTAssertTrue(views3.arrowView?.image == image)
-    }
-
-    func testThatBottomArrowIsLoaded() {
-        let views = coachMarkHelper.makeDefaultCoachViews(arrowOrientation: .bottom)
-        let views2 = coachMarkHelper.makeDefaultCoachViews(withArrow: true,
-                                                           arrowOrientation: .bottom,
-                                                           hintText: "", nextText: nil)
-
-        let image = UIImage(namedInInstructions: "arrow-bottom")
-
-        XCTAssertTrue(views.arrowView?.image == image)
-        XCTAssertTrue(views2.arrowView?.image == image)
-    }
-
     func testThatCoachMarkViewHasNoArrow() {
         let views1 = coachMarkHelper.makeDefaultCoachViews(withArrow: false)
         let views2 = coachMarkHelper.makeDefaultCoachViews(withArrow: false, arrowOrientation: .bottom)

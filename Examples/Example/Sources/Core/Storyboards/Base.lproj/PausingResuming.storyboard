@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wDi-0g-diO" userLabel="Container">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r3K-f5-qYv" userLabel="Avatar">
-                                        <rect key="frame" x="143" y="298.5" width="128" height="221"/>
+                                        <rect key="frame" x="143" y="242" width="128" height="221"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face-male" translatesAutoresizingMaskIntoConstraints="NO" id="5TO-mp-ADR">
                                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
@@ -67,7 +67,7 @@
                                         </variation>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Uci-9E-Lue">
-                                        <rect key="frame" x="0.0" y="736" width="414" height="82"/>
+                                        <rect key="frame" x="0.0" y="790" width="414" height="116"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wJM-AL-63v">
                                                 <rect key="frame" x="16" y="16" width="87.5" height="50"/>
@@ -115,10 +115,9 @@ karma</string>
                                 <constraints>
                                     <constraint firstItem="Uci-9E-Lue" firstAttribute="leading" secondItem="wDi-0g-diO" secondAttribute="leading" id="FNN-jZ-eBS"/>
                                     <constraint firstAttribute="trailing" secondItem="Uci-9E-Lue" secondAttribute="trailing" id="POl-Zu-Msj"/>
-                                    <constraint firstAttribute="bottom" secondItem="Uci-9E-Lue" secondAttribute="bottom" id="U6F-W1-h38"/>
                                     <constraint firstAttribute="height" constant="300" id="WSD-pk-G0j"/>
-                                    <constraint firstItem="r3K-f5-qYv" firstAttribute="centerY" secondItem="wDi-0g-diO" secondAttribute="centerY" id="naY-aK-9p0"/>
-                                    <constraint firstItem="r3K-f5-qYv" firstAttribute="centerX" secondItem="wDi-0g-diO" secondAttribute="centerX" id="rN4-Gb-zna"/>
+                                    <constraint firstItem="hgL-fl-PLX" firstAttribute="centerX" secondItem="wDi-0g-diO" secondAttribute="centerX" id="cN2-Fg-cGP"/>
+                                    <constraint firstItem="hgL-fl-PLX" firstAttribute="centerY" secondItem="wDi-0g-diO" secondAttribute="centerY" id="mns-VO-nu1"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -129,10 +128,11 @@ karma</string>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="wDi-0g-diO" firstAttribute="leading" secondItem="Tsg-pb-Wdh" secondAttribute="leading" id="3Aa-JM-0Cq"/>
-                            <constraint firstItem="wDi-0g-diO" firstAttribute="trailing" secondItem="Tsg-pb-Wdh" secondAttribute="trailing" id="JoT-wo-si9"/>
-                            <constraint firstItem="wDi-0g-diO" firstAttribute="top" secondItem="Tsg-pb-Wdh" secondAttribute="top" id="ZfR-B4-hkV"/>
-                            <constraint firstItem="Tsg-pb-Wdh" firstAttribute="bottom" secondItem="wDi-0g-diO" secondAttribute="bottom" id="gUh-st-3At"/>
+                            <constraint firstItem="Uci-9E-Lue" firstAttribute="bottom" secondItem="Tsg-pb-Wdh" secondAttribute="bottom" constant="44" id="1ug-bP-fKe"/>
+                            <constraint firstItem="wDi-0g-diO" firstAttribute="leading" secondItem="3wU-jX-d22" secondAttribute="leading" id="3Aa-JM-0Cq"/>
+                            <constraint firstItem="wDi-0g-diO" firstAttribute="trailing" secondItem="3wU-jX-d22" secondAttribute="trailing" id="JoT-wo-si9"/>
+                            <constraint firstItem="wDi-0g-diO" firstAttribute="top" secondItem="3wU-jX-d22" secondAttribute="top" id="ZfR-B4-hkV"/>
+                            <constraint firstAttribute="bottom" secondItem="wDi-0g-diO" secondAttribute="bottom" id="gUh-st-3At"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Tsg-pb-Wdh"/>
                     </view>

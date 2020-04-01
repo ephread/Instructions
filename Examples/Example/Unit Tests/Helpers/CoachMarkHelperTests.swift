@@ -90,7 +90,7 @@ class CoachMarkHelperTests: XCTestCase {
     func testThatCoachMarkBodyDoesNotHaveNextText() {
         let views = coachMarkHelper.makeDefaultCoachViews(withNextText: false)
 
-        XCTAssertTrue(views.bodyView.nextLabel.superview == nil)
+        XCTAssertTrue(views.bodyView.nextLabel.isHidden)
     }
 
     func testThatCoachMarkBodyHasRightText() {
@@ -99,11 +99,11 @@ class CoachMarkHelperTests: XCTestCase {
 
         XCTAssertTrue(views.bodyView.hintLabel.text == "Hint")
         XCTAssertTrue(views.bodyView.nextLabel.text == nil)
-        XCTAssertTrue(views.bodyView.nextLabel.superview == nil)
+        XCTAssertTrue(views.bodyView.nextLabel.isHidden)
 
         XCTAssertTrue(views2.bodyView.hintLabel.text == "Hint")
         XCTAssertTrue(views2.bodyView.nextLabel.text == "Next")
-        XCTAssertTrue(views2.bodyView.nextLabel.superview != nil)
+        XCTAssertFalse(views2.bodyView.nextLabel.isHidden)
     }
 
     func testThatUpdateDidNotOccur() {

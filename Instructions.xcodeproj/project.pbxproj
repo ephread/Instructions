@@ -76,7 +76,6 @@
 		C6417E291D291A8A004D13EA /* CoachMarkBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB34A1BB6DD1B0081E5B6 /* CoachMarkBodyView.swift */; };
 		C6417E2A1D291A8A004D13EA /* CoachMark.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3461BB6D91E0081E5B6 /* CoachMark.swift */; };
 		C6417E2D1D291A8A004D13EA /* Instructions.h in Headers */ = {isa = PBXBuildFile; fileRef = C64FB3231BB6CB5C0081E5B6 /* Instructions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C6417E2F1D291A8A004D13EA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C64FB3791BB7DE930081E5B6 /* Images.xcassets */; };
 		C64FB3251BB6CB5C0081E5B6 /* Instructions.h in Headers */ = {isa = PBXBuildFile; fileRef = C64FB3231BB6CB5C0081E5B6 /* Instructions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C64FB3431BB6D81C0081E5B6 /* CoachMarksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3411BB6D1020081E5B6 /* CoachMarksViewController.swift */; };
 		C64FB3441BB6D81C0081E5B6 /* CoachMarksControllerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB33D1BB6CE2C0081E5B6 /* CoachMarksControllerDataSource.swift */; };
@@ -87,7 +86,6 @@
 		C64FB34D1BB6DEDC0081E5B6 /* CoachMarkArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB34C1BB6DEDC0081E5B6 /* CoachMarkArrowView.swift */; };
 		C64FB3521BB6FA250081E5B6 /* CoachMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3511BB6FA250081E5B6 /* CoachMarkView.swift */; };
 		C64FB3541BB747590081E5B6 /* Instructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3531BB747590081E5B6 /* Instructions.swift */; };
-		C64FB37A1BB7DE930081E5B6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C64FB3791BB7DE930081E5B6 /* Images.xcassets */; };
 		C64FB37E1BB828E50081E5B6 /* CoachMarkBodyHighlightArrowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB37D1BB828E50081E5B6 /* CoachMarkBodyHighlightArrowDelegate.swift */; };
 		C67101001BBFE3C50005DAFC /* CoachMarkPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = C67100FF1BBFE3C50005DAFC /* CoachMarkPosition.swift */; };
 		C6D365101D57C5BB00D2C6A2 /* CoachMarksController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6D3650F1D57C5BB00D2C6A2 /* CoachMarksController.swift */; };
@@ -149,7 +147,6 @@
 		C64FB34C1BB6DEDC0081E5B6 /* CoachMarkArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkArrowView.swift; sourceTree = "<group>"; };
 		C64FB3511BB6FA250081E5B6 /* CoachMarkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkView.swift; sourceTree = "<group>"; };
 		C64FB3531BB747590081E5B6 /* Instructions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Instructions.swift; sourceTree = "<group>"; };
-		C64FB3791BB7DE930081E5B6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C64FB37D1BB828E50081E5B6 /* CoachMarkBodyHighlightArrowDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkBodyHighlightArrowDelegate.swift; sourceTree = "<group>"; };
 		C67100FF1BBFE3C50005DAFC /* CoachMarkPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkPosition.swift; sourceTree = "<group>"; };
 		C6D3650F1D57C5BB00D2C6A2 /* CoachMarksController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarksController.swift; sourceTree = "<group>"; };
@@ -425,7 +422,6 @@
 		C64FB33B1BB6CC5B0081E5B6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C64FB3791BB7DE930081E5B6 /* Images.xcassets */,
 				C64FB3221BB6CB5C0081E5B6 /* Info.plist */,
 				C6417E351D291EFA004D13EA /* InfoAppExtensions.plist */,
 				C64FB3231BB6CB5C0081E5B6 /* Instructions.h */,
@@ -564,7 +560,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C6417E2F1D291A8A004D13EA /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,7 +567,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C64FB37A1BB7DE930081E5B6 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

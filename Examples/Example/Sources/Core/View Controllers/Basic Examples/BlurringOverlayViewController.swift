@@ -10,6 +10,6 @@ internal class BlurringOverlayViewController: DefaultViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.coachMarksController.overlay.blurEffectStyle = .extraLight
+        self.coachMarksController.overlay.blurEffectStyle = .regular
     }
 }

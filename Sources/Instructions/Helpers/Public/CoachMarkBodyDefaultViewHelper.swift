@@ -77,7 +77,7 @@ open class CoachMarkBodyDefaultViewHelper {
     }
 
     private func configureTextPropertiesOfHint(_ hint: UITextView) {
-        hint.textColor = UIColor.darkGray
+        hint.textColor = InstructionsColor.coachMarkLabel
         hint.font = UIFont.systemFont(ofSize: 15.0)
         hint.textAlignment = .justified
         hint.layoutManager.hyphenationFactor = 1.0
@@ -85,7 +85,7 @@ open class CoachMarkBodyDefaultViewHelper {
     }
 
     private func configureTextPropertiesOfNext(_ next: UILabel) {
-        next.textColor = UIColor.darkGray
+        next.textColor = InstructionsColor.coachMarkLabel
         next.font = UIFont.systemFont(ofSize: 17.0)
         next.textAlignment = .center
     }

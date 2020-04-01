@@ -22,11 +22,11 @@ class CoachMarkBodyBackgroundView: UIView,
 
     public var cornerRadius: CGFloat = 8
 
-    public lazy var innerColor: UIColor = makeInnerColor()
-    public lazy var borderColor: UIColor = makeBorderColor()
+    public lazy var innerColor = InstructionsColor.coachMarkInner
+    public lazy var borderColor = InstructionsColor.coachMarkOuter
 
-    public lazy var highlightedInnerColor: UIColor = makeHighlightedInnerColor()
-    public lazy var highlightedBorderColor: UIColor = makeBorderColor()
+    public lazy var highlightedInnerColor = InstructionsColor.coachMarkHighlightedInner
+    public lazy var highlightedBorderColor = InstructionsColor.coachMarkOuter
 
     // MARK: - Initialization
     override public init(frame: CGRect) {

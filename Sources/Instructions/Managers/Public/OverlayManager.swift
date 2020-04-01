@@ -8,7 +8,7 @@ import UIKit
 public class OverlayManager {
     // MARK: - Public properties
     /// The background color of the overlay
-    public var color: UIColor = Constants.overlayColor {
+    public var color: UIColor = InstructionsColor.overlay {
         didSet {
             overlayStyleManager = updateOverlayStyleManager()
         }

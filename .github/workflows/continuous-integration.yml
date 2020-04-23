@@ -46,8 +46,7 @@ jobs:
           submodules: 'recursive'
 
       - name: Install test dependencies
-        run: gem install slather
-        run: cd "Examples" && carthage bootstrap --platform ios && cd ..
+        run: gem install slather && cd "Examples" && carthage bootstrap --platform ios && cd ..
 
       - name: Run Cocoapods' linter
         if: env.run_pod_lint == 'true'

@@ -20,8 +20,7 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
         storyboard = UIStoryboard(name: "Main", bundle: nil)
         fileNameOptions = [.device, .OS, .screenSize, .screenScale]
 
-        UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue,
-                                  forKey: "orientation")
+        XCUIDevice.shared.orientation = .portrait
         delegateEndExpectation = nil
     }
 
@@ -76,14 +75,13 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
             snapshotView = window
         }
 
-        let orientation = UIDevice.current.orientation
+        let orientation = XCUIDevice.shared.orientation
         FBSnapshotVerifyView(snapshotView,
                              identifier: "_i\(index)_o\(orientation.rawValue)_\(presentationContext)")
 
         if delegateEndExpectation.description == "DidShowWithRotation",
            index == 2, orientation == .portrait {
-            UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue,
-                                      forKey: "orientation")
+            XCUIDevice.shared.orientation = .landscapeRight
         } else {
             coachMarksController.flow.showNext()
         }

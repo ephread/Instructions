@@ -23,11 +23,37 @@ class InstructionsWindow: UIWindow {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let hitView = super.hitTest(point, with: event)
 
-        if hitView == self {
+        if let hitView = hitView, (hitView == self || insertedViewsToIgnore.contains(hitView)) {
             return nil
         }
 
         return hitView
+    }
+
+    // On iPad Pros, since iOS 13, a blocking view is present in the UIKit
+    // hierarchy. Here we're simply grabbing all these intermediate UIKit views
+    // so that we can ignore them in hitTest.
+    //
+    // See #234 and https://forums.developer.apple.com/thread/122174
+    var insertedViewsToIgnore: [UIView] {
+        return recursiveSubviews(of: self)
+    }
+
+    func recursiveSubviews(of view: UIView) -> [UIView] {
+        // We just hit the bottom.
+        guard !(view is PassthroughView) && !(view is InstructionsRootView) else {
+            return []
+        }
+
+        var subviews = view.subviews.filter {
+            !($0 is PassthroughView) && !($0 is InstructionsRootView)
+        }
+
+        for subview in view.subviews {
+            subviews.append(contentsOf: recursiveSubviews(of: subview))
+        }
+
+        return subviews
     }
 }
 

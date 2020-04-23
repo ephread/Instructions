@@ -67,7 +67,7 @@
                                         </variation>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Uci-9E-Lue">
-                                        <rect key="frame" x="0.0" y="790" width="414" height="116"/>
+                                        <rect key="frame" x="0.0" y="780" width="414" height="82"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wJM-AL-63v">
                                                 <rect key="frame" x="16" y="16" width="87.5" height="50"/>
@@ -128,7 +128,7 @@ karma</string>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Uci-9E-Lue" firstAttribute="bottom" secondItem="Tsg-pb-Wdh" secondAttribute="bottom" constant="44" id="1ug-bP-fKe"/>
+                            <constraint firstItem="Uci-9E-Lue" firstAttribute="bottom" secondItem="Tsg-pb-Wdh" secondAttribute="bottom" id="1ug-bP-fKe"/>
                             <constraint firstItem="wDi-0g-diO" firstAttribute="leading" secondItem="3wU-jX-d22" secondAttribute="leading" id="3Aa-JM-0Cq"/>
                             <constraint firstItem="wDi-0g-diO" firstAttribute="trailing" secondItem="3wU-jX-d22" secondAttribute="trailing" id="JoT-wo-si9"/>
                             <constraint firstItem="wDi-0g-diO" firstAttribute="top" secondItem="3wU-jX-d22" secondAttribute="top" id="ZfR-B4-hkV"/>

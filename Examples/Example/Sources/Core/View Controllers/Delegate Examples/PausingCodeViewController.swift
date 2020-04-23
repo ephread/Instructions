@@ -1,24 +1,5 @@
-// PausingViewController.swift
-//
-// Copyright (c) 2018 Frédéric Maquin <fred@ephread.com>
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// Copyright (c) 2018-present Frédéric Maquin <fred@ephread.com> and contributors.
+// Licensed under the terms of the MIT License.
 
 import UIKit
 import Instructions
@@ -29,8 +10,10 @@ internal class PausingCodeViewController: ProfileViewController {
 
     let text1 = "That's a beautiful navigation bar."
     let text2 = "We're going to pause the flow. Use this button to start it again."
-    let text2Alternate = "We're going to pause the flow, without hiding anything. " +
-                         "Use the skip button to get out."
+    let text2HideNothing = "We're going to pause the flow, without hiding anything (which means " +
+                           "that the UI will be blocked). Use the skip button to get out."
+    let text2HideOverlay = "We're going to pause the flow, hiding the overlay (while " +
+                           "keeping the UI blocked). Use the skip button to get out."
     let text3 = "Good job, that's all folks!"
 
     var pauseStyle: PauseStyle = .hideNothing
@@ -115,10 +98,13 @@ extension PausingCodeViewController: CoachMarksControllerDataSource {
             coachViews.bodyView.hintLabel.text = text1
             coachViews.bodyView.nextLabel.text = nextButtonText
         case 1:
-            if pauseStyle == .hideInstructions {
+            switch pauseStyle {
+            case .hideInstructions:
                 coachViews.bodyView.hintLabel.text = text2
-            } else {
-                coachViews.bodyView.hintLabel.text = text2Alternate
+            case .hideOverlay:
+                coachViews.bodyView.hintLabel.text = text2HideOverlay
+            case .hideNothing:
+                coachViews.bodyView.hintLabel.text = text2HideNothing
             }
 
             coachViews.bodyView.nextLabel.text = nextButtonText

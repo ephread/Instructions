@@ -1,24 +1,5 @@
-// OverlayManager.swift
-//
-// Copyright (c) 2017-2018 Frédéric Maquin <fred@ephread.com>
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// Copyright (c) 2017-present Frédéric Maquin <fred@ephread.com> and contributors.
+// Licensed under the terms of the MIT License.
 
 import UIKit
 
@@ -27,7 +8,7 @@ import UIKit
 public class OverlayManager {
     // MARK: - Public properties
     /// The background color of the overlay
-    public var color: UIColor = Constants.overlayColor {
+    public var color: UIColor = InstructionsColor.overlay {
         didSet {
             overlayStyleManager = updateOverlayStyleManager()
         }
@@ -64,24 +45,19 @@ public class OverlayManager {
     }
 
     public var cutoutPath: UIBezierPath? {
-        get {
-            return overlayView.cutoutPath
-        }
-
-        set {
-            overlayView.cutoutPath = newValue
-        }
+        get { return overlayView.cutoutPath }
+        set { overlayView.cutoutPath = newValue }
     }
 
     /// Used to temporarily enable touch forwarding isnide the cutoutPath.
     public var allowTouchInsideCutoutPath: Bool {
-        get {
-            return overlayView.allowTouchInsideCutoutPath
-        }
+        get { return overlayView.allowTouchInsideCutoutPath }
+        set { overlayView.allowTouchInsideCutoutPath = newValue }
+    }
 
-        set {
-            overlayView.allowTouchInsideCutoutPath = newValue
-        }
+    public var forwardTouchEvents: Bool {
+        get { return overlayView.forwardTouchEvents }
+        set { overlayView.forwardTouchEvents = newValue }
     }
 
     // MARK: - Internal Properties
@@ -184,6 +160,10 @@ public class OverlayManager {
     func viewDidTransition() {
         cutoutPath = nil
         overlayStyleManager.viewDidTransition()
+    }
+
+    func updateStyle(with traitCollection: UITraitCollection) {
+        overlayStyleManager.updateStyle(with: traitCollection)
     }
 
     private func updateDependencies(of overlayAnimator: BlurringOverlayStyleManager) {

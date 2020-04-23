@@ -1,46 +1,61 @@
-// CoachMarkArrowDefaultView.swift
-//
-// Copyright (c) 2015, 2016 Frédéric Maquin <fred@ephread.com>
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// Copyright (c) 2015-present Frédéric Maquin <fred@ephread.com> and contributors.
+// Licensed under the terms of the MIT License.
 
 import UIKit
 
 // MARK: - Default Class
 /// A concrete implementation of the coach mark arrow view and the
 /// default one provided by the library.
-public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
+public class CoachMarkArrowDefaultView: UIView,
+                                        CoachMarkArrowView,
+                                        CoachMarkComponent {
+
+    // MARK: Private Constants
+    private let defaultWidth: CGFloat = 15
+    private let defaultHeight: CGFloat = 9
+
+    private let foregroundLayer = CAShapeLayer()
+    private let backgroundLayer = CAShapeLayer()
+
+    private let orientation: CoachMarkArrowOrientation
+
+    // MARK: Public Properties
+    public var isHighlighted: Bool = false {
+        didSet {
+            setNeedsLayout()
+        }
+    }
+
+    public var background = CoachMarkArrowBackground()
+
     // MARK: - Initialization
     public init(orientation: CoachMarkArrowOrientation) {
-        let image, highlightedImage: UIImage?
+        self.orientation = orientation
 
-        if orientation == .top {
-            image = UIImage(namedInInstructions: "arrow-top")
-            highlightedImage = UIImage(namedInInstructions: "arrow-top-highlighted")
-        } else {
-            image = UIImage(namedInInstructions: "arrow-bottom")
-            highlightedImage = UIImage(namedInInstructions: "arrow-bottom-highlighted")
-        }
+        super.init(frame: .zero)
 
-        super.init(image: image, highlightedImage: highlightedImage)
+        layer.addSublayer(backgroundLayer)
+        layer.addSublayer(foregroundLayer)
 
         initializeConstraints()
+    }
+
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+
+        foregroundLayer.frame = bounds
+        backgroundLayer.frame = bounds
+
+        if isHighlighted {
+            foregroundLayer.fillColor = background.highlightedInnerColor.cgColor
+            backgroundLayer.fillColor = background.highlightedBorderColor.cgColor
+        } else {
+            foregroundLayer.fillColor = background.innerColor.cgColor
+            backgroundLayer.fillColor = background.borderColor.cgColor
+        }
+
+        foregroundLayer.path = makeInnerTrianglePath(orientation: orientation)
+        backgroundLayer.path = makeOuterTrianglePath(orientation: orientation)
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -48,11 +63,23 @@ public class CoachMarkArrowDefaultView: UIImageView, CoachMarkArrowView {
     }
 }
 
-// MARK: - Private Inner Setup
+// MARK: - Private Methods
 private extension CoachMarkArrowDefaultView {
     func initializeConstraints() {
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.widthAnchor.constraint(equalToConstant: self.image!.size.width).isActive = true
-        self.heightAnchor.constraint(equalToConstant: self.image!.size.height).isActive = true
+        translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            widthAnchor.constraint(equalToConstant: defaultWidth),
+            heightAnchor.constraint(equalToConstant: defaultHeight)
+        ])
     }
+}
+
+// MARK: - Background Style
+public struct CoachMarkArrowBackground: CoachMarkBackgroundStyle {
+    public lazy var innerColor = InstructionsColor.coachMarkInner
+    public lazy var borderColor = InstructionsColor.coachMarkOuter
+
+    public lazy var highlightedInnerColor = InstructionsColor.coachMarkHighlightedInner
+    public lazy var highlightedBorderColor = InstructionsColor.coachMarkOuter
 }

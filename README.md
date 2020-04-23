@@ -23,7 +23,7 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
   * [License](#license)
 
 ## Overview
-![Instructions Demo](http://i.imgur.com/JUlQH9F.gif)
+![Instructions Demo](https://i.imgur.com/ZYBQQtt.gif)
 
 ## Features
 - [x] [Customizable highlight system](#advanced-usage)

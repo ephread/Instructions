@@ -1,24 +1,5 @@
-// CoachMarkLayoutHelper.swift
-//
-// Copyright (c) 2016, 2018 Frédéric Maquin <fred@ephread.com>
-//
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-//
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// Copyright (c) 2016-present Frédéric Maquin <fred@ephread.com> and contributors.
+// Licensed under the terms of the MIT License.
 
 import UIKit
 
@@ -76,6 +57,22 @@ class CoachMarkLayoutHelper {
                                     withCoachMark coachMark: CoachMark,
                                     inParentView parentView: UIView
     ) -> [NSLayoutConstraint] {
+
+        if #available(iOS 11.0, *) {
+            let layoutGuide = parentView.safeAreaLayoutGuide
+
+            return [
+                coachMarkView.leadingAnchor
+                             .constraint(equalTo: layoutGuide.leadingAnchor,
+                                         constant: coachMark.horizontalMargin),
+                coachMarkView.widthAnchor
+                             .constraint(lessThanOrEqualToConstant: coachMark.maxWidth),
+                coachMarkView.trailingAnchor
+                             .constraint(lessThanOrEqualTo: layoutGuide.trailingAnchor,
+                                         constant: -coachMark.horizontalMargin)
+            ]
+        }
+
         let visualFormat = "H:|-(==\(coachMark.horizontalMargin))-" +
                            "[currentCoachMarkView(<=\(coachMark.maxWidth))]-" +
                            "(>=\(coachMark.horizontalMargin))-|"
@@ -124,6 +121,21 @@ class CoachMarkLayoutHelper {
                                      withCoachMark coachMark: CoachMark,
                                      inParentView parentView: UIView
     ) -> [NSLayoutConstraint] {
+        if #available(iOS 11.0, *) {
+            let layoutGuide = parentView.safeAreaLayoutGuide
+
+            return [
+                coachMarkView.leadingAnchor
+                    .constraint(greaterThanOrEqualTo: layoutGuide.leadingAnchor,
+                                constant: coachMark.horizontalMargin),
+                coachMarkView.widthAnchor
+                    .constraint(lessThanOrEqualToConstant: coachMark.maxWidth),
+                coachMarkView.trailingAnchor
+                    .constraint(equalTo: layoutGuide.trailingAnchor,
+                                constant: -coachMark.horizontalMargin)
+            ]
+        }
+
         let visualFormat = "H:|-(>=\(coachMark.horizontalMargin))-" +
                            "[currentCoachMarkView(<=\(coachMark.maxWidth))]-" +
                            "(==\(coachMark.horizontalMargin))-|"
@@ -168,11 +180,13 @@ class CoachMarkLayoutHelper {
             return 0
         }
 
+        let compensation = safeAreaCompensation(for: parentView, with: properties)
+
         if properties.layoutDirection == .leftToRight {
-            return pointOfInterest.x - coachMark.horizontalMargin
+            return pointOfInterest.x - coachMark.horizontalMargin - compensation
         } else {
             return parentView.bounds.size.width - pointOfInterest.x -
-                   coachMark.horizontalMargin
+                   coachMark.horizontalMargin - compensation
         }
     }
 
@@ -199,12 +213,30 @@ class CoachMarkLayoutHelper {
             return 0
         }
 
+        let compensation = safeAreaCompensation(for: parentView, with: properties)
+
         if properties.layoutDirection == .leftToRight {
             return parentView.bounds.size.width - pointOfInterest.x -
-                   coachMark.horizontalMargin
+                   coachMark.horizontalMargin - compensation
         } else {
-            return pointOfInterest.x - coachMark.horizontalMargin
+            return pointOfInterest.x - coachMark.horizontalMargin - compensation
         }
+    }
+
+    private func safeAreaCompensation(for parentView: UIView,
+                                      with properties: CoachMarkComputedProperties) -> CGFloat {
+        if #available(iOS 11.0, *) {
+            switch (properties.horizontalAligment, properties.layoutDirection) {
+
+            case (.leading, .leftToRight), (.trailing, .rightToLeft):
+                return parentView.safeAreaInsets.left
+            case (.leading, .rightToLeft), (.trailing, .leftToRight):
+                return parentView.safeAreaInsets.right
+            default: break
+            }
+        }
+
+        return 0
     }
 
     /// Compute the segment index (for now the screen is separated

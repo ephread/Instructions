@@ -1,4 +1,2 @@
-coverage:
-  ignore:
-    - Examples/*
-    - Tests/*
+ignore:
+  - "Examples/"

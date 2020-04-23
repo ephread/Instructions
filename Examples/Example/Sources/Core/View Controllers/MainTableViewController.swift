@@ -1,10 +1,5 @@
-//
-//  MainTableViewController.swift
-//  Instructions Example
-//
-//  Created by Frédéric Maquin on 03/06/2017.
-//  Copyright © 2017 Ephread. All rights reserved.
-//
+// Copyright (c) 2017-present Frédéric Maquin <fred@ephread.com> and contributors.
+// Licensed under the terms of the MIT License.
 
 import UIKit
 

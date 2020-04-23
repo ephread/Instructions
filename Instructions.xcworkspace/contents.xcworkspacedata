@@ -11,9 +11,30 @@
       location = "group:Examples/Instructions App Extensions Example.xcodeproj">
    </FileRef>
    <FileRef
+      location = "group:Package.swift">
+   </FileRef>
+   <FileRef
+      location = "group:codecov.yml">
+   </FileRef>
+   <FileRef
       location = "group:.swiftlint.yml">
    </FileRef>
    <FileRef
-      location = "group:.travis.yml">
+      location = "group:Instructions.podspec">
+   </FileRef>
+   <FileRef
+      location = "group:InstructionsAppExtensions.podspec">
+   </FileRef>
+   <FileRef
+      location = "group:CHANGELOG.md">
+   </FileRef>
+   <FileRef
+      location = "group:CODE_OF_CONDUCT.md">
+   </FileRef>
+   <FileRef
+      location = "group:CONTRIBUTING.md">
+   </FileRef>
+   <FileRef
+      location = "group:README.md">
    </FileRef>
 </Workspace>

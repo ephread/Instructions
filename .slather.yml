@@ -1,0 +1,8 @@
+coverage_service: cobertura_xml
+xcodeproj: Instructions.xcodeproj
+workspace: Instructions.xcworkspace
+scheme: Instructions
+source_directory: Sources
+output_directory: Tests
+ignore:
+  - Examples/*

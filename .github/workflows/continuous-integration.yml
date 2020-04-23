@@ -46,7 +46,7 @@ jobs:
           submodules: 'recursive'
 
       - name: Install test dependencies
-        run: cd "Examples" && carthage bootstrap --platform ios && cd ..
+        run: gem install slather && cd "Examples" && carthage bootstrap --platform ios && cd ..
 
       - name: Run Cocoapods' linter
         if: env.run_pod_lint == 'true'
@@ -81,8 +81,13 @@ jobs:
         if: env.run_tests == 'true'
         env:
           DESTINATION: ${{ matrix.destination }}
-        run: set -o pipefail && xcodebuild test -project "$EXAMPLE_PROJECT" -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug -enableCodeCoverage YES ONLY_ACTIVE_ARCH=YES | xcpretty -c;
+        run: set -o pipefail && xcodebuild test -project "$EXAMPLE_PROJECT" -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION" -configuration Debug -enableCodeCoverage YES -derivedDataPath Build/ ONLY_ACTIVE_ARCH=YES | xcpretty -c;
 
-      - name: Upload coverage
-        if: success() && env.run_tests == 'true'
-        run: bash <(curl -s https://codecov.io/bash) -cF ios
+      - name: Convert and upload coverage
+        uses: paambaati/codeclimate-action@v2.5.7
+        if: env.run_tests == 'true'
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+        with:
+          coverageCommand: "slather coverage --build-directory Build/"
+          coverageLocations: "${{github.workspace}}/Tests/cobertura.xml:cobertura"

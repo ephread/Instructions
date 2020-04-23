@@ -1,6 +1,11 @@
 # ![Instructions](https://i.imgur.com/0WFRs8e.png)
 
-[![Build status](https://github.com/ephread/Instructions/workflows/build/badge.svg)](https://github.com/ephread/Instructions/actions?query=workflow%3Abuild) [![codebeat badge](https://codebeat.co/badges/7bbb17b5-2cde-4108-aac0-eefcd439cf9f)](https://codebeat.co/projects/github-com-ephread-instructions) [![codecov](https://codecov.io/gh/ephread/Instructions/branch/master/graph/badge.svg)](https://codecov.io/gh/ephread/Instructions) [![CocoaPods Shield](https://img.shields.io/cocoapods/v/Instructions.svg)](https://cocoapods.org/pods/Instructions) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Join the chat at https://gitter.im/ephread/Instructions](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ephread/Instructions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build status](https://github.com/ephread/Instructions/workflows/build/badge.svg)](https://github.com/ephread/Instructions/actions?query=workflow%3Abuild)
+[![Code Climate - Maintainability](https://img.shields.io/codeclimate/maintainability/ephread/Instructions?color=brightscreen)](https://codeclimate.com/github/ephread/Instructions)
+[![Code Climate - Coverage](https://img.shields.io/codeclimate/coverage-letter/ephread/Instructions?color=brightscreen)](https://codeclimate.com/github/ephread/Instructions)
+[![CocoaPods Shield](https://img.shields.io/cocoapods/v/Instructions.svg)](https://cocoapods.org/pods/Instructions)
+[![Carthage compatible](https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+[![Join the chat at https://gitter.im/ephread/Instructions](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ephread/Instructions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Add customizable coach marks into your iOS project. Available for both iPhone and iPad.
 

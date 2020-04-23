@@ -93,4 +93,5 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
         with:
-          coverageLocations: "Tests"
+          coverageCommand: ""
+          coverageLocations: "${{github.workspace}}/Tests/cobertura.xml:cobertura"

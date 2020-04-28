@@ -19,16 +19,20 @@ class TransitionExampleTests: XCTestCase {
         let overlay = app.otherElements["AccessibilityIdentifiers.overlayView"]
         _ = overlay.waitForExistence(timeout: 5)
 
-        overlay.tap()
-        overlay.tap()
+        let defaultCoordinates = app.coordinate(withNormalizedOffset: CGVector(dx: 0.1, dy: 0.1))
 
-        let vector = CGVector(dx: 0.5, dy: 0.5)
-        let coordinate = overlay.coordinate(withNormalizedOffset: vector)
-        coordinate.tap()
+        defaultCoordinates.tap()
+        defaultCoordinates.tap()
 
-        overlay.tap()
-        overlay.tap()
-        overlay.tap()
+        // One extra tap, to make sure touch is disabled at this point.
+        defaultCoordinates.tap()
+
+        let cutoutCoordinates = app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+        cutoutCoordinates.tap()
+
+        defaultCoordinates.tap()
+        defaultCoordinates.tap()
+        defaultCoordinates.tap()
 
         app.navigationBars["Transition From Code"].buttons["Instructions"].tap()
     }

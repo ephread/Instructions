@@ -10,6 +10,7 @@ class TransitionExampleTests: XCTestCase {
         continueAfterFailure = false
 
         XCUIApplication().launchWithAnimationsDisabled()
+        XCUIDevice.shared.orientation = .portrait
     }
 
     func testTapThroughCutout() {

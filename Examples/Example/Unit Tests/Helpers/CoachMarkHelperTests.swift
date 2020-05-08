@@ -107,21 +107,21 @@ class CoachMarkHelperTests: XCTestCase {
     }
 
     func testThatUpdateDidNotOccur() {
-        flowManager.paused = true
+        flowManager.isPaused = true
         flowManager.currentCoachMark = CoachMark()
 
         coachMarkHelper.updateCurrentCoachMark()
 
         XCTAssertTrue(flowManager.currentCoachMark == CoachMark())
 
-        flowManager.paused = false
+        flowManager.isPaused = false
         flowManager.currentCoachMark = nil
 
         coachMarkHelper.updateCurrentCoachMark()
 
         XCTAssertTrue(flowManager.currentCoachMark == nil)
 
-        flowManager.paused = false
+        flowManager.isPaused = false
         flowManager.currentCoachMark = CoachMark()
 
         coachMarkHelper.updateCurrentCoachMark()
@@ -133,7 +133,7 @@ class CoachMarkHelperTests: XCTestCase {
 class MockedFlowManager: FlowManager {
     private var _pause = false;
 
-    override var paused: Bool {
+    override var isPaused: Bool {
         get {
             return _pause
         }

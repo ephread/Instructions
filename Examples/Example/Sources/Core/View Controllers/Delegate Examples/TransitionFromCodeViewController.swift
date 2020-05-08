@@ -32,7 +32,7 @@ internal class TransitionFromCodeViewController: ProfileViewController {
         skipView.setTitle("Skip", for: .normal)
 
         self.coachMarksController.skipView = skipView
-        self.coachMarksController.overlay.allowTap = true
+        self.coachMarksController.overlay.isUserInteractionEnabled = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -66,11 +66,11 @@ extension TransitionFromCodeViewController: CoachMarksControllerDataSource {
             // Since we've allowed the user to tap on the overlay to show the
             // next coach mark, we'll disable this ability for the current
             // coach mark to force the user to perform the appropriate action.
-            coachMark.disableOverlayTap = true
+            coachMark.isOverlayInteractionEnabled = false
 
             // We'll also enable the ability to touch what's inside
             // the cutoutPath.
-            coachMark.allowTouchInsideCutoutPath = true
+            coachMark.isUserInteractionEnabledInsideCutoutPath = true
             return coachMark
         case 3:
             return coachMarksController.helper.makeCoachMark(for: self.emailLabel)

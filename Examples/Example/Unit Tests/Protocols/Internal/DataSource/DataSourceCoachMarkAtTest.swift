@@ -64,9 +64,11 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
         return CoachMark()
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark)
-    -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(
+        _ coachMarksController: CoachMarksController,
+        coachMarkViewsAt index: Int,
+        madeFrom coachMark: CoachMark
+    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
             numberOfTimesCoachMarkViewsAtWasCalled += 1
             return (bodyView: CoachMarkBodyDefaultView(), arrowView: nil)
     }

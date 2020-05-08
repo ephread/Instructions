@@ -21,7 +21,7 @@ internal class KeyboardViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        coachMarksController.overlay.allowTap = false
+        coachMarksController.overlay.isUserInteractionEnabled = false
         coachMarksController.dataSource = self
         coachMarksController.delegate = self
 

@@ -35,7 +35,7 @@ internal class PausingCodeViewController: ProfileViewController {
         skipView.setTitle("Skip", for: .normal)
 
         coachMarksController.skipView = skipView
-        coachMarksController.overlay.allowTap = true
+        coachMarksController.overlay.isUserInteractionEnabled = true
     }
 
     override func viewDidAppear(_ animated: Bool) {

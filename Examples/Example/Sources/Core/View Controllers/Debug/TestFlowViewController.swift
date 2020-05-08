@@ -30,7 +30,7 @@ class TestFlowViewController: ProfileViewController {
         skipView.setTitle("Skip", for: .normal)
 
         self.coachMarksController.skipView = skipView
-        self.coachMarksController.overlay.allowTap = true
+        self.coachMarksController.overlay.isUserInteractionEnabled = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -126,7 +126,7 @@ extension TestFlowViewController: CoachMarksControllerDataSource {
             return coachMarksController.helper.makeCoachMark(for: self.handleLabel)
         case 2:
             var coachMark = coachMarksController.helper.makeCoachMark(for: self.tapMeButton)
-            coachMark.allowTouchInsideCutoutPath = true
+            coachMark.isUserInteractionEnabledInsideCutoutPath = true
 
             return coachMark
         case 3:

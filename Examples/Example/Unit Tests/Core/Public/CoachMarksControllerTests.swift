@@ -112,7 +112,7 @@ internal class CoachMarkControllerMockedDataSource : CoachMarksControllerDataSou
         _ coachMarksController: CoachMarksController,
         coachMarkViewsAt index: Int,
         madeFrom coachMark: CoachMark
-    ) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
         return (CoachMarkBodyDefaultView(), nil)
     }
 }
@@ -122,7 +122,7 @@ internal class CoachMarkControllerMockedDataSourceUsingConstructorWithoutButton 
         _ coachMarksController: CoachMarksController,
         coachMarkViewsAt index: Int,
         madeFrom coachMark: CoachMark
-    ) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
         return (CoachMarkBodyDefaultView(hintText: "hint", nextText: nil), nil)
     }
 }
@@ -133,7 +133,7 @@ internal class CoachMarkControllerMockedDataSourceUsingConstructorWithButton :
         _ coachMarksController: CoachMarksController,
         coachMarkViewsAt index: Int,
         madeFrom coachMark: CoachMark
-    ) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
         return (CoachMarkBodyDefaultView(hintText: "hint", nextText: "next"), nil)
     }
 }

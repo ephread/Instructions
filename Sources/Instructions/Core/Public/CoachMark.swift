@@ -3,7 +3,6 @@
 
 import UIKit
 
-// codebeat:disable[TOO_MANY_IVARS]
 /// This structure handle the parametrization of a given coach mark.
 /// It doesn't provide any clue about the way it will look, however.
 public struct CoachMark {
@@ -34,17 +33,17 @@ public struct CoachMark {
     public var horizontalMargin: CGFloat = 20
 
     /// Set this property to `true` to display the coach mark over the cutoutPath.
-    public var displayOverCutoutPath: Bool = false
+    public var isDisplayedOverCutoutPath: Bool = false
 
     /// Set this property to `true` to disable a tap on the overlay.
     /// (only if the tap capture was enabled)
     ///
     /// If you need to disable the tap for all the coachmarks, prefer setting
     /// `CoachMarkController.allowOverlayTap`.
-    public var disableOverlayTap: Bool = false
+    public var isOverlayInteractionEnabled: Bool = true
 
     /// Set this property to `true` to allow touch forwarding inside the cutoutPath.
-    public var allowTouchInsideCutoutPath: Bool = false
+    public var isUserInteractionEnabledInsideCutoutPath: Bool = false
 
     // MARK: - Initialization
     /// Allocate and initialize a Coach mark with default values.
@@ -105,18 +104,26 @@ public struct CoachMark {
     internal func ceiledMaxWidth(in frame: CGRect) -> CGFloat {
         return min(maxWidth, frame.width - 2 * horizontalMargin)
     }
+
+    // MARK: - Renamed Properties
+    // swiftlint:disable unused_setter_value
+    @available(*, unavailable, renamed: "isDisplayedOverCutoutPath")
+    public var displayOverCutoutPath: Bool {
+        get { return false }
+        set {}
+    }
+
+    @available(*, unavailable, renamed: "isOverlayInteractionEnabled")
+    public var disableOverlayTap: Bool {
+        get { return false }
+        set {}
+    }
+
+    @available(*, unavailable, renamed: "isUserInteractionEnabledInsideCutoutPath")
+    public var allowTouchInsideCutoutPath: Bool {
+        get { return false }
+        set {}
+    }
 }
 
 extension CoachMark: Equatable {}
-
-public func == (lhs: CoachMark, rhs: CoachMark) -> Bool {
-    return lhs.cutoutPath == rhs.cutoutPath &&
-           lhs.gapBetweenBodyAndArrow == rhs.gapBetweenBodyAndArrow &&
-           lhs.arrowOrientation == rhs.arrowOrientation &&
-           lhs.pointOfInterest == rhs.pointOfInterest &&
-           lhs.gapBetweenCoachMarkAndCutoutPath == rhs.gapBetweenCoachMarkAndCutoutPath &&
-           lhs.maxWidth == rhs.maxWidth &&
-           lhs.horizontalMargin == rhs.horizontalMargin &&
-           lhs.disableOverlayTap == rhs.disableOverlayTap &&
-           lhs.allowTouchInsideCutoutPath == rhs.allowTouchInsideCutoutPath
-}

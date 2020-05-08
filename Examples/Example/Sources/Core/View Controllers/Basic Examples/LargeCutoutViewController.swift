@@ -24,7 +24,7 @@ internal class LargeCutoutViewController: UIViewController {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Default")
 
-        self.coachMarksController.overlay.allowTap = true
+        self.coachMarksController.overlay.isUserInteractionEnabled = true
         self.coachMarksController.dataSource = self
 
         let skipView = CoachMarkSkipDefaultView()
@@ -68,12 +68,12 @@ extension LargeCutoutViewController: CoachMarksControllerDataSource {
 
             var coachMark = coachMarksController.helper.makeCoachMark(for: tableView,
                                                                       cutoutPathMaker: pathMaker)
-            coachMark.displayOverCutoutPath = true
+            coachMark.isDisplayedOverCutoutPath = true
 
             return coachMark
         case 1:
             var coachMark = coachMarksController.helper.makeCoachMark(for: halfInvisibleOverlay)
-            coachMark.displayOverCutoutPath = true
+            coachMark.isDisplayedOverCutoutPath = true
 
             return coachMark
         default:

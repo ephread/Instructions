@@ -114,7 +114,7 @@ public extension CoachMarksController {
         }
 
         // If coach marks are currently being displayed, calling `start(in: )` doesn't do anything.
-        if flow.started { return }
+        if flow.isStarted { return }
 
         let numberOfCoachMarks = dataSource.numberOfCoachMarks(for: self)
         if numberOfCoachMarks < 0 {

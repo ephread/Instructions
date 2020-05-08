@@ -75,7 +75,7 @@ extension BackgroundNetworkingViewController: URLSessionDownloadDelegate {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if self.stopInstructions { return }
 
-            if !self.coachMarksController.flow.started {
+            if !self.coachMarksController.flow.isStarted {
                 self.coachMarksController.start(in: .window(over: self))
             } else {
                 self.coachMarksController.flow.resume()

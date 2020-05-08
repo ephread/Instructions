@@ -35,14 +35,19 @@ public struct CoachMark {
     /// Set this property to `true` to display the coach mark over the cutoutPath.
     public var isDisplayedOverCutoutPath: Bool = false
 
-    /// Set this property to `true` to disable a tap on the overlay.
+    /// Set this property to `false` to disable a tap on the overlay.
     /// (only if the tap capture was enabled)
     ///
     /// If you need to disable the tap for all the coachmarks, prefer setting
-    /// `CoachMarkController.allowOverlayTap`.
+    /// `CoachMarkController.isUserInteractionEnabled` to `false`.
     public var isOverlayInteractionEnabled: Bool = true
 
     /// Set this property to `true` to allow touch forwarding inside the cutoutPath.
+    ///
+    /// If you need to enable cutout interaction for all the coachmarks,
+    /// prefer setting
+    /// `CoachMarkController.isUserInteractionEnabledInsideCutoutPath`
+    /// to `true`.
     public var isUserInteractionEnabledInsideCutoutPath: Bool = false
 
     // MARK: - Initialization

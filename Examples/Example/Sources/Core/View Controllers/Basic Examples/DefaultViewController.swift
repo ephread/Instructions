@@ -9,7 +9,7 @@ import Instructions
 internal class DefaultViewController: ProfileViewController,
                                       CoachMarksControllerDataSource {
     var windowLevel: UIWindow.Level?
-    var presentationContext: Context = .independantWindow
+    var presentationContext: Context = .independentWindow
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -43,7 +43,7 @@ internal class DefaultViewController: ProfileViewController,
     }
 
     enum Context {
-        case independantWindow, controllerWindow, controller
+        case independentWindow, controllerWindow, controller
     }
 
     // MARK: - Protocol Conformance | CoachMarksControllerDataSource

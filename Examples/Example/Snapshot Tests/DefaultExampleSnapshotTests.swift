@@ -11,7 +11,7 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
     var navigationController: UINavigationController!
     var delegateEndExpectation: XCTestExpectation!
 
-    var presentationContext: DefaultViewController.Context = .independantWindow
+    var presentationContext: DefaultViewController.Context = .independentWindow
 
     override func setUp() {
         super.setUp()
@@ -24,11 +24,11 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
         delegateEndExpectation = nil
     }
 
-    func testFlowInIndependantWindow() {
+    func testFlowInIndependentWindow() {
         runFlowTester()
     }
 
-    func testRotationInIndependantWindow() {
+    func testRotationInIndependentWindow() {
         runRotationTester()
     }
 
@@ -61,7 +61,7 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
 
         let snapshotView: UIView
         switch presentationContext {
-        case .independantWindow:
+        case .independentWindow:
             guard let window = instructionsWindow() else {
                 return
             }

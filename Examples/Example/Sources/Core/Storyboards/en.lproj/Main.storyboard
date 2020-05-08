@@ -172,7 +172,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="383" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Independant Window" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tzg-Ep-VAD">
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Independent Window" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Tzg-Ep-VAD">
                                                     <rect key="frame" x="20" y="0.0" width="355" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -614,6 +614,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Kei-0c-VDX"/>
-        <segue reference="54i-Wa-T5w"/>
+        <segue reference="8Sg-Kt-IuO"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -13,10 +13,10 @@ class MainTableViewController: UITableViewController {
             controller.pauseStyle = .hideInstructions
         } else if segue.identifier == "IndependentWindowContext",
                let controller = segue.destination as? DefaultViewController {
-            controller.presentationContext = .independantWindow
+            controller.presentationContext = .independentWindow
         } else if segue.identifier == "WindowLevel",
                   let controller = segue.destination as? DefaultViewController {
-            controller.presentationContext = .independantWindow
+            controller.presentationContext = .independentWindow
             controller.windowLevel = UIWindow.Level.statusBar + 1
         } else if segue.identifier == "ControllerWindowContext",
                   let controller = segue.destination as? DefaultViewController {

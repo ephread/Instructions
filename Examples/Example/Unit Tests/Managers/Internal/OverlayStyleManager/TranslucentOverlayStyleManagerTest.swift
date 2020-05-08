@@ -9,7 +9,7 @@ class TranslucentOverlayStyleManagerTest: XCTestCase {
     private let overlayView = OverlayView()
     private let translucentStyleManager = TranslucentOverlayStyleManager(color: UIColor.gray)
 
-    var viewIsVisibleExpectation: XCTestExpectation? = nil
+    var viewIsVisibleExpectation: XCTestExpectation?
 
     override func setUp() {
         super.setUp()

@@ -91,13 +91,13 @@ class CoachMarkView: UIView {
             for: (bodyView: bodyUIView, arrowView: arrowUIView), withPosition: position,
             horizontalOffset: offset)
 
-        self.addConstraint(innerConstraints.arrowXposition!)
+        innerConstraints.arrowXposition?.isActive = true
     }
 
     // MARK: - Private Method
 
     /// Layout the body view and the arrow view together.
-    fileprivate func layoutViewComposition() {
+    private func layoutViewComposition() {
         translatesAutoresizingMaskIntoConstraints = false
 
         self.addSubview(bodyUIView)
@@ -110,14 +110,14 @@ class CoachMarkView: UIView {
                 for: (bodyView: bodyUIView, arrowView: arrowUIView), withPosition: .center,
                 horizontalOffset: 0)
 
-            self.addConstraint(innerConstraints.arrowXposition!)
+            innerConstraints.arrowXposition?.isActive = true
             self.addConstraints(coachMarkLayoutHelper.verticalConstraints(
                 for: (bodyView: bodyUIView, arrowView: arrowUIView), in: self,
                 withProperties: (orientation: arrowOrientation, verticalArrowOffset: arrowOffset)
             ))
         } else {
-            self.addConstraint(bodyUIView.topAnchor.constraint(equalTo: topAnchor))
-            self.addConstraint(bodyUIView.bottomAnchor.constraint(equalTo: bottomAnchor))
+            bodyUIView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+            bodyUIView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         }
     }
 }
@@ -129,13 +129,13 @@ extension CoachMarkView: CoachMarkBodyHighlightArrowDelegate {
     }
 }
 
-struct CoachMarkViewConstraints {
+private struct CoachMarkViewConstraints {
     /// The horizontal position of the arrow, likely to be at the center of the
     /// cutout path.
-    fileprivate var arrowXposition: NSLayoutConstraint?
+    var arrowXposition: NSLayoutConstraint?
 
     /// The constraint making the body stick to its parent.
-    fileprivate var bodyStickToParent: NSLayoutConstraint?
+    var bodyStickToParent: NSLayoutConstraint?
 
     init () { }
 }

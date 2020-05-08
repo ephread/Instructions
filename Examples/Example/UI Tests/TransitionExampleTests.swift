@@ -4,7 +4,7 @@
 import XCTest
 
 class TransitionExampleTests: XCTestCase {
-        
+
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
@@ -16,7 +16,7 @@ class TransitionExampleTests: XCTestCase {
     func testTapThroughCutout() {
         let app = XCUIApplication()
         app.tables.staticTexts["Transitioning from code"].tap()
-        
+
         let overlay = app.otherElements["AccessibilityIdentifiers.overlayView"]
         _ = overlay.waitForExistence(timeout: 5)
 

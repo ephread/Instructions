@@ -12,7 +12,7 @@ class CoachMarkDisplayManagerTests: XCTestCase {
     let coachMarksController = CoachMarksController()
     var coachMarkDisplayManager: CoachMarkDisplayManager!
 
-    var viewIsVisibleExpectation: XCTestExpectation? = nil
+    var viewIsVisibleExpectation: XCTestExpectation?
 
     override func setUp() {
         super.setUp()

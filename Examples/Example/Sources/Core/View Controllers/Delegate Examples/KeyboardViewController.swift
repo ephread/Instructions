@@ -27,7 +27,7 @@ internal class KeyboardViewController: UIViewController {
 
         textField.delegate = self
 
-        textField.returnKeyType = UIReturnKeyType.done;
+        textField.returnKeyType = UIReturnKeyType.done
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow),
                                                name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -82,7 +82,7 @@ extension KeyboardViewController: CoachMarksControllerDataSource {
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
-        switch(index) {
+        switch index {
         case 0:
             return coachMarksController.helper.makeCoachMark(for: self.avatar)
         case 1:
@@ -100,7 +100,7 @@ extension KeyboardViewController: CoachMarksControllerDataSource {
 
         var coachViews: (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?)
 
-        switch(index) {
+        switch index {
         case 1:
             coachViews = coachMarksController.helper
                                              .makeDefaultCoachViews(withArrow: true,

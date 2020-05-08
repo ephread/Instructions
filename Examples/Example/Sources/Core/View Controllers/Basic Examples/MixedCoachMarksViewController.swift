@@ -10,9 +10,9 @@ internal class MixedCoachMarksViewsViewController: ProfileViewController {
     @IBOutlet weak var answersLabel: UILabel?
 
     // MARK: - Private properties
-    fileprivate let swipeImage = UIImage(named: "swipe")
+    private let swipeImage = UIImage(named: "swipe")
 
-    fileprivate let answersText = "That's the number of answers you gave."
+    private let answersText = "That's the number of answers you gave."
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -30,11 +30,12 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
         return 5
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              coachMarkAt index: Int) -> CoachMark {
 
-        var coachMark : CoachMark
+        var coachMark: CoachMark
 
-        switch(index) {
+        switch index {
         case 0:
             coachMark = coachMarksController.helper.makeCoachMark(for: self.handleLabel)
         case 1:
@@ -63,65 +64,107 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
         var bodyView: UIView & CoachMarkBodyView
         var arrowView: (UIView & CoachMarkArrowView)?
 
-        switch(index) {
-        case 0:
-            let coachMarkBodyView = CustomCoachMarkBodyView()
-            var coachMarkArrowView: CustomCoachMarkArrowView? = nil
-
-            coachMarkBodyView.hintLabel.text = self.handleText
-            coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: .normal)
-
-            var width: CGFloat = 0.0
-
-            if let handleLabel = self.handleLabel {
-                width = handleLabel.bounds.width
-            }
-
-            if let arrowOrientation = coachMark.arrowOrientation {
-                coachMarkArrowView = CustomCoachMarkArrowView(orientation: arrowOrientation)
-
-                coachMarkArrowView!.plate.addConstraint(NSLayoutConstraint(item: coachMarkArrowView!.plate, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width))
-            }
-
-            bodyView = coachMarkBodyView
-            arrowView = coachMarkArrowView
-        case 1:
-            let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
-
-            coachViews.bodyView.hintLabel.text = self.emailText
-            coachViews.bodyView.nextLabel.text = self.nextButtonText
-
-            bodyView = coachViews.bodyView
-            arrowView = coachViews.arrowView
-        case 2:
-            let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation, hintText: self.postsText, nextText: self.nextButtonText)
-
-            bodyView = coachViews.bodyView
-            arrowView = coachViews.arrowView
-        case 3:
-            let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation, hintText: self.answersText, nextText: nil)
-
-            bodyView = coachViews.bodyView
-            arrowView = coachViews.arrowView
-        case 4:
-            let coachMarkBodyView = TransparentCoachMarkBodyView()
-            var coachMarkArrowView: TransparentCoachMarkArrowView? = nil
-
-            coachMarkBodyView.hintLabel.text = self.handleText
-
-            if let arrowOrientation = coachMark.arrowOrientation {
-                coachMarkArrowView = TransparentCoachMarkArrowView(orientation: arrowOrientation)
-            }
-
-            bodyView = coachMarkBodyView
-            arrowView = coachMarkArrowView
-        default:
-            let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
-            
-            bodyView = coachViews.bodyView
-            arrowView = coachViews.arrowView
+        switch index {
+        case 0: (bodyView, arrowView) = createViews0(from: coachMark)
+        case 1: (bodyView, arrowView) = createViews1(from: coachMark)
+        case 2: (bodyView, arrowView) = createViews2(from: coachMark)
+        case 3: (bodyView, arrowView) = createViews3(from: coachMark)
+        case 4: (bodyView, arrowView) = createViews4(from: coachMark)
+        default: (bodyView, arrowView) = createDefaultViews(from: coachMark)
         }
-        
+
         return (bodyView: bodyView, arrowView: arrowView)
+    }
+
+    // MARK: - Private Helpers
+    private func createViews0(
+        from coachMark: CoachMark
+    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
+        let coachMarkBodyView = CustomCoachMarkBodyView()
+        var coachMarkArrowView: CustomCoachMarkArrowView?
+
+        coachMarkBodyView.hintLabel.text = self.handleText
+        coachMarkBodyView.nextButton.setTitle(self.nextButtonText, for: .normal)
+
+        var width: CGFloat = 0.0
+
+        if let handleLabel = self.handleLabel {
+            width = handleLabel.bounds.width
+        }
+
+        if let arrowOrientation = coachMark.arrowOrientation {
+            let view = CustomCoachMarkArrowView(orientation: arrowOrientation)
+            view.plate.widthAnchor.constraint(equalToConstant: width).isActive = true
+
+            coachMarkArrowView = view
+        }
+
+        return (coachMarkBodyView, coachMarkArrowView)
+    }
+
+    private func createViews1(
+        from coachMark: CoachMark
+    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            arrowOrientation: coachMark.arrowOrientation
+        )
+
+        coachViews.bodyView.hintLabel.text = self.emailText
+        coachViews.bodyView.nextLabel.text = self.nextButtonText
+
+        return (coachViews.bodyView, coachViews.arrowView)
+    }
+
+    private func createViews2(
+        from coachMark: CoachMark
+    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            arrowOrientation: coachMark.arrowOrientation,
+            hintText: self.postsText,
+            nextText: self.nextButtonText
+        )
+
+        return (coachViews.bodyView, coachViews.arrowView)
+    }
+
+    private func createViews3(
+        from coachMark: CoachMark
+    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            arrowOrientation: coachMark.arrowOrientation,
+            hintText: self.answersText,
+            nextText: nil
+        )
+
+        return (coachViews.bodyView, coachViews.arrowView)
+    }
+
+    private func createViews4(
+        from coachMark: CoachMark
+    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
+        let coachMarkBodyView = TransparentCoachMarkBodyView()
+        var coachMarkArrowView: TransparentCoachMarkArrowView?
+
+        coachMarkBodyView.hintLabel.text = self.handleText
+
+        if let arrowOrientation = coachMark.arrowOrientation {
+            coachMarkArrowView = TransparentCoachMarkArrowView(orientation: arrowOrientation)
+        }
+
+        return (coachMarkBodyView, coachMarkArrowView)
+    }
+
+    private func createDefaultViews(
+        from coachMark: CoachMark
+    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            arrowOrientation: coachMark.arrowOrientation
+        )
+
+        return (coachViews.bodyView, coachViews.arrowView)
     }
 }

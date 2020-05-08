@@ -9,7 +9,7 @@ class CoachMarkTests: XCTestCase {
     override func setUp() {
         super.setUp()
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
@@ -92,8 +92,11 @@ class CoachMarkTests: XCTestCase {
         XCTAssertEqual(coachMark3.ceiledMaxWidth(in: rect), 150)
     }
 
-    private func computeOrientation(of coachMark: inout CoachMark,
-                                    using cutoutPath: UIBezierPath = UIBezierPath(rect: CGRect(x: 30, y: 320, width: 30, height: 60))) {
+    private func computeOrientation(
+        of coachMark: inout CoachMark,
+        using cutoutPath: UIBezierPath = UIBezierPath(rect: CGRect(x: 30, y: 320,
+                                                                   width: 30, height: 60))
+    ) {
         let overlayFrame = CGRect(x: 0, y: 0, width: 320, height: 480)
 
         coachMark.cutoutPath = cutoutPath

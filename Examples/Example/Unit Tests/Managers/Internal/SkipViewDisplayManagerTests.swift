@@ -8,8 +8,8 @@ class SkipViewDisplayManagerTests: XCTestCase {
     let skipViewDisplayManager = SkipViewDisplayManager()
     let dataSource = MockedDataSource()
     let constraintsDataSource = ConstraintsMockedDataSource()
-    
-    var delegateEndExpectation: XCTestExpectation? = nil
+
+    var delegateEndExpectation: XCTestExpectation?
 
     override func setUp() {
         super.setUp()
@@ -19,12 +19,12 @@ class SkipViewDisplayManagerTests: XCTestCase {
 
     func testThatSkipViewWasHidden() {
         let skipView = CoachMarkSkipDefaultView()
-        skipView.alpha = 1.0;
+        skipView.alpha = 1.0
 
         skipViewDisplayManager.hide(skipView: skipView)
         XCTAssertEqual(skipView.alpha, 0.0)
 
-        skipView.alpha = 1.0;
+        skipView.alpha = 1.0
 
         skipViewDisplayManager.hide(skipView: skipView, duration: 2)
         XCTAssertEqual(skipView.alpha, 0.0)
@@ -32,12 +32,12 @@ class SkipViewDisplayManagerTests: XCTestCase {
 
     func testThatSkipViewWithNoParentCannotBeShown() {
         let skipView = CoachMarkSkipDefaultView()
-        skipView.alpha = 0.0;
+        skipView.alpha = 0.0
 
         skipViewDisplayManager.show(skipView: skipView)
         XCTAssertEqual(skipView.alpha, 0.0)
 
-        skipView.alpha = 0.0;
+        skipView.alpha = 0.0
 
         skipViewDisplayManager.show(skipView: skipView, duration: 2)
         XCTAssertEqual(skipView.alpha, 0.0)
@@ -48,12 +48,12 @@ class SkipViewDisplayManagerTests: XCTestCase {
         let skipView = CoachMarkSkipDefaultView()
         parentView.addSubview(skipView)
 
-        skipView.alpha = 0.0;
+        skipView.alpha = 0.0
 
         skipViewDisplayManager.show(skipView: skipView)
         XCTAssertEqual(skipView.alpha, 1.0)
 
-        skipView.alpha = 0.0;
+        skipView.alpha = 0.0
 
         skipViewDisplayManager.show(skipView: skipView, duration: 2)
         XCTAssertEqual(skipView.alpha, 1.0)
@@ -129,7 +129,7 @@ class MockedDataSource: CoachMarksControllerProxyDataSource {
 
 class ConstraintsMockedDataSource: MockedDataSource {
     override func constraintsForSkipView(_ skipView: UIView,
-                                inParent parentView: UIView) -> [NSLayoutConstraint]? {
+                                         inParent parentView: UIView) -> [NSLayoutConstraint]? {
         return [makeConstraint(skipView: skipView, inParent: parentView)]
     }
 }

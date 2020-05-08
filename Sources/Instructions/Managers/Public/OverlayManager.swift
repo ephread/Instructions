@@ -110,7 +110,7 @@ public class OverlayManager {
     /// a tap event.
     ///
     /// - Parameter sender: the object which sent the event
-    @objc fileprivate func handleSingleTap(_ sender: AnyObject?) {
+    @objc private func handleSingleTap(_ sender: AnyObject?) {
         if enableTap {
             self.overlayDelegate?.didReceivedSingleTap()
         }

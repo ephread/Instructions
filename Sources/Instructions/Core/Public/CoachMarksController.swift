@@ -47,7 +47,7 @@ public class CoachMarksController {
     }
 
     /// Hide the UI.
-    fileprivate(set) public lazy var overlay: OverlayManager = {
+    private(set) public lazy var overlay: OverlayManager = {
         let overlay = OverlayManager()
         overlay.overlayDelegate = self
 
@@ -55,14 +55,14 @@ public class CoachMarksController {
     }()
 
     /// Provide cutout path related helpers.
-    fileprivate(set) public lazy var helper: CoachMarkHelper! = {
+    private(set) public lazy var helper: CoachMarkHelper! = {
         let instructionsTopView = self.coachMarksViewController.instructionsRootView
         return CoachMarkHelper(instructionsRootView: instructionsTopView,
                                flowManager: self.flow)
     }()
 
     /// Handles the flow of coachmarks.
-    fileprivate(set) public lazy var flow: FlowManager = {
+    private(set) public lazy var flow: FlowManager = {
         let flowManager = FlowManager(coachMarksViewController: self.coachMarksViewController)
         flowManager.dataSource = self
         flowManager.delegate = self
@@ -73,11 +73,11 @@ public class CoachMarksController {
     }()
 
     // MARK: - Private properties
-    fileprivate weak var controllerWindow: UIWindow?
-    fileprivate var coachMarksWindow: UIWindow?
+    private weak var controllerWindow: UIWindow?
+    private var coachMarksWindow: UIWindow?
 
     /// Handle the UI part
-    fileprivate lazy var coachMarksViewController: CoachMarksViewController = {
+    private lazy var coachMarksViewController: CoachMarksViewController = {
         let coachMarkController = CoachMarksViewController(
             coachMarkDisplayManager: self.buildCoachMarkDisplayManager(),
             skipViewDisplayManager: self.buildSkipViewDisplayManager()

@@ -28,7 +28,6 @@ class CoachMarksViewControllerTests: XCTestCase, CoachMarksControllerDelegate {
         XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .default)
     }
 
-
     func testThatCustomStatusBarTakePrecedenceOverOverlayBlur() {
         coachMarksController.overlayManager.blurEffectStyle = .dark
         coachMarksController.customStatusBarStyle = .default

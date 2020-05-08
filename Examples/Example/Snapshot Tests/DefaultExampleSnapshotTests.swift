@@ -97,11 +97,11 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
             delegateEndExpectation.fulfill()
         }
     }
-    
+
     func setupController() {
         let controller =
             storyboard.instantiateViewController(withIdentifier: "DefaultViewController")
-            as! DefaultViewController
+                as! DefaultViewController // swiftlint:disable:this force_cast
 
         controller.snapshotDelegate = self
         controller.presentationContext = presentationContext

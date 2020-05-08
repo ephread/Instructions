@@ -8,9 +8,9 @@ class BlurringOverlayStyleManagerTest: XCTestCase {
 
     private let overlayView = OverlayView()
     private let blurringStyleManager = BlurringOverlayStyleManager(style: .extraLight)
-    private let  snapshotDelegate = SnapshotDelegate()
+    private let snapshotDelegate = SnapshotDelegate() // swiftlint:disable:this weak_delegate
 
-    var viewIsVisibleExpectation: XCTestExpectation? = nil
+    var viewIsVisibleExpectation: XCTestExpectation?
 
     override func setUp() {
         super.setUp()
@@ -19,11 +19,6 @@ class BlurringOverlayStyleManagerTest: XCTestCase {
 
         blurringStyleManager.overlayView = overlayView
         blurringStyleManager.snapshotDelegate = snapshotDelegate
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
     }
 
     func testThatOverlayIsShown() {
@@ -68,7 +63,7 @@ class BlurringOverlayStyleManagerTest: XCTestCase {
     }
 }
 
-fileprivate class SnapshotDelegate: Snapshottable {
+private class SnapshotDelegate: Snapshottable {
     func snapshot() -> UIView? {
         return UIView()
     }

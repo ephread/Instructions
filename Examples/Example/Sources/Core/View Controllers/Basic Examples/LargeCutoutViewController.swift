@@ -13,8 +13,10 @@ internal class LargeCutoutViewController: UIViewController {
     // MARK: - Public properties
     var coachMarksController = CoachMarksController()
 
-    let tableViewText = "That's a gorgeous table view in which all your content sits." +
-                        "Don't be afraid to scroll!"
+    let tableViewText = """
+                        That's a gorgeous table view in which all your content sits. \
+                        Don't be afraid to scroll!
+                        """
     let halfTableViewText = "That's half a tableView for testing."
 
     let nextButtonText = "Ok!"
@@ -60,7 +62,7 @@ extension LargeCutoutViewController: CoachMarksControllerDataSource {
         _ coachMarksController: CoachMarksController,
         coachMarkAt index: Int
     ) -> CoachMark {
-        switch(index) {
+        switch index {
         case 0:
             let pathMaker = { (frame: CGRect) -> UIBezierPath in
                 return UIBezierPath(rect: frame)
@@ -91,7 +93,7 @@ extension LargeCutoutViewController: CoachMarksControllerDataSource {
             withArrow: true, arrowOrientation: coachMark.arrowOrientation
         )
 
-        switch(index) {
+        switch index {
         case 0:
             coachViews.bodyView.hintLabel.text = self.tableViewText
             coachViews.bodyView.nextLabel.text = self.nextButtonText

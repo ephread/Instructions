@@ -43,13 +43,19 @@ class ViewController: UIViewController, CoachMarksControllerDataSource {
             return coachMarksController.helper.makeCoachMark(for: rectangleView)
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt: Int, madeFrom coachMark: CoachMark)
-        -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
-            let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
+    func coachMarksController(
+        _ coachMarksController: CoachMarksController,
+        coachMarkViewsAt: Int,
+        madeFrom coachMark: CoachMark
+    ) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            arrowOrientation: coachMark.arrowOrientation
+        )
 
-            coachViews.bodyView.hintLabel.text = "Hello! I'm a Coach Mark!"
-            coachViews.bodyView.nextLabel.text = "Ok!"
+        coachViews.bodyView.hintLabel.text = "Hello! I'm a Coach Mark!"
+        coachViews.bodyView.nextLabel.text = "Ok!"
 
-            return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
 }

@@ -11,11 +11,11 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     let mockedDataSource = CoachMarkControllerMockedDataSource()
     let mockedWindow = UIWindow()
 
-    var delegateEndExpectation: XCTestExpectation? = nil
+    var delegateEndExpectation: XCTestExpectation?
 
     override func setUp() {
         super.setUp()
-        
+
         coachMarksController.dataSource = self.mockedDataSource
         coachMarksController.delegate = self
 
@@ -74,31 +74,30 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
         }
     }
 
-
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               didEndShowingBySkipping skipped: Bool) {
         guard let delegateEndExpectation = self.delegateEndExpectation else {
-            XCTFail()
+            XCTFail("Undefined expectation")
             return
         }
 
-        if (delegateEndExpectation.description == "Detachment") {
+        if delegateEndExpectation.description == "Detachment" {
             XCTAssertTrue(coachMarksController.overlay.overlayView.window == nil)
 
             delegateEndExpectation.fulfill()
-        } else if (delegateEndExpectation.description == "DidFinishShowing") {
+        } else if delegateEndExpectation.description == "DidFinishShowing" {
             XCTAssertTrue(true)
             delegateEndExpectation.fulfill()
-        } else if (delegateEndExpectation.description == "DidFinishShowingBySkipping") {
+        } else if delegateEndExpectation.description == "DidFinishShowingBySkipping" {
             XCTAssertTrue(skipped)
             delegateEndExpectation.fulfill()
         } else {
-            XCTFail()
+            XCTFail("Invalid expectation")
         }
     }
 }
 
-internal class CoachMarkControllerMockedDataSource : CoachMarksControllerDataSource {
+internal class CoachMarkControllerMockedDataSource: CoachMarksControllerDataSource {
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         return 1
     }
@@ -114,26 +113,5 @@ internal class CoachMarkControllerMockedDataSource : CoachMarksControllerDataSou
         madeFrom coachMark: CoachMark
     ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
         return (CoachMarkBodyDefaultView(), nil)
-    }
-}
-
-internal class CoachMarkControllerMockedDataSourceUsingConstructorWithoutButton : CoachMarkControllerMockedDataSource {
-    override func coachMarksController(
-        _ coachMarksController: CoachMarksController,
-        coachMarkViewsAt index: Int,
-        madeFrom coachMark: CoachMark
-    ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
-        return (CoachMarkBodyDefaultView(hintText: "hint", nextText: nil), nil)
-    }
-}
-
-internal class CoachMarkControllerMockedDataSourceUsingConstructorWithButton :
-               CoachMarkControllerMockedDataSource {
-    override func coachMarksController(
-        _ coachMarksController: CoachMarksController,
-        coachMarkViewsAt index: Int,
-        madeFrom coachMark: CoachMark
-    ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
-        return (CoachMarkBodyDefaultView(hintText: "hint", nextText: "next"), nil)
     }
 }

@@ -5,15 +5,11 @@ import UIKit
 import Instructions
 
 // Transparent coach mark (text without background, cool arrow)
-internal class TransparentCoachMarkBodyView : UIControl, CoachMarkBodyView {
+internal class TransparentCoachMarkBodyView: UIControl, CoachMarkBodyView {
     // MARK: - Internal properties
-    var nextControl: UIControl? {
-        get {
-            return self
-        }
-    }
+    var nextControl: UIControl? { return self }
 
-    weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate? = nil
+    weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate?
 
     var hintLabel = UITextView()
 
@@ -33,7 +29,7 @@ internal class TransparentCoachMarkBodyView : UIControl, CoachMarkBodyView {
     }
 
     // MARK: - Private methods
-    fileprivate func setupInnerViewHierarchy() {
+    private func setupInnerViewHierarchy() {
         self.translatesAutoresizingMaskIntoConstraints = false
 
         hintLabel.backgroundColor = UIColor.clear
@@ -48,11 +44,6 @@ internal class TransparentCoachMarkBodyView : UIControl, CoachMarkBodyView {
         hintLabel.isUserInteractionEnabled = false
 
         self.addSubview(hintLabel)
-
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[hintLabel]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0),
-            metrics: nil, views: ["hintLabel": hintLabel]))
-
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[hintLabel]|", options: NSLayoutConstraint.FormatOptions(rawValue: 0),
-            metrics: nil, views: ["hintLabel": hintLabel]))
+        hintLabel.fillSuperview()
     }
 }

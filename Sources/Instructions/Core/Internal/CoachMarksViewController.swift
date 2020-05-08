@@ -4,6 +4,7 @@
 import UIKit
 
 // TODO: ❗️ Find a good way to refactor this growing controller
+// swiftlint:disable file_length
 // MARK: - Main Class
 /// Handles a set of coach marks, and display them successively.
 class CoachMarksViewController: UIViewController {

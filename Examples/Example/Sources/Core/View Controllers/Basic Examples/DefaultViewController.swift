@@ -52,13 +52,16 @@ internal class DefaultViewController: ProfileViewController,
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
-        switch(index) {
+        switch index {
         case 0:
-            return coachMarksController.helper.makeCoachMark(for: self.navigationController?.navigationBar) { (frame: CGRect) -> UIBezierPath in
-                // This will make a cutoutPath matching the shape of
-                // the component (no padding, no rounded corners).
-                return UIBezierPath(rect: frame)
-            }
+            return coachMarksController.helper.makeCoachMark(
+                for: self.navigationController?.navigationBar,
+                cutoutPathMaker: { (frame: CGRect) -> UIBezierPath in
+                    // This will make a cutoutPath matching the shape of
+                    // the component (no padding, no rounded corners).
+                    return UIBezierPath(rect: frame)
+                }
+            )
         case 1:
             return coachMarksController.helper.makeCoachMark(for: self.handleLabel)
         case 2:
@@ -78,9 +81,12 @@ internal class DefaultViewController: ProfileViewController,
         madeFrom coachMark: CoachMark
     ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
 
-        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            arrowOrientation: coachMark.arrowOrientation
+        )
 
-        switch(index) {
+        switch index {
         case 0:
             coachViews.bodyView.hintLabel.text = self.profileSectionText
             coachViews.bodyView.nextLabel.text = self.nextButtonText

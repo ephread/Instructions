@@ -10,11 +10,11 @@ import XCTest
 class CoachMarkInnerLayoutHelperTests: XCTestCase {
 
     let layoutHelper = CoachMarkInnerLayoutHelper()
-    
+
     override func setUp() {
         super.setUp()
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }

@@ -10,12 +10,15 @@ internal class TransitionFromCodeViewController: ProfileViewController {
 
     let text1 = "(1) That's the first coach mark."
     let text2 = "(2) Second coach mark no one will see."
-    let text3 = "(3) We skipped the second one (look at how we did it in the code). Now, please tap on this button to continue!"
+    let text3 = """
+                (3) We skipped the second one (look at how we did it in the code). \
+                Now, please tap on this button to continue!
+                """
     let text4 = "(4) We are finally hitting the fourth one!"
     let text5 = "(5) And now the fifth one!"
     let text6 = "(6) This instruction is the last one."
 
-    @IBOutlet var tapMeButton : UIButton!
+    @IBOutlet var tapMeButton: UIButton!
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -52,13 +55,16 @@ extension TransitionFromCodeViewController: CoachMarksControllerDataSource {
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
-        switch(index) {
+        switch index {
         case 0:
-            return coachMarksController.helper.makeCoachMark(for: self.navigationController?.navigationBar) { (frame: CGRect) -> UIBezierPath in
-                // This will make a cutoutPath matching the shape of
-                // the component (no padding, no rounded corners).
-                return UIBezierPath(rect: frame)
-            }
+            return coachMarksController.helper.makeCoachMark(
+                for: self.navigationController?.navigationBar,
+                cutoutPathMaker: { (frame: CGRect) -> UIBezierPath in
+                    // This will make a cutoutPath matching the shape of
+                    // the component (no padding, no rounded corners).
+                    return UIBezierPath(rect: frame)
+                }
+            )
         case 1:
             return coachMarksController.helper.makeCoachMark(for: self.handleLabel)
         case 2:
@@ -93,15 +99,23 @@ extension TransitionFromCodeViewController: CoachMarksControllerDataSource {
         // For the coach mark at index 2, we disable the ability to tap on the
         // coach mark to get to the next one, forcing the user to perform
         // the appropriate action.
-        switch(index) {
+        switch index {
         case 2:
-            coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, withNextText: false, arrowOrientation: coachMark.arrowOrientation)
+            coachViews = coachMarksController.helper.makeDefaultCoachViews(
+                withArrow: true,
+                withNextText: false,
+                arrowOrientation: coachMark.arrowOrientation
+            )
             coachViews.bodyView.isUserInteractionEnabled = false
         default:
-            coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, withNextText: true, arrowOrientation: coachMark.arrowOrientation)
+            coachViews = coachMarksController.helper.makeDefaultCoachViews(
+                withArrow: true,
+                withNextText: true,
+                arrowOrientation: coachMark.arrowOrientation
+            )
         }
 
-        switch(index) {
+        switch index {
         case 0:
             coachViews.bodyView.hintLabel.text = self.text1
             coachViews.bodyView.nextLabel.text = self.nextButtonText
@@ -127,7 +141,7 @@ extension TransitionFromCodeViewController: CoachMarksControllerDataSource {
 
     // MARK: - Protocol Conformance | CoachMarksControllerDelegate
     func coachMarksController(_ coachMarksController: CoachMarksController, willLoadCoachMarkAt index: Int) -> Bool {
-        switch(index) {
+        switch index {
         case 1:
             // Skipping the second coach mark.
             return false

@@ -24,7 +24,11 @@ class KeyboardViewController: UIInputViewController,
 
         loadInterface()
 
-        self.nextKeyboardButton.addTarget(self, action: #selector(UIInputViewController.advanceToNextInputMode), for: .touchUpInside)
+        self.nextKeyboardButton.addTarget(
+            self,
+            action: #selector(UIInputViewController.advanceToNextInputMode),
+            for: .touchUpInside
+        )
 
         self.coachMarksController = CoachMarksController()
         self.coachMarksController?.dataSource = self
@@ -57,11 +61,12 @@ class KeyboardViewController: UIInputViewController,
     }
 
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
-        return 4;
+        return 4
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
-        switch(index) {
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              coachMarkAt index: Int) -> CoachMark {
+        switch index {
         case 0:
             return coachMarksController.helper.makeCoachMark(for: self.nextKeyboardButton)
         case 1:
@@ -75,12 +80,17 @@ class KeyboardViewController: UIInputViewController,
         }
     }
 
+    func coachMarksController(
+        _ coachMarksController: CoachMarksController,
+        coachMarkViewsAt index: Int,
+        madeFrom coachMark: CoachMark
+    ) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            arrowOrientation: coachMark.arrowOrientation
+        )
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
-
-        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
-
-        switch(index) {
+        switch index {
         case 0:
             coachViews.bodyView.hintLabel.text = "Tap here to change the keyboard."
             coachViews.bodyView.nextLabel.text = "Next"
@@ -95,7 +105,7 @@ class KeyboardViewController: UIInputViewController,
             coachViews.bodyView.nextLabel.text = "Finish"
         default: break
         }
-        
+
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
 
@@ -113,7 +123,7 @@ class KeyboardViewController: UIInputViewController,
         // instantiate the view
         keyboardView = nib.instantiate(withOwner: self, options: nil)[0] as? UIView ?? UIView()
         keyboardView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         // add the interface to the main view
         view.addSubview(keyboardView)
         keyboardView.fillSuperview()

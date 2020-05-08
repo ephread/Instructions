@@ -13,7 +13,7 @@ class TestFlowViewController: ProfileViewController {
     let text3 = "CoachMark 3"
     let text4 = "CoachMark 4"
 
-    @IBOutlet var tapMeButton : UIButton!
+    @IBOutlet var tapMeButton: UIButton!
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -64,33 +64,33 @@ class TestFlowViewController: ProfileViewController {
     }
 
     override func coachMarksController(_ coachMarksController: CoachMarksController,
-                              willShow coachMark: inout CoachMark,
-                              beforeChanging change: ConfigurationChange,
-                              at index: Int) {
+                                       willShow coachMark: inout CoachMark,
+                                       beforeChanging change: ConfigurationChange,
+                                       at index: Int) {
         print("willShow at: \(index), beforeChanging: \(change)")
     }
 
     override func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didShow coachMark: CoachMark,
-                              afterChanging change: ConfigurationChange,
-                              at index: Int) {
+                                       didShow coachMark: CoachMark,
+                                       afterChanging change: ConfigurationChange,
+                                       at index: Int) {
         print("didShow at: \(index), afterChanging: \(change)")
     }
 
     override func coachMarksController(_ coachMarksController: CoachMarksController,
-                              willHide coachMark: CoachMark,
-                              at index: Int) {
+                                       willHide coachMark: CoachMark,
+                                       at index: Int) {
         print("willHide at: \(index)")
     }
 
     override func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didHide coachMark: CoachMark,
-                              at index: Int) {
+                                       didHide coachMark: CoachMark,
+                                       at index: Int) {
         print("didHide at: \(index)")
     }
 
     override func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didEndShowingBySkipping skipped: Bool) {
+                                       didEndShowingBySkipping skipped: Bool) {
         print("didEndShowingBySkipping: \(skipped)")
     }
 
@@ -117,11 +117,14 @@ extension TestFlowViewController: CoachMarksControllerDataSource {
 
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
         print("coachMarksForIndex: \(index)")
-        switch(index) {
+        switch index {
         case 0:
-            return coachMarksController.helper.makeCoachMark(for: self.navigationController?.navigationBar) { (frame: CGRect) -> UIBezierPath in
-                return UIBezierPath(rect: frame)
-            }
+            return coachMarksController.helper.makeCoachMark(
+                for: self.navigationController?.navigationBar,
+                cutoutPathMaker: { (frame: CGRect) -> UIBezierPath in
+                    return UIBezierPath(rect: frame)
+                }
+            )
         case 1:
             return coachMarksController.helper.makeCoachMark(for: self.handleLabel)
         case 2:
@@ -144,9 +147,13 @@ extension TestFlowViewController: CoachMarksControllerDataSource {
         print("coachMarkViewsForIndex: \(index)")
         var coachViews: (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?)
 
-        coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, withNextText: false, arrowOrientation: coachMark.arrowOrientation)
+        coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            withNextText: false,
+            arrowOrientation: coachMark.arrowOrientation
+        )
 
-        switch(index) {
+        switch index {
         case 0:
             coachViews.bodyView.hintLabel.text = self.text1
             coachViews.bodyView.nextLabel.text = self.nextButtonText

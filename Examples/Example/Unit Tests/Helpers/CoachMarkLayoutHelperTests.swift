@@ -15,7 +15,7 @@ class CoachMarkLayoutHelperTests: XCTestCase {
     var parentView: UIView!
     var bodyView: CoachMarkBodyDefaultView!
     var arrowView: CoachMarkArrowDefaultView!
-    
+
     override func setUp() {
         super.setUp()
 
@@ -23,7 +23,7 @@ class CoachMarkLayoutHelperTests: XCTestCase {
         bodyView = CoachMarkBodyDefaultView()
         arrowView = CoachMarkArrowDefaultView(orientation: .top)
     }
-    
+
     override func tearDown() {
         super.tearDown()
     }
@@ -74,8 +74,20 @@ class CoachMarkLayoutHelperTests: XCTestCase {
         XCTAssertTrue(constraintsToTest[2] != constraintsToTest[3])
     }
 
-    private func constraints(using layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight)
-    -> [[NSLayoutConstraint]] {
+    private func constraints(
+        using layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight
+    ) -> [[NSLayoutConstraint]] {
+        return [
+            constraints1(using: layoutDirection),
+            constraints2(using: layoutDirection),
+            constraints3(using: layoutDirection),
+            constraints4(using: layoutDirection)
+        ]
+    }
+
+    private func constraints1(
+        using layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight
+    ) -> [NSLayoutConstraint] {
         var coachMark1 = CoachMark()
 
         coachMark1.cutoutPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -87,6 +99,14 @@ class CoachMarkLayoutHelperTests: XCTestCase {
 
         parentView.addSubview(coachMarkView1)
 
+        return layoutHelper.constraints(for: coachMarkView1, coachMark: coachMark1,
+                                        parentView: parentView,
+                                        layoutDirection: layoutDirection)
+    }
+
+    private func constraints2(
+        using layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight
+    ) -> [NSLayoutConstraint] {
         var coachMark2 = CoachMark()
         coachMark2.cutoutPath = UIBezierPath(rect: CGRect(x: 135, y: 150, width: 50, height: 50))
         coachMark2.pointOfInterest = CGPoint(x: 160, y: 175)
@@ -97,6 +117,14 @@ class CoachMarkLayoutHelperTests: XCTestCase {
 
         parentView.addSubview(coachMarkView2)
 
+        return layoutHelper.constraints(for: coachMarkView2, coachMark: coachMark2,
+                                        parentView: parentView,
+                                        layoutDirection: layoutDirection)
+    }
+
+    private func constraints3(
+        using layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight
+    ) -> [NSLayoutConstraint] {
         var coachMark3 = CoachMark()
         coachMark3.cutoutPath = UIBezierPath(rect: CGRect(x: 270, y: 300, width: 50, height: 50))
         coachMark3.pointOfInterest = CGPoint(x: 295, y: 325)
@@ -107,6 +135,14 @@ class CoachMarkLayoutHelperTests: XCTestCase {
 
         parentView.addSubview(coachMarkView3)
 
+        return layoutHelper.constraints(for: coachMarkView3, coachMark: coachMark3,
+                                        parentView: parentView,
+                                        layoutDirection: layoutDirection)
+    }
+
+    private func constraints4(
+        using layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight
+    ) -> [NSLayoutConstraint] {
         var coachMark4 = CoachMark()
         coachMark4.cutoutPath = UIBezierPath(rect: CGRect(x: 135, y: 400, width: 50, height: 50))
 
@@ -116,26 +152,8 @@ class CoachMarkLayoutHelperTests: XCTestCase {
 
         parentView.addSubview(coachMarkView4)
 
-        let constraints1 =
-            layoutHelper.constraints(for: coachMarkView1, coachMark: coachMark1,
-                                     parentView: parentView,
-                                     layoutDirection: layoutDirection)
-
-        let constraints2 =
-            layoutHelper.constraints(for: coachMarkView2, coachMark: coachMark2,
-                                     parentView: parentView,
-                                     layoutDirection: layoutDirection)
-
-        let constraints3 =
-            layoutHelper.constraints(for: coachMarkView3, coachMark: coachMark3,
-                                     parentView: parentView,
-                                     layoutDirection: layoutDirection)
-
-        let constraints4 =
-            layoutHelper.constraints(for: coachMarkView4, coachMark: coachMark4,
-                                     parentView: parentView,
-                                     layoutDirection: layoutDirection)
-
-        return [constraints1, constraints2, constraints3, constraints4]
+        return layoutHelper.constraints(for: coachMarkView4, coachMark: coachMark4,
+                                        parentView: parentView,
+                                        layoutDirection: layoutDirection)
     }
 }

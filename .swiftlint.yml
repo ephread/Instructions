@@ -1,5 +1,10 @@
 disabled_rules:
   - todo
+  - identifier_name
 
 included:
   - Sources
+  - Examples
+
+excluded:
+  - Examples/Carthage

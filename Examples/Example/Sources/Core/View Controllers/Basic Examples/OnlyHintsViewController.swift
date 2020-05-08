@@ -10,16 +10,16 @@ internal class OnlyHintViewController: ProfileViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.coachMarksController.dataSource = self
-        
+
         self.emailLabel?.layer.cornerRadius = 4.0
         self.postsLabel?.layer.cornerRadius = 4.0
         self.reputationLabel?.layer.cornerRadius = 4.0
-        
+
         let skipView = CoachMarkSkipDefaultView()
         skipView.setTitle("Skip", for: .normal)
-        
+
         self.coachMarksController.skipView = skipView
     }
 
@@ -35,13 +35,16 @@ extension OnlyHintViewController: CoachMarksControllerDataSource {
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
-        switch(index) {
+        switch index {
         case 0:
-            return coachMarksController.helper.makeCoachMark(for: self.navigationController?.navigationBar) { (frame: CGRect) -> UIBezierPath in
-                // This will make a cutoutPath matching the shape of
-                // the component (no padding, no rounded corners).
-                return UIBezierPath(rect: frame)
-            }
+            return coachMarksController.helper.makeCoachMark(
+                for: self.navigationController?.navigationBar,
+                cutoutPathMaker: { (frame: CGRect) -> UIBezierPath in
+                    // This will make a cutoutPath matching the shape of
+                    // the component (no padding, no rounded corners).
+                    return UIBezierPath(rect: frame)
+                }
+            )
         case 1:
             return coachMarksController.helper.makeCoachMark(for: self.handleLabel)
         case 2:
@@ -63,7 +66,7 @@ extension OnlyHintViewController: CoachMarksControllerDataSource {
 
         var hintText = ""
 
-        switch(index) {
+        switch index {
         case 0:
             hintText = self.profileSectionText
         case 1:
@@ -77,7 +80,12 @@ extension OnlyHintViewController: CoachMarksControllerDataSource {
         default: break
         }
 
-        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation, hintText: hintText, nextText: nil)
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            arrowOrientation: coachMark.arrowOrientation,
+            hintText: hintText,
+            nextText: nil
+        )
 
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }

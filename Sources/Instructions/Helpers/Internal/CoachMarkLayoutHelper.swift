@@ -16,7 +16,7 @@ class CoachMarkLayoutHelper {
     ) -> [NSLayoutConstraint] {
         if coachMarkView.superview != parentView {
             print("""
-                  [WARNING] `coachMarkView` is not a child of `parentView`. " \
+                  [WARNING] `coachMarkView` is not a child of `parentView`. \
                   The array of constraints will be empty.
                   """)
             return []
@@ -75,9 +75,11 @@ class CoachMarkLayoutHelper {
             ]
         }
 
-        let visualFormat = "H:|-(==\(coachMark.horizontalMargin))-" +
-                           "[currentCoachMarkView(<=\(coachMark.maxWidth))]-" +
-                           "(>=\(coachMark.horizontalMargin))-|"
+        let visualFormat = """
+                           H:|-(==\(coachMark.horizontalMargin))-\
+                           [currentCoachMarkView(<=\(coachMark.maxWidth))]-\
+                           (>=\(coachMark.horizontalMargin))-|
+                           """
 
         return NSLayoutConstraint.constraints(withVisualFormat: visualFormat,
                                               options: NSLayoutConstraint.FormatOptions(rawValue: 0),
@@ -138,9 +140,11 @@ class CoachMarkLayoutHelper {
             ]
         }
 
-        let visualFormat = "H:|-(>=\(coachMark.horizontalMargin))-" +
-                           "[currentCoachMarkView(<=\(coachMark.maxWidth))]-" +
-                           "(==\(coachMark.horizontalMargin))-|"
+        let visualFormat = """
+                           H:|-(>=\(coachMark.horizontalMargin))-\
+                           [currentCoachMarkView(<=\(coachMark.maxWidth))]-\
+                           (==\(coachMark.horizontalMargin))-|
+                           """
 
         return NSLayoutConstraint.constraints(withVisualFormat: visualFormat,
                                               options: NSLayoutConstraint.FormatOptions(rawValue: 0),

@@ -17,7 +17,7 @@ internal class ConfigurationViewController: DefaultViewController {
         coachMarksController.rotationStyle = .manual
         coachMarksController.interfaceOrientations =
             .userDefined(as: supportedInterfaceOrientations)
-        
+
         instructionsNavigationController?.isLocked = true
     }
 

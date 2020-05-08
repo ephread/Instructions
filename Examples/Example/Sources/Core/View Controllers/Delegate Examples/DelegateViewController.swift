@@ -36,7 +36,7 @@ class DelegateViewController: ProfileViewController, CoachMarksControllerDataSou
 
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               coachMarkAt index: Int) -> CoachMark {
-        switch(index) {
+        switch index {
         case 0:
             let cutoutPathMaker = { (frame: CGRect) -> UIBezierPath in
                 return UIBezierPath(ovalIn: frame.insetBy(dx: -4, dy: -4))
@@ -67,7 +67,7 @@ class DelegateViewController: ProfileViewController, CoachMarksControllerDataSou
             arrowOrientation: coachMark.arrowOrientation
         )
 
-        switch(index) {
+        switch index {
         case 0:
             coachViews.bodyView.hintLabel.text = avatarText
             coachViews.bodyView.nextLabel.text = nextButtonText
@@ -105,8 +105,8 @@ class DelegateViewController: ProfileViewController, CoachMarksControllerDataSou
     }
 
     override func coachMarksController(_ coachMarksController: CoachMarksController,
-                              willShow coachMark: inout CoachMark,
-                              beforeChanging change: ConfigurationChange, at index: Int) {
+                                       willShow coachMark: inout CoachMark,
+                                       beforeChanging change: ConfigurationChange, at index: Int) {
         if index == 0 && change == .nothing {
             // We'll need to play an animation before showing up the coach mark.
             // To be able to play the animation and then show the coach mark and not stall
@@ -119,7 +119,7 @@ class DelegateViewController: ProfileViewController, CoachMarksControllerDataSou
 
             UIView.animate(withDuration: 1, animations: { () -> Void in
                 self.view.layoutIfNeeded()
-            }, completion: { (finished: Bool) -> Void in
+            }, completion: { _ -> Void in
                 let maker = { (frame: CGRect) -> UIBezierPath in
                     return UIBezierPath(ovalIn: frame.insetBy(dx: -4, dy: -4))
                 }
@@ -137,7 +137,7 @@ class DelegateViewController: ProfileViewController, CoachMarksControllerDataSou
     }
 
     override func coachMarksController(_ coachMarksController: CoachMarksController,
-                              willHide coachMark: CoachMark, at index: Int) {
+                                       willHide coachMark: CoachMark, at index: Int) {
         if index == 1 {
             avatarVerticalPositionConstraint?.constant = 0
             view.needsUpdateConstraints()
@@ -149,7 +149,7 @@ class DelegateViewController: ProfileViewController, CoachMarksControllerDataSou
     }
 
     override func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didEndShowingBySkipping skipped: Bool) {
+                                       didEndShowingBySkipping skipped: Bool) {
         let newColor: UIColor = skipped ? .systemPurple : .systemOrange
 
         UIView.animate(withDuration: 1, animations: { () -> Void in

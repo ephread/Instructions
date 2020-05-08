@@ -15,8 +15,10 @@ class CoachMarkLayoutHelper {
         passNumber: Int = 0
     ) -> [NSLayoutConstraint] {
         if coachMarkView.superview != parentView {
-            print("[WARNING] `coachMarkView` is not a child of `parentView`. " +
-                  "The array of constraints will be empty.")
+            print("""
+                  [WARNING] `coachMarkView` is not a child of `parentView`. " \
+                  The array of constraints will be empty.
+                  """)
             return []
         }
 

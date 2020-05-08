@@ -213,8 +213,10 @@ public class FlowManager {
         // the case.
         if !self.isPaused {
             if coachMarksViewController.instructionsRootView.bounds.isEmpty {
-                print("[ERROR] The overlay view added to the window has empty bounds, " +
-                      "Instructions will stop.")
+                print("""
+                      [ERROR] The overlay view added to the window has empty bounds, \
+                      Instructions will stop.
+                      """)
                 self.stopFlow()
                 return
             }

@@ -130,6 +130,16 @@ class CoachMarksViewController: UIViewController {
     ///   - windowLevel: the level at whcih display the window.
     func attach(to window: UIWindow, over viewController: UIViewController,
                 at windowLevel: UIWindow.Level? = nil) {
+        if #available(iOS 13.0, *) {
+            if let windowLevel = windowLevel,
+               windowLevel.rawValue >= UIWindow.Level.statusBar.rawValue {
+                print("""
+                      [WARNING] Displaying Instructions over the status bar is \
+                      unsupported in iOS 13+.
+                      """)
+            }
+        }
+
         presentationFashion = .window
         window.windowLevel = windowLevel ?? UIWindow.Level.normal + 1
 
@@ -152,8 +162,10 @@ class CoachMarksViewController: UIViewController {
     /// - Parameter viewController: the controller to which attach Instructions
     func attachToWindow(of viewController: UIViewController) {
         guard let window = viewController.view?.window else {
-            print("[ERROR] Instructions could not be properly attached to the window" +
-                  "did you call `start(in:)` inside `viewDidLoad` instead of `viewDidAppear`?")
+            print("""
+                  [ERROR] Instructions could not be properly attached to the window \
+                  did you call `start(in:)` inside `viewDidLoad` instead of `viewDidAppear`?
+                  """)
 
             return
         }

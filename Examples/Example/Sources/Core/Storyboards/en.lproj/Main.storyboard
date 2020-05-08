@@ -182,7 +182,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="W2E-KP-qCw" kind="show" identifier="IndependantWindowContext" id="54i-Wa-T5w"/>
+                                            <segue destination="W2E-KP-qCw" kind="show" identifier="IndependentWindowContext" id="54i-Wa-T5w"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="R6B-9K-ioz" style="IBUITableViewCellStyleDefault" id="Ond-BX-Vjb">
@@ -614,6 +614,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Kei-0c-VDX"/>
-        <segue reference="oIs-oz-kQV"/>
+        <segue reference="54i-Wa-T5w"/>
     </inferredMetricsTieBreakers>
 </document>

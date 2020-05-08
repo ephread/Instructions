@@ -128,7 +128,7 @@ public class FlowManager {
             return
         }
 
-        if let currentCoachMark = currentCoachMark {
+        if let currentCoachMark = currentCoachMark, currentIndex > 0 {
             delegate?.willHide(coachMark: currentCoachMark, at: currentIndex - 1)
         }
 
@@ -136,7 +136,10 @@ public class FlowManager {
             guard let currentCoachMark = currentCoachMark else { return }
 
             coachMarksViewController.hide(coachMark: currentCoachMark, at: previousIndex) {
-                self.delegate?.didHide(coachMark: self.currentCoachMark!, at: self.currentIndex - 1)
+                if self.currentIndex > 0 {
+                    self.delegate?.didHide(coachMark: self.currentCoachMark!,
+                                           at: self.currentIndex - 1)
+                }
                 self.showOrStop()
             }
         } else {
@@ -189,6 +192,7 @@ public class FlowManager {
     internal func createAndShowCoachMark(afterResuming: Bool = false,
                                          changing change: ConfigurationChange = .nothing) {
         if disableFlow { return }
+        if currentIndex < 0 { return }
 
         if !afterResuming {
             guard delegate?.willLoadCoachMark(at: currentIndex) ?? false else {
@@ -211,7 +215,7 @@ public class FlowManager {
                                     afterSizeTransition: (change == .size), at: currentIndex)
         }
 
-        // The delegate might have paused the flow, he check whether or not it's
+        // The delegate might have paused the flow, we check whether or not it's
         // the case.
         if !self.paused {
             if coachMarksViewController.instructionsRootView.bounds.isEmpty {

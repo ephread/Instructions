@@ -42,7 +42,7 @@ public protocol CoachMarksControllerDataSource: class {
     /// - Returns: a tuple packaging the body component and the arrow component.
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark)
-    -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?)
+    -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?)
 
     /// Asks for autolayout constraints needed to position `skipView` in
     /// `coachMarksController.view`.
@@ -94,7 +94,7 @@ internal protocol CoachMarksControllerProxyDataSource: class {
     ///
     /// - Returns: a tuple packaging the body component and the arrow component.
     func coachMarkViews(at index: Int, madeFrom coachMark: CoachMark)
-        -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?)
+        -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?)
 
     /// Asks for autolayout constraints needed to position `skipView` in
     /// `coachMarksController.view`.

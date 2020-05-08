@@ -54,10 +54,14 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
         return coachMark
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(
+        _ coachMarksController: CoachMarksController,
+        coachMarkViewsAt index: Int,
+        madeFrom coachMark: CoachMark
+    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
 
-        var bodyView : CoachMarkBodyView
-        var arrowView : CoachMarkArrowView?
+        var bodyView: UIView & CoachMarkBodyView
+        var arrowView: (UIView & CoachMarkArrowView)?
 
         switch(index) {
         case 0:

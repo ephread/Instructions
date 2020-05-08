@@ -60,7 +60,7 @@ class DelegateViewController: ProfileViewController, CoachMarksControllerDataSou
     func coachMarksController(
         _ coachMarksController: CoachMarksController,
         coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark
-    ) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
 
         let coachViews = coachMarksController.helper.makeDefaultCoachViews(
             withArrow: true,

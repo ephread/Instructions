@@ -13,7 +13,7 @@ extension CoachMarksController: CoachMarksControllerProxyDataSource {
     }
 
     func coachMarkViews(at index: Int, madeFrom coachMark: CoachMark)
-        -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
             return dataSource!.coachMarksController(self, coachMarkViewsAt: index,
                                                     madeFrom: coachMark)
     }

@@ -44,27 +44,10 @@ class CoachMarkView: UIView {
     ///                               to overlap the body) - a positive number
     ///                               will make the arrow overlap.
     /// - Parameter coachMarkInnerLayoutHelper: auto-layout constraints helper.
-    init(bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView? = nil,
+    init(bodyView: UIView & CoachMarkBodyView,
+         arrowView: (UIView & CoachMarkArrowView)? = nil,
          arrowOrientation: CoachMarkArrowOrientation? = nil, arrowOffset: CGFloat? = nil,
          coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper) {
-
-        // Due to the fact Swift 2 compiler doesn't let us enforce type check of
-        // an object being a class conforming to a given protocol, we are checking
-        // the type of body and arrow views at runtime. This isn't very nice, but
-        // I haven't found any better way to enforce that they both are subclasses
-        // of `UIView` and conform to the `CoachMarkBodyView` and
-        // `CoachMarkArrowView` protocols.
-        //
-        // TODO: ❗️Use class/protocol composition to enforce both constraints.
-        //       As this will require change in the dataSource/delegate method signature
-        //       this change should be targeted for Instructions 2.0.0
-        if !(bodyView is UIView) {
-            fatalError("Body view must conform to CoachMarkBodyView but also be a UIView.")
-        }
-
-        if arrowView != nil && !(arrowView is UIView) {
-            fatalError("Arrow view must conform to CoachMarkArrowView but also be a UIView.")
-        }
 
         self.bodyView = bodyView
         self.arrowView = arrowView

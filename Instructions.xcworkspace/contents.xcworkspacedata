@@ -10,31 +10,46 @@
    <FileRef
       location = "group:Examples/Instructions App Extensions Example.xcodeproj">
    </FileRef>
+   <Group
+      location = "container:"
+      name = "CocoaPods">
+      <FileRef
+         location = "group:Instructions.podspec">
+      </FileRef>
+      <FileRef
+         location = "group:InstructionsAppExtensions.podspec">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "Markdown">
+      <FileRef
+         location = "group:CHANGELOG.md">
+      </FileRef>
+      <FileRef
+         location = "group:CODE_OF_CONDUCT.md">
+      </FileRef>
+      <FileRef
+         location = "group:CONTRIBUTING.md">
+      </FileRef>
+      <FileRef
+         location = "group:README.md">
+      </FileRef>
+   </Group>
+   <Group
+      location = "container:"
+      name = "Services">
+      <FileRef
+         location = "group:.swiftlint.yml">
+      </FileRef>
+      <FileRef
+         location = "group:.codeclimate.yml">
+      </FileRef>
+      <FileRef
+         location = "group:.slather.yml">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:Package.swift">
-   </FileRef>
-   <FileRef
-      location = "group:codecov.yml">
-   </FileRef>
-   <FileRef
-      location = "group:.swiftlint.yml">
-   </FileRef>
-   <FileRef
-      location = "group:Instructions.podspec">
-   </FileRef>
-   <FileRef
-      location = "group:InstructionsAppExtensions.podspec">
-   </FileRef>
-   <FileRef
-      location = "group:CHANGELOG.md">
-   </FileRef>
-   <FileRef
-      location = "group:CODE_OF_CONDUCT.md">
-   </FileRef>
-   <FileRef
-      location = "group:CONTRIBUTING.md">
-   </FileRef>
-   <FileRef
-      location = "group:README.md">
    </FileRef>
 </Workspace>

@@ -12,6 +12,7 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
     var delegateEndExpectation: XCTestExpectation!
 
     var presentationContext: DefaultViewController.Context = .independentWindow
+    let originalOrientation = XCUIDevice.shared.orientation
 
     override func setUp() {
         super.setUp()
@@ -22,6 +23,11 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
 
         XCUIDevice.shared.orientation = .portrait
         delegateEndExpectation = nil
+    }
+
+    override func tearDown() {
+        super.tearDown()
+        XCUIDevice.shared.orientation = originalOrientation
     }
 
     func testFlowInIndependentWindow() {

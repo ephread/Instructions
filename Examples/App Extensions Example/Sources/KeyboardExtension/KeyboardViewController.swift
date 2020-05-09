@@ -84,7 +84,7 @@ class KeyboardViewController: UIInputViewController,
         _ coachMarksController: CoachMarksController,
         coachMarkViewsAt index: Int,
         madeFrom coachMark: CoachMark
-    ) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
         let coachViews = coachMarksController.helper.makeDefaultCoachViews(
             withArrow: true,
             arrowOrientation: coachMark.arrowOrientation

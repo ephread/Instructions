@@ -156,7 +156,10 @@ func coachMarksController(
     coachMarkViewsAt index: Int,
     madeFrom coachMark: CoachMark
 ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
-    let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
+    let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+        withArrow: true,
+        arrowOrientation: coachMark.arrowOrientation
+    )
 
     coachViews.bodyView.hintLabel.text = "Hello! I'm a Coach Mark!"
     coachViews.bodyView.nextLabel.text = "Ok!"
@@ -241,9 +244,9 @@ This protocol defines two properties.
 
 ```swift
 override var highlighted: Bool {
-	didSet {
-	    self.highlightArrowDelegate?.highlightArrow(self.highlighted)
-	}
+    didSet {
+        self.highlightArrowDelegate?.highlightArrow(self.highlighted)
+    }
 }
 ```
 
@@ -256,7 +259,10 @@ func coachMarksController(
     coachMarkViewsAt index: Int,
     madeFrom coachMark: CoachMark
 ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
-	let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
+    let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+        withArrow: true,
+        arrowOrientation: coachMark.arrowOrientation
+    )
 }
 ```
 
@@ -453,7 +459,7 @@ func coachMarksController(
     willShow coachMark: inout CoachMark,
     at index: Int
 ) {
-	 // Pause to be able to play the animation and then show the coach mark.
+    // Pause to be able to play the animation and then show the coach mark.
     coachMarksController.flow.pause()
 
     // Run the animation
@@ -583,7 +589,7 @@ use the specific statement:
 import InstructionsAppExtensions
 ```
 
-⚠️ **Please be extremely careful**, as you will be able to import regular _Instructions_
+⚠️ **Please be careful**, as you will be able to import regular _Instructions_
 from within an app extension without breaking anything. It will work. However, you're at a
 high risk of rejection from the Apple Store. Uses of `UIApplication.sharedApplication()`
 are statically checked during compilation but nothing prevents you from performing the calls

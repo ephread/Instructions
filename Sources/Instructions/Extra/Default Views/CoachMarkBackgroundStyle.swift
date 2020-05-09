@@ -4,13 +4,13 @@
 import UIKit
 
 public protocol CoachMarkBackgroundStyle {
-    var innerColor: UIColor { mutating get set }
-    var borderColor: UIColor { mutating get set }
-    var highlightedInnerColor: UIColor { mutating get set }
-    var highlightedBorderColor: UIColor { mutating get set }
+    var innerColor: UIColor { get set }
+    var borderColor: UIColor { get set }
+    var highlightedInnerColor: UIColor { get set }
+    var highlightedBorderColor: UIColor { get set }
 }
 
-public protocol CoachMarkBodyBackgroundStyle: CoachMarkBackgroundStyle {
+public protocol CoachMarkBodyBackgroundStyle: AnyObject, CoachMarkBackgroundStyle {
     var isHighlighted: Bool { get set }
     var cornerRadius: CGFloat { get set }
 }

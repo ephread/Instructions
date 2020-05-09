@@ -126,6 +126,20 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
             nextText: self.nextButtonText
         )
 
+        coachViews.bodyView.background.cornerRadius = 20
+        coachViews.bodyView.background.innerColor = innerColor
+        coachViews.bodyView.background.borderColor = borderColor
+        coachViews.bodyView.background.highlightedInnerColor = highlightedInnerColor
+        coachViews.bodyView.background.highlightedBorderColor = highlightedBorderColor
+        coachViews.bodyView.hintLabel.textColor = .white
+        coachViews.bodyView.nextLabel.textColor = .white
+        coachViews.bodyView.separator.backgroundColor = .white
+
+        coachViews.arrowView?.background.innerColor = innerColor
+        coachViews.arrowView?.background.borderColor = borderColor
+        coachViews.arrowView?.background.highlightedInnerColor = highlightedInnerColor
+        coachViews.arrowView?.background.highlightedBorderColor = highlightedBorderColor
+
         return (coachViews.bodyView, coachViews.arrowView)
     }
 
@@ -166,5 +180,71 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
         )
 
         return (coachViews.bodyView, coachViews.arrowView)
+    }
+}
+
+private extension MixedCoachMarksViewsViewController {
+    var borderColor: UIColor {
+        let defaultColor = #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
+
+        if #available(iOS 13.0, *) {
+            return UIColor { (traits) -> UIColor in
+                if traits.userInterfaceStyle == .dark {
+                    return #colorLiteral(red: 0.3176470697, green: 0.07450980693, blue: 0.02745098062, alpha: 1)
+                } else {
+                    return defaultColor
+                }
+            }
+        } else {
+            return defaultColor
+        }
+    }
+
+    var highlightedBorderColor: UIColor {
+        let defaultColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+
+        if #available(iOS 13.0, *) {
+            return UIColor { (traits) -> UIColor in
+                if traits.userInterfaceStyle == .dark {
+                    return #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
+                } else {
+                    return defaultColor
+                }
+            }
+        } else {
+            return defaultColor
+        }
+    }
+
+    var innerColor: UIColor {
+        let defaultColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+
+        if #available(iOS 13.0, *) {
+            return UIColor { (traits) -> UIColor in
+                if traits.userInterfaceStyle == .dark {
+                    return #colorLiteral(red: 0.521568656, green: 0.1098039225, blue: 0.05098039284, alpha: 1)
+                } else {
+                    return defaultColor
+                }
+            }
+        } else {
+            return defaultColor
+        }
+    }
+
+    var highlightedInnerColor: UIColor {
+        let defaultColor = #colorLiteral(red: 0.9372549057, green: 0.3490196168, blue: 0.1921568662, alpha: 1)
+
+        if #available(iOS 13.0, *) {
+            return UIColor { (traits) -> UIColor in
+                if traits.userInterfaceStyle == .dark {
+                    return #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+                } else {
+                    return defaultColor
+                }
+            }
+        } else {
+            return defaultColor
+        }
     }
 }

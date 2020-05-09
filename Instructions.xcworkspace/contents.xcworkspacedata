@@ -23,6 +23,13 @@
    <Group
       location = "container:"
       name = "Markdown">
+      <Group
+         location = "group:Documentation"
+         name = "Documentation">
+         <FileRef
+            location = "group:/Users/fred/Documents/Development/iOS/Instructions/Documentation/migrating_to_2.0.0.md">
+         </FileRef>
+      </Group>
       <FileRef
          location = "group:CHANGELOG.md">
       </FileRef>

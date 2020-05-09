@@ -9,6 +9,8 @@
 
 Add customizable coach marks into your iOS project. Available for both iPhone and iPad.
 
+⚠️ **Instructions 2.0.0 brings a couple of breaking changes, please review the [migration document](Documentation/migrating_to_2.0.0.md) before updating.**
+
 # Table of contents
 
   * [Overview](#overview)
@@ -95,6 +97,9 @@ You can then update, build and drag the generated framework into your project:
 $ carthage update
 $ carthage build
 ```
+
+### Swift Package Manager
+In Xcode, use File > Swift Packages > Add Package Dependency and search for `Instructions`.
 
 ### Manually
 If you rather stay away from both CocoaPods and Carthage, you can also install Instructions manually, with the cost of managing updates yourself.
@@ -194,8 +199,8 @@ You're all set. For more examples you can check the `Examples/` directory provid
 
 ### Advanced Usage
 
-#### Customizing general properties
-You can customized the background color of the overlay using this property:
+#### Customizing the overlay
+You can customize the background color of the overlay using this property:
 
 - `overlay.backgroundColor`
 
@@ -203,33 +208,39 @@ You can also make the overlay blur the content sitting behind it. Setting this p
 
 - `overlay.blurEffectStyle: UIBlurEffectStyle?`
 
-Last, you can make the overlay tappable. A tap on the overlay will hide the current coach mark and display the next one.
+You can make the overlay tappable. A tap on the overlay will hide the current coach mark and display the next one.
 
 - `overlay.isUserInteractionEnabled: Bool`
 
-TODO:
+You can also allow touch events to be forwarded to the UIView underneath if they happen inside the cutout path…
+
 - `overlay.isUserInteractionEnabledInsideCutoutPath: Bool`
+
+…or you can ask the entire overlay to forward touch events to the views under.
+
 - `overlay.areTouchEventsForwarded: Bool`
 
 ⚠️ The blurring overlay is not supported in app extensions.
 
-#### Providing a custom cutout path
-If you dislike how the default cutout path looks like, you can customize it by providing a block to `makeCoachMark(for:)`. The cutout path will automatically be stored in the `cutoutPath` property of the returning `CoachMark` object:
+#### Customizing default coach marks
+The efault coach marks provide minimum customisation options.
 
-```swift
-var coachMark = coachMarksController.helper.makeCoachMark(
-    for: customView,
-    cutoutPathMaker: { (frame: CGRect) -> UIBezierPath in
-        // This will create an oval cutout a bit larger than the view.
-        return UIBezierPath(ovalIn: frame.insetBy(dx: -4, dy: -4))
-    }
-)
-```
+**Available in both `CoachMarkBodyDefaultView` and `CoachMarkArrowDefaultView`:**
+- `background.innerColor: UIColor`: the background color of the coachmark.
+- `background.borderColor: UIColor`: the border color of the coachmark.
+- `background.highlightedInnerColor: UIColor`: the background color of the coachmark, when the coach mark is highlighted.
+- `background.highlightedBorderColor: UIColor`: the border color of the coachmark, when the coach mark is highlighted.
 
-`frame` will be the frame of `customView` converted in the `coachMarksController.view` referential, so don't have to worry about making sure the coordinates are in the appropriate referential. You can provide any kind of shape, from a simple rectangle to a complex star.
+**Available only on `CoachMarkArrowDefaultView`:**
+
+- `background.cornerRadius: UIColor`: the corner radius of the coach mark.
+
+Note that you can also customize properties on `CoachMarkBodyDefaultView.hintLabel` and `CoachMarkBodyDefaultView.nextLabel`.
+
+Refer to `MixedCoachMarksViewsViewController.swift` for a practical example.
 
 #### Providing custom views
-You can (and you should) provide custom views. A coach mark is composed of two views, a _body_ view and an _arrow_ view. Note that the term _arrow_ might be misleading. It doesn't have to be an actual arrow, it can be anything you want.
+If the default customisation options are not enough, you can provide your own custom views. A coach mark is composed of two views, a _body_ view and an _arrow_ view. Note that the term _arrow_ might be misleading. It doesn't have to be an actual arrow, it can be anything you want.
 
 A _body_ view must conform to the `CoachMarkBodyView` protocol. An _arrow_ view must conform to the `CoachMarkArrowView` protocol. Both of them must also be subclasses of `UIView`.
 
@@ -269,6 +280,21 @@ func coachMarksController(
 When providing a customized view, you need to provide an _arrow_ view with the approriate orientation (i. e. in the case of an actual arrow, pointing upward or downward). The `CoachMarkController` will tell you which orientation it expects, through the following property: `CoachMark.arrowOrientation`.
 
 Browse the `Example/` directory for more details.
+
+#### Providing a custom cutout path
+If you dislike how the default cutout path looks like, you can customize it by providing a block to `makeCoachMark(for:)`. The cutout path will automatically be stored in the `cutoutPath` property of the returning `CoachMark` object:
+
+```swift
+var coachMark = coachMarksController.helper.makeCoachMark(
+    for: customView,
+    cutoutPathMaker: { (frame: CGRect) -> UIBezierPath in
+        // This will create an oval cutout a bit larger than the view.
+        return UIBezierPath(ovalIn: frame.insetBy(dx: -4, dy: -4))
+    }
+)
+```
+
+`frame` will be the frame of `customView` converted in the `coachMarksController.view` referential, so don't have to worry about making sure the coordinates are in the appropriate referential. You can provide any kind of shape, from a simple rectangle to a complex star.
 
 #### Presentation Context
 

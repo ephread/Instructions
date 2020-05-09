@@ -4,7 +4,7 @@
 import UIKit
 
 ///
-public protocol CoachMarksControllerAnimationDelegate: class {
+public protocol CoachMarksControllerAnimationDelegate: AnyObject {
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               fetchAppearanceTransitionOfCoachMark coachMarkView: UIView,
                               at index: Int,
@@ -38,7 +38,7 @@ public extension CoachMarksControllerAnimationDelegate {
                               using manager: CoachMarkAnimationManager) { }
 }
 
-protocol CoachMarksControllerAnimationProxyDelegate: class {
+protocol CoachMarksControllerAnimationProxyDelegate: AnyObject {
     func fetchAppearanceTransition(OfCoachMark coachMarkView: UIView,
                                    at index: Int,
                                    using manager: CoachMarkTransitionManager)

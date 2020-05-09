@@ -6,7 +6,7 @@ import UIKit
 /// This protocol expected to be implemented by the CoachMarkController.
 /// A snapshottable object will return a snapshot view of its content.
 /// Useful when dealing with multiple windows.
-protocol Snapshottable: class {
+protocol Snapshottable: AnyObject {
     /// Returns: A snapshot of the view hierarchy.
     func snapshot() -> UIView?
 }
@@ -15,7 +15,7 @@ protocol Snapshottable: class {
 /// (Blurring the content behind, simple background color, etc.)
 /// Takes care of displaying and animating the overlay / cutout path (doesn't
 /// deals with the coach mark view itself).
-protocol OverlayStyleManager: class {
+protocol OverlayStyleManager: AnyObject {
     /// The overlay managed by the styleManager.
     var overlayView: OverlayView? { get set }
 

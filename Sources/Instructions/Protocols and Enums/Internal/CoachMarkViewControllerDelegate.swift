@@ -2,7 +2,7 @@
 // Licensed under the terms of the MIT License.
 
 /// Used by the CoachMarksViewController to notify user or system related events.
-protocol CoachMarksViewControllerDelegate: class {
+protocol CoachMarksViewControllerDelegate: AnyObject {
     /// The given `coachMarkView` was tapped.
     ///
     /// - Parameter coachMarkView: the view that was tapped.

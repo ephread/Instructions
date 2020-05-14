@@ -9,7 +9,8 @@ import Instructions
 internal class DefaultViewController: ProfileViewController,
                                       CoachMarksControllerDataSource {
     var windowLevel: UIWindow.Level?
-    var presentationContext: Context = .independantWindow
+    var presentationContext: Context = .independentWindow
+    var useInvisibleOverlay: Bool = false
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -26,6 +27,11 @@ internal class DefaultViewController: ProfileViewController,
         skipView.setTitle("Skip", for: .normal)
 
         self.coachMarksController.skipView = skipView
+
+        if useInvisibleOverlay {
+            self.coachMarksController.overlay.areTouchEventsForwarded = true
+            self.coachMarksController.overlay.backgroundColor = .clear
+        }
     }
 
     override func startInstructions() {
@@ -43,7 +49,7 @@ internal class DefaultViewController: ProfileViewController,
     }
 
     enum Context {
-        case independantWindow, controllerWindow, controller
+        case independentWindow, controllerWindow, controller
     }
 
     // MARK: - Protocol Conformance | CoachMarksControllerDataSource
@@ -52,13 +58,16 @@ internal class DefaultViewController: ProfileViewController,
     }
 
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
-        switch(index) {
+        switch index {
         case 0:
-            return coachMarksController.helper.makeCoachMark(for: self.navigationController?.navigationBar) { (frame: CGRect) -> UIBezierPath in
-                // This will make a cutoutPath matching the shape of
-                // the component (no padding, no rounded corners).
-                return UIBezierPath(rect: frame)
-            }
+            return coachMarksController.helper.makeCoachMark(
+                for: self.navigationController?.navigationBar,
+                cutoutPathMaker: { (frame: CGRect) -> UIBezierPath in
+                    // This will make a cutoutPath matching the shape of
+                    // the component (no padding, no rounded corners).
+                    return UIBezierPath(rect: frame)
+                }
+            )
         case 1:
             return coachMarksController.helper.makeCoachMark(for: self.handleLabel)
         case 2:
@@ -72,11 +81,18 @@ internal class DefaultViewController: ProfileViewController,
         }
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(
+        _ coachMarksController: CoachMarksController,
+        coachMarkViewsAt index: Int,
+        madeFrom coachMark: CoachMark
+    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
 
-        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            withArrow: true,
+            arrowOrientation: coachMark.arrowOrientation
+        )
 
-        switch(index) {
+        switch index {
         case 0:
             coachViews.bodyView.hintLabel.text = self.profileSectionText
             coachViews.bodyView.nextLabel.text = self.nextButtonText

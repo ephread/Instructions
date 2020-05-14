@@ -4,7 +4,7 @@
 import UIKit
 
 /// A protocol to which all the "arrow views" of a coach mark must conform.
-public protocol CoachMarkArrowView: class {
+public protocol CoachMarkArrowView: AnyObject {
     /// A method to change the arrow highlighted state.
     /// If you feel the arrow should mirror the state of the "body view",
     /// You will most likely change the background color of the view here.

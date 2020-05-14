@@ -9,7 +9,7 @@ import Instructions
 internal class BackgroundNetworkingViewController: DefaultViewController {
 
     // MARK: - Private properties
-    fileprivate lazy var urlSession: Foundation.URLSession = {
+    private lazy var urlSession: Foundation.URLSession = {
         let configuration = URLSessionConfiguration.background(withIdentifier: "BackgroundNetworking")
         configuration.sessionSendsLaunchEvents = true
         configuration.isDiscretionary = true
@@ -17,7 +17,7 @@ internal class BackgroundNetworkingViewController: DefaultViewController {
         return Foundation.URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
     }()
 
-    fileprivate var downloadTask: URLSessionDownloadTask?
+    private var downloadTask: URLSessionDownloadTask?
 
     var stopInstructions: Bool = false
 
@@ -75,7 +75,7 @@ extension BackgroundNetworkingViewController: URLSessionDownloadDelegate {
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if self.stopInstructions { return }
 
-            if !self.coachMarksController.flow.started {
+            if !self.coachMarksController.flow.isStarted {
                 self.coachMarksController.start(in: .window(over: self))
             } else {
                 self.coachMarksController.flow.resume()
@@ -83,12 +83,17 @@ extension BackgroundNetworkingViewController: URLSessionDownloadDelegate {
         }
     }
 
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
+    func urlSession(_ session: URLSession,
+                    downloadTask: URLSessionDownloadTask,
+                    didWriteData bytesWritten: Int64,
+                    totalBytesWritten: Int64,
+                    totalBytesExpectedToWrite: Int64) {
 
         let progress = Float(totalBytesWritten) / Float(totalBytesExpectedToWrite)
-        let size = ByteCountFormatter.string(fromByteCount: totalBytesExpectedToWrite, countStyle: ByteCountFormatter.CountStyle.binary)
+        let size = ByteCountFormatter.string(fromByteCount: totalBytesExpectedToWrite,
+                                             countStyle: ByteCountFormatter.CountStyle.binary)
 
-        print(String(format: "%.1f%% of %@",  progress * 100, size))
+        print(String(format: "%.1f%% of %@", progress * 100, size))
     }
 
     func urlSessionDidFinishEvents(forBackgroundURLSession session: URLSession) {

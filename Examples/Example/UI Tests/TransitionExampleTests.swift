@@ -4,18 +4,26 @@
 import XCTest
 
 class TransitionExampleTests: XCTestCase {
-        
+
+    let originalOrientation = XCUIDevice.shared.orientation
+
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
 
         XCUIApplication().launchWithAnimationsDisabled()
+        XCUIDevice.shared.orientation = .portrait
+    }
+
+    override func tearDown() {
+        super.tearDown()
+        XCUIDevice.shared.orientation = originalOrientation
     }
 
     func testTapThroughCutout() {
         let app = XCUIApplication()
         app.tables.staticTexts["Transitioning from code"].tap()
-        
+
         let overlay = app.otherElements["AccessibilityIdentifiers.overlayView"]
         _ = overlay.waitForExistence(timeout: 5)
 

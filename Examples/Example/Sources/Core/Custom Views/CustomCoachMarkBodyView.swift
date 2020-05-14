@@ -5,13 +5,9 @@ import UIKit
 import Instructions
 
 // Custom coach mark body (with the secret-like arrow)
-internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
+internal class CustomCoachMarkBodyView: UIView, CoachMarkBodyView {
     // MARK: - Internal properties
-    var nextControl: UIControl? {
-        get {
-            return self.nextButton
-        }
-    }
+    var nextControl: UIControl? { return self.nextButton }
 
     var highlighted: Bool = false
 
@@ -24,7 +20,7 @@ internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
 
     var hintLabel = UITextView()
 
-    weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate? = nil
+    weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate?
 
     // MARK: - Initialization
     override init (frame: CGRect) {
@@ -42,7 +38,7 @@ internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
     }
 
     // MARK: - Private methods
-    fileprivate func setupInnerViewHierarchy() {
+    private func setupInnerViewHierarchy() {
         self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = UIColor.white
 
@@ -74,15 +70,21 @@ internal class CustomCoachMarkBodyView : UIView, CoachMarkBodyView {
         self.addSubview(nextButton)
         self.addSubview(hintLabel)
 
-        self.addConstraint(NSLayoutConstraint(item: nextButton, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
+        NSLayoutConstraint.activate([
+            nextButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            nextButton.heightAnchor.constraint(equalToConstant: 30),
 
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:[nextButton(==30)]", options: NSLayoutConstraint.FormatOptions(rawValue: 0),
-            metrics: nil, views: ["nextButton": nextButton]))
+            hintLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            hintLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
+        ])
 
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-(5)-[hintLabel]-(5)-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0),
-            metrics: nil, views: ["hintLabel": hintLabel]))
-
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-(10)-[hintLabel]-(10)-[nextButton(==40)]-(10)-|", options: NSLayoutConstraint.FormatOptions(rawValue: 0),
-            metrics: nil, views: ["hintLabel": hintLabel, "nextButton": nextButton]))
+        NSLayoutConstraint.activate(
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "H:|-(10)-[hintLabel]-(10)-[nextButton(==40)]-(10)-|",
+                options: NSLayoutConstraint.FormatOptions(rawValue: 0),
+                metrics: nil,
+                views: ["hintLabel": hintLabel, "nextButton": nextButton]
+            )
+        )
     }
 }

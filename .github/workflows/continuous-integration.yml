@@ -5,6 +5,7 @@ on:
     branches:
     - master
     - github-actions
+    - 'release-**'
 
 env:
   # Expected to be used withint scripts.

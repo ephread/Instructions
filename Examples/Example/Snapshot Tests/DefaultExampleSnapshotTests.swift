@@ -11,7 +11,8 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
     var navigationController: UINavigationController!
     var delegateEndExpectation: XCTestExpectation!
 
-    var presentationContext: DefaultViewController.Context = .independantWindow
+    var presentationContext: DefaultViewController.Context = .independentWindow
+    let originalOrientation = XCUIDevice.shared.orientation
 
     override func setUp() {
         super.setUp()
@@ -24,11 +25,16 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
         delegateEndExpectation = nil
     }
 
-    func testFlowInIndependantWindow() {
+    override func tearDown() {
+        super.tearDown()
+        XCUIDevice.shared.orientation = originalOrientation
+    }
+
+    func testFlowInIndependentWindow() {
         runFlowTester()
     }
 
-    func testRotationInIndependantWindow() {
+    func testRotationInIndependentWindow() {
         runRotationTester()
     }
 
@@ -61,7 +67,7 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
 
         let snapshotView: UIView
         switch presentationContext {
-        case .independantWindow:
+        case .independentWindow:
             guard let window = instructionsWindow() else {
                 return
             }
@@ -97,11 +103,11 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
             delegateEndExpectation.fulfill()
         }
     }
-    
+
     func setupController() {
         let controller =
             storyboard.instantiateViewController(withIdentifier: "DefaultViewController")
-            as! DefaultViewController
+                as! DefaultViewController // swiftlint:disable:this force_cast
 
         controller.snapshotDelegate = self
         controller.presentationContext = presentationContext

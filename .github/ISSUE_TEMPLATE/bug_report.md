@@ -1,26 +1,25 @@
 ---
 name: Bug report
 about: Create a report to help us improve
-
 ---
 
-**Describe the bug**
+## Describe the bug
 <!-- A clear and concise description of what the bug is. -->
 
-**To Reproduce**
+## To Reproduce
 <!-- Steps to reproduce the behavior] -->
 
-**Expected behavior**
+## Expected behavior
 <!-- A clear and concise description of what you expected to happen. -->
 
-**Screenshots**
+## Screenshots
 <!-- If applicable, add screenshots to help explain your problem. -->
 
-**Environment:**
+## Environment
  - Device: <!-- e.g. iPhone X -->
  - iOS version: <!-- e.g. 11.3 -->
  - Instructions version: <!-- e.g. 1.4.0 or master -->
  - Dependency Manager: <!-- Carthage or CocoaPods or None -->
 
-**Additional context**
+## Additional context
 <!-- Add any other context about the problem here. -->

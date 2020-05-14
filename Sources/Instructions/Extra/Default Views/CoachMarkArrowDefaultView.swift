@@ -77,9 +77,9 @@ private extension CoachMarkArrowDefaultView {
 
 // MARK: - Background Style
 public struct CoachMarkArrowBackground: CoachMarkBackgroundStyle {
-    public lazy var innerColor = InstructionsColor.coachMarkInner
-    public lazy var borderColor = InstructionsColor.coachMarkOuter
+    public var innerColor = InstructionsColor.coachMarkInner
+    public var borderColor = InstructionsColor.coachMarkOuter
 
-    public lazy var highlightedInnerColor = InstructionsColor.coachMarkHighlightedInner
-    public lazy var highlightedBorderColor = InstructionsColor.coachMarkOuter
+    public var highlightedInnerColor = InstructionsColor.coachMarkHighlightedInner
+    public var highlightedBorderColor = InstructionsColor.coachMarkOuter
 }

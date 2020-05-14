@@ -6,14 +6,12 @@ import UIKit
 public class FlowManager {
     // MARK: - Internal Properties
     /// `true` if coach marks are curently being displayed, `false` otherwise.
-    public var started: Bool {
-        return currentIndex > -1
-    }
+    public var isStarted: Bool { return currentIndex > -1 }
 
     /// Sometimes, the chain of coach mark display can be paused
     /// to let animations be performed. `true` to pause the execution,
     /// `false` otherwise.
-    private(set) open var paused = false
+    private(set) open var isPaused = false
 
     internal unowned let coachMarksViewController: CoachMarksViewController
     internal weak var dataSource: CoachMarksControllerProxyDataSource?
@@ -71,7 +69,7 @@ public class FlowManager {
 
     internal func reset() {
         currentIndex = -1
-        paused = false
+        isPaused = false
         canShowCoachMark = true
         //disableFlow will be set by startFlow, to enable quick stop.
     }
@@ -116,7 +114,7 @@ public class FlowManager {
     }
 
     internal func showNextCoachMark(hidePrevious: Bool = true) {
-        if disableFlow || paused || !canShowCoachMark { return }
+        if disableFlow || isPaused || !canShowCoachMark { return }
 
         let previousIndex = currentIndex
 
@@ -148,7 +146,7 @@ public class FlowManager {
     }
 
     internal func showPreviousCoachMark(hidePrevious: Bool = true) {
-        if disableFlow || paused || !canShowCoachMark { return }
+        if disableFlow || isPaused || !canShowCoachMark { return }
 
         let previousIndex = currentIndex
 
@@ -209,18 +207,16 @@ public class FlowManager {
             // can perform some things and, if required, update the coach mark structure.
             self.delegate?.willShow(coachMark: &currentCoachMark!,
                                     beforeChanging: change, at: currentIndex)
-
-            // TODO: ❗️ To remove in 2.0.0
-            self.delegate?.willShow(coachMark: &currentCoachMark!,
-                                    afterSizeTransition: (change == .size), at: currentIndex)
         }
 
         // The delegate might have paused the flow, we check whether or not it's
         // the case.
-        if !self.paused {
+        if !self.isPaused {
             if coachMarksViewController.instructionsRootView.bounds.isEmpty {
-                print("[ERROR] The overlay view added to the window has empty bounds, " +
-                      "Instructions will stop.")
+                print("""
+                      [ERROR] The overlay view added to the window has empty bounds, \
+                      Instructions will stop.
+                      """)
                 self.stopFlow()
                 return
             }
@@ -230,19 +226,14 @@ public class FlowManager {
 
                 self.delegate?.didShow(coachMark: self.currentCoachMark!,
                                        afterChanging: change, at: self.currentIndex)
-
-                // TODO: ❗️ To remove in 2.0.0
-                self.delegate?.didShow(coachMark: self.currentCoachMark!,
-                                       afterSizeTransition: (change == .size),
-                                       at: self.currentIndex)
             }
         }
     }
 
     // MARK: Public methods
     public func resume() {
-        if started && paused {
-            paused = false
+        if isStarted && isPaused {
+            isPaused = false
 
             let completion: (Bool) -> Void = { _ in
                 self.createAndShowCoachMark(afterResuming: true)
@@ -259,7 +250,7 @@ public class FlowManager {
     }
 
     public func pause(and pauseStyle: PauseStyle = .hideNothing) {
-        paused = true
+        isPaused = true
 
         switch pauseStyle {
         case .hideInstructions:
@@ -275,7 +266,7 @@ public class FlowManager {
     /// - Parameter numberOfCoachMarksToSkip: the number of coach marks
     ///                                       to skip.
     public func showNext(numberOfCoachMarksToSkip numberToSkip: Int = 0) {
-        if !self.started || !canShowCoachMark { return }
+        if !self.isStarted || !canShowCoachMark { return }
 
         if numberToSkip < 0 {
             print("[WARNING] numberToSkip is negative, ignoring.")
@@ -292,7 +283,7 @@ public class FlowManager {
     /// - Parameter numberOfCoachMarksToSkip: the number of coach marks
     ///                                       to skip.
     public func showPrevious(numberOfCoachMarksToSkip numberToSkip: Int = 0) {
-        if !self.started || !canShowCoachMark { return }
+        if !self.isStarted || !canShowCoachMark { return }
 
         if numberToSkip < 0 {
             print("[WARNING] numberToSkip is negative, ignoring.")
@@ -303,6 +294,13 @@ public class FlowManager {
 
         showPreviousCoachMark(hidePrevious: true)
     }
+
+    // MARK: Renamed Public Properties
+    @available(*, unavailable, renamed: "isStarted")
+    public var started: Bool = false
+
+    @available(*, unavailable, renamed: "isPaused")
+    public var paused: Bool = false
 }
 
 extension FlowManager: CoachMarksViewControllerDelegate {

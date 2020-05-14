@@ -2,7 +2,7 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
-## [1.5.0](https://github.com/ephread/Instructions/releases/tag/1.5.0)
+## [2.0.0](https://github.com/ephread/Instructions/releases/tag/2.0.0)
 Released on 2020-XX-XX.
 
 ### Fixed
@@ -16,6 +16,9 @@ Released on 2020-XX-XX.
 ### Changed
 - Move from Travis to Github Actions
 - Refactor example project
+- Change return type in `coachMarkViewsAt` to enforce the type through protocol
+  composition
+- Unify the naming conventions for exposed properties
 
 ### Added
 - Full dark mode support

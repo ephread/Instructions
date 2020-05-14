@@ -18,8 +18,10 @@ internal class ProfileViewController: UIViewController,
     var coachMarksController = CoachMarksController()
 
     let avatarText = "That's your profile picture. You look gorgeous!"
-    let profileSectionText = "You are in the profile section, where you can review " +
-                             "all your informations."
+    let profileSectionText = """
+                             You are in the profile section, where you can review \
+                             all your informations.
+                             """
     let handleText = "That, here, is your name. Sounds a bit generic, don't you think?"
     let emailText = "This is your email address. Nothing too fancy."
     let postsText = "Here, is the number of posts you made. You are just starting up!"
@@ -28,12 +30,12 @@ internal class ProfileViewController: UIViewController,
     let nextButtonText = "Ok!"
 
     // Used for Snapshot testing (i. e. has nothing to do with the example)
-    var snapshotDelegate: CoachMarksControllerDelegate?
+    weak var snapshotDelegate: CoachMarksControllerDelegate?
 
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        coachMarksController.overlay.allowTap = true
+        coachMarksController.overlay.isUserInteractionEnabled = true
     }
 
     override func viewDidAppear(_ animated: Bool) {

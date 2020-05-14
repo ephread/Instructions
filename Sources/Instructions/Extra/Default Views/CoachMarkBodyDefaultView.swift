@@ -25,7 +25,10 @@ public class CoachMarkBodyDefaultView: UIControl,
     public lazy var hintLabel: UITextView = makeHintTextView()
     public lazy var separator: UIView = makeSeparator()
 
-    public var background: CoachMarkBodyBackgroundStyle { return bodyBackground }
+    public var background: CoachMarkBodyBackgroundStyle {
+        get { return bodyBackground }
+        set { bodyBackground.updateValues(from: newValue) }
+    }
 
     // MARK: Delegates
     public weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate?
@@ -33,7 +36,7 @@ public class CoachMarkBodyDefaultView: UIControl,
     // MARK: Private Properties
     private lazy var labelStackView: UIStackView = makeStackView()
 
-    private let bodyBackground = CoachMarkBodyBackgroundView().preparedForAutoLayout()
+    private var bodyBackground = CoachMarkBodyBackgroundView().preparedForAutoLayout()
 
     // MARK: - Initialization
     override public init(frame: CGRect) {

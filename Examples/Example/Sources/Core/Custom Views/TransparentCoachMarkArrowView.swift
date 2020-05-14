@@ -5,7 +5,7 @@ import UIKit
 import Instructions
 
 // Transparent coach mark (text without background, cool arrow)
-internal class TransparentCoachMarkArrowView : UIImageView, CoachMarkArrowView {
+internal class TransparentCoachMarkArrowView: UIImageView, CoachMarkArrowView {
     // MARK: - Initialization
     init(orientation: CoachMarkArrowOrientation) {
         if orientation == .top {
@@ -16,13 +16,8 @@ internal class TransparentCoachMarkArrowView : UIImageView, CoachMarkArrowView {
 
         self.translatesAutoresizingMaskIntoConstraints = false
 
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .width, relatedBy: .equal,
-            toItem: nil, attribute: .notAnAttribute,
-            multiplier: 1, constant: self.image!.size.width))
-
-        self.addConstraint(NSLayoutConstraint(item: self, attribute: .height, relatedBy: .equal,
-            toItem: nil, attribute: .notAnAttribute,
-            multiplier: 1, constant: self.image!.size.height))
+        widthAnchor.constraint(equalToConstant: self.image?.size.width ?? 0).isActive = true
+        heightAnchor.constraint(equalToConstant: self.image?.size.width ?? 0).isActive = true
     }
 
     required init?(coder aDecoder: NSCoder) {

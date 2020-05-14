@@ -5,7 +5,7 @@ import UIKit
 
 /// Describe how a coachmark datasource should behave.
 /// It works a bit like `UITableViewDataSource`.
-public protocol CoachMarksControllerDataSource: class {
+public protocol CoachMarksControllerDataSource: AnyObject {
     /// Asks for the number of coach marks to display.
     ///
     /// - Parameter coachMarksController: the coach mark controller requesting
@@ -42,7 +42,7 @@ public protocol CoachMarksControllerDataSource: class {
     /// - Returns: a tuple packaging the body component and the arrow component.
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark)
-    -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?)
+    -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?)
 
     /// Asks for autolayout constraints needed to position `skipView` in
     /// `coachMarksController.view`.
@@ -66,7 +66,7 @@ public extension CoachMarksControllerDataSource {
     }
 }
 
-internal protocol CoachMarksControllerProxyDataSource: class {
+internal protocol CoachMarksControllerProxyDataSource: AnyObject {
     /// Asks for the number of coach marks to display.
     ///
     /// - Returns: the number of coach marks to display.
@@ -94,7 +94,7 @@ internal protocol CoachMarksControllerProxyDataSource: class {
     ///
     /// - Returns: a tuple packaging the body component and the arrow component.
     func coachMarkViews(at index: Int, madeFrom coachMark: CoachMark)
-        -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?)
+        -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?)
 
     /// Asks for autolayout constraints needed to position `skipView` in
     /// `coachMarksController.view`.

@@ -4,6 +4,7 @@
 import UIKit
 
 // TODO: ❗️ Find a good way to refactor this growing controller
+// swiftlint:disable file_length
 // MARK: - Main Class
 /// Handles a set of coach marks, and display them successively.
 class CoachMarksViewController: UIViewController {
@@ -67,6 +68,8 @@ class CoachMarksViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if let statusBarStyle = customStatusBarStyle {
             return statusBarStyle
+        } else if overlayManager.backgroundColor == .clear {
+            return super.preferredStatusBarStyle
         } else {
             return overlayManager.statusBarStyle
         }
@@ -130,6 +133,16 @@ class CoachMarksViewController: UIViewController {
     ///   - windowLevel: the level at whcih display the window.
     func attach(to window: UIWindow, over viewController: UIViewController,
                 at windowLevel: UIWindow.Level? = nil) {
+        if #available(iOS 13.0, *) {
+            if let windowLevel = windowLevel,
+               windowLevel.rawValue >= UIWindow.Level.statusBar.rawValue {
+                print("""
+                      [WARNING] Displaying Instructions over the status bar is \
+                      unsupported in iOS 13+.
+                      """)
+            }
+        }
+
         presentationFashion = .window
         window.windowLevel = windowLevel ?? UIWindow.Level.normal + 1
 
@@ -152,8 +165,10 @@ class CoachMarksViewController: UIViewController {
     /// - Parameter viewController: the controller to which attach Instructions
     func attachToWindow(of viewController: UIViewController) {
         guard let window = viewController.view?.window else {
-            print("[ERROR] Instructions could not be properly attached to the window" +
-                  "did you call `start(in:)` inside `viewDidLoad` instead of `viewDidAppear`?")
+            print("""
+                  [ERROR] Instructions could not be properly attached to the window \
+                  did you call `start(in:)` inside `viewDidLoad` instead of `viewDidAppear`?
+                  """)
 
             return
         }
@@ -273,8 +288,8 @@ extension CoachMarksViewController {
               completion: (() -> Void)? = nil) {
         disableInteraction()
         coachMark.computeMetadata(inFrame: instructionsRootView.frame)
-        let passthrough =
-            coachMark.allowTouchInsideCutoutPath || overlayManager.forwardTouchEvents
+        let passthrough = coachMark.isUserInteractionEnabledInsideCutoutPath ||
+                          overlayManager.areTouchEventsForwarded
         let coachMarkView = coachMarkDisplayManager.createCoachMarkView(from: coachMark,
                                                                         at: index)
 

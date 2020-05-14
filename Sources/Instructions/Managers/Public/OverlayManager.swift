@@ -8,7 +8,7 @@ import UIKit
 public class OverlayManager {
     // MARK: - Public properties
     /// The background color of the overlay
-    public var color: UIColor = InstructionsColor.overlay {
+    public var backgroundColor: UIColor = InstructionsColor.overlay {
         didSet {
             overlayStyleManager = updateOverlayStyleManager()
         }
@@ -27,10 +27,15 @@ public class OverlayManager {
         }
     }
 
+    public var cutoutPath: UIBezierPath? {
+        get { return overlayView.cutoutPath }
+        set { overlayView.cutoutPath = newValue }
+    }
+
     /// `true` to let the overlay catch tap event and forward them to the
     /// CoachMarkController, `false` otherwise.
     /// After receiving a tap event, the controller will show the next coach mark.
-    public var allowTap: Bool {
+    public var isUserInteractionEnabled: Bool {
         get {
             return self.singleTapGestureRecognizer.view != nil
         }
@@ -44,18 +49,13 @@ public class OverlayManager {
         }
     }
 
-    public var cutoutPath: UIBezierPath? {
-        get { return overlayView.cutoutPath }
-        set { overlayView.cutoutPath = newValue }
-    }
-
     /// Used to temporarily enable touch forwarding isnide the cutoutPath.
-    public var allowTouchInsideCutoutPath: Bool {
+    public var isUserInteractionEnabledInsideCutoutPath: Bool {
         get { return overlayView.allowTouchInsideCutoutPath }
         set { overlayView.allowTouchInsideCutoutPath = newValue }
     }
 
-    public var forwardTouchEvents: Bool {
+    public var areTouchEventsForwarded: Bool {
         get { return overlayView.forwardTouchEvents }
         set { overlayView.forwardTouchEvents = newValue }
     }
@@ -79,7 +79,7 @@ public class OverlayManager {
         } else {
             var alpha: CGFloat = 1.0
             var white: CGFloat = 1.0
-            color.getWhite(&white, alpha: &alpha)
+            backgroundColor.getWhite(&white, alpha: &alpha)
 
             return white >= 0.5 ? .default : .lightContent
         }
@@ -110,7 +110,7 @@ public class OverlayManager {
     /// a tap event.
     ///
     /// - Parameter sender: the object which sent the event
-    @objc fileprivate func handleSingleTap(_ sender: AnyObject?) {
+    @objc private func handleSingleTap(_ sender: AnyObject?) {
         if enableTap {
             self.overlayDelegate?.didReceivedSingleTap()
         }
@@ -181,11 +181,24 @@ public class OverlayManager {
             self.updateDependencies(of: blurringOverlayStyleManager)
             return blurringOverlayStyleManager
         } else {
-            let translucentOverlayStyleManager = TranslucentOverlayStyleManager(color: color)
+            let translucentOverlayStyleManager = TranslucentOverlayStyleManager(color: backgroundColor)
             self.updateDependencies(of: translucentOverlayStyleManager)
             return translucentOverlayStyleManager
         }
     }
+
+    // MARK: Renamed Public Properties
+    @available(*, unavailable, renamed: "backgroundColor")
+    public var color: UIColor = InstructionsColor.overlay
+
+    @available(*, unavailable, renamed: "isUserInteractionEnabled")
+    public var allowTap: Bool = true
+
+    @available(*, unavailable, renamed: "isUserInteractionEnabledInsideCutoutPath")
+    public var allowTouchInsideCutoutPath: Bool = false
+
+    @available(*, unavailable, renamed: "areTouchEventsForwarded")
+    public var forwardTouchEvents: Bool = false
 }
 
 // swiftlint:disable class_delegate_protocol

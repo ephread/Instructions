@@ -32,7 +32,7 @@ class CoachMarkDisplayManager {
         // Creates the CoachMarkView, from the supplied component views.
         // CoachMarkView() is not a failable initializer. We'll force unwrap
         // currentCoachMarkView everywhere.
-        if coachMark.displayOverCutoutPath {
+        if coachMark.isDisplayedOverCutoutPath {
             // No arrow should be shown when displayed above the cutoutPath.
             return CoachMarkView(bodyView: coachMarkComponentViews.bodyView,
                                  coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper())
@@ -134,8 +134,9 @@ class CoachMarkDisplayManager {
         prepare(coachMarkView: coachMarkView, forDisplayIn: overlay.overlayView.superview!,
                 usingCoachMark: coachMark, andOverlayView: overlay.overlayView)
 
-        overlay.enableTap = !coachMark.disableOverlayTap
-        overlay.allowTouchInsideCutoutPath = coachMark.allowTouchInsideCutoutPath
+        overlay.enableTap = coachMark.isOverlayInteractionEnabled
+        overlay.isUserInteractionEnabledInsideCutoutPath =
+            coachMark.isUserInteractionEnabledInsideCutoutPath
 
         guard animated else {
             overlay.showCutoutPath(true, withDuration: 0)
@@ -243,7 +244,7 @@ class CoachMarkDisplayManager {
         // Depending where the cutoutPath sits, the coach mark will either
         // stand above or below it. Alternatively, it can also be displayed
         // over the cutoutPath.
-        if coachMark.displayOverCutoutPath {
+        if coachMark.isDisplayedOverCutoutPath {
             let constant = cutoutPath.bounds.midY - parentView.frame.size.height / 2
 
             coachMarkView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor,

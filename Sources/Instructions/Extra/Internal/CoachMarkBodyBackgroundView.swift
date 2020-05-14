@@ -1,4 +1,4 @@
-// Copyright (c)  2020-present Frédéric Maquin <fred@ephread.com> and contributors.
+// Copyright (c) 2020-present Frédéric Maquin <fred@ephread.com> and contributors.
 // Licensed under the terms of the MIT License.
 
 import UIKit
@@ -65,6 +65,17 @@ class CoachMarkBodyBackgroundView: UIView,
 
         foregroundLayer.path = makeInnerRoundedPath(cornerRadius: cornerRadius - 0.5)
         backgroundLayer.path = makeOuterRoundedPath(cornerRadius: cornerRadius)
+    }
+
+    // MARK: Internal Methods
+    func updateValues(from bodyBackground: CoachMarkBodyBackgroundStyle) {
+        borderColor = bodyBackground.borderColor
+        innerColor = bodyBackground.innerColor
+        highlightedBorderColor = bodyBackground.highlightedBorderColor
+        highlightedInnerColor = bodyBackground.highlightedInnerColor
+
+        isHighlighted = bodyBackground.isHighlighted
+        cornerRadius = bodyBackground.cornerRadius
     }
 
     // MARK: - Private Methods

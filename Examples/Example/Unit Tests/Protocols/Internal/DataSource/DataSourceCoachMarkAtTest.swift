@@ -8,7 +8,7 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
                                  CoachMarksControllerDataSource,
                                  CoachMarksControllerDelegate {
 
-    var delegateEndExpectation: XCTestExpectation? = nil
+    var delegateEndExpectation: XCTestExpectation?
     var numberOfTimesCoachMarkAtWasCalled = 0
     var numberOfTimesCoachMarkViewsAtWasCalled = 0
     var numberOfTimesConstraintsForSkipViewWasCalled = 0
@@ -64,9 +64,11 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
         return CoachMark()
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark)
-    -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(
+        _ coachMarksController: CoachMarksController,
+        coachMarkViewsAt index: Int,
+        madeFrom coachMark: CoachMark
+    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
             numberOfTimesCoachMarkViewsAtWasCalled += 1
             return (bodyView: CoachMarkBodyDefaultView(), arrowView: nil)
     }
@@ -89,28 +91,27 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
 
     func coachMarksController(_ coachMarksController: CoachMarksController, didEndShowingBySkipping skipped: Bool) {
         guard let delegateEndExpectation = self.delegateEndExpectation else {
-            XCTFail()
+            XCTFail("Undefined expectation")
             return
         }
 
-        if (delegateEndExpectation.description == "CoachMarkAt") {
+        if delegateEndExpectation.description == "CoachMarkAt" {
             if numberOfTimesCoachMarkAtWasCalled >= 4 {
                 delegateEndExpectation.fulfill()
-            } else {
-                XCTFail()
+                return
             }
-        } else if (delegateEndExpectation.description == "CoachMarkViewsAt") {
+        } else if delegateEndExpectation.description == "CoachMarkViewsAt" {
             if numberOfTimesCoachMarkViewsAtWasCalled >= 4 {
                 delegateEndExpectation.fulfill()
-            } else {
-                XCTFail()
+                return
             }
-        } else if (delegateEndExpectation.description == "ConstraintsForSkipView") {
+        } else if delegateEndExpectation.description == "ConstraintsForSkipView" {
             if numberOfTimesCoachMarkViewsAtWasCalled >= 1 {
                 delegateEndExpectation.fulfill()
-            } else {
-                XCTFail()
+                return
             }
         }
+
+        XCTFail("Unfulfilled expectation")
     }
 }

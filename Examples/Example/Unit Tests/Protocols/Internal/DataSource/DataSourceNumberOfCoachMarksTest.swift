@@ -7,7 +7,7 @@ import XCTest
 class DataSourceNumberOfCoachMarksTest: DataSourceBaseTest,
                                         CoachMarksControllerDataSource {
 
-    var delegateEndExpectation: XCTestExpectation? = nil
+    var delegateEndExpectation: XCTestExpectation?
 
     override func setUp() {
         super.setUp()
@@ -25,14 +25,13 @@ class DataSourceNumberOfCoachMarksTest: DataSourceBaseTest,
         }
     }
 
-
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
         guard let delegateEndExpectation = self.delegateEndExpectation else {
-            XCTFail()
+            XCTFail("Undefined expectation")
             return 0
         }
 
-        if (delegateEndExpectation.description == "numberOfCoachMarks") {
+        if delegateEndExpectation.description == "numberOfCoachMarks" {
             delegateEndExpectation.fulfill()
         }
 
@@ -44,9 +43,10 @@ class DataSourceNumberOfCoachMarksTest: DataSourceBaseTest,
         return CoachMark()
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark)
-        -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    func coachMarksController(
+        _ coachMarksController: CoachMarksController,
+        coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark
+    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
             return (bodyView: CoachMarkBodyDefaultView(), arrowView: nil)
     }
 

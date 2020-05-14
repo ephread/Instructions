@@ -13,8 +13,10 @@ internal class LargeCutoutViewController: UIViewController {
     // MARK: - Public properties
     var coachMarksController = CoachMarksController()
 
-    let tableViewText = "That's a gorgeous table view in which all your content sits." +
-                        "Don't be afraid to scroll!"
+    let tableViewText = """
+                        That's a gorgeous table view in which all your content sits. \
+                        Don't be afraid to scroll!
+                        """
     let halfTableViewText = "That's half a tableView for testing."
 
     let nextButtonText = "Ok!"
@@ -24,7 +26,7 @@ internal class LargeCutoutViewController: UIViewController {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Default")
 
-        self.coachMarksController.overlay.allowTap = true
+        self.coachMarksController.overlay.isUserInteractionEnabled = true
         self.coachMarksController.dataSource = self
 
         let skipView = CoachMarkSkipDefaultView()
@@ -60,7 +62,7 @@ extension LargeCutoutViewController: CoachMarksControllerDataSource {
         _ coachMarksController: CoachMarksController,
         coachMarkAt index: Int
     ) -> CoachMark {
-        switch(index) {
+        switch index {
         case 0:
             let pathMaker = { (frame: CGRect) -> UIBezierPath in
                 return UIBezierPath(rect: frame)
@@ -68,12 +70,12 @@ extension LargeCutoutViewController: CoachMarksControllerDataSource {
 
             var coachMark = coachMarksController.helper.makeCoachMark(for: tableView,
                                                                       cutoutPathMaker: pathMaker)
-            coachMark.displayOverCutoutPath = true
+            coachMark.isDisplayedOverCutoutPath = true
 
             return coachMark
         case 1:
             var coachMark = coachMarksController.helper.makeCoachMark(for: halfInvisibleOverlay)
-            coachMark.displayOverCutoutPath = true
+            coachMark.isDisplayedOverCutoutPath = true
 
             return coachMark
         default:
@@ -85,13 +87,13 @@ extension LargeCutoutViewController: CoachMarksControllerDataSource {
         _ coachMarksController: CoachMarksController,
         coachMarkViewsAt index: Int,
         madeFrom coachMark: CoachMark
-    ) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
 
         let coachViews = coachMarksController.helper.makeDefaultCoachViews(
             withArrow: true, arrowOrientation: coachMark.arrowOrientation
         )
 
-        switch(index) {
+        switch index {
         case 0:
             coachViews.bodyView.hintLabel.text = self.tableViewText
             coachViews.bodyView.nextLabel.text = self.nextButtonText

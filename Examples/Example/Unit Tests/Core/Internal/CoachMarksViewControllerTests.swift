@@ -19,15 +19,14 @@ class CoachMarksViewControllerTests: XCTestCase, CoachMarksControllerDelegate {
     }
 
     func testThatCustomStatusBarTakePrecedenceOverOverlayColor() {
-        coachMarksController.overlayManager.color = .white
+        coachMarksController.overlayManager.backgroundColor = .white
         coachMarksController.customStatusBarStyle = .lightContent
         XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .lightContent)
 
-        coachMarksController.overlayManager.color = .black
+        coachMarksController.overlayManager.backgroundColor = .black
         coachMarksController.customStatusBarStyle = .default
         XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .default)
     }
-
 
     func testThatCustomStatusBarTakePrecedenceOverOverlayBlur() {
         coachMarksController.overlayManager.blurEffectStyle = .dark
@@ -55,13 +54,13 @@ class CoachMarksViewControllerTests: XCTestCase, CoachMarksControllerDelegate {
     }
 
     func testThatStatusBarStyleDependsOnOverlayColor() {
-        coachMarksController.overlayManager.color = .black
+        coachMarksController.overlayManager.backgroundColor = .black
         XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .lightContent)
 
-        coachMarksController.overlayManager.color = .white
+        coachMarksController.overlayManager.backgroundColor = .white
         XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .default)
 
-        coachMarksController.overlayManager.color = .gray
+        coachMarksController.overlayManager.backgroundColor = .gray
         XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .default)
     }
 }

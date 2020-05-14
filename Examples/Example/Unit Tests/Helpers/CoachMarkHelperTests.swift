@@ -58,7 +58,7 @@ class CoachMarkHelperTests: XCTestCase {
     }
 
     func testThatCustomCutoutPathMakerIsUsed() {
-        var control = false;
+        var control = false
         let frame = CGRect(x: 30, y: 30, width: 70, height: 20)
 
         _ = coachMarkHelper.makeCoachMark(for: UIView(frame: frame)) { frame in
@@ -107,21 +107,21 @@ class CoachMarkHelperTests: XCTestCase {
     }
 
     func testThatUpdateDidNotOccur() {
-        flowManager.paused = true
+        flowManager.isPaused = true
         flowManager.currentCoachMark = CoachMark()
 
         coachMarkHelper.updateCurrentCoachMark()
 
         XCTAssertTrue(flowManager.currentCoachMark == CoachMark())
 
-        flowManager.paused = false
+        flowManager.isPaused = false
         flowManager.currentCoachMark = nil
 
         coachMarkHelper.updateCurrentCoachMark()
 
         XCTAssertTrue(flowManager.currentCoachMark == nil)
 
-        flowManager.paused = false
+        flowManager.isPaused = false
         flowManager.currentCoachMark = CoachMark()
 
         coachMarkHelper.updateCurrentCoachMark()
@@ -131,9 +131,9 @@ class CoachMarkHelperTests: XCTestCase {
 }
 
 class MockedFlowManager: FlowManager {
-    private var _pause = false;
+    private var _pause = false
 
-    override var paused: Bool {
+    override var isPaused: Bool {
         get {
             return _pause
         }

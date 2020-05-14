@@ -68,6 +68,8 @@ class CoachMarksViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if let statusBarStyle = customStatusBarStyle {
             return statusBarStyle
+        } else if overlayManager.backgroundColor == .clear {
+            return super.preferredStatusBarStyle
         } else {
             return overlayManager.statusBarStyle
         }

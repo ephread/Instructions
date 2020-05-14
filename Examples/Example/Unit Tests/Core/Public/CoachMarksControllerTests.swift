@@ -83,7 +83,6 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
 
         if delegateEndExpectation.description == "Detachment" {
             XCTAssertTrue(coachMarksController.overlay.overlayView.window == nil)
-
             delegateEndExpectation.fulfill()
         } else if delegateEndExpectation.description == "DidFinishShowing" {
             XCTAssertTrue(true)

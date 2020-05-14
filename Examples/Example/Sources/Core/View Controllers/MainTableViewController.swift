@@ -24,6 +24,9 @@ class MainTableViewController: UITableViewController {
         } else if segue.identifier == "ControllerContext",
                   let controller = segue.destination as? DefaultViewController {
             controller.presentationContext = .controller
+        } else if segue.identifier == "InvisibleOverlay",
+            let controller = segue.destination as? DefaultViewController {
+            controller.useInvisibleOverlay = true
         }
     }
 }

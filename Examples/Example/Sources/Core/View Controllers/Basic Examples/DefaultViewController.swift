@@ -10,6 +10,7 @@ internal class DefaultViewController: ProfileViewController,
                                       CoachMarksControllerDataSource {
     var windowLevel: UIWindow.Level?
     var presentationContext: Context = .independentWindow
+    var useInvisibleOverlay: Bool = false
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
@@ -26,6 +27,11 @@ internal class DefaultViewController: ProfileViewController,
         skipView.setTitle("Skip", for: .normal)
 
         self.coachMarksController.skipView = skipView
+
+        if useInvisibleOverlay {
+            self.coachMarksController.overlay.areTouchEventsForwarded = true
+            self.coachMarksController.overlay.backgroundColor = .clear
+        }
     }
 
     override func startInstructions() {

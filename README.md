@@ -99,7 +99,7 @@ $ carthage build
 ```
 
 ### Swift Package Manager
-In Xcode, use File > Swift Packages > Add Package Dependency and search for `Instructions`.
+In Xcode, use File > Swift Packages > Add Package Dependency and use `https://github.com/ephread/Instructions`.
 
 ### Manually
 If you rather stay away from both CocoaPods and Carthage, you can also install Instructions manually, with the cost of managing updates yourself.

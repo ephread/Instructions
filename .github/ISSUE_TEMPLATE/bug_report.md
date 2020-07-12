@@ -18,7 +18,7 @@ about: Create a report to help us improve
 ## Environment
  - Device: <!-- e.g. iPhone X -->
  - iOS version: <!-- e.g. 11.3 -->
- - Instructions version: <!-- e.g. 1.4.0 or master -->
+ - Instructions version: <!-- e.g. 1.4.0 or main -->
  - Dependency Manager: <!-- Carthage or CocoaPods or None -->
 
 ## Additional context

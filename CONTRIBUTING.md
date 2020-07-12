@@ -91,14 +91,14 @@ $ cd 'Examples' && carthage bootstrap --platform ios
 
 ### Git branching model & pull requests
 
-Instructions has a very loose branching model. All improvements and fixes happen in `master`, since there isn't a real need to support different versions. Branches are created for two reasons:
+Instructions has a very loose branching model. All improvements and fixes happen in `main`, since there isn't a real need to support different versions. Branches are created for two reasons:
 
-1. to deal with new features or large fixes, these will eventually be merged back into master;
+1. to deal with new features or large fixes, these will eventually be merged back into `main`;
 2. to keep legacy code working with older versions of Swift or experiment with new versions of Swift / iOS.
 
 Pull requests need to focus on specific new features, changes or fixes. Keep them short and try to keep the number of files involved as low as possible, to ensure that the code review will be manageable.
 
-If you are making a non-trivial changes, which will require back and forth exchanges on the PR, the maintainer will often ask you to create (or move) your PR against a specific branch. The feature can then be dealt with in isolation. Therefore, you shouldn't merge any subsequent commit added to `master` into your PR without discussing it first with the maintainer.
+If you are making a non-trivial changes, which will require back and forth exchanges on the PR, the maintainer will often ask you to create (or move) your PR against a specific branch. The feature can then be dealt with in isolation. Therefore, you shouldn't merge any subsequent commit added to `main` into your PR without discussing it first with the maintainer.
 
 ### License & contribution
 

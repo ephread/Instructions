@@ -60,7 +60,7 @@ If you need help with something in particular, ask a question in the [Gitter roo
 
 If you want to contribute, be sure to take a look at [the contributing guide].
 
-[the contributing guide]: https://github.com/ephread/Instructions/blob/master/CONTRIBUTING.md
+[the contributing guide]: https://github.com/ephread/Instructions/blob/main/CONTRIBUTING.md
 
 ## Installation
 
@@ -551,7 +551,7 @@ look smooth if the coach mark is already displayed. It's better to perform the c
 two coach marks, by pausing and resuming the flow. [`KeyboardViewController`] shows an
 example of this technique.
 
-[`KeyboardViewController`]: https://github.com/ephread/Instructions/blob/master/Examples/Example/KeyboardViewController.swift
+[`KeyboardViewController`]: https://github.com/ephread/Instructions/blob/main/Examples/Example/KeyboardViewController.swift
 
 ### Usage within App Extensions
 If you wish to add Instructions within App Extensions, there's additional work you need to perform.

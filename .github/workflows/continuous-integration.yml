@@ -95,7 +95,7 @@ jobs:
         run: |
           IFS_BACKUP=$IFS
           IFS=":"
-          DEVICES="${IPHONE_11}"
+          DEVICES="${IPAD_PRO}"
           for TEST_DESTINATION in ${DEVICES[@]}; do
             set -o pipefail && xcodebuild test -project "$EXAMPLE_PROJECT" -scheme "$EXAMPLE_SCHEME" \
             -sdk "$SDK" -destination "$TEST_DESTINATION" -configuration Debug -enableCodeCoverage YES \

@@ -3,12 +3,12 @@ Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
 ## [2.0.0](https://github.com/ephread/Instructions/releases/tag/2.0.0)
-Released on 2020-XX-XX.
+Released on 2020-05-14.
 
 ### Fixed
 - Fix [#205] - Safe area insets ignored by coach mark layout system
 - Fix [#231] - Support iOS 13's `WindowScene`
-- Fix incorrect window bounds while multitasking on iPad 
+- Fix incorrect window bounds while multitasking on iPad
 
 [#205]: https://github.com/ephread/Instructions/issues/205
 [#231]: https://github.com/ephread/Instructions/issues/231
@@ -24,7 +24,7 @@ Released on 2020-XX-XX.
 - Full dark mode support
 - Customizable default Coachmark
 - Support of Swift Package Manager
-- Let overlay forward touch events with a new option [#212] 
+- Let overlay forward touch events with a new option [#212]
 
 [#212]: https://github.com/ephread/Instructions/issues/212
 

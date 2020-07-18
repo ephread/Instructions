@@ -23,7 +23,7 @@ class BlurringOverlayStyleManagerTest: XCTestCase {
 
     override func tearDown() {
         super.tearDown()
-        delegateEndExpectation = nil
+        viewIsVisibleExpectation = nil
     }
 
     func testThatOverlayIsShown() {

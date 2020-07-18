@@ -31,7 +31,7 @@ class CoachMarkDisplayManagerTests: XCTestCase {
 
     override func tearDown() {
         super.tearDown()
-        delegateEndExpectation = nil
+        viewIsVisibleExpectation = nil
     }
 
     func testThatCoachMarkViewIsShown() {

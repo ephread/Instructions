@@ -17,6 +17,11 @@ class SkipViewDisplayManagerTests: XCTestCase {
         skipViewDisplayManager.dataSource = dataSource
     }
 
+    override func tearDown() {
+        super.tearDown()
+        delegateEndExpectation = nil
+    }
+
     func testThatSkipViewWasHidden() {
         let skipView = CoachMarkSkipDefaultView()
         skipView.alpha = 1.0

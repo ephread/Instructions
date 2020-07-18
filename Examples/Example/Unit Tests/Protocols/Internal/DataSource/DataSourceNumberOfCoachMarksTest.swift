@@ -14,6 +14,11 @@ class DataSourceNumberOfCoachMarksTest: DataSourceBaseTest,
         coachMarksController.dataSource = self
     }
 
+    override func tearDown() {
+        super.tearDown()
+        delegateEndExpectation = nil
+    }
+
     func testNumberOfCoachMarksIsCalled() {
         delegateEndExpectation = self.expectation(description: "numberOfCoachMarks")
         coachMarksController.start(in: .window(over: parentController))

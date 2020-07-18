@@ -9,7 +9,7 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
                                    CoachMarksControllerDelegate {
     var storyboard: UIStoryboard!
     var navigationController: UINavigationController!
-    var delegateEndExpectation: XCTestExpectation!
+    var delegateEndExpectation: XCTestExpectation?
 
     var presentationContext: DefaultViewController.Context = .independentWindow
     let originalOrientation = XCUIDevice.shared.orientation
@@ -27,6 +27,7 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
 
     override func tearDown() {
         super.tearDown()
+        delegateEndExpectation = nil
         XCUIDevice.shared.orientation = originalOrientation
     }
 
@@ -85,7 +86,7 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
         FBSnapshotVerifyView(snapshotView,
                              identifier: "_i\(index)_o\(orientation.rawValue)_\(presentationContext)")
 
-        if delegateEndExpectation.description == "DidShowWithRotation",
+        if delegateEndExpectation?.description == "DidShowWithRotation",
            index == 2, orientation == .portrait {
             XCUIDevice.shared.orientation = .landscapeRight
         } else {
@@ -97,10 +98,10 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests,
                               didEndShowingBySkipping skipped: Bool) {
         if let window = instructionsWindow() {
             if window.isHidden {
-                delegateEndExpectation.fulfill()
+                delegateEndExpectation?.fulfill()
             }
         } else {
-            delegateEndExpectation.fulfill()
+            delegateEndExpectation?.fulfill()
         }
     }
 

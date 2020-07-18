@@ -86,11 +86,11 @@ jobs:
         env:
           # Instead of using a matrix, we're just going to use a bash loop to
           # test multiple simulators.
-          IPAD_PRO: "OS=13.5,name=iPad Pro (11-inch) (2nd generation)"
-          IPAD_AIR: "OS=13.5,name=iPad Air (3rd generation)"
+          IPAD_PRO:  "OS=13.5,name=iPad Pro (11-inch) (2nd generation)"
+          IPAD_AIR:  "OS=13.5,name=iPad Air (3rd generation)"
           IPHONE_11: "OS=13.5,name=iPhone 11"
-          IPHONE_8: "OS=13.5,name=iPhone 8"
-        run:
+          IPHONE_8:  "OS=13.5,name=iPhone 8"
+        run: |
           IFS_BACKUP=$IFS
           IFS=":"
           DEVICES="${IPAD_PRO}:${IPAD_AIR}:${IPHONE_11}:${IPHONE_8}"

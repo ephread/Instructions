@@ -20,6 +20,11 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
         coachMarksController.delegate = self
     }
 
+    override func tearDown() {
+        super.tearDown()
+        delegateEndExpectation = nil
+    }
+
     func testThatCoachMarkAtIsCalledAtLeastTheNumberOfExpectedTimes() {
         delegateEndExpectation = self.expectation(description: "CoachMarkAt")
         coachMarksController.start(in: .window(over: parentController))

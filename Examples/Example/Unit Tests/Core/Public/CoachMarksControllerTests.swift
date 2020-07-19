@@ -22,6 +22,11 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
         mockedWindow.addSubview(self.parentController.view)
     }
 
+    override func tearDown() {
+        super.tearDown()
+        delegateEndExpectation = nil
+    }
+
     func testThatDidFinishShowingIsCalled() {
         delegateEndExpectation = self.expectation(description: "DidFinishShowing")
 

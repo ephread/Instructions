@@ -10,17 +10,20 @@ class TranslucentOverlayStyleManager: OverlayStyleManager {
     // MARK: Private Properties
     private var onGoingTransition = false
     private let color: UIColor
-
+    private var cutoutBorderColor: UIColor
+    
     // MARK: Layer Mask related properties
     private var cutoutMaskLayer = CAShapeLayer()
     private var fullMaskLayer = CAShapeLayer()
+    private var borderLayer = CAShapeLayer()
     private lazy var overlayLayer: CALayer = {
         return self.createSublayer()
     }()
 
     // MARK: Initialization
-    init(color: UIColor) {
+    init(color: UIColor, cutoutBorderColor: UIColor) {
         self.color = color
+        self.cutoutBorderColor = cutoutBorderColor
     }
 
     // MARK: OverlayStyleManager
@@ -119,13 +122,25 @@ class TranslucentOverlayStyleManager: OverlayStyleManager {
 
         configureCutoutMask(usingCutoutPath: cutoutPath)
         configureFullMask()
+        configureCutoutBorderMask(usingCutoutPath: cutoutPath, color: cutoutBorderColor)
 
         let maskLayer = CALayer()
         maskLayer.frame = overlayLayer.bounds
         maskLayer.addSublayer(self.cutoutMaskLayer)
         maskLayer.addSublayer(self.fullMaskLayer)
-
+        maskLayer.addSublayer(self.borderLayer)
+        
         overlayLayer.mask = maskLayer
+        overlayLayer.addSublayer(borderLayer)
+    }
+    
+    private func configureCutoutBorderMask(usingCutoutPath cutoutPath: UIBezierPath, color: UIColor) {
+        borderLayer.fillColor =  UIColor.clear.cgColor
+        borderLayer.strokeColor = color.cgColor
+        borderLayer.lineWidth = 2.6
+        let borderLayerPath = UIBezierPath()
+        borderLayerPath.append(cutoutPath)
+        borderLayer.path = borderLayerPath.cgPath
     }
 
     private func configureCutoutMask(usingCutoutPath cutoutPath: UIBezierPath) {

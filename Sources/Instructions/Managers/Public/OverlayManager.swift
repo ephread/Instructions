@@ -13,6 +13,12 @@ public class OverlayManager {
             overlayStyleManager = updateOverlayStyleManager()
         }
     }
+    
+    public var cutoutBorderColor: UIColor = .clear {
+        didSet {
+            overlayStyleManager = updateOverlayStyleManager()
+        }
+    }
 
     /// Duration to use when hiding/showing the overlay.
     public var fadeAnimationDuration = Constants.overlayFadeAnimationDuration
@@ -181,7 +187,7 @@ public class OverlayManager {
             self.updateDependencies(of: blurringOverlayStyleManager)
             return blurringOverlayStyleManager
         } else {
-            let translucentOverlayStyleManager = TranslucentOverlayStyleManager(color: backgroundColor)
+            let translucentOverlayStyleManager = TranslucentOverlayStyleManager(color: backgroundColor, cutoutBorderColor: cutoutBorderColor)
             self.updateDependencies(of: translucentOverlayStyleManager)
             return translucentOverlayStyleManager
         }

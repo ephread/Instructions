@@ -15,10 +15,7 @@ class CoachMarkLayoutHelper {
         passNumber: Int = 0
     ) -> [NSLayoutConstraint] {
         if coachMarkView.superview != parentView {
-            print("""
-                  [WARNING] `coachMarkView` is not a child of `parentView`. \
-                  The array of constraints will be empty.
-                  """)
+            print(ErrorMessage.Error.notAChild)
             return []
         }
 
@@ -182,7 +179,7 @@ class CoachMarkLayoutHelper {
                                     withProperties properties: CoachMarkComputedProperties,
                                     inParentView parentView: UIView) -> CGFloat {
         guard let pointOfInterest = coachMark.pointOfInterest else {
-            print("[INFO] The point of interest is nil, offset will be zero.")
+            print(ErrorMessage.Info.nilPointOfInterestZeroOffset)
             return 0
         }
 
@@ -200,7 +197,7 @@ class CoachMarkLayoutHelper {
                                    withProperties properties: CoachMarkComputedProperties,
                                    inParentView parentView: UIView) -> CGFloat {
         guard let pointOfInterest = coachMark.pointOfInterest else {
-            print("[INFO] The point of interest was found nil. Fallbacking offset will be 0")
+            print(ErrorMessage.Info.nilPointOfInterestZeroOffset)
             return 0
         }
 
@@ -215,7 +212,7 @@ class CoachMarkLayoutHelper {
                                      withProperties properties: CoachMarkComputedProperties,
                                      inParentView parentView: UIView) -> CGFloat {
         guard let pointOfInterest = coachMark.pointOfInterest else {
-            print("[INFO] The point of interest is nil, offset will be zero.")
+            print(ErrorMessage.Info.nilPointOfInterestZeroOffset)
             return 0
         }
 
@@ -272,9 +269,9 @@ class CoachMarkLayoutHelper {
             }
         } else {
             if coachMark.pointOfInterest == nil {
-                print("[INFO] The point of interest is nil, alignment will fall back to .center.")
+                print(ErrorMessage.Info.nilPointOfInterestCenterAlignment)
             } else {
-                print("[WARNING] frame has no width, alignment will fall back to .center.")
+                print(ErrorMessage.Warning.frameWithNoWidth)
             }
 
             return .centered

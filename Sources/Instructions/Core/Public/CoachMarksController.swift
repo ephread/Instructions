@@ -109,7 +109,7 @@ public extension CoachMarksController {
 
     func start(in presentationContext: PresentationContext) {
         guard let dataSource = self.dataSource else {
-            print("[WARNING] dataSource is nil.")
+            print(ErrorMessage.Warning.nilDataSource)
             return
         }
 
@@ -118,16 +118,16 @@ public extension CoachMarksController {
 
         let numberOfCoachMarks = dataSource.numberOfCoachMarks(for: self)
         if numberOfCoachMarks < 0 {
-            fatalError("dataSource.numberOfCoachMarks(for:) returned a negative number.")
+            fatalError(ErrorMessage.Fatal.negativeNumberOfCoachMarks)
         } else if numberOfCoachMarks == 0 {
-            print("[WARNING] dataSource.numberOfCoachMarks(for:) returned 0.")
+            print(ErrorMessage.Warning.noCoachMarks)
             return
         }
 
         switch presentationContext {
         case .newWindow(let viewController, let windowLevel):
 #if INSTRUCTIONS_APP_EXTENSIONS
-            fatalError("PresentationContext.newWindow(above:) is not available in App Extensions.")
+            fatalError(ErrorMessage.Fatal.windowContextNotAvailableInAppExtensions)
 #else
             controllerWindow = viewController.view.window
             coachMarksWindow = coachMarksWindow ?? buildNewWindow()

@@ -64,7 +64,7 @@ public class CoachMarkBodyDefaultView: UIControl,
     }
 
     required public init?(coder aDecoder: NSCoder) {
-        fatalError("This class does not support NSCoding.")
+        fatalError(ErrorMessage.Fatal.doesNotSupportNSCoding)
     }
 }
 

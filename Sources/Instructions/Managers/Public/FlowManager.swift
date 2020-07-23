@@ -213,10 +213,7 @@ public class FlowManager {
         // the case.
         if !self.isPaused {
             if coachMarksViewController.instructionsRootView.bounds.isEmpty {
-                print("""
-                      [ERROR] The overlay view added to the window has empty bounds, \
-                      Instructions will stop.
-                      """)
+                print(ErrorMessage.Error.overlayEmptyBounds)
                 self.stopFlow()
                 return
             }
@@ -269,7 +266,7 @@ public class FlowManager {
         if !self.isStarted || !canShowCoachMark { return }
 
         if numberToSkip < 0 {
-            print("[WARNING] numberToSkip is negative, ignoring.")
+            print(ErrorMessage.Warning.negativeNumberOfCoachMarksToSkip)
             return
         }
 
@@ -286,7 +283,7 @@ public class FlowManager {
         if !self.isStarted || !canShowCoachMark { return }
 
         if numberToSkip < 0 {
-            print("[WARNING] numberToSkip is negative, ignoring.")
+            print(ErrorMessage.Warning.negativeNumberOfCoachMarksToSkip)
             return
         }
 

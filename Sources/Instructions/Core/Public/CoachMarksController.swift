@@ -175,8 +175,11 @@ public extension CoachMarksController {
 // MARK: - Protocol Conformance | OverlayViewDelegate
 extension CoachMarksController: Snapshottable {
     func snapshot() -> UIView? {
-        guard let window = controllerWindow else { return nil }
-        return window.snapshotView(afterScreenUpdates: true)
+        if let window = controllerWindow {
+            return window.snapshotView(afterScreenUpdates: true)
+        } else {
+            return coachMarksViewController.view.snapshotView(afterScreenUpdates: true)
+        }
     }
 }
 

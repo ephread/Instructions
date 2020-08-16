@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: Switch Xcode version
-        run: sudo xcode-select --switch /Applications/Xcode_11.6_beta.app
+        run: sudo xcode-select --switch /Applications/Xcode_11.6.app
 
       - name: Check out the repository
         uses: actions/checkout@v2
@@ -55,36 +55,36 @@ jobs:
           gem install slather
           cd "Examples" && carthage bootstrap --platform ios && cd ..
 
-      # - name: Run Cocoapods' linter
-      #   if: env.run_pod_lint == 'true'
-      #   # Warnings might be allowed in versions where Instructions continue to support
-      #   # deprecated methods.
-      #   run: |
-      #     if [ $ALLOW_WARNINGS == "YES" ]; then
-      #       pod lib lint --allow-warnings;
-      #     else
-      #       pod lib lint;
-      #     fi
+      - name: Run Cocoapods' linter
+        if: env.run_pod_lint == 'true'
+        # Warnings might be allowed in versions where Instructions continue to support
+        # deprecated methods.
+        run: |
+          if [ $ALLOW_WARNINGS == "YES" ]; then
+            pod lib lint --allow-warnings;
+          else
+            pod lib lint;
+          fi
 
-      # - name: Build example project
-      #   if: env.build_example == 'true'
-      #   run: >
-      #     set -o pipefail && xcodebuild clean build -project "$EXAMPLE_PROJECT"
-      #     -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION"
-      #     ONLY_ACTIVE_ARCH=YES | xcpretty -c;
+      - name: Build example project
+        if: env.build_example == 'true'
+        run: >
+          set -o pipefail && xcodebuild clean build -project "$EXAMPLE_PROJECT"
+          -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION"
+          ONLY_ACTIVE_ARCH=YES | xcpretty -c;
 
-      # - name: Build App Extensions example project
-      #   if: env.build_app_extension_example == 'true'
-      #   run: >
-      #     set -o pipefail && xcodebuild clean build -project "$APPEX_EXAMPLE_PROJECT"
-      #     -scheme "$APPEX_EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION"
-      #     ONLY_ACTIVE_ARCH=YES | xcpretty -c;
+      - name: Build App Extensions example project
+        if: env.build_app_extension_example == 'true'
+        run: >
+          set -o pipefail && xcodebuild clean build -project "$APPEX_EXAMPLE_PROJECT"
+          -scheme "$APPEX_EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION"
+          ONLY_ACTIVE_ARCH=YES | xcpretty -c;
 
-      # - name: Build frameworks
-      #   run: >
-      #     set -o pipefail && xcodebuild clean build -project "$PROJECT"
-      #     -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION"
-      #     -configuration Debug ONLY_ACTIVE_ARCH=YES | xcpretty -c;
+      - name: Build frameworks
+        run: >
+          set -o pipefail && xcodebuild clean build -project "$PROJECT"
+          -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION"
+          -configuration Debug ONLY_ACTIVE_ARCH=YES | xcpretty -c;
 
       - name: Run tests
         if: env.run_tests == 'true'
@@ -106,11 +106,11 @@ jobs:
           done
           IFS=$IFS_BACKUP
 
-      # - name: Convert and upload coverage
-      #   uses: paambaati/codeclimate-action@v2.6.0
-      #   if: env.run_tests == 'true'
-      #   env:
-      #     CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-      #   with:
-      #     coverageCommand: "slather coverage -x --build-directory Build/"
-      #     coverageLocations: "${{github.workspace}}/Tests/cobertura.xml:cobertura"
+      - name: Convert and upload coverage
+        uses: paambaati/codeclimate-action@v2.6.0
+        if: env.run_tests == 'true'
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+        with:
+          coverageCommand: "slather coverage -x --build-directory Build/"
+          coverageLocations: "${{github.workspace}}/Tests/cobertura.xml:cobertura"

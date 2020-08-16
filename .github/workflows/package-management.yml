@@ -1,0 +1,67 @@
+name: package-management
+
+on:
+  push:
+    branches:
+    - main
+    - github-actions
+    - 'release-**'
+
+env:
+  LANG: en_US.UTF-8
+
+  SDK: "iphonesimulator13.6"
+  DESTINATION: "OS=13.6,name=iPhone 11"
+
+jobs:
+  test:
+    name: Build, lint & test
+    runs-on: macos-10.15
+
+    steps:
+      - name: Switch Xcode version
+        run: sudo xcode-select --switch /Applications/Xcode_11.6.app
+
+      - name: Check out test repository
+        uses: actions/checkout@v2
+        with:
+          repository: "ephread/InstructionsPackageTest"
+          path: "PackageTest"
+
+      - name: Test CocoaPods import
+        env:
+          WORKSPACE: "InstructionsCocoaPods.xcworkspace"
+          SCHEME: "InstructionsCocoaPods"
+          TEST_DIRECTORY: "PackageTest/InstructionsCocoaPods"
+        run: |
+          cd "$TEST_DIRECTORY"
+          pod install
+          set -o pipefail && xcodebuild test -workspace "$WORKSPACE" -scheme "$SCHEME" \
+              -sdk "$SDK" -destination "$DESTINATION" -configuration Debug \
+              ONLY_ACTIVE_ARCH=YES | xcpretty -c
+          cd ../..
+
+      - name: Test Carthage import
+        env:
+          PROJECT: "InstructionsCarthage.xcodeproj"
+          SCHEME: "InstructionsCarthage"
+          TEST_DIRECTORY: "PackageTest/InstructionsCarthage"
+        run: |
+          cd "$TEST_DIRECTORY"
+          carthage bootstrap
+          set -o pipefail && xcodebuild test -project "$PROJECT" -scheme "$SCHEME" \
+              -sdk "$SDK" -destination "$DESTINATION" -configuration Debug \
+              ONLY_ACTIVE_ARCH=YES | xcpretty -c
+          cd ../..
+
+      - name: Test SwiftPM import
+        env:
+          PROJECT: "InstructionsSwiftPM.xcodeproj"
+          SCHEME: "InstructionsSwiftPM"
+          TEST_DIRECTORY: "PackageTest/InstructionsSwiftPM"
+        run: |
+          cd "$TEST_DIRECTORY"
+          set -o pipefail && xcodebuild test -project "$PROJECT" -scheme "$SCHEME" \
+              -sdk "$SDK" -destination "$DESTINATION" -configuration Debug \
+              ONLY_ACTIVE_ARCH=YES | xcpretty -c
+          cd ../..

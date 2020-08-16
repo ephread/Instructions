@@ -27,6 +27,12 @@ class MainTableViewController: UITableViewController {
         } else if segue.identifier == "InvisibleOverlay",
             let controller = segue.destination as? DefaultViewController {
             controller.useInvisibleOverlay = true
+        } else if segue.identifier == "BlurInControllerWindowContext",
+            let controller = segue.destination as? BlurringOverlayViewController {
+            controller.presentationContext = .controllerWindow
+        } else if segue.identifier == "BlurInControllerContext",
+            let controller = segue.destination as? BlurringOverlayViewController {
+            controller.presentationContext = .controller
         }
     }
 }

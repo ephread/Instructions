@@ -6,6 +6,11 @@ on:
     - main
     - github-actions
     - 'release-**'
+  pull_request:
+    branches:
+    - main
+    - github-actions
+    - 'release-**'
 
 env:
   # Expected to be used withint scripts.

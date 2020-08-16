@@ -36,7 +36,7 @@ class SkipViewDisplayManager {
     /// - Parameter duration: the duration of the fade.
     func show(skipView: (UIView & CoachMarkSkipView), duration: TimeInterval = 0) {
         guard let parentView = skipView.asView?.superview else {
-            print("[INFO] skipView has no superview and won't be shown.")
+            print(ErrorMessage.Info.skipViewNoSuperviewNotShown)
             return
         }
 
@@ -63,7 +63,7 @@ class SkipViewDisplayManager {
     func update(skipView: (UIView & CoachMarkSkipView),
                 withConstraints constraints: [NSLayoutConstraint]?) {
         guard let parentView = skipView.asView?.superview else {
-            print("[INFO] skipView has no superview and won't be updated.")
+            print(ErrorMessage.Info.skipViewNoSuperviewNotUpdated)
             return
         }
 

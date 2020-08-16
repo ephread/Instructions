@@ -109,10 +109,7 @@ public class CoachMarkHelper {
                                        pointOfInterest: CGPoint? = nil,
                                        cutoutPathMaker: CutoutPathMaker? = nil) {
         if !flowManager.isPaused || flowManager.currentCoachMark == nil {
-            print("""
-                  [ERROR] Something went wrong, did you call \
-                  `updateCurrentCoachMark()` without pausing the controller first?
-                  """)
+            print(ErrorMessage.Error.updateWentwrong)
             return
         }
 

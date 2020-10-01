@@ -223,7 +223,7 @@ You can also allow touch events to be forwarded to the UIView underneath if they
 ⚠️ The blurring overlay is not supported in app extensions.
 
 #### Customizing default coach marks
-The efault coach marks provide minimum customisation options.
+The default coach marks provide minimum customisation options.
 
 **Available in both `CoachMarkBodyDefaultView` and `CoachMarkArrowDefaultView`:**
 - `background.innerColor: UIColor`: the background color of the coachmark.

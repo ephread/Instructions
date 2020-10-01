@@ -4,20 +4,27 @@
 import XCTest
 
 class TransitionExampleTests: XCTestCase {
-
+    #if targetEnvironment(macCatalyst)
+    #else
     let originalOrientation = XCUIDevice.shared.orientation
-
+    #endif
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
 
         XCUIApplication().launchWithAnimationsDisabled()
+        #if targetEnvironment(macCatalyst)
+        #else
         XCUIDevice.shared.orientation = .portrait
+        #endif
     }
 
     override func tearDown() {
         super.tearDown()
+        #if targetEnvironment(macCatalyst)
+        #else
         XCUIDevice.shared.orientation = originalOrientation
+        #endif
     }
 
     func testTapThroughCutout() {

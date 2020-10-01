@@ -1,6 +1,8 @@
 // Copyright (c) 2018-present Frédéric Maquin <fred@ephread.com> and contributors.
 // Licensed under the terms of the MIT License.
 
+#if targetEnvironment(macCatalyst)
+#else
 import Foundation
 
 @testable import Instructions
@@ -40,3 +42,4 @@ class BaseSnapshotTests: FBSnapshotTestCase {
         }.first
     }
 }
+#endif

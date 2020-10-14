@@ -282,10 +282,14 @@ $RECYCLE.BIN/
 Tests
 
 ## Other
+*.xccheckout
+*.moved-aside
 *.xcuserstate
+*.xcscmblueprint
 
 ## Carthage
 **/Carthage/Checkouts
 **/Carthage/Build
 
 Skassets
+.swiftpm/

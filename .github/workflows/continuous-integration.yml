@@ -24,11 +24,11 @@ env:
   EXAMPLE_SCHEME: "Instructions Example"
   APPEX_EXAMPLE_SCHEME: "Instructions App Extensions Example"
 
-  SDK: "iphonesimulator13.6"
+  SDK: "iphonesimulator14.0"
 
   ALLOW_WARNINGS: "NO"
 
-  DESTINATION: "OS=13.6,name=iPhone 11"
+  DESTINATION: "OS=14.0,name=iPhone 11 Pro"
 
   # Wether or not to perform certain steps.
   run_pod_lint: true
@@ -43,7 +43,7 @@ jobs:
 
     steps:
       - name: Switch Xcode version
-        run: sudo xcode-select --switch /Applications/Xcode_11.6.app
+        run: sudo xcode-select --switch /Applications/Xcode_12.app
 
       - name: Check out the repository
         uses: actions/checkout@v2
@@ -53,7 +53,19 @@ jobs:
       - name: Install test dependencies
         run: |
           gem install slather
-          cd "Examples" && carthage bootstrap --platform ios && cd ..
+          cd "Examples"
+
+          # For Xcode 12 make sure EXCLUDED_ARCHS is set to arm architectures otherwise
+          # the build will fail on lipo due to duplicate architectures.
+          xcconfig=$(mktemp /tmp/static.xcconfig.XXXXXX)
+
+          echo 'EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_simulator__NATIVE_ARCH_64_BIT_x86_64__XCODE_1200 = arm64 arm64e armv7 armv7s armv6 armv8' >> $xcconfig
+          echo 'EXCLUDED_ARCHS = $(inherited) $(EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_$(EFFECTIVE_PLATFORM_SUFFIX)__NATIVE_ARCH_64_BIT_$(NATIVE_ARCH_64_BIT)__XCODE_$(XCODE_VERSION_MAJOR))' >> $xcconfig
+
+          export XCODE_XCCONFIG_FILE="$xcconfig"
+          carthage bootstrap --platform ios
+
+          cd ..
 
       - name: Run Cocoapods' linter
         if: env.run_pod_lint == 'true'
@@ -91,10 +103,10 @@ jobs:
         env:
           # Instead of using a matrix, we're just going to use a bash loop to
           # test multiple simulators.
-          IPAD_PRO:  "OS=13.6,name=iPad Pro (11-inch) (2nd generation)"
-          IPAD_AIR:  "OS=13.6,name=iPad Air (3rd generation)"
-          IPHONE_11: "OS=13.6,name=iPhone 11"
-          IPHONE_8:  "OS=13.6,name=iPhone 8"
+          IPAD_PRO:  "OS=14.0,name=iPad Pro (11-inch) (2nd generation)"
+          IPAD_AIR:  "OS=14.0,name=iPad Air (4rd generation)"
+          IPHONE_11: "OS=14.0,name=iPhone 11 Pro"
+          IPHONE_8:  "OS=14.0,name=iPhone SE (2nd generation)"
         run: |
           IFS_BACKUP=$IFS
           IFS=":"

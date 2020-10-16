@@ -6,9 +6,13 @@
 # Carthage
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
-# Carthage/Checkouts
-
+Carthage/Checkouts
 Carthage/Build
+
+**/Carthage/Checkouts
+**/Carthage/Build
+
+carthage.sh
 
 ### CocoaPods ###
 ## CocoaPods GitIgnore Template
@@ -286,10 +290,6 @@ Tests
 *.moved-aside
 *.xcuserstate
 *.xcscmblueprint
-
-## Carthage
-**/Carthage/Checkouts
-**/Carthage/Build
 
 Skassets
 .swiftpm/

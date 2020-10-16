@@ -149,6 +149,7 @@
 		B625EAA1253A1BE200083BCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Basic Examples.storyboard"; sourceTree = "<group>"; };
 		B625EAA2253A1BE200083BCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Delegation.storyboard; sourceTree = "<group>"; };
 		B625EAA3253A1BE300083BCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PausingResuming.storyboard; sourceTree = "<group>"; };
+		B625EAA6253A1C7300083BCE /* Cartfile.private */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile.private; sourceTree = "<group>"; };
 		B639B28120D4E71D009996CF /* InstructionsSnapshotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstructionsSnapshotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B639B28520D4E71D009996CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B639B28F20D4E807009996CF /* BaseSnapshotTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSnapshotTestCase.swift; sourceTree = "<group>"; };
@@ -521,6 +522,7 @@
 				B6C9D65720D3B84D00EBC03A /* Unit Tests */,
 				B6CA4A8520BE7141006F42AC /* UI Tests */,
 				B690138220BE6B2E00E706B2 /* Instructions.xcodeproj */,
+				B625EAA6253A1C7300083BCE /* Cartfile.private */,
 			);
 			sourceTree = "<group>";
 		};

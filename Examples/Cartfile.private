@@ -1,2 +1,2 @@
-github "uber/ios-snapshot-test-case" ~> 6.2.0
+github "ephread/ios-snapshot-test-case" "xcode-12"
 

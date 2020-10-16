@@ -143,12 +143,12 @@
 		B6105E372434FE9E00B45CDA /* XCUIApplication+Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Launch.swift"; sourceTree = "<group>"; };
 		B6105E3D2435123D00B45CDA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B6105E3F2435124C00B45CDA /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
-		B6105E402435131F00B45CDA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/PausingResuming.storyboard; sourceTree = "<group>"; };
-		B6105E412435131F00B45CDA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Delegation.storyboard; sourceTree = "<group>"; };
-		B6105E422435131F00B45CDA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B6105E432435131F00B45CDA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B6105E442435132000B45CDA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = "en.lproj/Basic Examples.storyboard"; sourceTree = "<group>"; };
 		B618494120C2472100315E1C /* PausingCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PausingCodeViewController.swift; sourceTree = "<group>"; };
+		B625EA9F253A1BE200083BCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B625EAA0253A1BE200083BCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B625EAA1253A1BE200083BCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Basic Examples.storyboard"; sourceTree = "<group>"; };
+		B625EAA2253A1BE200083BCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Delegation.storyboard; sourceTree = "<group>"; };
+		B625EAA3253A1BE300083BCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PausingResuming.storyboard; sourceTree = "<group>"; };
 		B639B28120D4E71D009996CF /* InstructionsSnapshotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstructionsSnapshotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B639B28520D4E71D009996CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B639B28F20D4E807009996CF /* BaseSnapshotTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSnapshotTestCase.swift; sourceTree = "<group>"; };
@@ -653,7 +653,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = Ephread;
 				TargetAttributes = {
 					B639B28020D4E71D009996CF = {
@@ -688,6 +688,7 @@
 			knownRegions = (
 				en,
 				ar,
+				Base,
 			);
 			mainGroup = C64FB3031BB6CB1C0081E5B6;
 			productRefGroup = C64FB30D1BB6CB1C0081E5B6 /* Products */;
@@ -880,7 +881,7 @@
 		B6AF4D9824349A5100151B64 /* Delegation.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B6105E412435131F00B45CDA /* en */,
+				B625EAA2253A1BE200083BCE /* Base */,
 			);
 			name = Delegation.storyboard;
 			sourceTree = "<group>";
@@ -888,7 +889,7 @@
 		B6AF4D9A24349A5200151B64 /* PausingResuming.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B6105E402435131F00B45CDA /* en */,
+				B625EAA3253A1BE300083BCE /* Base */,
 			);
 			name = PausingResuming.storyboard;
 			sourceTree = "<group>";
@@ -896,7 +897,7 @@
 		B6AF4D9C24349A5200151B64 /* Basic Examples.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B6105E442435132000B45CDA /* en */,
+				B625EAA1253A1BE200083BCE /* Base */,
 			);
 			name = "Basic Examples.storyboard";
 			sourceTree = "<group>";
@@ -904,7 +905,7 @@
 		C64FB32F1BB6CC180081E5B6 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B6105E432435131F00B45CDA /* en */,
+				B625EA9F253A1BE200083BCE /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			path = .;
@@ -913,7 +914,7 @@
 		C64FB3311BB6CC180081E5B6 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				B6105E422435131F00B45CDA /* en */,
+				B625EAA0253A1BE200083BCE /* Base */,
 			);
 			name = Main.storyboard;
 			path = .;
@@ -1140,6 +1141,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1164,7 +1166,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1196,6 +1198,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1214,7 +1217,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1232,7 +1235,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Sources/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1253,7 +1256,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Sources/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

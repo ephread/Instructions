@@ -9,7 +9,7 @@ import Foundation
 /// `parameters` property first and then, call `animate`.
 public class CoachMarkAnimationManager: CoachMarkAnimationManagement {
     // MARK: Internal properties
-    /// Used to descriminate between regular animations and keyframe-based animations.
+    /// Used to discriminate between regular animations and keyframe-based animations.
     internal var animationType: AnimationType = .regular
 
     /// Animation block

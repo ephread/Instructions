@@ -36,8 +36,8 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 - [x] [Customizable highlight system](#advanced-usage)
 - [x] [Customizable views](#providing-custom-views)
 - [x] [Customizable positions](#customizing-how-the-coach-mark-will-show)
-- [x] [Skipable tour](#let-users-skip-the-tour)
-- [x] [Pilotable from code](#piloting-the-flow-from-the-code)
+- [x] [Skip-able tour](#let-users-skip-the-tour)
+- [x] [Pilot-able from code](#piloting-the-flow-from-the-code)
 - [x] [App Extensions support](#usage-within-app-extensions)
 - [x] [Animatable coach marks](#animating-coach-marks)
 - [x] Right-to-left support
@@ -277,7 +277,7 @@ func coachMarksController(
 }
 ```
 
-When providing a customized view, you need to provide an _arrow_ view with the approriate orientation (i. e. in the case of an actual arrow, pointing upward or downward). The `CoachMarkController` will tell you which orientation it expects, through the following property: `CoachMark.arrowOrientation`.
+When providing a customized view, you need to provide an _arrow_ view with the appropriate orientation (i. e. in the case of an actual arrow, pointing upward or downward). The `CoachMarkController` will tell you which orientation it expects, through the following property: `CoachMark.arrowOrientation`.
 
 Browse the `Example/` directory for more details.
 
@@ -304,7 +304,7 @@ You can choose in which context the coach marks will be displayed, by passing it
 - `.currentWindow(of: UIViewController)` – The window displaying the given `UIViewController`;
 - `.viewController(_: UIViewController)` – In the `view` of the given `UIViewController`.
 
-Additionally, you can also provide use `window(over: UIViewController)`, which is a convience static method equivalent to calling `.newWindow(over: UIViewController, at: UIWindowLevelNormal + 1)`.
+Additionally, you can also provide use `window(over: UIViewController)`, which is a convenience static method equivalent to calling `.newWindow(over: UIViewController, at: UIWindowLevelNormal + 1)`.
 
 ⚠️ Setting the window level to anything above `UIWindowLevelStatusBar` is neither supported on iOS 13 nor when using a blur effect on the overlay.
 
@@ -359,7 +359,7 @@ All methods from this delegate work in similar ways. First, you will need to spe
 
 - `duration: TimeInterval`: the total duration of the animation.
 
-- `delay: TimeInterval`: the amount of time to wai before beginning the animations
+- `delay: TimeInterval`: the amount of time to wait before beginning the animations
 
 - `options: UIViewAnimationOptions`: a mask of options indicating how you want to perform the animations (for regular animations).
 
@@ -369,10 +369,10 @@ Once you've set the parameters, you should provide your animations by calling `m
 
 You should provide your animations in a block passed to the `animate` parameter, in a similar fashion to `UIView.animate`. If you need to access the animation parameters or the coach mark metadata, a `CoachMarkAnimationManagementContext` containing these will be provided to your animation block. You shouldn't capture a reference to manager from the animation block.
 
-For an implemntation example, you can also take a look a the `DelegateViewController` class found in the `Example` directory.
+For an implementation example, you can also take a look a the `DelegateViewController` class found in the `Example` directory.
 
 ##### Appearance and disappearance specifics
-If you need to define an initial state, you should do so by providing a block to the `fromInitialState` property. While directly setting values on `coachMarkView` in the method before calling `manager.animate()` might work, it's not garanteed to.
+If you need to define an initial state, you should do so by providing a block to the `fromInitialState` property. While directly setting values on `coachMarkView` in the method before calling `manager.animate()` might work, it's not guaranteed to.
 
 #### Let users skip the tour
 ##### Control
@@ -402,7 +402,7 @@ func coachMarksController(
 
 This method will be called by the `CoachMarksController` before starting the tour and whenever there is a size change. It gives you the _skip button_ and the view in which it will be positioned and expects an array of `NSLayoutConstraints` in return. These constraints will define how the _skip button_ will be positioned in its parent. You should not add the constraints yourself, just return them.
 
-Returning `nil` will tell the `CoachMarksController` to use the defaults constraints, which will position the _skip button_ at the top of the screen. Returning an empty array is discouraged, as it will most probably lead to an akward positioning.
+Returning `nil` will tell the `CoachMarksController` to use the defaults constraints, which will position the _skip button_ at the top of the screen. Returning an empty array is discouraged, as it will most probably lead to an awkward positioning.
 
 For more information about the skip mechanism, you can check the `Example/` directory.
 

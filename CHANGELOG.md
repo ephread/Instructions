@@ -38,7 +38,7 @@ Released on 2019-05-04.
 - Fix [#218] - Division by zero during layout phase
 
 ### Changed
-- Turn runtime checks into cimpile time checks (protocol composition)
+- Turn runtime checks into compile time checks (protocol composition)
 - Improve error message when `numberOfCoachMarks <= 0`
 
 ### Removed
@@ -85,7 +85,7 @@ Released on 2018-12-05. ⚠️ Defective version
 - Add support for animated coach marks.
 
 ### Changed
-- Change willSHow and didShow coachmark delegate methods to discrimate between
+- Change willSHow and didShow coachmark delegate methods to discriminate between
   different configuration changes.
 
 [#84]: https://github.com/ephread/Instructions/issues/84
@@ -101,7 +101,7 @@ Released on 2018-06-04.
 ### Fixed
 - Fix [#163] - Silly weak modifier in protocol property.
 - Fix [#166] - `UIApplication.networkActivityIndicatorVisible` called from background queue.
-- Fix [#90] - Crash occuring infrequently if the view controller is dismissed too quickly. (PR [#161])
+- Fix [#90] - Crash occurring infrequently if the view controller is dismissed too quickly. (PR [#161])
 
 ### Added
 - Add supports for ornaments on the overlay.
@@ -201,8 +201,8 @@ Released on 2016-07-04.
 
 ### Fixed
 - Fix a bug caused by always-enabled touch inside the cutout path.
-- Fix a crash occuring during background fetches.
-- Fix the shift of cutout paths occuring when toggling the in-call status bar.
+- Fix a crash occurring during background fetches.
+- Fix the shift of cutout paths occurring when toggling the in-call status bar.
 
 ### Changed
 - Change completion method signature in delegate; it now provides a boolean notifying whether the flow was skipped by the user.

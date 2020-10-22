@@ -8,7 +8,7 @@ import UIKit
 /// default one provided by the library.
 public class CoachMarkBodyDefaultView: UIControl,
                                        CoachMarkBodyView {
-    // MARK: Overriden Properties
+    // MARK: Overridden Properties
     public override var isHighlighted: Bool {
         didSet {
             bodyBackground.isHighlighted = isHighlighted

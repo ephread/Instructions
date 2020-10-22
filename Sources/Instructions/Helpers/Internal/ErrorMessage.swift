@@ -39,7 +39,7 @@ struct ErrorMessage {
     }
 
     struct Error {
-        static let couldNotbeAttached =
+        static let couldNotBeAttached =
             """
             [ERROR] Instructions could not be properly attached to the window \
             did you call `start(in:)` inside `viewDidLoad` instead of `viewDidAppear`?
@@ -51,7 +51,7 @@ struct ErrorMessage {
             The array of constraints will be empty.
             """
 
-        static let updateWentwrong =
+        static let updateWentWrong =
             """
             [ERROR] Something went wrong, did you call \
             `updateCurrentCoachMark()` without pausing the controller first?

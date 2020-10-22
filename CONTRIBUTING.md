@@ -82,7 +82,7 @@ $ git lfs pull
 [Git LFS]: https://git-lfs.github.com/
 [snapshot tests]: https://github.com/uber/ios-snapshot-test-case
 
-###### 2. Install and run Carthage to build iOSSsnapshotTestCase
+###### 2. Install and run Carthage to build iOSSnapshotTestCase
 Run the following command from the root directory, and you should be good to go:
 
 ```shell

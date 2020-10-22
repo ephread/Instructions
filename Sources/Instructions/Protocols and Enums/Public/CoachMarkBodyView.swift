@@ -10,10 +10,10 @@ public protocol CoachMarkBodyView: AnyObject {
     var nextControl: UIControl? { get }
 
     /// A delegate to call, when the arrow view to mirror the current highlight
-    /// state of the body view. This is useful in case the entier view is actually a `UIControl`.
+    /// state of the body view. This is useful in case the entire view is actually a `UIControl`.
     ///
     /// The `CoachMarkView`, of which the current view must be
     /// part, will automatically set itself as the delegate and will take care
-    /// of fowarding the state to the arrow view.
+    /// of forwarding the state to the arrow view.
     var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate? { get set }
 }

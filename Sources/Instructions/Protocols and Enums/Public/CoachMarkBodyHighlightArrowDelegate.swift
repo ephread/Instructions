@@ -3,12 +3,12 @@
 
 import UIKit
 
-/// Delegate the hilight mecanism of the arrow. This protocol is
+/// Delegate the highlight mechanism of the arrow. This protocol is
 /// useful in case the whole body itself is the active control and
 /// we want the arrow to looks like it is part of this control.
 public protocol CoachMarkBodyHighlightArrowDelegate: AnyObject {
 
-    /// Set wethe ror not the arrow should get in its
+    /// Set whether or not the arrow should get in its
     /// highlighted state.
     ///
     /// - Parameters isHighlighted: `true` if the arrow should be highlighted, `false` otherwise.

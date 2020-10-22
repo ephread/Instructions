@@ -63,7 +63,7 @@ class CoachMarksViewController: UIViewController {
         return view
     }()
 
-    // MARK: - Overrided properties
+    // MARK: - Overridden properties
     ///
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if let statusBarStyle = customStatusBarStyle {
@@ -130,7 +130,7 @@ class CoachMarksViewController: UIViewController {
     /// - Parameters:
     ///   - window: the window which will hold the controller
     ///   - viewController: the controller displayed under the window
-    ///   - windowLevel: the level at whcih display the window.
+    ///   - windowLevel: the level at which display the window.
     func attach(to window: UIWindow, over viewController: UIViewController,
                 at windowLevel: UIWindow.Level? = nil) {
         if #available(iOS 13.0, *) {
@@ -162,7 +162,7 @@ class CoachMarksViewController: UIViewController {
     /// - Parameter viewController: the controller to which attach Instructions
     func attachToWindow(of viewController: UIViewController) {
         guard let window = viewController.view?.window else {
-            print(ErrorMessage.Error.couldNotbeAttached)
+            print(ErrorMessage.Error.couldNotBeAttached)
             return
         }
 

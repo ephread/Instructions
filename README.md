@@ -36,8 +36,8 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 - [x] [Customizable highlight system](#advanced-usage)
 - [x] [Customizable views](#providing-custom-views)
 - [x] [Customizable positions](#customizing-how-the-coach-mark-will-show)
-- [x] [Skip-able tour](#let-users-skip-the-tour)
-- [x] [Pilot-able from code](#piloting-the-flow-from-the-code)
+- [x] [Skippable tour](#let-users-skip-the-tour)
+- [x] [Pilotable from code](#piloting-the-flow-from-the-code)
 - [x] [App Extensions support](#usage-within-app-extensions)
 - [x] [Animatable coach marks](#animating-coach-marks)
 - [x] Right-to-left support

@@ -39,7 +39,7 @@ protocol OverlayStyleManager: AnyObject {
     /// - Parameters:
     ///   - show: `true` to show the overlay, `false` to hide.
     ///   - duration: duration of the animation
-    ///   - completion: a block to execute after compleion.
+    ///   - completion: a block to execute after completion.
     func showCutout(_ show: Bool, withDuration duration: TimeInterval,
                     completion: ((Bool) -> Void)?)
 

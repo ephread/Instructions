@@ -13,7 +13,7 @@ class OverlayView: UIView {
     let holder: UIView
     let ornaments: UIView
 
-    /// Used to temporarily enable touch forwarding isnide the cutoutPath.
+    /// Used to temporarily enable touch forwarding inside the cutoutPath.
     public var allowTouchInsideCutoutPath: Bool = false
     public var forwardTouchEvents: Bool = false
 

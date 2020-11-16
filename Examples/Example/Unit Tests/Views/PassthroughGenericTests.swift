@@ -8,15 +8,15 @@ class PassthroughGenericTests: XCTestCase {
     func testHitTestOnRootView() {
         let frame = CGRect(x: 0, y: 0, width: 50, height: 70)
         let rootView = InstructionsRootView(frame: frame)
-        let passThroughrootView = InstructionsRootView(frame: frame)
+        let passThroughRootView = InstructionsRootView(frame: frame)
 
-        passThroughrootView.passthrough = true
+        passThroughRootView.passthrough = true
 
         XCTAssertEqual(rootView.hitTest(CGPoint(x: 25, y: 25), with: nil), rootView)
-        XCTAssertEqual(passThroughrootView.hitTest(CGPoint(x: 25, y: 25), with: nil), nil)
+        XCTAssertEqual(passThroughRootView.hitTest(CGPoint(x: 25, y: 25), with: nil), nil)
 
         XCTAssertEqual(rootView.hitTest(CGPoint(x: 150, y: 150), with: nil), nil)
-        XCTAssertEqual(passThroughrootView.hitTest(CGPoint(x: 150, y: 150), with: nil), nil)
+        XCTAssertEqual(passThroughRootView.hitTest(CGPoint(x: 150, y: 150), with: nil), nil)
     }
 
     func testPassthroughHitTestOnWindow() {

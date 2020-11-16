@@ -18,7 +18,7 @@ class OverlayManagerTests: XCTestCase {
         XCTAssertFalse(manager.overlayView.gestureRecognizers?.isEmpty ?? true)
     }
 
-    func testPropertyTranfer() {
+    func testPropertyTransfer() {
         let cutoutPath = UIBezierPath(rect: CGRect(x: 20, y: 20, width: 30, height: 30))
 
         manager.isUserInteractionEnabledInsideCutoutPath = true

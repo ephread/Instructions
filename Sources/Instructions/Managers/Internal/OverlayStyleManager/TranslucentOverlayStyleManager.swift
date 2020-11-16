@@ -26,7 +26,7 @@ class TranslucentOverlayStyleManager: OverlayStyleManager {
     // MARK: OverlayStyleManager
     func viewWillTransition() {
         // Basically removes everything except the overlay itself.
-        // Background color duty, handled by the sublayer, it transfered to
+        // Background color duty, handled by the sublayer, it transferred to
         // the overlay itself.
         guard let overlay = overlayView else { return }
 

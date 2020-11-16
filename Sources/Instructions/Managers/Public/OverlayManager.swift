@@ -49,7 +49,7 @@ public class OverlayManager {
         }
     }
 
-    /// Used to temporarily enable touch forwarding isnide the cutoutPath.
+    /// Used to temporarily enable touch forwarding inside the cutoutPath.
     public var isUserInteractionEnabledInsideCutoutPath: Bool {
         get { return overlayView.allowTouchInsideCutoutPath }
         set { overlayView.allowTouchInsideCutoutPath = newValue }
@@ -203,7 +203,7 @@ public class OverlayManager {
 
 // swiftlint:disable class_delegate_protocol
 /// This protocol expected to be implemented by CoachMarkManager, so
-/// it can be notified when a tap occured on the overlay.
+/// it can be notified when a tap occurred on the overlay.
 internal protocol OverlayManagerDelegate: Snapshottable {
     /// Called when the overlay received a tap event.
     func didReceivedSingleTap()

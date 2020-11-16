@@ -29,13 +29,13 @@ class CoachMarkLayoutHelperTests: XCTestCase {
     }
 
     // We're not testing anything about constraints themselves (a visual check is better).
-    // We're only testing that they are differents in the given cases and present.
+    // We're only testing that they are different in the given cases and present.
     func testThatHorizontalConstraintArrayAreDifferentDependingOnParameters() {
         assert(constraints: constraints())
     }
 
     // We're not testing anything about constraints themselves (a visual check is better).
-    // We're only testing that they are differents in the given cases and present.
+    // We're only testing that they are different in the given cases and present.
     func testThatHorizontalConstraintArrayisEmptyIfCoachMarkViewParentDoesNotMatchParentView() {
         let coachMarkView = CoachMarkView(bodyView: self.bodyView, arrowView: self.arrowView,
                                           arrowOrientation: .bottom, arrowOffset: 0,

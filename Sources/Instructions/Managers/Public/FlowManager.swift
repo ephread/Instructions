@@ -5,7 +5,7 @@ import UIKit
 
 public class FlowManager {
     // MARK: - Internal Properties
-    /// `true` if coach marks are curently being displayed, `false` otherwise.
+    /// `true` if coach marks are currently being displayed, `false` otherwise.
     public var isStarted: Bool { return currentIndex > -1 }
 
     /// Sometimes, the chain of coach mark display can be paused
@@ -37,7 +37,7 @@ public class FlowManager {
     ///
     /// This property will be checked multiple time during the process of
     /// showing coach marks and can abort the normal flow. This, it's also
-    /// used to prevent the normal flow when calling `stop(imediately:)`.
+    /// used to prevent the normal flow when calling `stop(immediately:)`.
     ///
     /// `true` when the controller is performing a size change, `false` otherwise.
     private var disableFlow = false

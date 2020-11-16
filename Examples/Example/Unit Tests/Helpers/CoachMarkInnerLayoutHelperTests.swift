@@ -33,7 +33,7 @@ class CoachMarkInnerLayoutHelperTests: XCTestCase {
         XCTAssertFalse(constraints.isEmpty)
     }
 
-    func testThatVerticalConstraintArraysAreDifferentsDependingOnParameters() {
+    func testThatVerticalConstraintArraysAreDifferentDependingOnParameters() {
         let parent = UIView()
         let body = UIView()
         parent.addSubview(body)
@@ -53,7 +53,7 @@ class CoachMarkInnerLayoutHelperTests: XCTestCase {
         XCTAssertFalse(constraints1 == constraints2)
     }
 
-//    func testThathorizontalArrowConstraintsAreReturned() {
+//    func testThatHorizontalArrowConstraintsAreReturned() {
 //        let constraint =
 //            layoutHelper.horizontalArrowConstraints(for: (bodyView: UIView(), arrowView: UIView()),
 //                                                    withPosition: .center,

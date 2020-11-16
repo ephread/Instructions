@@ -50,7 +50,7 @@ public protocol CoachMarksControllerDataSource: AnyObject {
     /// - Parameter coachMarksController: the coach mark controller requesting
     ///                                   the information.
     /// - Parameter skipView: the view holding the skip button.
-    /// - Parameter inParentView: the parent view (used to set contraints properly).
+    /// - Parameter inParentView: the parent view (used to set constraints properly).
     ///
     /// - Returns: an array of NSLayoutConstraint.
     func coachMarksController(_ coachMarksController: CoachMarksController,
@@ -75,7 +75,7 @@ internal protocol CoachMarksControllerProxyDataSource: AnyObject {
     /// Asks for the metadata of the coach mark that will be displayed in the
     /// given nth place. All `CoachMark` metadata are optional or filled with
     /// sensible defaults. You are not forced to provide the `cutoutPath`.
-    /// If you don't the coach mark will be dispayed at the bottom of the screen,
+    /// If you don't the coach mark will be displayed at the bottom of the screen,
     /// without an arrow.
     ///
     /// - Parameter index: the index referring to the nth place.
@@ -100,7 +100,7 @@ internal protocol CoachMarksControllerProxyDataSource: AnyObject {
     /// `coachMarksController.view`.
     ///
     /// - Parameter skipView: the view holding the skip button.
-    /// - Parameter inParentView: the parent view (used to set contraints properly).
+    /// - Parameter inParentView: the parent view (used to set constraints properly).
     ///
     /// - Returns: an array of NSLayoutConstraint.
     func constraintsForSkipView(_ skipView: UIView,

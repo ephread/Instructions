@@ -742,7 +742,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS_APP_EXTENSIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions.AppExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -772,7 +772,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS_APP_EXTENSIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions.AppExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -923,7 +923,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -952,7 +952,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.0;
+				MARKETING_VERSION = 2.0.1;
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions;
 				PRODUCT_NAME = "$(TARGET_NAME)";

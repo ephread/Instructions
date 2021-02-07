@@ -9,7 +9,7 @@
 
 Add customizable coach marks into your iOS project. Available for both iPhone and iPad.
 
-⚠️ **Instructions 2.0.0 brings a couple of breaking changes, please review the [migration document](Documentation/migrating_to_2.0.0.md) before updating.**
+⚠️ **Instructions 2.0.1 brings a couple of breaking changes, please review the [migration document](Documentation/migrating_to_2.0.0.md) before updating.**
 
 # Table of contents
 
@@ -75,7 +75,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 use_frameworks!
 
-pod 'Instructions', '~> 2.0.0'
+pod 'Instructions', '~> 2.0.1'
 ```
 
 Then, run the following command:
@@ -88,7 +88,7 @@ $ pod install
 Add Instructions to your Cartfile:
 
 ```
-github "ephread/Instructions" ~> 2.0.0
+github "ephread/Instructions" ~> 2.0.1
 ```
 
 You can then update, build and drag the generated framework into your project:
@@ -569,11 +569,11 @@ like this:
 
 ```ruby
 target 'Instructions App Extensions Example' do
-  pod 'Instructions', '~> 2.0.0'
+  pod 'Instructions', '~> 2.0.1'
 end
 
 target 'Keyboard Extension' do
-  pod 'InstructionsAppExtensions', '~> 2.0.0'
+  pod 'InstructionsAppExtensions', '~> 2.0.1'
 end
 ```
 

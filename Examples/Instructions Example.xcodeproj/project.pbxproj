@@ -955,6 +955,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InstructionsExample.app/InstructionsExample";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Debug;
 		};
@@ -987,6 +988,7 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/InstructionsExample.app/InstructionsExample";
+				VALIDATE_WORKSPACE = YES;
 			};
 			name = Release;
 		};

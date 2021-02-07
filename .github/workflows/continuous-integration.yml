@@ -104,7 +104,7 @@ jobs:
           # Instead of using a matrix, we're just going to use a bash loop to
           # test multiple simulators.
           IPAD_PRO:  "OS=14.3,name=iPad Pro (11-inch) (2nd generation)"
-          IPAD_AIR:  "OS=14.3,name=iPad Air (4rd generation)"
+          IPAD_AIR:  "OS=14.3,name=iPad Air (4th generation)"
           IPHONE_11: "OS=14.3,name=iPhone 11 Pro"
           IPHONE_8:  "OS=14.3,name=iPhone SE (2nd generation)"
         run: |

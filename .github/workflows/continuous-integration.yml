@@ -24,11 +24,11 @@ env:
   EXAMPLE_SCHEME: "Instructions Example"
   APPEX_EXAMPLE_SCHEME: "Instructions App Extensions Example"
 
-  SDK: "iphonesimulator14.0"
+  SDK: "iphonesimulator14.3"
 
   ALLOW_WARNINGS: "NO"
 
-  DESTINATION: "OS=14.0,name=iPhone 11 Pro"
+  DESTINATION: "OS=14.3,name=iPhone 11 Pro"
 
   # Wether or not to perform certain steps.
   run_pod_lint: true
@@ -39,11 +39,11 @@ env:
 jobs:
   test:
     name: Build, lint & test
-    runs-on: macos-10.15
+    runs-on: macos-11.0
 
     steps:
       - name: Switch Xcode version
-        run: sudo xcode-select --switch /Applications/Xcode_12.app
+        run: sudo xcode-select --switch /Applications/Xcode_12.4.app
 
       - name: Check out the repository
         uses: actions/checkout@v2

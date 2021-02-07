@@ -15,17 +15,17 @@ on:
 env:
   LANG: en_US.UTF-8
 
-  SDK: "iphonesimulator13.6"
-  DESTINATION: "OS=13.6,name=iPhone 11"
+  SDK: "iphonesimulator14.3"
+  DESTINATION: "OS=14.0,name=iPhone 11 Pro"
 
 jobs:
   test:
-    name: Build, lint & test
-    runs-on: macos-10.15
+    name: Check installation
+    runs-on: macos-11.0
 
     steps:
       - name: Switch Xcode version
-        run: sudo xcode-select --switch /Applications/Xcode_11.6.app
+        run: sudo xcode-select --switch /Applications/Xcode_12.4.app
 
       - name: Check out test repository
         uses: actions/checkout@v2

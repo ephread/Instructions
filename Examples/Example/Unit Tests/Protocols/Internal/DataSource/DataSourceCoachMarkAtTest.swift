@@ -29,7 +29,7 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
         delegateEndExpectation = self.expectation(description: "CoachMarkAt")
         coachMarksController.start(in: .window(over: parentController))
 
-        waitForExpectations(timeout: 2) { error in
+        waitForExpectations(timeout: 10) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
@@ -40,7 +40,7 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
         delegateEndExpectation = self.expectation(description: "CoachMarkViewsAt")
         coachMarksController.start(in: .window(over: parentController))
 
-        waitForExpectations(timeout: 2) { error in
+        waitForExpectations(timeout: 10) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }
@@ -51,7 +51,7 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
         delegateEndExpectation = self.expectation(description: "ConstraintsForSkipView")
         coachMarksController.start(in: .window(over: parentController))
 
-        waitForExpectations(timeout: 2) { error in
+        waitForExpectations(timeout: 10) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }

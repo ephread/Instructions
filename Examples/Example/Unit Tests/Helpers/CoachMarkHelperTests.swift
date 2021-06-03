@@ -240,8 +240,8 @@ class CoachMarkHelperTests: XCTestCase {
             return
         }
 
-        XCTAssertEqual(updatedCutoutPath2.bounds, CGRect(x: 80, y: 75, width: 20, height: 300))
-        XCTAssertEqual(updatedPointOfInterest2, CGPoint(x: 105, y: 125))
+        XCTAssertEqual(updatedCutoutPath2.bounds, CGRect(x: 90, y: 75, width: 20, height: 300))
+        XCTAssertEqual(updatedPointOfInterest2, CGPoint(x: 105, y: 135))
     }
 
     // MARK: - 'Flow' Tests

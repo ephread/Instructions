@@ -117,6 +117,34 @@ public class CoachMarkHelper {
     /// The default cutout path expands the given rectangle by a few points and rounds its corners.
     /// If the default behavior is undesirable, a custom `cutoutPathMaker` should be provided.
     ///
+    /// If `pointOfInterest` is `nil`,
+    ///
+    /// - Parameters:
+    ///   - frame: The frame used to generate the cutout path.
+    ///   - superview: The superview defining the coordinate system.
+    ///   - pointOfInterest: The point of interest towards which the arrow points.
+    ///   - cutoutPathMaker: a block customizing the cutout path.
+    /// - Returns: A instance of `CoachMark` configured with the provided parameters.
+    public func makeCoachMark(
+        forFrame frame: CGRect,
+        pointOfInterest: CGPoint,
+        in superview: UIView?,
+        cutoutPathMaker: CutoutPathMaker? = nil
+    ) -> CoachMark {
+        var coachMark = CoachMark()
+
+        update(coachMark: &coachMark,
+               usingFrame: frame,
+               pointOfInterest: pointOfInterest,
+               superview: superview,
+               cutoutPathMaker: cutoutPathMaker)
+
+        return coachMark
+    }
+
+    /// Returns a new coach mark based on the `pointOfInterest`, relative to
+    /// `superview`’s coordinate system.
+    ///
     /// If `pointOfInterest` is `nil`, the center of `frame` will be used to create the
     /// coach mark.
     ///
@@ -127,16 +155,43 @@ public class CoachMarkHelper {
     ///   - cutoutPathMaker: a block customizing the cutout path.
     /// - Returns: A instance of `CoachMark` configured with the provided parameters.
     public func makeCoachMark(
-        forFrame frame: CGRect,
         pointOfInterest: CGPoint? = nil,
-        in superview: UIView,
+        in superview: UIView?
+    ) -> CoachMark {
+        var coachMark = CoachMark()
+
+        update(coachMark: &coachMark,
+               usingFrame: nil,
+               pointOfInterest: pointOfInterest,
+               superview: superview,
+               cutoutPathMaker: nil)
+
+        return coachMark
+    }
+
+    /// Returns a new coach mark based on the given `frame` rectangle relative to
+    /// `superview`’s coordinate system.
+    ///
+    /// The default cutout path expands the given rectangle by a few points and rounds its corners.
+    /// If the default behavior is undesirable, a custom `cutoutPathMaker` should be provided.
+    ///
+    /// The center of `frame` is used to create the point of interest.
+    ///
+    /// - Parameters:
+    ///   - frame: The frame used to generate the cutout path.
+    ///   - superview: The superview defining the coordinate system.
+    ///   - cutoutPathMaker: a block customizing the cutout path.
+    /// - Returns: A instance of `CoachMark` configured with the provided parameters.
+    public func makeCoachMark(
+        forFrame frame: CGRect,
+        in superview: UIView?,
         cutoutPathMaker: CutoutPathMaker? = nil
     ) -> CoachMark {
         var coachMark = CoachMark()
 
         update(coachMark: &coachMark,
                usingFrame: frame,
-               pointOfInterest: pointOfInterest,
+               pointOfInterest: nil,
                superview: superview,
                cutoutPathMaker: cutoutPathMaker)
 

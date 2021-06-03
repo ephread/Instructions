@@ -16,7 +16,7 @@ class CustomExampleTests: XCTestCase {
         app.tables.staticTexts["Custom"].tap()
 
         let nextButton = app.buttons["AccessibilityIdentifiers.next"]
-        _ = nextButton.waitForExistence(timeout: 5)
+        _ = nextButton.waitForExistence(timeout: 10)
 
         nextButton.tap()
         nextButton.tap()

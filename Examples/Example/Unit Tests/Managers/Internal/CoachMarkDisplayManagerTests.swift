@@ -53,7 +53,7 @@ class CoachMarkDisplayManagerTests: XCTestCase {
             self.viewIsVisibleExpectation?.fulfill()
         }
 
-        self.waitForExpectations(timeout: 5) { error in
+        self.waitForExpectations(timeout: 10) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }

@@ -7,7 +7,7 @@ import Instructions
 // This class mix different kind of coach marks together.
 internal class MixedCoachMarksViewsViewController: ProfileViewController {
     // MARK: - IBOutlet
-    @IBOutlet weak var answersLabel: UILabel?
+    @IBOutlet weak var answersLabel: UILabel!
 
     // MARK: - Private properties
     private let swipeImage = UIImage(named: "swipe")
@@ -37,15 +37,17 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
 
         switch index {
         case 0:
-            coachMark = coachMarksController.helper.makeCoachMark(for: self.handleLabel)
+            coachMark = coachMarksController.helper.makeCoachMark(for: handleLabel)
         case 1:
-            coachMark = coachMarksController.helper.makeCoachMark(for: self.emailLabel)
+            coachMark = coachMarksController.helper.makeCoachMark(for: emailLabel)
         case 2:
-            coachMark = coachMarksController.helper.makeCoachMark(for: self.postsLabel)
+            coachMark = coachMarksController.helper.makeCoachMark(for: postsLabel)
         case 3:
-            coachMark = coachMarksController.helper.makeCoachMark(for: self.answersLabel)
+            // A frame rectangle can also be passed.
+            coachMark = coachMarksController.helper.makeCoachMark(forFrame: answersLabel.frame,
+                                                                  in: answersLabel.superview)
         case 4:
-            coachMark = coachMarksController.helper.makeCoachMark(for: self.reputationLabel)
+            coachMark = coachMarksController.helper.makeCoachMark(for: reputationLabel)
         default:
             coachMark = coachMarksController.helper.makeCoachMark()
         }
@@ -162,7 +164,7 @@ extension MixedCoachMarksViewsViewController: CoachMarksControllerDataSource {
         let coachMarkBodyView = TransparentCoachMarkBodyView()
         var coachMarkArrowView: TransparentCoachMarkArrowView?
 
-        coachMarkBodyView.hintLabel.text = self.handleText
+        coachMarkBodyView.hintLabel.text = self.reputationText
 
         if let arrowOrientation = coachMark.arrowOrientation {
             coachMarkArrowView = TransparentCoachMarkArrowView(orientation: arrowOrientation)

@@ -32,7 +32,7 @@ class TransitionExampleTests: XCTestCase {
         app.tables.staticTexts["Transitioning from code"].tap()
 
         let overlay = app.otherElements["AccessibilityIdentifiers.overlayView"]
-        _ = overlay.waitForExistence(timeout: 5)
+        _ = overlay.waitForExistence(timeout: 10)
 
         let defaultCoordinates = app.coordinate(withNormalizedOffset: CGVector(dx: 0.1, dy: 0.1))
 
@@ -57,7 +57,7 @@ class TransitionExampleTests: XCTestCase {
         app.tables.staticTexts["Transitioning from code"].tap()
 
         let overlay = app.otherElements["AccessibilityIdentifiers.overlayView"]
-        _ = overlay.waitForExistence(timeout: 5)
+        _ = overlay.waitForExistence(timeout: 10)
 
         overlay.tap()
 

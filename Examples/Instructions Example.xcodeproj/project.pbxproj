@@ -12,7 +12,6 @@
 		B6105E3C2435123D00B45CDA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B6105E3E2435123D00B45CDA /* Localizable.strings */; };
 		B618494220C2472200315E1C /* PausingCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618494120C2472100315E1C /* PausingCodeViewController.swift */; };
 		B639B28D20D4E7AA009996CF /* DefaultExampleSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C9D6A020D4103700EBC03A /* DefaultExampleSnapshotTests.swift */; platformFilter = ios; };
-		B639B28E20D4E7CA009996CF /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B6C9D69A20D40DFD00EBC03A /* FBSnapshotTestCase.framework */; platformFilter = ios; settings = {ATTRIBUTES = (Required, ); }; };
 		B639B29120D4E829009996CF /* BaseSnapshotTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B639B28F20D4E807009996CF /* BaseSnapshotTestCase.swift */; platformFilter = ios; };
 		B6454D6220C78C2A00DCF351 /* LargeCutoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6454D5F20C78C2900DCF351 /* LargeCutoutViewController.swift */; };
 		B65DDDC21EE2C5F1002618AF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDC11EE2C5F1002618AF /* Extensions.swift */; };
@@ -20,6 +19,7 @@
 		B65DDDD61EE34330002618AF /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDD51EE34330002618AF /* MainTableViewController.swift */; };
 		B661D5B61F3AFA48000D29D3 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B661D5B31F3AFA48000D29D3 /* ConfigurationViewController.swift */; };
 		B661D5B81F3B00FB000D29D3 /* InstructionsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B661D5B71F3B00FB000D29D3 /* InstructionsNavigationController.swift */; };
+		B696898326692D860093EBBA /* FBSnapshotTestCase.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B696898126692D860093EBBA /* FBSnapshotTestCase.xcframework */; };
 		B6AF4D822433799300151B64 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AF4D812433799300151B64 /* SceneDelegate.swift */; };
 		B6AF4D9E24349A5200151B64 /* Delegation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6AF4D9824349A5100151B64 /* Delegation.storyboard */; };
 		B6AF4D9F24349A5200151B64 /* PausingResuming.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6AF4D9A24349A5200151B64 /* PausingResuming.storyboard */; };
@@ -49,7 +49,6 @@
 		B6CA4A9720BEBB53006F42AC /* CustomExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CA4A9620BEBB53006F42AC /* CustomExampleTests.swift */; };
 		B6CA4A9920BEC111006F42AC /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CA4A9820BEC111006F42AC /* AccessibilityIdentifiers.swift */; };
 		B6CA4A9B20BED19B006F42AC /* TransitionExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CA4A9A20BED19B006F42AC /* TransitionExampleTests.swift */; };
-		B6F2327823484DFF00040090 /* FBSnapshotTestCase.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = B6C9D69A20D40DFD00EBC03A /* FBSnapshotTestCase.framework */; platformFilter = ios; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C615FBAF1D7A1BB500EAEEFB /* TestFlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C615FBAE1D7A1BB500EAEEFB /* TestFlowViewController.swift */; };
 		C636FFAA1BBBD99200EB243B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C636FFA91BBBD99200EB243B /* Assets.xcassets */; };
 		C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */; };
@@ -132,7 +131,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B6F2327823484DFF00040090 /* FBSnapshotTestCase.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +158,8 @@
 		B661D5B31F3AFA48000D29D3 /* ConfigurationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationViewController.swift; sourceTree = "<group>"; };
 		B661D5B71F3B00FB000D29D3 /* InstructionsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsNavigationController.swift; sourceTree = "<group>"; };
 		B690138220BE6B2E00E706B2 /* Instructions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Instructions.xcodeproj; path = ../Instructions.xcodeproj; sourceTree = "<group>"; };
+		B696898126692D860093EBBA /* FBSnapshotTestCase.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSnapshotTestCase.xcframework; path = Carthage/Build/FBSnapshotTestCase.xcframework; sourceTree = "<group>"; };
+		B6968985266946D20093EBBA /* FullTestSuite.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = FullTestSuite.xctestplan; sourceTree = "<group>"; };
 		B6AF4D812433799300151B64 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B6AF4DA124349B3A00151B64 /* Development.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Development.storyboard; sourceTree = "<group>"; };
 		B6C9D64D20D3B7FC00EBC03A /* InstructionsUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstructionsUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,7 +182,6 @@
 		B6C9D67720D3B90D00EBC03A /* CoachMarkLayoutHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkLayoutHelperTests.swift; sourceTree = "<group>"; };
 		B6C9D67820D3B90D00EBC03A /* CoachMarkInnerLayoutHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkInnerLayoutHelperTests.swift; sourceTree = "<group>"; };
 		B6C9D68B20D3C02400EBC03A /* CoachMarksViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachMarksViewControllerTests.swift; sourceTree = "<group>"; };
-		B6C9D69A20D40DFD00EBC03A /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
 		B6C9D6A020D4103700EBC03A /* DefaultExampleSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultExampleSnapshotTests.swift; sourceTree = "<group>"; };
 		B6CA4A8420BE7141006F42AC /* InstructionsExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstructionsExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6CA4A8620BE7141006F42AC /* DefaultExampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultExampleTests.swift; sourceTree = "<group>"; };
@@ -215,7 +214,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B639B28E20D4E7CA009996CF /* FBSnapshotTestCase.framework in Frameworks */,
+				B696898326692D860093EBBA /* FBSnapshotTestCase.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,6 +311,14 @@
 				B690138B20BE6B2E00E706B2 /* InstructionsAppExtensions.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B6968984266946BF0093EBBA /* Test Plans */ = {
+			isa = PBXGroup;
+			children = (
+				B6968985266946D20093EBBA /* FullTestSuite.xctestplan */,
+			);
+			name = "Test Plans";
 			sourceTree = "<group>";
 		};
 		B6A53F5E1EEA8D2000873D75 /* Core */ = {
@@ -462,7 +469,7 @@
 		B6C9D69120D40BDA00EBC03A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B6C9D69A20D40DFD00EBC03A /* FBSnapshotTestCase.framework */,
+				B696898126692D860093EBBA /* FBSnapshotTestCase.xcframework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -517,6 +524,7 @@
 				E93D21882525BCD900B3A315 /* InstructionsExample.entitlements */,
 				B6C9D69120D40BDA00EBC03A /* Frameworks */,
 				C64FB30D1BB6CB1C0081E5B6 /* Products */,
+				B6968984266946BF0093EBBA /* Test Plans */,
 				C64FB32C1BB6CC180081E5B6 /* Sources */,
 				B639B28220D4E71D009996CF /* Snapshot Tests */,
 				B6C9D65720D3B84D00EBC03A /* Unit Tests */,

@@ -2,6 +2,12 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
+## [2.0.2](https://github.com/ephread/Instructions/releases/tag/2.0.2)
+Released on 2021-06-XX.
+
+### Added
+- New helper methods to deal with cutout paths that aren't anchored to a specific view.
+
 ## [2.0.1](https://github.com/ephread/Instructions/releases/tag/2.0.1)
 Released on 2021-02-07.
 

@@ -9,7 +9,7 @@
 
 Add customizable coach marks into your iOS project. Available for both iPhone and iPad.
 
-⚠️ **Instructions 2.0.1 brings a couple of breaking changes, please review the [migration document](Documentation/migrating_to_2.0.0.md) before updating.**
+⚠️ **Instructions 2.0.0 brings a couple of breaking changes, please review the [migration document](Documentation/migrating_to_2.0.0.md) before updating.**
 
 # Table of contents
 
@@ -47,8 +47,8 @@ Add customizable coach marks into your iOS project. Available for both iPhone an
 - [ ] Multiple coach marks support
 
 ## Requirements
-- Xcode 11 / Swift 5+
-- iOS 12.0+
+- Xcode 12 / Swift 5+
+- iOS 13.0+
 
 ## Asking Questions / Contributing
 
@@ -69,7 +69,7 @@ Add Instructions to your Podfile:
 
 ```ruby
 source 'https://github.com/CocoaPods/Specs.git'
-# Instructions is only supported for iOS 12+, but it
+# Instructions is only supported for iOS 13+, but it
 # can be used on older versions at your own risk,
 # going as far back as iOS 9.
 platform :ios, '9.0'
@@ -296,6 +296,19 @@ var coachMark = coachMarksController.helper.makeCoachMark(
 
 `frame` will be the frame of `customView` converted in the `coachMarksController.view` referential, so don't have to worry about making sure the coordinates are in the appropriate referential. You can provide any kind of shape, from a simple rectangle to a complex star.
 
+You can also pass a frame rectangle directly if you supply the _superview_ to which it relates.
+
+```swift
+var coachMark = coachMarksController.helper.makeCoachMark(
+    forFrame: frame,
+    in: superview,
+    cutoutPathMaker: { (frame: CGRect) -> UIBezierPath in
+        // This will create an oval cutout a bit larger than the view.
+        return UIBezierPath(ovalIn: frame.insetBy(dx: -4, dy: -4))
+    }
+)
+```
+
 #### Presentation Context
 
 You can choose in which context the coach marks will be displayed, by passing it to `start(in: PresentationContext). The available contexts are:
@@ -496,7 +509,10 @@ func coachMarksController(
         // and start the display again. Since inout parameters cannot be
         // captured by the closure, you can use the following method to update
         // the coachmark. It will only work if you paused the flow.
-        coachMarksController.helper.updateCurrentCoachMarkForView(myView)
+        //
+        // Note: it's also possible to update the coach mark by providing a
+        // a frame rectangle.
+        coachMarksController.helper.updateCurrentCoachMark(using: myView)
         coachMarksController.flow.resume()
     })
 }
@@ -506,7 +522,7 @@ func coachMarksController(
 you should make sure that animations targeting your own view don't occur while a coach mark
 is appearing or disappearing. Otherwise, the animation won't be visible.
 
-You may also want to customize the properties defining the of for the classic transparency overlay, as Instructions will fall back to using the classic type if `UIAccessibilityIsReduceTransparencyEnabled()` returns true.
+You may also want to customize the classic transparency overlay, as Instructions will fall back to using the classic type if `UIAccessibility.isReduceTransparencyEnabled` returns true.
 
 ##### Skipping a coach mark
 
@@ -615,11 +631,11 @@ use the specific statement:
 import InstructionsAppExtensions
 ```
 
-⚠️ **Please be careful**, as you will be able to import regular _Instructions_
-from within an app extension without breaking anything. It will work. However, you're at a
-high risk of rejection from the Apple Store. Uses of `UIApplication.sharedApplication()`
-are statically checked during compilation but nothing prevents you from performing the calls
-at runtime. Fortunately Xcode should warn you if you've mistakenly linked with a framework
+⚠️ **Caution:** it's possible to import _Instructions_ in an app extension.
+However, you're at a high risk of rejection from the Apple Store.
+Uses of `UIApplication.sharedApplication()` are statically checked
+during compilation but nothing prevents you from performing the calls at runtime.
+Fortunately, Xcode should warn you if you've mistakenly linked with a framework
 not suited for App Extensions.
 
 ## License

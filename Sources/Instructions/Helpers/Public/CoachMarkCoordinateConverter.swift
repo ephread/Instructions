@@ -1,7 +1,7 @@
 // Copyright (c)  2021-present Frédéric Maquin <fred@ephread.com> and contributors.
 // Licensed under the terms of the MIT License.
 
-import Foundation
+import UIKit
 
 public class CoachMarkCoordinateConverter {
     private let rootView: InstructionsRootView

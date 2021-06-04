@@ -10,7 +10,7 @@ public class CoachMarkCoordinateConverter {
         self.rootView = rootView
     }
 
-    func convert(frame: CGRect, from superview: UIView?) -> CGRect {
+    public func convert(frame: CGRect, from superview: UIView?) -> CGRect {
         // No superview, assuming frame in `instructionsRootView`'s coordinate system.
         guard let superview = superview else {
             print(ErrorMessage.Warning.anchorViewIsNotInTheViewHierarchy)
@@ -46,7 +46,7 @@ public class CoachMarkCoordinateConverter {
         return rootView.convert(frameInInstructionsWindow, from: instructionsWindow)
     }
 
-    func convert(point: CGPoint, from superview: UIView?) -> CGPoint {
+    public func convert(point: CGPoint, from superview: UIView?) -> CGPoint {
         // No superview, assuming frame in `instructionsRootView`'s coordinate system.
         guard let superview = superview else {
             print(ErrorMessage.Warning.anchorViewIsNotInTheViewHierarchy)

@@ -7,10 +7,13 @@ public class CoachMarkHelper {
 
     let instructionsRootView: InstructionsRootView
     let flowManager: FlowManager
+    let coordinateConverter: CoachMarkCoordinateConverter
 
     init(instructionsRootView: InstructionsRootView, flowManager: FlowManager) {
         self.instructionsRootView = instructionsRootView
         self.flowManager = flowManager
+
+        self.coordinateConverter = CoachMarkCoordinateConverter(rootView: instructionsRootView)
     }
 
     // MARK: - Coach View Creation
@@ -247,6 +250,11 @@ public class CoachMarkHelper {
     /// - Parameter pointOfInterest: the point of interest toward which the arrow
     ///                              should point
     /// - Parameter bezierPathBlock: a block customizing the cutoutPath
+    @available(
+        swift,
+        deprecated: 2.1.0,
+        message: "Use updateCurrentCoachMark(_:) instead."
+    )
     public func updateCurrentCoachMark(usingFrame frame: CGRect? = nil,
                                        pointOfInterest: CGPoint? = nil,
                                        superview: UIView? = nil,
@@ -265,6 +273,20 @@ public class CoachMarkHelper {
                superview: superview,
                cutoutPathMaker: cutoutPathMaker)
     }
+
+    public func updateCurrentCoachMark(
+        _ configure: (inout CoachMark, CoachMarkCoordinateConverter) -> Void
+    ) {
+        // `currentCoachMark` is inout, so binding it conditionally doesn't
+        // make sense, we'll have to force unwrap it later anyway since it's
+        // a value type.
+        guard flowManager.isPaused, flowManager.currentCoachMark != nil else {
+            print(ErrorMessage.Error.updateWentWrong)
+            return
+        }
+
+        configure(&flowManager.currentCoachMark!, coordinateConverter)
+    }
 }
 
 // MARK: - Internal Methods
@@ -277,7 +299,7 @@ internal extension CoachMarkHelper {
         cutoutPathMaker: CutoutPathMaker? = nil
     ) {
         if let frame = frame {
-            let convertedFrame = convertFrameToRootView(frame, superview: superview)
+            let convertedFrame = coordinateConverter.convert(frame: frame, from: superview)
 
             let bezierPath: UIBezierPath
 
@@ -293,8 +315,8 @@ internal extension CoachMarkHelper {
         }
 
         if let pointOfInterest = pointOfInterest {
-            let convertedPointOfInterest = convertPointToRootView(pointOfInterest,
-                                                                  superview: superview)
+            let convertedPointOfInterest = coordinateConverter.convert(point: pointOfInterest,
+                                                                       from: superview)
             coachMark.pointOfInterest = convertedPointOfInterest
         }
     }
@@ -308,82 +330,6 @@ internal extension CoachMarkHelper {
 
         return CoachMarkArrowDefaultView(orientation: arrowOrientation)
     }
-}
-
-// MARK: - Private Helpers
-private extension CoachMarkHelper {
-    func convertFrameToRootView(_ frame: CGRect, superview: UIView? = nil) -> CGRect {
-        // No superview, assuming frame in `instructionsRootView`'s coordinate system.
-        guard let superview = superview else {
-            print(ErrorMessage.Warning.anchorViewIsNotInTheViewHierarchy)
-            return frame
-        }
-
-        // Either `superview` and `instructionsRootView` is not in the hierarchy,
-        // the result is undefined.
-        guard let superviewWindow = superview.window,
-              let instructionsWindow = instructionsRootView.window else {
-            print(ErrorMessage.Warning.anchorViewIsNotInTheViewHierarchy)
-            return instructionsRootView.convert(frame, from: superview)
-        }
-
-        // If both windows are the same, we can directly convert, because
-        // `superview` and `instructionsRootView` are in the same hierarchy.
-        //
-        // This is the case when showing Instructions either in the parent
-        // view controller or the parent window.
-        guard superviewWindow != instructionsWindow else {
-            return instructionsRootView.convert(frame, from: superview)
-        }
-
-        // 1. Converts the coordinates of the frame from its superview to its window.
-        let frameInWindow = superviewWindow.convert(frame, from: superview)
-
-        // 2. Converts the coordinates of the frame from its window to Instructions' window.
-        let frameInInstructionsWindow = instructionsWindow.convert(frameInWindow,
-                                                                   from: superviewWindow)
-
-        // 3. Converts the coordinates of the frame from Instructions' window to
-        //    `instructionsRootView`.
-        return instructionsRootView.convert(frameInInstructionsWindow, from: instructionsWindow)
-    }
-
-    func convertPointToRootView(_ point: CGPoint, superview: UIView? = nil) -> CGPoint {
-        // No superview, assuming frame in `instructionsRootView`'s coordinate system.
-        guard let superview = superview else {
-            print(ErrorMessage.Warning.anchorViewIsNotInTheViewHierarchy)
-            return point
-        }
-
-        // Either `superview` and `instructionsRootView` is not in the hierarchy,
-        // the result is undefined.
-        guard let superviewWindow = superview.window,
-              let instructionsWindow = instructionsRootView.window else {
-            print(ErrorMessage.Warning.anchorViewIsNotInTheViewHierarchy)
-            return instructionsRootView.convert(point, from: superview)
-        }
-
-        // If both windows are the same, we can directly convert, because
-        // `superview` and `instructionsRootView` are in the same hierarchy.
-        //
-        // This is the case when showing Instructions either in the parent
-        // view controller or the parent window.
-        guard superviewWindow != instructionsWindow else {
-            return instructionsRootView.convert(point, from: superview)
-        }
-
-        // 1. Converts the coordinates of the frame from its superview to its window.
-        let frameInWindow = superviewWindow.convert(point, from: superview)
-
-        // 2. Converts the coordinates of the frame from its window to Instructions' window.
-        let frameInInstructionsWindow = instructionsWindow.convert(frameInWindow,
-                                                                   from: superviewWindow)
-
-        // 3. Converts the coordinates of the frame from Instructions' window to
-        //    `instructionsRootView`.
-        return instructionsRootView.convert(frameInInstructionsWindow, from: instructionsWindow)
-    }
-
 }
 
 // MARK: - Typealiases

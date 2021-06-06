@@ -294,9 +294,11 @@ var coachMark = coachMarksController.helper.makeCoachMark(
 )
 ```
 
-`frame` will be the frame of `customView` converted in the `coachMarksController.view` referential, so don't have to worry about making sure the coordinates are in the appropriate referential. You can provide any kind of shape, from a simple rectangle to a complex star.
+`frame` is the frame of `customView` expressed in the coordinate space of `coachMarksController.view`.
+The conversion between this coordinate space and Instructions' coordinate space is handled automatically.
+Any kind of shape can be provided, from a simple rectangle to a complex star.
 
-You can also pass a frame rectangle directly if you supply the _superview_ to which it relates.
+You can also pass a frame rectangle directly if you supply its coordinate space.
 
 ```swift
 var coachMark = coachMarksController.helper.makeCoachMark(
@@ -508,13 +510,20 @@ func coachMarksController(
         // Once the animation is completed, we update the coach mark,
         // and start the display again. Since inout parameters cannot be
         // captured by the closure, you can use the following method to update
-        // the coachmark. It will only work if you paused the flow.
-        //
-        // Note: it's also possible to update the coach mark by providing a
-        // a frame rectangle.
+        // the coach mark. It will only work if you paused the flow.
         coachMarksController.helper.updateCurrentCoachMark(using: myView)
         coachMarksController.flow.resume()
     })
+}
+```
+If you need to update multiple properties on the coach mark, you may prefer using the block-based method.
+When updating points of interest and cutout paths, make sure to express them in Instructions' coordinate
+space, by using the provided converter.
+
+```
+coachMarksController.helper.updateCurrentCoachMark { coachMark, converter in
+    coachMark.pointOfInterest = converter.convert(point: myPoint, from: myPointSuperview)
+    coachMark.gapBetweenCoachMarkAndCutoutPath = 6
 }
 ```
 

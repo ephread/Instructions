@@ -235,47 +235,20 @@ public class CoachMarkHelper {
                cutoutPathMaker: cutoutPathMaker)
     }
 
-    /// Updates the currently stored coach mark with a cutout path set to be
-    /// around the provided frame in the given view. The cutout path will be
-    /// slightly larger than the view and have rounded corners, however you can
-    /// bypass the default creator by providing a block.
-    ///
-    /// The point of interest (defining where the arrow will sit, horizontally)
-    /// will be the one provided.
+    /// Updates the current coach mark, using a configuration block.
     ///
     /// This method is expected to be used in the delegate, after pausing the display.
     /// Otherwise, there might not be such a thing as a "current coach mark".
     ///
-    /// - Parameter view: the view around which create the cutoutPath
-    /// - Parameter pointOfInterest: the point of interest toward which the arrow
-    ///                              should point
-    /// - Parameter bezierPathBlock: a block customizing the cutoutPath
-    @available(
-        swift,
-        deprecated: 2.1.0,
-        message: "Use updateCurrentCoachMark(_:) instead."
-    )
-    public func updateCurrentCoachMark(usingFrame frame: CGRect? = nil,
-                                       pointOfInterest: CGPoint? = nil,
-                                       superview: UIView? = nil,
-                                       cutoutPathMaker: CutoutPathMaker? = nil) {
-        // `currentCoachMark` is inout, so binding it conditionally doesn't
-        // make sense, we'll have to force unwrap it later anyway since it's
-        // a value type.
-        guard flowManager.isPaused, flowManager.currentCoachMark != nil else {
-            print(ErrorMessage.Error.updateWentWrong)
-            return
-        }
-
-        update(coachMark: &flowManager.currentCoachMark!,
-               usingFrame: frame,
-               pointOfInterest: pointOfInterest,
-               superview: superview,
-               cutoutPathMaker: cutoutPathMaker)
-    }
-
+    /// - Parameter configure: A configuration updating the current coach mark.
+    /// - Parameter coachMark: The coach mark to update.
+    /// - Parameter frameConverter: Since the cutout path and the point of interest need
+    ///                             to be expressed in Instruction's coordinate system, you
+    ///                             can used this instance of `CoachMarkCoordinateConverter`
+    ///                             to convert rectangles and points.
     public func updateCurrentCoachMark(
-        _ configure: (inout CoachMark, CoachMarkCoordinateConverter) -> Void
+        _ configure: (_ coachMark: inout CoachMark,
+                      _ frameConverter: CoachMarkCoordinateConverter) -> Void
     ) {
         // `currentCoachMark` is inout, so binding it conditionally doesn't
         // make sense, we'll have to force unwrap it later anyway since it's
@@ -299,7 +272,7 @@ internal extension CoachMarkHelper {
         cutoutPathMaker: CutoutPathMaker? = nil
     ) {
         if let frame = frame {
-            let convertedFrame = coordinateConverter.convert(frame: frame, from: superview)
+            let convertedFrame = coordinateConverter.convert(rect: frame, from: superview)
 
             let bezierPath: UIBezierPath
 

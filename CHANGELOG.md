@@ -2,7 +2,7 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
-## [2.0.2](https://github.com/ephread/Instructions/releases/tag/2.0.2)
+## [2.1.0](https://github.com/ephread/Instructions/releases/tag/2.1.0)
 Released on 2021-06-XX.
 
 ### Added

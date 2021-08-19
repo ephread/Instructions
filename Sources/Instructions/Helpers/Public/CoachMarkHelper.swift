@@ -158,9 +158,16 @@ public class CoachMarkHelper {
         in superview: UIView?
     ) -> CoachMark {
         var coachMark = CoachMark()
+        
+        let frame: CGRect?
+        if let point = pointOfInterest {
+            frame = .init(origin: point, size: .zero)
+        } else {
+            frame = nil
+        }
 
         update(coachMark: &coachMark,
-               usingFrame: nil,
+               usingFrame: frame,
                pointOfInterest: pointOfInterest,
                superview: superview,
                cutoutPathMaker: nil)

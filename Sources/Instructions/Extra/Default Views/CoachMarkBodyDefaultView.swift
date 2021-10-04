@@ -116,7 +116,7 @@ private extension CoachMarkBodyDefaultView {
         textView.isScrollEnabled = false
         textView.isUserInteractionEnabled = false
 
-        textView.setContentCompressionResistancePriority(UILayoutPriority.required,
+        textView.setContentCompressionResistancePriority(.init(749),
                                                          for: .horizontal)
         textView.setContentCompressionResistancePriority(UILayoutPriority.required,
                                                          for: .vertical)
@@ -135,9 +135,9 @@ private extension CoachMarkBodyDefaultView {
 
         label.isUserInteractionEnabled = false
 
-        label.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
+        label.setContentCompressionResistancePriority(.init(750), for: .horizontal)
         label.setContentCompressionResistancePriority(UILayoutPriority.required, for: .vertical)
-        label.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
+        label.setContentHuggingPriority(.init(760), for: .horizontal)
         label.setContentHuggingPriority(UILayoutPriority.defaultLow, for: .vertical)
 
         return label

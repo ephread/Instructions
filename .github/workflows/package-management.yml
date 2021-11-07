@@ -15,8 +15,8 @@ on:
 env:
   LANG: en_US.UTF-8
 
-  SDK: "iphonesimulator14.5"
-  DESTINATION: "OS=14.5,name=iPhone 11 Pro"
+  SDK: "iphonesimulator15.0"
+  DESTINATION: "OS=15.0,name=iPhone 13 Pro"
 
 jobs:
   test:

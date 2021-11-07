@@ -2,7 +2,7 @@
   "configurations" : [
     {
       "id" : "FB93C8F4-28D4-472C-8B4D-1C2BF5034923",
-      "name" : "Configuration 1",
+      "name" : "Default",
       "options" : {
 
       }
@@ -21,8 +21,8 @@
     ],
     "targetForVariableExpansion" : {
       "containerPath" : "container:Instructions Example.xcodeproj",
-      "identifier" : "C64FB30B1BB6CB1C0081E5B6",
-      "name" : "InstructionsExample"
+      "identifier" : "B639B28020D4E71D009996CF",
+      "name" : "InstructionsSnapshotTests"
     }
   },
   "testTargets" : [
@@ -43,10 +43,9 @@
       }
     },
     {
-      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Instructions Example.xcodeproj",
-        "identifier" : "B639B28020D4E71D009996CF",
+        "identifier" : "B64131082737EE3C006F6D8D",
         "name" : "InstructionsSnapshotTests"
       }
     }

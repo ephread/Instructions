@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "iOSSnapshotTestCase",
+        "repositoryURL": "https://github.com/uber/ios-snapshot-test-case",
+        "state": {
+          "branch": null,
+          "revision": "7b10770333a961be6e5a41c9ce04b8c6d3990126",
+          "version": "8.0.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

@@ -24,11 +24,11 @@ env:
   EXAMPLE_SCHEME: "Instructions Example"
   APPEX_EXAMPLE_SCHEME: "Instructions App Extensions Example"
 
-  SDK: "iphonesimulator14.5"
+  SDK: "iphonesimulator15.0"
 
   ALLOW_WARNINGS: "NO"
 
-  DESTINATION: "OS=14.5,name=iPhone 11 Pro"
+  DESTINATION: "OS=15.0,name=iPhone 13 Pro"
 
   # Wether or not to perform certain steps.
   run_pod_lint: true
@@ -39,11 +39,16 @@ env:
 jobs:
   test:
     name: Build, lint & test
-    runs-on: macos-latest
+    runs-on: macos-11
 
     steps:
+      - name: Change Time Zone
+        uses: szenius/set-timezone@v1.0
+        with:
+          timezoneMacos: "America/Los_Angeles"
+
       - name: Switch Xcode version
-        run: sudo xcode-select --switch /Applications/Xcode_12.3.app
+        run: sudo xcode-select --switch /Applications/Xcode_13.1.app
 
       - name: Check out the repository
         uses: actions/checkout@v2
@@ -63,7 +68,7 @@ jobs:
           echo 'EXCLUDED_ARCHS = $(inherited) $(EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_$(EFFECTIVE_PLATFORM_SUFFIX)__NATIVE_ARCH_64_BIT_$(NATIVE_ARCH_64_BIT)__XCODE_$(XCODE_VERSION_MAJOR))' >> $xcconfig
 
           export XCODE_XCCONFIG_FILE="$xcconfig"
-          carthage bootstrap --platform ios
+          carthage bootstrap --use-xcframeworks --platform ios
 
           cd ..
 
@@ -103,10 +108,10 @@ jobs:
         env:
           # Instead of using a matrix, we're just going to use a bash loop to
           # test multiple simulators.
-          IPAD_PRO:  "OS=14.5,name=iPad Pro (11-inch) (3rd generation)"
-          IPAD_AIR:  "OS=14.5,name=iPad (8th generation)"
-          IPHONE_11: "OS=14.5,name=iPhone 11 Pro"
-          IPHONE_8:  "OS=14.5,name=iPhone SE (2nd generation)"
+          IPAD_PRO:  "OS=15.0,name=iPad Pro (11-inch) (3rd generation)"
+          IPAD_AIR:  "OS=15.0,name=iPad (8th generation)"
+          IPHONE_11: "OS=15.0,name=iPhone 13 Pro"
+          IPHONE_8:  "OS=15.0,name=iPhone SE (2nd generation)"
         run: |
           IFS_BACKUP=$IFS
           IFS=":"

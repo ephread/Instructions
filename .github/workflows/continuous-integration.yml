@@ -90,6 +90,7 @@ jobs:
           -configuration Debug ONLY_ACTIVE_ARCH=YES | xcpretty -c;
 
       - name: Run tests
+        continue-on-error: true
         if: env.run_tests == 'true'
         env:
           # Instead of using a matrix, we're just going to use a bash loop to
@@ -108,6 +109,13 @@ jobs:
             -derivedDataPath Build/ ONLY_ACTIVE_ARCH=YES | xcpretty -c;
           done
           IFS=$IFS_BACKUP
+
+      - name: Upload Failure Diffs
+        uses: actions/upload-artifact@v2
+        if: failure() && env.run_tests == 'true'
+        with:
+          name: FailureDiffs
+          path: "${{github.workspace}}/Example/Snapshot Tests/Supporting Files/Snapshots/FailureDiffs"
 
       - name: Convert and upload coverage
         uses: paambaati/codeclimate-action@v2.6.0

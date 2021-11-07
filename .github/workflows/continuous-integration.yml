@@ -43,9 +43,8 @@ jobs:
 
     steps:
       - name: Change Time Zone
-        uses: szenius/set-timezone@v1.0
-        with:
-          timezoneMacos: "America/Los_Angeles"
+        run: |
+          sudo systemsetup -settimezone "America/Los_Angeles"
 
       - name: Switch Xcode version
         run: sudo xcode-select --switch /Applications/Xcode_13.1.app

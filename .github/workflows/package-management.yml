@@ -25,7 +25,7 @@ jobs:
 
     steps:
       - name: Switch Xcode version
-        run: sudo xcode-select --switch /Applications/Xcode_12.5.app
+        run: sudo xcode-select --switch /Applications/Xcode_13.1.app
 
       - name: Check out test repository
         uses: actions/checkout@v2

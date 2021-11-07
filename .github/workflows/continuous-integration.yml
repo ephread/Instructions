@@ -90,7 +90,6 @@ jobs:
           -configuration Debug ONLY_ACTIVE_ARCH=YES | xcpretty -c;
 
       - name: Run tests
-        continue-on-error: true
         if: env.run_tests == 'true'
         env:
           # Instead of using a matrix, we're just going to use a bash loop to

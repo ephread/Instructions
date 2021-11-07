@@ -23,7 +23,7 @@ class DataSourceNumberOfCoachMarksTest: DataSourceBaseTest,
         delegateEndExpectation = self.expectation(description: "numberOfCoachMarks")
         coachMarksController.start(in: .window(over: parentController))
 
-        waitForExpectations(timeout: 2) { error in
+        waitForExpectations(timeout: 10) { error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
             }

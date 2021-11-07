@@ -7,7 +7,7 @@ import Foundation
 
 @testable import Instructions
 @testable import InstructionsExample
-import FBSnapshotTestCase
+import iOSSnapshotTestCase
 
 class BaseSnapshotTests: FBSnapshotTestCase {
     var window: UIWindow!
@@ -23,7 +23,7 @@ class BaseSnapshotTests: FBSnapshotTestCase {
         }
 
         window.frame = UIScreen.main.bounds
-        fileNameOptions  = [.device, .OS, .screenSize, .screenScale]
+        fileNameOptions  = [.device, .OS, .screenScale]
 //        recordMode = true
     }
 
@@ -35,11 +35,35 @@ class BaseSnapshotTests: FBSnapshotTestCase {
     }
 
     func instructionsWindow() -> UIWindow? {
-        let windows = UIApplication.shared.windows
+        let windows = UIApplication.shared.activeScene?.windows
 
-        return windows.filter {
+        return windows?.filter {
             $0.accessibilityIdentifier == "AccessibilityIdentifiers.window"
         }.first
     }
 }
+
+public extension UIInterfaceOrientation {
+    var deviceOrientation: UIDeviceOrientation {
+        switch self {
+        case .landscapeLeft:
+            return .landscapeRight
+        case .landscapeRight:
+            return .landscapeLeft
+        case .portrait:
+            return .portrait
+        case .portraitUpsideDown:
+            return .portraitUpsideDown
+        case .unknown:
+            return .unknown
+        @unknown default:
+            return .unknown
+        }
+    }
+}
+
+public extension UIImage {
+    var dimensions: String { "\(Int(size.width))x\(Int(size.height))" }
+}
+
 #endif

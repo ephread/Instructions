@@ -36,6 +36,12 @@ struct ErrorMessage {
 
         static let negativeNumberOfCoachMarksToSkip =
            "[WARNING] numberToSkip is negative, ignoring."
+
+        static let anchorViewIsNotInTheViewHierarchy =
+            """
+            [WARNING] The view passed to the coach mark creator is not in any hierarchy, \
+            the resulting cutout path may not display correctly.
+            """
     }
 
     struct Error {

@@ -2,6 +2,31 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
+## [2.1.0](https://github.com/ephread/Instructions/releases/tag/2.1.0)
+Released on 2021-06-XX.
+
+### Added
+- New helper methods to:
+    - deal with cutout paths that aren't anchored to a specific view;
+    - update all coach mark properties at once.
+
+## [2.0.1](https://github.com/ephread/Instructions/releases/tag/2.0.1)
+Released on 2021-02-07.
+
+### Fixed
+- Fix [#229] - Blur Effect not working when used with .controller context
+- Fix [#247] - Fix for Mac Catalyst
+- Fix [#248] - Update README.md
+- Fix [#250] - Fix Spelling Mistakes
+
+[#229]: https://github.com/ephread/Instructions/issues/229
+[#247]: https://github.com/ephread/Instructions/issues/247
+[#248]: https://github.com/ephread/Instructions/issues/248
+[#250]: https://github.com/ephread/Instructions/issues/250
+
+### Changed
+- Moved all error messages into their own structs.
+
 ## [2.0.0](https://github.com/ephread/Instructions/releases/tag/2.0.0)
 Released on 2020-05-14.
 

@@ -14,7 +14,7 @@ class DefaultExampleTests: XCTestCase {
         app.tables.staticTexts["Default"].tap()
 
         let coachMark = app.otherElements["AccessibilityIdentifiers.coachMarkBody"]
-        _ = coachMark.waitForExistence(timeout: 5)
+        _ = coachMark.waitForExistence(timeout: 10)
 
         coachMark.tap()
         coachMark.tap()
@@ -30,7 +30,7 @@ class DefaultExampleTests: XCTestCase {
         app.tables.staticTexts["Default"].tap()
 
         let overlay = app.otherElements["AccessibilityIdentifiers.overlayView"]
-        _ = overlay.waitForExistence(timeout: 5)
+        _ = overlay.waitForExistence(timeout: 10)
 
         overlay.tap()
         overlay.tap()
@@ -46,7 +46,7 @@ class DefaultExampleTests: XCTestCase {
         app.tables.staticTexts["Default"].tap()
 
         let skipButton = app.buttons["AccessibilityIdentifiers.skipButton"]
-        _ = skipButton.waitForExistence(timeout: 5)
+        _ = skipButton.waitForExistence(timeout: 10)
         skipButton.tap()
 
         app.navigationBars["Default"].buttons["Instructions"].tap()
@@ -59,8 +59,8 @@ class DefaultExampleTests: XCTestCase {
         let overlay = app.otherElements["AccessibilityIdentifiers.overlayView"]
         let coachMark = app.otherElements["AccessibilityIdentifiers.coachMarkBody"]
 
-        _ = overlay.waitForExistence(timeout: 5)
-        _ = coachMark.waitForExistence(timeout: 5)
+        _ = overlay.waitForExistence(timeout: 10)
+        _ = coachMark.waitForExistence(timeout: 10)
 
         coachMark.tap()
         coachMark.tap()

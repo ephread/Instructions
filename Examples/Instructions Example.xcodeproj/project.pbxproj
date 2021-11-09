@@ -50,6 +50,7 @@
 		B6CA4A9720BEBB53006F42AC /* CustomExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CA4A9620BEBB53006F42AC /* CustomExampleTests.swift */; };
 		B6CA4A9920BEC111006F42AC /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CA4A9820BEC111006F42AC /* AccessibilityIdentifiers.swift */; };
 		B6CA4A9B20BED19B006F42AC /* TransitionExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CA4A9A20BED19B006F42AC /* TransitionExampleTests.swift */; };
+		B6DECE1C273AB88B00DB1AD1 /* XCUIApplication+Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DECE1B273AB88B00DB1AD1 /* XCUIApplication+Launch.swift */; };
 		C615FBAF1D7A1BB500EAEEFB /* TestFlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C615FBAE1D7A1BB500EAEEFB /* TestFlowViewController.swift */; };
 		C636FFAA1BBBD99200EB243B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C636FFA91BBBD99200EB243B /* Assets.xcassets */; };
 		C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */; };
@@ -162,7 +163,7 @@
 		B661D5B71F3B00FB000D29D3 /* InstructionsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsNavigationController.swift; sourceTree = "<group>"; };
 		B690138220BE6B2E00E706B2 /* Instructions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Instructions.xcodeproj; path = ../Instructions.xcodeproj; sourceTree = "<group>"; };
 		B696898126692D860093EBBA /* FBSnapshotTestCase.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSnapshotTestCase.xcframework; path = Carthage/Build/FBSnapshotTestCase.xcframework; sourceTree = "<group>"; };
-		B6968985266946D20093EBBA /* FullTestSuite.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = FullTestSuite.xctestplan; sourceTree = "<group>"; };
+		B6968985266946D20093EBBA /* Unit+UI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Unit+UI.xctestplan"; sourceTree = "<group>"; };
 		B6AF4D812433799300151B64 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B6AF4DA124349B3A00151B64 /* Development.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Development.storyboard; sourceTree = "<group>"; };
 		B6C9D64D20D3B7FC00EBC03A /* InstructionsUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstructionsUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +192,8 @@
 		B6CA4A9620BEBB53006F42AC /* CustomExampleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomExampleTests.swift; sourceTree = "<group>"; };
 		B6CA4A9820BEC111006F42AC /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
 		B6CA4A9A20BED19B006F42AC /* TransitionExampleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionExampleTests.swift; sourceTree = "<group>"; };
+		B6DECE1B273AB88B00DB1AD1 /* XCUIApplication+Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Launch.swift"; sourceTree = "<group>"; };
+		B6DECE1D273ACB4800DB1AD1 /* Snapshot.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapshot.xctestplan; sourceTree = "<group>"; };
 		C615FBAE1D7A1BB500EAEEFB /* TestFlowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFlowViewController.swift; sourceTree = "<group>"; };
 		C636FFA91BBBD99200EB243B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentCoachMarkArrowView.swift; sourceTree = "<group>"; };
@@ -290,6 +293,7 @@
 		B641310A2737EE3C006F6D8D /* Snapshot Tests */ = {
 			isa = PBXGroup;
 			children = (
+				B6DECE19273AB88B00DB1AD1 /* Extensions */,
 				B64131142737EF4F006F6D8D /* BaseSnapshotTestCase.swift */,
 				B64131162737EF51006F6D8D /* DefaultExampleSnapshotTests.swift */,
 				B64131182737EF61006F6D8D /* Supporting Files */,
@@ -318,7 +322,8 @@
 		B6968984266946BF0093EBBA /* Test Plans */ = {
 			isa = PBXGroup;
 			children = (
-				B6968985266946D20093EBBA /* FullTestSuite.xctestplan */,
+				B6DECE1D273ACB4800DB1AD1 /* Snapshot.xctestplan */,
+				B6968985266946D20093EBBA /* Unit+UI.xctestplan */,
 			);
 			name = "Test Plans";
 			sourceTree = "<group>";
@@ -495,6 +500,14 @@
 				B6CA4A8820BE7141006F42AC /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B6DECE19273AB88B00DB1AD1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B6DECE1B273AB88B00DB1AD1 /* XCUIApplication+Launch.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C636FFAD1BBBF68300EB243B /* Supporting Files */ = {
@@ -787,6 +800,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6DECE1C273AB88B00DB1AD1 /* XCUIApplication+Launch.swift in Sources */,
 				B64131172737EF51006F6D8D /* DefaultExampleSnapshotTests.swift in Sources */,
 				B64131152737EF4F006F6D8D /* BaseSnapshotTestCase.swift in Sources */,
 			);
@@ -954,7 +968,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Snapshot Tests/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -988,7 +1001,6 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Snapshot Tests/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1020,7 +1032,6 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Unit Tests/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1050,7 +1061,6 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Unit Tests/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1078,7 +1088,6 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/UI Tests/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1108,7 +1117,6 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/UI Tests/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1171,7 +1179,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1222,7 +1229,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1240,7 +1246,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Sources/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1261,7 +1266,6 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Sources/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

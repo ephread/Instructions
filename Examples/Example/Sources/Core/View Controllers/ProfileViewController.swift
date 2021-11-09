@@ -29,6 +29,10 @@ internal class ProfileViewController: UIViewController,
 
     let nextButtonText = "Ok!"
 
+    override var prefersStatusBarHidden: Bool {
+        CommandLine.arguments.contains("--SnapshotTests")
+    }
+
     // Used for Snapshot testing (i. e. has nothing to do with the example)
     weak var snapshotDelegate: CoachMarksControllerDelegate?
 
@@ -36,6 +40,10 @@ internal class ProfileViewController: UIViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
         coachMarksController.overlay.isUserInteractionEnabled = true
+
+        if CommandLine.arguments.contains("--SnapshotTests") {
+            coachMarksController.statusBarVisibility = .hidden
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {

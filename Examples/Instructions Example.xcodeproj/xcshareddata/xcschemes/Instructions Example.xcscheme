@@ -28,42 +28,6 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES"
       codeCoverageEnabled = "YES">
-      <PreActions>
-         <ExecutionAction
-            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
-            <ActionContent
-               title = "Run Script"
-               scriptText = "function version {&#10;    echo &quot;$@&quot; | awk -F. &apos;{ printf(&quot;%d%03d%03d%03d\n&quot;, $1,$2,$3,$4); }&apos;;&#10;}&#10;&#10;# Don&#x2019;t run on iOS devices.&#10;if [[ &quot;${SDKROOT}&quot; != *&quot;simulator&quot;* ]]; then&#10;    exit 0&#10;fi&#10;&#10;# Don&#x2019;t run on iOS versions before 13.&#10;if [ $(version &quot;${TARGET_DEVICE_OS_VERSION}&quot;) -ge $(version &quot;13&quot;) ]; then&#10;    xcrun simctl boot &quot;${TARGET_DEVICE_IDENTIFIER}&quot;&#10;    xcrun simctl status_bar &quot;${TARGET_DEVICE_IDENTIFIER}&quot; override \&#10;        --time &quot;2007-01-09T09:41:00-08:00&quot; \&#10;        --dataNetwork wifi \&#10;        --wifiMode active \&#10;        --wifiBars 3 \&#10;        --cellularMode notSupported \&#10;        --batteryState discharging \&#10;        --batteryLevel 100&#10;fi&#10;">
-               <EnvironmentBuildable>
-                  <BuildableReference
-                     BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "B64131082737EE3C006F6D8D"
-                     BuildableName = "InstructionsSnapshotTests.xctest"
-                     BlueprintName = "InstructionsSnapshotTests"
-                     ReferencedContainer = "container:Instructions Example.xcodeproj">
-                  </BuildableReference>
-               </EnvironmentBuildable>
-            </ActionContent>
-         </ExecutionAction>
-      </PreActions>
-      <PostActions>
-         <ExecutionAction
-            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
-            <ActionContent
-               title = "Run Script"
-               scriptText = "function version {&#10;    echo &quot;$@&quot; | awk -F. &apos;{ printf(&quot;%d%03d%03d%03d\n&quot;, $1,$2,$3,$4); }&apos;;&#10;}&#10;&#10;# Don&#x2019;t run on iOS devices.&#10;if [[ &quot;${SDKROOT}&quot; != *&quot;simulator&quot;* ]]; then&#10;    exit 0&#10;fi&#10;&#10;# Don&#x2019;t run on iOS versions before 13.&#10;if [ $(version &quot;${TARGET_DEVICE_OS_VERSION}&quot;) -ge $(version &quot;13&quot;) ]; then&#10;    xcrun simctl boot &quot;${TARGET_DEVICE_IDENTIFIER}&quot;&#10;    xcrun simctl status_bar &quot;${TARGET_DEVICE_IDENTIFIER}&quot; clear&#10;fi&#10;">
-               <EnvironmentBuildable>
-                  <BuildableReference
-                     BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "B64131082737EE3C006F6D8D"
-                     BuildableName = "InstructionsSnapshotTests.xctest"
-                     BlueprintName = "InstructionsSnapshotTests"
-                     ReferencedContainer = "container:Instructions Example.xcodeproj">
-                  </BuildableReference>
-               </EnvironmentBuildable>
-            </ActionContent>
-         </ExecutionAction>
-      </PostActions>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -75,8 +39,11 @@
       </MacroExpansion>
       <TestPlans>
          <TestPlanReference
-            reference = "container:FullTestSuite.xctestplan"
+            reference = "container:Unit+UI.xctestplan"
             default = "YES">
+         </TestPlanReference>
+         <TestPlanReference
+            reference = "container:Snapshot.xctestplan">
          </TestPlanReference>
       </TestPlans>
       <Testables>

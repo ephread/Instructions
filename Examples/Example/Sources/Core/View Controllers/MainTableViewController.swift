@@ -4,6 +4,10 @@
 import UIKit
 
 class MainTableViewController: UITableViewController {
+    override var prefersStatusBarHidden: Bool {
+        CommandLine.arguments.contains("--SnapshotTests")
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "PausingOverlay",
            let controller = segue.destination as? PausingCodeViewController {

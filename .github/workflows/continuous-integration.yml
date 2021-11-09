@@ -56,7 +56,7 @@ jobs:
 
       - name: Install test dependencies
         run: |
-          gem install slather
+          bundle install
 
       - name: Run Cocoapods' linter
         if: env.run_pod_lint == 'true'
@@ -69,45 +69,19 @@ jobs:
             pod lib lint;
           fi
 
+      - name: Build frameworks
+        run: |
+          bundle exec fastlane build_frameworks
+
       - name: Build example project
         if: env.build_example == 'true'
-        run: >
-          set -o pipefail && xcodebuild clean build -project "$EXAMPLE_PROJECT"
-          -scheme "$EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION"
-          ONLY_ACTIVE_ARCH=YES | xcpretty -c;
-
-      - name: Build App Extensions example project
-        if: env.build_app_extension_example == 'true'
-        run: >
-          set -o pipefail && xcodebuild clean build -project "$APPEX_EXAMPLE_PROJECT"
-          -scheme "$APPEX_EXAMPLE_SCHEME" -sdk "$SDK" -destination "$DESTINATION"
-          ONLY_ACTIVE_ARCH=YES | xcpretty -c;
-
-      - name: Build frameworks
-        run: >
-          set -o pipefail && xcodebuild clean build -project "$PROJECT"
-          -scheme "$SCHEME" -sdk "$SDK" -destination "$DESTINATION"
-          -configuration Debug ONLY_ACTIVE_ARCH=YES | xcpretty -c;
+        run: |
+          bundle exec fastlane build_examples
 
       - name: Run tests
         if: env.run_tests == 'true'
-        env:
-          # Instead of using a matrix, we're just going to use a bash loop to
-          # test multiple simulators.
-          IPAD_PRO:  "OS=15.0,name=iPad Pro (11-inch) (3rd generation)"
-          IPAD_AIR:  "OS=15.0,name=iPad (8th generation)"
-          IPHONE_11: "OS=15.0,name=iPhone 13 Pro"
-          IPHONE_8:  "OS=15.0,name=iPhone SE (2nd generation)"
         run: |
-          IFS_BACKUP=$IFS
-          IFS=":"
-          DEVICES="${IPAD_PRO}:${IPAD_AIR}:${IPHONE_11}:${IPHONE_8}"
-          for TEST_DESTINATION in ${DEVICES[@]}; do
-            set -o pipefail && xcodebuild test -project "$EXAMPLE_PROJECT" -scheme "$EXAMPLE_SCHEME" \
-            -sdk "$SDK" -destination "$TEST_DESTINATION" -configuration Debug -enableCodeCoverage YES \
-            -derivedDataPath Build/ ONLY_ACTIVE_ARCH=YES | xcpretty -c;
-          done
-          IFS=$IFS_BACKUP
+          bundle exec fastlane test_all
 
       - name: Upload Failure Diffs
         uses: actions/upload-artifact@v2

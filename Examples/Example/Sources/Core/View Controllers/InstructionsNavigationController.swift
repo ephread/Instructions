@@ -14,4 +14,8 @@ class InstructionsNavigationController: UINavigationController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return isLocked ? .portrait : .all
     }
+
+    override var prefersStatusBarHidden: Bool {
+        CommandLine.arguments.contains("--SnapshotTests")
+    }
 }

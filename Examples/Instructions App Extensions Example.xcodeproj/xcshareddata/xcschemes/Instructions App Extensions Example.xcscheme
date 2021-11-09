@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C60FA0AB1D29A2770055B60B"
                BuildableName = "Instructions App Extensions Example.app"
-               BlueprintName = "Instructions App Extensions Example"
+               BlueprintName = "InstructionsAppExtensionsExample"
                ReferencedContainer = "container:Instructions App Extensions Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -33,7 +33,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C60FA0AB1D29A2770055B60B"
             BuildableName = "Instructions App Extensions Example.app"
-            BlueprintName = "Instructions App Extensions Example"
+            BlueprintName = "InstructionsAppExtensionsExample"
             ReferencedContainer = "container:Instructions App Extensions Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -56,7 +56,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C60FA0AB1D29A2770055B60B"
             BuildableName = "Instructions App Extensions Example.app"
-            BlueprintName = "Instructions App Extensions Example"
+            BlueprintName = "InstructionsAppExtensionsExample"
             ReferencedContainer = "container:Instructions App Extensions Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -73,7 +73,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C60FA0AB1D29A2770055B60B"
             BuildableName = "Instructions App Extensions Example.app"
-            BlueprintName = "Instructions App Extensions Example"
+            BlueprintName = "InstructionsAppExtensionsExample"
             ReferencedContainer = "container:Instructions App Extensions Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -49,11 +49,7 @@ internal class CustomCoachMarkBodyView: UIView, CoachMarkBodyView {
         self.hintLabel.textColor = UIColor.darkGray
         self.hintLabel.font = UIFont.systemFont(ofSize: 15.0)
         self.hintLabel.isScrollEnabled = false
-        self.hintLabel.textAlignment = .justified
-        #if targetEnvironment(macCatalyst)
-        #else
-        self.hintLabel.layoutManager.hyphenationFactor = 1.0
-        #endif
+        self.hintLabel.textAlignment = .left
         self.hintLabel.isEditable = false
 
         self.nextButton.translatesAutoresizingMaskIntoConstraints = false

@@ -1,0 +1,104 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+
+  DEVICES = [
+    "iPad Pro (11-inch) (3rd generation)",
+    "iPad (8th generation)",
+    "iPhone 13 Pro",
+    "iPhone SE (2nd generation)"
+  ]
+
+  WORKSPACE = "Instructions.xcworkspace"
+
+  INSTRUCTIONS_SCHEME = "Instructions"
+  APP_EXTENSION_INSTRUCTIONS_SCHEME = "Instructions App Extensions"
+
+  EXAMPLE_SCHEME = "Instructions Example"
+  APP_EXTENSION_EXAMPLE_SCHEME = "Instructions App Extensions Example"
+
+  # ################################# BUILD ################################## #
+
+  desc "Build all targets"
+  lane :build_all do
+    build_frameworks
+    build_examples
+  end
+
+  desc "Build frameworks"
+  lane :build_frameworks do
+    build(scheme: INSTRUCTIONS_SCHEME)
+    build(scheme: APP_EXTENSION_INSTRUCTIONS_SCHEME)
+  end
+
+  desc "Build examples"
+  lane :build_examples do
+    build(scheme: EXAMPLE_SCHEME)
+    build(scheme: APP_EXTENSION_EXAMPLE_SCHEME)
+  end
+
+  desc "Build the given scheme"
+  lane :build do |values|
+    build_app(
+        workspace: WORKSPACE,
+        scheme: values[:scheme],
+        clean: true,
+        skip_archive: true
+      )
+  end
+
+  # ################################# TESTS ################################## #
+
+  desc "Generate new snapshots for all simulators"
+  lane :generate_snapshots do
+    run_tests(
+      workspace: WORKSPACE,
+      scheme: EXAMPLE_SCHEME,
+      testplan: "Snapshot",
+      only_test_configurations: "Generate Snapshots",
+      devices: DEVICES
+    )
+  end
+
+  desc "Run full test suite"
+  lane :test_all do
+    test_snapshots()
+    test_unit_and_ui()
+  end
+
+  desc "Run snapshot tests"
+  lane :test_snapshots do
+    run_tests(
+      workspace: WORKSPACE,
+      scheme: EXAMPLE_SCHEME,
+      testplan: "Snapshot",
+      only_test_configurations: "Test Snapshots",
+      devices: DEVICES
+    )
+  end
+
+  desc "Run snapshot tests"
+  lane :test_unit_and_ui do
+    run_tests(
+      workspace: WORKSPACE,
+      scheme: EXAMPLE_SCHEME,
+      testplan: "Unit+UI"
+    )
+  end
+
+end

@@ -2,9 +2,29 @@
   "configurations" : [
     {
       "id" : "FB93C8F4-28D4-472C-8B4D-1C2BF5034923",
-      "name" : "Default",
+      "name" : "Test Snapshots",
       "options" : {
 
+      }
+    },
+    {
+      "id" : "C4D9A363-5498-42F4-BE65-B4BB4DEF2C2D",
+      "name" : "Generate Snapshots",
+      "options" : {
+        "environmentVariableEntries" : [
+          {
+            "key" : "RECORD_MODE",
+            "value" : "true"
+          },
+          {
+            "key" : "FB_REFERENCE_IMAGE_DIR",
+            "value" : "$(SRCROOT)\/Example\/Snapshot Tests\/Supporting Files\/Snapshots\/ReferenceImages"
+          },
+          {
+            "key" : "IMAGE_DIFF_DIR",
+            "value" : "$(SRCROOT)\/Example\/Snapshot Tests\/Supporting Files\/Snapshots\/FailureDiffs"
+          }
+        ]
       }
     }
   ],
@@ -28,21 +48,6 @@
   "testTargets" : [
     {
       "parallelizable" : true,
-      "target" : {
-        "containerPath" : "container:Instructions Example.xcodeproj",
-        "identifier" : "B6CA4A8320BE7141006F42AC",
-        "name" : "InstructionsExampleUITests"
-      }
-    },
-    {
-      "parallelizable" : true,
-      "target" : {
-        "containerPath" : "container:Instructions Example.xcodeproj",
-        "identifier" : "B6C9D64C20D3B7FC00EBC03A",
-        "name" : "InstructionsUnitTests"
-      }
-    },
-    {
       "target" : {
         "containerPath" : "container:Instructions Example.xcodeproj",
         "identifier" : "B64131082737EE3C006F6D8D",

@@ -46,8 +46,6 @@ internal class BackgroundNetworkingViewController: DefaultViewController {
     }
 
     func startDownload() {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-
         if let url = URL(string: "https://ephread.com/assets/videos/instructions.mp4") {
             downloadTask = urlSession.downloadTask(with: url)
             downloadTask?.resume()
@@ -72,7 +70,6 @@ extension BackgroundNetworkingViewController: URLSessionDownloadDelegate {
         print("Finished.")
 
         DispatchQueue.main.async {
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if self.stopInstructions { return }
 
             if !self.coachMarksController.flow.isStarted {

@@ -3,6 +3,7 @@
 
 #if targetEnvironment(macCatalyst)
 #else
+
 import Foundation
 
 @testable import Instructions
@@ -24,7 +25,8 @@ class BaseSnapshotTests: FBSnapshotTestCase {
 
         window.frame = UIScreen.main.bounds
         fileNameOptions  = [.device, .OS, .screenScale]
-//        recordMode = true
+
+        recordMode = ProcessInfo.processInfo.environment["RECORD_MODE"] != nil
     }
 
     override func tearDown() {

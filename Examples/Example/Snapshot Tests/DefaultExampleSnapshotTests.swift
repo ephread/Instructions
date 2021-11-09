@@ -14,12 +14,8 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests {
         super.setUp()
 
         snapshotIndex = 0
-        XCUIApplication().launch()
-
-        #if targetEnvironment(macCatalyst)
-        #else
+        XCUIApplication().launchWithoutStatusBar()
         XCUIDevice.shared.orientation = .portrait
-        #endif
 
         fileNameOptions = [.device, .OS, .screenScale]
 
@@ -33,38 +29,36 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests {
     }
 
     func testFlowInIndependentWindow() {
-        performSnapshotTest(orientation: .portrait, presentationContext: .independentWindow)
+        performSnapshotTest(in: .independentWindow)
     }
 
     func testRotationInIndependentWindow() {
-        performSnapshotTest(orientation: .landscapeLeft, presentationContext: .independentWindow)
+        performSnapshotTest(in: .independentWindow, rotating: true)
     }
 
     func testFlowInWindow() {
-        performSnapshotTest(orientation: .portrait, presentationContext: .sameWindow)
+        performSnapshotTest(in: .sameWindow)
     }
 
     func testRotationInWindow() {
-        performSnapshotTest(orientation: .landscapeRight, presentationContext: .sameWindow)
+        performSnapshotTest(in: .sameWindow, rotating: true)
     }
 
     func testFlowInController() {
-        performSnapshotTest(orientation: .portrait, presentationContext: .controller)
+        performSnapshotTest(in: .controller)
     }
 
     func testRotationInController() {
-        performSnapshotTest(orientation: .landscapeLeft, presentationContext: .controller)
+        performSnapshotTest(in: .controller, rotating: true)
     }
 
     func performSnapshotTest(
-        orientation: UIDeviceOrientation,
-        presentationContext: Context
+        in context: Context,
+        rotating: Bool = false
     ) {
-        XCUIDevice.shared.orientation = orientation
-
         let app = XCUIApplication()
 
-        switch presentationContext {
+        switch context {
         case .independentWindow:
             let cell = app.tables.staticTexts["Independent Window"]
             cell.tap()
@@ -80,8 +74,16 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests {
 
         for _ in 0..<5 {
             if body.waitForExistence(timeout: 5) {
-                snapshot(app, presentationContext: presentationContext)
+                snapshot(app, presentationContext: context)
                 body.tap()
+                if rotating {
+                    let currentOrientation = XCUIDevice.shared.orientation
+                    if currentOrientation == .portrait {
+                        XCUIDevice.shared.orientation = .landscapeLeft
+                    } else if currentOrientation == .landscapeLeft {
+                        XCUIDevice.shared.orientation = .portrait
+                    }
+                }
             }
         }
     }

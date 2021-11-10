@@ -37,11 +37,17 @@ class BaseSnapshotTests: FBSnapshotTestCase {
     }
 
     func instructionsWindow() -> UIWindow? {
-        let windows = UIApplication.shared.activeScene?.windows
+        if #available(iOS 13.0, *) {
+            let windows = UIApplication.shared.activeScene?.windows
 
-        return windows?.filter {
-            $0.accessibilityIdentifier == "AccessibilityIdentifiers.window"
-        }.first
+            return windows?.filter {
+                $0.accessibilityIdentifier == "AccessibilityIdentifiers.window"
+            }.first
+        } else {
+            return UIApplication.shared.windows.filter {
+                $0.accessibilityIdentifier == "AccessibilityIdentifiers.window"
+            }.first
+        }
     }
 }
 

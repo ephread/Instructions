@@ -348,26 +348,38 @@ extension CoachMarksViewController {
 
     /// Same as `prepareForSizeTransition`, but for status bar changes.
     @objc public func prepareForChange() {
-        if !onGoingSizeChange {
-            delegate?.willTransition()
-            overlayManager.viewWillTransition()
+        if #available(iOS 13.0, *) {
+
+        } else {
+            if !onGoingSizeChange {
+                delegate?.willTransition()
+                overlayManager.viewWillTransition()
+            }
         }
     }
 
     /// Same as `restoreAfterSizeTransitionDidComplete`, but for status bar changes.
     @objc public func restoreAfterChangeDidComplete() {
-        if !onGoingSizeChange {
-            overlayManager.viewDidTransition()
-            delegate?.didTransition(afterChanging: .statusBar)
+        if #available(iOS 13.0, *) {
+
+        } else {
+            if !onGoingSizeChange {
+                overlayManager.viewDidTransition()
+                delegate?.didTransition(afterChanging: .statusBar)
+            }
         }
     }
 
     func registerForSystemEventChanges() {
-        let center = NotificationCenter.default
-        center.addObserver(self, selector: #selector(prepareForChange),
-                           name: UIApplication.willChangeStatusBarFrameNotification, object: nil)
-        center.addObserver(self, selector: #selector(restoreAfterChangeDidComplete),
-                           name: UIApplication.didChangeStatusBarFrameNotification, object: nil)
+        if #available(iOS 13.0, *) {
+
+        } else {
+            let center = NotificationCenter.default
+            center.addObserver(self, selector: #selector(prepareForChange),
+                               name: UIApplication.willChangeStatusBarFrameNotification, object: nil)
+            center.addObserver(self, selector: #selector(restoreAfterChangeDidComplete),
+                               name: UIApplication.didChangeStatusBarFrameNotification, object: nil)
+        }
     }
 
     func deregisterFromSystemEventChanges() {

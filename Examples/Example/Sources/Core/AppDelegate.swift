@@ -13,9 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        // Override point for customization after application launch.
-
-        if CommandLine.arguments.contains("--UITests") {
+        // Removing animations for speed and stability.
+        if CommandLine.arguments.contains("--UITests") ||
+           CommandLine.arguments.contains("--SnapshotTests") {
             UIView.setAnimationsEnabled(false)
         }
 

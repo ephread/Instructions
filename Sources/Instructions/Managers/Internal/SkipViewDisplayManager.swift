@@ -136,8 +136,16 @@ class SkipViewDisplayManager {
 
     func updateTopConstant(from original: CGFloat) -> CGFloat {
 #if !INSTRUCTIONS_APP_EXTENSIONS
-        if !UIApplication.shared.isStatusBarHidden {
-            return UIApplication.shared.statusBarFrame.size.height
+        if #available(iOS 13.0, *) {
+            let statusBarManager = UIApplication.shared.activeScene?.statusBarManager
+
+            if let statusBarManager = statusBarManager, !statusBarManager.isStatusBarHidden {
+                return statusBarManager.statusBarFrame.size.height
+            }
+        } else {
+            if !UIApplication.shared.isStatusBarHidden {
+                return UIApplication.shared.statusBarFrame.size.height
+            }
         }
 #endif
 

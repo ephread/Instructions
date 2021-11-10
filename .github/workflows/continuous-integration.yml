@@ -42,10 +42,6 @@ jobs:
     runs-on: macos-11
 
     steps:
-      - name: Change Time Zone
-        run: |
-          sudo systemsetup -settimezone "America/Los_Angeles"
-
       - name: Switch Xcode version
         run: sudo xcode-select --switch /Applications/Xcode_13.1.app
 
@@ -88,7 +84,7 @@ jobs:
         if: failure() && env.run_tests == 'true'
         with:
           name: FailureDiffs
-          path: "${{github.workspace}}/Example/Snapshot Tests/Supporting Files/Snapshots/FailureDiffs"
+          path: "${{github.workspace}}/Examples/Example/Snapshot\ Tests/Supporting\ Files/Snapshots/FailureDiffs/"
 
       - name: Convert and upload coverage
         uses: paambaati/codeclimate-action@v2.6.0

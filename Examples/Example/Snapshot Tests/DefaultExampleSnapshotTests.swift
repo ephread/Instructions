@@ -5,6 +5,7 @@
 #else
 
 import iOSSnapshotTestCase
+import Darwin
 
 class DefaultExampleSnapshotTests: BaseSnapshotTests {
 
@@ -89,6 +90,14 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests {
     }
 
     func snapshot(_ app: XCUIApplication, presentationContext: Context) {
+        // When animations are involved, even when disabled, snapshotting through
+        // UI Testing is remarkably brittle -> sleeping for additional stability
+        // when snapshotting.
+        //
+        // TODO: Figure out a way to use Point-Free's library while mimicking
+        // proper behaviour.
+        Thread.sleep(forTimeInterval: 0.1)
+
         let orientation = XCUIDevice.shared.orientation
         let image = app.screenshot().image
         let imageView = UIImageView(image: image)
@@ -99,7 +108,7 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests {
         FBSnapshotVerifyView(
             imageView,
             identifier: identifier,
-            perPixelTolerance: 0.05,
+            perPixelTolerance: 0.1,
             overallTolerance: 0.002
         )
 

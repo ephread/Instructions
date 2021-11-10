@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C60FA0AB1D29A2770055B60B"
-               BuildableName = "Instructions App Extensions Example.app"
+               BuildableName = "InstructionsAppExtensionsExample.app"
                BlueprintName = "InstructionsAppExtensionsExample"
                ReferencedContainer = "container:Instructions App Extensions Example.xcodeproj">
             </BuildableReference>
@@ -32,7 +32,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C60FA0AB1D29A2770055B60B"
-            BuildableName = "Instructions App Extensions Example.app"
+            BuildableName = "InstructionsAppExtensionsExample.app"
             BlueprintName = "InstructionsAppExtensionsExample"
             ReferencedContainer = "container:Instructions App Extensions Example.xcodeproj">
          </BuildableReference>
@@ -55,7 +55,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C60FA0AB1D29A2770055B60B"
-            BuildableName = "Instructions App Extensions Example.app"
+            BuildableName = "InstructionsAppExtensionsExample.app"
             BlueprintName = "InstructionsAppExtensionsExample"
             ReferencedContainer = "container:Instructions App Extensions Example.xcodeproj">
          </BuildableReference>
@@ -72,7 +72,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C60FA0AB1D29A2770055B60B"
-            BuildableName = "Instructions App Extensions Example.app"
+            BuildableName = "InstructionsAppExtensionsExample.app"
             BlueprintName = "InstructionsAppExtensionsExample"
             ReferencedContainer = "container:Instructions App Extensions Example.xcodeproj">
          </BuildableReference>

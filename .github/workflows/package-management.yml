@@ -18,7 +18,7 @@ env:
   SDK: "iphonesimulator15.0"
   DESTINATION: "OS=15.0,name=iPhone 13 Pro"
 
-  TEST_DIRECTORY: "PackageTest/"
+  TEST_DIRECTORY: "PackageTest"
 
 jobs:
   test:

@@ -35,22 +35,22 @@ jobs:
           repository: "ephread/InstructionsPackageTest"
           path: ${{ env.TEST_DIRECTORY }}
 
-      - name: Change Directory
-        run: |
-          cd $TEST_DIRECTORY
-
       - name: Install test dependencies
+        working-directory: ./${{ env.TEST_DIRECTORY }}
         run: |
           bundle install
 
       - name: Test CocoaPods import
+        working-directory: ./${{ env.TEST_DIRECTORY }}
         run: |
           bundle exec fastlane test_cocoapods
 
       - name: Test Carthage import
+        working-directory: ./${{ env.TEST_DIRECTORY }}
         run: |
           bundle exec fastlane test_carthage
 
       - name: Test SwiftPM import
+        working-directory: ./${{ env.TEST_DIRECTORY }}
         run: |
           bundle exec fastlane test_swiftpm

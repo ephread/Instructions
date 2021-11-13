@@ -18,6 +18,8 @@ env:
   SDK: "iphonesimulator15.0"
   DESTINATION: "OS=15.0,name=iPhone 13 Pro"
 
+  TEST_DIRECTORY: "PackageTest/"
+
 jobs:
   test:
     name: Check installation
@@ -31,7 +33,11 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: "ephread/InstructionsPackageTest"
-          path: "PackageTest"
+          path: $TEST_DIRECTORY
+
+      - name: Change Directory
+        run: |
+          cd $TEST_DIRECTORY
 
       - name: Test CocoaPods import
         run: |

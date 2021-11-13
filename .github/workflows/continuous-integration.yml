@@ -65,11 +65,7 @@ jobs:
             pod lib lint;
           fi
 
-      - name: Build frameworks
-        run: |
-          bundle exec fastlane build_frameworks
-
-      - name: Build example project
+      - name: Build example projects
         if: env.build_example == 'true'
         run: |
           bundle exec fastlane build_examples

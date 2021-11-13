@@ -4,22 +4,22 @@
 #if targetEnvironment(macCatalyst)
 #else
 
+import DeviceKit
 import iOSSnapshotTestCase
 import Darwin
 
-class DefaultExampleSnapshotTests: BaseSnapshotTests {
-
+class DefaultExampleSnapshotTests: FBSnapshotTestCase {
     var snapshotIndex: Int = 0
 
     override func setUp() {
         super.setUp()
 
         snapshotIndex = 0
+
+        fileNameOptions = [.screenScale]
+        recordMode = ProcessInfo.processInfo.environment["RECORD_MODE"] != nil
+
         XCUIApplication().launchWithoutStatusBar()
-        XCUIDevice.shared.orientation = .portrait
-
-        fileNameOptions = [.device, .OS, .screenScale]
-
         XCUIDevice.shared.orientation = .portrait
     }
 
@@ -100,11 +100,13 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests {
 
         let orientation = XCUIDevice.shared.orientation
         let image = app.screenshot().image
-        let imageView = UIImageView(image: image)
+        let imageView = UIImageView(image: image.cropped(using: orientation))
+
         let identifier = """
                          \(presentationContext.name)_\(snapshotIndex)_\
-                         \(orientation.name)_\(image.dimensions)
+                         \(orientation.name)_\(Device.current.snapshotDescription)
                          """
+
         FBSnapshotVerifyView(
             imageView,
             identifier: identifier,

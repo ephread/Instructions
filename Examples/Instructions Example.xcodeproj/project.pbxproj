@@ -11,7 +11,6 @@
 		B6105E392434FEC600B45CDA /* XCUIApplication+Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6105E372434FE9E00B45CDA /* XCUIApplication+Launch.swift */; };
 		B6105E3C2435123D00B45CDA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B6105E3E2435123D00B45CDA /* Localizable.strings */; };
 		B618494220C2472200315E1C /* PausingCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B618494120C2472100315E1C /* PausingCodeViewController.swift */; };
-		B64131152737EF4F006F6D8D /* BaseSnapshotTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64131142737EF4F006F6D8D /* BaseSnapshotTestCase.swift */; };
 		B64131172737EF51006F6D8D /* DefaultExampleSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64131162737EF51006F6D8D /* DefaultExampleSnapshotTests.swift */; };
 		B641311C2737F1B2006F6D8D /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = B641311B2737F1B2006F6D8D /* iOSSnapshotTestCase */; };
 		B641311E2737F1B2006F6D8D /* iOSSnapshotTestCase in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B641311B2737F1B2006F6D8D /* iOSSnapshotTestCase */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -21,6 +20,10 @@
 		B65DDDD61EE34330002618AF /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDD51EE34330002618AF /* MainTableViewController.swift */; };
 		B661D5B61F3AFA48000D29D3 /* ConfigurationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B661D5B31F3AFA48000D29D3 /* ConfigurationViewController.swift */; };
 		B661D5B81F3B00FB000D29D3 /* InstructionsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B661D5B71F3B00FB000D29D3 /* InstructionsNavigationController.swift */; };
+		B6AE59FD273FD36D00CFCF00 /* DeviceKit in Frameworks */ = {isa = PBXBuildFile; productRef = B6AE59FC273FD36D00CFCF00 /* DeviceKit */; };
+		B6AE5A00273FD8CA00CFCF00 /* UIDeviceOrientation+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AE59FF273FD8CA00CFCF00 /* UIDeviceOrientation+Convenience.swift */; };
+		B6AE5A02273FD99300CFCF00 /* DeviceKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AE5A01273FD99300CFCF00 /* DeviceKit+Extensions.swift */; };
+		B6AE5A04273FDA1300CFCF00 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AE5A03273FDA1300CFCF00 /* UIImage+Extensions.swift */; };
 		B6AF4D822433799300151B64 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AF4D812433799300151B64 /* SceneDelegate.swift */; };
 		B6AF4D9E24349A5200151B64 /* Delegation.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6AF4D9824349A5100151B64 /* Delegation.storyboard */; };
 		B6AF4D9F24349A5200151B64 /* PausingResuming.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B6AF4D9A24349A5200151B64 /* PausingResuming.storyboard */; };
@@ -152,7 +155,6 @@
 		B625EAA2253A1BE200083BCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Delegation.storyboard; sourceTree = "<group>"; };
 		B625EAA3253A1BE300083BCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PausingResuming.storyboard; sourceTree = "<group>"; };
 		B64131092737EE3C006F6D8D /* InstructionsSnapshotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstructionsSnapshotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B64131142737EF4F006F6D8D /* BaseSnapshotTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseSnapshotTestCase.swift; sourceTree = "<group>"; };
 		B64131162737EF51006F6D8D /* DefaultExampleSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultExampleSnapshotTests.swift; sourceTree = "<group>"; };
 		B641311A2737F0EA006F6D8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6454D5F20C78C2900DCF351 /* LargeCutoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeCutoutViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +166,9 @@
 		B690138220BE6B2E00E706B2 /* Instructions.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Instructions.xcodeproj; path = ../Instructions.xcodeproj; sourceTree = "<group>"; };
 		B696898126692D860093EBBA /* FBSnapshotTestCase.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = FBSnapshotTestCase.xcframework; path = Carthage/Build/FBSnapshotTestCase.xcframework; sourceTree = "<group>"; };
 		B6968985266946D20093EBBA /* Unit+UI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Unit+UI.xctestplan"; sourceTree = "<group>"; };
+		B6AE59FF273FD8CA00CFCF00 /* UIDeviceOrientation+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDeviceOrientation+Convenience.swift"; sourceTree = "<group>"; };
+		B6AE5A01273FD99300CFCF00 /* DeviceKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DeviceKit+Extensions.swift"; sourceTree = "<group>"; };
+		B6AE5A03273FDA1300CFCF00 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		B6AF4D812433799300151B64 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B6AF4DA124349B3A00151B64 /* Development.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Development.storyboard; sourceTree = "<group>"; };
 		B6C9D64D20D3B7FC00EBC03A /* InstructionsUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstructionsUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -220,6 +225,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B641311C2737F1B2006F6D8D /* iOSSnapshotTestCase in Frameworks */,
+				B6AE59FD273FD36D00CFCF00 /* DeviceKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,7 +300,6 @@
 			isa = PBXGroup;
 			children = (
 				B6DECE19273AB88B00DB1AD1 /* Extensions */,
-				B64131142737EF4F006F6D8D /* BaseSnapshotTestCase.swift */,
 				B64131162737EF51006F6D8D /* DefaultExampleSnapshotTests.swift */,
 				B64131182737EF61006F6D8D /* Supporting Files */,
 			);
@@ -506,6 +511,9 @@
 			isa = PBXGroup;
 			children = (
 				B6DECE1B273AB88B00DB1AD1 /* XCUIApplication+Launch.swift */,
+				B6AE59FF273FD8CA00CFCF00 /* UIDeviceOrientation+Convenience.swift */,
+				B6AE5A01273FD99300CFCF00 /* DeviceKit+Extensions.swift */,
+				B6AE5A03273FDA1300CFCF00 /* UIImage+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -613,6 +621,7 @@
 			name = InstructionsSnapshotTests;
 			packageProductDependencies = (
 				B641311B2737F1B2006F6D8D /* iOSSnapshotTestCase */,
+				B6AE59FC273FD36D00CFCF00 /* DeviceKit */,
 			);
 			productName = InstructionsSnapshotTests;
 			productReference = B64131092737EE3C006F6D8D /* InstructionsSnapshotTests.xctest */;
@@ -720,6 +729,7 @@
 			mainGroup = C64FB3031BB6CB1C0081E5B6;
 			packageReferences = (
 				B6CC2F242736AFB6009EB089 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */,
+				B6AE59FB273FD36D00CFCF00 /* XCRemoteSwiftPackageReference "DeviceKit" */,
 			);
 			productRefGroup = C64FB30D1BB6CB1C0081E5B6 /* Products */;
 			projectDirPath = "";
@@ -802,7 +812,9 @@
 			files = (
 				B6DECE1C273AB88B00DB1AD1 /* XCUIApplication+Launch.swift in Sources */,
 				B64131172737EF51006F6D8D /* DefaultExampleSnapshotTests.swift in Sources */,
-				B64131152737EF4F006F6D8D /* BaseSnapshotTestCase.swift in Sources */,
+				B6AE5A02273FD99300CFCF00 /* DeviceKit+Extensions.swift in Sources */,
+				B6AE5A00273FD8CA00CFCF00 /* UIDeviceOrientation+Convenience.swift in Sources */,
+				B6AE5A04273FDA1300CFCF00 /* UIImage+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1331,6 +1343,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		B6AE59FB273FD36D00CFCF00 /* XCRemoteSwiftPackageReference "DeviceKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devicekit/DeviceKit";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		B6CC2F242736AFB6009EB089 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/uber/ios-snapshot-test-case";
@@ -1346,6 +1366,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B6CC2F242736AFB6009EB089 /* XCRemoteSwiftPackageReference "ios-snapshot-test-case" */;
 			productName = iOSSnapshotTestCase;
+		};
+		B6AE59FC273FD36D00CFCF00 /* DeviceKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B6AE59FB273FD36D00CFCF00 /* XCRemoteSwiftPackageReference "DeviceKit" */;
+			productName = DeviceKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

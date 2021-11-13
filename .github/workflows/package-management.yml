@@ -39,14 +39,18 @@ jobs:
         run: |
           cd $TEST_DIRECTORY
 
+      - name: Install test dependencies
+        run: |
+          bundle install
+
       - name: Test CocoaPods import
         run: |
-          fastlane test_cocoapods
+          bundle exec fastlane test_cocoapods
 
       - name: Test Carthage import
         run: |
-          fastlane test_carthage
+          bundle exec fastlane test_carthage
 
       - name: Test SwiftPM import
         run: |
-           fastlane test_swiftpm
+          bundle exec fastlane test_swiftpm

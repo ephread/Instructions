@@ -86,7 +86,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		C60FA0AC1D29A2770055B60B /* Instructions App Extensions Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Instructions App Extensions Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C60FA0AC1D29A2770055B60B /* InstructionsAppExtensionsExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstructionsAppExtensionsExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C60FA0C21D29A3580055B60B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C60FA0C41D29A3780055B60B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C60FA0C81D29A3B10055B60B /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -142,7 +142,7 @@
 		C60FA0AD1D29A2770055B60B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C60FA0AC1D29A2770055B60B /* Instructions App Extensions Example.app */,
+				C60FA0AC1D29A2770055B60B /* InstructionsAppExtensionsExample.app */,
 				C60FA0E71D29A4AF0055B60B /* KeyboardExtension.appex */,
 			);
 			name = Products;
@@ -215,9 +215,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C60FA0AB1D29A2770055B60B /* Instructions App Extensions Example */ = {
+		C60FA0AB1D29A2770055B60B /* InstructionsAppExtensionsExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C60FA0BE1D29A2770055B60B /* Build configuration list for PBXNativeTarget "Instructions App Extensions Example" */;
+			buildConfigurationList = C60FA0BE1D29A2770055B60B /* Build configuration list for PBXNativeTarget "InstructionsAppExtensionsExample" */;
 			buildPhases = (
 				C60FA0A81D29A2770055B60B /* Sources */,
 				C60FA0A91D29A2770055B60B /* Frameworks */,
@@ -232,9 +232,9 @@
 				C6EF65711D92EA9400BE5B66 /* PBXTargetDependency */,
 				C6EF65751D92EA9800BE5B66 /* PBXTargetDependency */,
 			);
-			name = "Instructions App Extensions Example";
+			name = InstructionsAppExtensionsExample;
 			productName = "Instructions App Extensions Example";
-			productReference = C60FA0AC1D29A2770055B60B /* Instructions App Extensions Example.app */;
+			productReference = C60FA0AC1D29A2770055B60B /* InstructionsAppExtensionsExample.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C60FA0E61D29A4AF0055B60B /* KeyboardExtension */ = {
@@ -295,7 +295,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				C60FA0AB1D29A2770055B60B /* Instructions App Extensions Example */,
+				C60FA0AB1D29A2770055B60B /* InstructionsAppExtensionsExample */,
 				C60FA0E61D29A4AF0055B60B /* KeyboardExtension */,
 			);
 		};
@@ -518,7 +518,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = EV2G94D75V;
 				INFOPLIST_FILE = "$(SRCROOT)/App Extensions Example/Sources/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -539,7 +538,6 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = EV2G94D75V;
 				INFOPLIST_FILE = "$(SRCROOT)/App Extensions Example/Sources/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -556,7 +554,6 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = EV2G94D75V;
 				INFOPLIST_FILE = "$(SRCROOT)/App Extensions Example/Sources/KeyboardExtension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -574,7 +571,6 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = EV2G94D75V;
 				INFOPLIST_FILE = "$(SRCROOT)/App Extensions Example/Sources/KeyboardExtension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -599,7 +595,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C60FA0BE1D29A2770055B60B /* Build configuration list for PBXNativeTarget "Instructions App Extensions Example" */ = {
+		C60FA0BE1D29A2770055B60B /* Build configuration list for PBXNativeTarget "InstructionsAppExtensionsExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C60FA0BF1D29A2770055B60B /* Debug */,

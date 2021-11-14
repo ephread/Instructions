@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "DeviceKit",
+        "repositoryURL": "https://github.com/devicekit/DeviceKit",
+        "state": {
+          "branch": "master",
+          "revision": "da57c444cbb7b6159aa871534d4cf2616d1d55c6",
+          "version": null
+        }
+      },
+      {
         "package": "iOSSnapshotTestCase",
         "repositoryURL": "https://github.com/uber/ios-snapshot-test-case",
         "state": {

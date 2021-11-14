@@ -4,25 +4,22 @@
 #if targetEnvironment(macCatalyst)
 #else
 
+import DeviceKit
 import iOSSnapshotTestCase
+import Darwin
 
-class DefaultExampleSnapshotTests: BaseSnapshotTests {
-
+class DefaultExampleSnapshotTests: FBSnapshotTestCase {
     var snapshotIndex: Int = 0
 
     override func setUp() {
         super.setUp()
 
         snapshotIndex = 0
-        XCUIApplication().launch()
 
-        #if targetEnvironment(macCatalyst)
-        #else
-        XCUIDevice.shared.orientation = .portrait
-        #endif
+        fileNameOptions = [.screenScale]
+        recordMode = ProcessInfo.processInfo.environment["RECORD_MODE"] != nil
 
-        fileNameOptions = [.device, .OS, .screenScale]
-
+        XCUIApplication().launchWithoutStatusBar()
         XCUIDevice.shared.orientation = .portrait
     }
 
@@ -33,38 +30,36 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests {
     }
 
     func testFlowInIndependentWindow() {
-        performSnapshotTest(orientation: .portrait, presentationContext: .independentWindow)
+        performSnapshotTest(in: .independentWindow)
     }
 
     func testRotationInIndependentWindow() {
-        performSnapshotTest(orientation: .landscapeLeft, presentationContext: .independentWindow)
+        performSnapshotTest(in: .independentWindow, rotating: true)
     }
 
     func testFlowInWindow() {
-        performSnapshotTest(orientation: .portrait, presentationContext: .sameWindow)
+        performSnapshotTest(in: .sameWindow)
     }
 
     func testRotationInWindow() {
-        performSnapshotTest(orientation: .landscapeRight, presentationContext: .sameWindow)
+        performSnapshotTest(in: .sameWindow, rotating: true)
     }
 
     func testFlowInController() {
-        performSnapshotTest(orientation: .portrait, presentationContext: .controller)
+        performSnapshotTest(in: .controller)
     }
 
     func testRotationInController() {
-        performSnapshotTest(orientation: .landscapeLeft, presentationContext: .controller)
+        performSnapshotTest(in: .controller, rotating: true)
     }
 
     func performSnapshotTest(
-        orientation: UIDeviceOrientation,
-        presentationContext: Context
+        in context: Context,
+        rotating: Bool = false
     ) {
-        XCUIDevice.shared.orientation = orientation
-
         let app = XCUIApplication()
 
-        switch presentationContext {
+        switch context {
         case .independentWindow:
             let cell = app.tables.staticTexts["Independent Window"]
             cell.tap()
@@ -80,112 +75,47 @@ class DefaultExampleSnapshotTests: BaseSnapshotTests {
 
         for _ in 0..<5 {
             if body.waitForExistence(timeout: 5) {
-                snapshot(app, presentationContext: presentationContext)
+                snapshot(app, presentationContext: context)
                 body.tap()
+                if rotating {
+                    let currentOrientation = XCUIDevice.shared.orientation
+                    if currentOrientation == .portrait {
+                        XCUIDevice.shared.orientation = .landscapeLeft
+                    } else if currentOrientation == .landscapeLeft {
+                        XCUIDevice.shared.orientation = .portrait
+                    }
+                }
             }
         }
     }
 
     func snapshot(_ app: XCUIApplication, presentationContext: Context) {
+        // When animations are involved, even when disabled, snapshotting through
+        // UI Testing is remarkably brittle -> sleeping for additional stability
+        // when snapshotting.
+        //
+        // TODO: Figure out a way to use Point-Free's library while mimicking
+        // proper behaviour.
+        Thread.sleep(forTimeInterval: 0.1)
+
         let orientation = XCUIDevice.shared.orientation
         let image = app.screenshot().image
-        let imageView = UIImageView(image: image)
+        let imageView = UIImageView(image: image.cropped(using: orientation))
+
         let identifier = """
                          \(presentationContext.name)_\(snapshotIndex)_\
-                         \(orientation.name)_\(image.dimensions)
+                         \(orientation.name)_\(Device.current.snapshotDescription)
                          """
+
         FBSnapshotVerifyView(
             imageView,
             identifier: identifier,
-            perPixelTolerance: 0.05,
+            perPixelTolerance: 0.1,
             overallTolerance: 0.002
         )
 
         snapshotIndex += 1
     }
-
-//    // MARK: Helpers
-//    func coachMarksController(_ coachMarksController: CoachMarksController,
-//                              didShow coachMark: CoachMark,
-//                              afterChanging change: ConfigurationChange,
-//                              at index: Int) {
-//        if change == .statusBar { return }
-//
-//        let snapshotView: UIView
-//        switch presentationContext {
-//        case .independentWindow:
-//            guard let window = instructionsWindow() else {
-//                return
-//            }
-//
-//            snapshotView = window
-//        case .controllerWindow, .controller:
-//            guard let window = navigationController.view.window else {
-//                return
-//            }
-//
-//            snapshotView = window
-//        }
-//
-//        let orientation = XCUIDevice.shared.orientation
-//        FBSnapshotVerifyView(snapshotView,
-//                             identifier: "_i\(index)_o\(orientation.rawValue)_\(presentationContext)")
-//
-//        if delegateEndExpectation?.description == "DidShowWithRotation",
-//           index == 2, orientation == .portrait {
-//            XCUIDevice.shared.orientation = .landscapeRight
-//        } else {
-//            coachMarksController.flow.showNext()
-//        }
-//    }
-//
-//    func coachMarksController(_ coachMarksController: CoachMarksController,
-//                              didEndShowingBySkipping skipped: Bool) {
-//        if let window = instructionsWindow() {
-//            if window.isHidden {
-//                delegateEndExpectation?.fulfill()
-//            }
-//        } else {
-//            delegateEndExpectation?.fulfill()
-//        }
-//    }
-//
-//    func setupController() {
-//        let controller =
-//            storyboard.instantiateViewController(withIdentifier: "DefaultViewController")
-//                as! DefaultViewController // swiftlint:disable:this force_cast
-//
-//        controller.snapshotDelegate = self
-//        controller.presentationContext = presentationContext
-//
-//        navigationController.viewControllers.append(controller)
-//        window.rootViewController = navigationController
-//
-//        _ = controller.view
-//        _ = navigationController.view
-//
-//        window.makeKeyAndVisible()
-//    }
-//
-//    func runRotationTester() {
-//        delegateEndExpectation = expectation(description: "DidShowWithRotation")
-//        setupController()
-//        waitForExpectations(timeout: 15) { error in
-//            if let error = error {
-//                print("Error: \(error.localizedDescription)")
-//            }
-//        }
-//    }
-//
-//    func runFlowTester() {
-//        delegateEndExpectation = expectation(description: "DidShow")
-//        setupController()
-//        waitForExpectations(timeout: 15) { error in
-//            if let error = error {
-//                print("Error: \(error.localizedDescription)")
-//            }
-//        }
-//    }
 }
 
 enum Context: String {

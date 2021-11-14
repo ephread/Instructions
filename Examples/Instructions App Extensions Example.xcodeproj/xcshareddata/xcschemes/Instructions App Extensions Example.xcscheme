@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C60FA0AB1D29A2770055B60B"
-               BuildableName = "Instructions App Extensions Example.app"
-               BlueprintName = "Instructions App Extensions Example"
+               BuildableName = "InstructionsAppExtensionsExample.app"
+               BlueprintName = "InstructionsAppExtensionsExample"
                ReferencedContainer = "container:Instructions App Extensions Example.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,8 +32,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C60FA0AB1D29A2770055B60B"
-            BuildableName = "Instructions App Extensions Example.app"
-            BlueprintName = "Instructions App Extensions Example"
+            BuildableName = "InstructionsAppExtensionsExample.app"
+            BlueprintName = "InstructionsAppExtensionsExample"
             ReferencedContainer = "container:Instructions App Extensions Example.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,8 +55,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C60FA0AB1D29A2770055B60B"
-            BuildableName = "Instructions App Extensions Example.app"
-            BlueprintName = "Instructions App Extensions Example"
+            BuildableName = "InstructionsAppExtensionsExample.app"
+            BlueprintName = "InstructionsAppExtensionsExample"
             ReferencedContainer = "container:Instructions App Extensions Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -72,8 +72,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "C60FA0AB1D29A2770055B60B"
-            BuildableName = "Instructions App Extensions Example.app"
-            BlueprintName = "Instructions App Extensions Example"
+            BuildableName = "InstructionsAppExtensionsExample.app"
+            BlueprintName = "InstructionsAppExtensionsExample"
             ReferencedContainer = "container:Instructions App Extensions Example.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

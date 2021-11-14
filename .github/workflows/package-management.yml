@@ -18,6 +18,8 @@ env:
   SDK: "iphonesimulator15.0"
   DESTINATION: "OS=15.0,name=iPhone 13 Pro"
 
+  TEST_DIRECTORY: "PackageTest"
+
 jobs:
   test:
     name: Check installation
@@ -25,58 +27,30 @@ jobs:
 
     steps:
       - name: Switch Xcode version
-        run: sudo xcode-select --switch /Applications/Xcode_12.5.app
+        run: sudo xcode-select --switch /Applications/Xcode_13.1.app
 
       - name: Check out test repository
         uses: actions/checkout@v2
         with:
           repository: "ephread/InstructionsPackageTest"
-          path: "PackageTest"
+          path: ${{ env.TEST_DIRECTORY }}
+
+      - name: Install test dependencies
+        working-directory: ./${{ env.TEST_DIRECTORY }}
+        run: |
+          bundle install
 
       - name: Test CocoaPods import
-        env:
-          WORKSPACE: "InstructionsCocoaPods.xcworkspace"
-          SCHEME: "InstructionsCocoaPods"
-          TEST_DIRECTORY: "PackageTest/InstructionsCocoaPods"
+        working-directory: ./${{ env.TEST_DIRECTORY }}
         run: |
-          cd "$TEST_DIRECTORY"
-          pod install
-          set -o pipefail && xcodebuild test -workspace "$WORKSPACE" -scheme "$SCHEME" \
-              -sdk "$SDK" -destination "$DESTINATION" -configuration Debug \
-              ONLY_ACTIVE_ARCH=YES | xcpretty -c
-          cd ../..
+          bundle exec fastlane test_cocoapods
 
       - name: Test Carthage import
-        env:
-          PROJECT: "InstructionsCarthage.xcodeproj"
-          SCHEME: "InstructionsCarthage"
-          TEST_DIRECTORY: "PackageTest/InstructionsCarthage"
+        working-directory: ./${{ env.TEST_DIRECTORY }}
         run: |
-          cd "$TEST_DIRECTORY"
-
-          # For Xcode 12 make sure EXCLUDED_ARCHS is set to arm architectures otherwise
-          # the build will fail on lipo due to duplicate architectures.
-          xcconfig=$(mktemp /tmp/static.xcconfig.XXXXXX)
-
-          echo 'EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_simulator__NATIVE_ARCH_64_BIT_x86_64__XCODE_1200 = arm64 arm64e armv7 armv7s armv6 armv8' >> $xcconfig
-          echo 'EXCLUDED_ARCHS = $(inherited) $(EXCLUDED_ARCHS__EFFECTIVE_PLATFORM_SUFFIX_$(EFFECTIVE_PLATFORM_SUFFIX)__NATIVE_ARCH_64_BIT_$(NATIVE_ARCH_64_BIT)__XCODE_$(XCODE_VERSION_MAJOR))' >> $xcconfig
-
-          export XCODE_XCCONFIG_FILE="$xcconfig"
-          carthage bootstrap
-
-          set -o pipefail && xcodebuild test -project "$PROJECT" -scheme "$SCHEME" \
-              -sdk "$SDK" -destination "$DESTINATION" -configuration Debug \
-              ONLY_ACTIVE_ARCH=YES | xcpretty -c
-          cd ../..
+          bundle exec fastlane test_carthage
 
       - name: Test SwiftPM import
-        env:
-          PROJECT: "InstructionsSwiftPM.xcodeproj"
-          SCHEME: "InstructionsSwiftPM"
-          TEST_DIRECTORY: "PackageTest/InstructionsSwiftPM"
+        working-directory: ./${{ env.TEST_DIRECTORY }}
         run: |
-          cd "$TEST_DIRECTORY"
-          set -o pipefail && xcodebuild test -project "$PROJECT" -scheme "$SCHEME" \
-              -sdk "$SDK" -destination "$DESTINATION" -configuration Debug \
-              ONLY_ACTIVE_ARCH=YES | xcpretty -c
-          cd ../..
+          bundle exec fastlane test_swiftpm

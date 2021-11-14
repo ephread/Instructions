@@ -133,8 +133,16 @@ extension CustomViewsViewController: CoachMarksControllerDataSource {
         var constraints: [NSLayoutConstraint] = []
         var topMargin: CGFloat = 0.0
 
-        if !UIApplication.shared.isStatusBarHidden {
-            topMargin = UIApplication.shared.statusBarFrame.size.height
+        if #available(iOS 13.0, *) {
+            let statusBarManager = view.window?.windowScene?.statusBarManager
+
+            if let statusBarManager = statusBarManager, !statusBarManager.isStatusBarHidden {
+                topMargin = statusBarManager.statusBarFrame.size.height
+            }
+        } else {
+            if !UIApplication.shared.isStatusBarHidden {
+                topMargin = UIApplication.shared.statusBarFrame.size.height
+            }
         }
 
         constraints.append(contentsOf: [
@@ -142,7 +150,16 @@ extension CustomViewsViewController: CoachMarksControllerDataSource {
             skipView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor)
         ])
 
-        if UIApplication.shared.isStatusBarHidden {
+        if #available(iOS 13.0, *) {
+            let statusBarManager = view.window?.windowScene?.statusBarManager
+
+            if let statusBarManager = statusBarManager, statusBarManager.isStatusBarHidden {
+                constraints.append(contentsOf: [
+                    skipView.topAnchor.constraint(equalTo: parentView.topAnchor),
+                    skipView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor)
+                ])
+            }
+        } else if UIApplication.shared.isStatusBarHidden {
             constraints.append(contentsOf: [
                 skipView.topAnchor.constraint(equalTo: parentView.topAnchor),
                 skipView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor)

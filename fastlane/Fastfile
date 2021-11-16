@@ -89,7 +89,8 @@ platform :ios do
       scheme: EXAMPLE_SCHEME,
       testplan: "Snapshot",
       only_test_configurations: "Test Snapshots",
-      devices: DEVICES
+      devices: DEVICES,
+      prelaunch_simulator: true,
     )
   end
 
@@ -98,7 +99,9 @@ platform :ios do
     run_tests(
       workspace: WORKSPACE,
       scheme: EXAMPLE_SCHEME,
-      testplan: "Unit+UI"
+      testplan: "Unit+UI",
+      devices: DEVICES[0],
+      prelaunch_simulator: true,
     )
   end
 

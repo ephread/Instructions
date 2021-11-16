@@ -32,6 +32,8 @@ platform :ios do
   EXAMPLE_SCHEME = "Instructions Example"
   APP_EXTENSION_EXAMPLE_SCHEME = "Instructions App Extensions Example"
 
+  DERIVED_DATA_PATH = "Build/"
+
   # ################################# BUILD ################################## #
 
   desc "Build all targets"
@@ -91,10 +93,11 @@ platform :ios do
       only_test_configurations: "Test Snapshots",
       devices: DEVICES,
       prelaunch_simulator: true,
+      derived_data_path: DERIVED_DATA_PATH,
     )
   end
 
-  desc "Run snapshot tests"
+  desc "Run Unit & UI tests"
   lane :test_unit_and_ui do
     run_tests(
       workspace: WORKSPACE,
@@ -102,7 +105,7 @@ platform :ios do
       testplan: "Unit+UI",
       devices: DEVICES[0],
       prelaunch_simulator: true,
+      derived_data_path: DERIVED_DATA_PATH,
     )
   end
-
 end

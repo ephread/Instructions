@@ -97,10 +97,9 @@ jobs:
       - name: Upload Failure Diffs
         uses: actions/upload-artifact@v2
         if: failure() && env.run_tests == 'true'
-        working-directory: ./${{ env.TEST_DIRECTORY }}
         with:
           name: FailureDiffs
-          path: "${{github.workspace}}/Examples/Example/Snapshot\ Tests/Supporting\ Files/Snapshots/FailureDiffs/"
+          path: "${{github.workspace}}/${{env.TEST_DIRECTORY}}/Examples/Example/Snapshot\ Tests/Supporting\ Files/Snapshots/FailureDiffs/"
 
       - name: Convert and upload coverage
         uses: paambaati/codeclimate-action@v2.6.0

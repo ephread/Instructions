@@ -104,9 +104,8 @@ jobs:
       - name: Convert and upload coverage
         uses: paambaati/codeclimate-action@v2.6.0
         if: env.run_tests == 'true'
-        working-directory: ./${{ env.TEST_DIRECTORY }}
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
         with:
-          coverageCommand: "slather coverage -x --build-directory Build/"
-          coverageLocations: "${{github.workspace}}/Tests/cobertura.xml:cobertura"
+          coverageCommand: "cd '${{env.TEST_DIRECTORY}}' && slather coverage -x --build-directory Build/"
+          coverageLocations: "${{github.workspace}}/${{env.TEST_DIRECTORY}}/Tests/cobertura.xml:cobertura"

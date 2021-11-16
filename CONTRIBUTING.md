@@ -65,30 +65,6 @@ with a period. 🤘
 
 Make sure all the tests are green for all projects! Unit & UI tests are fairly classic and use the built-in XCTest APIs. Additionally, there's also a set of [snapshot tests]. Adding tests to your PR is not expected, but feel free to do so 😉.
 
-Two steps are required to be able to run the snapshot tests.
-
-###### 1. Install [Git LFS] and pull the test cases
-Run the following command to initialize the submodule containing the test cases.
-```shell
-$ git submodule update --init --recursive
-```
-
-Alternatively, if you initialized the submodules before installing git LFS, you can run the following command in the `Snapshots` directory to pull the snapshots.
-
-```shell
-$ git lfs pull
-```
-
-[Git LFS]: https://git-lfs.github.com/
-[snapshot tests]: https://github.com/uber/ios-snapshot-test-case
-
-###### 2. Install and run Carthage to build iOSSnapshotTestCase
-Run the following command from the root directory, and you should be good to go:
-
-```shell
-$ cd 'Examples' && carthage bootstrap --platform ios
-```
-
 ### Git branching model & pull requests
 
 Instructions has a very loose branching model. All improvements and fixes happen in `main`, since there isn't a real need to support different versions. Branches are created for two reasons:

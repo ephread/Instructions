@@ -40,6 +40,11 @@ jobs:
         run: |
           bundle install
 
+      - name: Test SwiftPM import
+        working-directory: ./${{ env.TEST_DIRECTORY }}
+        run: |
+          bundle exec fastlane test_swiftpm
+
       - name: Test CocoaPods import
         working-directory: ./${{ env.TEST_DIRECTORY }}
         run: |
@@ -49,8 +54,3 @@ jobs:
         working-directory: ./${{ env.TEST_DIRECTORY }}
         run: |
           bundle exec fastlane test_carthage
-
-      - name: Test SwiftPM import
-        working-directory: ./${{ env.TEST_DIRECTORY }}
-        run: |
-          bundle exec fastlane test_swiftpm

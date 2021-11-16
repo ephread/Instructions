@@ -13,26 +13,11 @@ on:
     - 'release-**'
 
 env:
-  # Expected to be used withint scripts.
+  # Expected to be used within scripts.
   LANG: en_US.UTF-8
-
-  PROJECT: "Instructions.xcodeproj"
-  EXAMPLE_PROJECT: "Examples/Instructions Example.xcodeproj"
-  APPEX_EXAMPLE_PROJECT: "Examples/Instructions App Extensions Example.xcodeproj"
-
-  SCHEME: "Instructions"
-  EXAMPLE_SCHEME: "Instructions Example"
-  APPEX_EXAMPLE_SCHEME: "Instructions App Extensions Example"
-
-  SDK: "iphonesimulator15.0"
-
-  ALLOW_WARNINGS: "NO"
-
-  DESTINATION: "OS=15.0,name=iPhone 13 Pro"
 
   # Wether or not to perform certain steps.
   run_pod_lint: true
-  build_example: true
   build_app_extension_example: true
   run_tests: true
 
@@ -64,11 +49,6 @@ jobs:
           else
             pod lib lint;
           fi
-
-      - name: Build example projects
-        if: env.build_example == 'true'
-        run: |
-          bundle exec fastlane build_examples
 
       - name: Run tests
         if: env.run_tests == 'true'

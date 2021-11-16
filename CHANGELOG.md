@@ -2,8 +2,16 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
+## [2.1.1](https://github.com/ephread/Instructions/releases/tag/2.1.1)
+Released on 2021-11-XX.
+
+### Fixed
+- Fix [#258] - Fix documentation comments in CoachMarkHelper
+- Fix [#259] - Quick fix regarding no cutout area use
+- Fix [#261] - Fix iOS 15 Layout for CoachMarkBodyDefaultView
+
 ## [2.1.0](https://github.com/ephread/Instructions/releases/tag/2.1.0)
-Released on 2021-06-XX.
+Released on 2021-06-06.
 
 ### Added
 - New helper methods to:

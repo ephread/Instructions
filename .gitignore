@@ -293,3 +293,6 @@ Tests
 
 Skassets
 .swiftpm/
+
+## Snapshot Testing
+**/FailureDiffs

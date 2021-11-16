@@ -15,6 +15,8 @@ on:
 env:
   # Expected to be used within scripts.
   LANG: en_US.UTF-8
+  PACKAGE_TEST_DIRECTORY: "InstructionsPackageTest"
+  TEST_DIRECTORY: "Instructions"
 
   # Wether or not to perform certain steps.
   run_pod_lint: true
@@ -22,6 +24,40 @@ env:
   run_tests: true
 
 jobs:
+  test-package:
+    name: Check installation
+    runs-on: macos-11
+
+    steps:
+      - name: Switch Xcode version
+        run: sudo xcode-select --switch /Applications/Xcode_13.1.app
+
+      - name: Check out test repository
+        uses: actions/checkout@v2
+        with:
+          repository: "ephread/InstructionsPackageTest"
+          path: ${{ env.PACKAGE_TEST_DIRECTORY }}
+
+      - name: Install test dependencies
+        working-directory: ./${{ env.PACKAGE_TEST_DIRECTORY }}
+        run: |
+          bundle install
+
+      - name: Test SwiftPM import
+        working-directory: ./${{ env.PACKAGE_TEST_DIRECTORY }}
+        run: |
+          bundle exec fastlane test_swiftpm
+
+      - name: Test CocoaPods import
+        working-directory: ./${{ env.PACKAGE_TEST_DIRECTORY }}
+        run: |
+          bundle exec fastlane test_cocoapods
+
+      - name: Test Carthage import
+        working-directory: ./${{ env.PACKAGE_TEST_DIRECTORY }}
+        run: |
+          bundle exec fastlane test_carthage
+
   test:
     name: Build, lint & test
     runs-on: macos-11
@@ -32,13 +68,17 @@ jobs:
 
       - name: Check out the repository
         uses: actions/checkout@v2
+        with:
+          path: ${{ env.TEST_DIRECTORY }}
 
       - name: Install test dependencies
+        working-directory: ./${{ env.TEST_DIRECTORY }}
         run: |
           bundle install
 
       - name: Run Cocoapods' linter
         if: env.run_pod_lint == 'true'
+        working-directory: ./${{ env.TEST_DIRECTORY }}
         # Warnings might be allowed in versions where Instructions continue to support
         # deprecated methods.
         run: |
@@ -50,12 +90,14 @@ jobs:
 
       - name: Run tests
         if: env.run_tests == 'true'
+        working-directory: ./${{ env.TEST_DIRECTORY }}
         run: |
           bundle exec fastlane test_all
 
       - name: Upload Failure Diffs
         uses: actions/upload-artifact@v2
         if: failure() && env.run_tests == 'true'
+        working-directory: ./${{ env.TEST_DIRECTORY }}
         with:
           name: FailureDiffs
           path: "${{github.workspace}}/Examples/Example/Snapshot\ Tests/Supporting\ Files/Snapshots/FailureDiffs/"
@@ -63,6 +105,7 @@ jobs:
       - name: Convert and upload coverage
         uses: paambaati/codeclimate-action@v2.6.0
         if: env.run_tests == 'true'
+        working-directory: ./${{ env.TEST_DIRECTORY }}
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
         with:

@@ -21,7 +21,7 @@ public class CoachMarkBodyDefaultView: UIControl,
         return self
     }
 
-    public lazy var nextLabel: UILabel = makeNextLabel()
+    public lazy var nextButton: UIButton = makeNextButton()
     public lazy var hintLabel: UITextView = makeHintTextView()
     public lazy var separator: UIView = makeSeparator()
 
@@ -49,9 +49,10 @@ public class CoachMarkBodyDefaultView: UIControl,
         initializeViewHierarchy()
 
         separator.isHidden = (nextText == nil)
-        nextLabel.isHidden = (nextText == nil)
+        nextButton.isHidden = (nextText == nil)
 
-        nextLabel.text = nextText
+        nextButton.setTitle(nextText, for: .normal)
+        nextButton.backgroundColor = .white
         hintLabel.text = hintText
     }
 
@@ -83,8 +84,8 @@ private extension CoachMarkBodyDefaultView {
         labelStackView.fillSuperview(insets: UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15))
 
         labelStackView.addArrangedSubview(hintLabel)
-        labelStackView.addArrangedSubview(separator)
-        labelStackView.addArrangedSubview(nextLabel)
+        //labelStackView.addArrangedSubview(separator)
+        labelStackView.addArrangedSubview(nextButton)
 
         separator.heightAnchor.constraint(equalTo: labelStackView.heightAnchor,
                                           constant: -10).isActive = true
@@ -92,7 +93,7 @@ private extension CoachMarkBodyDefaultView {
 
     func initializeAccessibilityIdentifier() {
         accessibilityIdentifier = AccessibilityIdentifiers.coachMarkBody
-        nextLabel.accessibilityIdentifier = AccessibilityIdentifiers.coachMarkNext
+        nextButton.accessibilityIdentifier = AccessibilityIdentifiers.coachMarkNext
         hintLabel.accessibilityIdentifier = AccessibilityIdentifiers.coachMarkHint
     }
 
@@ -159,6 +160,35 @@ private extension CoachMarkBodyDefaultView {
 
         return label
     }
+    
+    func makeNextButton() -> UIButton {
+        let button = UIButton().preparedForAutoLayout()
+        
+        button.titleLabel!.textAlignment = .center
+        button.titleLabel!.textColor = InstructionsColor.coachMarkLabel
+        button.titleLabel!.font = UIFont.systemFont(ofSize: 17.0)
+
+        button.titleLabel!.isUserInteractionEnabled = false
+
+        if #available(iOS 15.0, *) {
+            button.titleLabel!.setContentCompressionResistancePriority(UILayoutPriority.defaultHigh,
+                                                          for: .horizontal)
+            button.titleLabel!.setContentHuggingPriority(UILayoutPriority.init(765),
+                                            for: .horizontal)
+        } else {
+            button.titleLabel!.setContentCompressionResistancePriority(UILayoutPriority.required,
+                                                          for: .horizontal)
+            button.titleLabel!.setContentHuggingPriority(UILayoutPriority.defaultLow,
+                                            for: .horizontal)
+        }
+
+        button.titleLabel!.setContentCompressionResistancePriority(UILayoutPriority.required,
+                                                      for: .vertical)
+        button.titleLabel!.setContentHuggingPriority(UILayoutPriority.defaultLow,
+                                        for: .vertical)
+
+        return button
+    }
 
     func makeSeparator() -> UIView {
         let separator = UIView().preparedForAutoLayout()
@@ -172,7 +202,7 @@ private extension CoachMarkBodyDefaultView {
 
     func makeStackView() -> UIStackView {
         let stackView = UIStackView().preparedForAutoLayout()
-        stackView.axis = .horizontal
+        stackView.axis = .vertical
         stackView.spacing = 10
         stackView.isUserInteractionEnabled = false
         stackView.alignment = .center

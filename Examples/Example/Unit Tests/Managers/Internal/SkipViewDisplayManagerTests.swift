@@ -5,7 +5,7 @@ import XCTest
 @testable import Instructions
 
 class SkipViewDisplayManagerTests: XCTestCase {
-    let skipViewDisplayManager = SkipViewDisplayManager()
+    let skipViewDisplayManager = SkippingManager()
     let dataSource = MockedDataSource()
     let constraintsDataSource = ConstraintsMockedDataSource()
 
@@ -23,7 +23,7 @@ class SkipViewDisplayManagerTests: XCTestCase {
     }
 
     func testThatSkipViewWasHidden() {
-        let skipView = CoachMarkSkipDefaultView()
+        let skipView = DefaultCoachMarkSkipperView()
         skipView.alpha = 1.0
 
         skipViewDisplayManager.hide(skipView: skipView)
@@ -36,7 +36,7 @@ class SkipViewDisplayManagerTests: XCTestCase {
     }
 
     func testThatSkipViewWithNoParentCannotBeShown() {
-        let skipView = CoachMarkSkipDefaultView()
+        let skipView = DefaultCoachMarkSkipperView()
         skipView.alpha = 0.0
 
         skipViewDisplayManager.show(skipView: skipView)
@@ -50,7 +50,7 @@ class SkipViewDisplayManagerTests: XCTestCase {
 
     func testThatSkipViewWithParentCanBeShown() {
         let parentView = UIView()
-        let skipView = CoachMarkSkipDefaultView()
+        let skipView = DefaultCoachMarkSkipperView()
         parentView.addSubview(skipView)
 
         skipView.alpha = 0.0
@@ -66,7 +66,7 @@ class SkipViewDisplayManagerTests: XCTestCase {
 
     func testThatDefaultConstraintAreApplied() {
         let parentView = UIView()
-        let skipView = CoachMarkSkipDefaultView()
+        let skipView = DefaultCoachMarkSkipperView()
         parentView.addSubview(skipView)
 
         XCTAssertTrue(parentView.constraints.isEmpty)
@@ -78,7 +78,7 @@ class SkipViewDisplayManagerTests: XCTestCase {
 
     func testThatConstraintIsApplied() {
         let parentView = UIView()
-        let skipView = CoachMarkSkipDefaultView()
+        let skipView = DefaultCoachMarkSkipperView()
         parentView.addSubview(skipView)
         skipViewDisplayManager.dataSource = constraintsDataSource
 
@@ -91,7 +91,7 @@ class SkipViewDisplayManagerTests: XCTestCase {
 
     func testThatDefaultConstraintIsAppliedIfDataSourceIsNil() {
         let parentView = UIView()
-        let skipView = CoachMarkSkipDefaultView()
+        let skipView = DefaultCoachMarkSkipperView()
         parentView.addSubview(skipView)
         skipViewDisplayManager.dataSource = nil
 
@@ -103,26 +103,26 @@ class SkipViewDisplayManagerTests: XCTestCase {
     }
 
     func testThatSkipViewIsNotUpdated() {
-        let skipView = CoachMarkSkipDefaultView()
+        let skipView = DefaultCoachMarkSkipperView()
         skipViewDisplayManager.update(skipView: skipView, withConstraints: nil)
 
         XCTAssertTrue(true)
     }
 }
 
-class MockedDataSource: CoachMarksControllerProxyDataSource {
+class MockedDataSource: TutorialControllerProxyDataSource {
     func numberOfCoachMarks() -> Int {
         return 0
     }
 
-    func coachMark(at index: Int) -> CoachMark {
-        return CoachMark()
+    func coachMark(at index: Int) -> CoachMarkConfiguration {
+        return CoachMarkConfiguration()
     }
 
     func coachMarkViews(
         at index: Int,
-        madeFrom coachMark: CoachMark
-    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
+        madeFrom coachMark: CoachMarkConfiguration
+    ) -> (bodyView: (UIView & CoachMarkContentView), arrowView: (UIView & CoachMarkArrowView)?) {
         return (bodyView: CoachMarkBodyDefaultView(), arrowView: nil)
     }
 

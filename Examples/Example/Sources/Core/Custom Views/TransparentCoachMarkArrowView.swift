@@ -5,10 +5,10 @@ import UIKit
 import Instructions
 
 // Transparent coach mark (text without background, cool arrow)
-internal class TransparentCoachMarkArrowView: UIImageView, CoachMarkArrowView {
+internal class TransparentCoachMarkArrowView: UIImageView, CoachMarkPointer {
     // MARK: - Initialization
-    init(orientation: CoachMarkArrowOrientation) {
-        if orientation == .top {
+    init(orientation: ComputedVerticalPosition) {
+        if orientation == .below {
             super.init(image: UIImage(named: "arrow-top"))
         } else {
             super.init(image: UIImage(named: "arrow-bottom"))

@@ -9,7 +9,7 @@ class CoachMarkDisplayManagerTests: XCTestCase {
     let overlayView = OverlayView()
     let overlay = OverlayManager()
     let instructionsRootView = UIView()
-    let coachMarksController = CoachMarksController()
+    let tutorialController = TutorialController()
     var coachMarkDisplayManager: CoachMarkDisplayManager!
 
     var viewIsVisibleExpectation: XCTestExpectation?
@@ -35,9 +35,9 @@ class CoachMarkDisplayManagerTests: XCTestCase {
     }
 
     func testThatCoachMarkViewIsShown() {
-        let coachMarkView = CoachMarkView(bodyView: CoachMarkBodyDefaultView(),
+        let coachMarkView = CoachMarkView(bodyView: DefaultCoachMarkContentView(),
                                           coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper())
-        var coachMark = CoachMark()
+        var coachMark = CoachMarkConfiguration()
         coachMark.cutoutPath = UIBezierPath(rect: CGRect(x: 30, y: 30, width: 60, height: 30))
 
         self.viewIsVisibleExpectation = self.expectation(description: "viewIsVisible")

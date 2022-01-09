@@ -20,7 +20,7 @@ internal class PausingCodeViewController: ProfileViewController {
                            """
     let text3 = "Good job, that's all folks!"
 
-    var pauseStyle: PauseStyle = .hideNothing
+    var pauseStyle: PauseAction = .doNothing
 
     @IBOutlet var tapMeButton: UIButton!
 
@@ -28,18 +28,18 @@ internal class PausingCodeViewController: ProfileViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        coachMarksController.dataSource = self
-        coachMarksController.delegate = self
+        tutorialController.dataSource = self
+        tutorialController.delegate = self
 
         emailLabel?.layer.cornerRadius = 4.0
         postsLabel?.layer.cornerRadius = 4.0
         reputationLabel?.layer.cornerRadius = 4.0
 
-        let skipView = CoachMarkSkipDefaultView()
+        let skipView = DefaultCoachMarkSkipperView()
         skipView.setTitle("Skip", for: .normal)
 
-        coachMarksController.skipView = skipView
-        coachMarksController.overlay.isUserInteractionEnabled = true
+        tutorialController.skipView = skipView
+        tutorialController.overlay.isUserInteractionEnabled = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -48,28 +48,28 @@ internal class PausingCodeViewController: ProfileViewController {
 
     @IBAction func performButtonTap(_ sender: AnyObject) {
         // The user tapped on the button, so let's carry on!
-        coachMarksController.flow.resume()
+        tutorialController.flow.resume()
     }
 
     // MARK: - Protocol Conformance | CoachMarksControllerDelegate
-    override func coachMarksController(_ coachMarksController: CoachMarksController,
-                                       willShow coachMark: inout CoachMark,
+    override func coachMarksController(_ coachMarksController: TutorialController,
+                                       willShow coachMark: inout CoachMarkConfiguration,
                                        beforeChanging change: ConfigurationChange,
                                        at index: Int) {
         if index == 2 && change == .nothing {
-            coachMarksController.flow.pause(and: pauseStyle)
+            tutorialController.flow.pause(and: pauseStyle)
         }
     }
 }
 
 // MARK: - Protocol Conformance | CoachMarksControllerDataSource
-extension PausingCodeViewController: CoachMarksControllerDataSource {
-    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+extension PausingCodeViewController: TutorialControllerDataSource {
+    func numberOfCoachMarks(for coachMarksController: TutorialController) -> Int {
         return 3
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkAt index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: TutorialController,
+                              coachMarkAt index: Int) -> CoachMarkConfiguration {
         let controller = coachMarksController
 
         switch index {
@@ -85,17 +85,17 @@ extension PausingCodeViewController: CoachMarksControllerDataSource {
         case 2:
             return controller.helper.makeCoachMark(for: postsLabel)
 
-        default: return CoachMark()
+        default: return CoachMarkConfiguration()
         }
     }
 
     func coachMarksController(
-        _ coachMarksController: CoachMarksController,
+        _ coachMarksController: TutorialController,
         coachMarkViewsAt index: Int,
-        madeFrom coachMark: CoachMark
-    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
+        madeFrom coachMark: CoachMarkConfiguration
+    ) -> (bodyView: (UIView & CoachMarkContentView), arrowView: (UIView & CoachMarkArrowView)?) {
 
-        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+        let coachViews = tutorialController.helper.makeDefaultCoachViews(
             withArrow: true, withNextText: true, arrowOrientation: coachMark.arrowOrientation
         )
 
@@ -109,7 +109,7 @@ extension PausingCodeViewController: CoachMarksControllerDataSource {
                 coachViews.bodyView.hintLabel.text = text2
             case .hideOverlay:
                 coachViews.bodyView.hintLabel.text = text2HideOverlay
-            case .hideNothing:
+            case .doNothing:
                 coachViews.bodyView.hintLabel.text = text2HideNothing
             }
 

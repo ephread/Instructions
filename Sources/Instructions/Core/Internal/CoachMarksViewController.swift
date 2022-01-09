@@ -10,12 +10,8 @@ import UIKit
 class CoachMarksViewController: UIViewController {
     // MARK: - Private properties
     private var onGoingSizeChange = false
-    private var presentationFashion: PresentationFashion = .window {
-        didSet {
-            if let skipViewDisplayManager = skipViewDisplayManager {
-                skipViewDisplayManager.presentationFashion = presentationFashion
-            }
-        }
+    private var presentationStyle: PresentationStyle = .separateWindow {
+        didSet { skipperManager.presentationStyle = presentationStyle }
     }
 
     private weak var viewControllerDisplayedUnder: UIViewController?
@@ -23,45 +19,21 @@ class CoachMarksViewController: UIViewController {
     // MARK: - Internal properties
     weak var delegate: CoachMarksViewControllerDelegate?
 
-    var rotationStyle: RotationStyle = .systemDefined
+    var rotationStyle: RotationBehavior = .systemDefined
     var statusBarVisibility: StatusBarVisibility = .systemDefined
-    var interfaceOrientations: InterfaceOrientations = .systemDefined
+    var interfaceOrientations: InterfaceOrientationBehavior = .systemDefined
 
-    var coachMarkDisplayManager: CoachMarkDisplayManager!
-    var skipViewDisplayManager: SkipViewDisplayManager!
     var overlayManager: OverlayManager! {
-        didSet {
-            coachMarkDisplayManager.overlayManager = overlayManager
-        }
+        didSet { coachMarkDisplayManager.overlayManager = overlayManager }
     }
 
     var customStatusBarStyle: UIStatusBarStyle?
 
     var currentCoachMarkView: CoachMarkView?
-    var skipView: (UIView & CoachMarkSkipView)? {
-        willSet {
-            if newValue == nil {
-                self.skipView?.asView?.removeFromSuperview()
-                self.skipView?.skipControl?.removeTarget(self,
-                                                         action: #selector(skipCoachMarksTour(_:)),
-                                                         for: .touchUpInside)
-            }
-        }
 
-        didSet {
-            guard skipView != nil else { return }
-
-            addSkipView()
-        }
-    }
-
-    lazy var instructionsRootView: InstructionsRootView = {
-        let view = InstructionsRootView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor.clear
-
-        return view
-    }()
+    var coachMarkDisplayManager: CoachMarkDisplayManager
+    var skipperManager: SkippingManager
+    var instructionsRootView: InstructionsRootView
 
     // MARK: - Overridden properties
     ///
@@ -99,16 +71,20 @@ class CoachMarksViewController: UIViewController {
     }
 
     // MARK: - Lifecycle
-    convenience init(coachMarkDisplayManager: CoachMarkDisplayManager,
-                     skipViewDisplayManager: SkipViewDisplayManager) {
-        self.init()
-
+    init(
+        coachMarkDisplayManager: CoachMarkDisplayManager,
+        skipViewDisplayManager: SkippingManager,
+        instructionsRootView: InstructionsRootView
+    ) {
         self.coachMarkDisplayManager = coachMarkDisplayManager
-        self.skipViewDisplayManager = skipViewDisplayManager
+        self.skipperManager = skipViewDisplayManager
+        self.instructionsRootView = instructionsRootView
+
+        super.init(nibName: nil, bundle: nil)
     }
 
-    deinit {
-        deregisterFromSystemEventChanges()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     // Called after the view was loaded.
@@ -133,19 +109,15 @@ class CoachMarksViewController: UIViewController {
     ///   - windowLevel: the level at which display the window.
     func attach(to window: UIWindow, over viewController: UIViewController,
                 at windowLevel: UIWindow.Level? = nil) {
-        if #available(iOS 13.0, *) {
-            if let windowLevel = windowLevel,
-               windowLevel.rawValue >= UIWindow.Level.statusBar.rawValue {
-                print(ErrorMessage.Warning.unsupportedWindowLevel)
-            }
+        if let windowLevel = windowLevel,
+           windowLevel.rawValue >= UIWindow.Level.statusBar.rawValue {
+            print(ErrorMessage.Warning.unsupportedWindowLevel)
         }
 
-        presentationFashion = .window
+        presentationStyle = .separateWindow
         window.windowLevel = windowLevel ?? UIWindow.Level.normal + 1
 
         viewControllerDisplayedUnder = viewController
-
-        registerForSystemEventChanges()
 
         view.addSubview(instructionsRootView)
         instructionsRootView.fillSuperview()
@@ -166,14 +138,13 @@ class CoachMarksViewController: UIViewController {
             return
         }
 
-        presentationFashion = .viewControllerWindow
+        presentationStyle = .sameWindow
 
         viewController.addChild(self)
         view.translatesAutoresizingMaskIntoConstraints = false
         viewController.view.addSubview(view)
         view.fillSuperview()
 
-        registerForSystemEventChanges()
         self.didMove(toParent: viewController)
 
         addRootView(to: window)
@@ -186,14 +157,13 @@ class CoachMarksViewController: UIViewController {
     ///
     /// - Parameter viewController: the controller to which attach the current view controller
     func attach(to viewController: UIViewController) {
-        presentationFashion = .viewController
+        presentationStyle = .viewController
 
         viewController.addChild(self)
         view.translatesAutoresizingMaskIntoConstraints = false
         viewController.view.addSubview(view)
         view.fillSuperview()
 
-        registerForSystemEventChanges()
         view.addSubview(instructionsRootView)
         instructionsRootView.fillSuperview()
         addOverlayView()
@@ -208,19 +178,17 @@ class CoachMarksViewController: UIViewController {
 
     /// Detach the controller from its parent view controller.
     func detachFromWindow() {
-        switch presentationFashion {
-        case .window:
-            deregisterFromSystemEventChanges()
+        switch presentationStyle {
+        case .separateWindow:
             let window = view.window
             window?.isHidden = true
             window?.rootViewController = nil
             window?.accessibilityIdentifier = nil
-        case .viewControllerWindow, .viewController:
+        case .sameWindow, .viewController:
             self.instructionsRootView.removeFromSuperview()
             self.willMove(toParent: nil)
             self.view.removeFromSuperview()
             self.removeFromParent()
-            deregisterFromSystemEventChanges()
         }
     }
 
@@ -228,17 +196,6 @@ class CoachMarksViewController: UIViewController {
     private func addOverlayView() {
         instructionsRootView.addSubview(overlayManager.overlayView)
         overlayManager.overlayView.fillSuperview()
-    }
-
-    /// Add a the "Skip view" to the main view container.
-    private func addSkipView() {
-        guard let skipView = skipView else { return }
-
-        skipView.asView?.alpha = 0.0
-        skipView.skipControl?.addTarget(self, action: #selector(skipCoachMarksTour(_:)),
-                                        for: .touchUpInside)
-
-        instructionsRootView.addSubview(skipView.asView!)
     }
 }
 
@@ -249,17 +206,14 @@ extension CoachMarksViewController {
         disableInteraction()
 
         overlayManager.showOverlay(true, completion: { _ in
-            if let skipView = self.skipView {
-                self.skipViewDisplayManager.show(skipView: skipView,
-                                                 duration: self.overlayManager.fadeAnimationDuration)
-            }
+            self.skipperManager.showSkipper(duration: self.overlayManager.fadeAnimationDuration)
 
             self.enableInteraction()
             completion()
         })
     }
 
-    func hide(coachMark: CoachMark, at index: Int, animated: Bool = true,
+    func hide(coachMark: ComputedCoachMarkConfiguration, at index: Int, animated: Bool = true,
               beforeTransition: Bool = false, completion: (() -> Void)? = nil) {
         guard let currentCoachMarkView = currentCoachMarkView else {
             completion?()
@@ -277,14 +231,23 @@ extension CoachMarksViewController {
         }
     }
 
-    func show(coachMark: inout CoachMark, at index: Int, animated: Bool = true,
-              completion: (() -> Void)? = nil) {
+    func show(
+        coachMark: ComputedCoachMarkConfiguration,
+        at index: Int,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil
+    ) {
         disableInteraction()
-        coachMark.computeMetadata(inFrame: instructionsRootView.frame)
-        let passthrough = coachMark.isUserInteractionEnabledInsideCutoutPath ||
+        let passthrough = coachMark.interaction.isUserInteractionEnabledInsideCutoutPath ||
                           overlayManager.areTouchEventsForwarded
-        let coachMarkView = coachMarkDisplayManager.createCoachMarkView(from: coachMark,
-                                                                        at: index)
+
+        guard let coachMarkView = coachMarkDisplayManager.createCoachMarkView(from: coachMark,
+                                                                              at: index) else {
+            instructionsRootView.passthrough = passthrough
+            enableInteraction()
+            completion?()
+            return
+        }
 
         currentCoachMarkView = coachMarkView
         addTargetToCurrentCoachView()
@@ -302,14 +265,14 @@ extension CoachMarksViewController {
         instructionsRootView.isUserInteractionEnabled = true
         overlayManager.overlayView.isUserInteractionEnabled = false
         currentCoachMarkView?.isUserInteractionEnabled = false
-        skipView?.asView?.isUserInteractionEnabled = false
+        skipperManager.view?.isUserInteractionEnabled = false
     }
 
     private func enableInteraction() {
         instructionsRootView.isUserInteractionEnabled = true
         overlayManager.overlayView.isUserInteractionEnabled = true
         currentCoachMarkView?.isUserInteractionEnabled = true
-        skipView?.asView?.isUserInteractionEnabled = true
+        skipperManager.view?.isUserInteractionEnabled = true
     }
 }
 
@@ -329,61 +292,32 @@ extension CoachMarksViewController {
         coordinator.animate(alongsideTransition: nil, completion: { _ in
             self.onGoingSizeChange = false
             self.overlayManager.viewDidTransition()
-            self.delegate?.didTransition(afterChanging: .size)
+            self.delegate?.didTransition(afterChanging: .sizeChange)
         })
     }
 
     // MARK: - Internal Methods
     /// Will remove currently displayed coach mark.
     func prepareForSizeTransition() {
-        guard let skipView = skipView else { return }
-        skipViewDisplayManager?.hide(skipView: skipView)
+        skipperManager.hideSkipper()
     }
 
     /// Will re-add the current coach mark
     func restoreAfterSizeTransitionDidComplete() {
-        guard let skipView = skipView else { return }
-        skipViewDisplayManager?.show(skipView: skipView)
+        skipperManager.showSkipper()
     }
 
     /// Same as `prepareForSizeTransition`, but for status bar changes.
     @objc public func prepareForChange() {
-        if #available(iOS 13.0, *) {
 
-        } else {
-            if !onGoingSizeChange {
-                delegate?.willTransition()
-                overlayManager.viewWillTransition()
-            }
-        }
     }
 
     /// Same as `restoreAfterSizeTransitionDidComplete`, but for status bar changes.
     @objc public func restoreAfterChangeDidComplete() {
-        if #available(iOS 13.0, *) {
-
-        } else {
-            if !onGoingSizeChange {
-                overlayManager.viewDidTransition()
-                delegate?.didTransition(afterChanging: .statusBar)
-            }
+        if !onGoingSizeChange {
+            overlayManager.viewDidTransition()
+            delegate?.didTransition(afterChanging: .statusBarChange)
         }
-    }
-
-    func registerForSystemEventChanges() {
-        if #available(iOS 13.0, *) {
-
-        } else {
-            let center = NotificationCenter.default
-            center.addObserver(self, selector: #selector(prepareForChange),
-                               name: UIApplication.willChangeStatusBarFrameNotification, object: nil)
-            center.addObserver(self, selector: #selector(restoreAfterChangeDidComplete),
-                               name: UIApplication.didChangeStatusBarFrameNotification, object: nil)
-        }
-    }
-
-    func deregisterFromSystemEventChanges() {
-        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -412,6 +346,6 @@ private extension CoachMarksViewController {
     ///
     /// - Parameter sender: the object sending the message
     @objc func skipCoachMarksTour(_ sender: AnyObject?) {
-        delegate?.didTap(skipView: skipView)
+        delegate?.didTapSkipper()
     }
 }

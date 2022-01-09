@@ -5,8 +5,8 @@ import XCTest
 @testable import Instructions
 
 class DataSourceCoachMarkAtTest: DataSourceBaseTest,
-                                 CoachMarksControllerDataSource,
-                                 CoachMarksControllerDelegate {
+                                 TutorialControllerDataSource,
+                                 TutorialControllerDelegate {
 
     var delegateEndExpectation: XCTestExpectation?
     var numberOfTimesCoachMarkAtWasCalled = 0
@@ -16,8 +16,8 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
     override func setUp() {
         super.setUp()
 
-        coachMarksController.dataSource = self
-        coachMarksController.delegate = self
+        tutorialController.dataSource = self
+        tutorialController.delegate = self
     }
 
     override func tearDown() {
@@ -27,7 +27,7 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
 
     func testThatCoachMarkAtIsCalledAtLeastTheNumberOfExpectedTimes() {
         delegateEndExpectation = self.expectation(description: "CoachMarkAt")
-        coachMarksController.start(in: .window(over: parentController))
+        tutorialController.start(in: .newWindow(over: parentController))
 
         waitForExpectations(timeout: 10) { error in
             if let error = error {
@@ -38,7 +38,7 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
 
     func testThatCoachMarkViewsAtIsCalledAtLeastTheNumberOfExpectedTimes() {
         delegateEndExpectation = self.expectation(description: "CoachMarkViewsAt")
-        coachMarksController.start(in: .window(over: parentController))
+        tutorialController.start(in: .newWindow(over: parentController))
 
         waitForExpectations(timeout: 10) { error in
             if let error = error {
@@ -49,7 +49,7 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
 
     func testThatConstraintsForSkipViewIsCalledAtLeastTheNumberOfExpectedTimes() {
         delegateEndExpectation = self.expectation(description: "ConstraintsForSkipView")
-        coachMarksController.start(in: .window(over: parentController))
+        tutorialController.start(in: .newWindow(over: parentController))
 
         waitForExpectations(timeout: 10) { error in
             if let error = error {
@@ -58,43 +58,43 @@ class DataSourceCoachMarkAtTest: DataSourceBaseTest,
         }
     }
 
-    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarks(for coachMarksController: TutorialController) -> Int {
         return 4
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkAt index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: TutorialController,
+                              coachMarkAt index: Int) -> CoachMarkConfiguration {
         numberOfTimesCoachMarkAtWasCalled += 1
 
-        return CoachMark()
+        return CoachMarkConfiguration()
     }
 
     func coachMarksController(
-        _ coachMarksController: CoachMarksController,
+        _ coachMarksController: TutorialController,
         coachMarkViewsAt index: Int,
-        madeFrom coachMark: CoachMark
-    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
+        madeFrom coachMark: CoachMarkConfiguration
+    ) -> (bodyView: (UIView & CoachMarkContentView), arrowView: (UIView & CoachMarkArrowView)?) {
             numberOfTimesCoachMarkViewsAtWasCalled += 1
             return (bodyView: CoachMarkBodyDefaultView(), arrowView: nil)
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
+    func coachMarksController(_ coachMarksController: TutorialController,
                               constraintsForSkipView skipView: UIView,
                               inParent parentView: UIView) -> [NSLayoutConstraint]? {
         numberOfTimesConstraintsForSkipViewWasCalled += 1
         return nil
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didShow coachMark: CoachMark,
+    func coachMarksController(_ coachMarksController: TutorialController,
+                              didShow coachMark: CoachMarkConfiguration,
                               afterChanging change: ConfigurationChange,
                               at index: Int) {
         if change == .nothing {
-            coachMarksController.flow.showNext()
+            tutorialController.flow.showNext()
         }
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, didEndShowingBySkipping skipped: Bool) {
+    func coachMarksController(_ coachMarksController: TutorialController, didEndShowingBySkipping skipped: Bool) {
         guard let delegateEndExpectation = self.delegateEndExpectation else {
             XCTFail("Undefined expectation")
             return

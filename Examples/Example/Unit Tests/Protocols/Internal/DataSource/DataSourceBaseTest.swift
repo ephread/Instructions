@@ -6,7 +6,7 @@ import XCTest
 
 class DataSourceBaseTest: XCTestCase {
 
-    var coachMarksController = CoachMarksController()
+    var tutorialController = TutorialController()
     var parentController = UIViewController()
     var mockedWindow = UIWindow()
 

@@ -119,12 +119,12 @@ Open up the controller for which you wish to display coach marks and instantiate
 class DefaultViewController: UIViewController,
                              CoachMarksControllerDataSource,
                              CoachMarksControllerDelegate {
-    let coachMarksController = CoachMarksController()
+    let tutorialController = TutorialController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.coachMarksController.dataSource = self
+        self.tutorialController.dataSource = self
     }
 }
 ```
@@ -135,7 +135,7 @@ class DefaultViewController: UIViewController,
 The first one asks for the number of coach marks to display. Let's pretend that you want to display only one coach mark. Note that the `CoachMarksController` requesting the information is supplied, allowing you to supply data for multiple `CoachMarksController`, within a single dataSource.
 
 ```swift
-func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+func numberOfCoachMarks(for coachMarksController: TutorialController) -> Int {
     return 1
 }
 ```
@@ -145,9 +145,9 @@ The second one asks for metadata. This allows you to customize how a coach mark 
 ```swift
 let pointOfInterest = UIView()
 
-func coachMarksController(_ coachMarksController: CoachMarksController,
+func coachMarksController(_ coachMarksController: TutorialController,
                           coachMarkAt index: Int) -> CoachMark {
-    return coachMarksController.helper.makeCoachMark(for: pointOfInterest)
+    return tutorialController.helper.makeCoachMark(for: pointOfInterest)
 }
 ```
 
@@ -157,11 +157,11 @@ But for now, lets just return the default views provided by Instructions.
 
 ```swift
 func coachMarksController(
-    _ coachMarksController: CoachMarksController,
+    _ coachMarksController: TutorialController,
     coachMarkViewsAt index: Int,
     madeFrom coachMark: CoachMark
 ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
-    let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+    let coachViews = tutorialController.helper.makeDefaultCoachViews(
         withArrow: true,
         arrowOrientation: coachMark.arrowOrientation
     )
@@ -180,7 +180,7 @@ Once the `dataSource` is set up, you can start displaying the coach marks. You w
 override func viewDidAppear(animated: Bool) {
     super.viewDidAppear(animated)
 
-    self.coachMarksController.start(in: .window(over: self))
+    self.tutorialController.start(in: .window(over: self))
 }
 ```
 
@@ -191,7 +191,7 @@ You should always stop the flow, once the view disappear. To avoid animation art
 override func viewWillDisappear(animated: Bool) {
     super.viewWillDisappear(animated)
 
-    self.coachMarksController.stop(immediately: true)
+    self.tutorialController.stop(immediately: true)
 }
 ```
 
@@ -266,11 +266,11 @@ Remember the following method, from the dataSource?
 
 ```swift
 func coachMarksController(
-    _ coachMarksController: CoachMarksController,
+    _ coachMarksController: TutorialController,
     coachMarkViewsAt index: Int,
     madeFrom coachMark: CoachMark
 ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
-    let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+    let coachViews = tutorialController.helper.makeDefaultCoachViews(
         withArrow: true,
         arrowOrientation: coachMark.arrowOrientation
     )
@@ -285,7 +285,7 @@ Browse the `Example/` directory for more details.
 If you dislike how the default cutout path looks like, you can customize it by providing a block to `makeCoachMark(for:)`. The cutout path will automatically be stored in the `cutoutPath` property of the returning `CoachMark` object:
 
 ```swift
-var coachMark = coachMarksController.helper.makeCoachMark(
+var coachMark = tutorialController.helper.makeCoachMark(
     for: customView,
     cutoutPathMaker: { (frame: CGRect) -> UIBezierPath in
         // This will create an oval cutout a bit larger than the view.
@@ -294,14 +294,14 @@ var coachMark = coachMarksController.helper.makeCoachMark(
 )
 ```
 
-`frame` is the frame of `customView` expressed in the coordinate space of `coachMarksController.view`.
+`frame` is the frame of `customView` expressed in the coordinate space of `tutorialController.view`.
 The conversion between this coordinate space and Instructions' coordinate space is handled automatically.
 Any kind of shape can be provided, from a simple rectangle to a complex star.
 
 You can also pass a frame rectangle directly if you supply its coordinate space.
 
 ```swift
-var coachMark = coachMarksController.helper.makeCoachMark(
+var coachMark = tutorialController.helper.makeCoachMark(
     forFrame: frame,
     in: superview,
     cutoutPathMaker: { (frame: CGRect) -> UIBezierPath in
@@ -349,21 +349,21 @@ To animates coach marks, you will need to implement the `CoachMarksControllerAni
 
 ```swift
 func coachMarksController(
-    _ coachMarksController: CoachMarksController,
+    _ coachMarksController: TutorialController,
     fetchAppearanceTransitionOfCoachMark coachMarkView: UIView,
     at index: Int,
     using manager: CoachMarkTransitionManager
 )
 
 func coachMarksController(
-    _ coachMarksController: CoachMarksController,
+    _ coachMarksController: TutorialController,
     fetchDisappearanceTransitionOfCoachMark coachMarkView: UIView,
     at index: Int,
     using manager: CoachMarkTransitionManager
 )
 
 func coachMarksController(
-    _ coachMarksController: CoachMarksController,
+    _ coachMarksController: TutorialController,
     fetchIdleAnimationOfCoachMark coachMarkView: UIView,
     at index: Int,
     using manager: CoachMarkAnimationManager
@@ -409,7 +409,7 @@ To define how the view will position itself, you can use a method from the `Coac
 
 ```swift
 func coachMarksController(
-    _ coachMarksController: CoachMarksController,
+    _ coachMarksController: TutorialController,
     constraintsForSkipView skipView: UIView,
     inParent parentView: UIView
 ) -> [NSLayoutConstraint]?
@@ -443,7 +443,7 @@ First, when a coach mark will show. You might want to change something about the
 
 ```swift
 func coachMarksController(
-    _ coachMarksController: CoachMarksController,
+    _ coachMarksController: TutorialController,
     willShow coachMark: inout CoachMark,
     at index: Int
 )
@@ -453,7 +453,7 @@ Second, when a coach mark disappears.
 
 ```swift
 func coachMarksController(
-    _ coachMarksController: CoachMarksController,
+    _ coachMarksController: TutorialController,
     willHide coachMark: CoachMark,
     at index: Int
 )
@@ -463,7 +463,7 @@ Third, when all coach marks have been displayed. `didEndShowingBySkipping` speci
 
 ```swift
 func coachMarksController(
-    _ coachMarksController: CoachMarksController,
+    _ coachMarksController: TutorialController,
     didEndShowingBySkipping skipped: Bool
 )
 ```
@@ -474,7 +474,7 @@ Whenever the user will tap the overlay, you will get notified through:
 
 ```swift
 func shouldHandleOverlayTap(
-    in coachMarksController: CoachMarksController,
+    in coachMarksController: TutorialController,
     at index: Int
 ) -> Bool
 ```
@@ -484,7 +484,7 @@ Returning `true` will let Instructions continue the flow normally, while returni
 `index` is the index of the coach mark currently displayed.
 
 ##### Pausing and resuming the flow
-It's as simple as calling `coachMarksController.flow.pause()` and `coachMarksController.flow.resume()`. While pausing, you can also choose to hide Instructions's overlay altogether (`.pause(and: hideInstructions)`), or only hide the overlay and retain its touch blocking capabilities (`.pause(and: hideOverlay)`).
+It's as simple as calling `tutorialController.flow.pause()` and `tutorialController.flow.resume()`. While pausing, you can also choose to hide Instructions's overlay altogether (`.pause(and: hideInstructions)`), or only hide the overlay and retain its touch blocking capabilities (`.pause(and: hideOverlay)`).
 
 ##### Performing animations before showing coach marks #####
 You can perform animation on views, before or after showing a given coach mark.
@@ -496,12 +496,12 @@ To ensure you don't have to hack something up and turn asynchronous animation bl
 
 ```swift
 func coachMarksController(
-    _ coachMarksController: CoachMarksController,
+    _ coachMarksController: TutorialController,
     willShow coachMark: inout CoachMark,
     at index: Int
 ) {
     // Pause to be able to play the animation and then show the coach mark.
-    coachMarksController.flow.pause()
+    tutorialController.flow.pause()
 
     // Run the animation
     UIView.animateWithDuration(1, animations: { () -> Void in
@@ -511,8 +511,8 @@ func coachMarksController(
         // and start the display again. Since inout parameters cannot be
         // captured by the closure, you can use the following method to update
         // the coach mark. It will only work if you paused the flow.
-        coachMarksController.helper.updateCurrentCoachMark(using: myView)
-        coachMarksController.flow.resume()
+        tutorialController.helper.updateCurrentCoachMark(using: myView)
+        tutorialController.flow.resume()
     })
 }
 ```
@@ -521,7 +521,7 @@ When updating points of interest and cutout paths, make sure to express them in 
 space, by using the provided converter.
 
 ```
-coachMarksController.helper.updateCurrentCoachMark { coachMark, converter in
+tutorialController.helper.updateCurrentCoachMark { coachMark, converter in
     coachMark.pointOfInterest = converter.convert(point: myPoint, from: myPointSuperview)
     coachMark.gapBetweenCoachMarkAndCutoutPath = 6
 }
@@ -539,7 +539,7 @@ You can skip a given coach mark by implementing the following method defined in 
 
 ```swift
 func coachMarksController(
-    _ coachMarksController: CoachMarksController,
+    _ coachMarksController: TutorialController,
     coachMarkWillLoadAt index: Int
 ) -> Bool
 ```
@@ -552,7 +552,7 @@ It's possible to add custom views which will be displayed over the overlay by im
 
 ```swift
 func coachMarksController(
-    _ coachMarksController: CoachMarksController,
+    _ coachMarksController: TutorialController,
     configureOrnamentsOfOverlay overlay: UIView
 )
 ```

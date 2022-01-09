@@ -27,6 +27,9 @@
          location = "group:Documentation"
          name = "Documentation">
          <FileRef
+            location = "group:/Users/fred/Documents/Development/iOS/Instructions/Documentation/migrating_to_3.0.0.md">
+         </FileRef>
+         <FileRef
             location = "group:/Users/fred/Documents/Development/iOS/Instructions/Documentation/migrating_to_2.0.0.md">
          </FileRef>
       </Group>

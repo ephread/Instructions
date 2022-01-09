@@ -25,27 +25,26 @@ public class CoachMarkHelper {
     ///               a tap; the content of the label can be customised at a later stage.
     ///   - arrowOrientation: The orientation of the coach mark / arrow.
     /// - Returns: New instances of the default coach views.
-    public func makeDefaultCoachViews(
-        withArrow arrow: Bool = true,
-        withNextText nextText: Bool = true,
-        arrowOrientation: CoachMarkArrowOrientation? = .top
-    ) -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
-
-        var coachMarkBodyView: CoachMarkBodyDefaultView
-
-        if nextText {
-            coachMarkBodyView = CoachMarkBodyDefaultView()
+    public func makeDefaultViews(
+        showNextLabel: Bool = true,
+        showPointer: Bool = true,
+        position: ComputedVerticalPosition = .below
+    ) -> CoachMarkDefaultViewComponents {
+        let content: DefaultCoachMarkContentView
+        if showNextLabel {
+            content = DefaultCoachMarkContentView()
         } else {
-            coachMarkBodyView = CoachMarkBodyDefaultView(hintText: "", nextText: nil)
+            content = DefaultCoachMarkContentView(hintText: "", nextText: nil)
         }
 
-        var coachMarkArrowView: CoachMarkArrowDefaultView?
-
-        if arrow {
-            coachMarkArrowView = makeDefaultArrow(withOrientation: arrowOrientation)
+        let pointer: DefaultCoachMarkPointerView?
+        if showPointer {
+            pointer = makeDefaultArrow(position: position)
+        } else {
+            pointer = nil
         }
 
-        return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
+        return CoachMarkDefaultViewComponents(content: content, pointer: pointer)
     }
 
     /// Creates the default coach views.
@@ -57,21 +56,22 @@ public class CoachMarkHelper {
     ///   - nextText: An optional text to display on the trailing side, calling for
     ///               a tap.
     /// - Returns: New instances of the default coach views.
-    public func makeDefaultCoachViews(
-        withArrow arrow: Bool = true,
-        arrowOrientation: CoachMarkArrowOrientation? = .top,
-        hintText: String,
-        nextText: String? = nil
-    ) -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
-        let coachMarkBodyView = CoachMarkBodyDefaultView(hintText: hintText, nextText: nextText)
+    public func makeDefaultViews(
+        contentText: String,
+        nextText: String? = nil,
+        showPointer: Bool = true,
+        position: ComputedVerticalPosition = .below
+    ) -> CoachMarkDefaultViewComponents {
+        let content = DefaultCoachMarkContentView(hintText: contentText, nextText: nextText)
 
-        var coachMarkArrowView: CoachMarkArrowDefaultView?
-
-        if arrow {
-            coachMarkArrowView = makeDefaultArrow(withOrientation: arrowOrientation)
+        let pointer: DefaultCoachMarkPointerView?
+        if showPointer {
+            pointer = makeDefaultArrow(position: position)
+        } else {
+            pointer = nil
         }
 
-        return (bodyView: coachMarkBodyView, arrowView: coachMarkArrowView)
+        return CoachMarkDefaultViewComponents(content: content, pointer: pointer)
     }
 
     // MARK: - Coach Mark Creation
@@ -98,8 +98,12 @@ public class CoachMarkHelper {
         for view: UIView? = nil,
         pointOfInterest: CGPoint? = nil,
         cutoutPathMaker: CutoutPathMaker? = nil
-    ) -> CoachMark {
-        var coachMark = CoachMark()
+    ) -> CoachMarkConfiguration {
+        var coachMark = CoachMarkConfiguration(
+            layout: CoachMarkLayoutConfiguration(),
+            anchor: CoachMarkAnchorConfiguration(),
+            interaction: CoachMarkInteractionConfiguration()
+        )
 
         guard let view = view else {
             return coachMark
@@ -131,8 +135,12 @@ public class CoachMarkHelper {
         pointOfInterest: CGPoint,
         in superview: UIView?,
         cutoutPathMaker: CutoutPathMaker? = nil
-    ) -> CoachMark {
-        var coachMark = CoachMark()
+    ) -> CoachMarkConfiguration {
+        var coachMark = CoachMarkConfiguration(
+            layout: CoachMarkLayoutConfiguration(),
+            anchor: CoachMarkAnchorConfiguration(),
+            interaction: CoachMarkInteractionConfiguration()
+        )
 
         update(coachMark: &coachMark,
                usingFrame: frame,
@@ -156,9 +164,13 @@ public class CoachMarkHelper {
     public func makeCoachMark(
         pointOfInterest: CGPoint? = nil,
         in superview: UIView?
-    ) -> CoachMark {
-        var coachMark = CoachMark()
-        
+    ) -> CoachMarkConfiguration {
+        var coachMark = CoachMarkConfiguration(
+            layout: CoachMarkLayoutConfiguration(),
+            anchor: CoachMarkAnchorConfiguration(),
+            interaction: CoachMarkInteractionConfiguration()
+        )
+
         let frame: CGRect?
         if let point = pointOfInterest {
             frame = .init(origin: point, size: .zero)
@@ -192,8 +204,12 @@ public class CoachMarkHelper {
         forFrame frame: CGRect,
         in superview: UIView?,
         cutoutPathMaker: CutoutPathMaker? = nil
-    ) -> CoachMark {
-        var coachMark = CoachMark()
+    ) -> CoachMarkConfiguration {
+        var coachMark = CoachMarkConfiguration(
+            layout: CoachMarkLayoutConfiguration(),
+            anchor: CoachMarkAnchorConfiguration(),
+            interaction: CoachMarkInteractionConfiguration()
+        )
 
         update(coachMark: &coachMark,
                usingFrame: frame,
@@ -250,7 +266,7 @@ public class CoachMarkHelper {
     ///                             can used this instance of `CoachMarkCoordinateConverter`
     ///                             to convert rectangles and points.
     public func updateCurrentCoachMark(
-        _ configure: (_ coachMark: inout CoachMark,
+        _ configure: (_ coachMark: inout CoachMarkConfiguration,
                       _ frameConverter: CoachMarkCoordinateConverter) -> Void
     ) {
         // `currentCoachMark` is inout, so binding it conditionally doesn't
@@ -268,7 +284,7 @@ public class CoachMarkHelper {
 // MARK: - Internal Methods
 internal extension CoachMarkHelper {
     func update(
-        coachMark: inout CoachMark,
+        coachMark: inout CoachMarkConfiguration,
         usingFrame frame: CGRect? = nil,
         pointOfInterest: CGPoint?,
         superview: UIView? = nil,
@@ -287,24 +303,18 @@ internal extension CoachMarkHelper {
                                           cornerRadii: CGSize(width: 4, height: 4))
             }
 
-            coachMark.cutoutPath = bezierPath
+            coachMark.anchor.cutoutPath = bezierPath
         }
 
         if let pointOfInterest = pointOfInterest {
             let convertedPointOfInterest = coordinateConverter.convert(point: pointOfInterest,
                                                                        from: superview)
-            coachMark.pointOfInterest = convertedPointOfInterest
+            coachMark.anchor.pointOfInterest = convertedPointOfInterest
         }
     }
 
-    func makeDefaultArrow(
-        withOrientation arrowOrientation: CoachMarkArrowOrientation?
-    ) -> CoachMarkArrowDefaultView {
-        guard let arrowOrientation = arrowOrientation else {
-            return CoachMarkArrowDefaultView(orientation: .top)
-        }
-
-        return CoachMarkArrowDefaultView(orientation: arrowOrientation)
+    func makeDefaultArrow(position: ComputedVerticalPosition) -> DefaultCoachMarkPointerView {
+        return DefaultCoachMarkPointerView(position: position)
     }
 }
 

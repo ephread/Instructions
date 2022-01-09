@@ -11,7 +11,7 @@ internal class KeyboardViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
 
     // MARK: - Public properties
-    var coachMarksController = CoachMarksController()
+    var tutorialController = TutorialController()
 
     let avatarText = "That's your profile picture. You look gorgeous!"
     let inputText = "Please enter your name here"
@@ -21,9 +21,9 @@ internal class KeyboardViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        coachMarksController.overlay.isUserInteractionEnabled = false
-        coachMarksController.dataSource = self
-        coachMarksController.delegate = self
+        tutorialController.overlay.isUserInteractionEnabled = false
+        tutorialController.dataSource = self
+        tutorialController.delegate = self
 
         textField.delegate = self
 
@@ -51,11 +51,11 @@ internal class KeyboardViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        self.coachMarksController.stop(immediately: true)
+        self.tutorialController.stop(immediately: true)
     }
 
     func startInstructions() {
-        self.coachMarksController.start(in: .window(over: self))
+        self.tutorialController.start(in: .window(over: self))
     }
 
     @objc func keyboardWillShow() {
@@ -67,7 +67,7 @@ internal class KeyboardViewController: UIViewController {
     }
 
     @objc func keyboardDidShow() {
-        coachMarksController.flow.resume()
+        tutorialController.flow.resume()
     }
 
     @objc func keyboardDidHide() {
@@ -76,33 +76,33 @@ internal class KeyboardViewController: UIViewController {
 }
 
 // MARK: - Protocol Conformance | CoachMarksControllerDataSource
-extension KeyboardViewController: CoachMarksControllerDataSource {
-    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+extension KeyboardViewController: TutorialControllerDataSource {
+    func numberOfCoachMarks(for coachMarksController: TutorialController) -> Int {
         return 2
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: TutorialController, coachMarkAt index: Int) -> CoachMarkConfiguration {
         switch index {
         case 0:
-            return coachMarksController.helper.makeCoachMark(for: self.avatar)
+            return tutorialController.helper.makeCoachMark(for: self.avatar)
         case 1:
-            return coachMarksController.helper.makeCoachMark(for: self.textField)
+            return tutorialController.helper.makeCoachMark(for: self.textField)
         default:
-            return coachMarksController.helper.makeCoachMark()
+            return tutorialController.helper.makeCoachMark()
         }
     }
 
     func coachMarksController(
-        _ coachMarksController: CoachMarksController,
+        _ coachMarksController: TutorialController,
         coachMarkViewsAt index: Int,
-        madeFrom coachMark: CoachMark
-    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
+        madeFrom coachMark: CoachMarkConfiguration
+    ) -> (bodyView: (UIView & CoachMarkContentView), arrowView: (UIView & CoachMarkArrowView)?) {
 
-        var coachViews: (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?)
+        var coachViews: (bodyView: DefaultCoachMarkContentView, arrowView: DefaultCoachMarkPointerView?)
 
         switch index {
         case 1:
-            coachViews = coachMarksController.helper
+            coachViews = tutorialController.helper
                                              .makeDefaultCoachViews(withArrow: true,
                                                                     withNextText: false,
                                                                     arrowOrientation: .bottom)
@@ -110,7 +110,7 @@ extension KeyboardViewController: CoachMarksControllerDataSource {
             coachViews.bodyView.isUserInteractionEnabled = false
         default:
             let orientation = coachMark.arrowOrientation
-            coachViews = coachMarksController.helper
+            coachViews = tutorialController.helper
                                              .makeDefaultCoachViews(withArrow: true,
                                                                     withNextText: false,
                                                                     arrowOrientation: orientation)
@@ -122,21 +122,21 @@ extension KeyboardViewController: CoachMarksControllerDataSource {
 }
 
 // MARK: - Protocol Conformance | CoachMarksControllerDelegate
-extension KeyboardViewController: CoachMarksControllerDelegate {
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              willShow coachMark: inout CoachMark,
+extension KeyboardViewController: TutorialControllerDelegate {
+    func coachMarksController(_ coachMarksController: TutorialController,
+                              willShow coachMark: inout CoachMarkConfiguration,
                               beforeChanging change: ConfigurationChange,
                               at index: Int) {
         if index == 1 {
             coachMark.arrowOrientation = .bottom
             if change == .nothing {
                 textField.becomeFirstResponder()
-                coachMarksController.flow.pause()
+                tutorialController.flow.pause()
             }
         }
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
+    func coachMarksController(_ coachMarksController: TutorialController,
                               didEndShowingBySkipping skipped: Bool) {
         textField.resignFirstResponder()
     }
@@ -145,7 +145,7 @@ extension KeyboardViewController: CoachMarksControllerDelegate {
 // MARK: - Protocol Conformance | UITextFieldDelegate
 extension KeyboardViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        coachMarksController.flow.showNext()
+        tutorialController.flow.showNext()
         return true
     }
 }

@@ -11,7 +11,7 @@ protocol CoachMarksViewControllerDelegate: AnyObject {
     /// The given `skipView` was tapped.
     ///
     /// - Parameter skipView: the view that was tapped.
-    func didTap(skipView: CoachMarkSkipView?)
+    func didTapSkipper()
 
     /// The delegate should prepare for the upcoming size transition.
     func willTransition()

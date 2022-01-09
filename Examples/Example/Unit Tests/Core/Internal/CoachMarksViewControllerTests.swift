@@ -4,63 +4,63 @@
 import XCTest
 @testable import Instructions
 
-class CoachMarksViewControllerTests: XCTestCase, CoachMarksControllerDelegate {
+class CoachMarksViewControllerTests: XCTestCase, TutorialControllerDelegate {
 
-    let coachMarksController = CoachMarksViewController()
-    let skipViewDisplayManager = SkipViewDisplayManager()
+    let tutorialController = CoachMarksViewController()
+    let skipViewDisplayManager = SkippingManager()
     let coachMarkDisplayManager =
         CoachMarkDisplayManager(coachMarkLayoutHelper: CoachMarkLayoutHelper())
 
     override func setUp() {
         super.setUp()
-        coachMarksController.coachMarkDisplayManager = coachMarkDisplayManager
-        coachMarksController.skipViewDisplayManager = skipViewDisplayManager
-        coachMarksController.overlayManager = OverlayManager()
+        tutorialController.coachMarkDisplayManager = coachMarkDisplayManager
+        tutorialController.skipViewDisplayManager = skipViewDisplayManager
+        tutorialController.overlayManager = OverlayManager()
     }
 
     func testThatCustomStatusBarTakePrecedenceOverOverlayColor() {
-        coachMarksController.overlayManager.backgroundColor = .white
-        coachMarksController.customStatusBarStyle = .lightContent
-        XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .lightContent)
+        tutorialController.overlayManager.backgroundColor = .white
+        tutorialController.customStatusBarStyle = .lightContent
+        XCTAssertEqual(tutorialController.preferredStatusBarStyle, .lightContent)
 
-        coachMarksController.overlayManager.backgroundColor = .black
-        coachMarksController.customStatusBarStyle = .default
-        XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .default)
+        tutorialController.overlayManager.backgroundColor = .black
+        tutorialController.customStatusBarStyle = .default
+        XCTAssertEqual(tutorialController.preferredStatusBarStyle, .default)
     }
 
     func testThatCustomStatusBarTakePrecedenceOverOverlayBlur() {
-        coachMarksController.overlayManager.blurEffectStyle = .dark
-        coachMarksController.customStatusBarStyle = .default
-        XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .default)
+        tutorialController.overlayManager.blurEffectStyle = .dark
+        tutorialController.customStatusBarStyle = .default
+        XCTAssertEqual(tutorialController.preferredStatusBarStyle, .default)
 
-        coachMarksController.overlayManager.blurEffectStyle = .light
-        coachMarksController.customStatusBarStyle = .lightContent
-        XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .lightContent)
+        tutorialController.overlayManager.blurEffectStyle = .light
+        tutorialController.customStatusBarStyle = .lightContent
+        XCTAssertEqual(tutorialController.preferredStatusBarStyle, .lightContent)
 
-        coachMarksController.overlayManager.blurEffectStyle = .extraLight
-        coachMarksController.customStatusBarStyle = .lightContent
-        XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .lightContent)
+        tutorialController.overlayManager.blurEffectStyle = .extraLight
+        tutorialController.customStatusBarStyle = .lightContent
+        XCTAssertEqual(tutorialController.preferredStatusBarStyle, .lightContent)
     }
 
     func testThatStatusBarStyleDependsOnBlurStyle() {
-        coachMarksController.overlayManager.blurEffectStyle = .dark
-        XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .lightContent)
+        tutorialController.overlayManager.blurEffectStyle = .dark
+        XCTAssertEqual(tutorialController.preferredStatusBarStyle, .lightContent)
 
-        coachMarksController.overlayManager.blurEffectStyle = .light
-        XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .default)
+        tutorialController.overlayManager.blurEffectStyle = .light
+        XCTAssertEqual(tutorialController.preferredStatusBarStyle, .default)
 
-        coachMarksController.overlayManager.blurEffectStyle = .extraLight
-        XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .default)
+        tutorialController.overlayManager.blurEffectStyle = .extraLight
+        XCTAssertEqual(tutorialController.preferredStatusBarStyle, .default)
     }
 
     func testThatStatusBarStyleDependsOnOverlayColor() {
-        coachMarksController.overlayManager.backgroundColor = .black
-        XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .lightContent)
+        tutorialController.overlayManager.backgroundColor = .black
+        XCTAssertEqual(tutorialController.preferredStatusBarStyle, .lightContent)
 
-        coachMarksController.overlayManager.backgroundColor = .white
-        XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .default)
+        tutorialController.overlayManager.backgroundColor = .white
+        XCTAssertEqual(tutorialController.preferredStatusBarStyle, .default)
 
-        coachMarksController.overlayManager.backgroundColor = .gray
-        XCTAssertEqual(coachMarksController.preferredStatusBarStyle, .default)
+        tutorialController.overlayManager.backgroundColor = .gray
+        XCTAssertEqual(tutorialController.preferredStatusBarStyle, .default)
     }
 }

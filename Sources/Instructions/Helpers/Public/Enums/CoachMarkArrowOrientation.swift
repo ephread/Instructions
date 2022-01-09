@@ -3,10 +3,41 @@
 
 import UIKit
 
-/// Available orientations for the arrow.
-/// An arrow can either sit at the top of the body and point upwards (.top) or
-/// sit at the bottom of the body and point downwards. (.bottom)
-public enum CoachMarkArrowOrientation {
-    case top
-    case bottom
+/// The vertical alignment of the coach mark.
+public enum ComputedVerticalPosition: Hashable {
+    /// The coach mark should sit above the point of interest / cutout path.
+    case above
+
+    /// The coach mark should over point of interest / cutout path.
+    case over
+
+    /// The coach mark should sit below the point of interest / cutout path.
+    case below
+
+    init(position: VerticalPosition) {
+        switch position {
+        case .above: self = .above
+        case .over, .automatic: self = .over
+        case .below: self = .below
+        }
+    }
 }
+
+/// The vertical alignment of the coach mark.
+public enum VerticalPosition: Hashable {
+    /// The coach mark should sit above the point of interest / cutout path.
+    case above
+
+    /// The coach mark should over point of interest / cutout path.
+    case over
+
+    /// The coach mark should sit below the point of interest / cutout path.
+    case below
+
+    /// Depending on the available space, the coach mark should sit either above or below,
+    /// but never over point of interest / cutout path.
+    case automatic
+}
+
+@available(*, unavailable, renamed: "VerticalPosition")
+typealias CoachMarkArrowOrientation = VerticalPosition

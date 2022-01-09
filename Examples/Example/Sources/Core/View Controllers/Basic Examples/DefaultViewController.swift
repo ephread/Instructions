@@ -7,7 +7,8 @@ import Instructions
 // That's the default controller, using every defaults made available by Instructions.
 // It can't get any simpler.
 internal class DefaultViewController: ProfileViewController,
-                                      CoachMarksControllerDataSource {
+                                      TutorialControllerDataSource,
+                                      TutorialControllerDelegate {
     var windowLevel: UIWindow.Level?
     var presentationContext: Context = .independentWindow
     var useInvisibleOverlay: Bool = false
@@ -16,34 +17,34 @@ internal class DefaultViewController: ProfileViewController,
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.coachMarksController.dataSource = self
-        self.coachMarksController.delegate = self
+        self.tutorialController.dataSource = self
+        self.tutorialController.delegate = self
 
         self.emailLabel?.layer.cornerRadius = 4.0
         self.postsLabel?.layer.cornerRadius = 4.0
         self.reputationLabel?.layer.cornerRadius = 4.0
 
-        let skipView = CoachMarkSkipDefaultView()
+        let skipView = DefaultCoachMarkSkipperView()
         skipView.setTitle("Skip", for: .normal)
 
-        self.coachMarksController.skipView = skipView
+        self.tutorialController.skipper.view = skipView
 
         if useInvisibleOverlay {
-            self.coachMarksController.overlay.areTouchEventsForwarded = true
-            self.coachMarksController.overlay.backgroundColor = .clear
+            self.tutorialController.overlay.areTouchEventsForwarded = true
+            self.tutorialController.overlay.backgroundColor = .clear
         }
     }
 
     override func startInstructions() {
         if presentationContext == .controllerWindow {
-            self.coachMarksController.start(in: .currentWindow(of: self))
+            self.tutorialController.start(in: .currentWindow(of: self))
         } else if presentationContext == .controller {
-            self.coachMarksController.start(in: .viewController(self))
+            self.tutorialController.start(in: .viewController(self))
         } else {
             if let windowLevel = windowLevel {
-                self.coachMarksController.start(in: .newWindow(over: self, at: windowLevel))
+                self.tutorialController.start(in: .newWindow(over: self, at: windowLevel))
             } else {
-                self.coachMarksController.start(in: .window(over: self))
+                self.tutorialController.start(in: .newWindow(over: self))
             }
         }
     }
@@ -53,14 +54,17 @@ internal class DefaultViewController: ProfileViewController,
     }
 
     // MARK: - Protocol Conformance | CoachMarksControllerDataSource
-    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarks(in tutorialController: TutorialController) -> Int {
         return 5
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+    func tutorialController(
+        _ tutorialController: TutorialController,
+        configurationForCoachMarkAt index: Int
+    ) -> CoachMarkConfiguration {
         switch index {
         case 0:
-            return coachMarksController.helper.makeCoachMark(
+            return tutorialController.helper.makeCoachMark(
                 for: self.navigationController?.navigationBar,
                 cutoutPathMaker: { (frame: CGRect) -> UIBezierPath in
                     // This will make a cutoutPath matching the shape of
@@ -69,54 +73,55 @@ internal class DefaultViewController: ProfileViewController,
                 }
             )
         case 1:
-            return coachMarksController.helper.makeCoachMark(for: self.handleLabel)
+            return tutorialController.helper.makeCoachMark(for: self.handleLabel)
         case 2:
-            return coachMarksController.helper.makeCoachMark(for: self.emailLabel)
+            return tutorialController.helper.makeCoachMark(for: self.emailLabel)
         case 3:
-            return coachMarksController.helper.makeCoachMark(for: self.postsLabel)
+            return tutorialController.helper.makeCoachMark(for: self.postsLabel)
         case 4:
-            return coachMarksController.helper.makeCoachMark(for: self.reputationLabel)
+            return tutorialController.helper.makeCoachMark(for: self.reputationLabel)
         default:
-            return coachMarksController.helper.makeCoachMark()
+            return tutorialController.helper.makeCoachMark()
         }
     }
 
-    func coachMarksController(
-        _ coachMarksController: CoachMarksController,
-        coachMarkViewsAt index: Int,
-        madeFrom coachMark: CoachMark
-    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
-
-        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
-            withArrow: true,
-            arrowOrientation: coachMark.arrowOrientation
+    func tutorialController(
+        _ tutorialController: TutorialController,
+        compoundViewFor configuration: ComputedCoachMarkConfiguration,
+        at index: Int
+    ) -> CoachMarkViewComponents {
+        let components = tutorialController.helper.makeDefaultViews(
+            showPointer: true,
+            position: configuration.position
         )
 
         switch index {
         case 0:
-            coachViews.bodyView.hintLabel.text = self.profileSectionText
-            coachViews.bodyView.nextLabel.text = self.nextButtonText
+            components.contentView.hintLabel.text = self.profileSectionText
+            components.contentView.nextLabel.text = self.nextButtonText
         case 1:
-            coachViews.bodyView.hintLabel.text = self.handleText
-            coachViews.bodyView.nextLabel.text = self.nextButtonText
+            components.contentView.hintLabel.text = self.handleText
+            components.contentView.nextLabel.text = self.nextButtonText
         case 2:
-            coachViews.bodyView.hintLabel.text = self.emailText
-            coachViews.bodyView.nextLabel.text = self.nextButtonText
+            components.contentView.hintLabel.text = self.emailText
+            components.contentView.nextLabel.text = self.nextButtonText
         case 3:
-            coachViews.bodyView.hintLabel.text = self.postsText
-            coachViews.bodyView.nextLabel.text = self.nextButtonText
+            components.contentView.hintLabel.text = self.postsText
+            components.contentView.nextLabel.text = self.nextButtonText
         case 4:
-            coachViews.bodyView.hintLabel.text = self.reputationText
-            coachViews.bodyView.nextLabel.text = self.nextButtonText
+            components.contentView.hintLabel.text = self.reputationText
+            components.contentView.nextLabel.text = self.nextButtonText
         default: break
         }
 
-        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+        return components
     }
 
     // MARK: Protocol Conformance - CoachMarkControllerDelegate
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              willLoadCoachMarkAt index: Int) -> Bool {
+    func tutorialController(
+        _ tutorialController: TutorialController,
+        shouldLoadConfigurationForCoachMarkAt index: Int
+    ) -> Bool {
         if index == 0 && presentationContext == .controller {
             return false
         }

@@ -4,27 +4,27 @@
 import UIKit
 import Instructions
 
-class ViewController: UIViewController, CoachMarksControllerDataSource {
+class ViewController: UIViewController, TutorialControllerDataSource {
 
     @IBOutlet var rectangleView: UIView?
 
-    let coachMarksController = CoachMarksController()
+    let tutorialController = TutorialController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.coachMarksController.dataSource = self
+        self.tutorialController.dataSource = self
 
-        let skipView = CoachMarkSkipDefaultView()
+        let skipView = DefaultCoachMarkSkipperView()
         skipView.setTitle("Skip", for: .normal)
 
-        self.coachMarksController.skipView = skipView
+        self.tutorialController.skipView = skipView
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        self.coachMarksController.start(in: .newWindow(over: self,
+        self.tutorialController.start(in: .newWindow(over: self,
                                                        at: UIWindow.Level.statusBar + 1))
     }
 
@@ -33,22 +33,22 @@ class ViewController: UIViewController, CoachMarksControllerDataSource {
         // Dispose of any resources that can be recreated.
     }
 
-    func numberOfCoachMarks(for coachMarkController: CoachMarksController)
+    func numberOfCoachMarks(for coachMarkController: TutorialController)
         -> Int {
             return 1
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt: Int)
-        -> CoachMark {
-            return coachMarksController.helper.makeCoachMark(for: rectangleView)
+    func coachMarksController(_ coachMarksController: TutorialController, coachMarkAt: Int)
+        -> CoachMarkConfiguration {
+            return tutorialController.helper.makeCoachMark(for: rectangleView)
     }
 
     func coachMarksController(
-        _ coachMarksController: CoachMarksController,
+        _ coachMarksController: TutorialController,
         coachMarkViewsAt: Int,
-        madeFrom coachMark: CoachMark
-    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
-        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+        madeFrom coachMark: CoachMarkConfiguration
+    ) -> (bodyView: (UIView & CoachMarkContentView), arrowView: (UIView & CoachMarkArrowView)?) {
+        let coachViews = tutorialController.helper.makeDefaultCoachViews(
             withArrow: true,
             arrowOrientation: coachMark.arrowOrientation
         )

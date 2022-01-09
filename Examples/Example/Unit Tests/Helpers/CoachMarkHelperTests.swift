@@ -36,13 +36,13 @@ class CoachMarkHelperTests: XCTestCase {
         let coachMark1 = coachMarkHelper.makeCoachMark()
         let coachMark2 = coachMarkHelper.makeCoachMark(for: nil)
 
-        XCTAssertTrue(coachMark1 == CoachMark())
-        XCTAssertTrue(coachMark2 == CoachMark())
+        XCTAssertTrue(coachMark1 == CoachMarkConfiguration())
+        XCTAssertTrue(coachMark2 == CoachMarkConfiguration())
     }
 
     func testThatReturnedCoachMarkContainsPointOfInterest() {
         let coachMark1 = coachMarkHelper.makeCoachMark(for: UIView(), pointOfInterest: CGPoint(x: 10, y: 20))
-        var coachMark2 = CoachMark()
+        var coachMark2 = CoachMarkConfiguration()
 
         coachMark2.pointOfInterest = CGPoint(x: 10, y: 20)
 
@@ -247,11 +247,11 @@ class CoachMarkHelperTests: XCTestCase {
     // MARK: - 'Flow' Tests
     func testThatUpdateDidNotOccur() {
         flowManager.isPaused = true
-        flowManager.currentCoachMark = CoachMark()
+        flowManager.currentCoachMark = CoachMarkConfiguration()
 
         coachMarkHelper.updateCurrentCoachMark()
 
-        XCTAssertTrue(flowManager.currentCoachMark == CoachMark())
+        XCTAssertTrue(flowManager.currentCoachMark == CoachMarkConfiguration())
 
         flowManager.isPaused = false
         flowManager.currentCoachMark = nil
@@ -261,11 +261,11 @@ class CoachMarkHelperTests: XCTestCase {
         XCTAssertTrue(flowManager.currentCoachMark == nil)
 
         flowManager.isPaused = false
-        flowManager.currentCoachMark = CoachMark()
+        flowManager.currentCoachMark = CoachMarkConfiguration()
 
         coachMarkHelper.updateCurrentCoachMark()
 
-        XCTAssertTrue(flowManager.currentCoachMark ==  CoachMark())
+        XCTAssertTrue(flowManager.currentCoachMark ==  CoachMarkConfiguration())
     }
 }
 

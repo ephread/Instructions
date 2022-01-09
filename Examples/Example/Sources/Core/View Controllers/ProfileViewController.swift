@@ -5,8 +5,7 @@ import UIKit
 import Instructions
 
 /// This class serves as a base for all the other examples
-internal class ProfileViewController: UIViewController,
-                                      CoachMarksControllerDelegate {
+internal class ProfileViewController: UIViewController {
     // MARK: - IBOutlet
     @IBOutlet weak var handleLabel: UILabel?
     @IBOutlet weak var emailLabel: UILabel?
@@ -15,7 +14,7 @@ internal class ProfileViewController: UIViewController,
     @IBOutlet weak var avatar: UIImageView?
 
     // MARK: - Public properties
-    var coachMarksController = CoachMarksController()
+    var tutorialController = TutorialController()
 
     let avatarText = "That's your profile picture. You look gorgeous!"
     let profileSectionText = """
@@ -29,79 +28,24 @@ internal class ProfileViewController: UIViewController,
 
     let nextButtonText = "Ok!"
 
-    // Used for Snapshot testing (i. e. has nothing to do with the example)
-    weak var snapshotDelegate: CoachMarksControllerDelegate?
-
     // MARK: - View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        coachMarksController.overlay.isUserInteractionEnabled = true
+        tutorialController.overlay.isUserInteractionEnabled = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         startInstructions()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
-        coachMarksController.stop(immediately: true)
+        tutorialController.stop(immediately: true)
     }
 
+    // MARK: - Methods
     func startInstructions() {
-        coachMarksController.start(in: .window(over: self))
-    }
-
-    // MARK: Protocol Conformance | CoachMarksControllerDelegate
-    // Used for Snapshot testing (i. e. has nothing to do with the example)
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              configureOrnamentsOfOverlay overlay: UIView) {
-        snapshotDelegate?.coachMarksController(coachMarksController,
-                                               configureOrnamentsOfOverlay: overlay)
-    }
-
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              willShow coachMark: inout CoachMark,
-                              beforeChanging change: ConfigurationChange,
-                              at index: Int) {
-        snapshotDelegate?.coachMarksController(coachMarksController, willShow: &coachMark,
-                                               beforeChanging: change,
-                                               at: index)
-    }
-
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didShow coachMark: CoachMark,
-                              afterChanging change: ConfigurationChange,
-                              at index: Int) {
-        snapshotDelegate?.coachMarksController(coachMarksController, didShow: coachMark,
-                                               afterChanging: change,
-                                               at: index)
-    }
-
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              willHide coachMark: CoachMark,
-                              at index: Int) {
-        snapshotDelegate?.coachMarksController(coachMarksController, willHide: coachMark,
-                                               at: index)
-    }
-
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didHide coachMark: CoachMark,
-                              at index: Int) {
-        snapshotDelegate?.coachMarksController(coachMarksController, didHide: coachMark,
-                                               at: index)
-    }
-
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              didEndShowingBySkipping skipped: Bool) {
-        snapshotDelegate?.coachMarksController(coachMarksController,
-                                               didEndShowingBySkipping: skipped)
-    }
-
-    func shouldHandleOverlayTap(in coachMarksController: CoachMarksController,
-                                at index: Int) -> Bool {
-        return true
+        tutorialController.start(in: .newWindow(over: self))
     }
 }

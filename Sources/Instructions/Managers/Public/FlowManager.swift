@@ -14,14 +14,17 @@ public class FlowManager {
     private(set) open var isPaused = false
 
     internal unowned let coachMarksViewController: CoachMarksViewController
-    internal weak var dataSource: CoachMarksControllerProxyDataSource?
+    internal weak var dataSource: TutorialControllerDataSourceProxy?
 
     /// An object implementing the delegate data source protocol,
     /// which methods will be called at various points.
-    internal weak var delegate: CoachMarksControllerProxyDelegate?
+    internal weak var delegate: TutorialControllerDelegateProxy?
+
+    internal var instructionsRootView: InstructionsRootView
 
     /// Reference to the currently displayed coach mark, supplied by the `datasource`.
-    internal var currentCoachMark: CoachMark?
+    internal var currentCoachMark: CoachMarkConfiguration?
+    internal var currentComputedCoachMark: ComputedCoachMarkConfiguration?
 
     /// The total number of coach marks, supplied by the `datasource`.
     private var numberOfCoachMarks = 0
@@ -54,6 +57,7 @@ public class FlowManager {
 
     init(coachMarksViewController: CoachMarksViewController) {
         self.coachMarksViewController = coachMarksViewController
+        self.instructionsRootView = coachMarksViewController.instructionsRootView
     }
 
     // MARK: Internal methods
@@ -86,14 +90,19 @@ public class FlowManager {
         reset()
 
         let animationBlock = { () -> Void in
-            self.coachMarksViewController.skipView?.asView?.alpha = 0.0
+            self.coachMarksViewController.skipperManager.view?.alpha = 0.0
             self.coachMarksViewController.currentCoachMarkView?.alpha = 0.0
         }
 
         let completionBlock = { [weak self] (finished: Bool) -> Void in
-            guard let strongSelf = self else { return }
-            strongSelf.coachMarksViewController.detachFromWindow()
-            if shouldCallDelegate { strongSelf.delegate?.didEndShowingBySkipping(skipped) }
+            guard let self = self else { return }
+
+            self.coachMarksViewController.detachFromWindow()
+
+            if shouldCallDelegate {
+                self.delegate?.didEndTutorial(bySkipping: skipped)
+            }
+
             completion?()
         }
 
@@ -126,17 +135,16 @@ public class FlowManager {
             return
         }
 
-        if let currentCoachMark = currentCoachMark, currentIndex > 0 {
-            delegate?.willHide(coachMark: currentCoachMark, at: currentIndex - 1)
+        if let coachMark = currentComputedCoachMark, currentIndex > 0 {
+            delegate?.willHideCoachMark(with: coachMark, at: currentIndex - 1)
         }
 
         if hidePrevious {
-            guard let currentCoachMark = currentCoachMark else { return }
+            guard let coachMark = currentComputedCoachMark else { return }
 
-            coachMarksViewController.hide(coachMark: currentCoachMark, at: previousIndex) {
+            coachMarksViewController.hide(coachMark: coachMark, at: previousIndex) {
                 if self.currentIndex > 0 {
-                    self.delegate?.didHide(coachMark: self.currentCoachMark!,
-                                           at: self.currentIndex - 1)
+                    self.delegate?.didHideCoachMark(with: coachMark, at: self.currentIndex - 1)
                 }
                 self.showOrStop()
             }
@@ -158,15 +166,15 @@ public class FlowManager {
             return
         }
 
-        if let currentCoachMark = currentCoachMark {
-            delegate?.willHide(coachMark: currentCoachMark, at: currentIndex + 1)
+        if let coachMark = currentComputedCoachMark {
+            delegate?.willHideCoachMark(with: coachMark, at: currentIndex + 1)
         }
 
         if hidePrevious {
-            guard let currentCoachMark = currentCoachMark else { return }
+            guard let coachMark = currentComputedCoachMark else { return }
 
-            coachMarksViewController.hide(coachMark: currentCoachMark, at: previousIndex) {
-                self.delegate?.didHide(coachMark: self.currentCoachMark!, at: self.currentIndex)
+            coachMarksViewController.hide(coachMark: coachMark, at: previousIndex) {
+                self.delegate?.didHideCoachMark(with: coachMark, at: self.currentIndex + 1)
                 self.showOrStop()
             }
         } else {
@@ -188,12 +196,12 @@ public class FlowManager {
     ///
     /// - Parameter shouldCallDelegate: `true` to call delegate methods, `false` otherwise.
     internal func createAndShowCoachMark(afterResuming: Bool = false,
-                                         changing change: ConfigurationChange = .nothing) {
+                                         changing change: ConfigurationChange? = nil) {
         if disableFlow { return }
         if currentIndex < 0 { return }
 
         if !afterResuming {
-            guard delegate?.willLoadCoachMark(at: currentIndex) ?? false else {
+            guard delegate?.shouldLoadConfigurationForCoachMark(at: currentIndex) ?? false else {
                 canShowCoachMark = true
                 showNextCoachMark(hidePrevious: false)
                 return
@@ -201,12 +209,13 @@ public class FlowManager {
 
             // Retrieves the current coach mark structure from the datasource.
             // It can't be nil, that's why we'll force unwrap it everywhere.
-            currentCoachMark = self.dataSource!.coachMark(at: currentIndex)
+            currentCoachMark = self.dataSource!.configurationForCoachMark(at: currentIndex)
 
             // The coach mark will soon show, we notify the delegate, so it
             // can perform some things and, if required, update the coach mark structure.
-            self.delegate?.willShow(coachMark: &currentCoachMark!,
-                                    beforeChanging: change, at: currentIndex)
+            self.delegate?.willShowCoachMark(with: &currentCoachMark!,
+                                             after: change,
+                                             at: currentIndex)
         }
 
         // The delegate might have paused the flow, we check whether or not it's
@@ -218,11 +227,17 @@ public class FlowManager {
                 return
             }
 
-            coachMarksViewController.show(coachMark: &currentCoachMark!, at: currentIndex) {
+            let computedCoachMark = currentCoachMark!.computedConfiguration(inFrame: instructionsRootView.frame)
+            currentComputedCoachMark = computedCoachMark
+
+            coachMarksViewController.show(coachMark: computedCoachMark, at: currentIndex) {
                 self.canShowCoachMark = true
 
-                self.delegate?.didShow(coachMark: self.currentCoachMark!,
-                                       afterChanging: change, at: self.currentIndex)
+                self.delegate?.didShowCoachMark(
+                    with: computedCoachMark,
+                    after: change,
+                    at: self.currentIndex
+                )
             }
         }
     }
@@ -246,7 +261,7 @@ public class FlowManager {
         }
     }
 
-    public func pause(and pauseStyle: PauseStyle = .hideNothing) {
+    public func pause(and pauseStyle: PauseAction = .doNothing) {
         isPaused = true
 
         switch pauseStyle {
@@ -254,7 +269,7 @@ public class FlowManager {
             coachMarksViewController.overlayManager.showWindow(false, completion: nil)
         case .hideOverlay:
             coachMarksViewController.overlayManager.showOverlay(false, completion: nil)
-        case .hideNothing: break
+        case .doNothing: break
         }
     }
 
@@ -291,13 +306,6 @@ public class FlowManager {
 
         showPreviousCoachMark(hidePrevious: true)
     }
-
-    // MARK: Renamed Public Properties
-    @available(*, unavailable, renamed: "isStarted")
-    public var started: Bool = false
-
-    @available(*, unavailable, renamed: "isPaused")
-    public var paused: Bool = false
 }
 
 extension FlowManager: CoachMarksViewControllerDelegate {
@@ -305,13 +313,13 @@ extension FlowManager: CoachMarksViewControllerDelegate {
         showNextCoachMark()
     }
 
-    func didTap(skipView: CoachMarkSkipView?) {
+    func didTapSkipper() {
         stopFlow(immediately: false, userDidSkip: true, shouldCallDelegate: true)
     }
 
     func willTransition() {
         coachMarksViewController.prepareForSizeTransition()
-        if let coachMark = currentCoachMark {
+        if let coachMark = currentComputedCoachMark {
             coachMarksViewController.hide(coachMark: coachMark, at: currentIndex,
                                           animated: false, beforeTransition: true)
         }

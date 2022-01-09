@@ -24,18 +24,18 @@ internal class TransitionFromCodeViewController: ProfileViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.coachMarksController.dataSource = self
-        self.coachMarksController.delegate = self
+        self.tutorialController.dataSource = self
+        self.tutorialController.delegate = self
 
         self.emailLabel?.layer.cornerRadius = 4.0
         self.postsLabel?.layer.cornerRadius = 4.0
         self.reputationLabel?.layer.cornerRadius = 4.0
 
-        let skipView = CoachMarkSkipDefaultView()
+        let skipView = DefaultCoachMarkSkipperView()
         skipView.setTitle("Skip", for: .normal)
 
-        self.coachMarksController.skipView = skipView
-        self.coachMarksController.overlay.isUserInteractionEnabled = true
+        self.tutorialController.skipView = skipView
+        self.tutorialController.overlay.isUserInteractionEnabled = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -44,20 +44,20 @@ internal class TransitionFromCodeViewController: ProfileViewController {
 
     @IBAction func performButtonTap(_ sender: AnyObject) {
         // The user tapped on the button, so let's carry on!
-        self.coachMarksController.flow.showNext()
+        self.tutorialController.flow.showNext()
     }
 }
 
 // MARK: - Protocol Conformance | CoachMarksControllerDataSource
-extension TransitionFromCodeViewController: CoachMarksControllerDataSource {
-    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+extension TransitionFromCodeViewController: TutorialControllerDataSource {
+    func numberOfCoachMarks(for coachMarksController: TutorialController) -> Int {
         return 6
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: TutorialController, coachMarkAt index: Int) -> CoachMarkConfiguration {
         switch index {
         case 0:
-            return coachMarksController.helper.makeCoachMark(
+            return tutorialController.helper.makeCoachMark(
                 for: self.navigationController?.navigationBar,
                 cutoutPathMaker: { (frame: CGRect) -> UIBezierPath in
                     // This will make a cutoutPath matching the shape of
@@ -66,9 +66,9 @@ extension TransitionFromCodeViewController: CoachMarksControllerDataSource {
                 }
             )
         case 1:
-            return coachMarksController.helper.makeCoachMark(for: self.handleLabel)
+            return tutorialController.helper.makeCoachMark(for: self.handleLabel)
         case 2:
-            var coachMark = coachMarksController.helper.makeCoachMark(for: self.tapMeButton)
+            var coachMark = tutorialController.helper.makeCoachMark(for: self.tapMeButton)
             // Since we've allowed the user to tap on the overlay to show the
             // next coach mark, we'll disable this ability for the current
             // coach mark to force the user to perform the appropriate action.
@@ -79,36 +79,36 @@ extension TransitionFromCodeViewController: CoachMarksControllerDataSource {
             coachMark.isUserInteractionEnabledInsideCutoutPath = true
             return coachMark
         case 3:
-            return coachMarksController.helper.makeCoachMark(for: self.emailLabel)
+            return tutorialController.helper.makeCoachMark(for: self.emailLabel)
         case 4:
-            return coachMarksController.helper.makeCoachMark(for: self.postsLabel)
+            return tutorialController.helper.makeCoachMark(for: self.postsLabel)
         case 5:
-            return coachMarksController.helper.makeCoachMark(for: self.reputationLabel)
+            return tutorialController.helper.makeCoachMark(for: self.reputationLabel)
         default:
-            return coachMarksController.helper.makeCoachMark()
+            return tutorialController.helper.makeCoachMark()
         }
     }
 
     func coachMarksController(
-        _ coachMarksController: CoachMarksController,
+        _ coachMarksController: TutorialController,
         coachMarkViewsAt index: Int,
-        madeFrom coachMark: CoachMark
-    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
-        var coachViews: (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?)
+        madeFrom coachMark: CoachMarkConfiguration
+    ) -> (bodyView: (UIView & CoachMarkContentView), arrowView: (UIView & CoachMarkArrowView)?) {
+        var coachViews: (bodyView: DefaultCoachMarkContentView, arrowView: DefaultCoachMarkPointerView?)
 
         // For the coach mark at index 2, we disable the ability to tap on the
         // coach mark to get to the next one, forcing the user to perform
         // the appropriate action.
         switch index {
         case 2:
-            coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            coachViews = tutorialController.helper.makeDefaultCoachViews(
                 withArrow: true,
                 withNextText: false,
                 arrowOrientation: coachMark.arrowOrientation
             )
             coachViews.bodyView.isUserInteractionEnabled = false
         default:
-            coachViews = coachMarksController.helper.makeDefaultCoachViews(
+            coachViews = tutorialController.helper.makeDefaultCoachViews(
                 withArrow: true,
                 withNextText: true,
                 arrowOrientation: coachMark.arrowOrientation
@@ -140,7 +140,7 @@ extension TransitionFromCodeViewController: CoachMarksControllerDataSource {
     }
 
     // MARK: - Protocol Conformance | CoachMarksControllerDelegate
-    func coachMarksController(_ coachMarksController: CoachMarksController, willLoadCoachMarkAt index: Int) -> Bool {
+    func coachMarksController(_ coachMarksController: TutorialController, willLoadCoachMarkAt index: Int) -> Bool {
         switch index {
         case 1:
             // Skipping the second coach mark.

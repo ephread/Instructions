@@ -71,6 +71,8 @@ struct ErrorMessage {
     }
 
     struct Fatal {
+        static let dataSourceNotSet = "'dataSource' is 'nil'."
+
         static let negativeNumberOfCoachMarks =
             "dataSource.numberOfCoachMarks(for:) returned a negative number."
 

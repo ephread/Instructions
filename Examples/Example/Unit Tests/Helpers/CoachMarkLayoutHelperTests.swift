@@ -13,15 +13,15 @@ class CoachMarkLayoutHelperTests: XCTestCase {
 
     var layoutHelper = CoachMarkLayoutHelper()
     var parentView: UIView!
-    var bodyView: CoachMarkBodyDefaultView!
-    var arrowView: CoachMarkArrowDefaultView!
+    var bodyView: DefaultCoachMarkContentView!
+    var arrowView: DefaultCoachMarkPointerView!
 
     override func setUp() {
         super.setUp()
 
         parentView = UIView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
-        bodyView = CoachMarkBodyDefaultView()
-        arrowView = CoachMarkArrowDefaultView(orientation: .top)
+        bodyView = DefaultCoachMarkContentView()
+        arrowView = DefaultCoachMarkPointerView(orientation: .top)
     }
 
     override func tearDown() {
@@ -41,7 +41,7 @@ class CoachMarkLayoutHelperTests: XCTestCase {
                                           arrowOrientation: .bottom, arrowOffset: 0,
                                           coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper())
 
-        let constraints = layoutHelper.constraints(for: coachMarkView, coachMark: CoachMark(),
+        let constraints = layoutHelper.constraints(for: coachMarkView, coachMark: CoachMarkConfiguration(),
                                                    parentView: parentView)
 
         XCTAssertTrue(constraints.isEmpty)
@@ -88,7 +88,7 @@ class CoachMarkLayoutHelperTests: XCTestCase {
     private func constraints1(
         using layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight
     ) -> [NSLayoutConstraint] {
-        var coachMark1 = CoachMark()
+        var coachMark1 = CoachMarkConfiguration()
 
         coachMark1.cutoutPath = UIBezierPath(rect: CGRect(x: 0, y: 0, width: 50, height: 50))
         coachMark1.pointOfInterest = CGPoint(x: 25, y: 25)
@@ -107,7 +107,7 @@ class CoachMarkLayoutHelperTests: XCTestCase {
     private func constraints2(
         using layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight
     ) -> [NSLayoutConstraint] {
-        var coachMark2 = CoachMark()
+        var coachMark2 = CoachMarkConfiguration()
         coachMark2.cutoutPath = UIBezierPath(rect: CGRect(x: 135, y: 150, width: 50, height: 50))
         coachMark2.pointOfInterest = CGPoint(x: 160, y: 175)
 
@@ -125,7 +125,7 @@ class CoachMarkLayoutHelperTests: XCTestCase {
     private func constraints3(
         using layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight
     ) -> [NSLayoutConstraint] {
-        var coachMark3 = CoachMark()
+        var coachMark3 = CoachMarkConfiguration()
         coachMark3.cutoutPath = UIBezierPath(rect: CGRect(x: 270, y: 300, width: 50, height: 50))
         coachMark3.pointOfInterest = CGPoint(x: 295, y: 325)
 
@@ -143,7 +143,7 @@ class CoachMarkLayoutHelperTests: XCTestCase {
     private func constraints4(
         using layoutDirection: UIUserInterfaceLayoutDirection = .leftToRight
     ) -> [NSLayoutConstraint] {
-        var coachMark4 = CoachMark()
+        var coachMark4 = CoachMarkConfiguration()
         coachMark4.cutoutPath = UIBezierPath(rect: CGRect(x: 135, y: 400, width: 50, height: 50))
 
         let coachMarkView4 = CoachMarkView(bodyView: self.bodyView, arrowView: self.arrowView,

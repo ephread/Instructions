@@ -6,7 +6,7 @@ import Instructions
 
 // MARK: - Main Controller
 // This class is an example of what can be achieved with the delegate methods.
-class DelegateViewController: ProfileViewController, CoachMarksControllerDataSource {
+class DelegateViewController: ProfileViewController, TutorialControllerDataSource {
 
     // MARK: IBOutlets
     @IBOutlet var avatarVerticalPositionConstraint: NSLayoutConstraint?
@@ -15,54 +15,54 @@ class DelegateViewController: ProfileViewController, CoachMarksControllerDataSou
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        coachMarksController.delegate = self
-        coachMarksController.animationDelegate = self
-        coachMarksController.dataSource = self
+        tutorialController.delegate = self
+        tutorialController.animationDelegate = self
+        tutorialController.dataSource = self
 
         emailLabel?.layer.cornerRadius = 4.0
         postsLabel?.layer.cornerRadius = 4.0
         reputationLabel?.layer.cornerRadius = 4.0
 
-        let skipView = CoachMarkSkipDefaultView()
+        let skipView = DefaultCoachMarkSkipperView()
         skipView.setTitle("Skip", for: .normal)
 
-        coachMarksController.skipView = skipView
+        tutorialController.skipView = skipView
     }
 
     // MARK: - Protocol Conformance | CoachMarksControllerDataSource
-    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarks(for coachMarksController: TutorialController) -> Int {
         return 5
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkAt index: Int) -> CoachMark {
+    func coachMarksController(_ coachMarksController: TutorialController,
+                              coachMarkAt index: Int) -> CoachMarkConfiguration {
         switch index {
         case 0:
             let cutoutPathMaker = { (frame: CGRect) -> UIBezierPath in
                 return UIBezierPath(ovalIn: frame.insetBy(dx: -4, dy: -4))
             }
 
-            return coachMarksController.helper.makeCoachMark(for: avatar,
+            return tutorialController.helper.makeCoachMark(for: avatar,
                                                              cutoutPathMaker: cutoutPathMaker)
         case 1:
-            return coachMarksController.helper.makeCoachMark(for: handleLabel)
+            return tutorialController.helper.makeCoachMark(for: handleLabel)
         case 2:
-            return coachMarksController.helper.makeCoachMark(for: emailLabel)
+            return tutorialController.helper.makeCoachMark(for: emailLabel)
         case 3:
-            return coachMarksController.helper.makeCoachMark(for: postsLabel)
+            return tutorialController.helper.makeCoachMark(for: postsLabel)
         case 4:
-            return coachMarksController.helper.makeCoachMark(for: reputationLabel)
+            return tutorialController.helper.makeCoachMark(for: reputationLabel)
         default:
-            return coachMarksController.helper.makeCoachMark()
+            return tutorialController.helper.makeCoachMark()
         }
     }
 
     func coachMarksController(
-        _ coachMarksController: CoachMarksController,
-        coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark
-    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
+        _ coachMarksController: TutorialController,
+        coachMarkViewsAt index: Int, madeFrom coachMark: CoachMarkConfiguration
+    ) -> (bodyView: (UIView & CoachMarkContentView), arrowView: (UIView & CoachMarkArrowView)?) {
 
-        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+        let coachViews = tutorialController.helper.makeDefaultCoachViews(
             withArrow: true,
             arrowOrientation: coachMark.arrowOrientation
         )
@@ -90,7 +90,7 @@ class DelegateViewController: ProfileViewController, CoachMarksControllerDataSou
     }
 
     // MARK: - Protocol Conformance | CoachMarksControllerDelegate
-    override func coachMarksController(_ coachMarksController: CoachMarksController,
+    override func coachMarksController(_ coachMarksController: TutorialController,
                                        configureOrnamentsOfOverlay overlay: UIView) {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -104,14 +104,14 @@ class DelegateViewController: ProfileViewController, CoachMarksControllerDataSou
         label.topAnchor.constraint(equalTo: overlay.topAnchor, constant: 100).isActive = true
     }
 
-    override func coachMarksController(_ coachMarksController: CoachMarksController,
-                                       willShow coachMark: inout CoachMark,
+    override func coachMarksController(_ coachMarksController: TutorialController,
+                                       willShow coachMark: inout CoachMarkConfiguration,
                                        beforeChanging change: ConfigurationChange, at index: Int) {
         if index == 0 && change == .nothing {
             // We'll need to play an animation before showing up the coach mark.
             // To be able to play the animation and then show the coach mark and not stall
             // the UI (i. e. keep the asynchronicity), we'll pause the controller.
-            coachMarksController.flow.pause()
+            tutorialController.flow.pause()
 
             // Then we run the animation.
             avatarVerticalPositionConstraint?.constant = 30
@@ -125,19 +125,19 @@ class DelegateViewController: ProfileViewController, CoachMarksControllerDataSou
                 }
                 // Once the animation is completed, we update the coach mark,
                 // and start the display again.
-                coachMarksController.helper.updateCurrentCoachMark(
+                tutorialController.helper.updateCurrentCoachMark(
                     usingView: self.avatar,
                     pointOfInterest: nil,
                     cutoutPathMaker: maker
                 )
 
-                coachMarksController.flow.resume()
+                tutorialController.flow.resume()
             })
         }
     }
 
-    override func coachMarksController(_ coachMarksController: CoachMarksController,
-                                       willHide coachMark: CoachMark, at index: Int) {
+    override func coachMarksController(_ coachMarksController: TutorialController,
+                                       willHide coachMark: CoachMarkConfiguration, at index: Int) {
         if index == 1 {
             avatarVerticalPositionConstraint?.constant = 0
             view.needsUpdateConstraints()
@@ -148,7 +148,7 @@ class DelegateViewController: ProfileViewController, CoachMarksControllerDataSou
         }
     }
 
-    override func coachMarksController(_ coachMarksController: CoachMarksController,
+    override func coachMarksController(_ coachMarksController: TutorialController,
                                        didEndShowingBySkipping skipped: Bool) {
         let newColor: UIColor = skipped ? .systemPurple : .systemOrange
 
@@ -159,8 +159,8 @@ class DelegateViewController: ProfileViewController, CoachMarksControllerDataSou
 }
 
 // MARK: - Protocol Conformance | CoachMarksControllerAnimationDelegate
-extension DelegateViewController: CoachMarksControllerAnimationDelegate {
-    func coachMarksController(_ coachMarksController: CoachMarksController,
+extension DelegateViewController: TutorialControllerDelegateAnimation {
+    func coachMarksController(_ coachMarksController: TutorialController,
                               fetchAppearanceTransitionOfCoachMark coachMarkView: UIView,
                               at index: Int,
                               using manager: CoachMarkTransitionManager) {
@@ -174,7 +174,7 @@ extension DelegateViewController: CoachMarksControllerAnimationDelegate {
         })
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
+    func coachMarksController(_ coachMarksController: TutorialController,
                               fetchDisappearanceTransitionOfCoachMark coachMarkView: UIView,
                               at index: Int,
                               using manager: CoachMarkTransitionManager) {
@@ -190,7 +190,7 @@ extension DelegateViewController: CoachMarksControllerAnimationDelegate {
         })
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
+    func coachMarksController(_ coachMarksController: TutorialController,
                               fetchIdleAnimationOfCoachMark coachMarkView: UIView,
                               at index: Int,
                               using manager: CoachMarkAnimationManager) {

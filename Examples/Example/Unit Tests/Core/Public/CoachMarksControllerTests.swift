@@ -4,9 +4,9 @@
 import XCTest
 @testable import Instructions
 
-class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
+class CoachMarksControllerTests: XCTestCase, TutorialControllerDelegate {
 
-    let coachMarksController = CoachMarksController()
+    let tutorialController = TutorialController()
     let parentController = UIViewController()
     let mockedDataSource = CoachMarkControllerMockedDataSource()
     let mockedWindow = UIWindow()
@@ -16,8 +16,8 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     override func setUp() {
         super.setUp()
 
-        coachMarksController.dataSource = self.mockedDataSource
-        coachMarksController.delegate = self
+        tutorialController.dataSource = self.mockedDataSource
+        tutorialController.delegate = self
 
         mockedWindow.addSubview(self.parentController.view)
     }
@@ -30,8 +30,8 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     func testThatDidFinishShowingIsCalled() {
         delegateEndExpectation = self.expectation(description: "DidFinishShowing")
 
-        coachMarksController.start(in: .window(over: parentController))
-        coachMarksController.stop()
+        tutorialController.start(in: .newWindow(over: parentController))
+        tutorialController.stop()
 
         waitForExpectations(timeout: 10) { error in
             if let error = error {
@@ -41,10 +41,10 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     }
 
     func testThatCoachMarkControllerAttachItselfToParent() {
-        coachMarksController.start(in: .window(over: parentController))
+        tutorialController.start(in: .newWindow(over: parentController))
 
-        let attached = (coachMarksController.overlay.overlayView.window != nil &&
-                        coachMarksController.overlay.overlayView.window != mockedWindow)
+        let attached = (tutorialController.overlay.overlayView.window != nil &&
+                        tutorialController.overlay.overlayView.window != mockedWindow)
 
         XCTAssertTrue(attached)
     }
@@ -52,8 +52,8 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     func testThatCoachMarkControllerDetachItselfFromParent() {
         delegateEndExpectation = self.expectation(description: "Detachment")
 
-        coachMarksController.start(in: .window(over: parentController))
-        coachMarksController.stop()
+        tutorialController.start(in: .newWindow(over: parentController))
+        tutorialController.stop()
 
         waitForExpectations(timeout: 10) { error in
             if let error = error {
@@ -65,10 +65,10 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     func testThatCoachMarkStoppedBySkipping() {
         delegateEndExpectation = self.expectation(description: "DidFinishShowingBySkipping")
 
-        let skipView = CoachMarkSkipDefaultView(frame: CGRect(x: 0, y: 0, width: 20, height: 30))
-        coachMarksController.skipView = skipView
+        let skipView = DefaultCoachMarkSkipperView(frame: CGRect(x: 0, y: 0, width: 20, height: 30))
+        tutorialController.skipView = skipView
 
-        coachMarksController.start(in: .window(over: parentController))
+        tutorialController.start(in: .newWindow(over: parentController))
 
         skipView.skipControl?.sendActions(for: .touchUpInside)
 
@@ -79,7 +79,7 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
         }
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
+    func coachMarksController(_ coachMarksController: TutorialController,
                               didEndShowingBySkipping skipped: Bool) {
         guard let delegateEndExpectation = self.delegateEndExpectation else {
             XCTFail("Undefined expectation")
@@ -87,7 +87,7 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
         }
 
         if delegateEndExpectation.description == "Detachment" {
-            XCTAssertTrue(coachMarksController.overlay.overlayView.window == nil)
+            XCTAssertTrue(tutorialController.overlay.overlayView.window == nil)
             delegateEndExpectation.fulfill()
         } else if delegateEndExpectation.description == "DidFinishShowing" {
             XCTAssertTrue(true)
@@ -101,21 +101,21 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
     }
 }
 
-internal class CoachMarkControllerMockedDataSource: CoachMarksControllerDataSource {
-    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+internal class CoachMarkControllerMockedDataSource: TutorialControllerDataSource {
+    func numberOfCoachMarks(for coachMarksController: TutorialController) -> Int {
         return 1
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkAt index: Int) -> CoachMark {
-        return CoachMark()
+    func coachMarksController(_ coachMarksController: TutorialController,
+                              coachMarkAt index: Int) -> CoachMarkConfiguration {
+        return CoachMarkConfiguration()
     }
 
     func coachMarksController(
-        _ coachMarksController: CoachMarksController,
+        _ coachMarksController: TutorialController,
         coachMarkViewsAt index: Int,
-        madeFrom coachMark: CoachMark
-    ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
+        madeFrom coachMark: CoachMarkConfiguration
+    ) -> (bodyView: UIView & CoachMarkContentView, arrowView: (UIView & CoachMarkArrowView)?) {
         return (CoachMarkBodyDefaultView(), nil)
     }
 }

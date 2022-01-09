@@ -5,12 +5,12 @@ import UIKit
 
 internal extension UIView {
 
-    var isOutOfSuperview: Bool {
+    var isOutsideOfSuperviewsBounds: Bool {
         let insets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        return isOutOfSuperview(consideringInsets: insets)
+        return isOutsideOfSuperviewsBounds(consideringInsets: insets)
     }
 
-    func isOutOfSuperview(consideringInsets insets: UIEdgeInsets) -> Bool {
+    func isOutsideOfSuperviewsBounds(consideringInsets insets: UIEdgeInsets) -> Bool {
         guard let superview = self.superview else {
             return true
         }
@@ -24,6 +24,16 @@ internal extension UIView {
                          (superview.frame.size.height - insets.bottom)
 
         return !isInBounds
+    }
+
+    func preparedForAutoLayout() -> Self {
+        translatesAutoresizingMaskIntoConstraints = false
+        return self
+    }
+
+    func fillSuperview() {
+        fillSuperviewVertically()
+        fillSuperviewHorizontally()
     }
 
     func fillSuperview(insets: UIEdgeInsets) {
@@ -40,46 +50,23 @@ internal extension UIView {
         ])
     }
 
-    func fillSuperview() {
-        fillSuperviewVertically()
-        fillSuperviewHorizontally()
-    }
-
     func fillSuperviewVertically() {
-        NSLayoutConstraint.activate(makeConstraintToFillSuperviewVertically())
+        guard let superview = superview else {
+            print(ErrorMessage.Warning.noParent)
+            return
+        }
+
+        topAnchor.constraint(equalTo: superview.topAnchor).isActive = true
+        bottomAnchor.constraint(equalTo: superview.bottomAnchor).isActive = true
     }
 
     func fillSuperviewHorizontally() {
-        NSLayoutConstraint.activate(makeConstraintToFillSuperviewHorizontally())
-    }
-
-    func makeConstraintToFillSuperviewVertically() -> [NSLayoutConstraint] {
         guard let superview = superview else {
             print(ErrorMessage.Warning.noParent)
-            return []
+            return
         }
 
-        return [
-            topAnchor.constraint(equalTo: superview.topAnchor),
-            bottomAnchor.constraint(equalTo: superview.bottomAnchor)
-        ]
-    }
-
-    func makeConstraintToFillSuperviewHorizontally() -> [NSLayoutConstraint] {
-        guard let superview = superview else {
-            print(ErrorMessage.Warning.noParent)
-            return []
-        }
-
-        return [
-            leadingAnchor.constraint(equalTo: superview.leadingAnchor),
-            trailingAnchor.constraint(equalTo: superview.trailingAnchor)
-        ]
-    }
-
-    func preparedForAutoLayout() -> Self {
-        translatesAutoresizingMaskIntoConstraints = false
-
-        return self
+        leadingAnchor.constraint(equalTo: superview.leadingAnchor).isActive = true
+        trailingAnchor.constraint(equalTo: superview.trailingAnchor).isActive = true
     }
 }

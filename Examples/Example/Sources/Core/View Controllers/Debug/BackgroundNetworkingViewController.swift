@@ -24,7 +24,7 @@ internal class BackgroundNetworkingViewController: DefaultViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        coachMarksController.delegate = self
+        tutorialController.delegate = self
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -52,13 +52,15 @@ internal class BackgroundNetworkingViewController: DefaultViewController {
         }
     }
 
-    // MARK: CoachMarksControllerDelegate
-    override func coachMarksController(_ coachMarksController: CoachMarksController,
-                                       willShow coachMark: inout CoachMark,
-                                       beforeChanging change: ConfigurationChange,
-                                       at index: Int) {
-        if index == 2 && change == .nothing {
-            coachMarksController.flow.pause()
+    // MARK: TutorialControllerDelegate
+    override func tutorialController(
+        _ tutorialController: TutorialController,
+        willShowCoachMarkWith configuration: inout CoachMarkConfiguration,
+        after configurationChange: ConfigurationChange?,
+        at index: Int
+    ) {
+        if index == 2 && configurationChange == nil {
+            tutorialController.flow.pause()
             startDownload()
         }
     }
@@ -72,10 +74,10 @@ extension BackgroundNetworkingViewController: URLSessionDownloadDelegate {
         DispatchQueue.main.async {
             if self.stopInstructions { return }
 
-            if !self.coachMarksController.flow.isStarted {
-                self.coachMarksController.start(in: .window(over: self))
+            if !self.tutorialController.flow.isStarted {
+                self.tutorialController.start(in: .newWindow(over: self))
             } else {
-                self.coachMarksController.flow.resume()
+                self.tutorialController.flow.resume()
             }
         }
     }

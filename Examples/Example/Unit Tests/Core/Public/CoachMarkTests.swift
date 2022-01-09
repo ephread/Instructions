@@ -15,7 +15,7 @@ class CoachMarkTests: XCTestCase {
     }
 
     func testThatOrientationIsTop() {
-        var coachMark = CoachMark()
+        var coachMark = CoachMarkConfiguration()
 
         computeOrientation(of: &coachMark,
                            using: UIBezierPath(rect: CGRect(x: 30, y: 50, width: 30, height: 60)))
@@ -24,7 +24,7 @@ class CoachMarkTests: XCTestCase {
     }
 
     func testThatOrientationIsBottom() {
-        var coachMark = CoachMark()
+        var coachMark = CoachMarkConfiguration()
 
         computeOrientation(of: &coachMark,
                            using: UIBezierPath(rect: CGRect(x: 30, y: 320, width: 30, height: 60)))
@@ -33,7 +33,7 @@ class CoachMarkTests: XCTestCase {
     }
 
     func testThatOrientationIsNotRecomputed() {
-        var coachMark = CoachMark()
+        var coachMark = CoachMarkConfiguration()
         coachMark.arrowOrientation = .bottom
 
         computeOrientation(of: &coachMark,
@@ -43,7 +43,7 @@ class CoachMarkTests: XCTestCase {
     }
 
     func testThatOrientationIsNilWhenCutoutPathIsNil() {
-        var coachMark = CoachMark()
+        var coachMark = CoachMarkConfiguration()
         let overlayFrame = CGRect(x: 0, y: 0, width: 320, height: 480)
         coachMark.computeMetadata(inFrame: overlayFrame)
 
@@ -51,7 +51,7 @@ class CoachMarkTests: XCTestCase {
     }
 
     func testThatPointOfInterestIsAtCenterOfCutoutPath() {
-        var coachMark = CoachMark()
+        var coachMark = CoachMarkConfiguration()
         coachMark.cutoutPath = UIBezierPath(rect: CGRect(x: 30, y: 320, width: 30, height: 60))
 
         coachMark.computePointOfInterest()
@@ -60,7 +60,7 @@ class CoachMarkTests: XCTestCase {
     }
 
     func testThatPointOfInterestIsNotRecomputed() {
-        var coachMark = CoachMark()
+        var coachMark = CoachMarkConfiguration()
         coachMark.cutoutPath = UIBezierPath(rect: CGRect(x: 30, y: 320, width: 30, height: 60))
         coachMark.pointOfInterest = CGPoint(x: 30, y: 20)
 
@@ -73,19 +73,19 @@ class CoachMarkTests: XCTestCase {
 
         let rect = CGRect(x: 0, y: 0, width: 320, height: 500)
 
-        var coachMark1 = CoachMark()
+        var coachMark1 = CoachMarkConfiguration()
         coachMark1.horizontalMargin = 14
         coachMark1.maxWidth = 400
 
         XCTAssertEqual(coachMark1.ceiledMaxWidth(in: rect), 292)
 
-        var coachMark2 = CoachMark()
+        var coachMark2 = CoachMarkConfiguration()
         coachMark2.horizontalMargin = 14
         coachMark2.maxWidth = 318
 
         XCTAssertEqual(coachMark2.ceiledMaxWidth(in: rect), 292)
 
-        var coachMark3 = CoachMark()
+        var coachMark3 = CoachMarkConfiguration()
         coachMark3.horizontalMargin = 5
         coachMark3.maxWidth = 150
 
@@ -93,7 +93,7 @@ class CoachMarkTests: XCTestCase {
     }
 
     private func computeOrientation(
-        of coachMark: inout CoachMark,
+        of coachMark: inout CoachMarkConfiguration,
         using cutoutPath: UIBezierPath = UIBezierPath(rect: CGRect(x: 30, y: 320,
                                                                    width: 30, height: 60))
     ) {

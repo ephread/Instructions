@@ -5,13 +5,13 @@ import XCTest
 @testable import Instructions
 
 class DataSourceNumberOfCoachMarksTest: DataSourceBaseTest,
-                                        CoachMarksControllerDataSource {
+                                        TutorialControllerDataSource {
 
     var delegateEndExpectation: XCTestExpectation?
 
     override func setUp() {
         super.setUp()
-        coachMarksController.dataSource = self
+        tutorialController.dataSource = self
     }
 
     override func tearDown() {
@@ -21,7 +21,7 @@ class DataSourceNumberOfCoachMarksTest: DataSourceBaseTest,
 
     func testNumberOfCoachMarksIsCalled() {
         delegateEndExpectation = self.expectation(description: "numberOfCoachMarks")
-        coachMarksController.start(in: .window(over: parentController))
+        tutorialController.start(in: .newWindow(over: parentController))
 
         waitForExpectations(timeout: 10) { error in
             if let error = error {
@@ -30,7 +30,7 @@ class DataSourceNumberOfCoachMarksTest: DataSourceBaseTest,
         }
     }
 
-    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarks(for coachMarksController: TutorialController) -> Int {
         guard let delegateEndExpectation = self.delegateEndExpectation else {
             XCTFail("Undefined expectation")
             return 0
@@ -43,19 +43,19 @@ class DataSourceNumberOfCoachMarksTest: DataSourceBaseTest,
         return 4
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
-                              coachMarkAt index: Int) -> CoachMark {
-        return CoachMark()
+    func coachMarksController(_ coachMarksController: TutorialController,
+                              coachMarkAt index: Int) -> CoachMarkConfiguration {
+        return CoachMarkConfiguration()
     }
 
     func coachMarksController(
-        _ coachMarksController: CoachMarksController,
-        coachMarkViewsAt index: Int, madeFrom coachMark: CoachMark
-    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
+        _ coachMarksController: TutorialController,
+        coachMarkViewsAt index: Int, madeFrom coachMark: CoachMarkConfiguration
+    ) -> (bodyView: (UIView & CoachMarkContentView), arrowView: (UIView & CoachMarkArrowView)?) {
             return (bodyView: CoachMarkBodyDefaultView(), arrowView: nil)
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
+    func coachMarksController(_ coachMarksController: TutorialController,
                               constraintsForSkipView skipView: UIView,
                               inParent parentView: UIView) -> [NSLayoutConstraint]? {
         return nil

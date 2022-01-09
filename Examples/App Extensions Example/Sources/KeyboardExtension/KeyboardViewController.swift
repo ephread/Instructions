@@ -17,7 +17,7 @@ class KeyboardViewController: UIInputViewController,
     @IBOutlet weak var textField: UITextField!
 
     var keyboardView: UIView!
-    var coachMarksController: CoachMarksController?
+    var coachMarksController: TutorialController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +30,7 @@ class KeyboardViewController: UIInputViewController,
             for: .touchUpInside
         )
 
-        self.coachMarksController = CoachMarksController()
+        self.tutorialController = TutorialController()
         self.coachMarksController?.dataSource = self
         self.coachMarksController?.delegate = self
 
@@ -60,32 +60,32 @@ class KeyboardViewController: UIInputViewController,
         // The app has just changed the document's contents, the document context has been updated.
     }
 
-    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+    func numberOfCoachMarks(for coachMarksController: TutorialController) -> Int {
         return 4
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
+    func coachMarksController(_ coachMarksController: TutorialController,
                               coachMarkAt index: Int) -> CoachMark {
         switch index {
         case 0:
-            return coachMarksController.helper.makeCoachMark(for: self.nextKeyboardButton)
+            return tutorialController.helper.makeCoachMark(for: self.nextKeyboardButton)
         case 1:
-            return coachMarksController.helper.makeCoachMark(for: self.continueButton)
+            return tutorialController.helper.makeCoachMark(for: self.continueButton)
         case 2:
-            return coachMarksController.helper.makeCoachMark(for: self.footBallKey)
+            return tutorialController.helper.makeCoachMark(for: self.footBallKey)
         case 3:
-            return coachMarksController.helper.makeCoachMark(for: self.basketBallKey)
+            return tutorialController.helper.makeCoachMark(for: self.basketBallKey)
         default:
             return CoachMark()
         }
     }
 
     func coachMarksController(
-        _ coachMarksController: CoachMarksController,
+        _ coachMarksController: TutorialController,
         coachMarkViewsAt index: Int,
         madeFrom coachMark: CoachMark
     ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?) {
-        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+        let coachViews = tutorialController.helper.makeDefaultCoachViews(
             withArrow: true,
             arrowOrientation: coachMark.arrowOrientation
         )
@@ -109,11 +109,11 @@ class KeyboardViewController: UIInputViewController,
         return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
 
-    func coachMarksController(_ coachMarksController: CoachMarksController,
+    func coachMarksController(_ coachMarksController: TutorialController,
                               willShow coachMark: inout CoachMark,
                               beforeChanging change: ConfigurationChange, at index: Int) {
         if index == 2 && change == .nothing {
-            coachMarksController.flow.pause(and: .hideInstructions)
+            tutorialController.flow.pause(and: .hideInstructions)
         }
     }
 

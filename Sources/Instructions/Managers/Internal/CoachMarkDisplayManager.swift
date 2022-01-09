@@ -6,8 +6,8 @@ import UIKit
 /// This class deals with the layout of coach marks.
 class CoachMarkDisplayManager {
     // MARK: - Public properties
-    weak var dataSource: CoachMarksControllerProxyDataSource!
-    weak var animationDelegate: CoachMarksControllerAnimationProxyDelegate?
+    weak var dataSource: TutorialControllerDataSourceProxy?
+    weak var delegate: TutorialControllerDelegateAnimationProxy?
     weak var overlayManager: OverlayManager?
 
     // MARK: - Private properties
@@ -24,25 +24,23 @@ class CoachMarkDisplayManager {
         self.coachMarkLayoutHelper = coachMarkLayoutHelper
     }
 
-    func createCoachMarkView(from coachMark: CoachMark, at index: Int) -> CoachMarkView {
-        // Asks the data source for the appropriate tuple of views.
-        let coachMarkComponentViews =
-            dataSource.coachMarkViews(at: index, madeFrom: coachMark)
-
-        // Creates the CoachMarkView, from the supplied component views.
-        // CoachMarkView() is not a failable initializer. We'll force unwrap
-        // currentCoachMarkView everywhere.
-        if coachMark.isDisplayedOverCutoutPath {
-            // No arrow should be shown when displayed above the cutoutPath.
-            return CoachMarkView(bodyView: coachMarkComponentViews.bodyView,
-                                 coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper())
-        } else {
-            return CoachMarkView(bodyView: coachMarkComponentViews.bodyView,
-                                 arrowView: coachMarkComponentViews.arrowView,
-                                 arrowOrientation: coachMark.arrowOrientation,
-                                 arrowOffset: coachMark.gapBetweenBodyAndArrow,
-                                 coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper())
+    func createCoachMarkView(
+        from coachMark: ComputedCoachMarkConfiguration,
+        at index: Int
+    ) -> CoachMarkView? {
+        guard let dataSource = dataSource else {
+            print(ErrorMessage.Warning.nilDataSource)
+            return nil
         }
+
+        let container = dataSource.compoundViewFor(coachMark: coachMark, at: index)
+
+        return CoachMarkView(
+            container: container,
+            verticalPosition: coachMark.position,
+            pointerOffset: coachMark.layout.marginBetweenContentAndPointer,
+            coachMarkInnerLayoutHelper: CoachMarkInnerLayoutHelper()
+        )
     }
 
     // TODO: ❗️ Refactor this method into smaller components
@@ -56,8 +54,14 @@ class CoachMarkDisplayManager {
     ///   - beforeTransition: `true` if the coach mark is hidden because a transition
     ///                        is about to happen.
     ///   - completion: a handler to call after the coach mark was successfully hidden.
-    func hide(coachMarkView: UIView, from coachMark: CoachMark, at index: Int,
-              animated: Bool, beforeTransition: Bool, completion: (() -> Void)? = nil) {
+    func hide(
+        coachMarkView: UIView,
+        from coachMark: ComputedCoachMarkConfiguration,
+        at index: Int,
+        animated: Bool,
+        beforeTransition: Bool,
+        completion: (() -> Void)? = nil
+    ) {
         guard let overlay = overlayManager else { return }
 
         guard animated else {
@@ -74,8 +78,9 @@ class CoachMarkDisplayManager {
 
         let transitionManager = CoachMarkTransitionManager(coachMark: coachMark)
 
-        animationDelegate?.fetchDisappearanceTransition(OfCoachMark: coachMarkView, at: index,
-                                                        using: transitionManager)
+        delegate?.willEndDisplaying(coachMark: coachMarkView,
+                                    at: index,
+                                    transitioner: transitionManager)
 
         if !beforeTransition {
             overlay.showCutoutPath(false, withDuration: transitionManager.parameters.duration)
@@ -127,16 +132,20 @@ class CoachMarkDisplayManager {
     ///   - beforeTransition: `true` if the coach mark is hidden because a transition
     ///                        is about to happen.
     ///   - completion: a handler to call after the coach mark was successfully displayed.
-    func showNew(coachMarkView: CoachMarkView, from coachMark: CoachMark,
-                 at index: Int, animated: Bool = true, completion: (() -> Void)? = nil) {
+    func showNew(
+        coachMarkView: CoachMarkView,
+        from coachMark: ComputedCoachMarkConfiguration,
+        at index: Int,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil
+    ) {
         guard let overlay = overlayManager else { return }
 
         prepare(coachMarkView: coachMarkView, forDisplayIn: overlay.overlayView.superview!,
                 usingCoachMark: coachMark, andOverlayView: overlay.overlayView)
 
-        overlay.enableTap = coachMark.isOverlayInteractionEnabled
-        overlay.isUserInteractionEnabledInsideCutoutPath =
-            coachMark.isUserInteractionEnabledInsideCutoutPath
+        overlay.enableTap = coachMark.interaction.isOverlayInteractionEnabled
+        overlay.isUserInteractionEnabledInsideCutoutPath = coachMark.interaction.isUserInteractionEnabledInsideCutoutPath
 
         guard animated else {
             overlay.showCutoutPath(true, withDuration: 0)
@@ -147,8 +156,9 @@ class CoachMarkDisplayManager {
 
         let transitionManager = CoachMarkTransitionManager(coachMark: coachMark)
 
-        animationDelegate?.fetchAppearanceTransition(OfCoachMark: coachMarkView, at: index,
-                                                     using: transitionManager)
+        delegate?.willDisplay(coachMark: coachMarkView,
+                              at: index,
+                              transitioner: transitionManager)
 
         overlay.showCutoutPath(true, withDuration: transitionManager.parameters.duration)
 
@@ -199,17 +209,20 @@ class CoachMarkDisplayManager {
     ///   - parentView: the view in which display coach marks
     ///   - coachMark: the coachmark data
     ///   - overlayView: the overlayView (covering everything and showing cutouts)
-    private func prepare(coachMarkView: CoachMarkView, forDisplayIn parentView: UIView,
-                         usingCoachMark coachMark: CoachMark,
-                         andOverlayView overlayView: OverlayView) {
+    private func prepare(
+        coachMarkView: CoachMarkView, forDisplayIn parentView: UIView,
+        usingCoachMark coachMark: ComputedCoachMarkConfiguration,
+        andOverlayView overlayView: OverlayView
+    ) {
         // Add the view and compute its associated constraints.
         parentView.addSubview(coachMarkView)
 
-        coachMarkView.widthAnchor
-                     .constraint(lessThanOrEqualToConstant: coachMark.maxWidth).isActive = true
+        coachMarkView.widthAnchor.constraint(
+            lessThanOrEqualToConstant: coachMark.layout.maxWidth
+        ).isActive = true
 
         // No cutoutPath, no arrow.
-        if let cutoutPath = coachMark.cutoutPath {
+        if let cutoutPath = coachMark.anchor.cutoutPath {
 
             generateAndEnableVerticalConstraints(of: coachMarkView, forDisplayIn: parentView,
                                                  usingCoachMark: coachMark, cutoutPath: cutoutPath,
@@ -234,33 +247,35 @@ class CoachMarkDisplayManager {
     ///   - coachMark: the coachmark data
     ///   - cutoutPath: the cutout path
     ///   - overlayView: the overlayView (covering everything and showing cutouts)
-    private func generateAndEnableVerticalConstraints(of coachMarkView: CoachMarkView,
-                                                      forDisplayIn parentView: UIView,
-                                                      usingCoachMark coachMark: CoachMark,
-                                                      cutoutPath: UIBezierPath,
-                                                      andOverlayView overlayView: OverlayView) {
-        let offset = coachMark.gapBetweenCoachMarkAndCutoutPath
+    private func generateAndEnableVerticalConstraints(
+        of coachMarkView: CoachMarkView,
+        forDisplayIn parentView: UIView,
+        usingCoachMark coachMark: ComputedCoachMarkConfiguration,
+        cutoutPath: UIBezierPath,
+        andOverlayView overlayView: OverlayView
+    ) {
+        let offset = coachMark.layout.marginBetweenCoachMarkAndCutoutPath
 
         // Depending where the cutoutPath sits, the coach mark will either
         // stand above or below it. Alternatively, it can also be displayed
         // over the cutoutPath.
-        if coachMark.isDisplayedOverCutoutPath {
+
+        switch coachMark.position {
+        case .above:
+            let constant = -(parentView.frame.size.height - cutoutPath.bounds.origin.y + offset)
+
+            coachMarkView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor,
+                                                  constant: constant).isActive = true
+        case .below:
+            let constant = (cutoutPath.bounds.origin.y + cutoutPath.bounds.size.height) + offset
+
+            coachMarkView.topAnchor.constraint(equalTo: parentView.topAnchor,
+                                               constant: constant).isActive = true
+        case .over:
             let constant = cutoutPath.bounds.midY - parentView.frame.size.height / 2
 
             coachMarkView.centerYAnchor.constraint(equalTo: parentView.centerYAnchor,
                                                    constant: constant).isActive = true
-        } else if coachMark.arrowOrientation! == .bottom {
-            let constant = -(parentView.frame.size.height -
-                cutoutPath.bounds.origin.y + offset)
-
-            coachMarkView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor,
-                                                  constant: constant).isActive = true
-        } else {
-            let constant = (cutoutPath.bounds.origin.y +
-                cutoutPath.bounds.size.height) + offset
-
-            coachMarkView.topAnchor.constraint(equalTo: parentView.topAnchor,
-                                               constant: constant).isActive = true
         }
     }
 
@@ -275,10 +290,12 @@ class CoachMarkDisplayManager {
     ///   - parentView: the view in which display coach marks
     ///   - coachMark: the coachmark data
     ///   - overlayView: the overlayView (covering everything and showing cutouts)
-    private func generateAndEnableHorizontalConstraints(of coachMarkView: CoachMarkView,
-                                                        forDisplayIn parentView: UIView,
-                                                        usingCoachMark coachMark: CoachMark,
-                                                        andOverlayView overlayView: OverlayView) {
+    private func generateAndEnableHorizontalConstraints(
+        of coachMarkView: CoachMarkView,
+        forDisplayIn parentView: UIView,
+        usingCoachMark coachMark: ComputedCoachMarkConfiguration,
+        andOverlayView overlayView: OverlayView
+    ) {
         // Generating the constraints for the first pass. This constraints center
         // the view around the point of interest.
         let constraints = coachMarkLayoutHelper.constraints(for: coachMarkView,
@@ -292,10 +309,10 @@ class CoachMarkDisplayManager {
 
         // If the view turns out to be partially outside of the screen, constraints are
         // computed again and the view is laid out for the second time.
-        let insets = UIEdgeInsets(top: 0, left: coachMark.horizontalMargin,
-                                  bottom: 0, right: coachMark.horizontalMargin)
+        let insets = UIEdgeInsets(top: 0, left: coachMark.layout.horizontalMargin,
+                                  bottom: 0, right: coachMark.layout.horizontalMargin)
 
-        if coachMarkView.isOutOfSuperview(consideringInsets: insets) {
+        if coachMarkView.isOutsideOfSuperviewsBounds(consideringInsets: insets) {
             // Removing previous constraints.
             for constraint in constraints {
                 parentView.removeConstraint(constraint)
@@ -316,12 +333,14 @@ class CoachMarkDisplayManager {
     ///   - coachMarkView: the view to animate.
     ///   - coachMark: the related coach mark metadata.
     ///   - index: the index of the coach mark.
-    private func applyIdleAnimation(to coachMarkView: UIView, from coachMark: CoachMark,
-                                    at index: Int) {
+    private func applyIdleAnimation(
+        to coachMarkView: UIView,
+        from coachMark: ComputedCoachMarkConfiguration,
+        at index: Int
+    ) {
         let transitionManager = CoachMarkAnimationManager(coachMark: coachMark)
 
-        animationDelegate?.fetchIdleAnimationOfCoachMark(OfCoachMark: coachMarkView, at: index,
-                                                         using: transitionManager)
+        delegate?.animate(coachMark: coachMarkView, at: index, animator: transitionManager)
 
         if let animations = transitionManager.animations {
             let context = transitionManager.createContext()

@@ -54,18 +54,19 @@
 		B6CA4A9920BEC111006F42AC /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CA4A9820BEC111006F42AC /* AccessibilityIdentifiers.swift */; };
 		B6CA4A9B20BED19B006F42AC /* TransitionExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CA4A9A20BED19B006F42AC /* TransitionExampleTests.swift */; };
 		B6DECE1C273AB88B00DB1AD1 /* XCUIApplication+Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DECE1B273AB88B00DB1AD1 /* XCUIApplication+Launch.swift */; };
+		B6FD83E52673D0C100239A1A /* SnapshotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6FD83E42673D0C100239A1A /* SnapshotViewController.swift */; };
 		C615FBAF1D7A1BB500EAEEFB /* TestFlowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C615FBAE1D7A1BB500EAEEFB /* TestFlowViewController.swift */; };
 		C636FFAA1BBBD99200EB243B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C636FFA91BBBD99200EB243B /* Assets.xcassets */; };
 		C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */; };
-		C636FFB21BBC329600EB243B /* TransparentCoachMarkBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFB01BBC329600EB243B /* TransparentCoachMarkBodyView.swift */; };
+		C636FFB21BBC329600EB243B /* TransparentCoachMarkContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C636FFB01BBC329600EB243B /* TransparentCoachMarkContentView.swift */; };
 		C63935DB1D2837EF002DCABF /* BackgroundNetworkingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63935DA1D2837EF002DCABF /* BackgroundNetworkingViewController.swift */; };
 		C63BB9161C73CDD600C81A4D /* TransitionFromCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C63BB9151C73CDD600C81A4D /* TransitionFromCodeViewController.swift */; };
 		C64FB3351BB6CC180081E5B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB32D1BB6CC180081E5B6 /* AppDelegate.swift */; };
 		C64FB3371BB6CC180081E5B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64FB32F1BB6CC180081E5B6 /* LaunchScreen.storyboard */; };
 		C64FB3381BB6CC180081E5B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C64FB3311BB6CC180081E5B6 /* Main.storyboard */; };
 		C64FB33A1BB6CC180081E5B6 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3341BB6CC180081E5B6 /* ProfileViewController.swift */; };
-		C64FB3841BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3831BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift */; };
-		C64FB3861BB98EC20081E5B6 /* CustomCoachMarkArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3851BB98EC20081E5B6 /* CustomCoachMarkArrowView.swift */; };
+		C64FB3841BB98CE90081E5B6 /* CustomCoachMarkContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3831BB98CE90081E5B6 /* CustomCoachMarkContentView.swift */; };
+		C64FB3861BB98EC20081E5B6 /* CustomCoachMarkPointerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C64FB3851BB98EC20081E5B6 /* CustomCoachMarkPointerView.swift */; };
 		C6CE542C1BBD435500154266 /* BlurringOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE54291BBD435500154266 /* BlurringOverlayViewController.swift */; };
 		C6CE542D1BBD435500154266 /* CustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE542A1BBD435500154266 /* CustomViewController.swift */; };
 		C6CE542E1BBD435500154266 /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6CE542B1BBD435500154266 /* DefaultViewController.swift */; };
@@ -199,18 +200,19 @@
 		B6CA4A9A20BED19B006F42AC /* TransitionExampleTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionExampleTests.swift; sourceTree = "<group>"; };
 		B6DECE1B273AB88B00DB1AD1 /* XCUIApplication+Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "XCUIApplication+Launch.swift"; sourceTree = "<group>"; };
 		B6DECE1D273ACB4800DB1AD1 /* Snapshot.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Snapshot.xctestplan; sourceTree = "<group>"; };
+		B6FD83E42673D0C100239A1A /* SnapshotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapshotViewController.swift; sourceTree = "<group>"; };
 		C615FBAE1D7A1BB500EAEEFB /* TestFlowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFlowViewController.swift; sourceTree = "<group>"; };
 		C636FFA91BBBD99200EB243B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentCoachMarkArrowView.swift; sourceTree = "<group>"; };
-		C636FFB01BBC329600EB243B /* TransparentCoachMarkBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentCoachMarkBodyView.swift; sourceTree = "<group>"; };
+		C636FFB01BBC329600EB243B /* TransparentCoachMarkContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentCoachMarkContentView.swift; sourceTree = "<group>"; };
 		C63935DA1D2837EF002DCABF /* BackgroundNetworkingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundNetworkingViewController.swift; sourceTree = "<group>"; };
 		C63BB9151C73CDD600C81A4D /* TransitionFromCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionFromCodeViewController.swift; sourceTree = "<group>"; };
 		C64FB30C1BB6CB1C0081E5B6 /* InstructionsExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InstructionsExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C64FB32D1BB6CC180081E5B6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C64FB3331BB6CC180081E5B6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C64FB3341BB6CC180081E5B6 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		C64FB3831BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCoachMarkBodyView.swift; sourceTree = "<group>"; };
-		C64FB3851BB98EC20081E5B6 /* CustomCoachMarkArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCoachMarkArrowView.swift; sourceTree = "<group>"; };
+		C64FB3831BB98CE90081E5B6 /* CustomCoachMarkContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCoachMarkContentView.swift; sourceTree = "<group>"; };
+		C64FB3851BB98EC20081E5B6 /* CustomCoachMarkPointerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCoachMarkPointerView.swift; sourceTree = "<group>"; };
 		C6CE54291BBD435500154266 /* BlurringOverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurringOverlayViewController.swift; sourceTree = "<group>"; };
 		C6CE542A1BBD435500154266 /* CustomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomViewController.swift; sourceTree = "<group>"; };
 		C6CE542B1BBD435500154266 /* DefaultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewController.swift; sourceTree = "<group>"; };
@@ -518,6 +520,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		B6FD83E22673D0AA00239A1A /* Snapshot */ = {
+			isa = PBXGroup;
+			children = (
+				B6FD83E42673D0C100239A1A /* SnapshotViewController.swift */,
+			);
+			path = Snapshot;
+			sourceTree = "<group>";
+		};
 		C636FFAD1BBBF68300EB243B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -580,6 +590,7 @@
 		C6CE54261BBD42D300154266 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B6FD83E22673D0AA00239A1A /* Snapshot */,
 				B618494820C260D300315E1C /* Debug */,
 				B618494720C260A000315E1C /* Delegate Examples */,
 				B618494620C2608000315E1C /* Basic Examples */,
@@ -593,10 +604,10 @@
 		C6CE54281BBD42E500154266 /* Custom Views */ = {
 			isa = PBXGroup;
 			children = (
-				C64FB3851BB98EC20081E5B6 /* CustomCoachMarkArrowView.swift */,
-				C64FB3831BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift */,
+				C64FB3851BB98EC20081E5B6 /* CustomCoachMarkPointerView.swift */,
+				C64FB3831BB98CE90081E5B6 /* CustomCoachMarkContentView.swift */,
 				C636FFAF1BBC329600EB243B /* TransparentCoachMarkArrowView.swift */,
-				C636FFB01BBC329600EB243B /* TransparentCoachMarkBodyView.swift */,
+				C636FFB01BBC329600EB243B /* TransparentCoachMarkContentView.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -858,8 +869,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C64FB3861BB98EC20081E5B6 /* CustomCoachMarkArrowView.swift in Sources */,
-				C64FB3841BB98CE90081E5B6 /* CustomCoachMarkBodyView.swift in Sources */,
+				C64FB3861BB98EC20081E5B6 /* CustomCoachMarkPointerView.swift in Sources */,
+				C64FB3841BB98CE90081E5B6 /* CustomCoachMarkContentView.swift in Sources */,
 				C63935DB1D2837EF002DCABF /* BackgroundNetworkingViewController.swift in Sources */,
 				B618494220C2472200315E1C /* PausingCodeViewController.swift in Sources */,
 				C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */,
@@ -872,7 +883,8 @@
 				C64FB3351BB6CC180081E5B6 /* AppDelegate.swift in Sources */,
 				C6CE542E1BBD435500154266 /* DefaultViewController.swift in Sources */,
 				B65DDDC21EE2C5F1002618AF /* Extensions.swift in Sources */,
-				C636FFB21BBC329600EB243B /* TransparentCoachMarkBodyView.swift in Sources */,
+				C636FFB21BBC329600EB243B /* TransparentCoachMarkContentView.swift in Sources */,
+				B6FD83E52673D0C100239A1A /* SnapshotViewController.swift in Sources */,
 				C6CE54321BBD43CB00154266 /* MixedCoachMarksViewController.swift in Sources */,
 				C6CE542D1BBD435500154266 /* CustomViewController.swift in Sources */,
 				B6454D6220C78C2A00DCF351 /* LargeCutoutViewController.swift in Sources */,
@@ -1191,7 +1203,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1242,7 +1254,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

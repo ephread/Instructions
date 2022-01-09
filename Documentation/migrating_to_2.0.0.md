@@ -8,7 +8,7 @@ Instructions 2.0.0 brings a few breaking changes that are listed below.
 
 ```swift
 func coachMarksController(
-    _ coachMarksController: CoachMarksController,
+    _ coachMarksController: TutorialController,
     coachMarkViewsAt index: Int,
     madeFrom coachMark: CoachMark
 ) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?)
@@ -17,7 +17,7 @@ func coachMarksController(
 
 ```swift
 func coachMarksController(
-    _ coachMarksController: CoachMarksController,
+    _ coachMarksController: TutorialController,
     coachMarkViewsAt index: Int,
     madeFrom coachMark: CoachMark
 ) -> (bodyView: UIView & CoachMarkBodyView, arrowView: (UIView & CoachMarkArrowView)?)

@@ -11,7 +11,7 @@ internal class LargeCutoutViewController: UIViewController {
     @IBOutlet weak var halfInvisibleOverlay: UIView!
 
     // MARK: - Public properties
-    var coachMarksController = CoachMarksController()
+    var tutorialController = TutorialController()
 
     let tableViewText = """
                         That's a gorgeous table view in which all your content sits. \
@@ -26,13 +26,13 @@ internal class LargeCutoutViewController: UIViewController {
         super.viewDidLoad()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Default")
 
-        self.coachMarksController.overlay.isUserInteractionEnabled = true
-        self.coachMarksController.dataSource = self
+        self.tutorialController.overlay.isUserInteractionEnabled = true
+        self.tutorialController.dataSource = self
 
-        let skipView = CoachMarkSkipDefaultView()
+        let skipView = DefaultCoachMarkSkipperView()
         skipView.setTitle("Skip", for: .normal)
 
-        self.coachMarksController.skipView = skipView
+        self.tutorialController.skipView = skipView
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -44,52 +44,52 @@ internal class LargeCutoutViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 
-        self.coachMarksController.stop(immediately: true)
+        self.tutorialController.stop(immediately: true)
     }
 
     func startInstructions() {
-        self.coachMarksController.start(in: .window(over: self))
+        self.tutorialController.start(in: .window(over: self))
     }
 }
 
 // MARK: - Protocol Conformance | CoachMarksControllerDataSource
-extension LargeCutoutViewController: CoachMarksControllerDataSource {
-    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+extension LargeCutoutViewController: TutorialControllerDataSource {
+    func numberOfCoachMarks(for coachMarksController: TutorialController) -> Int {
         return 2
     }
 
     func coachMarksController(
-        _ coachMarksController: CoachMarksController,
+        _ coachMarksController: TutorialController,
         coachMarkAt index: Int
-    ) -> CoachMark {
+    ) -> CoachMarkConfiguration {
         switch index {
         case 0:
             let pathMaker = { (frame: CGRect) -> UIBezierPath in
                 return UIBezierPath(rect: frame)
             }
 
-            var coachMark = coachMarksController.helper.makeCoachMark(for: tableView,
+            var coachMark = tutorialController.helper.makeCoachMark(for: tableView,
                                                                       cutoutPathMaker: pathMaker)
             coachMark.isDisplayedOverCutoutPath = true
 
             return coachMark
         case 1:
-            var coachMark = coachMarksController.helper.makeCoachMark(for: halfInvisibleOverlay)
+            var coachMark = tutorialController.helper.makeCoachMark(for: halfInvisibleOverlay)
             coachMark.isDisplayedOverCutoutPath = true
 
             return coachMark
         default:
-            return coachMarksController.helper.makeCoachMark()
+            return tutorialController.helper.makeCoachMark()
         }
     }
 
     func coachMarksController(
-        _ coachMarksController: CoachMarksController,
+        _ coachMarksController: TutorialController,
         coachMarkViewsAt index: Int,
-        madeFrom coachMark: CoachMark
-    ) -> (bodyView: (UIView & CoachMarkBodyView), arrowView: (UIView & CoachMarkArrowView)?) {
+        madeFrom coachMark: CoachMarkConfiguration
+    ) -> (bodyView: (UIView & CoachMarkContentView), arrowView: (UIView & CoachMarkArrowView)?) {
 
-        let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+        let coachViews = tutorialController.helper.makeDefaultCoachViews(
             withArrow: true, arrowOrientation: coachMark.arrowOrientation
         )
 

@@ -49,8 +49,8 @@ Add customisable coach marks to your iOS project. Available for both iPhone and 
 - [ ] Multiple coach marks support
 
 ## Requirements
-- Xcode 12 / Swift 5+
-- iOS 13.0+
+- Xcode 13 / Swift 5+
+- iOS 14.0+
 
 ## Asking Questions / Contributing
 
@@ -222,7 +222,8 @@ You can also allow touch events to be forwarded to the UIView underneath if they
 
 - `overlay.areTouchEventsForwarded: Bool`
 
-⚠️ The blurring overlay is not supported in app extensions.
+> **Warning**  
+> The blurring overlay is not supported in app extensions. 
 
 #### Customizing default coach marks
 The default coach marks provide minimum customisation options.
@@ -323,7 +324,8 @@ You can choose in which context the coach marks will be displayed, by passing it
 
 Additionally, you can also provide use `window(over: UIViewController)`, which is a convenience static method equivalent to calling `.newWindow(over: UIViewController, at: UIWindowLevelNormal + 1)`.
 
-⚠️ Setting the window level to anything above `UIWindowLevelStatusBar` is neither supported on iOS 13 nor when using a blur effect on the overlay.
+> **Warning**  
+> Setting the window level to anything above `UIWindowLevelStatusBar` is neither supported on iOS 13 nor when using a blur effect on the overlay
 
 #### Customizing how the coach mark will show
 You can customise the following properties:
@@ -529,9 +531,8 @@ coachMarksController.helper.updateCurrentCoachMark { coachMark, converter in
 }
 ```
 
-⚠️ Since the blurring overlay snapshots the view during coach mark appearance/disappearance,
-you should make sure that animations targeting your view don't occur while a coach mark
-appears or disappears. Otherwise, the animation won't be visible.
+> **Warning**  
+> Since the blurring overlay snapshots the view during coach mark appearance/disappearance, you should make sure that animations targeting your view don't occur while a coach mark appears or disappears. Otherwise, the animation won't be visible.
 
 You may also want to customise the classic transparency overlay, as Instructions will fall back to using the traditional type if `UIAccessibility.isReduceTransparencyEnabled` returns true.
 
@@ -642,12 +643,9 @@ use the specific statement:
 import InstructionsAppExtensions
 ```
 
-⚠️ **Caution:** it's possible to import _Instructions_ in an app extension.
-However, you're at a high risk of rejection from the Apple Store.
-Uses of `UIApplication.sharedApplication()` are statically checked
-during compilation, but nothing prevents you from performing the calls at runtime.
-Fortunately, Xcode should warn you if you've mistakenly linked with a framework
-not suited for App Extensions.
+> **Warning**  
+> it's possible to import _Instructions_ in an app extension. However, you're at a high risk of rejection from the Apple Store.
+Uses of `UIApplication.sharedApplication()` are statically checked during compilation, but nothing prevents you from performing the calls at runtime. Fortunately, Xcode should warn you if you've mistakenly linked with a framework not suited for App Extensions.
 
 ## License
 

@@ -489,10 +489,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C6417E301D291A8A004D13EA /* Build configuration list for PBXNativeTarget "InstructionsAppExtensions" */;
 			buildPhases = (
-				B60D615221B8A89000148BC2 /* Swiftlint */,
+				B60D615221B8A89000148BC2 /* [SwiftLint] Lint code */,
+				C6417E2C1D291A8A004D13EA /* Headers */,
 				C6417E151D291A8A004D13EA /* Sources */,
 				C6417E2B1D291A8A004D13EA /* Frameworks */,
-				C6417E2C1D291A8A004D13EA /* Headers */,
 				C6417E2E1D291A8A004D13EA /* Resources */,
 			);
 			buildRules = (
@@ -508,10 +508,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C64FB2FD1BB6CA8A0081E5B6 /* Build configuration list for PBXNativeTarget "Instructions" */;
 			buildPhases = (
-				C6B30BA61D529E1000505F0C /* Swiftlint */,
+				C6B30BA61D529E1000505F0C /* [SwiftLint] Lint code */,
+				C64FB2E61BB6CA8A0081E5B6 /* Headers */,
 				C64FB2E41BB6CA8A0081E5B6 /* Sources */,
 				C64FB2E51BB6CA8A0081E5B6 /* Frameworks */,
-				C64FB2E61BB6CA8A0081E5B6 /* Headers */,
 				C64FB2E71BB6CA8A0081E5B6 /* Resources */,
 			);
 			buildRules = (
@@ -581,7 +581,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B60D615221B8A89000148BC2 /* Swiftlint */ = {
+		B60D615221B8A89000148BC2 /* [SwiftLint] Lint code */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -590,7 +590,7 @@
 			);
 			inputPaths = (
 			);
-			name = Swiftlint;
+			name = "[SwiftLint] Lint code";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -599,14 +599,14 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ ${CARTHAGE} ]; then\n    exit\nfi\n\nif [ -f ~/.profile ]; then\n    source ~/.profile\n\n    if which swiftlint > /dev/null; then\n        swiftlint\n    fi\nfi\n";
 		};
-		C6B30BA61D529E1000505F0C /* Swiftlint */ = {
+		C6B30BA61D529E1000505F0C /* [SwiftLint] Lint code */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = Swiftlint;
+			name = "[SwiftLint] Lint code";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;

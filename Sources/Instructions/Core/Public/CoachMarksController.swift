@@ -143,7 +143,16 @@ public extension CoachMarksController {
         delegate?.coachMarksController(self,
                                        configureOrnamentsOfOverlay: overlay.overlayView.ornaments)
 
-        flow.startFlow(withNumberOfCoachMarks: numberOfCoachMarks)
+
+        // This tells the window to layout the basic ornaments immediately. While this isn't
+        // strictly needed, it ensures the window has its bounds set when starting the flow.
+        //
+        // The window won't be laid out again when coach marks are added, so this shouldn't
+        // cause any glitch. If things become choppy, we can dispatch the call to `startFlow`
+        // asynchronously.
+        coachMarksWindow?.layoutIfNeeded()
+
+        self.flow.startFlow(withNumberOfCoachMarks: numberOfCoachMarks)
     }
 
     /// Stop the flow of coach marks. Don't forget to call this method in viewDidDisappear or

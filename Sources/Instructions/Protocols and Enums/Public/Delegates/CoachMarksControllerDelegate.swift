@@ -35,8 +35,8 @@ public protocol CoachMarksControllerDelegate: AnyObject {
     func shouldHandleOverlayTap(in coachMarksController: CoachMarksController,
                                 at index: Int) -> Bool
     
-    func handleCoachMarkTap(_ coachMarksController: CoachMarksController,
-                            at index: Int)
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didTapCoachMarkAt index: Int)
 }
 
 public extension CoachMarksControllerDelegate {
@@ -83,12 +83,13 @@ public extension CoachMarksControllerDelegate {
                                 at index: Int) -> Bool {
         return true
     }
+
+    func coachMarksController(_ coachMarksController: CoachMarksController,
+                              didTapCoachMarkAt index: Int) { }
 }
 
 protocol CoachMarksControllerProxyDelegate: AnyObject {
     func configureOrnaments(ofOverlay: UIView)
-    
-    func didTapCoachMark(at index: Int)
 
     func willLoadCoachMark(at index: Int) -> Bool
 
@@ -108,4 +109,6 @@ protocol CoachMarksControllerProxyDelegate: AnyObject {
     func didEndShowingBySkipping(_ skipped: Bool)
 
     func shouldHandleOverlayTap(at index: Int) -> Bool
+
+    func didTapCoachMark(at index: Int)
 }

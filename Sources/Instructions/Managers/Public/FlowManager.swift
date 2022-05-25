@@ -302,8 +302,8 @@ public class FlowManager {
 
 extension FlowManager: CoachMarksViewControllerDelegate {
     func didTap(coachMarkView: CoachMarkView?) {
-        showNextCoachMark()
         delegate?.didTapCoachMark(at: currentIndex)
+        showNextCoachMark()
     }
 
     func didTap(skipView: CoachMarkSkipView?) {

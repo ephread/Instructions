@@ -7,6 +7,10 @@ import UIKit
 /// Handles a set of coach marks, and display them successively.
 public class CoachMarksController {
     // MARK: - Public properties
+    /// The root window that displays the coach mark when the presentation context. `nil` unless
+    /// the presentation context is ``Instructions/PresentationContext/newWindow(over:at:)``.
+    public var rootWindow: UIWindow?
+
     /// Implement the data source protocol and supply
     /// the coach marks to display.
     public weak var dataSource: CoachMarksControllerDataSource?
@@ -74,7 +78,6 @@ public class CoachMarksController {
 
     // MARK: - Private properties
     private weak var controllerWindow: UIWindow?
-    private var coachMarksWindow: UIWindow?
 
     /// Handle the UI part
     private lazy var coachMarksViewController: CoachMarksViewController = {
@@ -130,8 +133,8 @@ public extension CoachMarksController {
             fatalError(ErrorMessage.Fatal.windowContextNotAvailableInAppExtensions)
 #else
             controllerWindow = viewController.view.window
-            coachMarksWindow = coachMarksWindow ?? buildNewWindow()
-            coachMarksViewController.attach(to: coachMarksWindow!, over: viewController,
+            rootWindow = rootWindow ?? buildNewWindow()
+            coachMarksViewController.attach(to: rootWindow!, over: viewController,
                                             at: windowLevel)
 #endif
         case .currentWindow(let viewController):
@@ -144,13 +147,13 @@ public extension CoachMarksController {
                                        configureOrnamentsOfOverlay: overlay.overlayView.ornaments)
 
 
-        // This tells the window to layout the basic ornaments immediately. While this isn't
+        // This tells the window to lay out the basic ornaments immediately. While this isn't
         // strictly needed, it ensures the window has its bounds set when starting the flow.
         //
         // The window won't be laid out again when coach marks are added, so this shouldn't
         // cause any glitch. If things become choppy, we can dispatch the call to `startFlow`
-        // asynchronously.
-        coachMarksWindow?.layoutIfNeeded()
+        // asynchronously in the future.
+        rootWindow?.layoutIfNeeded()
 
         self.flow.startFlow(withNumberOfCoachMarks: numberOfCoachMarks)
     }
@@ -172,7 +175,7 @@ public extension CoachMarksController {
                 userDidSkip: userDidSkip,
                 shouldCallDelegate: false
             ) { [weak self] in
-                self?.coachMarksWindow = nil
+                self?.rootWindow = nil
             }
         } else {
             flow.stopFlow(
@@ -180,7 +183,7 @@ public extension CoachMarksController {
                 userDidSkip: userDidSkip,
                 shouldCallDelegate: true
             ) { [weak self] in
-                self?.coachMarksWindow = nil
+                self?.rootWindow = nil
             }
         }
     }

@@ -119,6 +119,11 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
         }
     }
 
+    func testThatRootWindowIsExposedWhenUsingNewWindowContext() {
+        coachMarksController.start(in: .window(over: parentController))
+        XCTAssertNotNil(coachMarksController.rootWindow)
+    }
+
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               didEndShowingBySkipping skipped: Bool) {
         guard let delegateEndExpectation = self.delegateEndExpectation else {

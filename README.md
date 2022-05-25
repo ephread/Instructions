@@ -11,7 +11,7 @@ Add customisable coach marks to your iOS project. Available for both iPhone and 
 
 | ⚠️ MESSAGE FROM THE MAINTAINER |
 |:------------------------------|
-| _Instructions_ is in maintenance mode for now. I don't have a lot of time to work on the project at the moment. I will keep accepting Pull Requests and fixing issues, but no new features should be expected for a while. |
+| _Instructions_ is in maintenance mode for now, as I don't have a lot of time to work on the project. I will keep accepting Pull Requests and fixing issues, but no new features should be expected for a while. |
 
 # Table of contents
 
@@ -243,7 +243,7 @@ Note that you can also customize properties on `CoachMarkBodyDefaultView.hintLab
 Refer to `MixedCoachMarksViewsViewController.swift` for a practical example.
 
 #### Providing custom views
-If the default customisation options are not enough, you can provide your custom views. A coach mark comprises two views, a _body_ view and an _arrow_ view. Note that the term _arrow_ might be misleading. It doesn't have to be an actual arrow; it can be anything you want.
+If the default customisation options are not enough, you can provide your custom views. A coach mark comprises a _body_ view and an _arrow_ view. Note that the term _arrow_ might be misleading. It doesn't have to be an actual arrow; it can be anything you want.
 
 A _body_ view must conform to the `CoachMarkBodyView` protocol. An _arrow_ view must conform to the `CoachMarkArrowView` protocol. Both of them must also be subclasses of `UIView`.
 
@@ -325,7 +325,9 @@ You can choose in which context the coach marks will be displayed, by passing it
 Additionally, you can also provide use `window(over: UIViewController)`, which is a convenience static method equivalent to calling `.newWindow(over: UIViewController, at: UIWindowLevelNormal + 1)`.
 
 > **Warning**  
-> Setting the window level to anything above `UIWindowLevelStatusBar` is neither supported on iOS 13 nor when using a blur effect on the overlay
+> Setting the window level to anything above `UIWindowLevelStatusBar` is not supported on iOS 13+ or when adding a blur effect on the overlay.
+
+When the coach marks are displayed in a `. newWindow` context, the custom window is exposed by `CoachMarkController` through the `rootWindow` property.
 
 #### Customizing how the coach mark will show
 You can customise the following properties:

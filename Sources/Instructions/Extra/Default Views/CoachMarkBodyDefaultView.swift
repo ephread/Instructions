@@ -24,7 +24,7 @@ public class CoachMarkBodyDefaultView: UIControl,
     public lazy var nextLabel: UILabel = makeNextLabel()
     public lazy var hintLabel: UITextView = makeHintTextView()
     public lazy var separator: UIView = makeSeparator()
-    private let nextLabelPosition: CoachMarkNextLabelPosition?
+    private var nextLabelPosition: CoachMarkNextLabelPosition = .trailing
     private let spacing: CGFloat = 18
 
     public var background: CoachMarkBodyBackgroundStyle {
@@ -42,13 +42,11 @@ public class CoachMarkBodyDefaultView: UIControl,
 
     // MARK: - Initialization
     override public init(frame: CGRect) {
-        self.nextLabelPosition = .none
-
         super.init(frame: frame)
         initializeViewHierarchy()
     }
 
-    public init(frame: CGRect, hintText: String, nextText: String?, nextLabelPosition: CoachMarkNextLabelPosition?) {
+    public init(frame: CGRect, hintText: String, nextText: String?, nextLabelPosition: CoachMarkNextLabelPosition) {
         self.nextLabelPosition = nextLabelPosition
 
         super.init(frame: frame)
@@ -61,18 +59,18 @@ public class CoachMarkBodyDefaultView: UIControl,
         hintLabel.text = hintText
     }
 
-    public init(frame: CGRect, nextLabelPosition: CoachMarkNextLabelPosition?) {
+    public init(frame: CGRect, nextLabelPosition: CoachMarkNextLabelPosition) {
         self.nextLabelPosition = nextLabelPosition
 
         super.init(frame: frame)
         initializeViewHierarchy()
     }
 
-    convenience public init(hintText: String, nextText: String?, nextLabelPosition: CoachMarkNextLabelPosition?) {
+    convenience public init(hintText: String, nextText: String?, nextLabelPosition: CoachMarkNextLabelPosition) {
         self.init(frame: CGRect.zero, hintText: hintText, nextText: nextText, nextLabelPosition: nextLabelPosition)
     }
 
-    convenience public init(nextLabelPosition: CoachMarkNextLabelPosition?) {
+    convenience public init(nextLabelPosition: CoachMarkNextLabelPosition) {
         self.init(frame: CGRect.zero, nextLabelPosition: nextLabelPosition)
     }
 
@@ -96,7 +94,19 @@ private extension CoachMarkBodyDefaultView {
         labelStackView.fillSuperview(insets: UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15))
 
         switch nextLabelPosition {
-        case .topRight:
+        case .trailing:
+            labelStackView.addArrangedSubview(hintLabel)
+            labelStackView.addArrangedSubview(separator)
+            labelStackView.addArrangedSubview(nextLabel)
+            separator.heightAnchor.constraint(equalTo: labelStackView.heightAnchor,
+                                              constant: -10).isActive = true
+        case .leading:
+            labelStackView.addArrangedSubview(nextLabel)
+            labelStackView.addArrangedSubview(separator)
+            labelStackView.addArrangedSubview(hintLabel)
+            separator.heightAnchor.constraint(equalTo: labelStackView.heightAnchor,
+                                              constant: -10).isActive = true
+        case .topTrailing:
             labelStackView.addSubview(hintLabel)
             labelStackView.addSubview(nextLabel)
 
@@ -108,7 +118,7 @@ private extension CoachMarkBodyDefaultView {
                 hintLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: spacing),
                 hintLabel.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -spacing)
             ])
-        case .topLeft:
+        case .topLeading:
             labelStackView.addSubview(hintLabel)
             labelStackView.addSubview(nextLabel)
 
@@ -120,7 +130,7 @@ private extension CoachMarkBodyDefaultView {
                 hintLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: spacing),
                 hintLabel.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -spacing)
             ])
-        case .bottomRight:
+        case .bottomTrailing:
             labelStackView.addSubview(hintLabel)
             labelStackView.addSubview(nextLabel)
 
@@ -132,7 +142,7 @@ private extension CoachMarkBodyDefaultView {
                 nextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -spacing),
                 nextLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -spacing)
             ])
-        case .bottomLeft:
+        case .bottomLeading:
             labelStackView.addSubview(hintLabel)
             labelStackView.addSubview(nextLabel)
 
@@ -144,13 +154,6 @@ private extension CoachMarkBodyDefaultView {
                 nextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -spacing),
                 nextLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: spacing)
             ])
-        case .none:
-            labelStackView.addArrangedSubview(hintLabel)
-            labelStackView.addArrangedSubview(separator)
-            labelStackView.addArrangedSubview(nextLabel)
-
-            separator.heightAnchor.constraint(equalTo: labelStackView.heightAnchor,
-                                              constant: -10).isActive = true
         }
     }
 

@@ -29,7 +29,7 @@ public class CoachMarkHelper {
         withArrow arrow: Bool = true,
         withNextText nextText: Bool = true,
         arrowOrientation: CoachMarkArrowOrientation? = .top,
-        nextLabelPosition: CoachMarkNextLabelPosition? = .none
+        nextLabelPosition: CoachMarkNextLabelPosition = .trailing
     ) -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
 
         var coachMarkBodyView: CoachMarkBodyDefaultView
@@ -37,7 +37,7 @@ public class CoachMarkHelper {
         if nextText {
             coachMarkBodyView = CoachMarkBodyDefaultView(nextLabelPosition: nextLabelPosition)
         } else {
-            coachMarkBodyView = CoachMarkBodyDefaultView(hintText: "", nextText: nil, nextLabelPosition: .none)
+            coachMarkBodyView = CoachMarkBodyDefaultView(hintText: "", nextText: nil, nextLabelPosition: nextLabelPosition)
         }
 
         var coachMarkArrowView: CoachMarkArrowDefaultView?
@@ -63,7 +63,7 @@ public class CoachMarkHelper {
         arrowOrientation: CoachMarkArrowOrientation? = .top,
         hintText: String,
         nextText: String? = nil,
-        nextLabelPosition: CoachMarkNextLabelPosition? = .none
+        nextLabelPosition: CoachMarkNextLabelPosition = .trailing
     ) -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
         let coachMarkBodyView = CoachMarkBodyDefaultView(hintText: hintText, nextText: nextText, nextLabelPosition: nextLabelPosition)
 

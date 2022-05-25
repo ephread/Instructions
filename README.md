@@ -238,9 +238,20 @@ The default coach marks provide minimum customisation options.
 
 - `background.cornerRadius: UIColor`: the corner radius of the coach mark.
 
-Note that you can also customize properties on `CoachMarkBodyDefaultView.hintLabel` and `CoachMarkBodyDefaultView.nextLabel`.
+You can also customise properties on `CoachMarkBodyDefaultView.hintLabel` and `CoachMarkBodyDefaultView.nextLabel`. For instance, you can change the position of `nextLabel` in the coach mark:
 
-Refer to `MixedCoachMarksViewsViewController.swift` for a practical example.
+```swift
+let coachViews = coachMarksController.helper.makeDefaultCoachViews(
+    withArrow: true,
+    arrowOrientation: coachMark.arrowOrientation
+    nextLabelPosition: .topTrailing
+)
+
+coachViews.bodyView.hintLabel.text = "Hello! I'm a Coach Mark!"
+coachViews.bodyView.nextLabel.text = "Ok!"
+```
+
+Refer to `MixedCoachMarksViewsViewController.swift` and `NextPositionViewController.swift` for a practical example.
 
 #### Providing custom views
 If the default customisation options are not enough, you can provide your custom views. A coach mark comprises a _body_ view and an _arrow_ view. Note that the term _arrow_ might be misleading. It doesn't have to be an actual arrow; it can be anything you want.
@@ -285,7 +296,7 @@ When providing a customised view, you need to give an _arrow_ view with the appr
 Browse the `Example/` directory for more details.
 
 #### Providing a custom cutout path
-If you dislike how the default cutout path looks like, you can customize it by providing a block to `makeCoachMark(for:)`. The cutout path will automatically be stored in the `cutoutPath` property of the returning `CoachMark` object:
+If you dislike how the default cutout path looks like, you can customise it by providing a block to `makeCoachMark(for:)`. The cutout path will automatically be stored in the `cutoutPath` property of the returning `CoachMark` object:
 
 ```swift
 var coachMark = coachMarksController.helper.makeCoachMark(

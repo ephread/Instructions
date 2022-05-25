@@ -21,9 +21,11 @@ public class CoachMarkHelper {
     ///
     /// - Parameters:
     ///   - arrow: `true` to generate the arrow view, `false` otherwise.
-    ///   - nextText: `true` to add a label on the trailing side, calling for
-    ///               a tap; the content of the label can be customised at a later stage.
+    ///   - nextText: `true` to add a label, calling for a tap; the content of
+    ///                the label can be customised at a later stage.
     ///   - arrowOrientation: The orientation of the coach mark / arrow.
+    ///   - nextLabelPosition: The position of the "Next" label; if `nextText` is false,
+    ///                          this parameter is ignored.
     /// - Returns: New instances of the default coach views.
     public func makeDefaultCoachViews(
         withArrow arrow: Bool = true,
@@ -57,6 +59,8 @@ public class CoachMarkHelper {
     ///   - hintText: The hint/description of the coach mark.
     ///   - nextText: An optional text to display on the trailing side, calling for
     ///               a tap.
+    ///   - nextLabelPosition: The position of the "Next" label; if `nextText` is false,
+    ///                          this parameter is ignored.
     /// - Returns: New instances of the default coach views.
     public func makeDefaultCoachViews(
         withArrow arrow: Bool = true,

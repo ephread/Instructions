@@ -77,7 +77,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 use_frameworks!
 
-pod 'Instructions', '~> 2.1.1'
+pod 'Instructions', '~> 2.2.0'
 ```
 
 Then, run the following command:
@@ -90,7 +90,7 @@ $ pod install
 Add Instructions to your Cartfile:
 
 ```
-github "ephread/Instructions" ~> 2.1.1
+github "ephread/Instructions" ~> 2.2.0
 ```
 
 You can then update, build and drag the generated framework into your project:
@@ -222,8 +222,8 @@ You can also allow touch events to be forwarded to the UIView underneath if they
 
 - `overlay.areTouchEventsForwarded: Bool`
 
-> **Warning**  
-> The blurring overlay is not supported in app extensions. 
+> **Warning**
+> The blurring overlay is not supported in app extensions.
 
 #### Customizing default coach marks
 The default coach marks provide minimum customisation options.
@@ -335,7 +335,7 @@ You can choose in which context the coach marks will be displayed, by passing it
 
 Additionally, you can also provide use `window(over: UIViewController)`, which is a convenience static method equivalent to calling `.newWindow(over: UIViewController, at: UIWindowLevelNormal + 1)`.
 
-> **Warning**  
+> **Warning**
 > Setting the window level to anything above `UIWindowLevelStatusBar` is not supported on iOS 13+ or when adding a blur effect on the overlay.
 
 When the coach marks are displayed in a `. newWindow` context, the custom window is exposed by `CoachMarkController` through the `rootWindow` property.
@@ -544,7 +544,7 @@ coachMarksController.helper.updateCurrentCoachMark { coachMark, converter in
 }
 ```
 
-> **Warning**  
+> **Warning**
 > Since the blurring overlay snapshots the view during coach mark appearance/disappearance, you should make sure that animations targeting your view don't occur while a coach mark appears or disappears. Otherwise, the animation won't be visible.
 
 You may also want to customise the classic transparency overlay, as Instructions will fall back to using the traditional type if `UIAccessibility.isReduceTransparencyEnabled` returns true.
@@ -610,11 +610,11 @@ like this:
 
 ```ruby
 target 'Instructions App Extensions Example' do
-  pod 'Instructions', '~> 2.1.1'
+  pod 'Instructions', '~> 2.2.0'
 end
 
 target 'Keyboard Extension' do
-  pod 'InstructionsAppExtensions', '~> 2.1.1'
+  pod 'InstructionsAppExtensions', '~> 2.2.0'
 end
 ```
 
@@ -656,7 +656,7 @@ use the specific statement:
 import InstructionsAppExtensions
 ```
 
-> **Warning**  
+> **Warning**
 > it's possible to import _Instructions_ in an app extension. However, you're at a high risk of rejection from the Apple Store.
 Uses of `UIApplication.sharedApplication()` are statically checked during compilation, but nothing prevents you from performing the calls at runtime. Fortunately, Xcode should warn you if you've mistakenly linked with a framework not suited for App Extensions.
 

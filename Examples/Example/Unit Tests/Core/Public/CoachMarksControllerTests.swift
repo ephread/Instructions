@@ -79,6 +79,46 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
         }
     }
 
+    func testThatDidFinishShowingBySkippingIsNotCalledWhenStoppingImmediately() {
+        delegateEndExpectation = self.expectation(description: "StopImmediately")
+        delegateEndExpectation?.isInverted = true
+
+        coachMarksController.start(in: .window(over: parentController))
+        coachMarksController.stop(immediately: true)
+
+        waitForExpectations(timeout: 5) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    func testThatSkippedIsTrueWhenSkippingAndStoppingTheFlow() {
+        delegateEndExpectation = self.expectation(description: "StopAndEmulateSkip")
+
+        coachMarksController.start(in: .window(over: parentController))
+        coachMarksController.stop(emulatingSkip: true)
+
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    func testThatSkippedIsFalseWhenStoppingTheFlow() {
+        delegateEndExpectation = self.expectation(description: "StopAndDoNotEmulateSkip")
+
+        coachMarksController.start(in: .window(over: parentController))
+        coachMarksController.stop()
+
+        waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               didEndShowingBySkipping skipped: Bool) {
         guard let delegateEndExpectation = self.delegateEndExpectation else {
@@ -94,6 +134,12 @@ class CoachMarksControllerTests: XCTestCase, CoachMarksControllerDelegate {
             delegateEndExpectation.fulfill()
         } else if delegateEndExpectation.description == "DidFinishShowingBySkipping" {
             XCTAssertTrue(skipped)
+            delegateEndExpectation.fulfill()
+        } else if delegateEndExpectation.description == "StopAndEmulateSkip" {
+            XCTAssertTrue(skipped)
+            delegateEndExpectation.fulfill()
+        } else if delegateEndExpectation.description == "StopAndDoNotEmulateSkip" {
+            XCTAssertFalse(skipped)
             delegateEndExpectation.fulfill()
         } else {
             XCTFail("Invalid expectation")

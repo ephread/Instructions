@@ -155,18 +155,31 @@ public extension CoachMarksController {
         self.flow.startFlow(withNumberOfCoachMarks: numberOfCoachMarks)
     }
 
-    /// Stop the flow of coach marks. Don't forget to call this method in viewDidDisappear or
-    /// viewWillDisappear.
+    // TODO: Refactor this method into two separate methods.
+
+    /// Stop the flow of coach marks. Don't forget to call this method in `viewDidDisappear` or
+    /// `viewWillDisappear`.
+    ///
+    /// When `immediately` is `true`, `emulatingSkip` is ignored since the delegate
+    /// is not be called.
     ///
     /// - Parameter immediately: `true` to stop immediately, without animations.
-    func stop(immediately: Bool = false) {
+    /// - Parameter emulatingSkip: `true` to tell the delegate that the user pressed the skip button.
+    func stop(immediately: Bool = false, emulatingSkip userDidSkip: Bool = false) {
         if immediately {
-            flow.stopFlow(immediately: true, userDidSkip: false,
-                          shouldCallDelegate: false) { [weak self] in
+            flow.stopFlow(
+                immediately: true,
+                userDidSkip: userDidSkip,
+                shouldCallDelegate: false
+            ) { [weak self] in
                 self?.coachMarksWindow = nil
             }
         } else {
-            flow.stopFlow { [weak self] in
+            flow.stopFlow(
+                immediately: false,
+                userDidSkip: userDidSkip,
+                shouldCallDelegate: true
+            ) { [weak self] in
                 self?.coachMarksWindow = nil
             }
         }

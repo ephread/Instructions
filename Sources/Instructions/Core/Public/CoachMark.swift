@@ -12,7 +12,7 @@ public struct CoachMark {
 
     /// The vertical offset for the arrow (in rare cases, the arrow might need to overlap with
     /// the coach mark body).
-    public var gapBetweenBodyAndArrow: CGFloat = 2.0
+    public var gapBetweenBodyAndArrow: CGFloat = 10.0
 
     /// The orientation of the arrow, around the body of the coach mark (top or bottom).
     public var arrowOrientation: CoachMarkArrowOrientation?
@@ -24,7 +24,7 @@ public struct CoachMark {
     public var pointOfInterest: CGPoint?
 
     /// Offset between the coach mark and the cutout path.
-    public var gapBetweenCoachMarkAndCutoutPath: CGFloat = 2.0
+    public var gapBetweenCoachMarkAndCutoutPath: CGFloat = 10.0
 
     /// Maximum width for a coach mark.
     public var maxWidth: CGFloat = 350

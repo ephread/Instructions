@@ -6,6 +6,9 @@ import Instructions
 
 // Custom coach mark body (with the secret-like arrow)
 internal class CustomCoachMarkBodyView: UIView, CoachMarkBodyView {
+    
+    var backControl: UIControl? { return self.backButton }
+
     // MARK: - Internal properties
     var nextControl: UIControl? { return self.nextButton }
 
@@ -16,6 +19,12 @@ internal class CustomCoachMarkBodyView: UIView, CoachMarkBodyView {
         nextButton.accessibilityIdentifier = AccessibilityIdentifiers.next
 
         return nextButton
+    }()
+    var backButton: UIButton = {
+        let backButton = UIButton()
+        backButton.accessibilityIdentifier = "Back"
+
+        return backButton
     }()
 
     var hintLabel = UITextView()
@@ -65,8 +74,25 @@ internal class CustomCoachMarkBodyView: UIView, CoachMarkBodyView {
 
         self.nextButton.setTitleColor(UIColor.white, for: .normal)
         self.nextButton.titleLabel?.font = UIFont.systemFont(ofSize: 15.0)
+//
+//
+//
+        self.backButton.isUserInteractionEnabled = true
 
+        self.backButton.translatesAutoresizingMaskIntoConstraints = false
+
+        self.backButton.setBackgroundImage(UIImage(named: "button-background"),
+                                           for: .normal)
+        self.backButton.setBackgroundImage(UIImage(named: "button-background-highlighted"),
+                                           for: .highlighted)
+
+        self.backButton.setTitleColor(UIColor.black, for: .normal)
+        self.backButton.titleLabel?.font = UIFont.systemFont(ofSize: 15.0)
+        
+        
         self.addSubview(nextButton)
+        self.addSubview(backButton)
+
         self.addSubview(hintLabel)
 
         NSLayoutConstraint.activate([

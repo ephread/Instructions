@@ -389,23 +389,34 @@ extension CoachMarksViewController {
 
 // MARK: - Private Extension: User Events
 private extension CoachMarksViewController {
+    
     /// Add touch up target to the current coach mark view.
     func addTargetToCurrentCoachView() {
         currentCoachMarkView?.nextControl?.addTarget(self,
             action: #selector(didTapCoachMark(_:)), for: .touchUpInside)
+        currentCoachMarkView?.backControl?.addTarget(self,
+            action: #selector(didTapBackCoachMark(_:)), for: .touchUpInside)
     }
 
     /// Remove touch up target from the current coach mark view.
     func removeTargetFromCurrentCoachView() {
         currentCoachMarkView?.nextControl?.removeTarget(self,
             action: #selector(didTapCoachMark(_:)), for: .touchUpInside)
+        currentCoachMarkView?.nextControl?.removeTarget(self,
+                action: #selector(didTapBackCoachMark(_:)), for: .touchUpInside)
     }
 
+    
+    
     /// Will be called when the user perform an action requiring the display of the next coach mark.
     ///
     /// - Parameter sender: the object sending the message
     @objc func didTapCoachMark(_ sender: AnyObject?) {
         delegate?.didTap(coachMarkView: currentCoachMarkView)
+    }
+    
+    @objc func didTapBackCoachMark(_ sender: AnyObject?) {
+        delegate?.didBackTap(coachMarkView: currentCoachMarkView)
     }
 
     /// Will be called when the user choose to skip the coach mark tour.

@@ -20,6 +20,9 @@ public class CoachMarkBodyDefaultView: UIControl,
     public var nextControl: UIControl? {
         return self
     }
+    public var backControl: UIControl? {
+        return self
+    }
 
     public lazy var nextLabel: UILabel = makeNextLabel()
     public lazy var hintLabel: UITextView = makeHintTextView()

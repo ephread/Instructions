@@ -305,7 +305,11 @@ extension FlowManager: CoachMarksViewControllerDelegate {
         delegate?.didTapCoachMark(at: currentIndex)
         showNextCoachMark()
     }
-
+    
+    func didBackTap(coachMarkView: CoachMarkView?) {
+        delegate?.didTapCoachMark(at: currentIndex)
+        showPreviousCoachMark()
+    }
     func didTap(skipView: CoachMarkSkipView?) {
         stopFlow(immediately: false, userDidSkip: true, shouldCallDelegate: true)
     }

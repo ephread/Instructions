@@ -8,7 +8,7 @@ public protocol CoachMarkBodyView: AnyObject {
     /// The control that will trigger the change between the current coach mark
     /// and the next one.
     var nextControl: UIControl? { get }
-
+    var backControl: UIControl? { get }
     /// A delegate to call, when the arrow view to mirror the current highlight
     /// state of the body view. This is useful in case the entire view is actually a `UIControl`.
     ///

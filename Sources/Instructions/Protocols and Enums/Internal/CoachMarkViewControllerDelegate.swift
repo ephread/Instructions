@@ -7,7 +7,7 @@ protocol CoachMarksViewControllerDelegate: AnyObject {
     ///
     /// - Parameter coachMarkView: the view that was tapped.
     func didTap(coachMarkView: CoachMarkView?)
-
+    func didBackTap(coachMarkView: CoachMarkView?)
     /// The given `skipView` was tapped.
     ///
     /// - Parameter skipView: the view that was tapped.

@@ -26,6 +26,9 @@ class CoachMarkView: UIView {
     var nextControl: UIControl? {
         return bodyView.nextControl
     }
+    var backControl: UIControl? {
+        return bodyView.backControl
+    }
 
     // MARK: - Private properties
     private var bodyUIView: UIView { return bodyView as! UIView }

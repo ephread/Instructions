@@ -6,8 +6,10 @@ import Instructions
 
 // Transparent coach mark (text without background, cool arrow)
 internal class TransparentCoachMarkBodyView: UIControl, CoachMarkBodyView {
+    
     // MARK: - Internal properties
     var nextControl: UIControl? { return self }
+    var backControl: UIControl? { return self }
 
     weak var highlightArrowDelegate: CoachMarkBodyHighlightArrowDelegate?
 

@@ -288,9 +288,10 @@ internal extension CoachMarkHelper {
             if let makeCutoutPathWithFrame = cutoutPathMaker {
                 bezierPath = makeCutoutPathWithFrame(convertedFrame)
             } else {
-                bezierPath = UIBezierPath(roundedRect: convertedFrame.insetBy(dx: -4, dy: -4),
+//                bezierPath = UIBezierPath(ovalIn: convertedFrame)
+                bezierPath = UIBezierPath(roundedRect: convertedFrame.insetBy(dx: -10, dy: -10),
                                           byRoundingCorners: .allCorners,
-                                          cornerRadii: CGSize(width: 4, height: 4))
+                                          cornerRadii: CGSize(width: 20, height: 20))
             }
 
             coachMark.cutoutPath = bezierPath

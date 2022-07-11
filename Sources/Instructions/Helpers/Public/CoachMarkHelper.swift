@@ -293,6 +293,7 @@ internal extension CoachMarkHelper {
                                           byRoundingCorners: .allCorners,
                                           cornerRadii: CGSize(width: 20, height: 20))
             }
+            
 
             coachMark.cutoutPath = bezierPath
         }

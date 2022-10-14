@@ -179,7 +179,7 @@ func coachMarksController(
 Once the `dataSource` is set up, you can start displaying the coach marks. You will most likely supply `self` to `start`. While the overlay adds itself as a child of the current window (to be on top of everything), the `CoachMarksController` will add itself as a child of the view controller you provide. The `CoachMarksController` will receive size change events and react accordingly. Be careful; you can't call `start` in the `viewDidLoad` method since the view hierarchy has to be set up and ready for Instructions to work correctly.
 
 ```swift
-override func viewDidAppear(animated: Bool) {
+override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
     self.coachMarksController.start(in: .window(over: self))

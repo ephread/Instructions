@@ -190,7 +190,7 @@ override func viewDidAppear(_ animated: Bool) {
 You should always stop the flow once the view disappears. To avoid animation artefacts and timing issues, don't forget to add the following code to your `viewWillDisappear` method. Calling `stop(immediately: true)` will ensure that the flow is stopped immediately upon the disappearance of the view.
 
 ```swift
-override func viewWillDisappear(animated: Bool) {
+override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
 
     self.coachMarksController.stop(immediately: true)

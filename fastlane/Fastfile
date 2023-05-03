@@ -19,9 +19,9 @@ platform :ios do
 
   DEVICES = [
     "iPad Pro (11-inch) (3rd generation)",
-    "iPad (8th generation)",
+    "iPad (9th generation)",
     "iPhone 13 Pro",
-    "iPhone SE (2nd generation)"
+    "iPhone SE (3rd generation)"
   ]
 
   WORKSPACE = "Instructions.xcworkspace"

@@ -74,6 +74,10 @@ extension CoachMarksController: CoachMarksControllerProxyDelegate {
     func shouldHandleOverlayTap(at index: Int) -> Bool {
         return delegate?.shouldHandleOverlayTap(in: self, at: index) ?? true
     }
+
+    func didTapCoachMark(at index: Int) {
+        delegate?.coachMarksController(self, didTapCoachMarkAt: index)
+    }
 }
 
 extension CoachMarksController: CoachMarksControllerAnimationProxyDelegate {

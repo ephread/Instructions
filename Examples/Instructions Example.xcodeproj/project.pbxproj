@@ -14,6 +14,7 @@
 		B64131172737EF51006F6D8D /* DefaultExampleSnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64131162737EF51006F6D8D /* DefaultExampleSnapshotTests.swift */; };
 		B641311C2737F1B2006F6D8D /* iOSSnapshotTestCase in Frameworks */ = {isa = PBXBuildFile; productRef = B641311B2737F1B2006F6D8D /* iOSSnapshotTestCase */; };
 		B641311E2737F1B2006F6D8D /* iOSSnapshotTestCase in Embed Frameworks */ = {isa = PBXBuildFile; productRef = B641311B2737F1B2006F6D8D /* iOSSnapshotTestCase */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B64375B6283E9E5F0029B9E4 /* NextPositionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64375B4283E9E5F0029B9E4 /* NextPositionViewController.swift */; };
 		B6454D6220C78C2A00DCF351 /* LargeCutoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6454D5F20C78C2900DCF351 /* LargeCutoutViewController.swift */; };
 		B65DDDC21EE2C5F1002618AF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDC11EE2C5F1002618AF /* Extensions.swift */; };
 		B65DDDD41EE2EED0002618AF /* KeyboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B65DDDD31EE2EED0002618AF /* KeyboardViewController.swift */; };
@@ -157,6 +158,7 @@
 		B64131092737EE3C006F6D8D /* InstructionsSnapshotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InstructionsSnapshotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B64131162737EF51006F6D8D /* DefaultExampleSnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultExampleSnapshotTests.swift; sourceTree = "<group>"; };
 		B641311A2737F0EA006F6D8D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B64375B4283E9E5F0029B9E4 /* NextPositionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextPositionViewController.swift; sourceTree = "<group>"; };
 		B6454D5F20C78C2900DCF351 /* LargeCutoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LargeCutoutViewController.swift; sourceTree = "<group>"; };
 		B65DDDC11EE2C5F1002618AF /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B65DDDD31EE2EED0002618AF /* KeyboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				C6CE54291BBD435500154266 /* BlurringOverlayViewController.swift */,
 				C6CE542A1BBD435500154266 /* CustomViewController.swift */,
 				C6CE542B1BBD435500154266 /* DefaultViewController.swift */,
+				B64375B4283E9E5F0029B9E4 /* NextPositionViewController.swift */,
 				C6CE54301BBD43CB00154266 /* MixedCoachMarksViewController.swift */,
 				B6454D5F20C78C2900DCF351 /* LargeCutoutViewController.swift */,
 			);
@@ -864,6 +867,7 @@
 				B618494220C2472200315E1C /* PausingCodeViewController.swift in Sources */,
 				C636FFB11BBC329600EB243B /* TransparentCoachMarkArrowView.swift in Sources */,
 				B65DDDD61EE34330002618AF /* MainTableViewController.swift in Sources */,
+				B64375B6283E9E5F0029B9E4 /* NextPositionViewController.swift in Sources */,
 				5B84A3AE1BF48BE200C795F8 /* OnlyHintsViewController.swift in Sources */,
 				C6CE542C1BBD435500154266 /* BlurringOverlayViewController.swift in Sources */,
 				C63BB9161C73CDD600C81A4D /* TransitionFromCodeViewController.swift in Sources */,

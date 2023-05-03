@@ -21,22 +21,25 @@ public class CoachMarkHelper {
     ///
     /// - Parameters:
     ///   - arrow: `true` to generate the arrow view, `false` otherwise.
-    ///   - nextText: `true` to add a label on the trailing side, calling for
-    ///               a tap; the content of the label can be customised at a later stage.
+    ///   - nextText: `true` to add a label, calling for a tap; the content of
+    ///                the label can be customised at a later stage.
     ///   - arrowOrientation: The orientation of the coach mark / arrow.
+    ///   - nextLabelPosition: The position of the "Next" label; if `nextText` is false,
+    ///                          this parameter is ignored.
     /// - Returns: New instances of the default coach views.
     public func makeDefaultCoachViews(
         withArrow arrow: Bool = true,
         withNextText nextText: Bool = true,
-        arrowOrientation: CoachMarkArrowOrientation? = .top
+        arrowOrientation: CoachMarkArrowOrientation? = .top,
+        nextLabelPosition: CoachMarkNextLabelPosition = .trailing
     ) -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
 
         var coachMarkBodyView: CoachMarkBodyDefaultView
 
         if nextText {
-            coachMarkBodyView = CoachMarkBodyDefaultView()
+            coachMarkBodyView = CoachMarkBodyDefaultView(nextLabelPosition: nextLabelPosition)
         } else {
-            coachMarkBodyView = CoachMarkBodyDefaultView(hintText: "", nextText: nil)
+            coachMarkBodyView = CoachMarkBodyDefaultView(hintText: "", nextText: nil, nextLabelPosition: nextLabelPosition)
         }
 
         var coachMarkArrowView: CoachMarkArrowDefaultView?
@@ -56,14 +59,17 @@ public class CoachMarkHelper {
     ///   - hintText: The hint/description of the coach mark.
     ///   - nextText: An optional text to display on the trailing side, calling for
     ///               a tap.
+    ///   - nextLabelPosition: The position of the "Next" label; if `nextText` is false,
+    ///                          this parameter is ignored.
     /// - Returns: New instances of the default coach views.
     public func makeDefaultCoachViews(
         withArrow arrow: Bool = true,
         arrowOrientation: CoachMarkArrowOrientation? = .top,
         hintText: String,
-        nextText: String? = nil
+        nextText: String? = nil,
+        nextLabelPosition: CoachMarkNextLabelPosition = .trailing
     ) -> (bodyView: CoachMarkBodyDefaultView, arrowView: CoachMarkArrowDefaultView?) {
-        let coachMarkBodyView = CoachMarkBodyDefaultView(hintText: hintText, nextText: nextText)
+        let coachMarkBodyView = CoachMarkBodyDefaultView(hintText: hintText, nextText: nextText, nextLabelPosition: nextLabelPosition)
 
         var coachMarkArrowView: CoachMarkArrowDefaultView?
 

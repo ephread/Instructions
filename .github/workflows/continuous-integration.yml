@@ -60,11 +60,11 @@ jobs:
 
   test:
     name: Build, lint & test
-    runs-on: macos-11
+    runs-on: macos-12
 
     steps:
       - name: Switch Xcode version
-        run: sudo xcode-select --switch /Applications/Xcode_13.1.app
+        run: sudo xcode-select --switch /Applications/Xcode_13.4.app
 
       - name: Check out the repository
         uses: actions/checkout@v2

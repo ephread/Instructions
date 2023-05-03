@@ -1,25 +1,23 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "DeviceKit",
-        "repositoryURL": "https://github.com/devicekit/DeviceKit",
-        "state": {
-          "branch": "master",
-          "revision": "da57c444cbb7b6159aa871534d4cf2616d1d55c6",
-          "version": null
-        }
-      },
-      {
-        "package": "iOSSnapshotTestCase",
-        "repositoryURL": "https://github.com/uber/ios-snapshot-test-case",
-        "state": {
-          "branch": null,
-          "revision": "7b10770333a961be6e5a41c9ce04b8c6d3990126",
-          "version": "8.0.0"
-        }
+  "pins" : [
+    {
+      "identity" : "devicekit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/devicekit/DeviceKit",
+      "state" : {
+        "branch" : "master",
+        "revision" : "da57c444cbb7b6159aa871534d4cf2616d1d55c6"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "ios-snapshot-test-case",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/uber/ios-snapshot-test-case",
+      "state" : {
+        "revision" : "7b10770333a961be6e5a41c9ce04b8c6d3990126",
+        "version" : "8.0.0"
+      }
+    }
+  ],
+  "version" : 2
 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,8 @@
 		B61E448F1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61E448D1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift */; };
 		B621BB0220CA586400F0CF32 /* PresentationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B621BB0020CA580400F0CF32 /* PresentationContext.swift */; };
 		B621BB0320CA586400F0CF32 /* PresentationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = B621BB0020CA580400F0CF32 /* PresentationContext.swift */; };
+		B64375B8283E9FFE0029B9E4 /* CoachMarkNextLabelPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64375B7283E9FFE0029B9E4 /* CoachMarkNextLabelPosition.swift */; };
+		B64375B9283E9FFE0029B9E4 /* CoachMarkNextLabelPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64375B7283E9FFE0029B9E4 /* CoachMarkNextLabelPosition.swift */; };
 		B6454D6720C7CFA500DCF351 /* CoachMarksControllerAnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6454D6620C7CFA500DCF351 /* CoachMarksControllerAnimationDelegate.swift */; };
 		B6454D6820C7CFA500DCF351 /* CoachMarksControllerAnimationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6454D6620C7CFA500DCF351 /* CoachMarksControllerAnimationDelegate.swift */; };
 		B6454D6A20C7D19300DCF351 /* CoachMarkTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6454D6920C7D19300DCF351 /* CoachMarkTransitionManager.swift */; };
@@ -111,6 +113,7 @@
 		B61E448A1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurringOverlayStyleManager.swift; sourceTree = "<group>"; };
 		B61E448D1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslucentOverlayStyleManager.swift; sourceTree = "<group>"; };
 		B621BB0020CA580400F0CF32 /* PresentationContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationContext.swift; sourceTree = "<group>"; };
+		B64375B7283E9FFE0029B9E4 /* CoachMarkNextLabelPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkNextLabelPosition.swift; sourceTree = "<group>"; };
 		B6454D6620C7CFA500DCF351 /* CoachMarksControllerAnimationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarksControllerAnimationDelegate.swift; sourceTree = "<group>"; };
 		B6454D6920C7D19300DCF351 /* CoachMarkTransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachMarkTransitionManager.swift; sourceTree = "<group>"; };
 		B6454D6C20C7D71400DCF351 /* CoachMarkAnimationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoachMarkAnimationManager.swift; sourceTree = "<group>"; };
@@ -254,6 +257,7 @@
 		B65DDDC81EE2D9C2002618AF /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				B64375B7283E9FFE0029B9E4 /* CoachMarkNextLabelPosition.swift */,
 				C61458B21BBB01DE006EB4F2 /* CoachMarkArrowOrientation.swift */,
 			);
 			path = Enums;
@@ -489,10 +493,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C6417E301D291A8A004D13EA /* Build configuration list for PBXNativeTarget "InstructionsAppExtensions" */;
 			buildPhases = (
-				B60D615221B8A89000148BC2 /* Swiftlint */,
+				B60D615221B8A89000148BC2 /* [SwiftLint] Lint code */,
+				C6417E2C1D291A8A004D13EA /* Headers */,
 				C6417E151D291A8A004D13EA /* Sources */,
 				C6417E2B1D291A8A004D13EA /* Frameworks */,
-				C6417E2C1D291A8A004D13EA /* Headers */,
 				C6417E2E1D291A8A004D13EA /* Resources */,
 			);
 			buildRules = (
@@ -508,10 +512,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C64FB2FD1BB6CA8A0081E5B6 /* Build configuration list for PBXNativeTarget "Instructions" */;
 			buildPhases = (
-				C6B30BA61D529E1000505F0C /* Swiftlint */,
+				C6B30BA61D529E1000505F0C /* [SwiftLint] Lint code */,
+				C64FB2E61BB6CA8A0081E5B6 /* Headers */,
 				C64FB2E41BB6CA8A0081E5B6 /* Sources */,
 				C64FB2E51BB6CA8A0081E5B6 /* Frameworks */,
-				C64FB2E61BB6CA8A0081E5B6 /* Headers */,
 				C64FB2E71BB6CA8A0081E5B6 /* Resources */,
 			);
 			buildRules = (
@@ -529,8 +533,9 @@
 		C64FB2E01BB6CA8A0081E5B6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0940;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = Ephread;
 				TargetAttributes = {
 					C6417E141D291A8A004D13EA = {
@@ -581,8 +586,9 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B60D615221B8A89000148BC2 /* Swiftlint */ = {
+		B60D615221B8A89000148BC2 /* [SwiftLint] Lint code */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -590,7 +596,7 @@
 			);
 			inputPaths = (
 			);
-			name = Swiftlint;
+			name = "[SwiftLint] Lint code";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -599,14 +605,15 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ ${CARTHAGE} ]; then\n    exit\nfi\n\nif [ -f ~/.profile ]; then\n    source ~/.profile\n\n    if which swiftlint > /dev/null; then\n        swiftlint\n    fi\nfi\n";
 		};
-		C6B30BA61D529E1000505F0C /* Swiftlint */ = {
+		C6B30BA61D529E1000505F0C /* [SwiftLint] Lint code */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = Swiftlint;
+			name = "[SwiftLint] Lint code";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -652,6 +659,7 @@
 				C6417E1F1D291A8A004D13EA /* CoachMarkBodyDefaultView.swift in Sources */,
 				B6454D6820C7CFA500DCF351 /* CoachMarksControllerAnimationDelegate.swift in Sources */,
 				B6968989266A30BF0093EBBA /* CoachMarkCoordinateConverter.swift in Sources */,
+				B64375B9283E9FFE0029B9E4 /* CoachMarkNextLabelPosition.swift in Sources */,
 				B61E448F1EA8C57E00D82BA1 /* TranslucentOverlayStyleManager.swift in Sources */,
 				C6417E201D291A8A004D13EA /* CoachMarkSkipDefaultView.swift in Sources */,
 				C6417E211D291A8A004D13EA /* CoachMarkPosition.swift in Sources */,
@@ -708,6 +716,7 @@
 				C6D365121D57E97600D2C6A2 /* FlowManager.swift in Sources */,
 				C64FB3491BB6DC3B0081E5B6 /* OverlayView.swift in Sources */,
 				B61E448B1EA8C4AA00D82BA1 /* BlurringOverlayStyleManager.swift in Sources */,
+				B64375B8283E9FFE0029B9E4 /* CoachMarkNextLabelPosition.swift in Sources */,
 				B6A839EB24C9C23500B046FF /* ErrorMessage.swift in Sources */,
 				C64FB37E1BB828E50081E5B6 /* CoachMarkBodyHighlightArrowDelegate.swift in Sources */,
 				C64FB3451BB6D81C0081E5B6 /* CoachMarksControllerDelegate.swift in Sources */,
@@ -740,6 +749,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "Sources/Instructions/Supporting Files/InfoAppExtensions.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -749,6 +759,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS_APP_EXTENSIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions.AppExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -770,6 +782,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "Sources/Instructions/Supporting Files/InfoAppExtensions.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -779,6 +792,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				OTHER_SWIFT_FLAGS = "-DINSTRUCTIONS_APP_EXTENSIONS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions.AppExtensions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -921,6 +936,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "Sources/Instructions/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -930,6 +946,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -951,6 +969,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
 				INFOPLIST_FILE = "Sources/Instructions/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -959,6 +978,8 @@
 					"@loader_path/Frameworks",
 				);
 				MARKETING_VERSION = 2.1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu99 gnu++11";
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ephread.Instructions;
 				PRODUCT_NAME = "$(TARGET_NAME)";

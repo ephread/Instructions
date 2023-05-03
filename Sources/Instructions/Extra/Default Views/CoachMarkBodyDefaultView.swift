@@ -24,6 +24,8 @@ public class CoachMarkBodyDefaultView: UIControl,
     public lazy var nextLabel: UILabel = makeNextLabel()
     public lazy var hintLabel: UITextView = makeHintTextView()
     public lazy var separator: UIView = makeSeparator()
+    private var nextLabelPosition: CoachMarkNextLabelPosition = .trailing
+    private let spacing: CGFloat = 18
 
     public var background: CoachMarkBodyBackgroundStyle {
         get { return bodyBackground }
@@ -44,7 +46,9 @@ public class CoachMarkBodyDefaultView: UIControl,
         initializeViewHierarchy()
     }
 
-    public init(frame: CGRect, hintText: String, nextText: String?) {
+    public init(frame: CGRect, hintText: String, nextText: String?, nextLabelPosition: CoachMarkNextLabelPosition) {
+        self.nextLabelPosition = nextLabelPosition
+
         super.init(frame: frame)
         initializeViewHierarchy()
 
@@ -55,12 +59,19 @@ public class CoachMarkBodyDefaultView: UIControl,
         hintLabel.text = hintText
     }
 
-    convenience public init(hintText: String, nextText: String?) {
-        self.init(frame: CGRect.zero, hintText: hintText, nextText: nextText)
+    public init(frame: CGRect, nextLabelPosition: CoachMarkNextLabelPosition) {
+        self.nextLabelPosition = nextLabelPosition
+
+        super.init(frame: frame)
+        initializeViewHierarchy()
     }
 
-    convenience public init() {
-        self.init(frame: CGRect.zero)
+    convenience public init(hintText: String, nextText: String?, nextLabelPosition: CoachMarkNextLabelPosition) {
+        self.init(frame: CGRect.zero, hintText: hintText, nextText: nextText, nextLabelPosition: nextLabelPosition)
+    }
+
+    convenience public init(nextLabelPosition: CoachMarkNextLabelPosition) {
+        self.init(frame: CGRect.zero, nextLabelPosition: nextLabelPosition)
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -82,12 +93,68 @@ private extension CoachMarkBodyDefaultView {
         bodyBackground.fillSuperview()
         labelStackView.fillSuperview(insets: UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15))
 
-        labelStackView.addArrangedSubview(hintLabel)
-        labelStackView.addArrangedSubview(separator)
-        labelStackView.addArrangedSubview(nextLabel)
+        switch nextLabelPosition {
+        case .trailing:
+            labelStackView.addArrangedSubview(hintLabel)
+            labelStackView.addArrangedSubview(separator)
+            labelStackView.addArrangedSubview(nextLabel)
+            separator.heightAnchor.constraint(equalTo: labelStackView.heightAnchor,
+                                              constant: -10).isActive = true
+        case .leading:
+            labelStackView.addArrangedSubview(nextLabel)
+            labelStackView.addArrangedSubview(separator)
+            labelStackView.addArrangedSubview(hintLabel)
+            separator.heightAnchor.constraint(equalTo: labelStackView.heightAnchor,
+                                              constant: -10).isActive = true
+        case .topTrailing:
+            labelStackView.addSubview(hintLabel)
+            labelStackView.addSubview(nextLabel)
 
-        separator.heightAnchor.constraint(equalTo: labelStackView.heightAnchor,
-                                          constant: -10).isActive = true
+            NSLayoutConstraint.activate([
+                nextLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
+                nextLabel.bottomAnchor.constraint(equalTo: hintLabel.topAnchor, constant: -spacing),
+                nextLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -spacing),
+                hintLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -spacing),
+                hintLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: spacing),
+                hintLabel.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -spacing)
+            ])
+        case .topLeading:
+            labelStackView.addSubview(hintLabel)
+            labelStackView.addSubview(nextLabel)
+
+            NSLayoutConstraint.activate([
+                nextLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
+                nextLabel.bottomAnchor.constraint(equalTo: hintLabel.topAnchor, constant: -spacing),
+                nextLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: spacing),
+                hintLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -spacing),
+                hintLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: spacing),
+                hintLabel.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -spacing)
+            ])
+        case .bottomTrailing:
+            labelStackView.addSubview(hintLabel)
+            labelStackView.addSubview(nextLabel)
+
+            NSLayoutConstraint.activate([
+                hintLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
+                hintLabel.bottomAnchor.constraint(equalTo: nextLabel.topAnchor, constant: -spacing),
+                hintLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: spacing),
+                hintLabel.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -spacing),
+                nextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -spacing),
+                nextLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -spacing)
+            ])
+        case .bottomLeading:
+            labelStackView.addSubview(hintLabel)
+            labelStackView.addSubview(nextLabel)
+
+            NSLayoutConstraint.activate([
+                hintLabel.topAnchor.constraint(equalTo: topAnchor, constant: spacing),
+                hintLabel.bottomAnchor.constraint(equalTo: nextLabel.topAnchor, constant: -spacing),
+                hintLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: spacing),
+                hintLabel.rightAnchor.constraint(lessThanOrEqualTo: rightAnchor, constant: -spacing),
+                nextLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -spacing),
+                nextLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: spacing)
+            ])
+        }
     }
 
     func initializeAccessibilityIdentifier() {

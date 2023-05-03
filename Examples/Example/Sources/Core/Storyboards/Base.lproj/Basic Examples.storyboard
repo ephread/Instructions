@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -30,7 +31,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S5s-V0-jGe">
-                                                <rect key="frame" x="21.5" y="148" width="85" height="23"/>
+                                                <rect key="frame" x="22" y="148" width="84" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -58,7 +59,7 @@
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999999999998" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oft-E3-lng">
                                                 <rect key="frame" x="16" y="16" width="87.5" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="iox-BC-ik2"/>
                                                 </constraints>
@@ -70,7 +71,7 @@ posts</string>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="jane@doe.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999999999998" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Syb-tb-cMT">
                                                 <rect key="frame" x="119.5" y="16" width="175" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="4Kb-Us-wqV"/>
                                                 </constraints>
@@ -80,7 +81,7 @@ posts</string>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999999999998" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qnw-5n-qdN">
                                                 <rect key="frame" x="310.5" y="16" width="87.5" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="itN-Vy-Gh4"/>
                                                 </constraints>
@@ -114,14 +115,14 @@ karma</string>
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="S6R-6z-U5q"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="93p-mV-MOh" firstAttribute="top" secondItem="S6R-6z-U5q" secondAttribute="top" id="Fng-sq-WGK"/>
                             <constraint firstItem="93p-mV-MOh" firstAttribute="trailing" secondItem="S6R-6z-U5q" secondAttribute="trailing" id="Kjs-MG-g2H"/>
                             <constraint firstItem="S6R-6z-U5q" firstAttribute="bottom" secondItem="93p-mV-MOh" secondAttribute="bottom" id="aBD-mw-uPK"/>
                             <constraint firstItem="93p-mV-MOh" firstAttribute="leading" secondItem="S6R-6z-U5q" secondAttribute="leading" id="cEj-Et-jrc"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="S6R-6z-U5q"/>
                     </view>
                     <navigationItem key="navigationItem" title="Default" largeTitleDisplayMode="never" id="VQS-Fy-oJT"/>
                     <connections>
@@ -157,7 +158,7 @@ karma</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rs8-QN-JOh">
-                                                <rect key="frame" x="21.5" y="148" width="85" height="23"/>
+                                                <rect key="frame" x="22" y="148" width="84" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -185,7 +186,7 @@ karma</string>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="34 posts" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HWv-fJ-Jlt">
                                                 <rect key="frame" x="0.0" y="0.0" width="103" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="NWm-au-tQc"/>
                                                 </constraints>
@@ -195,7 +196,7 @@ karma</string>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="jane@doe.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nzu-GG-az4">
                                                 <rect key="frame" x="104" y="0.0" width="206" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="zhb-bp-pu4"/>
                                                 </constraints>
@@ -205,7 +206,7 @@ karma</string>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="29 karma" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xff-6j-Tno">
                                                 <rect key="frame" x="311" y="0.0" width="103" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="Q3X-i1-4sF"/>
                                                 </constraints>
@@ -236,14 +237,14 @@ karma</string>
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="hKN-b4-STX"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="hKN-b4-STX" firstAttribute="bottom" secondItem="B5y-yb-AuH" secondAttribute="bottom" id="0qM-Zi-Fsb"/>
                             <constraint firstItem="B5y-yb-AuH" firstAttribute="leading" secondItem="hKN-b4-STX" secondAttribute="leading" id="4D0-Ci-p7X"/>
                             <constraint firstItem="B5y-yb-AuH" firstAttribute="trailing" secondItem="hKN-b4-STX" secondAttribute="trailing" id="TRb-TJ-VEo"/>
                             <constraint firstItem="B5y-yb-AuH" firstAttribute="top" secondItem="hKN-b4-STX" secondAttribute="top" id="i6G-1A-BeW"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="hKN-b4-STX"/>
                     </view>
                     <navigationItem key="navigationItem" title="Custom" largeTitleDisplayMode="never" id="ZUh-ka-k2a"/>
                     <connections>
@@ -257,7 +258,7 @@ karma</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FgU-PS-T7Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1283" y="-392"/>
+            <point key="canvasLocation" x="1942" y="-392"/>
         </scene>
         <!--Mixed-->
         <scene sceneID="nqG-vh-iZl">
@@ -281,7 +282,7 @@ karma</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@johndoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mg7-20-fQY">
-                                                <rect key="frame" x="21" y="148" width="86" height="23"/>
+                                                <rect key="frame" x="21.5" y="148" width="85.5" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -312,7 +313,7 @@ karma</string>
                                                 <subviews>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="34 posts" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7qv-ev-yi1">
                                                         <rect key="frame" x="0.0" y="0.0" width="116.5" height="50"/>
-                                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="UIL-V0-fpc"/>
                                                         </constraints>
@@ -322,7 +323,7 @@ karma</string>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5 answers" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bOn-Sj-oph">
                                                         <rect key="frame" x="132.5" y="0.0" width="117" height="50"/>
-                                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="Gs0-q3-eXa"/>
                                                         </constraints>
@@ -332,7 +333,7 @@ karma</string>
                                                     </label>
                                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="29 karma" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TQX-yP-PxN">
                                                         <rect key="frame" x="265.5" y="0.0" width="116.5" height="50"/>
-                                                        <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="50" id="50b-CS-vrF"/>
                                                         </constraints>
@@ -344,7 +345,7 @@ karma</string>
                                             </stackView>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="john@doe.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bda-Kn-8AT">
                                                 <rect key="frame" x="16" y="82" width="382" height="30"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="M8E-t8-FEq"/>
                                                 </constraints>
@@ -372,14 +373,14 @@ karma</string>
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="qfc-XB-alw"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Esp-Ub-JhG" firstAttribute="trailing" secondItem="qfc-XB-alw" secondAttribute="trailing" id="G9n-PJ-p9h"/>
                             <constraint firstItem="qfc-XB-alw" firstAttribute="bottom" secondItem="Esp-Ub-JhG" secondAttribute="bottom" id="Rmq-ae-fBC"/>
                             <constraint firstItem="Esp-Ub-JhG" firstAttribute="leading" secondItem="qfc-XB-alw" secondAttribute="leading" id="iCV-it-h1D"/>
                             <constraint firstItem="Esp-Ub-JhG" firstAttribute="top" secondItem="qfc-XB-alw" secondAttribute="top" id="yFf-qo-CsL"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="qfc-XB-alw"/>
                     </view>
                     <navigationItem key="navigationItem" title="Mixed" largeTitleDisplayMode="never" id="V5t-Eo-hLg"/>
                     <connections>
@@ -393,7 +394,7 @@ karma</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p7k-wX-Z1I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1946" y="-392"/>
+            <point key="canvasLocation" x="2603" y="-392"/>
         </scene>
         <!--Blur-->
         <scene sceneID="T1c-jH-ZkX">
@@ -417,7 +418,7 @@ karma</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E3t-5F-BYF">
-                                                <rect key="frame" x="21.5" y="148" width="85" height="23"/>
+                                                <rect key="frame" x="22" y="148" width="84" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -445,7 +446,7 @@ karma</string>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BWW-y9-fNg">
                                                 <rect key="frame" x="16" y="16" width="87.5" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="8SC-Sy-QzV"/>
                                                 </constraints>
@@ -457,7 +458,7 @@ posts</string>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="jane@doe.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bhO-Q0-6UZ">
                                                 <rect key="frame" x="119.5" y="16" width="175" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="SkK-hs-Et2"/>
                                                 </constraints>
@@ -467,7 +468,7 @@ posts</string>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lfV-5F-vOO">
                                                 <rect key="frame" x="310.5" y="16" width="87.5" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="Hog-1H-Fpv"/>
                                                 </constraints>
@@ -501,14 +502,14 @@ karma</string>
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="IYQ-9u-IIc"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="IYQ-9u-IIc" firstAttribute="bottom" secondItem="irX-X0-4ym" secondAttribute="bottom" id="H5V-wT-pL6"/>
                             <constraint firstItem="irX-X0-4ym" firstAttribute="top" secondItem="IYQ-9u-IIc" secondAttribute="top" id="e1I-2V-o8i"/>
                             <constraint firstItem="irX-X0-4ym" firstAttribute="leading" secondItem="IYQ-9u-IIc" secondAttribute="leading" id="s5G-sP-c8m"/>
                             <constraint firstItem="irX-X0-4ym" firstAttribute="trailing" secondItem="IYQ-9u-IIc" secondAttribute="trailing" id="xRc-cK-BHB"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="IYQ-9u-IIc"/>
                     </view>
                     <navigationItem key="navigationItem" title="Blur" largeTitleDisplayMode="never" id="GO1-6f-wOd"/>
                     <connections>
@@ -521,7 +522,7 @@ karma</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r1T-r0-FFA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2610" y="-392"/>
+            <point key="canvasLocation" x="3267" y="-392"/>
         </scene>
         <!--Only Hints-->
         <scene sceneID="i3x-6u-3Mu">
@@ -545,7 +546,7 @@ karma</string>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@johndoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HOz-nH-RG9">
-                                                <rect key="frame" x="21" y="148" width="86" height="23"/>
+                                                <rect key="frame" x="21.5" y="148" width="85.5" height="23"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -573,7 +574,7 @@ karma</string>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EpN-Xh-Y1d">
                                                 <rect key="frame" x="16" y="16" width="87.5" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="XU6-q7-EvE"/>
                                                 </constraints>
@@ -585,7 +586,7 @@ posts</string>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="john@doe.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G6V-wf-SZX">
                                                 <rect key="frame" x="119.5" y="16" width="175" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="Cbs-RP-9b0"/>
                                                 </constraints>
@@ -595,7 +596,7 @@ posts</string>
                                             </label>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uhj-m4-Cn7">
                                                 <rect key="frame" x="310.5" y="16" width="87.5" height="50"/>
-                                                <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="jvw-tb-ekQ"/>
                                                 </constraints>
@@ -629,14 +630,14 @@ karma</string>
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="HFX-9K-wLT"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="534-Dn-8vZ" firstAttribute="trailing" secondItem="HFX-9K-wLT" secondAttribute="trailing" id="ARJ-Gi-DaY"/>
                             <constraint firstItem="HFX-9K-wLT" firstAttribute="bottom" secondItem="534-Dn-8vZ" secondAttribute="bottom" id="PtI-fq-dZP"/>
                             <constraint firstItem="534-Dn-8vZ" firstAttribute="top" secondItem="HFX-9K-wLT" secondAttribute="top" id="Rdz-Xk-6LF"/>
                             <constraint firstItem="534-Dn-8vZ" firstAttribute="leading" secondItem="HFX-9K-wLT" secondAttribute="leading" id="krl-4K-6v5"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="HFX-9K-wLT"/>
                     </view>
                     <navigationItem key="navigationItem" title="Hint Only" largeTitleDisplayMode="never" id="68B-24-hYi"/>
                     <connections>
@@ -661,7 +662,7 @@ karma</string>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vc1-7b-7jP">
                                 <rect key="frame" x="0.0" y="108" width="414" height="690"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <sections/>
                                 <connections>
                                     <outlet property="dataSource" destination="8h9-zA-fQ5" id="BJU-KQ-9gi"/>
@@ -672,7 +673,8 @@ karma</string>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <viewLayoutGuide key="safeArea" id="f2X-Ju-OZp"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="mDC-qT-B9g" firstAttribute="bottom" secondItem="vc1-7b-7jP" secondAttribute="bottom" id="8VX-kf-YiO"/>
                             <constraint firstItem="vc1-7b-7jP" firstAttribute="leading" secondItem="f2X-Ju-OZp" secondAttribute="leading" id="F9D-i9-Kfg"/>
@@ -683,7 +685,6 @@ karma</string>
                             <constraint firstItem="vc1-7b-7jP" firstAttribute="top" secondItem="f2X-Ju-OZp" secondAttribute="top" constant="64" id="pTb-8h-P7a"/>
                             <constraint firstItem="mDC-qT-B9g" firstAttribute="trailing" secondItem="vc1-7b-7jP" secondAttribute="trailing" id="uGq-ve-Pun"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="f2X-Ju-OZp"/>
                     </view>
                     <navigationItem key="navigationItem" title="Large Cutout" largeTitleDisplayMode="never" id="0cr-1l-pE1"/>
                     <connections>
@@ -693,11 +694,148 @@ karma</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rIl-Lf-mKV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3281" y="-392"/>
+            <point key="canvasLocation" x="3938" y="-392"/>
+        </scene>
+        <!--Next Position-->
+        <scene sceneID="t5z-WN-rai">
+            <objects>
+                <viewController storyboardIdentifier="NextPositionViewController" id="tWq-yy-cgM" userLabel="Next Position" customClass="NextPositionViewController" customModule="InstructionsExample" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2TK-Az-XSL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cmA-oh-Rxd" userLabel="Container">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nrS-EB-8Ne" userLabel="Avatar">
+                                        <rect key="frame" x="143" y="323.5" width="128" height="171"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face-female" translatesAutoresizingMaskIntoConstraints="NO" id="4JJ-m3-8Oc">
+                                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="128" id="ZHV-pD-GF7"/>
+                                                    <constraint firstAttribute="height" constant="128" id="gtB-J0-qkL"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@janedoe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NMW-ti-RKj">
+                                                <rect key="frame" x="22" y="148" width="84" height="23"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NMW-ti-RKj" secondAttribute="trailing" id="0Ct-Mb-Pgx"/>
+                                            <constraint firstAttribute="bottom" secondItem="NMW-ti-RKj" secondAttribute="bottom" id="6na-5O-D9p"/>
+                                            <constraint firstItem="NMW-ti-RKj" firstAttribute="centerX" secondItem="nrS-EB-8Ne" secondAttribute="centerX" id="7YB-OH-UuR"/>
+                                            <constraint firstItem="NMW-ti-RKj" firstAttribute="top" secondItem="4JJ-m3-8Oc" secondAttribute="bottom" constant="20" id="AHt-TQ-nAB"/>
+                                            <constraint firstItem="NMW-ti-RKj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="nrS-EB-8Ne" secondAttribute="leading" id="HGl-Oq-HC3"/>
+                                            <constraint firstItem="4JJ-m3-8Oc" firstAttribute="leading" secondItem="nrS-EB-8Ne" secondAttribute="leading" id="M93-lD-W2Q"/>
+                                            <constraint firstItem="4JJ-m3-8Oc" firstAttribute="top" secondItem="nrS-EB-8Ne" secondAttribute="top" id="iyf-Q2-0vj"/>
+                                            <constraint firstAttribute="trailing" secondItem="4JJ-m3-8Oc" secondAttribute="trailing" id="qW6-2K-qMa"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="HGl-Oq-HC3"/>
+                                                <exclude reference="0Ct-Mb-Pgx"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="RHa-a1-iaO">
+                                        <rect key="frame" x="0.0" y="736" width="414" height="82"/>
+                                        <subviews>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9PF-V9-NNn">
+                                                <rect key="frame" x="16" y="16" width="87.5" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="foB-ea-Ex9"/>
+                                                </constraints>
+                                                <string key="text">34
+posts</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="jane@doe.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b4z-f9-nrm">
+                                                <rect key="frame" x="119.5" y="16" width="175" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="qj6-rL-hhA"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.34999999403953552" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bcc-BL-5ub">
+                                                <rect key="frame" x="310.5" y="16" width="87.5" height="50"/>
+                                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="e3n-VG-YOG"/>
+                                                </constraints>
+                                                <string key="text">29
+karma</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="9PF-V9-NNn" firstAttribute="width" secondItem="b4z-f9-nrm" secondAttribute="width" multiplier="0.5" id="0iS-MV-GeK"/>
+                                            <constraint firstItem="Bcc-BL-5ub" firstAttribute="width" secondItem="b4z-f9-nrm" secondAttribute="width" multiplier="0.5" id="2mX-4v-yim"/>
+                                        </constraints>
+                                        <edgeInsets key="layoutMargins" top="16" left="16" bottom="16" right="16"/>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="RHa-a1-iaO" firstAttribute="leading" secondItem="cmA-oh-Rxd" secondAttribute="leading" id="bZq-mF-esp"/>
+                                    <constraint firstItem="nrS-EB-8Ne" firstAttribute="centerY" secondItem="cmA-oh-Rxd" secondAttribute="centerY" id="egX-31-FxR"/>
+                                    <constraint firstAttribute="bottom" secondItem="RHa-a1-iaO" secondAttribute="bottom" id="m3C-ck-Hw9"/>
+                                    <constraint firstAttribute="height" constant="300" id="odd-SK-715"/>
+                                    <constraint firstItem="nrS-EB-8Ne" firstAttribute="centerX" secondItem="cmA-oh-Rxd" secondAttribute="centerX" id="tFV-5K-e7i"/>
+                                    <constraint firstAttribute="trailing" secondItem="RHa-a1-iaO" secondAttribute="trailing" id="zVl-v1-1Rj"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="odd-SK-715"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="EJf-jw-V7k"/>
+                        <color key="backgroundColor" systemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="cmA-oh-Rxd" firstAttribute="leading" secondItem="EJf-jw-V7k" secondAttribute="leading" id="I2b-FR-Jq7"/>
+                            <constraint firstItem="EJf-jw-V7k" firstAttribute="bottom" secondItem="cmA-oh-Rxd" secondAttribute="bottom" id="Qgc-aI-8Uw"/>
+                            <constraint firstItem="cmA-oh-Rxd" firstAttribute="top" secondItem="EJf-jw-V7k" secondAttribute="top" id="ZJ5-Rs-YSk"/>
+                            <constraint firstItem="cmA-oh-Rxd" firstAttribute="trailing" secondItem="EJf-jw-V7k" secondAttribute="trailing" id="dtm-LS-LhB"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="&quot;Next&quot; Position" largeTitleDisplayMode="never" id="6Qx-IG-JTN"/>
+                    <connections>
+                        <outlet property="avatar" destination="4JJ-m3-8Oc" id="uOv-vQ-ydd"/>
+                        <outlet property="emailLabel" destination="b4z-f9-nrm" id="L0q-Nv-H68"/>
+                        <outlet property="handleLabel" destination="NMW-ti-RKj" id="R7y-6j-KNm"/>
+                        <outlet property="postsLabel" destination="9PF-V9-NNn" id="k9V-I2-7qi"/>
+                        <outlet property="reputationLabel" destination="Bcc-BL-5ub" id="juC-nF-cc3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LZM-zc-tKj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1280" y="-392"/>
         </scene>
     </scenes>
     <resources>
         <image name="face-female" width="132" height="132"/>
         <image name="face-male" width="132" height="132"/>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

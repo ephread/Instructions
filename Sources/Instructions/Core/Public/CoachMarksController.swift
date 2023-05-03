@@ -7,6 +7,10 @@ import UIKit
 /// Handles a set of coach marks, and display them successively.
 public class CoachMarksController {
     // MARK: - Public properties
+    /// The root window that displays the coach mark when the presentation context. `nil` unless
+    /// the presentation context is ``Instructions/PresentationContext/newWindow(over:at:)``.
+    public var rootWindow: UIWindow?
+
     /// Implement the data source protocol and supply
     /// the coach marks to display.
     public weak var dataSource: CoachMarksControllerDataSource?
@@ -74,7 +78,6 @@ public class CoachMarksController {
 
     // MARK: - Private properties
     private weak var controllerWindow: UIWindow?
-    private var coachMarksWindow: UIWindow?
 
     /// Handle the UI part
     private lazy var coachMarksViewController: CoachMarksViewController = {
@@ -130,8 +133,8 @@ public extension CoachMarksController {
             fatalError(ErrorMessage.Fatal.windowContextNotAvailableInAppExtensions)
 #else
             controllerWindow = viewController.view.window
-            coachMarksWindow = coachMarksWindow ?? buildNewWindow()
-            coachMarksViewController.attach(to: coachMarksWindow!, over: viewController,
+            rootWindow = rootWindow ?? buildNewWindow()
+            coachMarksViewController.attach(to: rootWindow!, over: viewController,
                                             at: windowLevel)
 #endif
         case .currentWindow(let viewController):
@@ -143,22 +146,44 @@ public extension CoachMarksController {
         delegate?.coachMarksController(self,
                                        configureOrnamentsOfOverlay: overlay.overlayView.ornaments)
 
-        flow.startFlow(withNumberOfCoachMarks: numberOfCoachMarks)
+
+        // This tells the window to lay out the basic ornaments immediately. While this isn't
+        // strictly needed, it ensures the window has its bounds set when starting the flow.
+        //
+        // The window won't be laid out again when coach marks are added, so this shouldn't
+        // cause any glitch. If things become choppy, we can dispatch the call to `startFlow`
+        // asynchronously in the future.
+        rootWindow?.layoutIfNeeded()
+
+        self.flow.startFlow(withNumberOfCoachMarks: numberOfCoachMarks)
     }
 
-    /// Stop the flow of coach marks. Don't forget to call this method in viewDidDisappear or
-    /// viewWillDisappear.
+    // TODO: Refactor this method into two separate methods.
+
+    /// Stop the flow of coach marks. Don't forget to call this method in `viewDidDisappear` or
+    /// `viewWillDisappear`.
+    ///
+    /// When `immediately` is `true`, `emulatingSkip` is ignored since the delegate
+    /// is not be called.
     ///
     /// - Parameter immediately: `true` to stop immediately, without animations.
-    func stop(immediately: Bool = false) {
+    /// - Parameter emulatingSkip: `true` to tell the delegate that the user pressed the skip button.
+    func stop(immediately: Bool = false, emulatingSkip userDidSkip: Bool = false) {
         if immediately {
-            flow.stopFlow(immediately: true, userDidSkip: false,
-                          shouldCallDelegate: false) { [weak self] in
-                self?.coachMarksWindow = nil
+            flow.stopFlow(
+                immediately: true,
+                userDidSkip: userDidSkip,
+                shouldCallDelegate: false
+            ) { [weak self] in
+                self?.rootWindow = nil
             }
         } else {
-            flow.stopFlow { [weak self] in
-                self?.coachMarksWindow = nil
+            flow.stopFlow(
+                immediately: false,
+                userDidSkip: userDidSkip,
+                shouldCallDelegate: true
+            ) { [weak self] in
+                self?.rootWindow = nil
             }
         }
     }

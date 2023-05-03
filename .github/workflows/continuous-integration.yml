@@ -26,11 +26,11 @@ env:
 jobs:
   test-package:
     name: Check installation
-    runs-on: macos-11
+    runs-on: macos-13
 
     steps:
       - name: Switch Xcode version
-        run: sudo xcode-select --switch /Applications/Xcode_13.1.app
+        run: sudo xcode-select --switch /Applications/Xcode_14.3.app
 
       - name: Check out test repository
         uses: actions/checkout@v2
@@ -60,11 +60,11 @@ jobs:
 
   test:
     name: Build, lint & test
-    runs-on: macos-12
+    runs-on: macos-13
 
     steps:
       - name: Switch Xcode version
-        run: sudo xcode-select --switch /Applications/Xcode_13.4.app
+        run: sudo xcode-select --switch /Applications/Xcode_14.3.app
 
       - name: Check out the repository
         uses: actions/checkout@v2
@@ -79,8 +79,8 @@ jobs:
       - name: Run Cocoapods' linter
         if: env.run_pod_lint == 'true'
         working-directory: ./${{ env.TEST_DIRECTORY }}
-        # Warnings might be allowed in versions where Instructions continue to support
-        # deprecated methods.
+        # Warnings might be allowed in versions where Instructions
+        # continue to support deprecated methods.
         run: |
           if [ $ALLOW_WARNINGS == "YES" ]; then
             pod lib lint --allow-warnings;

@@ -19,7 +19,12 @@ extension Device {
 
     private var xSeries2ndGen: [Device] {
         [.iPhone12, .iPhone12Pro, .iPhone12ProMax,
-         .iPhone13, .iPhone13Pro, .iPhone13ProMax]
+         .iPhone13, .iPhone13Pro, .iPhone13ProMax,
+         .iPhone14, .iPhone14Plus]
+    }
+
+    private var xSeries3ndGen: [Device] {
+        [.iPhone14Pro, .iPhone14ProMax]
     }
 
     func homeIndicatorHeight(for orientation: UIDeviceOrientation) -> CGFloat {
@@ -64,6 +69,10 @@ extension Device {
 
         if (xSeries2ndGen + xSeries2ndGen.map(Device.simulator)).contains(self) {
             return 47
+        }
+
+        if (xSeries3ndGen + xSeries3ndGen.map(Device.simulator)).contains(self) {
+            return 59
         }
 
         return 0

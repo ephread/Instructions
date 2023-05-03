@@ -15,6 +15,8 @@ on:
 env:
   # Expected to be used within scripts.
   LANG: en_US.UTF-8
+  PACKAGE_TEST_DIRECTORY: "InstructionsPackageTest"
+  TEST_DIRECTORY: "Instructions"
 
   # Wether or not to perform certain steps.
   run_pod_lint: true
@@ -22,25 +24,63 @@ env:
   run_tests: true
 
 jobs:
-  test:
-    name: Build, lint & test
-    runs-on: macos-12
+  test-package:
+    name: Check installation
+    runs-on: macos-13
 
     steps:
       - name: Switch Xcode version
-        run: sudo xcode-select --switch /Applications/Xcode_13.4.app
+        run: sudo xcode-select --switch /Applications/Xcode_14.3.app
+
+      - name: Check out test repository
+        uses: actions/checkout@v2
+        with:
+          repository: "ephread/InstructionsPackageTest"
+          path: ${{ env.PACKAGE_TEST_DIRECTORY }}
+
+      - name: Install test dependencies
+        working-directory: ./${{ env.PACKAGE_TEST_DIRECTORY }}
+        run: |
+          bundle install
+
+      - name: Test SwiftPM import
+        working-directory: ./${{ env.PACKAGE_TEST_DIRECTORY }}
+        run: |
+          bundle exec fastlane test_swiftpm
+
+      - name: Test CocoaPods import
+        working-directory: ./${{ env.PACKAGE_TEST_DIRECTORY }}
+        run: |
+          bundle exec fastlane test_cocoapods
+
+      - name: Test Carthage import
+        working-directory: ./${{ env.PACKAGE_TEST_DIRECTORY }}
+        run: |
+          bundle exec fastlane test_carthage
+
+  test:
+    name: Build, lint & test
+    runs-on: macos-13
+
+    steps:
+      - name: Switch Xcode version
+        run: sudo xcode-select --switch /Applications/Xcode_14.3.app
 
       - name: Check out the repository
         uses: actions/checkout@v2
+        with:
+          path: ${{ env.TEST_DIRECTORY }}
 
       - name: Install test dependencies
+        working-directory: ./${{ env.TEST_DIRECTORY }}
         run: |
           bundle install
 
       - name: Run Cocoapods' linter
         if: env.run_pod_lint == 'true'
-        # Warnings might be allowed in versions where Instructions continue to support
-        # deprecated methods.
+        working-directory: ./${{ env.TEST_DIRECTORY }}
+        # Warnings might be allowed in versions where Instructions
+        # continue to support deprecated methods.
         run: |
           if [ $ALLOW_WARNINGS == "YES" ]; then
             pod lib lint --allow-warnings;
@@ -50,6 +90,7 @@ jobs:
 
       - name: Run tests
         if: env.run_tests == 'true'
+        working-directory: ./${{ env.TEST_DIRECTORY }}
         run: |
           bundle exec fastlane test_all
 
@@ -58,7 +99,7 @@ jobs:
         if: failure() && env.run_tests == 'true'
         with:
           name: FailureDiffs
-          path: "${{github.workspace}}/Examples/Example/Snapshot\ Tests/Supporting\ Files/Snapshots/FailureDiffs/"
+          path: "${{github.workspace}}/${{env.TEST_DIRECTORY}}/Examples/Example/Snapshot\ Tests/Supporting\ Files/Snapshots/FailureDiffs/"
 
       - name: Convert and upload coverage
         uses: paambaati/codeclimate-action@v2.6.0
@@ -66,5 +107,5 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
         with:
-          coverageCommand: "slather coverage -x --build-directory Build/"
-          coverageLocations: "${{github.workspace}}/Tests/cobertura.xml:cobertura"
+          coverageCommand: "cd '${{env.TEST_DIRECTORY}}' && slather coverage -x --build-directory Build/"
+          coverageLocations: "${{github.workspace}}/${{env.TEST_DIRECTORY}}/Tests/cobertura.xml:cobertura"

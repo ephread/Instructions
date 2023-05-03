@@ -99,7 +99,7 @@ class DefaultExampleSnapshotTests: FBSnapshotTestCase {
         Thread.sleep(forTimeInterval: 0.1)
 
         let orientation = XCUIDevice.shared.orientation
-        let image = app.screenshot().image
+        let image = XCUIScreen.main.screenshot().image
         let imageView = UIImageView(image: image.cropped(using: orientation))
 
         let identifier = """

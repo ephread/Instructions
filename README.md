@@ -5,7 +5,6 @@
 [![Coverage](https://img.shields.io/codeclimate/coverage/ephread/Instructions)](https://codeclimate.com/github/ephread/Instructions)
 [![CocoaPods Shield](https://img.shields.io/cocoapods/v/Instructions.svg)](https://cocoapods.org/pods/Instructions)
 [![Carthage compatible](https://img.shields.io/badge/carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-[![Join the chat at https://gitter.im/ephread/Instructions](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ephread/Instructions?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Add customisable coach marks to your iOS project. Available for both iPhone and iPad.
 

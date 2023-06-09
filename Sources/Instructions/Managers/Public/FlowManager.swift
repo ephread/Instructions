@@ -294,10 +294,10 @@ public class FlowManager {
 
     // MARK: Renamed Public Properties
     @available(*, unavailable, renamed: "isStarted")
-    public var started: Bool = false
+    public var started: Bool { return false }
 
     @available(*, unavailable, renamed: "isPaused")
-    public var paused: Bool = false
+    public var paused: Bool { return false }
 }
 
 extension FlowManager: CoachMarksViewControllerDelegate {

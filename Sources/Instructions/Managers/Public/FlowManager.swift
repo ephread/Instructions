@@ -291,6 +291,20 @@ public class FlowManager {
 
         showPreviousCoachMark(hidePrevious: true)
     }
+    
+    public func jumpTo(index: Int) {
+        var skips: Int
+        
+        if index < currentIndex {
+            skips = currentIndex - index - 1
+            showPrevious(numberOfCoachMarksToSkip: skips)
+        } else if index > currentIndex {
+            skips = index - currentIndex - 1
+            showNext(numberOfCoachMarksToSkip: skips)
+        } else {
+            return
+        }
+    }
 
     // MARK: Renamed Public Properties
     @available(*, unavailable, renamed: "isStarted")

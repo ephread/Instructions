@@ -308,7 +308,7 @@ public class FlowManager {
     
     public func hideCurrent() {
         if let coachMark = currentCoachMark {
-            coachMarksViewController.hide(coachMark: coachMark, at: currentIndex)
+            coachMarksViewController.hide(coachMark: coachMark, at: currentIndex, animated: false)
         }
     }
 

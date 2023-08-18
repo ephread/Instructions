@@ -305,12 +305,6 @@ public class FlowManager {
             return
         }
     }
-    
-    public func hideCurrent() {
-        if let coachMark = currentCoachMark {
-            coachMarksViewController.hide(coachMark: coachMark, at: currentIndex, animated: false)
-        }
-    }
 
     // MARK: Renamed Public Properties
     @available(*, unavailable, renamed: "isStarted")

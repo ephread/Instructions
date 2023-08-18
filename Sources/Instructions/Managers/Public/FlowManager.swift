@@ -307,7 +307,9 @@ public class FlowManager {
     }
     
     public func hideCurrent() {
-        willTransition()
+        if let coachMark = currentCoachMark {
+            coachMarksViewController.hide(coachMark: coachMark, at: currentIndex)
+        }
     }
 
     // MARK: Renamed Public Properties

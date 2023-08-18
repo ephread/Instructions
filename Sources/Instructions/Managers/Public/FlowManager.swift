@@ -12,6 +12,9 @@ public class FlowManager {
     /// to let animations be performed. `true` to pause the execution,
     /// `false` otherwise.
     private(set) open var isPaused = false
+    
+    /// The index (in `coachMarks`) of the coach mark being currently displayed.
+    private(set) public var currentIndex = -1
 
     internal unowned let coachMarksViewController: CoachMarksViewController
     internal weak var dataSource: CoachMarksControllerProxyDataSource?
@@ -48,9 +51,6 @@ public class FlowManager {
     ///
     /// `true` if a new coach mark can be shown, `false` otherwise.
     private var canShowCoachMark = true
-
-    /// The index (in `coachMarks`) of the coach mark being currently displayed.
-    internal var currentIndex = -1
 
     init(coachMarksViewController: CoachMarksViewController) {
         self.coachMarksViewController = coachMarksViewController

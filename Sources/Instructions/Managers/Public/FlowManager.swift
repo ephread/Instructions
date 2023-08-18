@@ -305,6 +305,10 @@ public class FlowManager {
             return
         }
     }
+    
+    public func hideCurrent() {
+        willTransition()
+    }
 
     // MARK: Renamed Public Properties
     @available(*, unavailable, renamed: "isStarted")

@@ -212,7 +212,7 @@ extension CoachMarksController: OverlayManagerDelegate {
     func didReceivedSingleTap() {
         if delegate?.shouldHandleOverlayTap(in: self, at: flow.currentIndex) ?? true {
             flow.jumpTo(index: 0)
-            flow.pause(and: .hideOverlay)
+            flow.pause(and: .hideInstructions)
         }
     }
 }

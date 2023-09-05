@@ -116,6 +116,12 @@ public class OverlayManager {
         }
     }
 
+    func handleHitTestOnOverlayView() {
+        if enableTap {
+            self.overlayDelegate?.didReceivedHitTest()
+        }
+    }
+
     /// Show/hide a cutout path with fade in animation
     ///
     /// - Parameter show: `true` to show the cutout path, `false` to hide.
@@ -204,7 +210,7 @@ public class OverlayManager {
 extension OverlayManager: OverlayViewDelegate {
 
     func onHitTest() {
-        self.handleSingleTap(nil)
+        self.handleHitTestOnOverlayView()
     }
 }
 
@@ -214,4 +220,5 @@ extension OverlayManager: OverlayViewDelegate {
 internal protocol OverlayManagerDelegate: Snapshottable {
     /// Called when the overlay received a tap event.
     func didReceivedSingleTap()
+    func didReceivedHitTest()
 }

@@ -37,6 +37,8 @@ public protocol CoachMarksControllerDelegate: AnyObject {
     
     func coachMarksController(_ coachMarksController: CoachMarksController,
                               didTapCoachMarkAt index: Int)
+
+    func coachMarksControllerDidHitTestOnOverlayView(_ coachMarksController: CoachMarksController)
 }
 
 public extension CoachMarksControllerDelegate {

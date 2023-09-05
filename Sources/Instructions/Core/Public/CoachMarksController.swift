@@ -209,6 +209,11 @@ extension CoachMarksController: Snapshottable {
 }
 
 extension CoachMarksController: OverlayManagerDelegate {
+    
+    func didReceivedHitTest() {
+        delegate?.coachMarksControllerDidHitTestOnOverlayView(self)
+    }
+
     func didReceivedSingleTap() {
         if delegate?.shouldHandleOverlayTap(in: self, at: flow.currentIndex) ?? true {
             flow.jumpTo(index: 0)

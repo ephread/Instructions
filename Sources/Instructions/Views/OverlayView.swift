@@ -3,6 +3,10 @@
 
 import UIKit
 
+protocol OverlayViewDelegate: AnyObject {
+    func onHitTest()
+}
+
 // Overlay a blocking view on top of the screen and handle the cutout path
 // around the point of interest.
 class OverlayView: UIView {
@@ -13,12 +17,14 @@ class OverlayView: UIView {
     let holder: UIView
     let ornaments: UIView
 
+    weak var delegate: OverlayViewDelegate?
+
     /// Used to temporarily enable touch forwarding inside the cutoutPath.
     public var allowTouchInsideCutoutPath: Bool = false
     public var forwardTouchEvents: Bool = false
 
     // MARK: - Initialization
-    init() {
+    init(delegate: OverlayViewDelegate?) {
         holder = UIView()
         ornaments = UIView()
 
@@ -37,6 +43,8 @@ class OverlayView: UIView {
         holder.fillSuperview()
         ornaments.fillSuperview()
 
+        self.delegate = delegate
+
         accessibilityIdentifier = AccessibilityIdentifiers.overlayView
     }
 
@@ -48,6 +56,8 @@ class OverlayView: UIView {
     override public func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         let hitView = super.hitTest(point, with: event)
 
+        self.delegate?.onHitTest()
+        
         if hitView == self {
             guard !forwardTouchEvents else { return nil }
 

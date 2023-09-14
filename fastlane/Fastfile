@@ -19,7 +19,7 @@ platform :ios do
 
   DEVICES = [
     "iPad (10th generation)",
-    "iPhone 14 Pro",
+    "iPhone 15 Pro",
     "iPhone SE (3rd generation)"
   ]
 

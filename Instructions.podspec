@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
   spec.cocoapods_version = '>= 1.0'
 
   spec.name             = "Instructions"
-  spec.version          = "2.2.0"
+  spec.version          = "2.3.0"
   spec.summary          = "Create walkthroughs and guided tours (with coach marks) in a simple way, using Swift."
   spec.homepage         = "https://github.com/ephread/Instructions"
   spec.license          = 'MIT'

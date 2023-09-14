@@ -76,7 +76,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 use_frameworks!
 
-pod 'Instructions', '~> 2.2.0'
+pod 'Instructions', '~> 2.3.0'
 ```
 
 Then, run the following command:
@@ -89,7 +89,7 @@ $ pod install
 Add Instructions to your Cartfile:
 
 ```
-github "ephread/Instructions" ~> 2.2.0
+github "ephread/Instructions" ~> 2.3.0
 ```
 
 You can then update, build and drag the generated framework into your project:
@@ -609,11 +609,11 @@ like this:
 
 ```ruby
 target 'Instructions App Extensions Example' do
-  pod 'Instructions', '~> 2.2.0'
+  pod 'Instructions', '~> 2.3.0'
 end
 
 target 'Keyboard Extension' do
-  pod 'InstructionsAppExtensions', '~> 2.2.0'
+  pod 'InstructionsAppExtensions', '~> 2.3.0'
 end
 ```
 

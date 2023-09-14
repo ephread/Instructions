@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: Switch Xcode version
-        run: sudo xcode-select --switch /Applications/Xcode_14.3.app
+        run: sudo xcode-select --switch /Applications/Xcode_14.3.1.app
 
       - name: Check out test repository
         uses: actions/checkout@v2
@@ -64,7 +64,7 @@ jobs:
 
     steps:
       - name: Switch Xcode version
-        run: sudo xcode-select --switch /Applications/Xcode_14.3.app
+        run: sudo xcode-select --switch /Applications/Xcode_14.3.1.app
 
       - name: Check out the repository
         uses: actions/checkout@v2

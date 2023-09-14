@@ -2,6 +2,17 @@
 Important changes to Instructions will be documented in this file.
 Instructions follows [Semantic Versioning](http://semver.org/).
 
+## [2.3.0](https://github.com/ephread/Instructions/releases/tag/2.3.0)
+Released on 2023-09-13.
+
+### Added
+- Support for Xcode 15 / Swift 5.9
+
+### Changed
+- Changed `FlowManager.currentIndex` to be public get, private set [#298]
+
+[#298]: https://github.com/ephread/Instructions/issues/298
+
 ## [2.2.0](https://github.com/ephread/Instructions/releases/tag/2.2.0)
 Released on 2022-05-25.
 

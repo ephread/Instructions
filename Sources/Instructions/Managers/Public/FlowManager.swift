@@ -8,6 +8,9 @@ public class FlowManager {
     /// `true` if coach marks are currently being displayed, `false` otherwise.
     public var isStarted: Bool { return currentIndex > -1 }
 
+    /// The index (in `coachMarks`) of the coach mark being currently displayed.
+    private(set) public var currentIndex = -1
+    
     /// Sometimes, the chain of coach mark display can be paused
     /// to let animations be performed. `true` to pause the execution,
     /// `false` otherwise.
@@ -48,9 +51,6 @@ public class FlowManager {
     ///
     /// `true` if a new coach mark can be shown, `false` otherwise.
     private var canShowCoachMark = true
-
-    /// The index (in `coachMarks`) of the coach mark being currently displayed.
-    internal var currentIndex = -1
 
     init(coachMarksViewController: CoachMarksViewController) {
         self.coachMarksViewController = coachMarksViewController

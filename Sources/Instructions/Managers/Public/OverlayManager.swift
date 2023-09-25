@@ -188,16 +188,9 @@ public class OverlayManager {
     }
 
     // MARK: Renamed Public Properties
-    @available(*, unavailable, renamed: "backgroundColor")
     public var color: UIColor { return InstructionsColor.overlay }
-
-    @available(*, unavailable, renamed: "isUserInteractionEnabled")
     public var allowTap: Bool { return true }
-
-    @available(*, unavailable, renamed: "isUserInteractionEnabledInsideCutoutPath")
     public var allowTouchInsideCutoutPath: Bool { return false }
-
-    @available(*, unavailable, renamed: "areTouchEventsForwarded")
     public var forwardTouchEvents: Bool { return false }
 }
 

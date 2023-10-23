@@ -47,7 +47,13 @@ public class CoachMarkSkipDefaultView: UIButton, CoachMarkSkipView {
         sendSubviewToBack(bodyBackground)
         bodyBackground.fillSuperview()
 
-        contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 15.0, bottom: 10.0, right: 15.0)
+        if #available(iOS 15, *) {
+            var config = UIButton.Configuration.plain()
+            config.contentInsets = NSDirectionalEdgeInsets(top: 10.0, leading: 15.0, bottom: 10.0, trailing: 15.0)
+            self.configuration = config
+        } else {
+            contentEdgeInsets = UIEdgeInsets(top: 10.0, left: 15.0, bottom: 10.0, right: 15.0)
+        }
         sizeToFit()
     }
 

@@ -8,9 +8,10 @@
 
 Add customisable coach marks to your iOS project. Available for both iPhone and iPad.
 
-| ⚠️ MESSAGE FROM THE MAINTAINER |
-|:------------------------------|
-| _Instructions_ is in maintenance mode for now, as I don't have a lot of time to work on the project. I will keep accepting Pull Requests and fixing issues, but no new features should be expected for a while. |
+> [!WARNING]
+> **MESSAGE FROM THE MAINTAINER**
+> 
+> _Instructions_ is now considered _deprecated_. I will still fix issues, maintain compatibility with newer versions of Xcode iOS and accept maintenance-oriented Pull Requests, but no new features should be expected. If you can, migrate to SwiftUI and take advantage of [TipKit](https://developer.apple.com/documentation/tipkit).
 
 # Table of contents
 

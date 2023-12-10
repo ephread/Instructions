@@ -293,10 +293,7 @@ public class FlowManager {
     }
 
     // MARK: Renamed Public Properties
-    @available(*, unavailable, renamed: "isStarted")
     public var started: Bool { return false }
-
-    @available(*, unavailable, renamed: "isPaused")
     public var paused: Bool { return false }
 }
 
